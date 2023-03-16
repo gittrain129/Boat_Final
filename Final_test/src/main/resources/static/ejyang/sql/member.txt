@@ -1,18 +1,18 @@
 drop table member3 cascade constraints purge;
---1. index.jsp¿¡¼­ ½ÃÀÛÇÕ´Ï´Ù.
---2. °ü¸®ÀÚ °èÁ¤ admin, ºñ¹ø 1234¸¦ ¸¸µì´Ï´Ù.
---3. »ç¿ëÀÚ °èÁ¤À» 3°³ ¸¸µì´Ï´Ù.
+--1. index.jspì—ì„œ ì‹œì‘í•©ë‹ˆë‹¤.
+--2. ê´€ë¦¬ì ê³„ì • admin, ë¹„ë²ˆ 1234ë¥¼ ë§Œë“­ë‹ˆë‹¤.
+--3. ì‚¬ìš©ì ê³„ì •ì„ 3ê°œ ë§Œë“­ë‹ˆë‹¤.
 
 create table member3(
 	id varchar2(15),
-	password varchar2(60),--¾ÏÈ£È­¸¦ ÇÏ¸é password°¡ 60ÀÚ ÇÊ¿äÇÕ´Ï´Ù.
+	password varchar2(60),--ì•”í˜¸í™”ë¥¼ í•˜ë©´ passwordê°€ 60ì í•„ìš”í•©ë‹ˆë‹¤.
 	name varchar2(15),
 	age number(2),
 	gender varchar2(5),
 	email varchar2(30),
-	auth varchar2(50) not null,	--È¸¿øÀÇ role(±ÇÇÑ)À» ÀúÀåÇÏ´Â °÷À¸·Î ±âº»°ªÀº 'ROLE_MEMBER' ÀÔ´Ï´Ù.
+	auth varchar2(50) not null,	--íšŒì›ì˜ role(ê¶Œí•œ)ì„ ì €ì¥í•˜ëŠ” ê³³ìœ¼ë¡œ ê¸°ë³¸ê°’ì€ 'ROLE_MEMBER' ì…ë‹ˆë‹¤.
 	PRIMARY KEY(id)
 );
 
---memberfileÀº È¸¿ø Á¤º¸ ¼öÁ¤½Ã Àû¿ëÇÕ´Ï´Ù.
+--memberfileì€ íšŒì› ì •ë³´ ìˆ˜ì •ì‹œ ì ìš©í•©ë‹ˆë‹¤.
 select*from member3;
