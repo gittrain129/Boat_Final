@@ -11,6 +11,7 @@
 <meta name="keywords" content="law,legal services, business law, criminal, bankruptcy services,
   lawyer, immigration law, family law, civil litigations, real estate law, injury, taxation law, free website templates,responsive HTML website template">
 <title>BOAT</title>
+
 <!-- Bootstrap -->
 <link href="${pageContext.request.contextPath}/resources/static/Kimsj/css/bootstrap.min.css" rel="stylesheet">
 <!-- Style CSS -->
@@ -23,12 +24,7 @@
 <link href="${pageContext.request.contextPath}/resources/static/Kimsj/css/font-awesome.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/static/Kimsj/css/owl.carousel.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/static/Kimsj/css/owl.theme.default.css" rel="stylesheet">
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+
     
     <jsp:include page="header.jsp"/>
     
@@ -450,15 +446,16 @@
         <!-- tiny-footer-start -->
     </div>
     <!-- footer close -->
+    
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="js/jquery.min.js" type="text/javascript"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="js/menumaker.js" type="text/javascript"></script>
-    <script type="text/javascript" src="js/jquery.sticky.js"></script>
-    <script type="text/javascript" src="js/sticky-header.js"></script>
-    <script type="text/javascript" src="js/owl.carousel.min.js"></script>
-    <script type="text/javascript" src="js/slider.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/Kimsj/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/resources/Kimsj/js/menumaker.js" type="text/javascript"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/Kimsj/js/jquery.sticky.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/Kimsj/js/sticky-header.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/Kimsj/js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/Kimsj/js/slider.js"></script>
 </body>
 
 </html>
