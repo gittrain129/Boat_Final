@@ -3,7 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	  <jsp:include page="../boat/header.jsp" />
+<jsp:include page="../Main/header.jsp" />
+	
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
