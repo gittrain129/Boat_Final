@@ -148,7 +148,7 @@
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">게시판</a>
                     <div class="dropdown-menu border-0 rounded-0 rounded-bottom m-0">
-                        <a href="feature.html" class="dropdown-item">업무 게시판</a>
+                        <a href="boardList" class="dropdown-item">업무 게시판</a>
                         <a href="team.html" class="dropdown-item">자료 게시판</a>
                         <a href="${pageContext.request.contextPath}/workboard" class="dropdown-item">워크 보드</a>
                     </div>
@@ -159,12 +159,12 @@
                     <div class="dropdown-menu border-0 rounded-0 rounded-bottom m-0">
                     	<a href="team.html" class="dropdown-item">회의실</a>
                         <a href="feature.html" class="dropdown-item">캘린더</a>
-                        <a href="team.html" class="dropdown-item">주소록</a>
+                        <a href="address" class="dropdown-item">주소록</a>
                     </div>
                 </div>
                               
                 
-                <a href="contact.html" class="nav-item nav-link">예약신청</a>
+                <a href="confer" class="nav-item nav-link">예약신청</a>
                 
             </div>
             
