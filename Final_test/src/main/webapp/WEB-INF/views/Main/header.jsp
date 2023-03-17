@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,6 +13,26 @@
     
 	<jsp:include page="headertag.jsp"/>
   
+  	<style>
+  	.inout_button:focus {
+	  background-color: #29d329;
+	}
+/*
+	
+	.inout_button {
+	  width: 350px;
+	  margin: 0 auto;
+	}
+	
+	.inout_button div {
+	  margin: 0 15px 0 0;
+	  width: 30px;
+	  height: 30px;
+	  display: inline-block;
+	  border-radius: 100%;
+	}
+	*/
+  	</style>
 </head>
 
 <body>
@@ -59,20 +80,15 @@
                     <div class="col-4">
                         <div class="d-flex align-items-center justify-content-end">
                             
-                            
-                            <div class="nav-item dropdown">
-			                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+								<button class='inout_button'>
 			                    	<div class="flex-shrink-0 btn-lg-square border rounded-circle" style="display:inline-flex !important";>
+			                    	
 		                                <i class="far fa-clock text-primary"></i>
+		                               
 		                            </div>
-			                    </a>
-			                    <div class="dropdown-menu border-0 rounded-0 rounded-bottom m-0" style="position: relative; z-index: 1500 !important";>
-			                        <a href="#" class="dropdown-item">출근</a>
-			                        <a href="#" class="dropdown-item">외출</a>
-			                        <a href="#" class="dropdown-item">복귀</a>
-			                        <a href="#" class="dropdown-item">퇴근</a>
-			                    </div>
-			                </div>
+			                  	</button>
+			                    
+			            
                 
                             <div class="ps-3">
                                 <p class="mb-2">근태관리</p>
@@ -98,7 +114,7 @@
                                 <i class="bi bi-chat-fill text-primary"></i>
                             </div>
                             <div class="ps-3">
-                                <p class="mb-2">대화하기</p>
+                                <p class="mb-2">채팅</p>
                             </div>
                         </div>
                         </a>
@@ -119,18 +135,12 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">        
             <div class="navbar-nav me-auto p-3 p-lg-0">
             
-            	<div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">회사소개</a>
-                    <div class="dropdown-menu border-0 rounded-0 rounded-bottom m-0">
-                        <a href="feature.html" class="dropdown-item">오시는길</a>
-                    </div>
-                </div>
+            	<a href="contact.html" class="nav-item nav-link">회사소개</a>
 	
 				<div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">내 정보</a>
                     <div class="dropdown-menu border-0 rounded-0 rounded-bottom m-0">
-                        <a href="feature.html" class="dropdown-item">내 정보 보기</a>
-                        <a href="team.html" class="dropdown-item">내 글 보기</a>
+                        <a href="feature.html" class="dropdown-item">근태 관리</a>
                         <a href="testimonial.html" class="dropdown-item">내 할일 보기</a>
                     </div>
                 </div>
@@ -140,28 +150,21 @@
                     <div class="dropdown-menu border-0 rounded-0 rounded-bottom m-0">
                         <a href="feature.html" class="dropdown-item">업무 게시판</a>
                         <a href="team.html" class="dropdown-item">자료 게시판</a>
+                        <a href="team.html" class="dropdown-item">워크 보드</a>
                     </div>
                 </div>
                 
  				<div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">공유업무</a>
                     <div class="dropdown-menu border-0 rounded-0 rounded-bottom m-0">
+                    	<a href="team.html" class="dropdown-item">회의실</a>
                         <a href="feature.html" class="dropdown-item">캘린더</a>
                         <a href="team.html" class="dropdown-item">주소록</a>
                     </div>
                 </div>
                               
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                    <div class="dropdown-menu border-0 rounded-0 rounded-bottom m-0">
-                        <a href="feature.html" class="dropdown-item">Features</a>
-                        <a href="team.html" class="dropdown-item">Our Team</a>
-                        <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                        <a href="404.html" class="dropdown-item">404 Page</a>
-                    </div>
-                </div>
                 
-                <a href="contact.html" class="nav-item nav-link">Contact Us</a>
+                <a href="contact.html" class="nav-item nav-link">예약신청</a>
                 
             </div>
             
@@ -182,15 +185,15 @@
 	 <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/counterup/counterup.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/lightbox/js/lightbox.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/Kimsj/lib/wow/wow.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/Kimsj/lib/easing/easing.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/Kimsj/lib/waypoints/waypoints.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/Kimsj/lib/counterup/counterup.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/Kimsj/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/Kimsj/lib/lightbox/js/lightbox.min.js"></script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/Kimsj/js/main.js"></script>
     
 
 </body>
