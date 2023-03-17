@@ -135,36 +135,40 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">        
             <div class="navbar-nav me-auto p-3 p-lg-0">
             
-            	<a href="contact.html" class="nav-item nav-link">회사소개</a>
+            	<a href="${pageContext.request.contextPath}/map" class="nav-item nav-link">회사소개</a>
 	
 				<div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">내 정보</a>
                     <div class="dropdown-menu border-0 rounded-0 rounded-bottom m-0">
-                        <a href="feature.html" class="dropdown-item">근태 관리</a>
-                        <a href="testimonial.html" class="dropdown-item">내 할일 보기</a>
+                        <a href="${pageContext.request.contextPath}/Attendance/list" class="dropdown-item">근태 관리</a>
+                        <a href="${pageContext.request.contextPath}/Todo/list" class="dropdown-item">내 할일 보기</a>
                     </div>
                 </div>
                 
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">게시판</a>
                     <div class="dropdown-menu border-0 rounded-0 rounded-bottom m-0">
-                        <a href="boardList" class="dropdown-item">업무 게시판</a>
-                        <a href="team.html" class="dropdown-item">자료 게시판</a>
-                        <a href="team.html" class="dropdown-item">워크 보드</a>
+
+                        
+                      
+                        <a href="${pageContext.request.contextPath}/boardList" class="dropdown-item">업무 게시판</a>
+                        <a href="${pageContext.request.contextPath}/Filebo/list" class="dropdown-item">자료 게시판</a>
+                        <a href="${pageContext.request.contextPath}/workboard" class="dropdown-item">워크 보드</a>
+
                     </div>
                 </div>
                 
  				<div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">공유업무</a>
                     <div class="dropdown-menu border-0 rounded-0 rounded-bottom m-0">
-                    	<a href="team.html" class="dropdown-item">회의실</a>
-                        <a href="feature.html" class="dropdown-item">캘린더</a>
-                        <a href="address" class="dropdown-item">주소록</a>
+                    	<a href="${pageContext.request.contextPath}/cal" class="dropdown-item">캘린더</a>
+                        <a href="${pageContext.request.contextPath}/address" class="dropdown-item">주소록</a>
+
                     </div>
                 </div>
                               
                 
-                <a href="confer" class="nav-item nav-link">예약신청</a>
+                <a href="${pageContext.request.contextPath}/confer" class="nav-item nav-link">예약신청</a>
                 
             </div>
             
@@ -173,7 +177,7 @@
                     <i class="bi bi-person-circle text-primary" style="font-size:45px;"></i>
                 </div>
                 <div class="ps-3">
-                    <a href="#" class="btn btn-sm btn-light rounded-pill py-2 px-4 d-none d-lg-block">로그인</a>
+                    <a href="${pageContext.request.contextPath}/member/sign_in" class="btn btn-sm btn-light rounded-pill py-2 px-4 d-none d-lg-block">로그인</a>
                 </div>
             </div>
     
@@ -182,18 +186,7 @@
     </nav>
     <!-- Navbar End -->
 
-	 <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/Kimsj/lib/wow/wow.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/Kimsj/lib/easing/easing.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/Kimsj/lib/waypoints/waypoints.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/Kimsj/lib/counterup/counterup.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/Kimsj/lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/Kimsj/lib/lightbox/js/lightbox.min.js"></script>
-
-    <!-- Template Javascript -->
-    <script src="${pageContext.request.contextPath}/resources/Kimsj/js/main.js"></script>
+	
     
 
 </body>
