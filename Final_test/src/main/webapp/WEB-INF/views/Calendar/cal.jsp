@@ -8,7 +8,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <!-- <link rel="stylesheet" href="${path}\resources\css\schedule\calendar.css"> -->
 <!-- <script defer src="${path}/resources/js/schedule/calendar.js"></script> -->
-<%-- <jsp:include page="../Main/header.jsp" /> --%>
+<jsp:include page="../Main/header.jsp" />
+	
 
 <style>
     .calendar{

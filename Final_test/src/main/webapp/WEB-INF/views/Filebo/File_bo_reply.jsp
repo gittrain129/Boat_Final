@@ -3,7 +3,8 @@
 
 <!DOCTYPE html>
 <html>
-  <jsp:include page="../boat/header.jsp" />
+   <jsp:include page="../Main/header.jsp" />
+	  
 <head>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <!-- include summernote css/js -->

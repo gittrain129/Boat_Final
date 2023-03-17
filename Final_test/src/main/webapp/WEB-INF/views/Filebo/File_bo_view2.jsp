@@ -16,8 +16,8 @@
     <title>자료실 게시판</title>
 
   <link rel="stylesheet" href="jhLee/css/fileview.css">
-  
-   <jsp:include page="../boat/header.jsp" />
+  <jsp:include page="../Main/header.jsp" />
+	
 </head>
 <body>
 <input type="hidden" id ="loginid" value ="${id}" name="loginid"><%--view.js에서 사용하기 위해 추가합니다. --%>
@@ -222,6 +222,5 @@ this.F_COMMENT_DATE
 </div><%-- class="comment end --%>
         </div>
         
-         <jsp:include page="../boat/footer.jsp" />
 </body>
 </html>
