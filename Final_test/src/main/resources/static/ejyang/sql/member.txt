@@ -1,18 +1,23 @@
-drop table member3 cascade constraints purge;
---1. index.jsp에서 시작합니다.
---2. 관리자 계정 admin, 비번 1234를 만듭니다.
---3. 사용자 계정을 3개 만듭니다.
+DROP TABLE MEMBER CASCADE CONSTRAINTS PURGE;
 
-create table member3(
-	id varchar2(15),
-	password varchar2(60),--암호화를 하면 password가 60자 필요합니다.
-	name varchar2(15),
-	age number(2),
-	gender varchar2(5),
-	email varchar2(30),
-	auth varchar2(50) not null,	--회원의 role(권한)을 저장하는 곳으로 기본값은 'ROLE_MEMBER' 입니다.
-	PRIMARY KEY(id)
+CREATE TABLE MEMBER(
+	EMPNO VARCHAR2(12),
+	DEPT VARCHAR2(10),
+	CONSTRAINT BOAT_DEPT_CK CHECK (DEPT IN('홍보팀','개발팀','인사팀','기획팀','영업팀')),
+	JOB VARCHAR2(20) DEFAULT '사원',
+	PASSWORD VARCHAR2(60),
+	PWCHECK VARCHAR2(60),
+	NAME VARCHAR2(15),
+	EMAIL VARCHAR2(30),
+	PROFILE_IMG VARCHAR2(50),
+	REGISTER_DATE DATE DEFAULT SYSDATE,
+	AUTH VARCHAR2(50) DEFAULT 'ROLE_MEMBER' NOT NULL,
+	PRIMARY KEY(EMPNO)
 );
 
---memberfile은 회원 정보 수정시 적용합니다.
-select*from member3;
+
+SELECT*FROM MEMBER;
+
+INSERT INTO MEMBER 
+VALUES('ADMIN', '인사팀', '부서장','123456','123456','홍길동','admin@boat.com',
+'adminImage.png', SYSDATE, 'ROLE_MEMBER');
