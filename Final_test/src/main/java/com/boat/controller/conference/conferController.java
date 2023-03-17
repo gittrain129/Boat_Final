@@ -1,15 +1,15 @@
-package com.boat.controller.admin;
+package com.boat.controller.conference;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Controller
-public class adminController {
+public class conferController {
 
 
-	@GetMapping("/admin")
-	public String hello5() {
-		return "/Admin/admin_radio";
+	@GetMapping("/confer")
+	public String hello2() {
+		return "/Conference_Res/conferMain";
 	}
 }
