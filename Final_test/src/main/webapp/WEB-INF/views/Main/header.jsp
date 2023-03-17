@@ -173,7 +173,7 @@
                     <i class="bi bi-person-circle text-primary" style="font-size:45px;"></i>
                 </div>
                 <div class="ps-3">
-                    <a href="#" class="btn btn-sm btn-light rounded-pill py-2 px-4 d-none d-lg-block">로그인</a>
+                    <a href="${pageContext.request.contextPath}/member/sign_in" class="btn btn-sm btn-light rounded-pill py-2 px-4 d-none d-lg-block">로그인</a>
                 </div>
             </div>
     
