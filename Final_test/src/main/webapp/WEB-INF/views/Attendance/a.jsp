@@ -164,7 +164,7 @@
 	
 		</form>
 	
-    			<script>$('#myModal').modal();</script>
+    			<!-- <script>$('#myModal').modal();</script> -->
     		
 					<div class="alert alert-success">
 						<button type="button" class="close" data-dismiss="alert">&times;</button>
