@@ -8,7 +8,13 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
-
+<style>
+.team-item .team-social{flex-wrap : wrap;
+}
+.emails{
+   width: 100%;
+}
+</style>
   
  </head>
 <body>
@@ -53,7 +59,8 @@
                                 
                             </div>
                             <div class="team-social">
-                            	geo_webhard@naver.com        	
+                            
+                            	<span class="emails">geo_webhard@naver.com</span>
                                 <a class="btn btn-square btn-primary rounded-circle" href=""><i class="bi bi-card-checklist"></i></a>
                                 <a class="btn btn-square btn-primary rounded-circle" href=""><i class="bi bi-pencil-square"></i></a>
                                 <a class="btn btn-square btn-primary rounded-circle" href=""><i class="bi bi-envelope"></i></a>
