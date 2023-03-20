@@ -29,6 +29,7 @@
     <!-- 풀캘린더 -->
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
     
+
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -41,6 +42,7 @@
     <script src="${pageContext.request.contextPath}/resources/lib/counterup/counterup.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/lib/lightbox/js/lightbox.min.js"></script>
+
 
     <!-- Template Javascript -->
     <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>

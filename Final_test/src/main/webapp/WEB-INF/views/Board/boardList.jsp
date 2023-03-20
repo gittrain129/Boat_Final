@@ -5,7 +5,7 @@
 <head>
 
 <title>업무 게시판</title>
-<link rel="stylesheet" type="text/css" href="/jkKim/css/all.css" />
+<link rel="stylesheet" type="text/css" href="jkKim/css/all.css" />
 
 </head>
 <body>
@@ -48,7 +48,7 @@
       <input type="text" name="search" id="search" class="form-control" placeholder="Search...">
       <button class="btn ml-2" type="button"><i class="bi bi-search"></i></button>
     </div>
-    <a href="new-discussion.html" class="btn btn-success btn-sm ml-3"><i class="fas fa-plus"></i> 글쓰기</a>
+    <a href="boardWrite" class="btn btn-success btn-sm ml-3"><i class="fas fa-plus"></i> 글쓰기</a>
   </div>
 </div>
 
@@ -70,7 +70,13 @@
 						<tbody>
 							<tr>
 								<td title="like" class="text-center"><i class="bi bi-bookmark-star"></i></td>
-								<td><a href="discussion-detail.html">Quos ut recusandae	et consequuntur. <span class="badge badge-pill badge-primary float-right" style="background-color: #ffcb6b;">공지</span>	</a></td>
+								
+								<td style="display: flex; align-items: center;">
+  								<a href="discussion-detail.html" style="flex: 1;">Quos ut recusandae et consequuntur.</a>
+  								<div class="ml-auto"><span class="badge badge-pill badge-primary float-right" style="background-color: #ffcb6b;">공지</span></div>
+								</td>
+
+
 								<td><div style="display: flex; justify-content: center; align-items: center;"><small>Carroll Hintz</small></div></td>
 								<td><div style="display: flex; justify-content: center; align-items: center;">538</div></td>
 								<td><div style="display: flex; justify-content: center; align-items: center;">1 week ago</div></td>
@@ -87,7 +93,10 @@
 							
 							<tr>
 								<td title="like" class="text-center"><i class="bi bi-star"></i></td>
-								<td><a href="discussion-detail.html">Qui id corporisnihil magnam. <span	class="badge badge-pill badge-warning float-right" style="background-color: #89a5ea;">기획팀</span></a></td>
+								<td style="display: flex; align-items: center;">
+								<a href="discussion-detail.html" style="flex: 1;">Qui id corporisnihil magnam.</a>
+								<div><span	class="badge badge-pill badge-warning float-right" style="background-color: #89a5ea;">기획팀</span></div>
+								</td>
 								<td><div style="display: flex; justify-content: center; align-items: center;"><small>Mr. Felton Paucek II</small></div></td>
 								<td><div style="display: flex; justify-content: center; align-items: center;">256</div></td>
 								<td><div style="display: flex; justify-content: center; align-items: center;">1 week ago</div></td>
@@ -95,7 +104,12 @@
 							
 							<tr>
 								<td title="like" class="text-center"><i class="bi bi-star"></i></td>
-								<td><a href="discussion-detail.html">Aut fugiat et consequuntur eveniet veniam placeat. <span class="badge badge-pill badge-warning float-right" style="background-color: #89a5ea;">홍보팀</span></a></td>
+								
+								<td style="display: flex; align-items: center;">
+								<a href="discussion-detail.html" style="flex: 1;">Qui id corporisnihil magnam.</a>
+  								<div class="ml-auto"><span class="badge badge-pill badge-primary float-right" style="background-color: #89a5ea;">홍보팀</span></div>
+								</td>
+								
 								<td><div style="display: flex; justify-content: center; align-items: center;"><small>Max Nikolaus</small></div></td>
 								<td><div style="display: flex; justify-content: center; align-items: center;">256</div></td>
 								<td><div style="display: flex; justify-content: center; align-items: center;">1 week ago</div></td>
@@ -103,7 +117,10 @@
 							
 							<tr>
 								<td title="like" class="text-center"><i class="bi bi-star"></i></td>
-								<td><a href="discussion-detail.html">In et magnam nesciunt aperiam atque est culpa. <span class="badge badge-pill badge-primary float-right" style="background-color: #89a5ea;">홍보팀</span></a></td>
+								<td style="display: flex; align-items: center;">
+								<a href="discussion-detail.html" style="flex: 1;">In et magnam nesciunt aperiam atque est culpa.</a>
+								<div class="ml-auto"><span class="badge badge-pill badge-primary float-right" style="background-color: #89a5ea;">홍보팀</span></div>
+								</td>
 								<td><div style="display: flex; justify-content: center; align-items: center;"><small>Geovanny	Stark</small></div></td>
 								<td><div style="display: flex; justify-content: center; align-items: center;">256</div></td>
 								<td><div style="display: flex; justify-content: center; align-items: center;">1 week ago</div></td>
@@ -172,7 +189,7 @@
 
 		
 	</section>
-	<script type="text/javascript" src="public/lib/feather/feather.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"></script>
 	<script>
 		feather.replace({
 			width : 20

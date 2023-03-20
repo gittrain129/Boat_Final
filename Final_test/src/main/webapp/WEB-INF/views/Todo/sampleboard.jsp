@@ -9,7 +9,7 @@
 <meta charset="utf-8">
 <title>Insert title here</title>
 <jsp:include page="../Main/header.jsp" />
-	
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <style type="text/css">
 .project-tab {
     padding: 10%;
@@ -63,9 +63,25 @@
                 <a href="${pageContext.request.contextPath}/Todo/todo2" class="navbar-brand m-0 p-0">
                 todosample2</a>
  --%>
- 
+ <!-- Page Header Start -->
+    <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container text-center py-5">
+            <h1 class="display-4 text-white animated slideInDown mb-3">내 할 일 보기</h1>
+            <nav aria-label="breadcrumb animated slideInDown">
+                <ol class="breadcrumb justify-content-center mb-0">
+                    <li class="breadcrumb-item"><a class="text-white" href="#"></a></li>
+                    <li class="breadcrumb-item"><a class="text-white" href="#"></a></li>
+                    <li class="breadcrumb-item text-primary active" aria-current="page"></li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!-- Page Header End -->
+    
 <div class = 'todocontainer'>
 	<a href="<!--모달넣기-->" class="btn btn-success btn-sm float-right"><i class="fas fa-plus"></i> 새 일정</a>
+	
+	
 	<section id="tabs" class="project-tab">
             <div class="container">
                 <div class="row">
@@ -145,6 +161,69 @@
                                 </table>
                             </div>
                             <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                              
+                              
+                              <!-- 아코디언 테스트 -->
+                             
+                             <div class="accordion" id="accordionExample">
+							  <div class="accordion-item">
+							    <h2 class="accordion-header" id="headingOne">
+							      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+							        Accordion Item #1
+							      </button>
+							    </h2>
+							    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+							      <div class="accordion-body">
+							       
+							         <table class="table" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>A사원</th>
+                                            <th>시작날짜</th>
+                                            <th>예상 마감일</th>
+                                        </tr>
+                                    </thead>
+                                
+                                    <tbody>
+                                     <tr>
+                                            <th></th>
+                                            <th>그래프</th>
+                                            <th></th>
+                                        </tr> 
+                                        <tr>
+                                            <td><a href="#">첫 번째 할 일</a></td>
+                                            <td>2023-03-10</td>
+                                            <td>2023-03-12</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="#">두 번째 할 일</a></td>
+                                            <td>2023-03-10</td>
+                                            <td>2023-03-12</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="#">세번째 할 일</a></td>
+                                            <td>2023-03-10</td>
+                                            <td>2023-03-12</td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td><b>더보기</b></td>
+                                        </tr>
+                                    </tbody>
+                                    </table><%--a 사원 todo 끝 --%>
+                                    
+							      </div>
+							    </div>
+							  </div>
+							 
+							</div>
+                             
+                             
+                              <!-- 아코디언 테스트 -->
+                             
+                              
                                 <table class="table" cellspacing="0">
                                     <thead>
                                         <tr>

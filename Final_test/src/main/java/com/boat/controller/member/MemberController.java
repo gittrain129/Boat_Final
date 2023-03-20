@@ -1,12 +1,16 @@
 package com.boat.controller.member;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping(value = "/member")
 public class MemberController {
+	private static final Logger Logger = LoggerFactory.getLogger(MemberController.class);
 
 
 	
@@ -15,7 +19,7 @@ public class MemberController {
 		return "/Member/sign_up";
 	}
 	
-	@GetMapping("/sign_in")
+	@RequestMapping(value = "/sign_in", method = RequestMethod.GET)
 	public String signin() {
 		return "/Member/sign_in";
 	}

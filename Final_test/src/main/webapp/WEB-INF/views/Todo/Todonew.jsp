@@ -8,15 +8,24 @@
 <title>일별근무시간</title>
 <jsp:include page="../Main/header.jsp" />
 <%-- <link rel="stylesheet" href="<c:url value='/resources/css/attendance/attendanceBoard.css'/>" /> --%>
-<script src="${path}/resources/js/attendance/board.js" defer ></script>
+<!-- <script src="${path}/resources/js/attendance/board.js" defer ></script> -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/jhLee/css/Todonew.css">
+  
+  
+  <%--tab 전환에 필요 bootstrap4 --%>
+  <%-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">--%>
+  
+  
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  
+  
 </head>
 
 <style>
 
 .main-box{
     display: grid;
-    grid-template-columns: 0.25fr 1fr; 
+    grid-template-columns: 1fr; 
     gap: 40px
 }
 
@@ -358,11 +367,80 @@ h1{
     transition: 1s ease 0.3s;
 }
 
-
-
+.project-tab {
+    padding: 10%;
+    margin-top: -8%;
+}
+.project-tab #tabs{
+    background: #007b5e;
+    color: #eee;
+}
+.project-tab #tabs h6.section-title{
+    color: #eee;
+}
+.project-tab #tabs .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #0062cc;
+    background-color: transparent;
+    border-color: transparent transparent #f3f3f3;
+    border-bottom: 3px solid !important;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom : 30px;
+}
+.project-tab .nav-link {
+    border: 1px solid transparent;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+    color: #0062cc;
+    font-size: 16px;
+    font-weight: 600;
+}
+.project-tab .nav-link:hover {
+    border: none;
+}
+.project-tab thead{
+    background: #f3f3f3;
+    color: #333;
+}
+.project-tab a{
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    
+}
+/* 추가 css */
+.todocontainer{margin-top : 50px;}
+.btn{margin-left : 20px;}
+				
 </style>
+<%--
 
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+ 
+  5.0 번들에서 모달 작동안함... --%>
 <body>
+
+<!-- 내일정 추가 Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 내일정 추가 Modal end -->
+
+
 <!-- Page Header Start -->
     <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
         <div class="container text-center py-5">
@@ -378,92 +456,34 @@ h1{
     </div>
     <!-- Page Header End -->
     
+    
+    
+    <a href="${pageContext.request.contextPath}/Todo/sampleboard">js4이용 샘플보드</a>
+    <a href="${pageContext.request.contextPath}/Todo/sampleboard2ar">js4이용 샘플보드</a>
 <main class="main-box">
   <div id="right-content">
-       <%--  <div id="clock" class="box">
-            <div id="date-box">${day}</div>
-            <div id="time-box">${time}</div>
-            <div id="btn-box">
-                <form action="" method="post"><input type="submit" name="" id="start-btn" class="btn" value="출근"></form>
-                <form action="" method="post"><input type="submit" name="" id="end-btn" class="c-btn" value="퇴근"></form>
-            </div>
-            <div id="result-box">
-                <div>시작: ${todayWork.start}</div>
-                <div>종료: ${todayWork.end}</div>
-            </div>
+      
         </div>
-        <div id="work-week" class="box">
-            <div id="week-header">이번주 근로시간</div>
-            <div id="select-week">
-                <input id="start-day" type="date" style="width: 100px;" name="start" value="2022-01-08">
-                        ~
-                <input id="end-day" type="date" style="width: 100px;" name="end" value="2023-01-14">
-            </div>
-            <div id="work-time">
-                총 근무시간 &nbsp&nbsp 
-                <div class="progress">
-                    <div class="progress-bar" style="width:80%;">80%</div>
-                </div>
-            </div>
-            <div id="work-time2">
-                           
-               <!--  <div class="progress">
-                    <div class="progress-bar" style="width:30%;">30%</div>
-                </div> -->
-            </div>
-        </div>
-        <div id="rest-information" class="box">
-        <div id="information-header">부서별 근무시간</div>
-            <!-- <div id="information-header">내 휴가 정보</div>
-            <div id="restinfo1" class="box">
-                <div id="restinfo-title1">입사일</div>
-                <div>2022-01-02</div>
-            </div>
-            <div id="restinfo2" class="box">
-                <div id="restinfo-title2">연차휴가</div>
-                <div>16일 0시간</div>
-            </div>
-            <div id="restinfo3" class="box">
-                <div id="restinfo-title3">사용연차</div>
-                <div> 10일 1시간</div>
-            </div>
-            <div id="restinfo4" class="box">
-                <div id="restinfo-title4">대체휴가</div>
-                <div> 0일 0시간</div>
-            </div>
-            <div id="restinfo5" class="box">
-                <div id="restinfo-title5">휴가 잔여일</div>
-                <div>5일 7시간</div> -->
-            </div> --%>
-        </div>
-    </div>
 
     <div id="main-content">
         <div>
-            <form action="/sixman/attendance/board3" method="post">
              <div id="search-box" class="box">
-              <h1>근태관리</h1>
+              <h1>내 할 일 보기</h1>
               </div>
-              <!--   <div id="search-box" class="box">
-                    <div id="search-font">검색기간</div>
-                    <div class="btn">7일</div>
-                    <div class="btn">1개월</div>
-                    <div class="btn">3개월</div>
-                    <div class="btn">1년</div>
-                    <div id="date">
-                        <input id="start-day" type="date" style="width: 100px;" name="start" value="2022-01-01">
-                        ~
-                        <input id="end-day" type="date" style="width: 100px;" name="end">
-                    </div>
-                    <div><input class="btn" id="date-btn" type="submit" value="검색"></div>
-                    <div></div>
-                </div> -->
-            </form>         
+             
         </div>
         <div>
             <div id="notice-box" class="box">
             <div class = 'todocontainer'>
-	<a href="<!--모달넣기-->" class="btn btn-success btn-sm float-right"><i class="fas fa-plus"></i> 새 일정</a>
+            
+
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  <i class="fas fa-plus"></i> 새 일정 추가</a>
+</button>
+	
+	
 	<section id="tabs" class="project-tab">
             <div class="container">
                 <div class="row">
@@ -509,41 +529,37 @@ h1{
                                     <thead>
                                         <tr>
                                             <th>첫 번째 할 일</th>
-                                            <th>그래프</th>
+                                            <th><div class='progress'></div></th>
                                             <th></th>
                                         </tr> 
                                          <tr>
                                             <th>두 번째 할 일</th>
-                                            <th>그래프</th>
+                                            <th><div class='progress'></div></th>
                                             <th></th>
                                         </tr>
                                           <tr>
                                             <th>세 번째 할 일</th>
-                                           <th>그래프</th>
+                                           <th><div class='progress'></div></th>
                                             <th></th>
                                         </tr>
                                     </thead>
-                                 <!--    <tbody>
-                                        <tr>
-                                            <td><a href="#">Work 1</a></td>
-                                            <td>Doe</td>
-                                            <td>john@example.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Work 2</a></td>
-                                            <td>Moe</td>
-                                            <td>mary@example.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Work 3</a></td>
-                                            <td>Dooley</td>
-                                            <td>july@example.com</td>
-                                        </tr>
-                                    </tbody> -->
+                               
                                 </table>
                             </div>
                             <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                                <table class="table" cellspacing="0">
+                                
+                                <%--아코디언 시작 --%>
+                             <div class="accordion" id="accordionExample">
+							  <div class="accordion-item">
+							    <h2 class="accordion-header" id="headingOne">
+							      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+										A사원 <div class="progress"></div>	
+							      </button>
+							    </h2>
+							    <div id="collapseOne" class="accordion-collapse collapse " aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+							      <div class="accordion-body">
+							       
+							         <table class="table" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>A사원</th>
@@ -580,19 +596,119 @@ h1{
                                             <td><b>더보기</b></td>
                                         </tr>
                                     </tbody>
-                                     <thead>
-                                        <tr class='accordion-flush'>
-                                            <td><a href="#">b사원</a></td>
-                                            <td>그래프</td>
-                                            <td></td>
+                                    </table><%--a 사원 todo 끝 --%>
+                                    
+							      </div>
+							    </div>
+							  </div>
+							    <div class="accordion-item">
+								    <h2 class="accordion-header" id="headingTwo">
+								      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+								        B사원 <div class="progress"></div>	
+								      </button>
+								       </h2>
+							  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+      								<div class="accordion-body">
+							       
+							         <table class="table" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>b사원</th>
+                                            <th>시작날짜</th>
+                                            <th>예상 마감일</th>
+                                        </tr>
+                                    </thead>
+                                
+                                    <tbody>
+                                     <tr>
+                                            <th></th>
+                                            <th>그래프</th>
+                                            <th></th>
+                                        </tr> 
+                                        <tr>
+                                            <td><a href="#">첫 번째 할 일</a></td>
+                                            <td>2023-03-10</td>
+                                            <td>2023-03-12</td>
                                         </tr>
                                         <tr>
-                                            <td><a href="#">c사원</a></td>
-                                            <td>그래프</td>
-                                            <td></td>
+                                            <td><a href="#">두 번째 할 일</a></td>
+                                            <td>2023-03-10</td>
+                                            <td>2023-03-12</td>
                                         </tr>
-          </thead>
-                                          </table>
+                                        <tr>
+                                            <td><a href="#">세번째 할 일</a></td>
+                                            <td>2023-03-10</td>
+                                            <td>2023-03-12</td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td><b>더보기</b></td>
+                                        </tr>
+                                    </tbody>
+                                    </table><%--a 사원 todo 끝 --%>
+                                    
+							      </div>
+							    </div>
+							  </div>
+							  
+							    <div class="accordion-item">
+								    <h2 class="accordion-header" id="headingThree">
+								      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+								      		A사원 <div class="progress"></div>	
+								      </button>
+								    </h2>
+								    
+							     <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+      								<div class="accordion-body">
+							         <table class="table" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>A사원</th>
+                                            <th>시작날짜</th>
+                                            <th>예상 마감일</th>
+                                        </tr>
+                                    </thead>
+                                
+                                    <tbody>
+                                     <tr>
+                                            <th></th>
+                                            <th>그래프</th>
+                                            <th></th>
+                                        </tr> 
+                                        <tr>
+                                            <td><a href="#">첫 번째 할 일</a></td>
+                                            <td>2023-03-10</td>
+                                            <td>2023-03-12</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="#">두 번째 할 일</a></td>
+                                            <td>2023-03-10</td>
+                                            <td>2023-03-12</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="#">세번째 할 일</a></td>
+                                            <td>2023-03-10</td>
+                                            <td>2023-03-12</td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td><b>더보기</b></td>
+                                        </tr>
+                                    </tbody>
+                                    </table><%--a 사원 todo 끝 --%>
+                                    
+							      </div>
+							    </div>
+							  </div>
+							 
+							</div><%-- 아코디언 끝 --%>
+                             
+                             
+                                    
                             </div>
                         </div>
                     </div>
@@ -600,35 +716,7 @@ h1{
             </div>
         </section>
         </div>
-             <%--    <div class="list-box">
-                    <div class="first-item">
-                        <p>날짜</p>
-                        <p>성명</p>
-                        <p>시작시간</p>
-                        <p>종료시간</p>
-                        <p>추가근무시간</p>
-                        <p>총 근무시간</p>
-                    </div>
-                        <c:forEach items="${voList}" var="x">
-                            <div class="list-item">
-                                <p>${x.workDay}</p>
-                                <p>${x.name}</p>
-                                <p>${x.start}</p>
-                                <p>${x.end}</p>
-                                <p>${x.workoverTime}</p>
-                                <p>${x.workTime}</p>
-                            </div>
-                        </c:forEach>
-                </div> --%>
-              <%--   <div class="page-box">
-                	<span class="material-symbols-outlined" <c:if test="${pv.currentPage ne 1}">onclick="location.href='/sixman/attendance/board?page=1'"</c:if>> keyboard_double_arrow_left </span>
-                    <span class="material-symbols-outlined" <c:if test="${pv.currentPage ne 1}">onclick="location.href='/sixman/attendance/board?page=${pv.currentPage - 1}'"</c:if>> chevron_left </span>
-                    <c:forEach var="i" begin="${pv.startPage}" end="${pv.endPage}">
-                    <div class="page-btn <c:if test="${i eq pv.currentPage}"> checked-p-btn</c:if>" onclick="location.href='/sixman/attendance/board?page=${i}'">${i}</div>
-                    </c:forEach>
-                    <span class="material-symbols-outlined" <c:if test="${pv.maxPage ne pv.currentPage}">onclick="location.href='/sixman/attendance/board?page=${pv.currentPage + 1}'"</c:if>> chevron_right </span>
-                    <span class="material-symbols-outlined" <c:if test="${pv.maxPage ne 1 and pv.maxPage eq pv.currentPage}">onclick="location.href='/sixman/attendance/board?page=${pv.maxPage}'"</c:if>> keyboard_double_arrow_right </span>
-                </div> --%>
+         
             </div>
         </div>
     </div>
@@ -636,50 +724,6 @@ h1{
 
 </main>
 
-<script>
-
-    //오늘날짜 이후는 선택못하게 제한설정
-    var now_utc = Date.now()
-    var timeOff = new Date().getTimezoneOffset()*60000;
-    var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
-    document.getElementById("end-day").setAttribute("max", today);
-    document.getElementById("start-day").setAttribute("max", today);
-
-    //오늘날짜
-    document.getElementById('end-day').value = new Date().toISOString().substring(0, 10);
-
-    //출근버튼
-    // document.querySelector("#start-btn").addEventListener("click", () => {
-    //     popup.alertPop("출근","시간나오게");
-    // })
-
-    //퇴근버튼
-    // document.querySelector("#end-btn").addEventListener("click", () => {
-    //     popup.alertPop("퇴근","시간나오게");
-    // })
-
-    var start = document.getElementById('start123');
-    var end = document.getElementById('end123');
-
-    var result = start-end;
-    
-
-    const progress = document.querySelector('.progress-bar');
-const valueinput = document.querySelector('.valueinput');
-const maxIntput = document.querySelector('.maxinput');
-
-let finalValue = valueinput.value;
-let max = 100;
-changeGuage()
-
-function changeGuage(){
-    progress.style.width = `${(finalValue / max) * 100}%`;
-    progress.innerText = `${Math.ceil((finalValue / max) * 100)}%`;
-}
-
- 
-
-</script>
 
 </body>
 </html>

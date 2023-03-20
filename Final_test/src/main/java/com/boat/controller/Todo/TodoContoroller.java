@@ -30,4 +30,17 @@ public class TodoContoroller {
 		return "Todo/todo2";
 	}
 	
+	@RequestMapping(value="/sampleboard",method=RequestMethod.GET)
+	public String sampleboard() {
+		
+		
+		return "Todo/sampleboard";
+	}
+	@RequestMapping(value="/sampleboard2ar",method=RequestMethod.GET)
+	public String sampleboard2() {
+		
+		
+		return "Todo/sampleboard2";
+	}
+	
 }//클래스 end
