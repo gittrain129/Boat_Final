@@ -411,7 +411,215 @@ h1{
 /* 추가 css */
 .todocontainer{margin-top : 50px;}
 .btn{margin-left : 20px;}
+<%-- 아코디언 바디 --%>
+
+.white-bg {
+    background-color: #ffffff;
+}
+.page-heading {
+    border-top: 0;
+    padding: 0 10px 20px 10px;
+}
+
+.forum-post-container .media {
+  margin: 10px 10px 10px 10px;
+  padding: 20px 10px 20px 10px;
+  border-bottom: 1px solid #f1f1f1;
+}
+.forum-avatar {
+  float: left;
+  margin-right: 20px;
+  text-align: center;
+  width: 110px;
+}
+.forum-avatar .img-circle {
+  height: 48px;
+  width: 48px;
+}
+.author-info {
+  color: #676a6c;
+  font-size: 11px;
+  margin-top: 5px;
+  text-align: center;
+}
+.forum-post-info {
+  padding: 9px 12px 6px 12px;
+  background: #f9f9f9;
+  border: 1px solid #f1f1f1;
+}
+.media-body > .media {
+  background: #f9f9f9;
+  border-radius: 3px;
+  border: 1px solid #f1f1f1;
+}
+.forum-post-container .media-body .photos {
+  margin: 10px 0;
+}
+.forum-photo {
+  max-width: 140px;
+  border-radius: 3px;
+}
+.media-body > .media .forum-avatar {
+  width: 70px;
+  margin-right: 10px;
+}
+.media-body > .media .forum-avatar .img-circle {
+  height: 38px;
+  width: 38px;
+}
+.mid-icon {
+  font-size: 66px;
+}
+.forum-item {
+  margin: 10px 0;
+  padding: 10px 0 20px;
+  border-bottom: 1px solid #f1f1f1;
+}
+.views-number {
+  font-size: 24px;
+  line-height: 18px;
+  font-weight: 400;
+}
+.forum-container,
+.forum-post-container {
+  padding: 30px !important;
+}
+.forum-item small {
+  color: #999;
+}
+.forum-item .forum-sub-title {
+  color: #999;
+  margin-left: 50px;
+}
+.forum-title {
+  margin: 15px 0 15px 0;
+}
+.forum-info {
+  text-align: center;
+}
+.forum-desc {
+  color: #999;
+}
+.forum-icon {
+  float: left;
+  width: 30px;
+  margin-right: 20px;
+  text-align: center;
+}
+a.forum-item-title {
+  color: inherit;
+  display: block;
+  font-size: 18px;
+  font-weight: 600;
+}
+a.forum-item-title:hover {
+  color: inherit;
+}
+.forum-icon .fa {
+  font-size: 30px;
+  margin-top: 8px;
+  color: #9b9b9b;
+}
+.forum-item.active .fa {
+  color: #1ab394;
+}
+.forum-item.active a.forum-item-title {
+  color: #1ab394;
+}
+@media (max-width: 992px) {
+  .forum-info {
+    margin: 15px 0 10px 0;
+    /* Comment this is you want to show forum info in small devices */
+    display: none;
+  }
+  .forum-desc {
+    float: none !important;
+  }
+}
+
+
+
+
+
+.ibox {
+  clear: both;
+  margin-bottom: 25px;
+  margin-top: 0;
+  padding: 0;
+}
+.ibox.collapsed .ibox-content {
+ /*font-size : 0.3rem;*/
+  display: none;
+}
+.ibox.collapsed .fa.fa-chevron-up:before {
+  content: "\f078";
+}
+.ibox.collapsed .fa.fa-chevron-down:before {
+  content: "\f077";
+}
+.ibox:after,
+.ibox:before {
+  display: table;
+}
+.ibox-title {
+  -moz-border-bottom-colors: none;
+  -moz-border-left-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-top-colors: none;
+  background-color: #ffffff;
+  border-color: #e7eaec;
+  border-image: none;
+  border-style: solid solid none;
+  border-width: 3px 0 0;
+  color: inherit;
+  margin-bottom: 0;
+  padding: 14px 15px 7px;
+  min-height: 48px;
+}
+.ibox-content {
+  background-color: #ffffff;
+  color: inherit;
+  padding: 15px 20px 20px 20px;
+  border-color: #e7eaec;
+  border-image: none;
+  border-style: solid solid none;
+  border-width: 1px 0;
+}
+.ibox-footer {
+  color: inherit;
+  border-top: 1px solid #e7eaec;
+  font-size: 90%;
+  background: #ffffff;
+  padding: 10px 15px;
+}
+
+.message-input {
+    height: 90px !important;
+}
+.form-control, .single-line {
+    background-color: #FFFFFF;
+    background-image: none;
+    border: 1px solid #e5e6e7;
+    border-radius: 1px;
+    color: inherit;
+    display: block;
+    padding: 6px 12px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    width: 100%;
+    font-size: 14px;
+}
+.text-navy {
+    color: #1ab394;
+}
+.mid-icon {
+    font-size: 66px !important;
+}
+.m-b-sm {
+    margin-bottom: 10px;
+}
 				
+
+.nav-tabs{border : none;}
 </style>
 <%--
 
@@ -656,50 +864,140 @@ h1{
 							    <div class="accordion-item">
 								    <h2 class="accordion-header" id="headingThree">
 								      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-								      		A사원 <div class="progress"></div>	
+								      		C사원 <div class="progress"></div>	
 								      </button>
 								    </h2>
 								    
 							     <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
       								<div class="accordion-body">
-							         <table class="table" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>A사원</th>
-                                            <th>시작날짜</th>
-                                            <th>예상 마감일</th>
-                                        </tr>
-                                    </thead>
+							       <div class="ibox-content forum-container">
+
+                <div class="forum-title">
+                    <div class="pull-right forum-desc">
+                        <samll></samll>
+                    </div>
+                    <h3>사원 이지현</h3>
+                </div>
+
+                <div class="forum-item active">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="forum-icon">
+                                <i class="fa fa-shield"></i>
+                            </div>
+                            <a href="forum_post.html" class="forum-item-title">진행중</a>
+                            <div class="forum-sub-title">
+                            첫 번째 할 일
+                            </div>
+                        </div>
+                    
+                        <div class="col-md-1 forum-info">
+                            <span class="views-number">
                                 
-                                    <tbody>
-                                     <tr>
-                                            <th></th>
-                                            <th>그래프</th>
-                                            <th></th>
-                                        </tr> 
-                                        <tr>
-                                            <td><a href="#">첫 번째 할 일</a></td>
-                                            <td>2023-03-10</td>
-                                            <td>2023-03-12</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">두 번째 할 일</a></td>
-                                            <td>2023-03-10</td>
-                                            <td>2023-03-12</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">세번째 할 일</a></td>
-                                            <td>2023-03-10</td>
-                                            <td>2023-03-12</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td><b>더보기</b></td>
-                                        </tr>
-                                    </tbody>
-                                    </table><%--a 사원 todo 끝 --%>
+                            </span>
+                            <div>
+                                <small></small>
+                            </div>
+                        </div>
+                        <div class="col-md-1 forum-info">
+                            <span class="views-number">
+                               
+                            </span>
+                            <div>
+                                <small></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="forum-item">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="forum-icon">
+                                <i class="fa fa-bolt"></i>
+                            </div>
+                            <a href="forum_post.html" class="forum-item-title">두 번째 할 일</a>
+                            <div class="forum-sub-title">
+                            할일상세보기
+                            </div>
+                        </div>
+                        <div class="col-md-2 forum-info">
+                            <span class="views-number">
+                            </span>
+                            <div>
+                                <small>23-03-20</small>
+                            </div>
+                        </div>
+                       
+                        <div class="col-md-2 forum-info">
+                            <span class="views-number">
+                                
+                            </span>
+                            <div>
+                                <small>23-03-20</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="forum-item active">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="forum-icon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                              <a href="forum_post.html" class="forum-item-title">두 번째 할 일</a>
+                            <div class="forum-sub-title">
+                            할일상세보기
+                            </div>
+                        </div>
+                        <div class="col-md-2 forum-info">
+                            <span class="views-number">
+                            </span>
+                            <div>
+                               <small>23-03-20</small>
+                            </div>
+                        </div>
+                      
+                        <div class="col-md-2 forum-info">
+                            <span class="views-number">
+                                
+                            </span>
+                            <div>
+                                <small>23-03-20</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="forum-item active">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="forum-icon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                              <a href="forum_post.html" class="forum-item-title">두 번째 할 일</a>
+                            <div class="forum-sub-title">
+                            할일상세보기
+                            </div>
+                        </div>
+                        <div class="col-md-2 forum-info">
+                            <span class="views-number">
+                            </span>
+                            <div>
+                                <small>23-03-20</small>
+                            </div>
+                        </div>
+                       
+                        <div class="col-md-2 forum-info">
+                            <span class="views-number">
+                                
+                            </span>
+                            <div>
+                                <small>23-03-20</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+      
+               
                                     
 							      </div>
 							    </div>
