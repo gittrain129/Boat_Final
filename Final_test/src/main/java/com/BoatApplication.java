@@ -1,5 +1,5 @@
 package com;
-
+//localhost:9700/boat/index
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

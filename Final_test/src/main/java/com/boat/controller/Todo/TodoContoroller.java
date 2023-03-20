@@ -13,7 +13,21 @@ public class TodoContoroller {
 	public String mainpage() {
 		
 		
-	return "Todo/sampleboard";
+	return "Todo/Todonew";
+	}
+	
+	@RequestMapping(value="/todo1",method=RequestMethod.GET)
+	public String todosample1() {
+		
+		
+		return "Todo/todo";
+	}
+	
+	@RequestMapping(value="/todo2",method=RequestMethod.GET)
+	public String todosample2() {
+		
+		
+		return "Todo/todo2";
 	}
 	
 }//클래스 end

@@ -13,6 +13,6 @@ public class AttendanceContoroller {
 	public String attList() {
 		
 		
-	return "Attendance/a";
+	return "Attendance/a_1";
 	}
 }//클래스 end

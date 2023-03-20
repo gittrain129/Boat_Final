@@ -49,11 +49,24 @@
     text-decoration: none;
     color: #333;
     font-weight: 600;
-}</style>
+    
+}
+/* 추가 css */
+.todocontainer{margin-top : 50px;}
+.btn{margin-left : 20px;}
+				
+</style>
 </head>
 <body>
-
-<section id="tabs" class="project-tab">
+          <%--       <a href="${pageContext.request.contextPath}/Todo/todo1" class="navbar-brand m-0 p-0">
+                todosample1</a>
+                <a href="${pageContext.request.contextPath}/Todo/todo2" class="navbar-brand m-0 p-0">
+                todosample2</a>
+ --%>
+ 
+<div class = 'todocontainer'>
+	<a href="<!--모달넣기-->" class="btn btn-success btn-sm float-right"><i class="fas fa-plus"></i> 새 일정</a>
+	<section id="tabs" class="project-tab">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
@@ -170,7 +183,7 @@
                                         </tr>
                                     </tbody>
                                      <thead>
-                                        <tr>
+                                        <tr class='accordion-flush'>
                                             <td><a href="#">b사원</a></td>
                                             <td>그래프</td>
                                             <td></td>
@@ -188,5 +201,6 @@
                 </div>
             </div>
         </section>
+        </div>
 </body>
 </html>
