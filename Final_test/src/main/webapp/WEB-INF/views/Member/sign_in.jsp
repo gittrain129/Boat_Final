@@ -26,13 +26,20 @@
             <input type="password" name="password" id="password" placeholder="비밀번호를 입력해주세요">
 		    <i class= "fa fa-solid fa-eye-slash" ></i>
 
+			<!--
             <input type="checkbox" name="terms" id="terms">
             <label for="terms">로그인 유지하기</label>
+             -->
+	        <input type="checkbox" id="terms" name="terms">
+	        <i class="fas fa-check-circle"></i>
+	        <label for="terms" class="terms_lable"><span>아이디 저장</span></label>
 
+			 
             <div id="form-controls">
               <button type="submit">Sign Up</button>
-              <button type="button" id="toggleSignIn">Sign In</button>
+              <!--<button type="button" id="toggleSignIn">Sign In</button> -->
             </div>
+            
 
           </form>
         </div>

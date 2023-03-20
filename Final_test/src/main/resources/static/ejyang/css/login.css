@@ -155,6 +155,7 @@ button[type="button"] {
     color: #ED4B5E;
 }
 
+/*
 #terms {
     width: 30px;
     height: 30px;
@@ -172,6 +173,7 @@ button[type="button"] {
     top: 0;
     left: 3px;
 }
+*/
 
 label[for="terms"] {
     display: inline-block;
@@ -256,5 +258,9 @@ label[for="terms"] {
 	padding-right: 47px;
 	background-size: 45px;
 	background-position: 3px;
+}
+
+#terms {
+    display: none;
 }
 
