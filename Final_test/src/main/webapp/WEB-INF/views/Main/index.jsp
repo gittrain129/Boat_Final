@@ -13,17 +13,17 @@
 <title>BOAT</title>
 
 <!-- Bootstrap -->
-<link href="${pageContext.request.contextPath}/resources/static/Kimsj/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/static/css/bootstrap.min.css" rel="stylesheet">
 <!-- Style CSS -->
-<link href="${pageContext.request.contextPath}/resources/static/Kimsj/css/style.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/static/css/style.css" rel="stylesheet">
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css?family=PT+Serif:400,400i,700,700i" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
 <!-- FontAwesome CSS --> 
 <link rel="stylesheet" type="text/css" href="css/fontello.css">
-<link href="${pageContext.request.contextPath}/resources/static/Kimsj/css/font-awesome.min.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/resources/static/Kimsj/css/owl.carousel.min.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/resources/static/Kimsj/css/owl.theme.default.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/static/css/font-awesome.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/static/css/owl.carousel.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/static/css/owl.theme.default.css" rel="stylesheet">
 
     
     <jsp:include page="header.jsp"/>
@@ -450,12 +450,12 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="js/jquery.min.js" type="text/javascript"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="${pageContext.request.contextPath}/resources/Kimsj/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="${pageContext.request.contextPath}/resources/Kimsj/js/menumaker.js" type="text/javascript"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/Kimsj/js/jquery.sticky.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/Kimsj/js/sticky-header.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/Kimsj/js/owl.carousel.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/Kimsj/js/slider.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/menumaker.js" type="text/javascript"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.sticky.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/sticky-header.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/slider.js"></script>
 </body>
 
 </html>
