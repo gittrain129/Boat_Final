@@ -33,7 +33,7 @@
             </div>
             <div class="carousel-inner" style="height:630px;">
                 <div class="carousel-item active">
-                    <img class="w-100" src="${pageContext.request.contextPath}/resources/Kimsj/img/carousel-1.jpg" alt="Image">
+                    <img class="w-100" src="${pageContext.request.contextPath}/resources/img/carousel-1.jpg" alt="Image">
                     <div class="carousel-caption" style="height:630px;">
                         <div class="p-3" style="max-width: 900px;">
                             <h4 class="text-white text-uppercase mb-4 animated zoomIn">공지사항</h4>
@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="w-100" src="${pageContext.request.contextPath}/resources/Kimsj/img/carousel-2.jpg" alt="Image">
+                    <img class="w-100" src="${pageContext.request.contextPath}/resources/img/carousel-2.jpg" alt="Image">
                     <div class="carousel-caption" style="height:630px;">
                         <div class="p-3" style="max-width: 900px;">
                             <h4 class="text-white text-uppercase mb-4 animated zoomIn">We Are Leader In</h4>
@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="w-100" src="${pageContext.request.contextPath}/resources/Kimsj/img/carousel-3.jpg" alt="Image">
+                    <img class="w-100" src="${pageContext.request.contextPath}/resources/img/carousel-3.jpg" alt="Image">
                     <div class="carousel-caption" style="height:630px;">
                         <div class="p-3" style="max-width: 900px;">
                             <h4 class="text-white text-uppercase mb-4 animated zoomIn">We Are Leader In</h4>
