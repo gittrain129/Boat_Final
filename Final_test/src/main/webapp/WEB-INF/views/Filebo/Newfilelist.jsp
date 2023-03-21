@@ -3686,6 +3686,20 @@ readers do not read off random characters that represent icons */
 </style>
 </head>
 <body>
+  <!-- Page Header Start -->
+    <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container text-center py-5">
+            <h1 class="display-4 text-white animated slideInDown mb-3">자료실 게시판</h1>
+            <nav aria-label="breadcrumb animated slideInDown">
+                <ol class="breadcrumb justify-content-center mb-0">
+                    <li class="breadcrumb-item"><a class="text-white" href="#"></a></li>
+                    <li class="breadcrumb-item"><a class="text-white" href="#"></a></li>
+                    <li class="breadcrumb-item text-primary active" aria-current="page"></li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!-- Page Header End -->
 <section class="container">
 	<!--<div class="row">  -->
 		<!-- <div class="col-lg-9 col-12 mb-4"> -->
@@ -3697,14 +3711,18 @@ readers do not read off random characters that represent icons */
 			<table class="table table-bordered table-hover">
 				<thead>
 					<tr class="bg-light">
-						<th title="Discussion List"><i data-feather="list"></i></th>
-						<th class="bg-light" title="Created By"><i data-feather="user-check"></i></th>
-						<th title="Total Replies"><i data-feather="hash"></i></th>
-						<th title="Last Updated"><i data-feather="clock"></i></th>
+					<th>즐겨칮기</th>
+						<th title="Discussion List">제목</th>
+						<th class="bg-light" title="Created By">작성자</th>
+						<th title="Total Replies">조회수</th>
+						<th title="Last Updated">작성일</th>
+						<th title="Last Updated">파일1</th>
+						<th title="Last Updated">파일2</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
+					<td></td>
 						<td>
 						
 							<a href="discussion-detail.html">자료실게시판 제목1
@@ -3714,101 +3732,39 @@ readers do not read off random characters that represent icons */
 						<td><a href="profile.html"><small>Carroll Hintz</small></a></td>
 						<td>538</td>
 						<td>1 week ago</td>
+						<td></td><td></td>
 					</tr>
-															<tr>
+					<tr>
+					<td></td>
 						<td>
-							<a href="discussion-detail.html">Id temporibus eius tempore nihil.
-							<span class="badge badge-pill badge-warning float-right">Admin</span>
-							</a>
-						</td>
-						<td><a href="profile.html"><small>Hans Pfannerstill</small></a></td>
-						<td>256</td>
-						<td>1 week ago</td>
-					</tr>
-															<tr>
-						<td>
-							<a href="discussion-detail.html">Qui id corporis nihil magnam.
-							<span class="badge badge-pill badge-warning float-right">Admin</span>
-							</a>
-						</td>
-						<td><a href="profile.html"><small>Mr. Felton Paucek II</small></a></td>
-						<td>444</td>
-						<td>1 week ago</td>
-					</tr>
-															<tr>
-						<td>
-							<a href="discussion-detail.html">Aut fugiat et consequuntur eveniet veniam placeat.
-							<span class="badge badge-pill badge-warning float-right">Admin</span>
-							</a>
-						</td>
-						<td><a href="profile.html"><small>Max Nikolaus</small></a></td>
-						<td>892</td>
-						<td>1 week ago</td>
-					</tr>
-															<tr>
-						<td>
-							<a href="discussion-detail.html">In et magnam nesciunt aperiam atque est culpa.
-							<span class="badge badge-pill badge-primary float-right">Admin</span>
-							</a>
-						</td>
-						<td><a href="profile.html"><small>Geovanny Stark</small></a></td>
-						<td>215</td>
-						<td>1 week ago</td>
-					</tr>
-															<tr>
-						<td>
-							<a href="discussion-detail.html">Aliquid incidunt non unde eveniet possimus exercitationem qu...
-							<span class="badge badge-pill badge-primary float-right">Admin</span>
-							</a>
-						</td>
-						<td><a href="profile.html"><small>Max Nikolaus</small></a></td>
-						<td>983</td>
-						<td>1 week ago</td>
-					</tr>
-															<tr>
-						<td>
-							<a href="discussion-detail.html">Aspernatur optio consequatur quos ipsum qui sint.
+						
+							<a href="discussion-detail.html">자료실게시판 제목1
 							<span class="badge badge-pill badge-primary float-right">Admin</span>
 							</a>
 						</td>
 						<td><a href="profile.html"><small>Carroll Hintz</small></a></td>
-						<td>634</td>
+						<td>538</td>
 						<td>1 week ago</td>
+						<td></td><td></td>
 					</tr>
-															<tr>
+					<tr>
+					<td></td>
 						<td>
-							<a href="discussion-detail.html">Quidem aut cupiditate qui nihil hic.
-							<span class="badge badge-pill badge-warning float-right">Admin</span>
-							</a>
-						</td>
-						<td><a href="profile.html"><small>Mr. Felton Paucek II</small></a></td>
-						<td>555</td>
-						<td>1 week ago</td>
-					</tr>
-															<tr>
-						<td>
-							<a href="discussion-detail.html">Iusto explicabo ea in odio architecto.
+						
+							<a href="discussion-detail.html">자료실게시판 제목1
 							<span class="badge badge-pill badge-primary float-right">Admin</span>
 							</a>
 						</td>
-						<td><a href="profile.html"><small>Hans Pfannerstill</small></a></td>
-						<td>334</td>
+						<td><a href="profile.html"><small>Carroll Hintz</small></a></td>
+						<td>538</td>
 						<td>1 week ago</td>
+						<td></td><td></td>
 					</tr>
-															<tr>
-						<td>
-							<a href="discussion-detail.html">Autem id consequatur consectetur et nobis consequuntur nulla...
-							<span class="badge badge-pill badge-warning float-right">Admin</span>
-							</a>
-						</td>
-						<td><a href="profile.html"><small>Geovanny Stark</small></a></td>
-						<td>909</td>
-						<td>1 week ago</td>
-					</tr>
+							
 														</tbody>
 				<tfoot>
 					<tr>
-						<td colspan="4">
+						<td colspan="7">
 							<nav class="pt-3" aria-label="Page navigation example">
 							  <ul class="pagination">
 							    <li class="page-item"><a class="page-link" href="#">Previous</a></li>

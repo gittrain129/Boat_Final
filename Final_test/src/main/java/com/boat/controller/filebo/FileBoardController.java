@@ -9,6 +9,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class FileBoardController {
 
 	@RequestMapping(value="/list",method=RequestMethod.GET)
+	public String list() {
+		
+		
+		return "Filebo/Newfilelist";
+	}
+	
+	@RequestMapping(value="/list2",method=RequestMethod.GET)
 	public String mainpage() {
 		
 		
