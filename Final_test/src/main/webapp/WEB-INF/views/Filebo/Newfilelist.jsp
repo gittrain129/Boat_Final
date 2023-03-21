@@ -31,7 +31,7 @@
 	<!--<div class="row">  -->
 		<!-- <div class="col-lg-9 col-12 mb-4"> -->
 		<h3 class="border-bottom pb-1 mb-4">자료실 게시판
-			<a href="new-discussion.html" class="btn btn-success btn-sm float-right"><i class="fas fa-plus"></i> 수정
+			<a href="new-discussion.html" class="btn btn-success btn-sm float-right"><i class="fas fa-plus"></i> 글쓰기
 			</a>
 		</h3>
 		<div class="table-responsive">

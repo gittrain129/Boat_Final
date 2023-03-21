@@ -21,4 +21,10 @@ public class CalContoller {
 		
 	return "Calendar/cal";
 	}
+	@RequestMapping(value="/calendar",method=RequestMethod.GET)
+	public String fullcalPage() {
+		
+		
+		return "Calendar/fullcalendar";
+	}
 }//클래스 end
