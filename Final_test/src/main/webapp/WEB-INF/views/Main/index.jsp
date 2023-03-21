@@ -13,17 +13,17 @@
 <title>BOAT</title>
 
 <!-- Bootstrap -->
-<link href="${pageContext.request.contextPath}/resources/static/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 <!-- Style CSS -->
-<link href="${pageContext.request.contextPath}/resources/static/css/style.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css?family=PT+Serif:400,400i,700,700i" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
 <!-- FontAwesome CSS --> 
 <link rel="stylesheet" type="text/css" href="css/fontello.css">
-<link href="${pageContext.request.contextPath}/resources/static/css/font-awesome.min.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/resources/static/css/owl.carousel.min.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/resources/static/css/owl.theme.default.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/owl.carousel.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/owl.theme.default.css" rel="stylesheet">
 
     
     <jsp:include page="header.jsp"/>
