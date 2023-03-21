@@ -126,7 +126,7 @@
     </div>
     <!-- Team End -->
     
-    <jsp:include page="/WEB-INF/views/Board/footer.jsp"/>
+    <jsp:include page="Main/footer.jsp"/>
     
     
 </body>
