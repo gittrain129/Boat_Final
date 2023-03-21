@@ -2,10 +2,9 @@
 <!DOCTYPE html>
 <html>
  <head>
- 	<title>BOAT - 로그인</title>
- 	<link href="${pageContext.request.contextPath}/resources/ejyang/css/login.css" type="text/css" rel="stylesheet">
+ 	<title>BOAT - 아이디 찾기</title>
+ 	<link href="${pageContext.request.contextPath}/resources/ejyang/css/idcheck.css" type="text/css" rel="stylesheet">
  	<script src="http://code.jquery.com/jquery-latest.js"></script>
- 	<script src="${pageContext.request.contextPath}/resources/ejyang/js/signin.js"></script>
  	<jsp:include page="../Main/header.jsp" />
  </head>
  <body>
@@ -13,10 +12,9 @@
       <div id="form-inner-container">
         <!-- Sign up form -->
         <div id="sign-up-container">
-          <h3>로그인</h3>
+          <h3>아이디 찾기</h3>
           <form>
-            <label for="name">사번</label>
-            <i class= "fas fa-user"></i>
+            <label for="name">이름</label>
             <input type="text" name="name" id="name" placeholder="사번을 입력해주세요">
 
             <label for="password">비밀번호</label>

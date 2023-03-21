@@ -24,6 +24,11 @@ public class MemberController {
 		return "/Member/sign_in";
 	}
 	
+	@RequestMapping("/id_check")
+	public String idcheck() {
+		return "/Member/id_check";
+	}
+	
 	@GetMapping("/myinfo")
 	public String hello4() {
 		return "/Member/myinfo";
