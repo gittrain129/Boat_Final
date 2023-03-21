@@ -9,6 +9,15 @@
     <meta content="" name="keywords">
     <meta content="" name="description">
 
+       <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
 
 
 
@@ -30,7 +39,87 @@
     margin: 20px auto;
   }
  </style>
+    <!-- eventMaxStack? 한번에 여러개 못쓰게 막는 태그인지 체크 -->
+    <script>
+       
+     $(document).ready(function(){
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+        	
+        	  headerToolbar: {
+                 right: 'prev,next,today,addEventButton',
+                 center: 'title'
+             },
+                
+        	initialView: 'timeGridFourDay',
+          	views: {
+          		  timeGridFourDay: {
+          	      type: 'timeGrid',
+          	      duration: { days: 5 }
+          	    }},
+          	  
+          	  
+              editable: true,
+          	  height: 'auto',
+              navLinks: true, // can click day/week names to navigate views
+              editable: true,
+              selectable: true,
+              selectMirror: true,
+              nowIndicator: true,
+          	locale : 'ko',
+          	height:'auto',
+          	selectable: true,
+          	slotMinTime: '09:00',
+          	slotMaxTime: '19:00',
+          	eventDrop: function(info) {
+        		  console.log('인식중');
+            	  $('#calendarModal').modal('show');
+            	}
+          	
+          	/*
+          	customButtons: {
+	        	   addEventButton: { // 추가한 버튼 설정
+                    text : "일정 추가",  // 버튼 내용
+                    click : function(){ 
+                  	  // 버튼 클릭 시 이벤트 추가
+					$('#calendarModal #addCalendar')
+              		.css('display', 'inline');
+                  	  
+                        $("#calendarModal").modal("show"); // modal 나타내기
+                        $('#calendarModal #modifyCalendar').css('display', 'none');
+          				$('#calendarModal #deleteCalendar').css('display', 'none');
+          				$('#calendar_title').val('');
+                        $('#calendar_content').val('');
+                        $('#calendar_start_date').val('');
+                        $('#calendar_end_date').val('');
+                        $("#calendarModal #calendar_title").attr("readonly",false); 
+                       						}
+										}
+									}
+          	*/          	
+          	
+          	
+          	
+          	
+          	
+        });
+        calendar.render();
+      });
 
+     
+    
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+    </script>
   </head>
  
   <body>
@@ -146,6 +235,11 @@
     
     
     
+    
+    
+    
+    
+    
      <!-- modal 추가 -->
 
  	<div class="modal fade insertModal" id="calendarModal" tabindex="-1"
@@ -203,71 +297,8 @@
  			</div>
  		</div>
  	</div>
+ 	
 
-	
-
-
-
-
-	<script>
-       
-	$(document).ready(function(){
-	    var calendarEl = document.getElementById('calendar');
-	    var calendar = new FullCalendar.Calendar(calendarEl, {
-	        headerToolbar: {
-	            right: 'prev,next today',
-	            center: 'title'
-	        },
-	        initialView: 'timeGridFiveDay',
-	        views: {
-	            timeGridFiveDay: {
-	              type: 'timeGrid',
-	              duration: { days: 5 }
-	            }
-	        },
-	        height: 'auto',
-	        navLinks: true,
-	        editable: false,
-	        selectable: true,
-	        selectMirror: true,
-	        nowIndicator: true,
-	        locale : 'ko',
-	        slotMinTime: '09:00',
-	        slotMaxTime: '19:00',
-	        
-	        eventOverlap: function(stillEvent, movingEvent) {
-	            return stillEvent.allDay && movingEvent.allDay;
-	        },
-	        
-	        select: function(add) {
-	            $('#event-modal #event-start').val(add.start.toISOString().slice(0,16));
-	            $('#event-modal #event-end').val(add.end.toISOString().slice(0,16));
-	            $('#event-modal').modal('show');
-	        },
-	        
-	        
-	    });
-	    
-	    // Handle the form submit event to add the event to the calendar
-	    $('#event-form').submit(function(e) {
-	        e.preventDefault();
-	        var title = $('#event-title').val();
-	        var start = $('#event-start').val();
-	        var end = $('#event-end').val();
-	        calendar.addEvent({
-	            title: title,
-	            start: start,
-	            end: end,
-	            allDay: false
-	        });
-	        $('#event-modal').modal('hide');
-	    });
-	    
-	    calendar.render();
-	});
-  
-    </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
   </body>
   
 </html>
