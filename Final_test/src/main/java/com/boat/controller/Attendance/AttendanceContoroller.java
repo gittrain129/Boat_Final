@@ -13,6 +13,21 @@ public class AttendanceContoroller {
 	public String attList() {
 		
 		
-	return "Attendance/a_1";
+	return "Attendance/main";
 	}
+	
+	
+	@RequestMapping(value="/on",method=RequestMethod.GET)
+	public void on() {
+		
+		
+	}
+	
+	@RequestMapping(value="/off",method=RequestMethod.GET)
+	public void off() {
+		
+		
+	}
+	
+	
 }//클래스 end
