@@ -15,18 +15,23 @@ public class MemberController {
 
 	
 	@GetMapping("/sign_up")
-	public String signup() {
+	public String signUp() {
 		return "/Member/sign_up";
 	}
 	
 	@RequestMapping(value = "/sign_in", method = RequestMethod.GET)
-	public String signin() {
+	public String signIn() {
 		return "/Member/sign_in";
 	}
 	
 	@RequestMapping("/id_check")
-	public String idcheck() {
+	public String idCheck() {
 		return "/Member/id_check";
+	}
+	
+	@RequestMapping("/id_list")
+	public String idList() {
+		return "/Member/id_list";
 	}
 	
 	@GetMapping("/myinfo")

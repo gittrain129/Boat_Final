@@ -44,24 +44,18 @@
             </div>
             <div class="sns_login_button">
             	<div class="naver">
+            		<img src="${pageContext.request.contextPath}/resources/ejyang/image/btn_google.png"><br>
+                	<a href="#">
+                    	구글 로그인
+                    </a>
+                </div>
+            	<div class="naver">
             		<img src="${pageContext.request.contextPath}/resources/ejyang/image/btnG_아이콘원형.png"><br>
                 	<a href="#">
                     	네이버 로그인
                     </a>
                 </div>
-            	<div class="naver">
-            		<img src="${pageContext.request.contextPath}/resources/ejyang/image/btnG_아이콘사각.png"><br>
-                	<a href="#">
-                    	네이버 로그인
-                    </a>
-                </div>
             </div>
-            	<div class="naver_btn">
-            		<img src="${pageContext.request.contextPath}/resources/ejyang/image/btnG_완성형.png"><br>
-                	<a href="#">
-                    	네이버 로그인
-                    </a>
-                </div>
             
             
             <div class="findinfo">

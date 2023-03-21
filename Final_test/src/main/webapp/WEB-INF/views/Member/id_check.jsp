@@ -15,58 +15,24 @@
           <h3>아이디 찾기</h3>
           <form>
             <label for="name">이름</label>
-            <input type="text" name="name" id="name" placeholder="사번을 입력해주세요">
+            <input type="text" class="_input" name="name" placeholder="실명을 입력해 주세요." id="name">
 
-            <label for="password">비밀번호</label>
-            <i class= "fas fa-lock"></i>
-            <input type="password" name="password" id="password" placeholder="비밀번호를 입력해주세요">
-		    <i class= "fa fa-solid fa-eye-slash" ></i>
-
-			<!--
-            <input type="checkbox" name="terms" id="terms">
-            <label for="terms">로그인 유지하기</label>
-             -->
-             
-            <div>
-	        	<input type="checkbox" id="terms" name="terms">
-	        	<label for="terms" class="terms_lable">로그인 유지하기</label>
-			</div>
-			 
+            <label for="sub_title">이메일</label>
+            <div class="body multi_column" id="_input-email-body">
+            	<div class="column_wrap">
+                	<input type="text" name="email" class="clear focusInteraction" id="sub_title" placeholder="이메일">
+                    <span class="whelk clear">@</span>
+                    <div class="auto_complete_wrap" id="auto_complete">
+                    	<input type="text" name="email_domain" id="email_domain" class="clear focusInteraction" placeholder="직접 입력" autocomplete="off" style="width: 150px; padding-right: 30px;">
+                        <ul class="content" style="display: none;"></ul>
+                    </div>
+                </div>
+            </div>
+            
             <div id="form-controls">
-              <button type="submit"  class="btn-primary">로그인</button>
-              <!--<button type="button" id="toggleSignIn">Sign In</button> -->
+              <button type="submit"  class="btn-primary">아이디찾기</button>
             </div>
-            
-            <div class="sns_login">
-            	<div class="brick-login_2023__sns"> 다른 계정으로 로그인 하기 </div>
-            </div>
-            <div class="sns_login_button">
-            	<div class="naver">
-            		<img src="${pageContext.request.contextPath}/resources/ejyang/image/btnG_아이콘원형.png"><br>
-                	<a href="#">
-                    	네이버 로그인
-                    </a>
-                </div>
-            	<div class="naver">
-            		<img src="${pageContext.request.contextPath}/resources/ejyang/image/btnG_아이콘사각.png"><br>
-                	<a href="#">
-                    	네이버 로그인
-                    </a>
-                </div>
-            </div>
-            	<div class="naver_btn">
-            		<img src="${pageContext.request.contextPath}/resources/ejyang/image/btnG_완성형.png"><br>
-                	<a href="#">
-                    	네이버 로그인
-                    </a>
-                </div>
-            
-            
-            <div class="findinfo">
-            	<a href="id_check">아이디 찾기</a>
-                <a href="/login/pwd_check_form.php?origin_site=https://www.gabia.com&amp;target_url=/">비밀번호 찾기</a>
-                <a href="/member/member_register.php?origin_site=https://www.gabia.com">회원 가입</a>
-            </div>
+
 
           </form>
         </div>
