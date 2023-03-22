@@ -1,26 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 
-<!DOCTYPE html>
-<html>
 
-<head>
 <jsp:include page="../Main/header.jsp" />
 	
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-  	<%--<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script> --%>
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="jhLee/css/writeform.css">
+   <%-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script> 
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">--%>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/jhLee/css/writeform.css">
+	<script src="${pageContext.request.contextPath}/resources/jhLee/js/writeform.js"></script>
 
 	 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
-	<script src="${pageContext.request.contextPath}/jhLee/js/writeform.js"></script>
     
 </head>
 
 <body>
 <div class="container">
-
- <form action="FileBoardAddAction.filebo" method="post" enctype = "multipart/form-data" name ="fileboardform">
+<form action="add" method="post" enctype = "multipart/form-data" name ="fileboardform">
  
  	<h1>boat_ 자료실 글쓰기</h1>
      

@@ -1,4 +1,4 @@
-package com.boat.Service;
+package com.boat.FileboService;
 
 import java.util.HashMap;
 import java.util.List;

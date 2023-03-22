@@ -31,8 +31,9 @@
     
 
     <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" ></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> 
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" defer></script>
+       
     <%--  내할일 게시판 4.0번들 필요 충돌시 부분 발췌 예정 --%>
     
     <script src="${pageContext.request.contextPath}/resources/lib/wow/wow.min.js"></script>
@@ -44,6 +45,7 @@
 
 
     <!-- Template Javascript -->
+    
     <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
     
     

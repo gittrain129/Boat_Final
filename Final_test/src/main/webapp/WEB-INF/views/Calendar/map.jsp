@@ -1,18 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
 <jsp:include page="../Main/header.jsp" />
-<title>오시는 길</title>
- <link href ="${pageContext.request.contextPath}/jhLee/css/map.css"  rel ="stylesheet">
-</head>
+ <link href ="${pageContext.request.contextPath}/resources/jhLee/css/map.css"  rel ="stylesheet">
 <body>
 
+<div class="main-box">
 
-<hr>
-<div class="map-wrap">
 <div id="map" style="width:500px;height:400px;"></div>
 
 <div class = "mapdetail">
@@ -24,6 +17,7 @@
 
 <p><b class ="boat">Boat</b><b>&nbsp;&nbsp;&nbsp;구성원</b> <div class = "mapsub">김정근 김소중 양은정 이지현 </div>
 <p><b><a href ="https://github.com/gittrain129/Boat">Github</a></b> <div class = "mapsub"> </div></p></p>
+</div>
 </div>
 </div>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	7fdfc33ff395298d7cf8053acedaf837"></script>
@@ -58,6 +52,6 @@
 
 	</script>
 	
-	
+	<jsp:include page="../Main/footer.jsp" />
 </body>
 </html>
