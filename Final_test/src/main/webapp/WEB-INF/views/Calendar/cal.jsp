@@ -331,6 +331,7 @@
 <body>
     <!-- 메뉴바 고정 -->
 
+<a href="${pageContext.request.contextPath}/calendar">js4이용 샘플보드</a>
     <main class="main-box">
         <div class="calendar box">
             <div class="header">
