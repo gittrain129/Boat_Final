@@ -210,10 +210,11 @@
 	            // 모달에 띄울 데이터 .val
 	            $('#startTime').val(startTimeString);
 	            $('#endTime').val(endTimeString);
-	            
 	            $('#reservationModal').modal('show');
 	           
-	          }
+	          },
+	          
+	          events: ${conferenceEvents}
 	         
 	    });
 	    
@@ -226,26 +227,28 @@
 		  // modal에서 데이터 저장하기
 		  var startTime = $('#startTime').val();
 		  var endTime = $('#endTime').val();
-		  var reason = $('#reservationReason').val();
+		  var content = $('#reservationReason').val();
 
 		  
 		  $.ajax({
-		    url: '/conference_res/submit_reservation',
-		    type: 'POST',
-		    data: {
-		      start_time: startTime,
-		      end_time: endTime,
-		      reason: reason
-		    },
-		    //캘린더 다시 생성
-		    success: function(response) {
-		      $('#reservationModal').modal('hide');
-		      $('#calendar').fullCalendar('refetchEvents');
-		    },
-		    error: function(xhr) {
-		      console.log(xhr);
-		    }
-		  });
+			    url: '/confer/reservation',
+			    type: 'POST',
+			    data: ({
+			        start_time: startTime,
+			        end_time: endTime,
+			        content: content
+			    }),
+			    contentType: 'application/json',
+			    success: function(response) {
+			        $('#reservationModal').modal('hide');
+			        $('#calendar').fullCalendar('refetchEvents');
+			    },
+			    error: function(xhr) {
+			    	console.log('여기에러');
+			        console.log(xhr);
+			    }
+			});
+
 		}
 	
 	

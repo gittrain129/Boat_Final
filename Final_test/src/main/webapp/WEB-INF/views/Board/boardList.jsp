@@ -95,6 +95,7 @@
 								<td title="like" class="text-center"><i class="bi bi-star"></i></td>
 								<td style="display: flex; align-items: center;">
 								<a href="discussion-detail.html" style="flex: 1;">Qui id corporisnihil magnam.</a>
+								<div><span	class="badge badge-pill badge-warning" style="background-color: #89a5ea;">new</span></div>
 								<div><span	class="badge badge-pill badge-warning float-right" style="background-color: #89a5ea;">기획팀</span></div>
 								</td>
 								<td><div style="display: flex; justify-content: center; align-items: center;"><small>Mr. Felton Paucek II</small></div></td>
