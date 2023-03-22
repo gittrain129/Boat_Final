@@ -39,8 +39,8 @@
                 
 
 	            <div class="brick-idpw_2022__findinfo">
-	                <a href="/login/login_form">로그인하기</a>
-	                <a href="/login/pwd_check_form.php">비밀번호를 찾으시나요?</a>
+	                <a href="sign_in">로그인하기</a>
+	                <a href="pwd_check">비밀번호를 찾으시나요?</a>
 	            </div>
             </div>
 
