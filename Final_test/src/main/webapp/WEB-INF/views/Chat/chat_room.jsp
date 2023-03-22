@@ -5,18 +5,19 @@
 <meta charset="utf-8">
 
 
-<title>chat room - Bootdey.com</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+<title>BOAT - chat room</title>
+<link rel="stylesheet" type="text/css" href="jkKim/css/all.css" />
 <jsp:include page="../Main/header.jsp" />
 <style type="text/css">
-    	body {
+
+
+body .bootstrap {
   padding-top: 0;
   font-size: 12px;
   color: #777;
-  background: #f9f9f9;
   font-family: 'Open Sans',sans-serif;
-  margin-top:20px;
+  margin-top: 70px;
+  margin-bottom: 70px;
 }
 
 .bg-white {
@@ -210,6 +211,26 @@ a:hover, a:active, a:focus {
 </head>
 <body>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+  <!-- Page Header Start -->
+    <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container text-center py-5">
+            <h1 class="display-4 text-white animated slideInDown mb-3">채팅</h1>
+            <nav aria-label="breadcrumb animated slideInDown">
+                <ol class="breadcrumb justify-content-center mb-0">
+                	<!-- 
+                    <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
+                    <li class="breadcrumb-item text-primary active" aria-current="page">Our Team</li>
+                     -->
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
 <div class="container bootstrap snippets bootdey">
 <div class="row">
 <div class="col-md-4 bg-white ">
@@ -426,9 +447,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum orna
 </div>
 </div>
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script type="text/javascript">
+
 	
 </script>
+<jsp:include page="../Main/footer.jsp" />
 </body>
 </html>

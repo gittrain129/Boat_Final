@@ -111,12 +111,13 @@
                         </div>
                     </div>
                     <div class="col-4">
-                        <a href="" style="color:black;">
-                        <div class="d-flex align-items-center justify-content-end" style="height:70.4px !important;">
-                            <div class="flex-shrink-0 btn-lg-square border rounded-circle">
+                        <div class="d-flex align-items-center justify-content-end"">
+                            <div class="flex-shrink-0 btn-lg-square border rounded-circle"
+                            	 style=" cursor: pointer;" onclick="location.href='${pageContext.servletContext.contextPath}/member/chat'">
                                 <i class="bi bi-chat-fill text-primary"></i>
                             </div>
-                            <div class="ps-3">
+                            <div class="ps-3"
+                            	 style=" cursor: pointer;" onclick="location.href='${pageContext.servletContext.contextPath}/member/chat'">
                                 <p class="mb-2">채팅</p>
                             </div>
                         </div>
@@ -144,6 +145,7 @@
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">내 정보</a>
                     <div class="dropdown-menu border-0 rounded-0 rounded-bottom m-0">
                         <a href="${pageContext.request.contextPath}/Attendance/list" class="dropdown-item">근태 관리</a>
+                        <a href="${pageContext.request.contextPath}/member/myboardList" class="dropdown-item">내 글 보기</a>
                         <a href="${pageContext.request.contextPath}/Todo/list" class="dropdown-item">내 할일 보기</a>
                     </div>
                 </div>

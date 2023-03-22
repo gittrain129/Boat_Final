@@ -32,6 +32,10 @@
             <div id="form-controls">
               <button type="submit"  class="btn-primary">아이디찾기</button>
             </div>
+            
+            <div class="find-userinfo__btn_text">
+            	<a href="pwd_check">비밀번호를 찾으시나요?</a>
+            </div>
 
 
           </form>
@@ -44,5 +48,6 @@
   
 
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <jsp:include page="../Main/footer.jsp" />
  </body>
 </html>

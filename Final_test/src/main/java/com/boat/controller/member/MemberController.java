@@ -43,6 +43,11 @@ public class MemberController {
 		return "/Member/pwd_check";
 	}
 	
+	@RequestMapping("/pwd_check_ok")
+	public String pwdCheckok() {
+		return "/Member/pwd_check_ok";
+	}
+	
 	
 	
 	
