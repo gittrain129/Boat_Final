@@ -1021,7 +1021,7 @@ a.forum-item-title:hover {
   
 
 </main>
-
+<jsp:include page="../Main/footer.jsp" />
 
 </body>
 </html>
