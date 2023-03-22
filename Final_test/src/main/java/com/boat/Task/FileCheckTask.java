@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Service;
 
-import com.boat.Service.FileBoService;
+import com.boat.FileboService.FileBoServiceImpl;
 import com.boat.domain.MySaveFoler;
 
 @Service
@@ -23,7 +23,7 @@ public class FileCheckTask {
 	private MySaveFoler mysavefolder;
 	
 	@Autowired
-	private FileBoService boardservice;
+	private FileBoServiceImpl boardservice;
 	
 	
 	//@Scheduled(fixedDelay=1000)

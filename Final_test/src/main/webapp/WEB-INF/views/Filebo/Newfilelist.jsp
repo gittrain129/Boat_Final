@@ -1,18 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
 <jsp:include page="../Main/header.jsp" />
 	
-<meta charset="UTF-8">
-<title>Insert title here</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/jhLee/css/filelist.css">
 <style>
 .float-right{float:right!important}
 </style>
-</head>
-<body>
+
   <!-- Page Header Start -->
     <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
         <div class="container text-center py-5">
@@ -31,7 +25,7 @@
 	<!--<div class="row">  -->
 		<!-- <div class="col-lg-9 col-12 mb-4"> -->
 		<h3 class="border-bottom pb-1 mb-4">자료실 게시판
-			<a href="new-discussion.html" class="btn btn-success btn-sm float-right"><i class="fas fa-plus"></i> 글쓰기
+			<a href="${pageContext.request.contextPath}/Filebo/write" class="btn btn-success btn-sm float-right"><i class="fas fa-plus"></i> 글쓰기
 			</a>
 		</h3>
 		<div class="table-responsive">
@@ -178,5 +172,3 @@
       </div>
 	</footer>
 	<jsp:include page="../Main/footer.jsp" />
-</body>
-</html>
