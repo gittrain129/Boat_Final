@@ -15,13 +15,13 @@ public class CalContoller {
 	return "Calendar/map";
 	}
 
-	@RequestMapping(value="/cal",method=RequestMethod.GET)
+	@RequestMapping(value="/calendar",method=RequestMethod.GET)
 	public String calPage() {
 		
 		
 	return "Calendar/cal";
 	}
-	@RequestMapping(value="/calendar",method=RequestMethod.GET)
+	@RequestMapping(value="/cal",method=RequestMethod.GET)
 	public String fullcalPage() {
 		
 		
