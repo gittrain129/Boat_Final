@@ -12,8 +12,9 @@
     <meta content="" name="description">
     
 	<jsp:include page="headertag.jsp"/>
-  
-  	<style>
+    <jsp:include page="process_bar.jsp"/>
+  	
+<style>
   	.inout_button:focus {
 	  background-color: #29d329;
 	}
@@ -32,10 +33,12 @@
 	  border-radius: 100%;
 	}
 	*/
-  	</style>
+</style>
 </head>
 
 <body>
+
+	
     <!-- Spinner Start -->
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border position-relative text-primary" style="width: 6rem; height: 6rem;" role="status"></div>
@@ -183,6 +186,7 @@
     
             
         </div>
+        
     </nav>
     <!-- Navbar End -->
 
@@ -191,3 +195,4 @@
 
 </body>
 </html>
+
