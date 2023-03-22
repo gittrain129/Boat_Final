@@ -83,13 +83,13 @@
                     <div class="col-4">
                         <div class="d-flex align-items-center justify-content-end">
                             
-								<button class='inout_button'>
-			                    	<div class="flex-shrink-0 btn-lg-square border rounded-circle" style="display:inline-flex !important";>
+								<!-- <button class='inout_button'> -->
+			                    	<div class="flex-shrink-0 btn-lg-square border rounded-circle" style="display:inline-flex !important; background-color : green;">
 			                    	
 		                                <i class="far fa-clock text-primary"></i>
 		                               
 		                            </div>
-			                  	</button>
+			                  	<!-- </button> -->
 			                    
 			            
                 
