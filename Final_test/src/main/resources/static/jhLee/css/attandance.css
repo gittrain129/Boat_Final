@@ -224,7 +224,7 @@ a {
     font-size: 1em;
 }
 .main-box {
-    position: absolute;
+    /*position: absolute;*/
     padding: 20px 40px ;
     width: 100vw;
     max-width: 100vw;
@@ -232,7 +232,7 @@ a {
     display: grid;
     background-color: rgba(0, 0, 0, 0.03);
 }
-.btn {
+#btn-box .btn {
     display: flex;
     align-items: center;
     justify-content: center;

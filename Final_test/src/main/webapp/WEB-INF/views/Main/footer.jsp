@@ -79,8 +79,6 @@
             </div>
         </div>
     </div>
-    <%--
-    <jsp:include page="../Main/footertag.jsp" /> --%>
     <!-- Footer End -->
 </body>
 </html>
