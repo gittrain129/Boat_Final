@@ -298,6 +298,72 @@
  		</div>
  	</div>
  	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	     <!-- modal 추가 -->
+
+ 	<div class="modal fade insertModal" id="calendarModal" tabindex="-1"
+ 		role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ 		<div class="modal-dialog" role="document">
+ 			<div class="modal-content">
+ 				<div class="modal-header">
+ 					<h5 class="modal-title" id="exampleModalLabel">대회의실</h5>
+
+ 					<button type="button" class="close" data-dismiss="modal"
+ 						aria-label="Close" id="xbutton">
+ 						<span aria-hidden="true">&times;</span>
+ 					</button>
+
+ 				</div>
+ 				<div class="modal-body">
+ 					<div class="form-group">
+ 						<label for="taskId" class="col-form-label">신청자</label> <input
+ 							type="text" class="form-control" id="calendar_title"
+ 							name="calendar_title"> <label for="taskId"
+ 							class="col-form-label">사용 용도</label> <input type="text"
+ 							class="form-control" id="calendar_content"
+ 							name="calendar_content"> 
+ 							<label for="taskId"
+ 							class="col-form-label">시작 날짜</label> <input type="date"
+ 							class="form-control" id="calendar_start_date"
+ 							name="calendar_start_date" value="2023-02-14">
+ 							
+ 							<label for="taskId"
+ 							class="col-form-label">시작 시간</label> <input type="time"
+ 							class="form-control" id="calendar_end_date"
+ 							name="calendar_end_date">
+ 							
+ 							
+ 							<label for="taskId"
+ 							class="col-form-label">종료 시간</label> <input type="time"
+ 							class="form-control" id="calendar_end_date"
+ 							name="calendar_end_date">
+ 					</div>
+ 				</div>
+ 				<div class="modal-footer">
+
+ 					<button type="button" class="btn btn-success" id="modify"
+ 						onclick="updatedata(g_arg)">수정</button>
+ 					<button type="button" class="btn btn-danger" id="delete"
+ 						onclick="deletecal(g_arg)">삭제</button>
+
+ 					<button type="button" class="btn btn-secondary" id="addCalendar">추가</button>
+
+ 					<button type="button" class="btn btn-dark" data-dismiss="modal"
+ 						id="sprintSettingModalClose" data-backdrop="static"
+ 						data-keybord="false">닫기</button>
+ 				</div>
+
+ 			</div>
+ 		</div>
+ 	</div>
+ 	
+ 	
+ 	
+ 	
 
   </body>
   
