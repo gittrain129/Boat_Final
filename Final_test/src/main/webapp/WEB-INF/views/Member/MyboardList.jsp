@@ -5,7 +5,7 @@
   <script src="${pageContext.request.contextPath}/ejYang/js/jquery-3.6.3.js"></script> 
   <link href="${pageContext.request.contextPath}/ejYang/css/mylist.css" type="text/css" rel="stylesheet">
   <jsp:include page="../Main/header.jsp" />
-  <title>내 글 보기</title>
+  <title>BOAT - 내 글 보기</title>
  </head>
  <body>
 <section class="notice">

@@ -74,5 +74,6 @@
   
 
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <jsp:include page="../Main/footer.jsp" />
  </body>
 </html>

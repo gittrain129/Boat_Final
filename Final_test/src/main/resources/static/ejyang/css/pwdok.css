@@ -32,7 +32,19 @@ form input:focus {
     font-size: 40px;
     font-weight: 500;
     text-align:center;
-    margin-bottom: 60px;
+}
+
+.brick-idpw_2022__desc {
+    padding-top: 20px;
+    font-size: 16px;
+    text-align: center;
+    color: #6f7070;
+    font-weight: bold;
+    padding-bottom: 60px;
+}
+
+.brick-idpw_2022__desc .w-blue-text {
+    color: #3090d6 !important;
 }
 
 label {
@@ -47,14 +59,7 @@ label {
 
 
 
-button[type="button"] {
-    padding: 16px 0 16px 35px;
-    background-color: transparent;
-    color: #ED4B5E;
-}
-
-
-label[for="sub_title"] {
+label[for="sub_title"], label[for="empno"] {
 	padding: 30px 0 0;
 }
 
@@ -134,7 +139,7 @@ label[for="sub_title"] {
     box-sizing: border-box;
 }
 
-.column_wrap:focus-within {
+.column_wrap:focus-within, .multi_column:focus-within {
     border-color: #009CFF;
 }
 
@@ -177,20 +182,99 @@ button[type="submit"]:hover {
     font-weight: bold;
 }
 
-.find-userinfo__btn_text {
-    margin-top: 30px;
-    font-size: 14px;
-    text-align: right;
+#auth_email_btn {
+	background-color: #f2f4f7;
+	height: 40px;
+	width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-width: 110px;
+    padding: 0 20px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    margin-top: 10px;
 }
 
-.find-userinfo__btn_text > a {
+@media only screen and (min-width: 768px){
+	.multi_column {
+	    flex-direction: row;
+	}
+}
+
+.borders {
+    margin-bottom: 0;
+    display: flex;
+    position: relative;
+    flex-grow: 1;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.borders ._input {
     font-size: 16px;
-    display: inline-block;
-    color: #111;
-    text-decoration: none;
+    height: 60px;
+    width: 100%;
+    flex-grow: 1;
+    border: none;
+    outline: none;
+}
+
+.icon_input {
+    position: absolute;
+    top: calc(50% - 10px);
+    display: flex;
+    gap: 5px;
+    text-align: center;
+}
+
+.column_wrap .limit_time {
+    height: 60px;
+    color: #009CFF;
+    letter-spacing: 0.1px;
+    font-size: 14px;
     font-weight: bold;
 }
 
-.find-userinfo__btn_text > a:hover {
-    color: #009CFF;
+.button_wrap {
+    display: flex;
+    align-items: center;
+    height: 61px;
+}
+
+.button {
+    width: auto;
+    display: block;
+    color: white;
+    background: #009CFF;
+    height: 40px;
+    text-align: center;
+    min-width: 110px;
+    padding: 0 20px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+    font-weight: bold;
+}
+
+
+.fa-eye:before{content:"\f06e"}.fa-eye-slash:before{content:"\f070"}
+
+.first_icon .fa-eye, .first_icon .fa-eye-slash{
+    position: absolute;
+    left: 90%;
+    top: 220px;
+    font-size: 20px;
+    cursor: pointer;
+    color: rgb(184, 184, 184);
+}
+
+.second_icon .fa-eye, .second_icon .fa-eye-slash{
+    position: absolute;
+    left: 90%;
+    top: 335px;
+    font-size: 20px;
+    cursor: pointer;
+    color: rgb(184, 184, 184);
 }
