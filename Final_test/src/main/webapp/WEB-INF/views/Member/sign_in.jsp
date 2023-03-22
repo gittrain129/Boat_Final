@@ -60,7 +60,7 @@
             
             <div class="findinfo">
             	<a href="id_check">아이디 찾기</a>
-                <a href="/login/pwd_check_form.php?origin_site=https://www.gabia.com&amp;target_url=/">비밀번호 찾기</a>
+                <a href="pwd_check">비밀번호 찾기</a>
                 <a href="/member/member_register.php?origin_site=https://www.gabia.com">회원 가입</a>
             </div>
 

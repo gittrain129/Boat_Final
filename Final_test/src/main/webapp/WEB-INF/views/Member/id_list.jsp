@@ -23,16 +23,16 @@
 		                    <input id="7" class="btn_radio" type="radio" name="user_id" checked="">
 	                        <label for="7">admin</label>
 	                        <input type="hidden" name="search_type_7" value="email">
-	                        <input type="hidden" name="user_name_7" value="양은정">
-	                        <input type="hidden" name="param_7" value="/78Yrck93nh1btNMyyhys+70Bb5yOeiUls98fvIIVYrc3ZOhz+YQmO73SVKBT94AfbvlW07qWn0JWJCcKc75K/KqZBnb6Z0wJlpYoU+GvZQ=">
+	                        <input type="hidden" name="user_name_7" value="">
+	                        <input type="hidden" name="param_7" value="">
                     	</div>
                 	
                         <div class="find-userinfo__list id_list">
 	                        <input id="10" class="btn_radio" type="radio" name="user_id">
 	                        <label for="10">admin2</label>
 	                        <input type="hidden" name="search_type_10" value="email">
-	                        <input type="hidden" name="user_name_10" value="양은정">
-	                        <input type="hidden" name="param_10" value="T27oSkYTcy2UJfhdJyMl6oLnbGLg63QJAtNW/ifTA+UeEX8sqMEb/xLZOSH5ECWFSQnRX8BhU97jeH6wlJ+0ko6CzRNvb0Wod817yjVXHtw=">
+	                        <input type="hidden" name="user_name_10" value="">
+	                        <input type="hidden" name="param_10" value="">
                     	</div>
                     </div>
                 </div>

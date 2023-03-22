@@ -17,7 +17,7 @@
 }
 
 #sign-up-container {
-    width: 450px;
+    width: 400px;
     display: inline-block;
     position: relative;
 }
@@ -53,6 +53,10 @@ button[type="button"] {
     color: #ED4B5E;
 }
 
+
+label[for="sub_title"], label[for="empno"] {
+	padding: 30px 0 0;
+}
 
 
 /* responsive display */
@@ -104,80 +108,71 @@ button[type="button"] {
     }
 }
 
-.find-userinfo__item .find-userinfo__list {
-    position: relative;
-    height: 50px;
-    margin-bottom: 10px;
-    
-    border-radius: 3px;
-}
 
-.find-userinfo__item input[type="radio"] {
-    display: none;
-}
-
-.find-userinfo .btn_radio {
-    top: 13px;
-    left: 18px;
-    width: 24px;
-    height: 24px;
-    position: absolute;
-}
-	
-.find-userinfo__item label {
+._input {
+	font-size: 16px;
+    height: 60px;
+    width: 100%;
     flex-grow: 1;
-    font-size: 16px;
-    padding-left: 60px;
-    background-size: 24px;
-    height: 100%;
-   	color: #454a60;
-   	display: flex;
-    align-items: center;
-    box-sizing: border-box;
-    cursor: pointer;
-    background-image: url(/resources/static/ejyang/image/btn_member_radio.svg);
-    background-repeat: no-repeat;
-    background-position: 20px center;
-    border: 1px solid #cdcdcd;
-    border-radius: 6px;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #cdcdcd;
 }
 
-.find-userinfo__list input[type="radio"]:checked + label {
-    background-color: #e6f0f8;
-    background-image: url(/resources/static/ejyang/image/btn_member_radio_checked.svg);
-    font-size: 16px;
-    padding-left: 60px;
-    background-size: 24px;
+.multi_column {
+	position: relative;
     display: flex;
+    flex-direction: row;
+}
+
+.column_wrap {
+	border-bottom: 1px solid #cdcdcd;
+	display: flex;
+    position: relative;
+    flex-grow: 1;
     align-items: center;
     box-sizing: border-box;
-    border: 1px solid #009CFF;
 }
 
-.brick-idpw_2022__findinfo {
-	padding-top: 40px;
-	text-align: center;
+.column_wrap:focus-within {
+    border-color: #009CFF;
 }
 
-.brick-idpw_2022__findinfo > a {
-    font-size: 16px;
-    display: inline-block;
-    color: #111;
-    text-decoration: none;
+.column_wrap .focusInteraction {
+	border: none;
+	font-size: 16px;
+    height: 60px;
+    outline: none;
+}
+
+#form-controls {
+    margin-bottom: 20px;
+}
+
+#form-controls button {
+    border: none;
+    font-size: 100%;
+    margin-top: 40px;
+}
+
+#form-controls button:hover {
+    cursor: pointer;
+}
+
+button[type="submit"] {
+    padding: 16px 75px;
+    border-radius: 6px;
+    color: white;
+    width: 100%;
+    height: 57px;
+    background-color: #009CFF;
+    border-color: #009CFF;
     font-weight: bold;
 }
 
-
-.brick-idpw_2022__findinfo > a:hover {
-    color: #009CFF;
-}
-
-.brick-idpw_2022__findinfo > a::after {
-    content: '|';
-    padding: 0 10px;
-    color: #ced4da;
-}
-
-.brick-idpw_2022__findinfo > a:last-child::after {
-  content: none;
+button[type="submit"]:hover {
+    color: white;
+    background-color: #26abff;
+    border-color: #1aa6ff;
+    font-weight: bold;
 }

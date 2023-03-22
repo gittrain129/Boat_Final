@@ -19,6 +19,9 @@ public class MemberController {
 		return "/Member/sign_up";
 	}
 	
+	
+	
+	
 	@RequestMapping(value = "/sign_in", method = RequestMethod.GET)
 	public String signIn() {
 		return "/Member/sign_in";
@@ -33,6 +36,15 @@ public class MemberController {
 	public String idList() {
 		return "/Member/id_list";
 	}
+	
+	
+	@RequestMapping("/pwd_check")
+	public String pwdCheck() {
+		return "/Member/pwd_check";
+	}
+	
+	
+	
 	
 	@GetMapping("/myinfo")
 	public String hello4() {
