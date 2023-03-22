@@ -1,47 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 
-<!DOCTYPE html>
-<html>
-   <jsp:include page="../Main/header.jsp" />
-	  
-<head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<!-- include summernote css/js -->
- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
-
-  <link rel="stylesheet" href="jhLee/css/writeform.css">
-
-    
-<script src="${pageContext.request.contextPath}/jhLee/js/writeform.js"></script>
-
-
-<style>
-
-</style>
-
+<jsp:include page="../Main/header.jsp" />
+	
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/jhLee/css/writeform.css">
+	<script src="${pageContext.request.contextPath}/resources/jhLee/js/writeform.js"></script>
+	<%-- 드롭다운바 --%>
+	<script src="${pageContext.request.contextPath}/resources/jhLee/js/4.0bootstrap.bundle4.0.js"></script>
+	<%--썸머노트 --%>
+ 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 </head>
+
 <body>
 <div class="container">
-<%-- <hr class = "writehr">--%>
- <form action="FileBoardReplyAction.filebo" method="post" enctype = "multipart/form-data" name ="fileboardform">
- 	<input type="hidden" value ="${boarddata.FILE_RE_REF}" name="board_re_ref">
-	<input type="hidden" value ="${boarddata.FILE_RE_LEV}" name="board_re_lev">
-	<input type="hidden" value ="${boarddata.FILE_RE_SEQ}" name="board_re_seq">
- 	<h1>boat_ 답글쓰기</h1>
-     <input type ="hidden" name = "empno" value="${empno}">
+<form action="add" method="post" enctype = "multipart/form-data" name ="fileboardform">
+ 
+ 	<h1>boat_ 자료실 답변쓰기</h1>
+     
     <div class="form-group">
         <label for="board_subject">제목</label>
         <input name="board_subject" id="board_subject" type="text" maxlength="100"
-        class="form-control" placeholder="제목을 입력하세요" value="Re:${boarddata.FILE_SUBJECT}">
+        class="form-control" placeholder="제목을 입력하세요">
     </div>
+    <input type ="hidden" name ="empno" value="${member.empno}">
  	
-
 
  	<div class="form-group">
          <label for="board_pass">비밀번호</label>
@@ -49,14 +33,15 @@
  		class="form-control" placeholder="비밀번호를 입력하세요">
     </div>
 
- 
-         <div class="form-group ">
-        <label for = "board_name">글쓴이</label><br>
-        <div class="btn-group">
-            <button type="button" class="btn btn-secondary" id = "deptsel">${member.dept}</button>
+    <div class="form-group">
+        <label>글쓴이</label><br>
+        <div class="form-control deptwriter">
+        <div class="btn-group " id = "">
+            <button type="button" class="btn btn-secondary" id ="deptsel" >${member.dept}</button>
             <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" id = "deptbutton">
             </button>
-              <div class="dropdown-menu" >
+            
+              <div class="dropdown-menu">
                 <a class="dropdown-item" href="#">홍보팀</a>
                 <a class="dropdown-item" href="#">개발팀</a>
                 <a class="dropdown-item" href="#">인사팀</a>
@@ -64,30 +49,32 @@
                 <a class="dropdown-item" href="#">영업팀</a>
               </div>
             </div>
-            <input type="hidden" name = "dept" id = "dept">
-       		<input name="board_name" id="board_name" value="${member.name}" type="text"  class="form-control writer"
-       			placeholder="이름을 입력하세요" >
+       		<input name="board_name" id="board_name" type="text"  class=" writer form-control"
+       			placeholder="이름을 입력하세요" value ="${member.name}">
+            <input type="hidden" name = "dept" id = "dept" value = "${member.dept}">
   	  </div>
-        
+        </div>
     
 
- 	
- 		<label for="board_content">내용</label>
+ 	<div class="form-group">
+ 		<label for="board_content">내용</label><br>
  		<textarea name="board_content" id="summernote"  class="form-control"></textarea>
- 	
- 	<div class="form-group file1">
+ 	</div>
+    
+ 	<div class="form-group form-control deptwriter file1">
  		<label>
- 		<img alt="파일첨부" src="${pageContext.request.contextPath}/jhLee/image/file.png"> 
- 		&nbsp;파일첨부
+ 		<img alt="파일첨부" src="${pageContext.request.contextPath}/resources/jhLee/img/file.png"> 
+ 		&nbsp;파일첨부 &nbsp; &nbsp; &nbsp; &nbsp;
  		<input name="board_file" id="upfile" type="file">
 		 </label>
 	 	
  		<span id ="filevalue"></span>
  	</div>
- 	<div class="form-group file2">
+ 	
+ 	<div class="form-group form-control deptwriter file2">
  		<label>
- 		<img alt="파일첨부2" src="${pageContext.request.contextPath}/jhLee/image/file.png">
- 		 &nbsp;파일첨부2
+ 		<img alt="파일첨부2" src="${pageContext.request.contextPath}/resources/jhLee/img/file.png">
+ 		 &nbsp;파일첨부2 &nbsp; &nbsp; &nbsp;
  		<input name="board_file2" id="upfile2" type="file">
 		 </label>
 	 	
@@ -100,14 +87,5 @@
  	</div>
  </form>
 </div><!-- container끝 -->
-<script>
-$(function(){
-$("deptsel+div a").text(${boarddata.DEPT})
 
-	
-})//ready끝
-
-</script>
-
-</body>
-</html>
+<jsp:include page="../Main/footer.jsp" />

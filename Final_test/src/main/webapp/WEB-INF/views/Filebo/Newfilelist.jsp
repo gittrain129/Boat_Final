@@ -5,6 +5,24 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/jhLee/css/filelist.css">
 <style>
 .float-right{float:right!important}
+
+
+input[class='sharch']:focus{
+ outline: none;
+  width: 300px;
+  text-align: left;
+  border : none!important;}
+  
+  
+.searchimg {
+	width : 20px;
+}
+
+
+img {
+	width: 10px
+}
+.search{text-align:right}
 </style>
 
   <!-- Page Header Start -->
@@ -25,8 +43,39 @@
 	<!--<div class="row">  -->
 		<!-- <div class="col-lg-9 col-12 mb-4"> -->
 		<h3 class="border-bottom pb-1 mb-4">자료실 게시판
-			<a href="${pageContext.request.contextPath}/Filebo/write" class="btn btn-success btn-sm float-right"><i class="fas fa-plus"></i> 글쓰기
+		 
+		 <!--검색 및 글쓰기  -->
+   			<div class = 'search '>
+     		
+     
+      
+        
+
+        <div class="btn-group search form-group">
+        
+           <input type="hidden" name = "searchsel" id = "searcselhval" value =" ${searchsel}">
+            <div class="dropdown" >
+    		  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+    	    검색옵션
+   			   </a>
+		      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+		        <li><a class="dropdown-item" href="#">작성자</a></li>
+		        <li><a class="dropdown-item" href="#">제목</a></li>
+		      </ul>
+  		  </div>
+ 
+          <input class ="search form-control" type="text" name="searchinput" id = "searchinput" value="${searchinput}" >
+          		
+          <button type="submit" class = "searchbutton search" id="searhcbtn2">
+        	<img src="${pageContext.request.contextPath}/resources/jhLee/img/2.png"  class ="searchimg">
+          </button>
+          </div>
+        </label>
+        
+			<a href="${pageContext.request.contextPath}/Filebo/writee" class="btn btn-success btn-sm float-right">
+			<i class="fas fa-plus"></i> 글쓰기
 			</a>
+		</div>
 		</h3>
 		<div class="table-responsive">
 			<table class="table table-bordered table-hover">
@@ -59,7 +108,11 @@
 					<td></td>
 						<td>
 						
-							<a href="discussion-detail.html">자료실게시판 제목1
+							<%--<a href="detail?num=${b.BOARD_NUM}">자료실게시판 제목1
+							
+							<a href="detail">자료실게시판 제목1
+							 --%>
+							 <a href="discussion-detail.html">자료실게시판 제목1
 							<span class="badge badge-pill badge-primary float-right">Admin</span>
 							</a>
 						</td>
@@ -71,8 +124,7 @@
 					<tr>
 					<td></td>
 						<td>
-						
-							<a href="discussion-detail.html">자료실게시판 제목1
+					<a href="discussion-detail.html">자료실게시판 제목1
 							<span class="badge badge-pill badge-primary float-right">Admin</span>
 							</a>
 						</td>
@@ -102,27 +154,7 @@
 		</div>
 	</div>
 	
-	<!-- <div class="col-lg-3 col-12">
-	<div class="list-group mb-4 shadow">
-		<li class="list-group-item list-group-item-info"><strong>Recent Discussion</strong></li>
-		<a href="discussion-detail.html" class="list-group-item list-group-item-action">Discussion 1 <span class="float-right badge badge-primary">123</span></a>
-		<a href="discussion-detail.html" class="list-group-item list-group-item-action">Discussion 1 <span class="float-right badge badge-primary">123</span></a>
-		<a href="discussion-detail.html" class="list-group-item list-group-item-action">Discussion 1 <span class="float-right badge badge-primary">123</span></a>
-		<a href="discussion-detail.html" class="list-group-item list-group-item-action">Discussion 1 <span class="float-right badge badge-primary">123</span></a>
-		<a href="discussion-detail.html" class="list-group-item list-group-item-action">Discussion 1 <span class="float-right badge badge-primary">123</span></a>
-		<a href="discussion-detail.html" class="list-group-item list-group-item-action">Discussion 1 <span class="float-right badge badge-primary">123</span></a>
-	</div>
 	
-	<div class="list-group mb-4 shadow">
-		<li class="list-group-item list-group-item-info"><strong>Recent Users</strong></li>
-		<a href="profile.html" class="list-group-item list-group-item-action">User 1 <span class="float-right badge badge-info">123</span></a>
-		<a href="profile.html" class="list-group-item list-group-item-action">User 1 <span class="float-right badge badge-info">123</span></a>
-		<a href="profile.html" class="list-group-item list-group-item-action">User 1 <span class="float-right badge badge-info">123</span></a>
-		<a href="profile.html" class="list-group-item list-group-item-action">User 1 <span class="float-right badge badge-info">123</span></a>
-		<a href="profile.html" class="list-group-item list-group-item-action">User 1 <span class="float-right badge badge-info">123</span></a>
-		<a href="profile.html" class="list-group-item list-group-item-action">User 1 <span class="float-right badge badge-info">123</span></a>
-	</div>
-</div>	 -->
 	</div>
 </section>
 <script type="text/javascript" src="public/lib/feather/feather.min.js"></script>
@@ -132,43 +164,4 @@
   })
 </script>
 	
-	<footer class="container-fluid mt-5 bg-light border-top">
-	<div class="pt-4 container">
-    <!--     <div class="row">
-          <div class="col-12 col-md">
-            <img class="mb-2" src="../../assets/brand/bootstrap-solid.svg" alt="" width="24" height="24">
-            <small class="d-block mb-3 text-muted">&copy; 2017-2018</small>
-          </div>
-          <div class="col}.float-right{float:right!important}-6 col-md">
-            <h5>Features</h5>
-            <ul class="list-unstyled text-small">
-              <li><a class="text-muted" href="#">Cool stuff</a></li>
-              <li><a class="text-muted" href="#">Random feature</a></li>
-              <li><a class="text-muted" href="#">Team feature</a></li>
-              <li><a class="text-muted" href="#">Stuff for developers</a></li>
-              <li><a class="text-muted" href="#">Another one</a></li>
-              <li><a class="text-muted" href="#">Last time</a></li>
-            </ul>
-          </div>
-          <div class="col-6 col-md">
-            <h5>Resources</h5>
-            <ul class="list-unstyled text-small">
-              <li><a class="text-muted" href="#">Resource</a></li>
-              <li><a class="text-muted" href="#">Resource name</a></li>
-              <li><a class="text-muted" href="#">Another resource</a></li>
-              <li><a class="text-muted" href="#">Final resource</a></li>
-            </ul>
-          </div>
-          <div class="col-6 col-md">
-            <h5>About</h5>
-            <ul class="list-unstyled text-small">
-              <li><a class="text-muted" href="#">Team</a></li>
-              <li><a class="text-muted" href="#">Locations</a></li>
-              <li><a class="text-muted" href="#">Privacy</a></li>
-              <li><a class="text-muted" href="#">Terms</a></li>
-            </ul>
-          </div>
-        </div> -->
-      </div>
-	</footer>
 	<jsp:include page="../Main/footer.jsp" />

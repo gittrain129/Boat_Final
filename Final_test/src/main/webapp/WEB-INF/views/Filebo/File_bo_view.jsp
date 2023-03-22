@@ -219,6 +219,4 @@
 
 
         </div>
-        
-</body>
-</html>
+     <jsp:include page="../Main/footer.jsp" />
