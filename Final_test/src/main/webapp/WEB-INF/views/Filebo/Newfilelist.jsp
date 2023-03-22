@@ -177,5 +177,6 @@
         </div> -->
       </div>
 	</footer>
+	<jsp:include page="../Main/footer.jsp" />
 </body>
 </html>
