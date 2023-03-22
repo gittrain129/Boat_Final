@@ -9,7 +9,7 @@ http://localhost:8088/Boat/FileBoardList.filebo
 <!DOCTYPE html>
 <html lang="ko">
 <head> 
-	  <jsp:include page="../boat/header.jsp" />
+	  <jsp:include page="../Main/header.jsp" />
 	  
 	  
     <meta charset="UTF-8">
@@ -254,6 +254,6 @@ http://localhost:8088/Boat/FileBoardList.filebo
 	
  
  </script>
-  <jsp:include page="../boat/footer.jsp" />
+  <%--  <jsp:include page="../boat/footer.jsp" />--%>
 </body>
 </html>

@@ -12,8 +12,9 @@
     <meta content="" name="description">
     
 	<jsp:include page="headertag.jsp"/>
-  
-  	<style>
+    <jsp:include page="process_bar.jsp"/>
+  	
+<style>
   	.inout_button:focus {
 	  background-color: #29d329;
 	}
@@ -32,10 +33,12 @@
 	  border-radius: 100%;
 	}
 	*/
-  	</style>
+</style>
 </head>
 
 <body>
+
+	
     <!-- Spinner Start -->
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border position-relative text-primary" style="width: 6rem; height: 6rem;" role="status"></div>
@@ -70,7 +73,7 @@
     <div class="container-fluid py-4 px-5 wow fadeIn" data-wow-delay="0.5s" >
         <div class="row align-items-center top-bar">
             <div class="col-lg-4 col-md-12 text-center text-lg-start">
-                <a href="" class="navbar-brand m-0 p-0">
+                <a href="${pageContext.request.contextPath}/index" class="navbar-brand m-0 p-0">
                     <h1 class="fw-bold text-primary m-0"><i class="bi bi-tsunami"></i>BOAT</h1>
                     <!-- <img src="img/logo.png" alt="Logo"> -->
                 </a>
@@ -161,9 +164,8 @@
  				<div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">공유업무</a>
                     <div class="dropdown-menu border-0 rounded-0 rounded-bottom m-0">
-                    	<a href="${pageContext.request.contextPath}/cal" class="dropdown-item">캘린더</a>
+                        <a href="${pageContext.request.contextPath}/cal" class="dropdown-item">캘린더</a>
                         <a href="${pageContext.request.contextPath}/address" class="dropdown-item">주소록</a>
-
                     </div>
                 </div>
                               
@@ -183,6 +185,7 @@
     
             
         </div>
+        
     </nav>
     <!-- Navbar End -->
 
@@ -191,3 +194,4 @@
 
 </body>
 </html>
+

@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<jsp:include page="../boat/header.jsp" />
-
+  <jsp:include page="../Main/header.jsp" />
+	  
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <!-- include summernote css/js -->
 
@@ -94,6 +94,5 @@
  </form>
 </div><!-- container끝 -->
 
- <jsp:include page="../boat/footer.jsp" />
 </body>
 </html>

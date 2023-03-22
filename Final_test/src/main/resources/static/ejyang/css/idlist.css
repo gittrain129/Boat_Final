@@ -1,0 +1,183 @@
+#form-container {
+	padding: 70px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
+#form-inner-container {
+    background-color: white;
+    max-width: 70%;
+    border-radius: 8px;
+    /*
+    box-shadow: 0 0 20px gainsboro;
+    */
+}
+
+#sign-up-container {
+    width: 450px;
+    display: inline-block;
+    position: relative;
+}
+
+
+form input:focus {
+    border-color: #009CFF;
+}
+
+
+#sign-up-container h3 {
+    font-size: 40px;
+    font-weight: 500;
+    text-align:center;
+    margin-bottom: 60px;
+}
+
+label {
+    font-weight: bold;
+}
+
+::placeholder {
+    color: #C0C7DB;
+    font-size: 1rem;
+    letter-spacing: 1.2px;
+}
+
+
+
+button[type="button"] {
+    padding: 16px 0 16px 35px;
+    background-color: transparent;
+    color: #ED4B5E;
+}
+
+
+
+/* responsive display */
+
+@media(max-width:1438px) {
+    lottie-player {
+        width: 300px!important;
+    }
+}
+
+@media(max-width:1124px) {
+    #animation-container {
+        display: none;
+    }
+
+    #form-inner-container{
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media(max-width: 684px) {
+    #form-controls {
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    form input:not(:last-of-type) {
+        width: 85%;
+    }
+
+    #toggleSignIn, #toggleSignUp {
+        padding: 16px 75px;
+    }
+
+    #terms {
+        width: 20px;
+        height: 20px;
+    }
+    
+    label[for="terms"] {
+        display: inline-block;
+        font-size: smaller;
+    }
+}
+
+.find-userinfo__item .find-userinfo__list {
+    position: relative;
+    height: 50px;
+    margin-bottom: 10px;
+    
+    border-radius: 3px;
+}
+
+.find-userinfo__item input[type="radio"] {
+    display: none;
+}
+
+.find-userinfo .btn_radio {
+    top: 13px;
+    left: 18px;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+}
+	
+.find-userinfo__item label {
+    flex-grow: 1;
+    font-size: 16px;
+    padding-left: 60px;
+    background-size: 24px;
+    height: 100%;
+   	color: #454a60;
+   	display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    cursor: pointer;
+    background-image: url(/resources/static/ejyang/image/btn_member_radio.svg);
+    background-repeat: no-repeat;
+    background-position: 20px center;
+    border: 1px solid #cdcdcd;
+    border-radius: 6px;
+}
+
+.find-userinfo__list input[type="radio"]:checked + label {
+    background-color: #e6f0f8;
+    background-image: url(/resources/static/ejyang/image/btn_member_radio_checked.svg);
+    font-size: 16px;
+    padding-left: 60px;
+    background-size: 24px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    border: 1px solid #009CFF;
+}
+
+.brick-idpw_2022__findinfo {
+	padding-top: 40px;
+	text-align: center;
+}
+
+.brick-idpw_2022__findinfo > a {
+    font-size: 16px;
+    display: inline-block;
+    color: #111;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+.brick-idpw_2022__findinfo > a:hover {
+    color: #009CFF;
+}
+
+.brick-idpw_2022__findinfo > a::after {
+    content: '|';
+    padding: 0 10px;
+    color: #ced4da;
+}
+
+.brick-idpw_2022__findinfo > a:last-child::after {
+  content: none;
+}

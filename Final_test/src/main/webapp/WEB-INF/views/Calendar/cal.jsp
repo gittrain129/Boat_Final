@@ -8,7 +8,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <!-- <link rel="stylesheet" href="${path}\resources\css\schedule\calendar.css"> -->
 <!-- <script defer src="${path}/resources/js/schedule/calendar.js"></script> -->
-<%-- <jsp:include page="../Main/header.jsp" /> --%>
+<jsp:include page="../Main/header.jsp" />
+	
 
 <style>
     .calendar{
@@ -330,6 +331,7 @@
 <body>
     <!-- 메뉴바 고정 -->
 
+<a href="${pageContext.request.contextPath}/calendar">js4이용 샘플보드</a>
     <main class="main-box">
         <div class="calendar box">
             <div class="header">
