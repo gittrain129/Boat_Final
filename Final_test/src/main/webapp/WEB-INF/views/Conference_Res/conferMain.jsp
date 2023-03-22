@@ -66,15 +66,7 @@
               <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#zxc">회의실2</a>
               </li>
-             	 <li class="nav-item" style="display:hidden">
-                <a class="nav-link" data-toggle="tab" href="#zxc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-             	</li>
-             	<li class="nav-item" style="display:hidden">
-                <a class="nav-link" data-toggle="tab" href="#zxc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-             	</li>
-             	<li class="nav-item" style="display:hidden">
-                <a class="nav-link" data-toggle="tab" href="#zxc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-             	</li>
+             	
               
              
               <li class="nav-item">
@@ -98,18 +90,16 @@
                 <div id='calendar'></div>
               </div>
               <div class="tab-pane fade" id="asd">
-                <p>Nunc vitae turpis id nibh sodales commodo et non augue. Proin fringilla ex nunc. Integer tincidunt risus ut facilisis tristique.</p>
+             	 <div id='calendar2'></div>
               </div>
               <div class="tab-pane fade" id="zxc">
-                <p>Curabitur dignissim quis nunc vitae laoreet. Etiam ut mattis leo, vel fermentum tellus. Sed sagittis rhoncus venenatis. Quisque commodo consectetur faucibus. Aenean eget ultricies justo.</p>
-              </div>
+					<div id='calendar'></div>
             </div>
         </div>
       </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</div>
+    
     
     <table class="table table-hover" id="mytable">
   <thead class="table-light">
@@ -141,72 +131,39 @@
     </tr>
   </tbody>
 </table>
+
+
+    <!-- modal -->
+    <div class="modal fade" id="reservationModal" tabindex="-1" role="dialog" aria-labelledby="reservationModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="reservationModalLabel">대여 신청</h5>
+       </div>
+      <div class="modal-body">
+        <form id="reservationForm">
+          <div class="form-group">
+            <label for="startTime">대여시작 시간</label>
+            <input type="text" class="form-control" id="startTime" readonly>
+          </div>
+          <div class="form-group">
+            <label for="endTime">대여종료 시간</label>
+            <input type="text" class="form-control" id="endTime" readonly>
+          </div>
+          <div class="form-group">
+            <label for="reservationReason">용도</label>
+            <textarea class="form-control" id="reservationReason" rows="3"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" onclick="$('#reservationModal').modal('hide')">취소</button>
+        <button type="button" class="btn btn-primary" onclick="submitReservation()">대여신청</button>
+      </div>
+    </div>
+  </div>
+</div>
     
-    
-    
-    
-    
-     <!-- modal 추가 -->
-
- 	<div class="modal fade insertModal" id="calendarModal" tabindex="-1"
- 		role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
- 		<div class="modal-dialog" role="document">
- 			<div class="modal-content">
- 				<div class="modal-header">
- 					<h5 class="modal-title" id="exampleModalLabel">대회의실</h5>
-
- 					<button type="button" class="close" data-dismiss="modal"
- 						aria-label="Close" id="xbutton">
- 						<span aria-hidden="true">&times;</span>
- 					</button>
-
- 				</div>
- 				<div class="modal-body">
- 					<div class="form-group">
- 						<label for="taskId" class="col-form-label">신청자</label> <input
- 							type="text" class="form-control" id="calendar_title"
- 							name="calendar_title"> <label for="taskId"
- 							class="col-form-label">사용 용도</label> <input type="text"
- 							class="form-control" id="calendar_content"
- 							name="calendar_content"> 
- 							<label for="taskId"
- 							class="col-form-label">시작 날짜</label> <input type="date"
- 							class="form-control" id="calendar_start_date"
- 							name="calendar_start_date" value="2023-02-14">
- 							
- 							<label for="taskId"
- 							class="col-form-label">시작 시간</label> <input type="time"
- 							class="form-control" id="calendar_end_date"
- 							name="calendar_end_date">
- 							
- 							
- 							<label for="taskId"
- 							class="col-form-label">종료 시간</label> <input type="time"
- 							class="form-control" id="calendar_end_date"
- 							name="calendar_end_date">
- 					</div>
- 				</div>
- 				<div class="modal-footer">
-
- 					<button type="button" class="btn btn-success" id="modify"
- 						onclick="updatedata(g_arg)">수정</button>
- 					<button type="button" class="btn btn-danger" id="delete"
- 						onclick="deletecal(g_arg)">삭제</button>
-
- 					<button type="button" class="btn btn-secondary" id="addCalendar">추가</button>
-
- 					<button type="button" class="btn btn-dark" data-dismiss="modal"
- 						id="sprintSettingModalClose" data-backdrop="static"
- 						data-keybord="false">닫기</button>
- 				</div>
-
- 			</div>
- 		</div>
- 	</div>
-
-	
-
-
 
 
 	<script>
@@ -215,6 +172,7 @@
 	    var calendarEl = document.getElementById('calendar');
 	    var calendar = new FullCalendar.Calendar(calendarEl, {
 	        headerToolbar: {
+	        	left: '',
 	            right: 'prev,next today',
 	            center: 'title'
 	        },
@@ -222,7 +180,9 @@
 	        views: {
 	            timeGridFiveDay: {
 	              type: 'timeGrid',
-	              duration: { days: 5 }
+	              duration: { days: 5 },
+	              
+	        
 	            }
 	        },
 	        height: 'auto',
@@ -238,36 +198,70 @@
 	        eventOverlap: function(stillEvent, movingEvent) {
 	            return stillEvent.allDay && movingEvent.allDay;
 	        },
-	        
-	        select: function(add) {
-	            $('#event-modal #event-start').val(add.start.toISOString().slice(0,16));
-	            $('#event-modal #event-end').val(add.end.toISOString().slice(0,16));
-	            $('#event-modal').modal('show');
-	        },
-	        
-	        
+	        select: function(info) {
+	        	
+	        	var startTime = info.start;
+	            var endTime = info.end;
+
+	            // moment라이브러리로 출력 방식 바꾸고 저장
+	            var startTimeString = moment(startTime).format('MM-DD HH:mm');
+	            var endTimeString = moment(endTime).format('MM-DD HH:mm');
+
+	            // 모달에 띄울 데이터 .val
+	            $('#startTime').val(startTimeString);
+	            $('#endTime').val(endTimeString);
+	            
+	            $('#reservationModal').modal('show');
+	           
+	          }
+	         
 	    });
 	    
-	    // Handle the form submit event to add the event to the calendar
-	    $('#event-form').submit(function(e) {
-	        e.preventDefault();
-	        var title = $('#event-title').val();
-	        var start = $('#event-start').val();
-	        var end = $('#event-end').val();
-	        calendar.addEvent({
-	            title: title,
-	            start: start,
-	            end: end,
-	            allDay: false
-	        });
-	        $('#event-modal').modal('hide');
-	    });
 	    
 	    calendar.render();
 	});
   
+	
+	function submitReservation() {
+		  // modal에서 데이터 저장하기
+		  var startTime = $('#startTime').val();
+		  var endTime = $('#endTime').val();
+		  var reason = $('#reservationReason').val();
+
+		  
+		  $.ajax({
+		    url: '/conference_res/submit_reservation',
+		    type: 'POST',
+		    data: {
+		      start_time: startTime,
+		      end_time: endTime,
+		      reason: reason
+		    },
+		    //캘린더 다시 생성
+		    success: function(response) {
+		      $('#reservationModal').modal('hide');
+		      $('#calendar').fullCalendar('refetchEvents');
+		    },
+		    error: function(xhr) {
+		      console.log(xhr);
+		    }
+		  });
+		}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
     </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
   </body>
   
 </html>

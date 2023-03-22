@@ -10,13 +10,13 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value="/board")
 public class boardController {
 
-	@GetMapping("/boardList")
+	@GetMapping("/List")
 	public String List() {
 		return "/Board/boardList";
 	}
 	
 	
-	@GetMapping("/boardWrite")
+	@GetMapping("/Write")
 	public String Write() {
 		return "/Board/boardWrite";
 	}
