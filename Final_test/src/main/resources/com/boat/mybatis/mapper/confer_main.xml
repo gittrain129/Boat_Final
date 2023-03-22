@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.boat.mybatis.mapper.ConferenceReservationMapper">
+  
+   <select id = "findAll" resultType="ConferenceReservation" parameterType="java.util.Map">
+  	select * from CONFER_MAIN
+  
+  
+  
+   </select>
+  
+   <insert id = "insert1" parameterType = "ConferenceReservation">
+  	insert into CONFER_MAIN
+  	(START_TIME,END_TIME,CONTENT)
+    VALUES (#{start_time}, #{end_time}, #{content})
+  
+  
+   </insert>
+  
+  <!-- 
+  <insert id = "insert1" parameterType = "ConferenceReservation">
+  	insert into CONFER_MAIN
+  	(ID,RENTAL,START_TIME,END_TIME,CONTENT)
+  	values
+  	(#{ID},#{RENTAL},#{START_TIME},#{END_TIME},#{CONTENT})
+  
+  
+   </insert>
+   -->
+  
+  </mapper>
