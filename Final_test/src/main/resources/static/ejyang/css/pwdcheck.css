@@ -47,13 +47,6 @@ label {
 
 
 
-button[type="button"] {
-    padding: 16px 0 16px 35px;
-    background-color: transparent;
-    color: #ED4B5E;
-}
-
-
 label[for="sub_title"], label[for="empno"] {
 	padding: 30px 0 0;
 }
@@ -134,7 +127,7 @@ label[for="sub_title"], label[for="empno"] {
     box-sizing: border-box;
 }
 
-.column_wrap:focus-within {
+.column_wrap:focus-within, .multi_column:focus-within {
     border-color: #009CFF;
 }
 
@@ -175,4 +168,98 @@ button[type="submit"]:hover {
     background-color: #26abff;
     border-color: #1aa6ff;
     font-weight: bold;
+}
+
+#auth_email_btn {
+	background-color: #f2f4f7;
+	height: 40px;
+	width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-width: 110px;
+    padding: 0 20px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    margin-top: 10px;
+}
+
+@media only screen and (min-width: 768px){
+	.multi_column {
+	    flex-direction: row;
+	}
+}
+
+.borders {
+    margin-bottom: 0;
+    display: flex;
+    position: relative;
+    flex-grow: 1;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.borders ._input {
+    font-size: 16px;
+    height: 60px;
+    width: 100%;
+    flex-grow: 1;
+    border: none;
+    outline: none;
+}
+
+.icon_input {
+    position: absolute;
+    top: calc(50% - 10px);
+    display: flex;
+    gap: 5px;
+    text-align: center;
+}
+
+.column_wrap .limit_time {
+    height: 60px;
+    color: #009CFF;
+    letter-spacing: 0.1px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.button_wrap {
+    display: flex;
+    align-items: center;
+    height: 61px;
+}
+
+.button {
+    width: auto;
+    display: block;
+    color: white;
+    background: #009CFF;
+    height: 40px;
+    text-align: center;
+    min-width: 110px;
+    padding: 0 20px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+    font-weight: bold;
+}
+
+.find-userinfo__btn_text {
+    margin-top: 30px;
+    font-size: 14px;
+    text-align: right;
+}
+
+.find-userinfo__btn_text > a {
+    font-size: 16px;
+    display: inline-block;
+    color: #111;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.find-userinfo__btn_text > a:hover {
+    color: #009CFF;
 }

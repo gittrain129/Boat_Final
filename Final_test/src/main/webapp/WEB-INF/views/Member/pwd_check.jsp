@@ -32,10 +32,27 @@
                 </div>
             </div>
             
-            <div id="form-controls">
-              <button type="submit"  class="btn-primary">아이디찾기</button>
+            <button class="button sm lib-mt-10 auth" type="button" id="auth_email_btn" style="color: rgb(153, 153, 153);">인증하기</button>
+            
+            <div class="row row-container" style="" id="auth_email_content">
+            	<div class="body multi_column" id="_input-auth-num-email-body" style="flex: 1 0; width: 100%;">
+                	<div class="column_wrap borders">
+                    	<input type="tel" name="auth_num_email" class="_input clear focusInteraction" id="_input-auth-num-email" placeholder="인증 번호를 입력해 주세요">
+                    	<span class="icon_input" style="right: 10px;">
+							<span class="limit_time" id="limit_time_email" style="color: rgb(48, 144, 214);">09:53</span>
+						</span>
+                    </div>
+	                <div class="button_wrap">
+		                <button class="button primary sm tablet-only" type="button" onclick="on_click_auth_num_email()">확인
+		                </button>
+	                </div>
+                </div>
+                	<p class="warning_message color-blue" id="valid_check_msg_email_auth" style="display: none;"></p>
             </div>
 
+			<div class="find-userinfo__btn_text">
+            	<a href="id_check">아이디를 찾으시나요?</a>
+            </div>
 
           </form>
         </div>
