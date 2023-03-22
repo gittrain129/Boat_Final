@@ -46,5 +46,6 @@
     <!-- Template Javascript -->
     <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
     
+    
     <!-- favicon error -->
     <link rel="shortcut icon" href="#">
