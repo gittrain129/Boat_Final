@@ -3,43 +3,39 @@
 <!DOCTYPE html>
 <html>
  <head>
- 	<link href="${pageContext.request.contextPath}/ejyang/resources/css/signup.css" type="text/css" rel="stylesheet">
+ 	<title>BOAT - 회원가입</title>
+ 	<link href="${pageContext.request.contextPath}/resources/ejyang/css/signup.css" type="text/css" rel="stylesheet">
  	<script src="http://code.jquery.com/jquery-latest.js"></script>
+ 	<script src="${pageContext.request.contextPath}/resources/ejyang/js/signup.js"></script>
  	<jsp:include page="../Main/header.jsp" />
  </head>
  <body>
+ 
+ <!-- 로고 -->
+ <a href="/boat/index" class="navbar-brand m-0 p-0">
+ 	<h1 class="bodylogo fw-bold text-primary m-0"><i class="bi bi-tsunami"></i>BOAT</h1>
+ </a>
+                
+                
+                
   <div id="form-container">
       <div id="form-inner-container">
         <!-- Sign up form -->
         <div id="sign-up-container">
-          <h3>로그인</h3>
-          <form>
-            <label for="name">사번</label>
-            <i class= "fas fa-user"></i>
-            <input type="text" name="name" id="name" placeholder="사번을 입력해주세요">
+          <h3>환영합니다!</h3>
+          <h4>원하시는 회원가입 방법을 선택해주세요.</h4>
+          <form name="sign_up" action="${pageContext.request.contextPath}/member/join" method="get">
+            <label for="email">이메일</label>
+            <input type="email" name="email" id="email" placeholder="이메일을 입력해주세요">
+            <p class="css-1u2lazp" style="display: none">올바른 이메일을 입력해주세요.</p>
 
-            <label for="password">비밀번호</label>
-            <i class= "fas fa-lock"></i>
-            <input type="password" name="password" id="password" placeholder="비밀번호를 입력해주세요">
-		    <i class= "fa fa-solid fa-eye-slash" ></i>
-
-			<!--
-            <input type="checkbox" name="terms" id="terms">
-            <label for="terms">로그인 유지하기</label>
-             -->
              
-            <div>
-	        	<input type="checkbox" id="terms" name="terms">
-	        	<label for="terms" class="terms_lable">로그인 유지하기</label>
-			</div>
-			 
             <div id="form-controls">
-              <button type="submit"  class="btn-primary">로그인</button>
-              <!--<button type="button" id="toggleSignIn">Sign In</button> -->
+              <button type="submit"  class="btn-primary" disabled>이메일로 계속하기</button>
             </div>
             
             <div class="sns_login">
-            	<div class="brick-login_2023__sns"> 다른 계정으로 로그인 하기 </div>
+            	<div class="brick-login_2023__sns"> 다른 계정으로 회원가입 하기 </div>
             </div>
             <div class="sns_login_button">
             	<div class="naver">
@@ -57,12 +53,7 @@
             </div>
             
             
-            <div class="findinfo">
-            	<a href="id_check">아이디 찾기</a>
-                <a href="pwd_check">비밀번호 찾기</a>
-                <a href="sign_up">회원 가입</a>
-            </div>
-
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
           </form>
         </div>
 
