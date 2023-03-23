@@ -1,16 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+ <meta name="_csrf" content="${_csrf.token }">
+  <meta name="_csrf_header" content="${_csrf.headerName }">
+  
 <title>일별근무시간</title>
 <jsp:include page="../Main/header.jsp" />
+
+<%-- <sec:authorize access="isAnonymous()">
+		<sec:authentication property="principal" var="pinfo"/>
+		
+		<c:if test="${pinfo.username=='admin'}">
+		 </c:if>
+      </sec:authorize>
+		--%>
+
 <%-- <script src="${path}/resources/js/attendance/board.js" defer ></script>--%>
+
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/jhLee/css/attandance.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/jhLee/css/attandance2.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment-with-locales.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/jhLee/js/attandance.js" ></script>
 </head>
 
 <style>
@@ -39,48 +54,28 @@
             <div id="date-box">${day}</div>
             <div id="time-box">${time}</div>
             <div id="btn-box">
+            
             <!--출근버튼  -->
-                <form action="${pageContext.request.contextPath}/attendance/on" method="post">
-                <input type="hidden" value="" id="on"          >
-                
-                <input type="button" name="on" id="start-btn" class="btn" value="출근">
+                <form action="${pageContext.request.contextPath}/Attendance/on" method="post">
+                <input type="hidden" name="on"  value="" id="on">
+                <input type="submit" id="start-btn" class="btn" value="출근">
+                <input type="hidden" class ="empno" name="empno" value="">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                 
                 </form>
+                
+                
             <!--퇴근버튼  -->
-                <form action="${pageContext.request.contextPath}/attendance/off" method="post">
+                <form action="${pageContext.request.contextPath}/Attendance/off" method="post">
                 
-                <input type="hidden" value="" id="off"          >
-                
-                <input type="button" name="off" id="end-btn" class="c-btn" value="퇴근">
+                <input type="hidden" name="off" value="" id="off"          >
+                <input type="submit"  id="end-btn" class="c-btn" value="퇴근">
+                <input type="hidden" class ="empno" name="empno" value="">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                 
                 
                 </form>
             
-            <script>
-  			$(function(){
-  				moment.locale('ko');
-  			var currenttime= moment().format('MMMM Do YYYY, h:mm:ss a');
-  			
-  	      
-  	      
-            $('#start-btn').click(function(){
-            	
-            var val =$('#on').val(currenttime);
-            console.log("출근시간="+currenttime);
-            	
-            })
-            
-            
-            $('#end-btn').click(function(){
-            	
-            var val =$('#off').val(currenttime);
-            $('#off').val(currenttime);
-            console.log("퇴근시간="+currenttime);
-            	
-            })
-            
-  			})
-			</script>
             
             </div>
             <div id="result-box">

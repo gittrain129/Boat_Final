@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
     
 <!DOCTYPE html>
 <html lang="en">
@@ -10,6 +11,8 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
+    <meta name="_csrf" content="${_csrf.token }">
+  	<meta name="_csrf_header" content="${_csrf.headerName }">
     
 	<jsp:include page="headertag.jsp"/>
     <jsp:include page="process_bar.jsp"/>
@@ -112,7 +115,7 @@
                             </div>
                             <div class="ps-3">
                                 <p class="mb-2">인사팀</p>
-                                <h6 class="mb-0">122309</h6>
+                                <h6 class="mb-0"><span id="loginid">122309</span></h6>
                             </div>
                         </div>
                     </div>
