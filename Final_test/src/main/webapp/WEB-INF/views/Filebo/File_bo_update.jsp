@@ -17,7 +17,7 @@
 <div class="container">
 <form action="add" method="post" enctype = "multipart/form-data" name ="fileboardform">
  
- 	<h1>boat_ 자료실 글쓰기</h1>
+ 	<h1>boat_ 자료실 글수정</h1>
      
     <div class="form-group">
         <label for="board_subject">제목</label>

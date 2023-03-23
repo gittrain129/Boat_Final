@@ -1,23 +1,45 @@
-$(function(){
-	//부서명 자동 선택
-	let department = '${member.dept}'
-	let part = 1;
-	switch(department){
-		case '개발팀':
-			part=2;
-			break;
-		case '인사팀':
-			part=3;
-			break;
-		case '기획팀':
-			part=4;
-			break;
-		case '영업팀':
-			part=5;
-			break;
-	}
-	$('#select option:nth-child('+part+')').prop('selected',true)
+$(document).ready(function(){
+	
+	  $('#summernote').summernote({
+	        placeholder: '내용을 입력하세요',
+	        tabsize: 2,
+	        lang : "ko-KR",
+	        height: 300
+	      });
+	      
+	      
+	      
+
+
+	$('#deptbutton+div a').click(function(){
+			const dept =$(this).text();
+				console.log(dept)
+			const sel =$('#deptsel').text();
+			
+		$('#deptsel').text(dept);
+			console.log(sel)
 		
+			
+		$('#dept').val(dept);
+			console.log($('#dept').val())			
+	
+	})//drop downclick 끝
+	
+	
+
+$("#upfile").change(function(){
+	console.log($(this).val())
+	const inputfile = $(this).val().split('\\');//c:\facepath\upload.png
+	$('#filevalue').text(inputfile[inputfile.length -1]);
+	$('.file2').css('display','block');
+	});
+$("#upfile2").change(function(){
+	console.log($(this).val())
+	const inputfile2 = $(this).val().split('\\');//c:\facepath\upload.png
+	$('#filevalue2').text(inputfile2[inputfile2.length -1]);
+	});
+	
+	
 	//submit 버튼 클릭할 때 이벤트 부분
 	$("form").submit(function(){
 		

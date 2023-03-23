@@ -1,29 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
- <%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <jsp:include page="../Main/header.jsp" />
   
-  
+  <%--
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script> --%>
+    
+    <script src="jhLee/js/fileview.js"></script>
     <title>자료실 게시판</title>
 
-  <link rel="stylesheet" href="jhLee/css/fileview.css">
-  <jsp:include page="../Main/header.jsp" />
-	
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/jhLee/css/fileview.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/jhLee/css/fileview2.css"><%--댓글 --%>
+  
+  
 </head>
 <body>
-<input type="hidden" id ="loginid" value ="${id}" name="loginid"><%--view.js에서 사용하기 위해 추가합니다. --%>
+<input type="hidden" id ="loginid" value ="${empno }" name="loginid"><%--view.js에서 사용하기 위해 추가합니다. --%>
+<%-- <input type="hidden" id ="loginid" value ="${id}" name="loginid"><%--view.js에서 사용하기 위해 추가합니다. --%>
     <div class="board_wrap">
         <div class="board_title">
-            <strong>자료실 게시판</strong>
+            <strong><a href="${pageContext.request.contextPath}/Filebo/list" target="_self">자료실 게시판</a></strong>
             <p>자료실 게시판 입니다.</p>
 
 
@@ -58,7 +54,7 @@
            </div>
       
            <div class="content">
-           <c:out value =" ${boarddata.FILE_CONTENT}" escapeXml="true" />
+           <c:out value =" ${boarddata.FILE_CONTENT}" escapeXml="false" />
            </div>
          
         </div>
@@ -102,31 +98,43 @@
 		 </div><%--div class filedown끝 --%>
 		 <%-- </c:if>--%>
      
-        </div>
+     
         <div class="bt_wrap">
         
-            <a href="FileBoardList.filebo" class="on">목록</a>
+           
+            <a href="list" class="on">목록</a>
             
-              <!-- <c:if test="${boarddata.FILE_NAME ==id||id=='admin'}"></c:if> -->
-              
-			  <a href="FileBoardModifyView.filebo?num=${boarddata.FILE_NUM}">
+			  
+<%--             <a href ="replyView?num=${boarddata.FILE_NUM}">답변</a>--%>
+            <a href ="reply">답변</a>
+             
+		<c:if test="${boarddata.FIlE_EMPNO ==empno||empno=='ADMIN'}">
+		<div class = "personal">
+<%--			 <a href="modifyView?num=${boarddata.FILE_NUM}" class = "update"> --%>
+			 <a href="modifyView" class = "update">
 		         수정
 			  </a>
-			  
-			  <%--href의 주소를 #으로 설정합니다. --%>
-			  
-            <a href ="FileBoardReplyView.filebo?num=${boarddata.FILE_NUM}">답변</a>
-             
-            <a href ="FileBoardReplyView.filebo?num=${boarddata.FILE_NUM}">이전</a>
-            <a href ="FileBoardReplyView.filebo?num=${boarddata.FILE_NUM}">다음</a>
-
-		  <a href="#" id ='delete'>
-			  <button id = 'deletebtn' class="btn btn-danger" data-toggle ="modal"
+			  <a id ='delete'>
+		  	<button id = 'deletebtn' class="btn btn-danger" data-toggle ="modal"
 			  data-target="#myModal">삭제</button>
 			</a>
-			  
-
-
+			</div>
+		</c:if>
+		
+		
+		<div class = "next">
+		 	<c:if test="${!empty Fileprev}">
+		 	<a href ="FileBoadDetailAction.filebo?num=${Fileprev.FILE_NUM}"><span class = "nextbtn">&lt; 이전글&nbsp;&nbsp;</span><span id ="pretitle">${Fileprev.FILE_SUBJECT}</span></a>
+            </c:if>
+            
+		 	<c:if test="${!empty Filenext}">
+            <a href ="FileBoadDetailAction.filebo?num=${Filenext.FILE_NUM}"><span id ="nexttitle">${Filenext.FILE_SUBJECT}</span><span class = "nextbtn">&nbsp;&nbsp;다음글 &gt;</span></a>
+            </c:if>
+            
+		 </div>
+		  
+		
+</div>
         </div><%--"bt_wrap끝 --%>
 <%-- modal 시작 --%>
 	  <div class="modal" id="myModal">
@@ -154,73 +162,58 @@
 		</div>
 		</div>
 <%--id="myModal"end --%>
-
-<div class="comment">
- <section class="mb-5">
-                        <div class="card bg-light">
-                            <div class="card-body">
-                                <!-- Comment form-->
-                                <form class="mb-4"><textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea></form>
- 							 </div>
+       <div class="commcard">
+    
+       <div class="comment-area">
+		<div class="comment-head">
+			<h3 class="comment-count">
+			댓글<sup id="count"></sup><%--superscript(윗첨자) --%>
+			</h3>
+			<div class ="comment-order">
+				<ul class="comment-order-list">
+				</ul>		
+			</div>
+		</div><%--comment head 끝 --%>
+		
+		<ul class="comment-list">
+		</ul>
+		<div class="comment-write">
+			<div class="comment-write-area">
+				<b class="comment-write-area-name"> ${DEPT}${NAME}${empno}</b>
+				<span class="comment-write-area-count">0/200</span>
+				<textarea placeholder="댓글을 남겨보세요" rows="1"
+					class="comment-write-area-text form-control" maxlength="200"></textarea>
+			</div>	
+			<div class="register-box">
+				<div class="button btn-cancel">취소</div><%--댓글의 취소는 display:none,등록만 보이도록 합니다. --%>
+				<div class="button btn-register">등록</div>
+			</div>
+		</div><%--comment-write end --%>
+		
+	</div><%--card-body end --%>		
+	 							
+						
+								
+								
                         </div>
-                    </section>
+                           </div>		
 <%-- class="card bg-light">end --%>
-</div><%-- class="comment end --%>
+<%-- class="comment end --%>
 
-  <div class="d-flex mb-4">
-                                    <!-- Parent comment-->
-                                    <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                    <div class="ms-3">
-                                        <div class="fw-bold">${empno}</div><!--  this.F_C_ID -->
-                                        ${F_CONTENT} this.F_CONTENT
 
-this.F_COMMENT_DATE
 
-<div class="comment">
- <section class="mb-5">
-                        <div class="card bg-light">
-                            <div class="card-body">
-                                <!-- Comment form-->
-                                <form class="mb-4"><textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea></form>
-                                <!-- Comment with nested comments-->
-                                <div class="d-flex mb-4">
-                                    <!-- Parent comment-->
-                                    <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                    <div class="ms-3">
-                                        <div class="fw-bold">Commenter Name</div>
-                                        If you're going to lead a space frontier, it has to be government; it'll never be private enterprise. Because the space frontier is dangerous, and it's expensive, and it has unquantified risks.
-                                        <!-- Child comment 1-->
-                                        <div class="d-flex mt-4">
-                                            <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                            <div class="ms-3">
-                                                <div class="fw-bold">Commenter Name</div>
-                                                And under those conditions, you cannot establish a capital-market evaluation of that enterprise. You can't get investors.
-                                            </div>
-                                        </div>
-                                        <!-- Child comment 2-->
-                                        <div class="d-flex mt-4">
-                                            <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                            <div class="ms-3">
-                                                <div class="fw-bold">Commenter Name</div>
-                                                When you put money directly to a problem, it makes a good headline.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Single comment-->
-                                <div class="d-flex">
-                                    <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                    <div class="ms-3">
-                                        <div class="fw-bold">Commenter Name</div>
-                                        When I look at the universe and all the ways the universe wants to kill us, I find it hard to reconcile that with statements of beneficence.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-<%-- class="card bg-light">end --%>
-</div><%-- class="comment end --%>
+
+
+
+
+
+
+
+
+
+
         </div>
         
+      <jsp:include page="../Main/footer.jsp" />
 </body>
 </html>

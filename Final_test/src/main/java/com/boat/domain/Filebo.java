@@ -18,6 +18,36 @@ public class Filebo {
 	private int CNT;
 	private String DEPT;
 	private String FIlE_EMPNO;
+	private MultipartFile uploadfile;
+	
+	private String FILE_ORIGINAL;//첨부될파일의이름
+	private String FILE_ORIGINAL2;//첨부될파일의이름
+	
+	
+	public String getFILE_ORIGINAL2() {
+		return FILE_ORIGINAL2;
+	}
+	public void setFILE_ORIGINAL2(String fILE_ORIGINAL2) {
+		FILE_ORIGINAL2 = fILE_ORIGINAL2;
+	}
+
+	
+	public MultipartFile getUploadfile() {
+		return uploadfile;
+	}
+	public void setUploadfile(MultipartFile uploadfile) {
+		this.uploadfile = uploadfile;
+	}
+	public String getFILE_ORIGINAL() {
+		return FILE_ORIGINAL;
+	}
+	public void setFILE_ORIGINAL(String fILE_ORIGINAL) {
+		FILE_ORIGINAL = fILE_ORIGINAL;
+	}
+	
+	
+	
+	
 	
 	public String getFIlE_EMPNO() {
 		return FIlE_EMPNO;
