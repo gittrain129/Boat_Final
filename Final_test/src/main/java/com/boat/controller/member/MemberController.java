@@ -63,7 +63,7 @@ public class MemberController {
 	
 	@GetMapping("/myboardList")
 	public String hello6() {
-		return "/Member/MyboardList";
+		return "/Member/myboardList";
 	}
 	
 	
