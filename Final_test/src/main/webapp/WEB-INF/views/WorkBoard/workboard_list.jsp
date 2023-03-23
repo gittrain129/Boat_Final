@@ -13,72 +13,28 @@
 	<link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 	
 	<style>
-		/* reset */
-		ul{
-		    margin: 0;
-		    padding: 0;
-		}
-		
-		/* design */
-		
-		.selectbox{
-		    margin: 150px auto;
-		}
-		
 		.pl{
-		width: 200px;
-		border: 1px solid #FFFFFF;
-		box-sizing: border-box;
-		border-radius: 10px;
-		padding: 12px 13px;
-		font-family: 'Roboto';
-		font-style: normal;
-		font-weight: 400;
-		font-size: 14px;
-		line-height: 16px;
-		background: url(./img/Polygon_up.png) 93% no-repeat; /*화살표 이미지 삽입*/
-		appearance: none;
-		text-align: left;
-		}
-		.pl:focus{
-		    border: 1px solid #5cbdfc;
-		    box-sizing: border-box;
-		    border-radius: 10px;
-		    outline: 3px solid #FFFFFF;
-		    border-radius: 10px;
-		}
-		
-		.listbox{
 		    width: 200px;
-		    list-style: none;
-		    background: #FFFFFF;
-		    border: 1px solid #FFFFFF;
+		    border: 1px solid #C4C4C4;
 		    box-sizing: border-box;
-		    box-shadow: 4px 4px 14px rgba(0, 0, 0, 0.15);
 		    border-radius: 10px;
-		    margin-top: 9px;
-		}
-		
-		.list{
-		    border: none;
-		    background-color: #FFFFFF;
+		    padding: 12px 13px;
 		    font-family: 'Roboto';
 		    font-style: normal;
 		    font-weight: 400;
 		    font-size: 14px;
 		    line-height: 16px;
-		    padding: 7px 10px;
-		    margin: 5px 7px;
-		    box-sizing: border-box;
 		}
 		
-		.list:focus{
-		    background: #5cbdfc;
-		    width: 184px;
-		    border-radius: 8px;
+		.pl:focus{
+		    border: 1px solid #9fdaff;
 		    box-sizing: border-box;
-		    text-align: left;
+		    border-radius: 10px;
+		    outline: 3px solid #d2eeff;
+		    border-radius: 10px;
 		}
+		
+
 	</style>
 	
 	<script>
@@ -109,17 +65,17 @@
 		<div class="table-responsive  mt-4">
 			<table class="table">
 				<tbody>
-					<tr>
+					<tr>					
 						<th>카테고리</th>
 						<td>
-							 <button class="pl on" onclick="select();">최애 프로그래밍 언어</button>
-							    <ul class="listbox" id="listbox">
-							        <li><button class="list">홍보팀</button></li>
-							        <li><button class="list">개발팀</button></li>
-							        <li><button class="list">인사팀</button></li>
-							        <li><button class="list">기획팀</button></li>
-							        <li><button class="list">동호회</button></li>
-							    </ul>
+							<select name="likeLanguage" id="" class="pl">
+					            <option value="0" selected>카테고리</option>
+					            <option value="list">홍보팀</option>
+					            <option value="list">개발팀</option>
+					            <option value="list">인사팀</option>
+					            <option value="list">기획팀</option>
+					            <option value="list">동호회</option>
+					        </select>
 						</td>
 					</tr>
 					<tr>
@@ -131,7 +87,7 @@
 					<tr>
 						<th>내용</th>
 						<td>
-							<textarea id="text" name="_text" class="form-control" rows="10"></textarea>
+							<textarea id="text" name="_text" class="form-control" rows="5"></textarea>
 						</td>
 					</tr>
 					<tr>
@@ -382,15 +338,12 @@
 		  	2 days ago
 		  </div>
 		</div>
-		<hr class="border-danger mb-4 mt-4" />
-				
-		
-		
+		<hr class="border-danger mb-4 mt-4" />	
 	</div>
-	
+
 	<div class="col-lg-3 col-12" >
 	<div class="list-group mb-4 shadow">
-		<li class="list-group-item list-group-item-info"><strong>카테고리</strong></li>
+		<li class="list-group-item list-group-item-info" style="background-color:#90d5ff; color: #000000; font-size: smaller;"><strong>카테고리</strong></li>
 		<a href="discussion-detail.html" class="list-group-item list-group-item-action">홍보팀<span class="float-right badge badge-primary">123</span></a>
 		<a href="discussion-detail.html" class="list-group-item list-group-item-action">개발팀<span class="float-right badge badge-primary">123</span></a>
 		<a href="discussion-detail.html" class="list-group-item list-group-item-action">인사팀<span class="float-right badge badge-primary">123</span></a>
