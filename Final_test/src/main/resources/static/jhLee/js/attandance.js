@@ -15,7 +15,7 @@ moment.locale('ko');
 var currenttime= moment().format('YYYY-MM-DD HH:mm');
 //출근시간 :2023-03-23 15:38
 
-$(".empno").val($("#loginid").text());
+$(.empno").val($("#loginid").text());
 
 $('#start-btn').click(function(){
   
