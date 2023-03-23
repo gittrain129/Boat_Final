@@ -35,22 +35,22 @@
                     <h5 class="text-light mb-4">갤러리</h5>
                     <div class="row g-2">
                         <div class="col-4">
-                            <img class="img-fluid rounded" src="img/project-1.jpg" alt="Image">
+                            <img class="img-fluid rounded" src="${pageContext.request.contextPath}/resources/img/project-1.jpg" alt="Image">
                         </div>
                         <div class="col-4">
-                            <img class="img-fluid rounded" src="img/project-2.jpg" alt="Image">
+                            <img class="img-fluid rounded" src="${pageContext.request.contextPath}/resources/img/project-2.jpg" alt="Image">
                         </div>
                         <div class="col-4">
-                            <img class="img-fluid rounded" src="img/project-3.jpg" alt="Image">
+                            <img class="img-fluid rounded" src="${pageContext.request.contextPath}/resources/img/project-3.jpg" alt="Image">
                         </div>
                         <div class="col-4">
-                            <img class="img-fluid rounded" src="img/project-4.jpg" alt="Image">
+                            <img class="img-fluid rounded" src="${pageContext.request.contextPath}/resources/img/project-4.jpg" alt="Image">
                         </div>
                         <div class="col-4">
-                            <img class="img-fluid rounded" src="img/project-5.jpg" alt="Image">
+                            <img class="img-fluid rounded" src="${pageContext.request.contextPath}/resources/img/project-5.jpg" alt="Image">
                         </div>
                         <div class="col-4">
-                            <img class="img-fluid rounded" src="img/project-6.jpg" alt="Image">
+                            <img class="img-fluid rounded" src="${pageContext.request.contextPath}/resources/img/project-6.jpg" alt="Image">
                         </div>
                     </div>
                 </div>
@@ -68,12 +68,12 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        &copy; <a href="#">Your Site Name</a>, All Right Reserved.
+                        &copy; <a href="#">BOAT</a>, All Right Reserved.
                     </div>
                     <div class="col-md-6 text-center text-md-end">
                         <!--/*** This template is free as long as you keep the footer author��s credit link/attribution link/backlink. If you'd like to use the template without the footer author��s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                        Designed By <a href="https://htmlcodex.com">HTML Codex</a>
-                        <br>Distributed By: <a class="border-bottom" href="https://themewagon.com" target="_blank">ThemeWagon</a>
+                        Designed By <a href="https://htmlcodex.com">Boat Codex</a>
+                        <br>Distributed By: <a class="border-bottom" href="https://themewagon.com" target="_blank">Boat</a>
                     </div>
                 </div>
             </div>
