@@ -172,7 +172,7 @@
                 </div>
                               
                 
-                <a href="${pageContext.request.contextPath}/confer" class="nav-item nav-link">예약신청</a>
+                <a href="${pageContext.request.contextPath}/confer/view" class="nav-item nav-link">예약신청</a>
                 
             </div>
             
