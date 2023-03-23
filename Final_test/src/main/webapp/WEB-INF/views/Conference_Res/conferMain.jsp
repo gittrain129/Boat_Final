@@ -62,13 +62,13 @@
          
             <ul class="nav nav-tabs">
               <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#qwe"onclick="tabclick()">대회의실</a>
+                <a class="nav-link active" data-toggle="tab" href="#qwe">대회의실</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#asd">회의실1</a>
+                <a class="nav-link" data-toggle="tab" href="#asd" >회의실1</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#zxc">회의실2</a>
+                <a class="nav-link" data-toggle="tab" href="#zxc" >회의실2</a>
               </li>
                 
               
@@ -181,16 +181,7 @@
 
 
    <script>
-   $(document).ready(function() {
-	   $('.nav-tabs a').on('click', function (e) {
-		   e.preventDefault();
-		   $('.nav-tabs a').removeClass('active'); 
-		   $(this).addClass('active'); 
-		  
-		   
-		 });
 
-	 });
        
    $(document).ready(function(){
        var calendarEl = document.getElementById('calendar');
@@ -234,9 +225,7 @@
            slotMinTime: '09:00',
            slotMaxTime: '19:00',
            
-           eventOverlap: function(stillEvent, movingEvent) {
-               return stillEvent.allDay && movingEvent.allDay;
-           },
+           selectOverlap: false,
            eventClick: function(info) {
                var title = info.event.title;
                var start = moment(info.event.start).format('MM-DD HH:mm');
@@ -292,11 +281,41 @@
              events: asdf
                   
             
-       });
+       }); //var calendar 선언
+         calendar.render();
+       
+         $(document).ready(function() {
+      	   $('.nav-tabs a').on('click', function (e) {
+      		   e.preventDefault();
+      		   $('.nav-tabs a').removeClass('active'); 
+      		   $(this).addClass('active'); 
+      		   var tab_info = $('.nav-tabs .active').text();
+      		   console.log(tab_info);
+      		   
+      		   $.ajax({
+      	            type: "GET",
+      	            url: "${pageContext.request.contextPath}/confer/view_ajax",
+      	            data: {"tab_info": tab_info},
+      	            success: function (response) {
+      	              calendar.getEventSources().forEach(function(source) {
+      	                source.remove();
+      	              });
+      	              calendar.addEventSource(response);
+      	              calendar.refetchEvents();
+      	               
+      	            },
+      	            error: function (error) {
+      	            	alert(error);
+      	            }
+      	        });
+      		   
+      		   
+      		 });
+
+      	 });
        
        
        
-       calendar.render();
    });
   
 
@@ -337,12 +356,9 @@
        });
    }
 
-   function tabclick(){
-	   var tab_info = $(this).text();
-	   console.log(tab_info);
-   }
+ 
    
-   
+  
    
    
    
