@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix ="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang='en'>
   <head>
@@ -29,6 +30,9 @@
     max-width: 1100px;
     margin: 20px auto;
   }
+    .fc-event-main:hover {
+    cursor: pointer;
+  }
  </style>
 
   </head>
@@ -44,7 +48,7 @@
                 <ol class="breadcrumb justify-content-center mb-0">
                     <li class="breadcrumb-item"><a class="text-white" href="#">회의실</a></li>
                     <li class="breadcrumb-item"><a class="text-white" href="#">노트북</a></li>
-                  	<li class="breadcrumb-item"><a class="text-white" href="#">프로젝터</a></li>
+                     <li class="breadcrumb-item"><a class="text-white" href="#">프로젝터</a></li>
                 </ol>
             </nav>
         </div>
@@ -58,7 +62,7 @@
          
             <ul class="nav nav-tabs">
               <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#qwe">대회의실</a>
+                <a class="nav-link active" data-toggle="tab" href="#qwe"onclick="tabclick()">대회의실</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#asd">회의실1</a>
@@ -66,20 +70,22 @@
               <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#zxc">회의실2</a>
               </li>
-             	
+                
               
-             
+             <!--  drop down 임시 삭제
               <li class="nav-item">
-           		<div class="dropdown" >
-  				<button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    			회의실
-  				</button>
-  				<div class="dropdown-menu">
-    				<a class="dropdown-item" href="#">회의실</a>
-    				<a class="dropdown-item" href="#">비품 대여</a>
-    			</div>
-				</div>	
+                 <div class="dropdown" >
+              <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+             회의실
+              </button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">회의실</a>
+                <a class="dropdown-item" href="#">비품 대여</a>
+             </div>
+            </div>   
               </li>
+               -->
+              
              </ul> 
             
             
@@ -90,10 +96,10 @@
                 <div id='calendar'></div>
               </div>
               <div class="tab-pane fade" id="asd">
-             	 <div id='calendar2'></div>
+                 <div id='calendar'></div>
               </div>
               <div class="tab-pane fade" id="zxc">
-					<div id='calendar'></div>
+               <div id='calendar'></div>
             </div>
         </div>
       </div>
@@ -134,31 +140,39 @@
 
 
     <!-- modal -->
-    <div class="modal fade" id="reservationModal" tabindex="-1" role="dialog" aria-labelledby="reservationModalLabel" aria-hidden="true">
+    <div class="modal fade" id="res_Modal" tabindex="-1" role="dialog" aria-labelledby="res_ModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="reservationModalLabel">대여 신청</h5>
+        <h5 class="modal-title" id="res_ModalLabel">대여 신청</h5>
        </div>
       <div class="modal-body">
-        <form id="reservationForm">
+        <form id="res_Form">
+        
+          <div class="form-group" style="display:none">
+            <label for="rental">대여대상</label>
+            <input type="hidden" id="rental" name="rental">
+          </div>
+        
           <div class="form-group">
             <label for="startTime">대여시작 시간</label>
             <input type="text" class="form-control" id="startTime" readonly>
+            <input type="hidden" id="startTimeISO" name="startTimeISO">
           </div>
           <div class="form-group">
             <label for="endTime">대여종료 시간</label>
             <input type="text" class="form-control" id="endTime" readonly>
+             <input type="hidden" id="endTimeISO" name="endTimeISO">
           </div>
           <div class="form-group">
-            <label for="reservationReason">용도</label>
-            <textarea class="form-control" id="reservationReason" rows="3"></textarea>
+            <label for="content">용도</label>
+            <textarea class="form-control" id="content" rows="3"></textarea>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-       <button type="button" class="btn btn-secondary" onclick="$('#reservationModal').modal('hide')">취소</button>
-        <button type="button" class="btn btn-primary" onclick="submitReservation()">대여신청</button>
+       <button type="button" class="btn btn-secondary" onclick="$('#res_Modal').modal('hide')">취소</button>
+        <button type="button" class="btn btn-primary" onclick="reservation()">대여신청</button>
       </div>
     </div>
   </div>
@@ -166,105 +180,180 @@
     
 
 
-	<script>
-       
-	$(document).ready(function(){
-	    var calendarEl = document.getElementById('calendar');
-	    var calendar = new FullCalendar.Calendar(calendarEl, {
-	        headerToolbar: {
-	        	left: '',
-	            right: 'prev,next today',
-	            center: 'title'
-	        },
-	        initialView: 'timeGridFiveDay',
-	        views: {
-	            timeGridFiveDay: {
-	              type: 'timeGrid',
-	              duration: { days: 5 },
-	              
-	        
-	            }
-	        },
-	        height: 'auto',
-	        navLinks: true,
-	        editable: false,
-	        selectable: true,
-	        selectMirror: true,
-	        nowIndicator: true,
-	        locale : 'ko',
-	        slotMinTime: '09:00',
-	        slotMaxTime: '19:00',
-	        
-	        eventOverlap: function(stillEvent, movingEvent) {
-	            return stillEvent.allDay && movingEvent.allDay;
-	        },
-	        select: function(info) {
-	        	
-	        	var startTime = info.start;
-	            var endTime = info.end;
-
-	            // moment라이브러리로 출력 방식 바꾸고 저장
-	            var startTimeString = moment(startTime).format('MM-DD HH:mm');
-	            var endTimeString = moment(endTime).format('MM-DD HH:mm');
-
-	            // 모달에 띄울 데이터 .val
-	            $('#startTime').val(startTimeString);
-	            $('#endTime').val(endTimeString);
-	            $('#reservationModal').modal('show');
-	           
-	          },
-	          
-	          events: ${conferenceEvents}
-	         
-	    });
-	    
-	    
-	    calendar.render();
-	});
-  
-	
-	function submitReservation() {
-		  // modal에서 데이터 저장하기
-		  var startTime = $('#startTime').val();
-		  var endTime = $('#endTime').val();
-		  var content = $('#reservationReason').val();
-
+   <script>
+   $(document).ready(function() {
+	   $('.nav-tabs a').on('click', function (e) {
+		   e.preventDefault();
+		   $('.nav-tabs a').removeClass('active'); 
+		   $(this).addClass('active'); 
 		  
-		  $.ajax({
-			    url: '/confer/reservation',
-			    type: 'POST',
-			    data: ({
-			        start_time: startTime,
-			        end_time: endTime,
-			        content: content
-			    }),
-			    contentType: 'application/json',
-			    success: function(response) {
-			        $('#reservationModal').modal('hide');
-			        $('#calendar').fullCalendar('refetchEvents');
-			    },
-			    error: function(xhr) {
-			    	console.log('여기에러');
-			        console.log(xhr);
-			    }
-			});
+		   
+		 });
 
-		}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	 });
+       
+   $(document).ready(function(){
+       var calendarEl = document.getElementById('calendar');
+       
+       var asdf =   ([<c:forEach items="${list}" var="l">
+       {
+           start: '${l.start}',
+           end: '${l.end}',
+           title: '${l.title}'
+         },
+         </c:forEach>]);
+       
+       var ttt = $('.nav-tabs .active').text();
+       console.log(ttt);
+            
+       var calendar = new FullCalendar.Calendar(calendarEl, {
+           headerToolbar: {
+              left: 'title',
+              center: '',
+              right: 'prev,next today',
+       
+    	 
+           },
+           initialView: 'timeGridFiveDay',
+           views: {
+               timeGridFiveDay: {
+                 type: 'timeGrid',
+                 duration: { days: 5 },
+                 
+           
+               }
+           },
+          
+           height: 'auto',
+           navLinks: true,
+           editable: false,
+           selectable: true,
+           selectMirror: true,
+           nowIndicator: true,
+           locale : 'ko',
+           slotMinTime: '09:00',
+           slotMaxTime: '19:00',
+           
+           eventOverlap: function(stillEvent, movingEvent) {
+               return stillEvent.allDay && movingEvent.allDay;
+           },
+           eventClick: function(info) {
+               var title = info.event.title;
+               var start = moment(info.event.start).format('MM-DD HH:mm');
+               var end = moment(info.event.end).format('MM-DD HH:mm');
+               var tab = $('.nav-tabs .active').text();
+               var modalTitle = tab + ' 대여 신청';
+               
+              
+              
+               
+               $('#res_ModalLabel').text('');
+               $('#content').text('');
+               $('#startTime').val('');
+               $('#endTime').val('');
+               
+               $('#res_ModalLabel').text(modalTitle);
+               $('#content').text(title);
+               $('#startTime').val(start);
+               $('#endTime').val(end);
+               
+               $('#res_Modal').modal('show');
+           },
+           select: function(info) {
+              
+              var startTime = info.start.toISOString();
+               var endTime = info.end.toISOString();
+
+               // moment라이브러리로 출력 방식 바꾸기
+               var startTimeString = moment(startTime).format('MM-DD HH:mm');
+               var endTimeString = moment(endTime).format('MM-DD HH:mm');
+               var tab = $('.nav-tabs .active').text();
+               var modalTitle = tab + ' 대여 신청';
+               
+               //저장용데이터
+               $('#rental').val(tab);
+               $('#startTimeISO').val(startTime);
+               $('#endTimeISO').val(endTime);
+
+               // 모달에 띄울 데이터 .val
+               $('#res_ModalLabel').text('');
+               $('#content').text('');
+               $('#startTime').val('');
+               $('#endTime').val('');
+               
+               $('#res_ModalLabel').text(modalTitle);
+               $('#startTime').val(startTimeString);
+               $('#endTime').val(endTimeString);
+               $('#res_Modal').modal('show');
+              
+             },
+              
+             
+             events: asdf
+                  
+            
+       });
+       
+       
+       
+       calendar.render();
+   });
+  
+
+   
+   
+   
+   
+   function reservation() {
+       // modal에서 데이터 저장하기
+       var startTime =  $('#startTimeISO').val();
+       var endTime = $('#endTimeISO').val();
+       var content = $('#content').val();
+       var rental = $('#rental').val();
+       
+       console.log('confermain의 ajax중');
+       console.log(startTime);
+       console.log(endTime);
+       console.log(content);
+       console.log(rental);
+             
+       $.ajax({
+           url: "${pageContext.request.contextPath}/confer/reservation/",
+           type: 'POST',
+           data: {
+               "start_time": startTime,
+               "end_time": endTime,
+               "content": content,
+               "rental": rental
+           },
+           success: function(response) {
+               $('#res_Modal').modal('hide');
+               document.location.reload(); //나중에 삭제해야댐 확인용
+           },
+           error: function(request,error) {
+             
+               alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+           }
+       });
+   }
+
+   function tabclick(){
+	   var tab_info = $(this).text();
+	   console.log(tab_info);
+   }
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
     </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-
   </body>
   
 </html>

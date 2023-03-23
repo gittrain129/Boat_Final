@@ -4,30 +4,22 @@
   
   <mapper namespace="com.boat.mybatis.mapper.ConferenceReservationMapper">
   
-   <select id = "findAll" resultType="ConferenceReservation" parameterType="java.util.Map">
-  	select * from CONFER_MAIN
+   <select id = "getcal" resultType="ConferenceReservation" parameterType="java.util.Map">
+     select * from CONFER_MAIN
+     where rental = #{RENTAL}
+  </select>
   
   
-  
-   </select>
-  
-   <insert id = "insert1" parameterType = "ConferenceReservation">
-  	insert into CONFER_MAIN
-  	(START_TIME,END_TIME,CONTENT)
-    VALUES (#{start_time}, #{end_time}, #{content})
-  
-  
-   </insert>
-  
-  <!-- 
+
+
   <insert id = "insert1" parameterType = "ConferenceReservation">
-  	insert into CONFER_MAIN
-  	(ID,RENTAL,START_TIME,END_TIME,CONTENT)
-  	values
-  	(#{ID},#{RENTAL},#{START_TIME},#{END_TIME},#{CONTENT})
+     insert into CONFER_MAIN
+     (id,rental,start_time,end_time,content)
+     values
+     ('admin',#{RENTAL},#{START_TIME},#{END_TIME},#{CONTENT})
   
   
    </insert>
-   -->
+  
   
   </mapper>
