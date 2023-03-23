@@ -13,29 +13,87 @@
 	<link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 	
 	<style>
-	.txt-hide {
-    position: absolute;
-    clip: rect(0 0 0 0);
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-	}
-	
-	.select-btn:focus {
-    outline: 3px solid #F8E4FF;
-    border: 1px solid #9B51E0;
-	}
-	
-	.txt-ellipsis {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-	}
-	
-	.select-btn {
-    background-position: right 14px center;  
-	}
+		/* reset */
+		ul{
+		    margin: 0;
+		    padding: 0;
+		}
+		
+		/* design */
+		
+		.selectbox{
+		    margin: 150px auto;
+		}
+		
+		.pl{
+		width: 200px;
+		border: 1px solid #FFFFFF;
+		box-sizing: border-box;
+		border-radius: 10px;
+		padding: 12px 13px;
+		font-family: 'Roboto';
+		font-style: normal;
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 16px;
+		background: url(./img/Polygon_up.png) 93% no-repeat; /*화살표 이미지 삽입*/
+		appearance: none;
+		text-align: left;
+		}
+		.pl:focus{
+		    border: 1px solid #5cbdfc;
+		    box-sizing: border-box;
+		    border-radius: 10px;
+		    outline: 3px solid #FFFFFF;
+		    border-radius: 10px;
+		}
+		
+		.listbox{
+		    width: 200px;
+		    list-style: none;
+		    background: #FFFFFF;
+		    border: 1px solid #FFFFFF;
+		    box-sizing: border-box;
+		    box-shadow: 4px 4px 14px rgba(0, 0, 0, 0.15);
+		    border-radius: 10px;
+		    margin-top: 9px;
+		}
+		
+		.list{
+		    border: none;
+		    background-color: #FFFFFF;
+		    font-family: 'Roboto';
+		    font-style: normal;
+		    font-weight: 400;
+		    font-size: 14px;
+		    line-height: 16px;
+		    padding: 7px 10px;
+		    margin: 5px 7px;
+		    box-sizing: border-box;
+		}
+		
+		.list:focus{
+		    background: #5cbdfc;
+		    width: 184px;
+		    border-radius: 8px;
+		    box-sizing: border-box;
+		    text-align: left;
+		}
 	</style>
+	
+	<script>
+		 const btn = document.querySelector('.pl on');
+		    const list = document.querySelector('.listbox');
+		    btn.addEventListener('click', () => {
+		        list.classList.toggle('on');
+		    });
+		    list.addEventListener('click', (event) => {
+		        if (event.target.nodeName === "BUTTON") {
+		            btn.innerText = event.target.innerText;
+		            list.classList.remove('on');
+		        }
+		    });
+	</script>
 </head>
 <body>
 
@@ -52,23 +110,17 @@
 			<table class="table">
 				<tbody>
 					<tr>
-						 <section class="select-wrapper" data-role="selectbox">
-						    <h2 class="hidden">select</h2>
-						
-						   <section class="selectbox">
-						     <h2 class="hidden">selectbox</h2>
-						    <button type="button" class="toggle-btn">
-						      카테고리
-						      <img src="./img/icon-Triangle-down.svg" alt="" class="ico-down">
-						    </button>
-						   <ul class="selectbox-option hide">
-						     <li><button type="button" class="option-btn">홍보팀</button></li>
-						     <li><button type="button" class="option-btn">개발팀</button></li>
-						     <li><button type="button" class="option-btn">인사팀</button></li>
-						     <li><button type="button" class="option-btn">기획팀</button></li>
-						     <li><button type="button" class="option-btn">동호회</button></li>
-						   </ul>
-						   </section>
+						<th>카테고리</th>
+						<td>
+							 <button class="pl on" onclick="select();">최애 프로그래밍 언어</button>
+							    <ul class="listbox" id="listbox">
+							        <li><button class="list">홍보팀</button></li>
+							        <li><button class="list">개발팀</button></li>
+							        <li><button class="list">인사팀</button></li>
+							        <li><button class="list">기획팀</button></li>
+							        <li><button class="list">동호회</button></li>
+							    </ul>
+						</td>
 					</tr>
 					<tr>
 						<th>제목</th>
@@ -79,7 +131,7 @@
 					<tr>
 						<th>내용</th>
 						<td>
-							<textarea id="editor" name="_text" class="form-control" rows="10"></textarea>
+							<textarea id="text" name="_text" class="form-control" rows="10"></textarea>
 						</td>
 					</tr>
 					<tr>
