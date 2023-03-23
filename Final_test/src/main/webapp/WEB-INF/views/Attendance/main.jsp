@@ -51,8 +51,8 @@
 <main class="main-box">
   <div id="right-content">
         <div id="clock" class="box">
-            <div id="date-box">${day}</div>
-            <div id="time-box">${time}</div>
+            <div id="date-box"></div>
+            
             <div id="btn-box">
             
             <!--출근버튼  -->
