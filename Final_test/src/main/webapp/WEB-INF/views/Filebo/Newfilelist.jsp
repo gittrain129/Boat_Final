@@ -73,7 +73,9 @@ background-color: white;
 		 <!--검색 및 글쓰기  -->
    			<div class = 'search '>
      		
-     
+     <a href="${pageContext.request.contextPath}/Filebo/writee" class="btn btn-success btn">
+			<i class="fas fa-plus"></i> 글쓰기
+			</a>
       
         
 
@@ -98,9 +100,7 @@ background-color: white;
           </div>
         </label>
         
-			<a href="${pageContext.request.contextPath}/Filebo/writee" class="btn btn-success btn-sm float-right">
-			<i class="fas fa-plus"></i> 글쓰기
-			</a>
+			
 		</div>
 		</h3>
 		<div class="table-responsive">
@@ -162,8 +162,9 @@ background-color: white;
 							
 														</tbody>
 				<tfoot>
-					<tr>
-						<td colspan="7">
+				</tfoot>
+			</table>
+					
 							<nav class="pt-3" aria-label="Page navigation example">
 							  <ul class="pagination">
 							    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
@@ -173,10 +174,8 @@ background-color: white;
 							    <li class="page-item"><a class="page-link" href="#">Next</a></li>
 							  </ul>
 							</nav>
-						</td>
-					</tr>
-				</tfoot>
-			</table>
+					
+				
 		</div>
 	</div>
 	

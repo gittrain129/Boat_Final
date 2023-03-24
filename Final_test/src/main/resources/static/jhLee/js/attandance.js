@@ -35,7 +35,8 @@ var empno = $('#loginid').text();
 
 console.log("출근시간="+currenttime);
 
-if($("this").hasClass("btn")){
+if($(this).hasClass("btn")){
+        console.log("??? ");
 $(this).addClass('c-btn')       
         .removeClass('btn');
         //하얗게
@@ -54,7 +55,7 @@ var val =$('#off').val(currenttime);
 $('#off').val(currenttime);
 console.log("퇴근시간="+currenttime);
 
-if($("this").hasClass("btn")){
+if($(this).hasClass("btn")){
 $(this).addClass('c-btn')
         .removeClass('btn');       
         

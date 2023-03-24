@@ -34,7 +34,6 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" defer></script>
        
-    <%--  내할일 게시판 4.0번들 필요 충돌시 부분 발췌 예정 --%>
     
     <script src="${pageContext.request.contextPath}/resources/lib/wow/wow.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/lib/easing/easing.min.js"></script>
@@ -48,6 +47,10 @@
     
     <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
     
-    
+    <!-- toastr css 라이브러리 -->
+ 	 <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+   <!-- toastr js 라이브러리 -->
+  	 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+     
     <!-- favicon error -->
     <link rel="shortcut icon" href="#">

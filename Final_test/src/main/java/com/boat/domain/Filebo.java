@@ -28,6 +28,7 @@ public class Filebo {
 	private int CNT;
 	private String DEPT;
 	private String FIlE_EMPNO;
+	
 	private MultipartFile uploadfile;
 	
 	private String FILE_ORIGINAL;//첨부될파일의이름

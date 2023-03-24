@@ -85,7 +85,7 @@ import com.boat.domain.MySaveFoler;
 		}
 		  
   //글쓴화면
-  @RequestMapping(value="/write",method=RequestMethod.GET) 
+  @RequestMapping(value="/writeee",method=RequestMethod.GET) 
   public String  write() {
   
   return "Filebo/File_bo_Write"; 
@@ -102,13 +102,14 @@ import com.boat.domain.MySaveFoler;
 	  
 		  MultipartFile uploadfile = board.getUploadfile();
 		  
-		  if(!uploadfile.isEmpty()) { String fileName =
+		  if(!uploadfile.isEmpty()) {
+			  String fileName =
 		  uploadfile.getOriginalFilename();//원래 파일명
+			  logger.info("있니?"+uploadfile.getOriginalFilename());//원래 파일명
+			  //==> 있음
 		  board.setFILE_ORIGINAL(fileName);//원래 파일명 저장
 		  
-		  // String saveFolder =  request.getSession().getServletContext().getRealPath("resources") +"/upload";
 		  
-		  //위에서 saveFolder 주입받아 생성함. 
 		  String saveFolder= mysavefolder.getSavefolder();
 		  String fileDBName = fileDBName(fileName, saveFolder);//update에서도 쓸예정입니다.
 		  logger.info("fileDBName= "+fileDBName);
@@ -365,8 +366,15 @@ import com.boat.domain.MySaveFoler;
 			mv.addObject("count",count);
 			mv.addObject("boarddata",board);
 		}
-		return mv;
-	
+		return mv;}
+		
+		
+		@GetMapping(value="/hiff")
+		public ModelAndView dfDetail(ModelAndView mv) {
+				mv.setViewName("Filebo/File_bo_view");
+				return mv;
+		
+		
 	}
 	//파일다운
 		@ResponseBody

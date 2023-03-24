@@ -2,9 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="com.boat.mybatis.mapper.FileboMapper">
+  <mapper namespace="com.boat.mybatis.mapper.FileboMapper2">
   
+  <!-- 
+   BOARD_NUM                                 NOT NULL NUMBER
+ BOARD_NAME                                         VARCHAR2(30)
+ BOARD_PASS                                         VARCHAR2(30)
+ BOARD_SUBJECT                                      VARCHAR2(300)
+ BOARD_CONTENT                                      VARCHAR2(4000)
+ BOARD_FILE                                         VARCHAR2(50)
+ BOARD_ORIGINAL                                     VARCHAR2(50)
+ BOARD_RE_REF                                       NUMBER(5)
+ BOARD_RE_LEV                                       NUMBER(5)
+ BOARD_RE_SEQ                                       NUMBER(5)
+ BOARD_READCOUNT                                    NUMBER(5)
+ BOARD_DATE                                         DATE
  
+ create table file_board (
+	FILE_NUM NUMBER(5) primary key,
+	FILE_NAME VARCHAR2(30), 
+	FILE_PASS NUMBER(30),
+	FILE_SUBJECT VARCHAR2(300),	
+	FILE_CONTENT VARCHAR2(4000),		
+	FILE_FILE VARCHAR2(50),
+	FILE_FILE2 VARCHAR2(50),		
+	FILE_RE_REF NUMBER(5),	
+	FILE_RE_LEV NUMBER(5),	
+	FILE_RE_SEQ NUMBER(5),
+	FILE_READCOUNT NUMBER(5),
+	FILE_DATE DATE ,
+	DEPT VARCHAR2(30) check (dept in ('홍보팀', '개발팀', '인사팀', '기획팀', '영업팀')),
+	FIlE_EMPNO varchar2(50)
+	);
+ 
+  -->
   
   
 	<select id="getListCount" resultType="int">
@@ -13,7 +44,18 @@
 	
   <select id = "getBoardList" resultType="Filebo" parameterType="java.util.Map">
 	
-	select * from file_board
+	
+  
+   SELECT * FROM (select rownum rnum, j.* from (
+							 select file_board.*, nvl(CNT ,0) CNT 
+							from file_board left outer join (select FILE_NUM ,count(*) CNT  
+														from FILE_COMMENT  
+														group by FILE_NUM )b 
+												on board3.FILE_NUM  = b.FILE_NUM   
+							order by FILE_RE_REF  desc,  
+							FILE_RE_SEQ  asc)j
+							 				where rownum&lt;=  #{end}   ) 
+							WHERE rnum&gt;= #{start}  and rnum&lt;= #{end}  
   
   </select>
   
@@ -23,37 +65,51 @@
 	  	 select nvl(max(FILE_NUM ),0)+1 from file_board 
 	  
 	  </selectKey>
-	 	 insert into file_board 
+	 insert into file_board 
   (FILE_NUM ,FILE_NAME ,FILE_PASS ,FILE_SUBJECT ,
-  FILE_CONTENT ,FILE_FILE ,BOARD_ORIGINAL,FILE_RE_REF ,
+  FILE_CONTENT ,FILE_FILE ,FILE_ORIGINAL,FILE_RE_REF ,
   FILE_RE_LEV ,FILE_RE_SEQ ,FILE_READCOUNT ,FILE_DATE )
   values
   (
   #{FILE_NUM},#{FILE_NAME},#{FILE_PASS},#{FILE_SUBJECT},#{FILE_CONTENT},
-  #{FILE_FILE,jdbcType=VARCHAR}, #{BOARD_ORIGINAL,jdbcType=VARCHAR},
+  #{FILE_FILE,jdbcType=VARCHAR}, #{FILE_ORIGINAL,jdbcType=VARCHAR},
   #{FILE_NUM},#{FILE_RE_LEV},#{FILE_RE_SEQ},#{FILE_READCOUNT},SYSDATE)
   </insert>
   
   <select id ="getDetail" parameterType ="Filebo" resultType = "Filebo">
-
+	select * from file_board  
+   where 
+  FILE_NUM = #{number}
   </select>
   
   <update id="setReadCountUpdate" parameterType ="int">
-	
+	update file_board
+  set FILE_READCOUNT  = FILE_READCOUNT +1
+  where FILE_NUM = #{number}
   </update>
   
   <!--  map은 java.util.Map의 별칭입니다.-->
   <select id = "isBoardWriter" parameterType = "map" resultType="Filebo" >
-
+ select * from file_board
+  where FILE_NUM=#{num}
+  and FILE_PASS=#{pass}
   </select>
   
   <update id="boardModify" parameterType = "Filebo" >
-	
+	update file_board
+  set
+  FILE_SUBJECT  = #{FILE_SUBJECT },
+  FILE_CONTENT  = #{FILE_CONTENT },
+  FILE_FILE   = #{FILE_FILE ,jdbcType=VARCHAR},
+  BOARD_ORIGINAL = #{BOARD_ORIGINAL,jdbcType=VARCHAR}
+ where
+  FILE_NUM  =#{FILE_NUM }
   
   </update>
   
   <insert id = "boardReply" parameterType = "Filebo">
   	<selectKey resultType="int" order ="BEFORE" keyProperty ="FILE_NUM">
+ 		 select nvl(max(FILE_NUM ),0)+1 from file_board 
   	</selectKey>
  insert into file_board  
 					(FILE_NUM,FILE_NAME  ,FILE_PASS ,FILE_SUBJECT ,
