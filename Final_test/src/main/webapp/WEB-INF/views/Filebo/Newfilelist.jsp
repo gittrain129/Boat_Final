@@ -174,7 +174,32 @@ background-color: white;
 							    <li class="page-item"><a class="page-link" href="#">Next</a></li>
 							  </ul>
 							</nav>
-					
+					 <div class="btn-group search form-group">
+        
+           <input type="hidden" name = "searchsel" id = "searcselhval" value =" ${searchsel}">
+            <div class="dropdown" >
+    		  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+    	    정렬
+   			   </a>
+		      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+		        <li><a class="dropdown-item" href="#">작성자</a></li>
+		        <li><a class="dropdown-item" href="#">제목</a></li>
+		      </ul>
+  		  </div>
+ 
+   <input type="hidden" name = "searchsel" id = "searcselhval" value =" ${searchsel}">
+            <div class="dropdown" >
+    		  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+    	    정렬
+   			   </a>
+		      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+		        <li><a class="dropdown-item" href="#">작성자</a></li>
+		        <li><a class="dropdown-item" href="#">제목</a></li>
+		      </ul>
+  		  </div>
+ 
+          		
+          </div>
 				
 		</div>
 	</div>
