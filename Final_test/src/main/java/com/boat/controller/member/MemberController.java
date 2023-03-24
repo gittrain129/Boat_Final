@@ -51,7 +51,7 @@ public class MemberController {
 	}
 	
 	//네이버 회원가입 => 정보 작성폼
-	@PostMapping(value = "/naverlogin")
+	@RequestMapping(value = "/naverlogin", method = {RequestMethod.GET, RequestMethod.POST})
 	public String userNaverLoginPro(Model model,
 			@RequestParam Map<String,Object> paramMap, @RequestParam String code, 
 			@RequestParam String state, HttpSession session) throws SQLException, Exception {

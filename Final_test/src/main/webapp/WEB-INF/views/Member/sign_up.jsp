@@ -36,6 +36,7 @@
             <div id="form-controls">
               <button type="submit"  class="btn btn-primary py-3 px-5" disabled>이메일로 계속하기</button>
             </div>
+          </form>
             
            	<div class="text-center other"> 또는 </div>
             
@@ -48,7 +49,6 @@
 			
 			
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-          </form>
         </div>
 
 

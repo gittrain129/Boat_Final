@@ -8,4 +8,12 @@
 		SELECT * FROM MEMBERS WHERE EMAIL = #{email}
 	</select>
 
+	<select id="userNaverLoginPro" resultType="java.util.Map">
+		SELECT * FROM MEMBER WHERE EMAIL = #{email} AND NAVERLOGIN = #{id}
+	</select>
+
+	<update id="setNaverConnection">
+		UPDATE MEMBER SET NAVERLOGIN = #{id} WHERE EMAIL = #{email}
+	</update>
+
 </mapper>
