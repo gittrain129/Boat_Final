@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-    
+ 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,21 +20,6 @@
   	.inout_button:focus {
 	  background-color: #29d329;
 	}
-/*
-	 
-	.inout_button {
-	  width: 350px;
-	  margin: 0 auto;
-	}
-	
-	.inout_button div {
-	  margin: 0 15px 0 0;
-	  width: 30px;
-	  height: 30px;
-	  display: inline-block;
-	  border-radius: 100%;
-	}
-	*/
 	 
 	.ps-3 .btn a {
 		color:black;
