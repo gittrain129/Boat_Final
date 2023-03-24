@@ -5,14 +5,17 @@ $(document).ready(function(){
 		var email = $.trim($(this).val());
 		if(pattern.test(email)){
 			$('.btn-primary').attr("disabled", false);
-			$('.css-1u2lazp').hide();
+			$('input[type=email]').removeClass('is-invalid');
+			$('#user_mail').hide().removeClass('invalid-feedback');
 		}else {	
 			$('.btn-primary').attr("disabled", true);
-			$('.css-1u2lazp').show();
+			$('input[type=email]').addClass('is-invalid');
+			$('#user_mail').show().addClass('invalid-feedback');
 		}
 		
-		if(email=='') {
-			$('.css-1u2lazp').hide();
+		if(email=='' || email.equls('')) {
+			$('input[type=email]').removeClass('is-invalid');
+			$('#user_mail').hide().removeClass('invalid-feedback');
 		}
 	});
 	
