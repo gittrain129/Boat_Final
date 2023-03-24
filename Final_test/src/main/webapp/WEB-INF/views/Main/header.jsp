@@ -44,7 +44,7 @@
 	    font-weight: normal;
 	    font-style: normal;
 	}
-		.text-primary{
+		.text-primary:not(.far, .fa){
 	 font-family:'BMJUA';
 	 http://localhost:9700/boat/index
 	
