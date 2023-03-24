@@ -8,8 +8,8 @@
 
 	<jsp:include page="../Main/header.jsp"/>
 	
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/Kimsj/lib2/fa-5/css/all.css" />  	
-	<!-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/Kimsj/lib2/bootstrap-4/css/bootstrap.min.css" />  -->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/Kimsj/workboard_lib/fa-5/css/all.css" />  	
+	<!-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/Kimsj/workboard_lib/bootstrap-4/css/bootstrap.min.css" />  -->
 	<link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 	
 	<style>
@@ -364,25 +364,25 @@
 	</div>
 </section>
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/Kimsj/lib2/sceditor/minified/themes/default.min.css" />
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/Kimsj/lib2/sceditor/minified/sceditor.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/Kimsj/lib2/sceditor/minified/formats/bbcode.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/Kimsj/workboard_lib/sceditor/minified/themes/default.min.css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/Kimsj/workboard_lib/sceditor/minified/sceditor.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/Kimsj/workboard_lib/sceditor/minified/formats/bbcode.js"></script>
 <script>
 // Replace the textarea #example with SCEditor
 var textarea = document.getElementById('editor');
 sceditor.create(textarea, {
 	format: 'bbcode',
-	style: 'lib2/sceditor/minified/themes/content/default.min.css'
+	style: 'workboard_lib/sceditor/minified/themes/content/default.min.css'
 });
 </script>
 	
 	
 	
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/Kimsj/lib2/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/Kimsj/workboard_lib/jquery-3.3.1.min.js"></script>
 	
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/Kimsj/lib2/bootstrap-4/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/Kimsj/workboard_lib/bootstrap-4/js/bootstrap.min.js"></script>
 	
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/Kimsj/lib2/bootstrap-4/js/popper.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/Kimsj/workboard_lib/bootstrap-4/js/popper.min.js"></script>
 	
 	<jsp:include page="../Main/footer.jsp"/>
 	
