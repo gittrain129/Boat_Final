@@ -42,15 +42,14 @@
     <script src="${pageContext.request.contextPath}/resources/lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/lib/lightbox/js/lightbox.min.js"></script>
 
+   <!-- toastr js 라이브러리-->
+  	 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+   <!-- toastr css 라이브러리   -->
+ 	 <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
 
     <!-- Template Javascript -->
-    
     <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-    
-    <!-- toastr css 라이브러리 -->
- 	 <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
-   <!-- toastr js 라이브러리 -->
-  	 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-     
+  
+
     <!-- favicon error -->
     <link rel="shortcut icon" href="#">
