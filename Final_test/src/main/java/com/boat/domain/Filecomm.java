@@ -1,42 +1,47 @@
 package com.boat.domain;
 
+import lombok.Data;
+
+@Data
 public class Filecomm {
 
-	private String num;
-	private String id;
-	private String content;
-	private String reg_date;//2020-12-24 16:08:35
-	private int board_num;
+	private String F_C_NUM;
+	private String F_C_ID;
+	private String F_CONTENT;
+	private String F_COMMENT_DATE;//2020-12-24 16:08:35
+	private int F_BO_NUM;
 	
-	public String getNum() {
-		return num;
+	
+	public String getF_C_NUM() {
+		return F_C_NUM;
 	}
-	public void setNum(String num) {
-		this.num = num;
+	public void setF_C_NUM(String f_C_NUM) {
+		F_C_NUM = f_C_NUM;
 	}
-	public String getId() {
-		return id;
+	public String getF_C_ID() {
+		return F_C_ID;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setF_C_ID(String f_C_ID) {
+		F_C_ID = f_C_ID;
 	}
-	public String getContent() {
-		return content;
+	public String getF_CONTENT() {
+		return F_CONTENT;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setF_CONTENT(String f_CONTENT) {
+		F_CONTENT = f_CONTENT;
 	}
-	public String getReg_date() {
-		return reg_date;
+	public String getF_COMMENT_DATE() {
+		return F_COMMENT_DATE;
 	}
-	public void setReg_date(String reg_date) {
-		this.reg_date = reg_date;
+	public void setF_COMMENT_DATE(String f_COMMENT_DATE) {
+		F_COMMENT_DATE = f_COMMENT_DATE;
 	}
-	public int getBoard_num() {
-		return board_num;
+	public int getF_BO_NUM() {
+		return F_BO_NUM;
 	}
-	public void setBoard_num(int board_num2) {
-		this.board_num = board_num2;
+	public void setF_BO_NUM(int f_BO_NUM) {
+		F_BO_NUM = f_BO_NUM;
 	}
+	
 	
 }

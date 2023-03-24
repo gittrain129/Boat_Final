@@ -22,7 +22,7 @@
 	  background-color: #29d329;
 	}
 /*
-	
+	 
 	.inout_button {
 	  width: 350px;
 	  margin: 0 auto;
@@ -36,7 +36,7 @@
 	  border-radius: 100%;
 	}
 	*/
-	
+	 
 	.ps-3 .btn a {
 		color:black;
 		font-weight:bold;

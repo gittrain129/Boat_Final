@@ -8,6 +8,16 @@
 	값을 글쓴이 값으로 설정필요
 */
 
+	//실시간 시계
+
+	setInterval(time,1000);
+
+	function time()
+	{        
+	var today = new Date();
+ 	$('#date-box').text(today.toLocaleString());
+ 	}
+
 $(function(){
 
  //출퇴근 버튼 클릭시 시간 설정
@@ -25,7 +35,8 @@ var empno = $('#loginid').text();
 
 console.log("출근시간="+currenttime);
 
-if($("this").hasClass("btn")){
+if($(this).hasClass("btn")){
+        console.log("??? ");
 $(this).addClass('c-btn')       
         .removeClass('btn');
         //하얗게
@@ -44,7 +55,7 @@ var val =$('#off').val(currenttime);
 $('#off').val(currenttime);
 console.log("퇴근시간="+currenttime);
 
-if($("this").hasClass("btn")){
+if($(this).hasClass("btn")){
 $(this).addClass('c-btn')
         .removeClass('btn');       
         
