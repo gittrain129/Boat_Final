@@ -51,14 +51,14 @@
 <main class="main-box">
   <div id="right-content">
         <div id="clock" class="box">
-            <div id="date-box">${day}</div>
-            <div id="time-box">${time}</div>
+            <div id="date-box"></div>
+            
             <div id="btn-box">
             
             <!--출근버튼  -->
                 <form action="${pageContext.request.contextPath}/Attendance/on" method="post">
                 <input type="hidden" name="on"  value="" id="on">
-                <input type="submit" id="start-btn" class="btn" value="출근">
+                <input type="button" id="start-btn" class="btn" value="출근">
                 <input type="hidden" class ="empno" name="empno" value="">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                 
@@ -69,7 +69,7 @@
                 <form action="${pageContext.request.contextPath}/Attendance/off" method="post">
                 
                 <input type="hidden" name="off" value="" id="off"          >
-                <input type="submit"  id="end-btn" class="c-btn" value="퇴근">
+                <input type="button"  id="end-btn" class="c-btn" value="퇴근">
                 <input type="hidden" class ="empno" name="empno" value="">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                 

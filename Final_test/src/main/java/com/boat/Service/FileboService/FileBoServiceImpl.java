@@ -13,11 +13,14 @@ import com.boat.mybatis.mapper.FileboMapper;
 public class FileBoServiceImpl implements FileBoService {
 
 	private FileboMapper dao;
-	
-	@Autowired
-	public FileBoServiceImpl(FileboMapper dao) {
-		this.dao = dao;
+	public FileBoServiceImpl() {
 	}
+		 
+		 @Autowired 
+		 public FileBoServiceImpl(FileboMapper dao) { 
+			 this.dao = dao; 
+			 }
+		
 	
 	
 	@Override
