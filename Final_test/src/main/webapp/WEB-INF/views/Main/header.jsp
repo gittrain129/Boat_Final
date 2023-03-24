@@ -119,7 +119,7 @@
 								<!-- <button class='inout_button'> -->
 			                    	<div class="flex-shrink-0 btn-lg-square border rounded-circle" style="display:inline-flex !important; background-color : green;">
 			                    	
-		                                <i class="far fa-clock text-primary"></i>
+		                                <i class="far fa-clock text-primary" style="font-family: Font Awesome 5 Free !important"></i>
 		                               
 		                            </div>
 			                  	<!-- </button> -->
