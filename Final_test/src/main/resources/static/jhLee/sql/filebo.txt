@@ -4,7 +4,22 @@ delete from file_board
 
 drop table file_board cascade constraints purge;
 
-
+CREATE TABLE BOARD3(
+	BOARD_NUM         NUMBER,   
+	BOARD_NAME        VARCHAR2(30),    
+	BOARD_PASS          VARCHAR2(30), 
+	BOARD_SUBJECT      VARCHAR2(300), 
+	BOARD_CONTENT    VARCHAR2(4000), 
+	BOARD_FILE            VARCHAR2(50),	
+	BOARD_ORIGINAL  VARCHAR2(50),	
+	BOARD_RE_REF         NUMBER(5),   
+	BOARD_RE_LEV         NUMBER(5),   
+	BOARD_RE_SEQ         NUMBER(5),   
+	BOARD_READCOUNT NUMBER(5),   
+	BOARD_DATE  DATE ,
+	primary key(board_num)
+	);
+	
 create table file_board (
 	FILE_NUM NUMBER(5) primary key,
 	FILE_NAME VARCHAR2(30), 

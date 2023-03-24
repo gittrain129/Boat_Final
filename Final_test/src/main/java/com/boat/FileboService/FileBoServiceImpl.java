@@ -22,7 +22,6 @@ public class FileBoServiceImpl implements FileBoService {
 	
 	@Override
 	public int getListCount() {
-		System.out.println("dao getlistcount 전");
 		return dao.getListCount();     
 	}
 

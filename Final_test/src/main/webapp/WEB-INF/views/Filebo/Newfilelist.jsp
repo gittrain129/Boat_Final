@@ -23,6 +23,32 @@ img {
 	width: 10px
 }
 .search{text-align:right}
+.btn-secondary {
+color: white;
+    background-color: #009CFF;
+    border-color: #009CFF;
+}
+.btn-secondary:focus ,.btn-secondary:active {
+    color: white;
+    background-color:  #009CFF;
+    border-color:  #009CFF;
+    box-shadow: 0 0 0 0;
+/*     box-shadow: 0 0 0 0.25rem rgba(101,101,101,0.5); */
+}
+.btn-secondary:hover {
+    color: white;
+    background-color: #009CFF;
+    border-color: #009CFF;
+}
+.btn-check:focus+.btn, .btn:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0;
+}
+#searhcbtn2{
+border : none;
+background-color: white;
+}
+
 </style>
 
   <!-- Page Header Start -->

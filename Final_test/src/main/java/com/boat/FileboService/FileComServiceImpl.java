@@ -12,13 +12,13 @@ import com.boat.domain.Filecomm;
 import com.boat.mybatis.mapper.FileComMapper;
 
 @Service
-public class CommentServiceImpl implements FileCommentService {
+public class FileComServiceImpl implements FileCommentService {
 	
 	private FileComMapper dao;
 	private LogAdvice log;
 	
 	@Autowired
-	public CommentServiceImpl(FileComMapper dao,LogAdvice log) {
+	public FileComServiceImpl(FileComMapper dao,LogAdvice log) {
 		this.dao = dao;
 		this.log = log;
 	}
