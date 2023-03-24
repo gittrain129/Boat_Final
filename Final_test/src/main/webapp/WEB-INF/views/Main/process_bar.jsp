@@ -25,18 +25,20 @@
 
 <style>
 	/* Progress Bar */
-.progress-container {
+.progress-containers {
   position: fixed;
   width: 100%;
   height: 5px;
-  background-color: #f2f4f6;
+  background-color: #f2f4f6 !important;
 	z-index: 10;
 }
 
-.progress-bar {
+.progress-bars {
   width: 0%;
   height: 5px;
-  background-color: #006fc7!important;
+
+  background-color: #006fc7 !important;
+
 }
 
 .shadow-sm {
@@ -49,8 +51,8 @@
 </head>
 <body>
 	<!-- Progress Bar -->
-			<div class="progress-container">
-				<div class="progress-bar" id="abboScrollBar"></div>
+			<div class="progress-containers">
+				<div class="progress-bars" id="abboScrollBar"></div>
 			</div>
 </body>
 </html>
