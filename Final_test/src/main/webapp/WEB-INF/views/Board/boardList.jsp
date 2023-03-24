@@ -5,7 +5,7 @@
 <head>
 
 <title>업무 게시판</title>
-<link rel="stylesheet" type="text/css" href="jkKim/css/all.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/jkKim/css/all.css" />
 
 </head>
 <body>
@@ -72,21 +72,21 @@
 								<td title="like" class="text-center"><i class="bi bi-bookmark-star"></i></td>
 								
 								<td style="display: flex; align-items: center;">
-  								<a href="discussion-detail.html" style="flex: 1;">Quos ut recusandae et consequuntur.</a>
+  								<a href="discussion-detail.html" style="flex: 1; ">100% 가나다라마바사 한국어로 적어보기</a>
   								<div class="ml-auto"><span class="badge badge-pill badge-primary float-right" style="background-color: #ffcb6b;">공지</span></div>
 								</td>
 
 
-								<td><div style="display: flex; justify-content: center; align-items: center;"><small>Carroll Hintz</small></div></td>
+								<td><div style="display: flex; justify-content: center; align-items: center;"><small>김정근</small></div></td>
 								<td><div style="display: flex; justify-content: center; align-items: center;">538</div></td>
-								<td><div style="display: flex; justify-content: center; align-items: center;">1 week ago</div></td>
+								<td><div style="display: flex; justify-content: center; align-items: center;">1시간</div></td>
 
 							</tr>
 							
 							<tr>
 								<td title="like" class="text-center"><i class="bi bi-star"></i></td>
-								<td><a href="discussion-detail.html">Id temporibus eius	tempore nihil. <span class="badge badge-pill badge-warning float-right" style="background-color: #ffcb6b;">공지</span> </a></td>
-								<td><div style="display: flex; justify-content: center; align-items: center;"><small>Hans Pfannerstill</small></div></td>
+								<td><a href="discussion-detail.html" style="flex: 1; font-size:95%">95% 가나다라마바사 한국어로 적어보기<span class="badge badge-pill badge-warning float-right" style="background-color: #ffcb6b;">공지</span> </a></td>
+								<td><div style="display: flex; justify-content: center; align-items: center;"><small>홍길동</small></div></td>
 								<td><div style="display: flex; justify-content: center; align-items: center;">256</div></td>
 								<td><div style="display: flex; justify-content: center; align-items: center;">1 week ago</div></td>
 							</tr>
@@ -94,7 +94,7 @@
 							<tr>
 								<td title="like" class="text-center"><i class="bi bi-star"></i></td>
 								<td style="display: flex; align-items: center;">
-								<a href="discussion-detail.html" style="flex: 1;">Qui id corporisnihil magnam.</a>
+								<a href="discussion-detail.html" style="flex: 1; font-size:90%">90% 가나다라마바사 한국어로 적어보기</a>
 								<div><span	class="badge badge-pill badge-warning" style="background-color: #89a5ea;">new</span></div>
 								<div><span	class="badge badge-pill badge-warning float-right" style="background-color: #89a5ea;">기획팀</span></div>
 								</td>
