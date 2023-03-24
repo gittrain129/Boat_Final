@@ -176,7 +176,7 @@
 	
 				<div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">내 정보</a>
-                    <div class="dropdown-menu border-0 rounded-0 rounded-bottom m-0">
+                    <div class="dropdown-menu border-0 rounded-0 rounded-bottom m-0 shadow">
                         <a href="${pageContext.request.contextPath}/Attendance/list" class="dropdown-item">근태 관리</a>
                         <a href="${pageContext.request.contextPath}/member/myboardList" class="dropdown-item">내 글 보기</a>
                         <a href="${pageContext.request.contextPath}/Todo/list" class="dropdown-item">내 할일 보기</a>
@@ -185,10 +185,7 @@
                 
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">게시판</a>
-                    <div class="dropdown-menu border-0 rounded-0 rounded-bottom m-0">
-
-                        
-                      
+                    <div class="dropdown-menu border-0 rounded-0 rounded-bottom m-0 shadow">       
                         <a href="${pageContext.request.contextPath}/board/List" class="dropdown-item">업무 게시판</a>
                         <a href="${pageContext.request.contextPath}/Filebo/list" class="dropdown-item">자료 게시판</a>
                         <a href="${pageContext.request.contextPath}/workboard" class="dropdown-item">워크 보드</a>
@@ -198,7 +195,7 @@
                 
  				<div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">공유업무</a>
-                    <div class="dropdown-menu border-0 rounded-0 rounded-bottom m-0">
+                    <div class="dropdown-menu border-0 rounded-0 rounded-bottom m-0 shadow">
                         <a href="${pageContext.request.contextPath}/cal" class="dropdown-item">캘린더</a>
                         <a href="${pageContext.request.contextPath}/address" class="dropdown-item">주소록</a>
                     </div>
@@ -211,7 +208,7 @@
             
             <div class="d-flex align-items-center justify-content-end" style="height:70.4px !important;">
                 <div class="flex-shrink-0 btn-lg-square border rounded-circle" style="background-color:white !important">
-                    <i class="bi bi-person-circle text-primary" style="font-size:45px;"></i>
+                    <i class="bi bi-person-circle text-primary" style="font-size:45px; margin-top:15px"></i>
                 </div>
                 <div class="ps-3">
                     <div class="btn btn-sm btn-light rounded-pill py-2 px-4 d-none d-lg-block">
