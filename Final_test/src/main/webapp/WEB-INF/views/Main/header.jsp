@@ -26,6 +26,46 @@
 		font-weight:bold;
 	}
 	
+			@font-face {
+		    font-family: 'Pretendard-Regular';
+		    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+		    font-weight: 400;
+		    font-style: normal;
+		}
+			/*천재 *{
+		 font-family: 'Pretendard-Regular';
+		}
+ 		*/
+ 		
+/*보트 로고*/
+	@font-face {
+	    font-family: 'BMJUA';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+		.text-primary{
+	 font-family:'BMJUA';
+	 http://localhost:9700/boat/index
+	
+	}
+	/*전체 폰트
+	https://noonnu.cc/font_page/223
+	*/
+@font-face {
+     font-family: 'S-CoreDream-3Light';
+     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+     font-weight: normal;
+     font-style: normal;
+}
+	*{
+	 font-family: 'S-CoreDream-3Light';
+	 font-weight : 700!important;
+	}
+	/*전체 폰트*/
+
+.flex-shrink-0{font-family : 'Pretendard-Regular';}
+
 </style>
 </head>
 
