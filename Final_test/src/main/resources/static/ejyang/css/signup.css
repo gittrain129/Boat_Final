@@ -3,7 +3,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .other {
@@ -94,7 +93,6 @@ label {
     padding: 13px 12px;
     border-color: #01c73c;
     color: #fff;
-    font-family: 'Nexon Gothic', 'Malgun Gothic', Sans-Serif;
     border-radius: 3px;
     font-weight: bold;
 }

@@ -25,14 +25,12 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void setNaverConnection(Map<String, Object> apiJson) {
-		// TODO Auto-generated method stub
-		
+		dao.setNaverConnection(apiJson);
 	}
 
 	@Override
 	public Map<String, Object> userNaverLoginPro(Map<String, Object> apiJson) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.userNaverLoginPro(apiJson);
 	}
 
 	

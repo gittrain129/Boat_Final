@@ -13,6 +13,41 @@
 	
 	<!-- Customized Bootstrap Stylesheet -->
     <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+		@font-face {
+		    font-family: 'Pretendard-Regular';
+		    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+		    font-weight: 400;
+		    font-style: normal;
+		}
+		
+		/*보트 로고*/
+		@font-face {
+		    font-family: 'BMJUA';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+		
+		.text-primary{
+			 font-family:'BMJUA';
+			 http://localhost:9700/boat/index
+		}
+		/*전체 폰트*/
+		@font-face {
+		     font-family: 'S-CoreDream-3Light';
+		     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+		     font-weight: normal;
+		     font-style: normal;
+		}
+		*{
+			 font-family: 'S-CoreDream-3Light';
+			 font-weight : 700!important;
+		}
+		
+		/*전체 폰트*/
+		.flex-shrink-0{font-family : 'Pretendard-Regular';}
+ </style>
  </head>
  <body>
  
@@ -20,8 +55,6 @@
  <a href="/boat/index" class="navbar-brand p-0">
  	<h1 class="text-center fw-bold text-primary m-0"><i class="bi bi-tsunami"></i>BOAT</h1>
  </a>
-                
-                
                 
   
   <div id="w-contents" class="container join_2022_wrap">
@@ -44,11 +77,14 @@
             <!-- 부서명 -->
             <div class="row row-container align-items-center">
                 <div class="head col-sm-12 col-md-3">부서명</div>
+                
                 <div class="body col-sm-12 col-md-9">
-                    <input type="text" name="user_id" onblur="valid_check_id()" placeholder="6~16자 / 영문 소문자, 숫자 사용 가능" class="input-id _input " id="_label-id">
-                    <span id="user_id_alert_icons">
-						<img class="icon_check icon_input" src="https://static.gabia.com/responsive/assets/images/accounts/ico_check.svg" alt="" style="display:none;">
-					</span>
+	                <select class="col-sm-12 col-md-9 form-select" aria-label="Default select example">
+					  <option selected>Open this select menu</option>
+					  <option value="1">One</option>
+					  <option value="2">Two</option>
+					  <option value="3">Three</option>
+					</select>
                 </div>
                 <p class="warning-sign warning_message color-orange" id="valid_check_msg_uid" style="display:none;"></p>
                 <!-- <span class="warning_message color-orange">영문 또는 숫자 6 ~16자리로 입력해 주세요</span> -->
