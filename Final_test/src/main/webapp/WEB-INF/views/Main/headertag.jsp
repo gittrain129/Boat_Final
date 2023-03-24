@@ -47,8 +47,7 @@
    <!-- toastr css 라이브러리   -->
  	 <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
 
-    <!-- Template Javascript -->
-    <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+    <!-- Template Javascript -->\    <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
   
 
     <!-- favicon error -->
