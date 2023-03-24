@@ -66,6 +66,13 @@
 			<table class="table">
 				<tbody>
 					<tr>					
+						<th></th>
+						<td>
+							
+						</td>
+					</tr>
+					<tr>
+					<tr>					
 						<th>카테고리</th>
 						<td>
 							<select name="likeLanguage" id="" class="pl">
