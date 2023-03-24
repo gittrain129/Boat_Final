@@ -31,7 +31,8 @@ h1{
  text-align: center;  color:rgb(0,173,238)!important; ;}
 
 
-label{font-weight : bold}
+label{font-weight : 900;
+	color : black;}
 
 #upfile,#upfile2{display : none}
 
@@ -51,6 +52,11 @@ input{width : 80%;
 	padding : 0;
 	background-color : white!important;
 	border:none;
+	
+}
+
+.content label{
+	margin-bottom: 10px;
 	
 }
 

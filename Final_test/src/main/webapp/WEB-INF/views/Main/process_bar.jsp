@@ -36,7 +36,9 @@
 .progress-bars {
   width: 0%;
   height: 5px;
+
   background-color: #006fc7 !important;
+
 }
 
 .shadow-sm {

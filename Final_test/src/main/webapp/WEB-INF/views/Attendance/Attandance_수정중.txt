@@ -1,0 +1,8 @@
+drop table MYINFO cascade constraints purge;
+
+create table attandance (
+	EMPNO VARCHAR2(12),
+	CONTENT VARCHAR2(1000),
+	on_time varchar2(20),
+	curdate DATE DEFAULT SYSDATE
+);

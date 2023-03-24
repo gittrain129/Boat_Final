@@ -16,8 +16,8 @@
     <script src="jhLee/js/fileview.js"></script>
     <title>자료실 게시판</title>
 
-  <link rel="stylesheet" href="jhLee/css/fileview.css">
-  <link rel="stylesheet" href="jhLee/css/fileview2.css"><%--댓글 --%>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/jhLee/css/fileview.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/jhLee/css/fileview2.css"><%--댓글 --%>
   
   
 </head>

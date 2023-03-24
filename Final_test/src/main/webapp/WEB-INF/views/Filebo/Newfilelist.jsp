@@ -23,6 +23,32 @@ img {
 	width: 10px
 }
 .search{text-align:right}
+.btn-secondary {
+color: white;
+    background-color: #009CFF;
+    border-color: #009CFF;
+}
+.btn-secondary:focus ,.btn-secondary:active {
+    color: white;
+    background-color:  #009CFF;
+    border-color:  #009CFF;
+    box-shadow: 0 0 0 0;
+/*     box-shadow: 0 0 0 0.25rem rgba(101,101,101,0.5); */
+}
+.btn-secondary:hover {
+    color: white;
+    background-color: #009CFF;
+    border-color: #009CFF;
+}
+.btn-check:focus+.btn, .btn:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0;
+}
+#searhcbtn2{
+border : none;
+background-color: white;
+}
+
 </style>
 
   <!-- Page Header Start -->
@@ -47,7 +73,9 @@ img {
 		 <!--검색 및 글쓰기  -->
    			<div class = 'search '>
      		
-     
+     <a href="${pageContext.request.contextPath}/Filebo/writee" class="btn btn-success btn">
+			<i class="fas fa-plus"></i> 글쓰기
+			</a>
       
         
 
@@ -72,9 +100,7 @@ img {
           </div>
         </label>
         
-			<a href="${pageContext.request.contextPath}/Filebo/writee" class="btn btn-success btn-sm float-right">
-			<i class="fas fa-plus"></i> 글쓰기
-			</a>
+			
 		</div>
 		</h3>
 		<div class="table-responsive">
@@ -136,8 +162,9 @@ img {
 							
 														</tbody>
 				<tfoot>
-					<tr>
-						<td colspan="7">
+				</tfoot>
+			</table>
+					
 							<nav class="pt-3" aria-label="Page navigation example">
 							  <ul class="pagination">
 							    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
@@ -147,10 +174,8 @@ img {
 							    <li class="page-item"><a class="page-link" href="#">Next</a></li>
 							  </ul>
 							</nav>
-						</td>
-					</tr>
-				</tfoot>
-			</table>
+					
+				
 		</div>
 	</div>
 	

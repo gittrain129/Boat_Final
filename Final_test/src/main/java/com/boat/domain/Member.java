@@ -10,8 +10,15 @@ public class Member {
 	private String PROFILE_IMG;
 	private String REGISTER_DATE;
 	private String AUTH;
+	private String NAVERLOGIN;
 	
 	
+	public String getNAVERLOGIN() {
+		return NAVERLOGIN;
+	}
+	public void setNAVERLOGIN(String nAVERLOGIN) {
+		NAVERLOGIN = nAVERLOGIN;
+	}
 	public String getEMPNO() {
 		return EMPNO;
 	}

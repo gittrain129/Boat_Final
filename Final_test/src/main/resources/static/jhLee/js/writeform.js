@@ -10,8 +10,8 @@ $(document).ready(function(){
 	      
 	      
 
-
-	$('#deptbutton+div a').click(function(){
+//dept dropdown 입력칸
+$('#deptbutton+div a').click(function(){
 			const dept =$(this).text();
 				console.log(dept)
 			const sel =$('#deptsel').text();
@@ -21,7 +21,8 @@ $(document).ready(function(){
 		
 			
 		$('#dept').val(dept);
-			console.log($('#dept').val())			
+			console.log($('#dept').val())	
+			return false;
 	
 	})//drop downclick 끝
 	
@@ -43,29 +44,84 @@ $("#upfile2").change(function(){
 	//submit 버튼 클릭할 때 이벤트 부분
 	$("form").submit(function(){
 		
-		if($.trim($("#board_subject").val()) == ""){
-			alert("제목을 입력하세요");
-			$("#board_subject").focus();
+		if($.trim($("#FILE_SUBJECT").val()) == ""){
+			toastr.options.escapeHtml = true;
+			toastr.options.closeButton = true;
+			toastr.options.newestOnTop = false;
+			toastr.options.progressBar = true;
+			toastr.info('제목을 입력하세요', '자료실 게시판', {timeOut: 3000});
+
+			$("#FILE_SUBJECT").focus();
+			console.log($("#FILE_SUBJECT").val());
 			return false;
 		}
 		
-		if($.trim($("#board_name").val()) == ""){
-			alert("성함을 입력하세요");
-			$("#board_subject").focus();
+		
+			const name=$.trim($("#board_name").val());
+			
+		if($.trim($("#FILE_NAME").val())==""){
+			toastr.options.escapeHtml = true;
+			toastr.options.closeButton = true;
+			toastr.options.newestOnTop = false;
+			toastr.options.progressBar = true;
+			toastr.info('이름을 입력하세요', '자료실 게시판', {timeOut: 3000});
+
+			$("FILE_NAME").focus();
+			return false;	
+			}
+			
+		if(name.length >10){
+			toastr.options.escapeHtml = true;
+			toastr.options.closeButton = true;
+			toastr.options.newestOnTop = false;
+			toastr.options.progressBar = true;
+			toastr.info('이름의 최대 글자는 10글자입니다.', '자료실 게시판', {timeOut: 3000});
+
+			$("FILE_NAME").focus();
+			return false;
+		}
+		if($.trim($('#deptsel').text())== "부서"){
+			toastr.options.escapeHtml = true;
+			toastr.options.closeButton = true;
+			toastr.options.newestOnTop = false;
+			toastr.options.progressBar = true;
+			toastr.info('부서를 선택하세요', '자료실 게시판', {timeOut: 3000});
+
+			return false;
+			
+		} 
+		if($.trim($("#FILE_PASS").val()) == ""){
+			toastr.options.escapeHtml = true;
+			toastr.options.closeButton = true;
+			toastr.options.newestOnTop = false;
+			toastr.options.progressBar = true;
+			toastr.info('비밀번호를 입력하세요', '자료실 게시판', {timeOut: 3000});
+
+			$("#FILE_PASS").focus();
+			return false;
+		}
+
+		
+		if($.trim($("#summernote").val()) == ""){
+			toastr.options.escapeHtml = true;
+			toastr.options.closeButton = true;
+			toastr.options.newestOnTop = false;
+			toastr.options.progressBar = true;
+			toastr.info('내용을 입력하세요', '자료실 게시판', {timeOut: 3000});
+
+			$("#FILE_CONTENT").focus();
+			return false;
+		}
+		if($.trim($("#filevalue").text())==""){
+			toastr.options.escapeHtml = true;
+			toastr.options.closeButton = true;
+			toastr.options.newestOnTop = false;
+			toastr.options.progressBar = true;
+			toastr.info('자료실 게시판입니다. 하나 이상의 자료를 입력해주세요.', '자료실 게시판', {timeOut: 3000});
+
 			return false;
 		}
 		
-		if($.trim($("#board_pass").val()) == ""){
-			alert("비밀번호를 입력하세요");
-			$("#board_pass").focus();
-			return false;
-		}
-		
-		if($.trim($(".board_content").val()) == ""){
-			alert("내용을 입력하세요");
-			$(".board_content").focus();
-			return false;
-		}
 	});//submit end
 	
 });//ready() end
