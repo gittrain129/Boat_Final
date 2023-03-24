@@ -20,8 +20,8 @@ public class ConferenceReservationServiceImpl implements ConferenceReservationSe
 	  }
 	
 	@Override
-	 public List<ConferenceReservation> findAll() {
-		    return conferenceReservationMapper.findAll();
+	 public List<ConferenceReservation> getcal(String tab) {
+		    return conferenceReservationMapper.getcal(tab);
 		  }
 
 	@Override

@@ -1,4 +1,4 @@
-package com.boat.FileboService;
+package com.boat.Service.FileboService;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,13 +12,13 @@ import com.boat.domain.Filecomm;
 import com.boat.mybatis.mapper.FileComMapper;
 
 @Service
-public class FileComServiceImpl implements FileCommentService {
+public class CommentServiceImpl implements FileCommentService {
 	
 	private FileComMapper dao;
 	private LogAdvice log;
 	
 	@Autowired
-	public FileComServiceImpl(FileComMapper dao,LogAdvice log) {
+	public CommentServiceImpl(FileComMapper dao,LogAdvice log) {
 		this.dao = dao;
 		this.log = log;
 	}

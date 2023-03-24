@@ -1,39 +1,43 @@
 package com.boat.domain;
 
 public class ConferenceReservation {
-	 private int id;
-	  private String rental;
-	  private String start_time;
-	  private String end_time;
-	  private String content;
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getRental() {
-		return rental;
-	}
-	public void setRental(String rental) {
-		this.rental = rental;
-	}
-	public String getStart_time() {
-		return start_time;
-	}
-	public void setStart_time(String start_time) {
-		this.start_time = start_time;
-	}
-	public String getEnd_time() {
-		return end_time;
-	}
-	public void setEnd_time(String end_time) {
-		this.end_time = end_time;
-	}
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
+    private String ID;
+     private String RENTAL;
+     private String START_TIME;
+     private String END_TIME;
+     private String CONTENT;
+
+   
+   public String getID() {
+      return ID;
+   }
+   public void setID(String iD) {
+      ID = iD;
+   }
+   public String getRENTAL() {
+      return RENTAL;
+   }
+   public void setRENTAL(String rENTAL) {
+      RENTAL = rENTAL;
+   }
+   public String getSTART_TIME() {
+      return START_TIME;
+   }
+   public void setSTART_TIME(String sTART_TIME) {
+      START_TIME = sTART_TIME;
+   }
+   public String getEND_TIME() {
+      return END_TIME;
+   }
+   public void setEND_TIME(String eND_TIME) {
+      END_TIME = eND_TIME;
+   }
+
+   public String getCONTENT() {
+      return CONTENT;
+   }
+   public void setCONTENT(String cONTENT) {
+      CONTENT = cONTENT;
+   }     
+
 }

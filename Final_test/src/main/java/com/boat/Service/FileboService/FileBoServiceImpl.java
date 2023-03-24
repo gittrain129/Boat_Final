@@ -1,4 +1,4 @@
-package com.boat.FileboService;
+package com.boat.Service.FileboService;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +22,7 @@ public class FileBoServiceImpl implements FileBoService {
 	
 	@Override
 	public int getListCount() {
+		System.out.println("dao getlistcount 전");
 		return dao.getListCount();     
 	}
 

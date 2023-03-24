@@ -43,8 +43,8 @@
                     <img class="w-100" src="${pageContext.request.contextPath}/resources/img/carousel-2.jpg" alt="Image">
                     <div class="carousel-caption" style="height:630px;">
                         <div class="p-3" style="max-width: 900px;">
-                            <h4 class="text-white text-uppercase mb-4 animated zoomIn">We Are Leader In</h4>
-                            <h1 class="display-1 text-white mb-0 animated zoomIn">Creative & Innovative Digital Solution</h1>
+                            <h4 class="text-white text-uppercase mb-4 animated zoomIn">3-WORKS</h4>
+                            <h1 class="display-1 text-white mb-0 animated zoomIn">소통 협업 관리를 한 번에</h1>
                         </div>
                     </div>
                 </div>
@@ -52,8 +52,8 @@
                     <img class="w-100" src="${pageContext.request.contextPath}/resources/img/carousel-3.jpg" alt="Image">
                     <div class="carousel-caption" style="height:630px;">
                         <div class="p-3" style="max-width: 900px;">
-                            <h4 class="text-white text-uppercase mb-4 animated zoomIn">We Are Leader In</h4>
-                            <h1 class="display-1 text-white mb-0 animated zoomIn">Creative & Innovative Digital Solution</h1>
+                            <h4 class="text-white text-uppercase mb-4 animated zoomIn">BOAT</h4>
+                            <h1 class="display-1 text-white mb-0 animated zoomIn">실시간 업무공유 협업 툴</h1>
                         </div>
                     </div>
                 </div>
@@ -88,17 +88,17 @@
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="h-100">
                         <h6 class="section-title bg-white text-start text-primary pe-3">About Us</h6>
-                        <h1 class="display-6 mb-4">#1 Digital Solution With <span class="text-primary">10 Years</span> Of Experience</h1>
-                        <p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
-                        <p class="mb-4">Stet no et lorem dolor et diam, amet duo ut dolore vero eos. No stet est diam rebum amet diam ipsum. Clita clita labore, dolor duo nonumy clita sit at, sed sit sanctus dolor eos.</p>
+                        <h1 class="display-6 mb-4">실시간 업무공유 협업 툴  관리와 이용하는 <span class="text-primary">BOAT</span> 사이트 제작 </h1>
+                        <p>협업이라는 기본적인 내용에 충실하면서 필요한 정보를 확인하기 편하게 구성하여 업무효율을 높이는 것을 목표로 하는 툴 입니다.</p>
+                        <p class="mb-4">실제 협업툴에서 쓰이는 기능들을 베이스로 관리/유지/이용에 필요한 기능구현을 목표.  또 각각의 게시판에 기본적인 기능 외에도 가시성과 활용성을 높여줄 만한 기능들을 추가로 제공하는 것을 목표로 합니다. </p>
                         <div class="d-flex align-items-center mb-4 pb-2">
-                            <img class="flex-shrink-0 rounded-circle" src="img/team-1.jpg" alt="" style="width: 50px; height: 50px;">
+                            
                             <div class="ps-4">
-                                <h6>Jhon Doe</h6>
-                                <small>SEO & Founder</small>
+                                <h6>BOAT</h6>
+                                <small>ⓒCorporation company</small>
                             </div>
                         </div>
-                        <a class="btn btn-primary rounded-pill py-3 px-5" href="">Read More</a>
+                        <a class="btn btn-primary rounded-pill py-3 px-5" href="${pageContext.request.contextPath}/map">더보기</a>
                     </div>
                 </div>
             </div>
@@ -111,44 +111,43 @@
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                <h6 class="section-title bg-white text-center text-primary px-3">안녕하세요 admin님</h6>
-                <h1 class="display-6 mb-4">관리자 페이지</h1>
+                <h6 class="section-title bg-white text-center text-primary px-3">빠른 메뉴 가기</h6>
             </div>
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <a class="service-item d-block rounded text-center h-100 p-4" href="">
+                    <a class="service-item d-block rounded text-center h-100 p-4" href="${pageContext.request.contextPath}/map">
                         <img class="img-fluid rounded mb-4" src="img/service-1.jpg" alt="">
-                        <h4 class="mb-0">직원 상세</h4>
+                        <h4 class="mb-0">회사 소개</h4>
                     </a>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <a class="service-item d-block rounded text-center h-100 p-4" href="">
+                    <a class="service-item d-block rounded text-center h-100 p-4" href="${pageContext.request.contextPath}/Attendance/list">
                         <img class="img-fluid rounded mb-4" src="img/service-2.jpg" alt="">
-                        <h4 class="mb-0">회의실 예약 관리</h4>
+                        <h4 class="mb-0">근태 관리</h4>
                     </a>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <a class="service-item d-block rounded text-center h-100 p-4" href="">
+                    <a class="service-item d-block rounded text-center h-100 p-4" href="${pageContext.request.contextPath}/member/myboardList">
                         <img class="img-fluid rounded mb-4" src="img/service-3.jpg" alt="">
-                        <h4 class="mb-0">직원 근태관리</h4>
+                        <h4 class="mb-0">내 글 보기</h4>
                     </a>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <a class="service-item d-block rounded text-center h-100 p-4" href="">
+                    <a class="service-item d-block rounded text-center h-100 p-4" href="${pageContext.request.contextPath}/Todo/list">
                         <img class="img-fluid rounded mb-4" src="img/service-4.jpg" alt="">
-                        <h4 class="mb-0">직원 할일 보기</h4>
+                        <h4 class="mb-0">내 할일 보기</h4>
                     </a>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <a class="service-item d-block rounded text-center h-100 p-4" href="">
+                    <a class="service-item d-block rounded text-center h-100 p-4" href="${pageContext.request.contextPath}/board/List">
                         <img class="img-fluid rounded mb-4" src="img/service-5.jpg" alt="">
-                        <h4 class="mb-0">부서 관리</h4>
+                        <h4 class="mb-0">업무 게시판</h4>
                     </a>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <a class="service-item d-block rounded text-center h-100 p-4" href="">
+                    <a class="service-item d-block rounded text-center h-100 p-4" href="${pageContext.request.contextPath}/cal">
                         <img class="img-fluid rounded mb-4" src="img/service-6.jpg" alt="">
-                        <h4 class="mb-0">부서 캘린더</h4>
+                        <h4 class="mb-0">캘린더</h4>
                     </a>
                 </div>
             </div>
@@ -157,267 +156,13 @@
     <!-- Service End -->
 
 
-    <!-- Feature Start -->
-    <div class="container-xxl py-5">
-        <div class="container">
-            <div class="row g-5">
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="h-100">
-                        <h6 class="section-title bg-white text-start text-primary pe-3">Why Choose Us</h6>
-                        <h1 class="display-6 mb-4">Why People Trust Us? Learn About Us!</h1>
-                        <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
-                        <div class="row g-4">
-                            <div class="col-12">
-                                <div class="skill">
-                                    <div class="d-flex justify-content-between">
-                                        <p class="mb-2">Digital Marketing</p>
-                                        <p class="mb-2">85%</p>
-                                    </div>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="skill">
-                                    <div class="d-flex justify-content-between">
-                                        <p class="mb-2">SEO & Backlinks</p>
-                                        <p class="mb-2">90%</p>
-                                    </div>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="skill">
-                                    <div class="d-flex justify-content-between">
-                                        <p class="mb-2">Design & Development</p>
-                                        <p class="mb-2">95%</p>
-                                    </div>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="img-border">
-                        <img class="img-fluid" src="img/feature.jpg" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Feature End -->
-
-
-    <!-- Project Start -->
-    <div class="container-xxl py-5">
-        <div class="container">
-            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                <h6 class="section-title bg-white text-center text-primary px-3">Our Projects</h6>
-                <h1 class="display-6 mb-4">Learn More About Our Complete Projects</h1>
-            </div>
-            <div class="owl-carousel project-carousel wow fadeInUp" data-wow-delay="0.1s">
-                <div class="project-item border rounded h-100 p-4" data-dot="01">
-                    <div class="position-relative mb-4">
-                        <img class="img-fluid rounded" src="img/project-1.jpg" alt="">
-                        <a href="img/project-1.jpg" data-lightbox="project"><i class="fa fa-eye fa-2x"></i></a>
-                    </div>
-                    <h6>UI / UX Design</h6>
-                    <span>Digital agency website design and development</span>
-                </div>
-                <div class="project-item border rounded h-100 p-4" data-dot="02">
-                    <div class="position-relative mb-4">
-                        <img class="img-fluid rounded" src="img/project-2.jpg" alt="">
-                        <a href="img/project-2.jpg" data-lightbox="project"><i class="fa fa-eye fa-2x"></i></a>
-                    </div>
-                    <h6>UI / UX Design</h6>
-                    <span>Digital agency website design and development</span>
-                </div>
-                <div class="project-item border rounded h-100 p-4" data-dot="03">
-                    <div class="position-relative mb-4">
-                        <img class="img-fluid rounded" src="img/project-3.jpg" alt="">
-                        <a href="img/project-2.jpg" data-lightbox="project"><i class="fa fa-eye fa-2x"></i></a>
-                    </div>
-                    <h6>UI / UX Design</h6>
-                    <span>Digital agency website design and development</span>
-                </div>
-                <div class="project-item border rounded h-100 p-4" data-dot="04">
-                    <div class="position-relative mb-4">
-                        <img class="img-fluid rounded" src="img/project-4.jpg" alt="">
-                        <a href="img/project-4.jpg" data-lightbox="project"><i class="fa fa-eye fa-2x"></i></a>
-                    </div>
-                    <h6>UI / UX Design</h6>
-                    <span>Digital agency website design and development</span>
-                </div>
-                <div class="project-item border rounded h-100 p-4" data-dot="05">
-                    <div class="position-relative mb-4">
-                        <img class="img-fluid rounded" src="img/project-5.jpg" alt="">
-                        <a href="img/project-5.jpg" data-lightbox="project"><i class="fa fa-eye fa-2x"></i></a>
-                    </div>
-                    <h6>UI / UX Design</h6>
-                    <span>Digital agency website design and development</span>
-                </div>
-                <div class="project-item border rounded h-100 p-4" data-dot="06">
-                    <div class="position-relative mb-4">
-                        <img class="img-fluid rounded" src="img/project-6.jpg" alt="">
-                        <a href="img/project-6.jpg" data-lightbox="project"><i class="fa fa-eye fa-2x"></i></a>
-                    </div>
-                    <h6>UI / UX Design</h6>
-                    <span>Digital agency website design and development</span>
-                </div>
-                <div class="project-item border rounded h-100 p-4" data-dot="07">
-                    <div class="position-relative mb-4">
-                        <img class="img-fluid rounded" src="img/project-7.jpg" alt="">
-                        <a href="img/project-7.jpg" data-lightbox="project"><i class="fa fa-eye fa-2x"></i></a>
-                    </div>
-                    <h6>UI / UX Design</h6>
-                    <span>Digital agency website design and development</span>
-                </div>
-                <div class="project-item border rounded h-100 p-4" data-dot="08">
-                    <div class="position-relative mb-4">
-                        <img class="img-fluid rounded" src="img/project-8.jpg" alt="">
-                        <a href="img/project-8.jpg" data-lightbox="project"><i class="fa fa-eye fa-2x"></i></a>
-                    </div>
-                    <h6>UI / UX Design</h6>
-                    <span>Digital agency website design and development</span>
-                </div>
-                <div class="project-item border rounded h-100 p-4" data-dot="09">
-                    <div class="position-relative mb-4">
-                        <img class="img-fluid rounded" src="img/project-9.jpg" alt="">
-                        <a href="img/project-9.jpg" data-lightbox="project"><i class="fa fa-eye fa-2x"></i></a>
-                    </div>
-                    <h6>UI / UX Design</h6>
-                    <span>Digital agency website design and development</span>
-                </div>
-                <div class="project-item border rounded h-100 p-4" data-dot="10">
-                    <div class="position-relative mb-4">
-                        <img class="img-fluid rounded" src="img/project-10.jpg" alt="">
-                        <a href="img/project-10.jpg" data-lightbox="project"><i class="fa fa-eye fa-2x"></i></a>
-                    </div>
-                    <h6>UI / UX Design</h6>
-                    <span>Digital agency website design and development</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Project End -->
-
-
-    <!-- Team Start -->
-    <div class="container-xxl py-5">
-        <div class="container">
-            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                <h6 class="section-title bg-white text-center text-primary px-3">Our Team</h6>
-                <h1 class="display-6 mb-4">We Are A Creative Team For Your Dream Project</h1>
-            </div>
-            <div class="row g-4">
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="team-item text-center p-4">
-                        <img class="img-fluid border rounded-circle w-75 p-2 mb-4" src="img/team-1.jpg" alt="">
-                        <div class="team-text">
-                            <div class="team-title">
-                                <h5>Full Name</h5>
-                                <span>Designation</span>
-                            </div>
-                            <div class="team-social">
-                                <a class="btn btn-square btn-primary rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square btn-primary rounded-circle" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square btn-primary rounded-circle" href=""><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="team-item text-center p-4">
-                        <img class="img-fluid border rounded-circle w-75 p-2 mb-4" src="img/team-2.jpg" alt="">
-                        <div class="team-text">
-                            <div class="team-title">
-                                <h5>Full Name</h5>
-                                <span>Designation</span>
-                            </div>
-                            <div class="team-social">
-                                <a class="btn btn-square btn-primary rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square btn-primary rounded-circle" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square btn-primary rounded-circle" href=""><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="team-item text-center p-4">
-                        <img class="img-fluid border rounded-circle w-75 p-2 mb-4" src="img/team-3.jpg" alt="">
-                        <div class="team-text">
-                            <div class="team-title">
-                                <h5>Full Name</h5>
-                                <span>Designation</span>
-                            </div>
-                            <div class="team-social">
-                                <a class="btn btn-square btn-primary rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square btn-primary rounded-circle" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square btn-primary rounded-circle" href=""><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Team End -->
-
 
     <!-- Testimonial Start -->
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                <h6 class="section-title bg-white text-center text-primary px-3">Testimonial</h6>
-                <h1 class="display-6 mb-4">What Our Clients Say!</h1>
-            </div>
-            <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
-                <div class="testimonial-item bg-light rounded p-4">
-                    <div class="d-flex align-items-center mb-4">
-                        <img class="flex-shrink-0 rounded-circle border p-1" src="img/testimonial-1.jpg" alt="">
-                        <div class="ms-4">
-                            <h5 class="mb-1">Client Name</h5>
-                            <span>Profession</span>
-                        </div>
-                    </div>
-                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                </div>
-                <div class="testimonial-item bg-light rounded p-4">
-                    <div class="d-flex align-items-center mb-4">
-                        <img class="flex-shrink-0 rounded-circle border p-1" src="img/testimonial-2.jpg" alt="">
-                        <div class="ms-4">
-                            <h5 class="mb-1">Client Name</h5>
-                            <span>Profession</span>
-                        </div>
-                    </div>
-                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                </div>
-                <div class="testimonial-item bg-light rounded p-4">
-                    <div class="d-flex align-items-center mb-4">
-                        <img class="flex-shrink-0 rounded-circle border p-1" src="img/testimonial-3.jpg" alt="">
-                        <div class="ms-4">
-                            <h5 class="mb-1">Client Name</h5>
-                            <span>Profession</span>
-                        </div>
-                    </div>
-                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                </div>
-                <div class="testimonial-item bg-light rounded p-4">
-                    <div class="d-flex align-items-center mb-4">
-                        <img class="flex-shrink-0 rounded-circle border p-1" src="img/testimonial-4.jpg" alt="">
-                        <div class="ms-4">
-                            <h5 class="mb-1">Client Name</h5>
-                            <span>Profession</span>
-                        </div>
-                    </div>
-                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                </div>
+                <h6 class="section-title bg-white text-center text-primary px-3">BOAT</h6>
+                <h1 class="display-6 mb-4">Best Of A Trendy</h1>
             </div>
         </div>
     </div>

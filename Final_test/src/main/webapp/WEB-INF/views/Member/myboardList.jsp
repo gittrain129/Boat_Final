@@ -2,12 +2,28 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
  <head> 
-  <script src="${pageContext.request.contextPath}/ejYang/js/jquery-3.6.3.js"></script> 
-  <link href="${pageContext.request.contextPath}/ejYang/css/mylist.css" type="text/css" rel="stylesheet">
-  <jsp:include page="../Main/header.jsp" />
   <title>BOAT - 내 글 보기</title>
+  <link href="${pageContext.request.contextPath}/ejYang/css/mylist.css" type="text/css" rel="stylesheet">
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <jsp:include page="../Main/header.jsp" />
  </head>
  <body>
+ <!-- Page Header Start -->
+    <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container text-center py-5">
+            <h1 class="display-4 text-white animated slideInDown mb-3">내 글 보기</h1>
+            <nav aria-label="breadcrumb animated slideInDown">
+                <ol class="breadcrumb justify-content-center mb-0">
+                	<!-- 
+                    <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
+                    <li class="breadcrumb-item text-primary active" aria-current="page">Our Team</li>
+                     -->
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!-- Page Header End -->
 <section class="notice">
     <%-- 게시글이 있는 경우 --%>
     <c:if test="${listcount > 0 }">
@@ -157,7 +173,7 @@
     </c:if>
     
     <%-- 게시글이 없는 경우 --%>
- 	<c:if test="${listcount == 0 }">
+ 	<%-- <c:if test="${listcount == 0 }"> --%>
  		<div id="board-search">
         <div class="container">
         <h2>내 글 보기</h2>
@@ -187,7 +203,9 @@
         </div>
     </div>
  	<br><h3 style="text-align:center">등록된 글이 없습니다.</h3>
- 	</c:if>
+ 	<%-- </c:if> --%>
 </section>
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<jsp:include page="../Main/footer.jsp" />
  </body>
 </html>

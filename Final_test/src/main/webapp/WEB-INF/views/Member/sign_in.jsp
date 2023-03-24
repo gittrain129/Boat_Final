@@ -61,7 +61,7 @@
             <div class="findinfo">
             	<a href="id_check">아이디 찾기</a>
                 <a href="pwd_check">비밀번호 찾기</a>
-                <a href="/member/member_register.php?origin_site=https://www.gabia.com">회원 가입</a>
+                <a href="sign_up">회원 가입</a>
             </div>
 
           </form>

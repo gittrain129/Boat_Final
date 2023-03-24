@@ -28,8 +28,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.boat.FileboService.FileBoService;
-import com.boat.FileboService.FileCommentService;
+import com.boat.Service.FileboService.FileBoService;
+import com.boat.Service.FileboService.FileCommentService;
 import com.boat.domain.Filebo;
 import com.boat.domain.MySaveFoler;
   

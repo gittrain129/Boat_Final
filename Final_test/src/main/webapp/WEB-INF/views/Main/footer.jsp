@@ -12,10 +12,10 @@
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
-                    <h5 class="text-light mb-4">Address</h5>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
-                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
+                    <h5 class="text-light mb-4">주소</h5>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>서울 특별시 종로구 율곡로 10길 105 디아망 4층</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+02 345 6789</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>boat@gmail.com</p>
                     <div class="d-flex pt-2">
                         <a class="btn btn-square btn-outline-secondary rounded-circle me-1" href=""><i class="fab fa-twitter"></i></a>
                         <a class="btn btn-square btn-outline-secondary rounded-circle me-1" href=""><i class="fab fa-facebook-f"></i></a>
@@ -24,7 +24,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <h5 class="text-light mb-4">Quick Links</h5>
+                    <h5 class="text-light mb-4">관련링크</h5>
                     <a class="btn btn-link" href="">About Us</a>
                     <a class="btn btn-link" href="">Contact Us</a>
                     <a class="btn btn-link" href="">Our Services</a>
@@ -32,34 +32,34 @@
                     <a class="btn btn-link" href="">Support</a>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <h5 class="text-light mb-4">Gallery</h5>
+                    <h5 class="text-light mb-4">갤러리</h5>
                     <div class="row g-2">
                         <div class="col-4">
-                            <img class="img-fluid rounded" src="img/project-1.jpg" alt="Image">
+                            <img class="img-fluid rounded" src="${pageContext.request.contextPath}/resources/img/project-1.jpg" alt="Image">
                         </div>
                         <div class="col-4">
-                            <img class="img-fluid rounded" src="img/project-2.jpg" alt="Image">
+                            <img class="img-fluid rounded" src="${pageContext.request.contextPath}/resources/img/project-2.jpg" alt="Image">
                         </div>
                         <div class="col-4">
-                            <img class="img-fluid rounded" src="img/project-3.jpg" alt="Image">
+                            <img class="img-fluid rounded" src="${pageContext.request.contextPath}/resources/img/project-3.jpg" alt="Image">
                         </div>
                         <div class="col-4">
-                            <img class="img-fluid rounded" src="img/project-4.jpg" alt="Image">
+                            <img class="img-fluid rounded" src="${pageContext.request.contextPath}/resources/img/project-4.jpg" alt="Image">
                         </div>
                         <div class="col-4">
-                            <img class="img-fluid rounded" src="img/project-5.jpg" alt="Image">
+                            <img class="img-fluid rounded" src="${pageContext.request.contextPath}/resources/img/project-5.jpg" alt="Image">
                         </div>
                         <div class="col-4">
-                            <img class="img-fluid rounded" src="img/project-6.jpg" alt="Image">
+                            <img class="img-fluid rounded" src="${pageContext.request.contextPath}/resources/img/project-6.jpg" alt="Image">
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <h5 class="text-light mb-4">Newsletter</h5>
-                    <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                    <h5 class="text-light mb-4">뉴스레터</h5>
+                    <p>회사에 관한 뉴스정보를 원하시면 아래 이메일 주소를 입력해주세요.</p>
                     <div class="position-relative mx-auto" style="max-width: 400px;">
                         <input class="form-control bg-transparent border-secondary w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
-                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">구독</button>
                     </div>
                 </div>
             </div>
@@ -68,12 +68,12 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        &copy; <a href="#">Your Site Name</a>, All Right Reserved.
+                        &copy; <a href="#">BOAT</a>, All Right Reserved.
                     </div>
                     <div class="col-md-6 text-center text-md-end">
                         <!--/*** This template is free as long as you keep the footer author��s credit link/attribution link/backlink. If you'd like to use the template without the footer author��s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                        Designed By <a href="https://htmlcodex.com">HTML Codex</a>
-                        <br>Distributed By: <a class="border-bottom" href="https://themewagon.com" target="_blank">ThemeWagon</a>
+                        Designed By <a href="https://htmlcodex.com">Boat Codex</a>
+                        <br>Distributed By: <a class="border-bottom" href="https://themewagon.com" target="_blank">Boat</a>
                     </div>
                 </div>
             </div>

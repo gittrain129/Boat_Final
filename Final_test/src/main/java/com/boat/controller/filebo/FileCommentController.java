@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.boat.FileboService.FileCommentService;
+import com.boat.Service.FileboService.FileCommentService;
 import com.boat.domain.Filecomm;
 
 //@Controller+@ResponseBody
