@@ -1,10 +1,10 @@
 package com.boat.mybatis.mapper;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+
+import com.boat.domain.Member;
 
 @Mapper
 public interface MemberMapper {
@@ -14,4 +14,7 @@ public interface MemberMapper {
 	public void setNaverConnection(Map<String, Object> apiJson);
 
 	public Map<String, Object> userNaverLoginPro(Map<String, Object> apiJson);
+	
+	//사원번호 생성
+	public Member isEmpno(String selectempno);
 }

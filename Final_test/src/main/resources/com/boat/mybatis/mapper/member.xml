@@ -16,4 +16,13 @@
 		UPDATE MEMBER SET NAVERLOGIN = #{id} WHERE EMAIL = #{email}
 	</update>
 
+	<!-- 사원번호 생성하기 위해 조회 -->
+	<select id="isEmpno" resultType="member">
+		SELECT * FROM MEMBER(
+			SELECT * FROM MEMBER
+			WHERE EMPNO = #{selectempno}
+			ORDER BY REGISTER_DATE DESC)
+		WHERE ROWNUM = 1
+	</select>
+
 </mapper>

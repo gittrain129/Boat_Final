@@ -13,5 +13,8 @@ public interface MemberService {
 	//네이버 로그인
 	public Map<String, Object> userNaverLoginPro(Map<String, Object> apiJson);
 
+	//사원번호 생성
+	public int isEmpno(String select);
+
 
 }
