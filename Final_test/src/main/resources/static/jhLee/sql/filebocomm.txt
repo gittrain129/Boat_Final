@@ -1,17 +1,23 @@
 drop table Filecomm cascade constraints purge;
 
+COL F_C_NUM FORMAT A20
+COL F_C_ID FORMAT A20
+COL F_COMMENT_DATE FORMAT A20
+COL F_BO_NUM FORMAT A20
+COL F_COMMENT_RE_LEV FORMAT A20
+COL F_COMMENT_RE_SEQ FORMAT A20
+COL F_COMMENT_RE_REF FORMAT A20
 
-create sequence filecom nocache;
-
-drop sequence filecom;
-
-select * from FILE_COMMENT;
-
-
+ COL Null?  FORMAT A20  
+ COL Type  FORMAT A20  
 create table Filecomm (
 F_C_NUM number primary key,
 F_C_ID varchar2(30) references member(empno),
 F_CONTENT varchar2(200),
 F_COMMENT_DATE date,
 F_BO_NUM NUMBER references file_board(FILE_NUM) on delete cascade,
+F_COMMENT_RE_LEV number(5),
+F_COMMENT_RE_SEQ number(5),
+F_COMMENT_RE_REF number(5)
 );
+

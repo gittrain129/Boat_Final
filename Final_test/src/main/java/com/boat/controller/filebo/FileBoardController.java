@@ -101,22 +101,46 @@ import com.boat.domain.MySaveFoler;
 		  			HttpServletRequest request) throws Exception {
 	  
 		  MultipartFile uploadfile = board.getUploadfile();
+		  MultipartFile uploadfile2 = board.getUploadfile2();
 		  
 		  if(!uploadfile.isEmpty()) {
-			  String fileName =
-		  uploadfile.getOriginalFilename();//원래 파일명
-			  logger.info("있니?"+uploadfile.getOriginalFilename());//원래 파일명
+			  String fileName = uploadfile.getOriginalFilename();//원래 파일명
+			 
+			  logger.info("있니?uploadfile1="+uploadfile.getOriginalFilename());//원래 파일명
+			  
 			  //==> 있음
 		  board.setFILE_ORIGINAL(fileName);//원래 파일명 저장
+
 		  
 		  
 		  String saveFolder= mysavefolder.getSavefolder();
 		  String fileDBName = fileDBName(fileName, saveFolder);//update에서도 쓸예정입니다.
+		  
 		  logger.info("fileDBName= "+fileDBName);
 		  
+		  
 		  //transferTo(File path) : 업로드한 파일을 매개변수의 경로에 저장합니다.
-		  uploadfile.transferTo(new File(saveFolder + fileDBName)); logger.info("transferTo path ="  +saveFolder+fileDBName); //바뀐 파일명으로 저장 
-		  board.setFILE_FILE(fileDBName); }
+		  uploadfile.transferTo(new File(saveFolder + fileDBName));
+		  logger.info("transferTo path ="  +saveFolder+fileDBName); //바뀐 파일명으로 저장 
+		   
+		  board.setFILE_FILE(fileDBName); 
+		   logger.info("왜 널이뜨는지 보자고"+uploadfile2.getOriginalFilename());
+		   
+		  	if(!uploadfile2.isEmpty()) {
+		  		
+		  		
+		  		String fileName2 = uploadfile2.getOriginalFilename();//원래 파일명
+		  		logger.info("있니?uploadfile2="+uploadfile2.getOriginalFilename());//원래 파일명
+				board.setFILE_ORIGINAL2(fileName2);//원래 파일명 저장
+				String fileDBName2 = fileDBName(fileName2, saveFolder);//update에서도 쓸예정입니다.
+				logger.info("fileDBName2= "+fileDBName2);
+				uploadfile2.transferTo(new File(saveFolder + fileDBName2)); 
+				logger.info("uploadfile2 transferTo path ="  +saveFolder+fileDBName2); //바뀐 파일명으로 저장
+				board.setFILE_FILE2(fileDBName2);
+				  
+		  	}
+		  	
+		  }
 		  
 		  boardService.insertBoard(board);//저장메서드 호출
 		  logger.info(board.toString());//selectKey로 정의한 BOARD_NUM값 확인해 봅니다. 

@@ -30,6 +30,7 @@ public class Filebo {
 	private String FIlE_EMPNO;
 	
 	private MultipartFile uploadfile;
+	private MultipartFile uploadfile2;
 	
 	private String FILE_ORIGINAL;//첨부될파일의이름
 	private String FILE_ORIGINAL2;//첨부될파일의이름
