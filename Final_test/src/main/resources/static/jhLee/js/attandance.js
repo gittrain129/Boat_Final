@@ -24,28 +24,30 @@ $(function(){
 moment.locale('ko');
 var currenttime= moment().format('YYYY-MM-DD HH:mm');
 //출근시간 :2023-03-23 15:38
-
+var resulttime= moment().format('MM-DD HH:mm');
+console.log("resulttime : "+resulttime)
 $(".empno").val($("#loginid").text());
 
 $('#start-btn').click(function(){
-  
-var val =$('#on').val(currenttime);
-var empno = $('#loginid').text();
-
-
-console.log("출근시간="+currenttime);
-
-if($(this).hasClass("btn")){
-        console.log("??? ");
-$(this).addClass('c-btn')       
-        .removeClass('btn');
-        //하얗게
-$('#end-btn').addClass('btn')       
-        .removeClass('c-btn');
-        //파랗게
         
-    }
-    
+        var val =$('#on').val(currenttime);
+        var empno = $('#loginid').text();
+
+        $('#result-box').children('div:eq(0)').text('시작 :'+ currenttime);
+
+        console.log("출근시간="+currenttime);
+
+        if($(this).hasClass("btn")){
+                        console.log("??? ");
+                $(this).addClass('c-btn')       
+                        .removeClass('btn');
+                        //하얗게
+                $('#end-btn').addClass('btn')       
+                        .removeClass('c-btn');
+                        //파랗게
+                
+        }
+        
 })
 
 
@@ -55,6 +57,7 @@ var val =$('#off').val(currenttime);
 $('#off').val(currenttime);
 console.log("퇴근시간="+currenttime);
 
+$('#result-box').children('div:eq(1)').text('종료 :'+currenttime);
 if($(this).hasClass("btn")){
 $(this).addClass('c-btn')
         .removeClass('btn');       

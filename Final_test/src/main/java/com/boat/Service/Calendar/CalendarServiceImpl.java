@@ -1,4 +1,4 @@
-package com.boat.Service.Attandance;
+package com.boat.Service.Calendar;
 
 import java.util.HashMap;
 import java.util.List;
@@ -11,13 +11,13 @@ import com.boat.domain.Attandance;
 import com.boat.mybatis.mapper.AttandanceMapper;
 
 @Service
-public class AttandanceServiceImpl implements AttandanceService {
+public class CalendarServiceImpl implements CalendarService {
 	
 	private AttandanceMapper dao;
 	private LogAdvice log;
 	
 	@Autowired
-	public AttandanceServiceImpl(AttandanceMapper dao,LogAdvice log) {
+	public CalendarServiceImpl(AttandanceMapper dao,LogAdvice log) {
 		this.dao = dao;
 		this.log = log;
 	}

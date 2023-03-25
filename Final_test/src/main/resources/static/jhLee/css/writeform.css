@@ -69,6 +69,12 @@ input{width : 80%;
     width : 20%;
     float: left;
 }
+#deptdrop{
+display : inline;
+height : 20px;
+	
+}
+
 .btn-group2{
   text-align :center;
 }
