@@ -1,11 +1,11 @@
-package com.boat.Service.Attandance;
+package com.boat.Service.Calendar;
 
 import java.util.List;
 
 import com.boat.domain.Attandance;
 
 
-public interface AttandanceService { 
+public interface CalendarService { 
 	
 	//출근 시간 저장
 	public void AttOn(String on, String empno);

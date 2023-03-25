@@ -4,8 +4,21 @@
   
   <mapper namespace="com.boat.mybatis.mapper.AttandanceMapper">
   
-<insert id="AttOn">
-insert into attandance (empno, on_time) values(#{empno},#{on})
-</insert>
-  
+		<select id="getAttList" resultType = 'Attandance'>
+		select * from attandance
+		<!--
+		개인 회원 전용
+		select * from attandance where empno = #{empno}
+		
+		admin 전용
+		select * from attandance where dept = #{dept}
+		  -->
+		</select>
+		
+		<insert id="AttOn">
+		insert into attandance (empno, on_time) values(#{empno},#{on})
+		</insert>
+		  
+		  
+		  
   </mapper>

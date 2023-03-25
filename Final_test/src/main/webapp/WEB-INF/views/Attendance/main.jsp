@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
@@ -79,8 +80,8 @@
             
             </div>
             <div id="result-box">
-                <div>시작: ${todayWork.start}</div>
-                <div>종료: ${todayWork.end}</div>
+                <div>시작: </div>
+                <div>종료: </div>
             </div>
         </div>
         <div id="work-week" class="box">
@@ -131,14 +132,14 @@
                         <p>추가근무시간</p>
                         <p>총 근무시간</p>
                     </div>
-                        <c:forEach items="${voList}" var="x">
+                        <c:forEach items="${listcount}" var="x">
                             <div class="list-item">
-                                <p>${x.workDay}</p>
-                                <p>${x.name}</p>
-                                <p>${x.start}</p>
-                                <p>${x.end}</p>
-                                <p>${x.workoverTime}</p>
-                                <p>${x.workTime}</p>
+                                <p>${fn:substring(x.ON_TIME,5,10)}</p>
+                                <p></p>
+                                <p>${fn:substring(x.ON_TIME,11,16)}</p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
                             </div>
                         </c:forEach>
                 </div>
