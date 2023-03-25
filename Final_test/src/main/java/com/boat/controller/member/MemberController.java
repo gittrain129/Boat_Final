@@ -1,9 +1,11 @@
 package com.boat.controller.member;
 
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -49,6 +51,18 @@ public class MemberController {
 		model.addAttribute("email", email);
 		return "/Member/joinForm";
 	}
+	
+	//사원번호 생성
+	@RequestMapping(value = "/idcheck", method = RequestMethod.GET)
+	public void join(@RequestParam("select") String select, HttpServletResponse response) throws Exception {
+		
+		int empno = memberservice.isEmpno(select);
+		
+	}
+	
+	
+	
+	
 	
 	//네이버 회원가입 => 정보 작성폼
 	@RequestMapping(value = "/naverlogin", method = {RequestMethod.GET, RequestMethod.POST})

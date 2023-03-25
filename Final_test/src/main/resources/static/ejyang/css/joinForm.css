@@ -45,13 +45,12 @@
 	}
 	.head  {
 	    font-size: 16px;
-	    font-weight: bold;
+	    color: black;
 	}
 	._input {
 	    height: 60px;
 	    width: 100%;
 	    font-size: 1rem;
-	    font-weight: bold;
 	    border: none;
 	    outline: none;
 	    border-bottom: 1px solid #cdcdcd;
@@ -60,7 +59,7 @@
 	    font-size: 16px;
 	    display: inline-flex;
 	    align-items: center;
-	    cursor: pointer;
+	    color: black;
 	}
 	._checkbox {
 	    width: 18px;
@@ -127,12 +126,27 @@
 .head + .body {
 	margin-bottom: 5px;
 }
-
 .head + .body select {
 	height: 50px;
 	border: none;
 	border-bottom: 1px solid #cdcdcd;
-	outline: none;
 	border-radius: 0px;
+	padding-left: 2px;
 }
 
+.body select:focus {
+	outline: none;
+	border-color: #009CFF;
+	box-shadow: none;
+}
+
+/* disabled 의사 클래스를 이용해 비활성화 상태의 버튼 스타일 설정 */
+#form-controls button:disabled {
+  color: #ccc;
+  background-color: #f2f4f7;
+  border: none;
+}
+
+.invalid-feedback {
+	padding-left: 180px;
+}

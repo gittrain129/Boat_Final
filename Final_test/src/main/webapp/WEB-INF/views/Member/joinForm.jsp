@@ -4,15 +4,11 @@
 <html>
  <head>
  	<title>BOAT - 회원가입</title>
+ 	<jsp:include page="../Main/headertag.jsp"/>
  	<link href="${pageContext.request.contextPath}/resources/ejyang/css/joinForm.css" type="text/css" rel="stylesheet">
  	<script src="http://code.jquery.com/jquery-latest.js"></script>
  	<script src="${pageContext.request.contextPath}/resources/ejyang/js/joinForm.js"></script>
- 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
- 	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-	
-	<!-- Customized Bootstrap Stylesheet -->
-    <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+ 	
     <style>
 		@font-face {
 		    font-family: 'Pretendard-Regular';
@@ -42,7 +38,6 @@
 		}
 		*{
 			 font-family: 'S-CoreDream-3Light';
-			 font-weight : 700!important;
 		}
 		
 		/*전체 폰트*/
@@ -58,10 +53,10 @@
                 
   
   <div id="w-contents" class="container join_2022_wrap">
-    <form class="join_2022_box" name="member">
-        <h2 class="page_title">회원가입</h2>
+    <form class="join_2022_box" name="joinform" action="joinProcess" method="post">
+        <h2 class="page_title fw-bold">회원가입</h2>
         <div class="login_info_wrap">
-            <h3 class="sub_title">로그인 정보</h3>
+            <h3 class="sub_title fs-5 text fw-bold">로그인 정보</h3>
             <!-- 사진 -->
             <div class="profile">
             	<button class="bF7skra2CCu8uPGJJ3Jw" style="background-image: url(../img/ano.png); background-size: cover;">
@@ -76,85 +71,81 @@
             <!-- 입력 -->
             <!-- 부서명 -->
             <div class="row row-container align-items-center">
-                <div class="head col-sm-12 col-md-3">부서명</div>
+                <div class="head col-sm-12 col-md-3 fw-bold">부서명</div>
                 
                 <div class="body col-sm-12 col-md-9">
-	                <select class="col-sm-12 col-md-9 form-select" aria-label="Default select example">
-					  <option selected>Open this select menu</option>
-					  <option value="1">One</option>
-					  <option value="2">Two</option>
-					  <option value="3">Three</option>
+	                <select class="col-sm-12 col-md-9 form-select" aria-label="Default select example" name="select" required>
+					  <option selected>부서명을 선택해 주세요</option>
+					  <option value="1">홍보팀</option>
+					  <option value="2">개발팀</option>
+					  <option value="3">인사팀</option>
+					  <option value="4">기획팀</option>
+					  <option value="5">영업팀</option>
 					</select>
                 </div>
-                <p class="warning-sign warning_message color-orange" id="valid_check_msg_uid" style="display:none;"></p>
-                <!-- <span class="warning_message color-orange">영문 또는 숫자 6 ~16자리로 입력해 주세요</span> -->
+                <div id="validationServerUsernameFeedback" class="invalid-feedback fw-bold">
+			        부서명을 선택해 주세요
+			    </div>
             </div>
             
             <!-- 사원번호 -->
             <div class="row row-container align-items-center">
-                <div class="head col-sm-12 col-md-3">사원번호</div>
+                <div class="head col-sm-12 col-md-3 fw-bold">사원번호</div>
                 <div class="body col-sm-12 col-md-9">
-                    <input type="text" name="user_id" onblur="valid_check_id()" placeholder="6~16자 / 영문 소문자, 숫자 사용 가능" class="input-id _input" id="_label-id">
-                    <span id="user_id_alert_icons">
-						<img class="icon_check icon_input" src="https://static.gabia.com/responsive/assets/images/accounts/ico_check.svg" alt="" style="display:none;">
-					</span>
+                    <input type="text" name="user_empno" placeholder="부서명을 선택하면 사원번호가 자동 생성됩니다" class="input-empno _input" id="_label-id" readOnly required>
                 </div>
-                <p class="warning-sign warning_message color-orange" id="valid_check_msg_uid" style="display:none;"></p>
-                <!-- <span class="warning_message color-orange">영문 또는 숫자 6 ~16자리로 입력해 주세요</span> -->
+                <div id="validationServerUsernameFeedback2" class="invalid-feedback fw-bold">
+			        부서명을 선택해 주세요
+			    </div>
             </div>
             
             <!-- 비번 -->
             <div class="row row-container align-items-center">
-                <div class="head col-sm-12 col-md-3">비밀번호
+                <div class="head col-sm-12 col-md-3 fw-bold">비밀번호
                 </div>
                 <div class="body col-sm-12 col-md-9">
-                    <input type="password" name="user_pwd1" class="_input" onblur="make_pwd_input_valid(1)" autocomplete="off" placeholder="8~16자 / 문자, 숫자, 특수 문자 모두 혼용" id="_label-pwd">
+                    <input type="password" name="user_pwd1" class="_input" autocomplete="off" placeholder="6~16자 / 문자, 숫자, 특수 문자 모두 혼용 가능"
+                    	    id="_label-pwd" maxlength="16" required>
                 	<i class= "fa fa-solid fa-eye-slash" ></i>
                 </div>
-                <p class="warning-sign warning_message color-orange" id="valid_check_msg_pwd" style="display:none; width:100%"></p>
-                <div class="safety_indicator_wrap" id="safety_indicator_pwd" style="display: none;">
-                    <div class="indicator uppercase_lowercase">영문 대/소문자</div>
-                    <div class="indicator number">숫자</div>
-                    <div class="indicator special_character">특수문자</div>
-                </div>
+                <div id="validationServerUsernameFeedback3" class="invalid-feedback fw-bold">
+			        영문, 숫자, 특수 문자 6~16자리로 입력해 주세요
+			    </div>
             </div>
             
             <!-- 비번확인 -->
             <div class="row row-container align-items-center">
-                <div class="head col-sm-12 col-md-3">비밀번호 확인</div>
+                <div class="head col-sm-12 col-md-3 fw-bold">비밀번호 확인</div>
                 <div class="body col-sm-12 col-md-9">
-                    <!-- [D]input에 유효한 값이 들어있지 않다면 error_border 클래스 추가 -->
-                    <!-- [D]input에 유효한 값이면 success_border 클래스 추가 -->
-                    <input type="password" name="user_pwd2" onblur="make_pwd_input_valid(2)" autocomplete="off" placeholder="비밀번호를 다시 입력해 주세요" id="_label-pwd-ck" class="_input">
+                    <input type="password" name="user_pwd2" onblur="make_pwd_input_valid(2)" autocomplete="off" placeholder="비밀번호를 다시 입력해 주세요" 
+                    	   id="_label-pwd-ck" class="_input" maxlength="16" required>
                 	<i class= "fa fa-solid fa-eye-slash" ></i>
                 </div>
-                <p class="warning-sign warning_message color-orange" id="valid_check_msg_pwd_re" style="display:none;"></p>
+                <div id="validationServerUsernameFeedback4" class="invalid-feedback fw-bold">
+			        비밀번호와 동일하게 입력해 주세요
+			    </div>
             </div>
             
             <!-- 이름 -->
             <div class="row row-container align-items-center">
-                <div class="head col-sm-12 col-md-3">이름</div>
+                <div class="head col-sm-12 col-md-3 fw-bold">이름</div>
                 <div class="body col-sm-12 col-md-9">
-                    <input type="text" name="user_id" onblur="valid_check_id()" placeholder="6~16자 / 영문 소문자, 숫자 사용 가능" class="input-id _input" id="_label-id">
-                    <span id="user_id_alert_icons">
-						<img class="icon_check icon_input" src="https://static.gabia.com/responsive/assets/images/accounts/ico_check.svg" alt="" style="display:none;">
-					</span>
+                    <input type="text" name="user_name" placeholder="이름을 입력해 주세요" class="input-id _input" id="_label-name" required>
                 </div>
-                <p class="warning-sign warning_message color-orange" id="valid_check_msg_uid" style="display:none;"></p>
-                <!-- <span class="warning_message color-orange">영문 또는 숫자 6 ~16자리로 입력해 주세요</span> -->
+                <div id="validationServerUsernameFeedback5" class="invalid-feedback fw-bold">
+			        이름을 입력해 주세요
+			    </div>
             </div>
             
             <!-- 메일 -->
             <div class="row row-container align-items-center">
-                <div class="head col-sm-12 col-md-3">메일</div>
+                <div class="head col-sm-12 col-md-3 fw-bold">메일</div>
                 <div class="body col-sm-12 col-md-9">
-                    <input type="email" name="email" placeholder="이메일을 입력해주세요" class="_input" id="email" value="${email}">
-                    <span id="user_id_alert_icons">
-						<img class="icon_check icon_input" src="https://static.gabia.com/responsive/assets/images/accounts/ico_check.svg" alt="" style="display:none;">
-					</span>
+                    <input type="email" name="email" placeholder="이메일을 입력해주세요" class="_input" id="email" value="${email}" required readOnly>
                 </div>
-                <p class="warning-sign warning_message color-orange" id="valid_check_msg_uid" style="display:none;"></p>
-                <!-- <span class="warning_message color-orange">영문 또는 숫자 6 ~16자리로 입력해 주세요</span> -->
+                <div id="validationServerUsernameFeedback6" class="invalid-feedback fw-bold">
+			        이름을 입력해 주세요
+			    </div>
             </div>
             
             
@@ -163,29 +154,28 @@
 
         <!-- 가입 약관 동의 -->
         <div class="policy_agree_wrap">
-            <h3 class="sub_title">가입 약관 동의</h3>
+            <h3 class="sub_title fs-5 text mb-4 fw-bold">가입 약관 동의</h3>
             <div class="row row-container align-items-center">
                 <div class="col-sm-12">
-                    <label class="checkbox_wrap font-bold">
-                        <input id="agree_all" class="_checkbox" type="checkbox" onchange="all_allow(this)">
+                    <label class="checkbox_wrap mb-2 fw-bold" for="agree_all">
+	                    <input id="agree_all" class="_checkbox" type="checkbox">
                         모든 약관에 동의합니다.
                     </label>
                 </div>
             </div>
             <div class="row row-container align-items-center">
                 <div class="head col-sm-12 col-md-10">
-                    <label class="checkbox_wrap">
-                        <input id="agree_chk" class="_checkbox" type="checkbox" onchange="on_change_agree_checkbox()">
-                        가비아 이용 약관에 동의합니다.
-                        <span class="essential">(필수)</span>
+                    <label class="checkbox_wrap mb-2">
+                    	<input id="agree_chk" class="_checkbox" type="checkbox" required>
+                        가비아&nbsp; <a href="" data-bs-toggle="modal" data-bs-target="#Modal">이용 약관</a>   에 동의합니다.<span class="essential">(필수)</span>                    
                     </label>
                 </div>
             </div>
             <div class="row row-container align-items-center">
                 <div class="head col-sm-12 col-md-10">
-                    <label class="checkbox_wrap">
-                        <input id="agree_chk2" class="_checkbox" type="checkbox" onchange="on_change_agree_checkbox()">
-                        개인정보 수집 및 이용에 동의합니다.
+                    <label class="checkbox_wrap mb-2">
+                    	<input id="agree_chk2" class="_checkbox" type="checkbox" required>
+                    	<a href="" data-bs-toggle="modal" data-bs-target="#Modal2">개인정보 수집 및 이용에 동의합니다.</a>
                         <span class="essential">(필수)</span>
                     </label>
                 </div>
@@ -194,21 +184,77 @@
             <div id="marketingAgreeToggleLine" style="width: 100%; height: 1px; background-color: #e4e4e4; margin-top: 10px;">
                 </div>
             
-            <div class="w-list dot no_child">
+            <div class="w-list dot no_child mb-5">
                 <li>14세 미만은 회원 가입이 제한됩니다.</li>
             </div>
         </div>
         <!--  -->
 
         <div id="form-controls">
-        	<button type="submit"  class="btn-primary">로그인</button>
+        	<button type="submit"  class="btn-primary btn py-3 px-5 w-100 fw-bold fs-5 text" disabled>가입하기</button>
         </div>
         
+        
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	</form>
+        
+		
+		<!-- 이용약관 -->
+		<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-lg">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLabel">프로그래머스 개인정보 수집∙이용 동의</h5>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+		      	<h6><strong>제1장 총칙</strong></h6>
+	        	<p><br></p>
+	        	<p><strong>제1조 [목적]</strong></p>
+	        	<p>이 약관은 (주)3-works(이하 “회사”)이 운영하는 사이트에서 제공하는 “서비스”의 이용과 관련하여 “회사”와 “개인회원”간의 이용조건, 제반 절차, 회원의 권리, 의무 및 책임 사항, 기타 필요한 사항을 규정함을 목적으로 한다.<br>
+				<br></p>
+				<p><strong>제2조 [정의]</strong></p>
+				<p>본 약관에서 사용하는 용어의 정의는 다음과 같다.</p>
+				<p>① “사이트”라 함은 “회사”가 “개인회원”에게 서비스를 제공하기 위해 단말기(PC, TV, 휴대형 단말기 등의 각종 유무선 장치를 포함) 등 정보 통신 설비를 이용하여 재화 또는 용역을 거래할 수 있도록 설정한 가상의 영업장을 말하며, “회사”가 운영하는  웹사이트인 boat.co.kr 등이 이에 포함된다.</p>
+				<p>② “서비스”라 함은 “회사”의 “사이트”에서 “개인회원”에게 유∙무료로 제공하는 모든 서비스를 일컫는다. 개인정보 및 근태정보 서비스, 내가 작성한 글 조회 서비스, 개인일정을 등록하고 진행도를 확인하는 서비스, 사원들의 주소 정보 서비스, 실시간 채팅 콘텐츠, 개인이 등록한 자료를 관리하여 기업 정보를 제공하는 서비스, 게시판을 운영하고 관리하는 서비스 및 모든 부대 서비스를 의미한다.</p>
+				<p>③ “개인회원”이라 함은 “서비스”를 이용하기 위하여 동 약관에 동의하거나, 페이스북 등 연동된 서비스를 통해 “회사”와 이용 계약을 체결한 개인 회원을 말한다.</p>
+				<p>④ “ID”라 함은 “개인회원”의 식별과 “개인회원”의 “서비스” 이용을 위하여 가입 시 사용한 이메일 주소를 말한다.</p>
+				<p>⑤ “비밀번호”라 함은 “회사”의 "서비스"를 이용하려는 “개인회원”이 이용자 ID를 부여받은 자와 동일인임을 확인하고 회원의 권익을 보호하기 위하여 회원이 선정한 문자와 숫자의 조합을 말한다.<br>
+				<br></p>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+        
+        
+        
+		<!-- 개인정보 수집 -->
+		<div class="modal fade" id="Modal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-lg">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLabel">프로그래머스 개인정보 수집∙이용 동의</h5>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+		        <p class=""> 주식회사 그렙은 프로그래머스 서비스를 이용하는 귀하의 개인정보를 아래와 같이 수집∙이용합니다.<br> 자세한 내용은 프로그래머스 개인정보 처리방침에서 확인하실 수 있습니다. </p>
+	        	<div class="fw-bold">1. 수집하는 개인정보 항목 및 이용 목적</div>
+	        	<table class="table table-border">
+	        	<tr><th>수집 방법</th><th>수집 항목</th><th>수집 및 이용목적</th></tr><tr><td>회원가입</td><td>[필수] 성명,이메일(아이디),비밀번호,중복가입확인정보(DI) [선택] 성별,휴대폰 번호, 한 줄 소개, 홈페이지, 활동 지역,페이스북 등 외부 서비스와의 연동을 위해 이용자가 설정한 계정 정보</td><td>이용자 식별 및 본인확인, 회원가입 의사의 확인</td></tr><tr><td>교육서비스 이용</td><td>[필수] 성명,이메일,전화번호 [선택] 취업상태,Github 등 블로그/웹사이트 주소, 경력사항</td><td>교육서비스 운영 목적</td></tr><tr><td>채용서비스 이용</td><td>[필수] 성명,이메일,전화번호 [선택] Github 저장소, 블로그/웹사이트 주소, 희망 연봉, 간단 소개,업무 경험(회사 이름, 직무, 업무 시작일, 사용 스택, 상세 업무 및 성과),학력사항(학력,전공,학위,입학/졸업 일,학점),개인 프로젝트(프로젝트명,제작 연도, 설명, 팀, 사용 스택, 상세 업무 및 성과, 오픈 여부, 저장소),수상/자격증(수상/취득 내용, 수상/취득 년월), 출판/논문/특허(출판/논문/특허명, 고유번호,출판사,저자,발행 연월),활동(활동명,시작일),외국어(시험명,점수)</td><td>이력서 등록을 통한 입사지원 등 취업활동 서비스 제공, 각종 맞춤형 취업서비스 제공</td></tr><tr><td>서비스 이용 과정 또는 처리 과정에서 생성되는 정보</td><td>서비스 이용기록,쿠키,방문 기록, 불량 이용 기록, 접속 로그, 접속IP정보</td><td>이상행위 탐지 및 서비스 개선을 위한 분석, 서비스 이용 기록과 접속 빈도 분석</td></tr></table>
+	        	<div>2. 개인정보 보유 및 이용기간</div><p> 회사는 이용자의 개인정보를 고지 및 동의 받은 사항에 따라 수집∙이용 목적이 달성되기 전 또는 이용자의 탈퇴 시까지 해당 정보를 보유합니다. 다만, 타 법령에 따라 법령에서 규정한 기간동안 개인정보를 보관할 필요가 있는 경우 외부와 차단된 별도 DB 또는 테이블에 분리 보관 됩니다. </p>
+	        	<div>3. 개인정보 수집 및 이용 동의를 거부할 권리</div><p> 귀하는 위 정보에 대한 수집∙이용 동의를 거부할 수 있는 권리가 있으나, 이에 동의하지 않을 경우 프로그래머스 서비스 이용에 제한될 수 있습니다. </p>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+        
   </div>
 
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
   <script type="text/JavaScript" src="./my-script.js"></script>
   <jsp:include page="../Main/footer.jsp" />
+  <script>
+  	
+  </script>
  </body>
 </html>
