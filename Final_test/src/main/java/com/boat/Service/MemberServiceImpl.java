@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.boat.domain.Member;
 import com.boat.mybatis.mapper.MemberMapper;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
 public class MemberServiceImpl implements MemberService {
 
@@ -36,24 +38,23 @@ public class MemberServiceImpl implements MemberService {
 	//사원번호 생성
 	@Override
 	public int isEmpno(String select) {
-		String selectempno = "홍보팀";
-		if(select.equals("2"))
-			selectempno = "개발팀";
-		if(select.equals("3"))
-			selectempno = "인사팀";
-		if(select.equals("4"))
-			selectempno = "기획팀";
-		if(select.equals("5"))
-			selectempno = "영업팀";
 		
-		Member member = dao.isEmpno(selectempno);
+		System.out.println("selectempno"+select);
+		
+		Member member = dao.isEmpno(select);
 		int empno;
-		if(member == null)
-			empno = 0;
-		else
+		if(member != null && !(member.getEMPNO().equals("ADMIN")))
 			empno = Integer.parseInt(member.getEMPNO());
+		else
+			empno=0;
 		
 		return empno;
+	}
+
+	//회원가입 처리
+	@Override
+	public int insert(Member member) {
+		return dao.insert(member);
 	}
 
 	

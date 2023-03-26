@@ -11,7 +11,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Service;
 
 import com.boat.Service.FileboService.FileBoService;
-import com.boat.domain.MySaveFoler;
+import com.boat.domain.MySaveFolder;
 
 @Service
 @EnableScheduling
@@ -21,7 +21,7 @@ public class FileCheckTask {
 	private static final Logger logger = LoggerFactory.getLogger(FileCheckTask.class);
 
 	@Autowired
-	private MySaveFoler mysavefolder;//230313
+	private MySaveFolder mysavefolder;//230313
 	
 	@Autowired
 	private FileBoService boardservice;

@@ -1,5 +1,7 @@
 package com.boat.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Member {
 	private String EMPNO;
 	private String DEPT;
@@ -7,12 +9,30 @@ public class Member {
 	private String PASSWORD;
 	private String NAME;
 	private String EMAIL;
+	
+	//joinForm.jsp에서 name 속성 확인하세요.
+	//<input type="file" name="uploadfile" id="upfile" accept="image/.jpg, .jpeg, .png, .gif" hidden=""> 확인
+	private MultipartFile uploadfile;
+	
+	private String PROFILE_FILE;
 	private String PROFILE_IMG;
 	private String REGISTER_DATE;
-	private String AUTH;
+	private String AUTH="ROLE_MEMBER";
 	private String NAVERLOGIN;
 	
 	
+	public String getPROFILE_FILE() {
+		return PROFILE_FILE;
+	}
+	public void setPROFILE_FILE(String pROFILE_FILE) {
+		PROFILE_FILE = pROFILE_FILE;
+	}
+	public MultipartFile getUploadfile() {
+		return uploadfile;
+	}
+	public void setUploadfile(MultipartFile uploadfile) {
+		this.uploadfile = uploadfile;
+	}
 	public String getNAVERLOGIN() {
 		return NAVERLOGIN;
 	}

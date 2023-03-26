@@ -31,7 +31,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.boat.Service.FileboService.FileBoService;
 import com.boat.Service.FileboService.FileCommentService;
 import com.boat.domain.Filebo;
-import com.boat.domain.MySaveFoler;
+import com.boat.domain.MySaveFolder;
   
   @Controller
   @RequestMapping(value="/Filebo")
@@ -40,14 +40,14 @@ import com.boat.domain.MySaveFoler;
   private static final Logger logger =
   LoggerFactory.getLogger(FileBoardController.class);
   
-  private MySaveFoler mysavefolder;
+  private MySaveFolder mysavefolder;
   private FileBoService boardService;
   private FileCommentService commentService;
   
   
   @Autowired public FileBoardController(FileBoService boardService, 
 		  								FileCommentService commentService, 
-		  								MySaveFoler mysavefolder)  {
+		  								MySaveFolder mysavefolder)  {
 	  this.boardService = boardService;
 	  this.commentService = commentService;
 	  this.mysavefolder = mysavefolder; }

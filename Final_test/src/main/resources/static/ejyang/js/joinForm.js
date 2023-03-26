@@ -1,4 +1,16 @@
 $(document).ready(function(){
+	// 초기값은 모든 필드의 검사를 통과하지 않은 상태로 설정합니다
+	var agree_chk = false;
+	var agree_chk2 = false;
+	var valid_select = false;
+	var valid_empno = false;
+	var valid_password = false;
+	var valid_password_ck = false;
+	var valid_email = true;
+	var valid_name = false;
+	var valid_file = false;
+	
+	activateButton();
 	
 	//비밀번호 눈
     $('.fa-eye-slash').on('click',function(){
@@ -17,10 +29,16 @@ $(document).ready(function(){
     	if($(this).is(":checked") == true) {
 	    	$('#agree_chk').prop("checked", true);
 	    	$('#agree_chk2').prop("checked", true);
+	    	agree_chk = true;
+	    	agree_chk2 = true;
     	}else {
 	    	$('#agree_chk').prop("checked", false);
 	    	$('#agree_chk2').prop("checked", false);
+	    	agree_chk = false;
+	    	agree_chk2 = false;
     	}
+    		
+		activateButton();
     });
     $('#agree_chk').on('click',function(){
 	    if($('#agree_chk').is(":checked") == true && $('#agree_chk2').is(":checked") == true) {
@@ -28,6 +46,14 @@ $(document).ready(function(){
 	    }else{
 	    	$('#agree_all').prop("checked", false);
 	    }
+	    
+	    if($('#agree_chk').is(":checked") == true) {
+	    	 agree_chk = true;
+	    }else{
+	    	 agree_chk = false;
+	    }
+		
+		activateButton();
     });
     $('#agree_chk2').on('click',function(){
 	    if($('#agree_chk').is(":checked") == true && $('#agree_chk2').is(":checked") == true) {
@@ -35,6 +61,14 @@ $(document).ready(function(){
 	    }else{
 	    	$('#agree_all').prop("checked", false);
 	    }
+	    
+	    if($('#agree_chk2').is(":checked") == true) {
+	    	 agree_chk2 = true;
+	    }else{
+	    	 agree_chk2 = false;
+	    }
+		
+		activateButton();
     });
     
     //유효성 부서명
@@ -42,36 +76,68 @@ $(document).ready(function(){
     	if($(this).val() == '부서명을 선택해 주세요'){
 			$(this).addClass('border-danger ');
 			$('#validationServerUsernameFeedback').show();
+			 valid_select = false;
+			 valid_empno = false;
 		}else {	
 			$(this).removeClass('border-danger ');
 			$('#validationServerUsernameFeedback').hide();
+			 valid_select = true;
+			 valid_empno = true;
 		}
 		
 		
 		$.ajax({
  			url : "idcheck",
- 			data : {"select":select},
+ 			data : {"select":$(this).val()},
  			success : function(resp){
- 				if(resp == -1){//db에 해당 id가 없는 경우
- 					$("#message").css('color','green').html("사용 가능한 아이디 입니다.");
- 					checkid=true;
- 				}else{//db에 해당 id가 있는 경우(0)
- 					$("#message").css('color','blue').html("사용중인 아이디 입니다.");
- 					checkid=false;
+ 				let select = $(".form-select").val();
+ 				
+ 				let selectempno = 10;
+				if(select=="개발팀")
+					selectempno = 20;
+				if(select=="인사팀")
+					selectempno = 30;
+				if(select=="기획팀")
+					selectempno = 40;
+				if(select=="영업팀")
+					selectempno = 50;
+					
+ 				if(resp == 0){//db에 해당 id가 없는 경우
+ 					var today = new Date();
+ 					var year = today.getFullYear().toString().slice(-2);
+ 					console.log(year)
+ 					console.log("$(this).val()"+$(".form-select").val())
+ 					
+ 					var empno = year + selectempno + "001";
+ 					$('.input-empno').val(empno);
+ 					
+ 				}else{//db에 해당 id가 있는 경우
+ 					console.log("resp"+resp)
+ 					var empno = Number(resp) + 1;
+ 					console.log("empno"+empno)
+ 					$('.input-empno').val(empno);
  				}
  			}
  		});//ajax end
 		
+		activateButton();
 		
     });
     $('.form-select').focusout(function() {
 	    if($(this).val() == '부서명을 선택해 주세요'){
 			$(this).addClass('border-danger ');
 			$('#validationServerUsernameFeedback').show();
+			 valid_select = false;
+			 valid_empno = false;
+			 
 		}else {
 			$(this).removeClass('border-danger ');
 			$('#validationServerUsernameFeedback').hide();
+			 valid_select = true;
+			 valid_empno = true;
 		}
+		
+		activateButton();
 	});
 	
 	//유효성 사원번호
@@ -83,6 +149,7 @@ $(document).ready(function(){
 			$(this).removeClass('border-danger ');
 			$('#validationServerUsernameFeedback2').hide();
 		}
+		
     });
 	
 	//유효성 비밀번호
@@ -93,19 +160,27 @@ $(document).ready(function(){
 		if(pattern.test(pwd)){
 			$(this).removeClass('border-danger ');
 			$('#validationServerUsernameFeedback3').hide();
+			valid_password = true;
 		}else {	
 			$(this).addClass('border-danger ');
 			$('#validationServerUsernameFeedback3').show();
+			valid_password = false;
 		}
+		
+		activateButton();
     });
     $('#_label-pwd').focusout(function() {
-    	if($(this).val() == '' || $(this).val().length() < 6){
+    	if($(this).val() == '' || $(this).length() < 6){
 			$(this).addClass('border-danger ');
 			$('#validationServerUsernameFeedback3').show();
+			valid_password = false;
 		}else {	
 			$(this).removeClass('border-danger ');
 			$('#validationServerUsernameFeedback3').hide();
+			valid_password = true;
 		}
+		
+		activateButton();
     });
 	
 	//유효성 비밀번호 확인
@@ -115,19 +190,59 @@ $(document).ready(function(){
 		if(pwdck == $('#_label-pwd').val()){
 			$(this).removeClass('border-danger ');
 			$('#validationServerUsernameFeedback4').hide();
+			 valid_password_ck = true;
 		}else {	
 			$(this).addClass('border-danger ');
 			$('#validationServerUsernameFeedback4').show();
+			 valid_password_ck = false;
 		}
+		
+		activateButton();
     });
     $('#_label-pwd-ck').focusout(function() {
     	if($(this).val() == '' || $(this).val().length() < 6){
 			$(this).addClass('border-danger ');
 			$('#validationServerUsernameFeedback4').show();
+			 valid_password_ck = false;
 		}else {	
 			$(this).removeClass('border-danger ');
 			$('#validationServerUsernameFeedback4').hide();
+			 valid_password_ck = true;
 		}
+		
+		activateButton();
+    });
+	
+	//유효성 메일
+	$('#email').keyup(function() {
+		var pattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+		var email = $.trim($(this).val());
+		if(pattern.test(email)){
+			$(this).removeClass('border-danger ');
+			$('#validationServerUsernameFeedback6').hide();
+			 valid_email = true;
+		}else {	
+			$(this).addClass('border-danger ');
+			$('#validationServerUsernameFeedback6').show();
+			 valid_email = false;
+		}
+		
+		activateButton();
+	});
+	$('#email').focusout(function() {
+		var pattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+		var email = $.trim($(this).val());
+    	if($(this).val() == '' || !(pattern.test(email))){
+			$(this).addClass('border-danger ');
+			$('#validationServerUsernameFeedback6').show();
+			 valid_email = false;
+		}else {	
+			$(this).removeClass('border-danger ');
+			$('#validationServerUsernameFeedback6').hide();
+			 valid_email = true;
+		}
+		
+		activateButton();
     });
 	
 	//유효성 이름
@@ -135,26 +250,64 @@ $(document).ready(function(){
 		if($(this).val() == ''){
 			$(this).addClass('border-danger ');
 			$('#validationServerUsernameFeedback5').show();
+			 valid_name = false;
 		}else {	
 			$(this).removeClass('border-danger ');
 			$('#validationServerUsernameFeedback5').hide();
+			 valid_name = true;
 		}
+		
+		activateButton();
     });
     $('#_label-name').focusout(function() {
     	if($(this).val() == ''){
 			$(this).addClass('border-danger ');
 			$('#validationServerUsernameFeedback5').show();
+			 valid_name = false;
 		}else {	
 			$(this).removeClass('border-danger ');
 			$('#validationServerUsernameFeedback5').hide();
+			 valid_name = true;
 		}
+		
+		activateButton();
     });
-	element.classList.contains('이름');
+    
+    //사진 첨부
+    $("#upfile").on('change',function(){
+		const reader = new FileReader();
+		reader.readAsDataURL(event.target.files[0]);
+					
+		reader.onload = function() { //읽기에 성공했을 때 실행되는 이벤트 핸들러
+			$('.profile img').attr('src', this.result); 
+			$('.profile img').show();
+			$(".profile label").removeAttr("style");
+			$(".profile svg").hide();
+		};
+		
+			 valid_file = true;
+		activateButton();
+		
+	});
+    
 	//가입하기 버튼 활성화
-	if($('.form-select').val() != '' && $('.input-empno').val() != '' && $('#_label-pwd').val() != ''
-		&& $('#_label-pwd-ck').val() != '' && $('#_label-name').val() != '') {
-		$('.btn-primary').attr("disabled", false);
-	}
-    
-    
+	function activateButton() {
+		console.log("===================")
+		console.log("agree_chk"+agree_chk)
+		console.log("agree_chk2"+agree_chk2)
+		console.log("valid_select"+valid_select)
+		console.log("valid_empno"+valid_empno)
+		console.log("valid_password"+valid_password)
+		console.log("valid_password_ck"+valid_password_ck)
+		console.log("valid_email"+valid_email)
+		console.log("valid_name"+valid_name)
+		console.log("valid_file"+valid_file)
+	    if (agree_chk && agree_chk2 && valid_select && valid_empno && valid_password && valid_password_ck && valid_email && valid_name && valid_file) {
+	      $('button[type="submit"]').prop('disabled', false);
+	    } else {
+	      $('button[type="submit"]').prop('disabled', true);
+	    }
+	  }
 });
+
+
