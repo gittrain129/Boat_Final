@@ -329,6 +329,8 @@
        var endTime = $('#endTimeISO').val();
        var content = $('#content').val();
        var rental = $('#rental').val();
+       var start = $('#startTime').val();
+       var end = $('#endTime').val();
        
        console.log('confermain의 ajax중');
        console.log(startTime);
@@ -343,7 +345,9 @@
                "start_time": startTime,
                "end_time": endTime,
                "content": content,
-               "rental": rental
+               "rental": rental,
+               "start": start,
+               "end": end
            },
            success: function(response) {
                $('#res_Modal').modal('hide');

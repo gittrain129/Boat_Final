@@ -8,7 +8,11 @@ public interface ConferenceReservationService {
 
 	public List<ConferenceReservation> getcal(String tab);
 
-	  public void insert1(ConferenceReservation conferenceReservation);
+	public void insert1(ConferenceReservation conferenceReservation);
+
+	public List<ConferenceReservation> admit();
+
+	public int listcount();
 	
 	
 }
