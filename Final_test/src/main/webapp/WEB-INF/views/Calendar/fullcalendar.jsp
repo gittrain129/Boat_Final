@@ -348,47 +348,50 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      일정추가
+      일정
       <form action="add"	method = 'post'>
         <input type="text" class = "form-control" id = 'title'>
-       <div class="form-control">
-         <input
+       <div class="form-control" style="margin-top:15px" >
+         <input 
                     class=form-group
                     id="allday"
                     name=""
-                    type="checkbox"      />
-                  <label class="form-group">종일 여부</label>
+                    type="checkbox"     />
+                  <label class="form-group" >종일 여부</label>
 		</div>
 		
 		
-		<div class="cal_time" style ="display:none">
+		<div class="cal_time" style="margin-top:15px" >
 		 <label>일정 시작 시간: </label>
                     <div class="form-group">
                       <input
                         type="time"
                         name="scheTimeStart"
-                        class="form-control"
+                        class="form-control time"
                       />
                     </div>
                     
-                    <label>일정 종료 시간: </label>
-                    <div class="form-group">
+                    <label style="margin-top:15px" >일정 종료 시간: </label>
+                    <div class="form-group" >
                       <input
                         type="time"
                         name="scheTimeEnd"
-                        class="form-control"
+                        class="form-control time"
                       />
                     </div>
                 </div>
+                
                 <script>
-		if($('#allday').is(':checked')){
-			
-			$('.cal_time').css('display','block');
-		}
-		
+                $(document).ready(function(){
+					if($('#allday').is(':checked')){
+						console.log($('#allday').is(':checked'))
+						$('.time').attr('readonly',true);
+						
+					}
+                })
 		</script>
 		
-        <select class="form-control" id ="color">
+        <select class="form-control" id ="color" style="margin-top:25px;">
   			<option value ="pink" class="ad">홍보팀</option>
   			<option value ="orange" class = "devel">개발팀</option>
   			<option value ="lightgreen" class = "hire">인사팀</option>
