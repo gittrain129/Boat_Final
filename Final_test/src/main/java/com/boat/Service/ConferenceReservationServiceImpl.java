@@ -12,22 +12,32 @@ import com.boat.mybatis.mapper.ConferenceReservationMapper;
 public class ConferenceReservationServiceImpl implements ConferenceReservationService{
 
 	
-	  private ConferenceReservationMapper conferenceReservationMapper;
+	  private ConferenceReservationMapper c3;
 	  
 	  @Autowired
 	  public ConferenceReservationServiceImpl(ConferenceReservationMapper conferenceReservationMapper) {
-		  this.conferenceReservationMapper = conferenceReservationMapper;
+		  this.c3 = conferenceReservationMapper;
 	  }
 	
 	@Override
 	 public List<ConferenceReservation> getcal(String tab) {
-		    return conferenceReservationMapper.getcal(tab);
+		    return c3.getcal(tab);
 		  }
 
 	@Override
 	public void insert1(ConferenceReservation conferenceReservation) {
-		conferenceReservationMapper.insert1(conferenceReservation);
+		c3.insert1(conferenceReservation);
 		
+	}
+
+	@Override
+	public List<ConferenceReservation> admit() {
+		return c3.admit();
+	}
+
+	@Override
+	public int listcount() {
+		return c3.listcount();
 	}
 
 

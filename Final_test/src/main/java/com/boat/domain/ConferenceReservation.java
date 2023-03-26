@@ -6,6 +6,36 @@ public class ConferenceReservation {
      private String START_TIME;
      private String END_TIME;
      private String CONTENT;
+     private String START_T; //moment처리된 값
+     private String END_T;
+     private String STATE;//예약승인 처리여부
+     
+  
+	public String getSTATE() {
+		return STATE;
+	}
+	public void setSTATE(String sTATE) {
+		STATE = sTATE;
+	}
+	public String getSTART_T() {
+		return START_T;
+	}
+	public void setSTART_T(String sTART_T) {
+		START_T = sTART_T;
+	}
+	public String getEND_T() {
+		return END_T;
+	}
+	public void setEND_T(String eND_T) {
+		END_T = eND_T;
+	}
+	public String getEND() {
+		return END;
+	}
+	public void setEND(String eND) {
+		END = eND;
+	}
+	private String END;
 
    
    public String getID() {
@@ -38,6 +68,7 @@ public class ConferenceReservation {
    }
    public void setCONTENT(String cONTENT) {
       CONTENT = cONTENT;
-   }     
+   }
+  
 
 }

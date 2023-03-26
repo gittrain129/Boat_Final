@@ -12,4 +12,10 @@ public interface ConferenceReservationMapper {
 	 public List<ConferenceReservation> getcal(String tab);
 	 
 	 public void insert1(ConferenceReservation conferenceReservation);
+
+	public List<ConferenceReservation> admit();
+
+	public int listcount();
+
+	
 }

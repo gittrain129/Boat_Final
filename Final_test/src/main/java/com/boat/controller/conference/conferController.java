@@ -31,7 +31,10 @@ public class conferController {
    public String reserveConference(@RequestParam("rental") String rental,
 		   						   @RequestParam("start_time") String startTime,
                                    @RequestParam("end_time") String endTime,
-                                   @RequestParam("content") String content) {
+                                   @RequestParam("content") String content,
+                                   @RequestParam("start") String start,
+                                   @RequestParam("end") String end
+		   						) {
     
      
      ConferenceReservation c1 = new ConferenceReservation();
@@ -39,6 +42,8 @@ public class conferController {
      c1.setEND_TIME(endTime);
      c1.setCONTENT(content);
      c1.setRENTAL(rental);
+     c1.setSTART_T(start);
+     c1.setEND_T(end);
      co.insert1(c1);
      
      return "redirect:/confer/view";
@@ -100,7 +105,28 @@ public class conferController {
 		return cList;
 	}
    
-   
+    @RequestMapping(value="/admit")
+    public String confer_admit(@RequestParam(value="page",defaultValue="1",required=false) int page,
+    											Model model) {
+    	
+    	int limit = 8;
+    	int listcount= co.listcount();
+    	int maxpage = (listcount + limit - 1) / limit;
+		
+		int startpage = ((page-1) /8) *8 +1;
+		int endpage = startpage +8 -1;
+		
+		if(endpage>maxpage)
+			endpage=maxpage;
+		
+		List<ConferenceReservation> reservation = co.admit();
+		model.addAttribute("page",page);
+		model.addAttribute("startpage",startpage);
+		model.addAttribute("endpage",endpage);
+		model.addAttribute("maxpage",maxpage);
+        model.addAttribute("reservation", reservation);
+		return "/Conference_Res/conferAdmit";
+	}
    
    
 }

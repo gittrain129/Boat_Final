@@ -9,17 +9,25 @@
      where rental = #{RENTAL}
   </select>
   
-  
-
 
   <insert id = "insert1" parameterType = "ConferenceReservation">
      insert into CONFER_MAIN
-     (id,rental,start_time,end_time,content)
+     (id,rental,start_time,end_time,content,start_t,end_t)
      values
-     ('admin',#{RENTAL},#{START_TIME},#{END_TIME},#{CONTENT})
+     ('admin',#{RENTAL},#{START_TIME},#{END_TIME},#{CONTENT},#{START_T},#{END_T})
   
   
    </insert>
+  
+   <select id = "admit" resultType="ConferenceReservation" parameterType="java.util.Map">
+     select * from CONFER_MAIN
+     
+  </select>
+  
+  
+  <select id="listcount" resultType="int">
+		select count(*) from CONFER_MAIN
+	</select>
   
   
   </mapper>
