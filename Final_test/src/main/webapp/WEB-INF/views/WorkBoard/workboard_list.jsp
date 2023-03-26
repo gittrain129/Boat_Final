@@ -76,7 +76,7 @@
 						<th>카테고리</th>
 						<td>
 							<select name="likeLanguage" id="" class="pl">
-					            <option value="0" selected>카테고리</option>
+					            <option value="0" selected>선택해주세요</option>
 					            <option value="list">홍보팀</option>
 					            <option value="list">개발팀</option>
 					            <option value="list">인사팀</option>
@@ -109,7 +109,7 @@
 			
 		<div class="card">
 		  <div class="card-header">
-		    Reply Title
+		    제목
 		  </div>
 		  <div class="card-body">
 		    <div class="row">
@@ -117,8 +117,8 @@
 				  	<a href="#">
 				  		<img class="mr-3 rounded img-thumbnail" src="public/imgs/user.jpg" alt="Generic placeholder image">
 				  	</a>
-				  	<h6 class="mt-2"><a href="#">Username</a></h6>
-				  	<small class="text-muted">Moderator</small>
+				  	<h6 class="mt-2"><a href="#">아이디</a></h6>
+				  	<small class="text-muted">122309</small>
 				 </div>
 				  <div class="col-sm-9 border-left border-secondary">
 				    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
@@ -126,14 +126,14 @@
 			</div>
 		  </div>
 		  <div class="card-footer text-muted">
-		  	2 days ago
+		  	2일 전
 		  </div>
 		</div>
 		<hr class="border-danger mb-4 mt-4" />
 				
 		<div class="card">
 		  <div class="card-header">
-		    Reply Title
+		    제목
 		  </div>
 		  <div class="card-body">
 		    <div class="row">
@@ -141,8 +141,8 @@
 				  	<a href="#">
 				  		<img class="mr-3 rounded img-thumbnail" src="public/imgs/user.jpg" alt="Generic placeholder image">
 				  	</a>
-				  	<h6 class="mt-2"><a href="#">Username</a></h6>
-				  	<small class="text-muted">Moderator</small>
+				  	<h6 class="mt-2"><a href="#">아이디</a></h6>
+				  	<small class="text-muted">122309</small>
 				 </div>
 				  <div class="col-sm-9 border-left border-secondary">
 				    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
@@ -150,14 +150,14 @@
 			</div>
 		  </div>
 		  <div class="card-footer text-muted">
-		  	2 days ago
+		  	2일 전
 		  </div>
 		</div>
 		<hr class="border-danger mb-4 mt-4" />
 				
 		<div class="card">
 		  <div class="card-header">
-		    Reply Title
+		    제목
 		  </div>
 		  <div class="card-body">
 		    <div class="row">
@@ -165,8 +165,8 @@
 				  	<a href="#">
 				  		<img class="mr-3 rounded img-thumbnail" src="public/imgs/user.jpg" alt="Generic placeholder image">
 				  	</a>
-				  	<h6 class="mt-2"><a href="#">Username</a></h6>
-				  	<small class="text-muted">Moderator</small>
+				  	<h6 class="mt-2"><a href="#">아이디</a></h6>
+				  	<small class="text-muted">122309</small>
 				 </div>
 				  <div class="col-sm-9 border-left border-secondary">
 				    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
@@ -174,14 +174,14 @@
 			</div>
 		  </div>
 		  <div class="card-footer text-muted">
-		  	2 days ago
+		  	2일 전
 		  </div>
 		</div>
 		<hr class="border-danger mb-4 mt-4" />
 				
 		<div class="card">
 		  <div class="card-header">
-		    Reply Title
+		    제목
 		  </div>
 		  <div class="card-body">
 		    <div class="row">
@@ -189,8 +189,8 @@
 				  	<a href="#">
 				  		<img class="mr-3 rounded img-thumbnail" src="public/imgs/user.jpg" alt="Generic placeholder image">
 				  	</a>
-				  	<h6 class="mt-2"><a href="#">Username</a></h6>
-				  	<small class="text-muted">Moderator</small>
+				  	<h6 class="mt-2"><a href="#">아이디</a></h6>
+				  	<small class="text-muted">122309</small>
 				 </div>
 				  <div class="col-sm-9 border-left border-secondary">
 				    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
@@ -198,14 +198,14 @@
 			</div>
 		  </div>
 		  <div class="card-footer text-muted">
-		  	2 days ago
+		  	2일 전
 		  </div>
 		</div>
 		<hr class="border-danger mb-4 mt-4" />
 				
 		<div class="card">
 		  <div class="card-header">
-		    Reply Title
+		    제목
 		  </div>
 		  <div class="card-body">
 		    <div class="row">
@@ -213,8 +213,8 @@
 				  	<a href="#">
 				  		<img class="mr-3 rounded img-thumbnail" src="public/imgs/user.jpg" alt="Generic placeholder image">
 				  	</a>
-				  	<h6 class="mt-2"><a href="#">Username</a></h6>
-				  	<small class="text-muted">Moderator</small>
+				  	<h6 class="mt-2"><a href="#">아이디</a></h6>
+				  	<small class="text-muted">122309</small>
 				 </div>
 				  <div class="col-sm-9 border-left border-secondary">
 				    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
@@ -222,14 +222,14 @@
 			</div>
 		  </div>
 		  <div class="card-footer text-muted">
-		  	2 days ago
+		  	2일 전
 		  </div>
 		</div>
 		<hr class="border-danger mb-4 mt-4" />
 				
 		<div class="card">
 		  <div class="card-header">
-		    Reply Title
+		    제목
 		  </div>
 		  <div class="card-body">
 		    <div class="row">
@@ -237,8 +237,8 @@
 				  	<a href="#">
 				  		<img class="mr-3 rounded img-thumbnail" src="public/imgs/user.jpg" alt="Generic placeholder image">
 				  	</a>
-				  	<h6 class="mt-2"><a href="#">Username</a></h6>
-				  	<small class="text-muted">Moderator</small>
+				  	<h6 class="mt-2"><a href="#">아이디</a></h6>
+				  	<small class="text-muted">122309</small>
 				 </div>
 				  <div class="col-sm-9 border-left border-secondary">
 				    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
@@ -246,14 +246,14 @@
 			</div>
 		  </div>
 		  <div class="card-footer text-muted">
-		  	2 days ago
+		  	2일 전
 		  </div>
 		</div>
 		<hr class="border-danger mb-4 mt-4" />
 				
 		<div class="card">
 		  <div class="card-header">
-		    Reply Title
+		    제목
 		  </div>
 		  <div class="card-body">
 		    <div class="row">
@@ -261,8 +261,8 @@
 				  	<a href="#">
 				  		<img class="mr-3 rounded img-thumbnail" src="public/imgs/user.jpg" alt="Generic placeholder image">
 				  	</a>
-				  	<h6 class="mt-2"><a href="#">Username</a></h6>
-				  	<small class="text-muted">Moderator</small>
+				  	<h6 class="mt-2"><a href="#">아이디</a></h6>
+				  	<small class="text-muted">122309</small>
 				 </div>
 				  <div class="col-sm-9 border-left border-secondary">
 				    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
@@ -270,86 +270,14 @@
 			</div>
 		  </div>
 		  <div class="card-footer text-muted">
-		  	2 days ago
-		  </div>
-		</div>
-		<hr class="border-danger mb-4 mt-4" />
-				
-		<div class="card">
-		  <div class="card-header">
-		    Reply Title
-		  </div>
-		  <div class="card-body">
-		    <div class="row">
-				<div class="col-sm-2">
-				  	<a href="#">
-				  		<img class="mr-3 rounded img-thumbnail" src="public/imgs/user.jpg" alt="Generic placeholder image">
-				  	</a>
-				  	<h6 class="mt-2"><a href="#">Username</a></h6>
-				  	<small class="text-muted">Moderator</small>
-				 </div>
-				  <div class="col-sm-9 border-left border-secondary">
-				    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-				  </div>
-			</div>
-		  </div>
-		  <div class="card-footer text-muted">
-		  	2 days ago
-		  </div>
-		</div>
-		<hr class="border-danger mb-4 mt-4" />
-				
-		<div class="card">
-		  <div class="card-header">
-		    Reply Title
-		  </div>
-		  <div class="card-body">
-		    <div class="row">
-				<div class="col-sm-2">
-				  	<a href="#">
-				  		<img class="mr-3 rounded img-thumbnail" src="public/imgs/user.jpg" alt="Generic placeholder image">
-				  	</a>
-				  	<h6 class="mt-2"><a href="#">Username</a></h6>
-				  	<small class="text-muted">Moderator</small>
-				 </div>
-				  <div class="col-sm-9 border-left border-secondary">
-				    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-				  </div>
-			</div>
-		  </div>
-		  <div class="card-footer text-muted">
-		  	2 days ago
-		  </div>
-		</div>
-		<hr class="border-danger mb-4 mt-4" />
-				
-		<div class="card">
-		  <div class="card-header">
-		    Reply Title
-		  </div>
-		  <div class="card-body">
-		    <div class="row">
-				<div class="col-sm-2">
-				  	<a href="#">
-				  		<img class="mr-3 rounded img-thumbnail" src="public/imgs/user.jpg" alt="Generic placeholder image">
-				  	</a>
-				  	<h6 class="mt-2"><a href="#">Username</a></h6>
-				  	<small class="text-muted">Moderator</small>
-				 </div>
-				  <div class="col-sm-9 border-left border-secondary">
-				    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-				  </div>
-			</div>
-		  </div>
-		  <div class="card-footer text-muted">
-		  	2 days ago
+		  	2일 전
 		  </div>
 		</div>
 		<hr class="border-danger mb-4 mt-4" />	
 	</div>
 
 	<div class="col-lg-3 col-12" >
-	<div class="list-group mb-4 shadow">
+	<div class="list-group mb-4 shadow" style="margin-top:550px !important;">
 		<li class="list-group-item list-group-item-info" style="background-color:#90d5ff; color: #000000; font-size: smaller;"><strong>카테고리</strong></li>
 		<a href="discussion-detail.html" class="list-group-item list-group-item-action">홍보팀<span class="float-right badge badge-primary">123</span></a>
 		<a href="discussion-detail.html" class="list-group-item list-group-item-action">개발팀<span class="float-right badge badge-primary">123</span></a>

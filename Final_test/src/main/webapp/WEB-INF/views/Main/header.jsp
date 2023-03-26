@@ -81,7 +81,7 @@
 
 
     <!-- Topbar Start -->
-    <div class="container-fluid bg-light px-0 wow fadeIn" data-wow-delay="0.1s" style="background-color: white !important">
+    <div class="container-fluid bg-light px-0 wow fadeIn" data-wow-delay="0.1s">
         <div class="row gx-0 align-items-center d-none d-lg-flex">
             <div class="col-lg-6 px-5 text-start">
                 <ol class="breadcrumb mb-0">
@@ -107,7 +107,7 @@
         <div class="row align-items-center top-bar">
             <div class="col-lg-4 col-md-12 text-center text-lg-start">
                 <a href="${pageContext.request.contextPath}/index" class="navbar-brand m-0 p-0">
-                    <h1 class="fw-bold text-primary m-0"><i class="bi bi-tsunami"></i>BOAT</h1>
+                    <h1 class="fw-bold text-primary m-0"><i class="bi bi-tsunami" style="font-size: 45px !important";></i> BOAT</h1>
                     <!-- <img src="img/logo.png" alt="Logo"> -->
                 </a>
             </div>
