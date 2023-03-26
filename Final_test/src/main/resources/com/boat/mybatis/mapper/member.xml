@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.boat.mybatis.mapper.member">
+<mapper namespace="com.boat.mybatis.mapper.MemberMapper">
 
 	<select id="naverConnectionCheck" resultType="java.util.Map">
 		SELECT * FROM MEMBERS WHERE EMAIL = #{email}
@@ -18,11 +18,18 @@
 
 	<!-- 사원번호 생성하기 위해 조회 -->
 	<select id="isEmpno" resultType="member">
-		SELECT * FROM MEMBER(
+		SELECT * FROM (
 			SELECT * FROM MEMBER
-			WHERE EMPNO = #{selectempno}
+			WHERE DEPT = #{select}
 			ORDER BY REGISTER_DATE DESC)
 		WHERE ROWNUM = 1
 	</select>
+	
+	<insert id="insert">
+		INSERT INTO MEMBER
+		VALUES
+		(#{EMPNO}, #{DEPT}, #{JOB}, #{PASSWORD}, #{NAME}, #{EMAIL}, 
+		#{PROFILE_FILE}, #{PROFILE_IMG}, SYSDATE, #{AUTH}, NULL)
+	</insert>
 
 </mapper>

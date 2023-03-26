@@ -16,5 +16,9 @@ public interface MemberMapper {
 	public Map<String, Object> userNaverLoginPro(Map<String, Object> apiJson);
 	
 	//사원번호 생성
-	public Member isEmpno(String selectempno);
+	public Member isEmpno(String select);
+	
+	//회원가입 처리
+	public int insert(Member m);
+	
 }

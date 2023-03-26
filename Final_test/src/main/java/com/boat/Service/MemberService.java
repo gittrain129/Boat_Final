@@ -2,6 +2,8 @@ package com.boat.Service;
 
 import java.util.Map;
 
+import com.boat.domain.Member;
+
 public interface MemberService {
 
 	//네이버 가입했는지 확인
@@ -15,6 +17,9 @@ public interface MemberService {
 
 	//사원번호 생성
 	public int isEmpno(String select);
+
+	//회원가입 처리
+	public int insert(Member member);
 
 
 }

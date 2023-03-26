@@ -53,19 +53,22 @@
                 
   
   <div id="w-contents" class="container join_2022_wrap">
-    <form class="join_2022_box" name="joinform" action="joinProcess" method="post">
+    <form class="join_2022_box" name="joinform" action="joinProcess" method="post" enctype="multipart/form-data" name="boardform">
         <h2 class="page_title fw-bold">회원가입</h2>
         <div class="login_info_wrap">
             <h3 class="sub_title fs-5 text fw-bold">로그인 정보</h3>
+            
+            
             <!-- 사진 -->
             <div class="profile">
-            	<button class="bF7skra2CCu8uPGJJ3Jw" style="background-image: url(../img/ano.png); background-size: cover;">
-	            	<svg width="36" height="36" fill="none" class="g68VV5Ghc0ymGpbFWhEx">
-		            	<circle cx="18" cy="18" r="18" fill="#000"></circle>
-		            	<path d="M11.375 22.658v2.969h2.969l8.756-8.756-2.97-2.969-8.755 8.756zm14.02-8.083a.788.788 0 000-1.116l-1.852-1.852a.788.788 0 00-1.116 0l-1.45 1.448 2.97 2.97 1.448-1.45z" fill="#fff"></path>
-	            	</svg>
-	            	<input type="file" name="file" accept="image/.jpg, .jpeg, .png, .gif" class="gzQjiZ66mBZWb7UEN7T0" hidden="">
-            	</button>
+            	<label for="upfile" class="bF7skra2CCu8uPGJJ3Jw pe-auto" style="background-image: url(../img/ano.png); background-size: cover; cursor:pointer;">
+            		<img alt="profile" class="bF7skra2CCu8uPGJJ3Jw" style="display:none; cursor:pointer;">	
+		 	  	  	<svg width="36" height="36" fill="none" class="g68VV5Ghc0ymGpbFWhEx">
+				          	<circle cx="18" cy="18" r="18" fill="#000"></circle>
+				          	<path d="M11.375 22.658v2.969h2.969l8.756-8.756-2.97-2.969-8.755 8.756zm14.02-8.083a.788.788 0 000-1.116l-1.852-1.852a.788.788 0 00-1.116 0l-1.45 1.448 2.97 2.97 1.448-1.45z" fill="#fff"></path>
+			           </svg>
+		 	  	</label>
+	            <input type="file" name="uploadfile" id="upfile" accept="image/.jpg, .jpeg, .png, .gif" hidden="">
             </div>
             
             <!-- 입력 -->
@@ -74,13 +77,13 @@
                 <div class="head col-sm-12 col-md-3 fw-bold">부서명</div>
                 
                 <div class="body col-sm-12 col-md-9">
-	                <select class="col-sm-12 col-md-9 form-select" aria-label="Default select example" name="select" required>
+	                <select class="col-sm-12 col-md-9 form-select" aria-label="Default select example" name="DEPT" required>
 					  <option selected>부서명을 선택해 주세요</option>
-					  <option value="1">홍보팀</option>
-					  <option value="2">개발팀</option>
-					  <option value="3">인사팀</option>
-					  <option value="4">기획팀</option>
-					  <option value="5">영업팀</option>
+					  <option value="홍보팀">홍보팀</option>
+					  <option value="개발팀">개발팀</option>
+					  <option value="인사팀">인사팀</option>
+					  <option value="기획팀">기획팀</option>
+					  <option value="영업팀">영업팀</option>
 					</select>
                 </div>
                 <div id="validationServerUsernameFeedback" class="invalid-feedback fw-bold">
@@ -92,7 +95,7 @@
             <div class="row row-container align-items-center">
                 <div class="head col-sm-12 col-md-3 fw-bold">사원번호</div>
                 <div class="body col-sm-12 col-md-9">
-                    <input type="text" name="user_empno" placeholder="부서명을 선택하면 사원번호가 자동 생성됩니다" class="input-empno _input" id="_label-id" readOnly required>
+                    <input type="text" name="EMPNO" placeholder="부서명을 선택하면 사원번호가 자동 생성됩니다" class="input-empno _input" id="_label-id" readOnly required>
                 </div>
                 <div id="validationServerUsernameFeedback2" class="invalid-feedback fw-bold">
 			        부서명을 선택해 주세요
@@ -104,7 +107,7 @@
                 <div class="head col-sm-12 col-md-3 fw-bold">비밀번호
                 </div>
                 <div class="body col-sm-12 col-md-9">
-                    <input type="password" name="user_pwd1" class="_input" autocomplete="off" placeholder="6~16자 / 문자, 숫자, 특수 문자 모두 혼용 가능"
+                    <input type="password" name="PASSWORD" class="_input" autocomplete="off" placeholder="6~16자 / 문자, 숫자, 특수 문자 모두 혼용 가능"
                     	    id="_label-pwd" maxlength="16" required>
                 	<i class= "fa fa-solid fa-eye-slash" ></i>
                 </div>
@@ -117,7 +120,7 @@
             <div class="row row-container align-items-center">
                 <div class="head col-sm-12 col-md-3 fw-bold">비밀번호 확인</div>
                 <div class="body col-sm-12 col-md-9">
-                    <input type="password" name="user_pwd2" onblur="make_pwd_input_valid(2)" autocomplete="off" placeholder="비밀번호를 다시 입력해 주세요" 
+                    <input type="password" name="user_pwd2" autocomplete="off" placeholder="비밀번호를 다시 입력해 주세요" 
                     	   id="_label-pwd-ck" class="_input" maxlength="16" required>
                 	<i class= "fa fa-solid fa-eye-slash" ></i>
                 </div>
@@ -130,7 +133,7 @@
             <div class="row row-container align-items-center">
                 <div class="head col-sm-12 col-md-3 fw-bold">이름</div>
                 <div class="body col-sm-12 col-md-9">
-                    <input type="text" name="user_name" placeholder="이름을 입력해 주세요" class="input-id _input" id="_label-name" required>
+                    <input type="text" name="NAME" placeholder="이름을 입력해 주세요" class="input-id _input" id="_label-name" required>
                 </div>
                 <div id="validationServerUsernameFeedback5" class="invalid-feedback fw-bold">
 			        이름을 입력해 주세요
@@ -141,10 +144,10 @@
             <div class="row row-container align-items-center">
                 <div class="head col-sm-12 col-md-3 fw-bold">메일</div>
                 <div class="body col-sm-12 col-md-9">
-                    <input type="email" name="email" placeholder="이메일을 입력해주세요" class="_input" id="email" value="${email}" required readOnly>
+                    <input type="email" name="EMAIL" placeholder="이메일을 입력해주세요" class="_input" id="email" value="${email}" required readOnly>
                 </div>
                 <div id="validationServerUsernameFeedback6" class="invalid-feedback fw-bold">
-			        이름을 입력해 주세요
+			        올바른 이메일을 입력해주세요
 			    </div>
             </div>
             
@@ -167,7 +170,7 @@
                 <div class="head col-sm-12 col-md-10">
                     <label class="checkbox_wrap mb-2">
                     	<input id="agree_chk" class="_checkbox" type="checkbox" required>
-                        가비아&nbsp; <a href="" data-bs-toggle="modal" data-bs-target="#Modal">이용 약관</a>   에 동의합니다.<span class="essential">(필수)</span>                    
+                        BOAT&nbsp; <a href="" data-bs-toggle="modal" data-bs-target="#Modal">이용 약관</a>   에 동의합니다.<span class="essential">(필수)</span>                    
                     </label>
                 </div>
             </div>
@@ -254,7 +257,6 @@
   <script type="text/JavaScript" src="./my-script.js"></script>
   <jsp:include page="../Main/footer.jsp" />
   <script>
-  	
   </script>
  </body>
 </html>
