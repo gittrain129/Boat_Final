@@ -2,16 +2,18 @@ package com.boat.Service.Calendar;
 
 import java.util.List;
 
-import com.boat.domain.Attandance;
+import com.boat.domain.Calendar;
 
 
 public interface CalendarService { 
 	
-	//출근 시간 저장
-	public void AttOn(String on, String empno);
+	//이벤트 갯수 
+	public int getListcount();
 
-	//출퇴근 리스트 불러오기
-	public List<Attandance> getAttList();
+	//이벤트 불러오기
+	public List<Calendar> getList(String dept);
+
+	public int insertcal(Calendar cal);
 
 	
 	

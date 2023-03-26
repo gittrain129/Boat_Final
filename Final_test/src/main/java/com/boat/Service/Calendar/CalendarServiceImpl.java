@@ -2,44 +2,55 @@ package com.boat.Service.Calendar;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.boat.aop.LogAdvice;
-import com.boat.domain.Attandance;
-import com.boat.mybatis.mapper.AttandanceMapper;
+import com.boat.domain.Calendar;
+import com.boat.mybatis.mapper.CalendarMapper;
 
 @Service
 public class CalendarServiceImpl implements CalendarService {
 	
-	private AttandanceMapper dao;
+	private CalendarMapper dao;
 	private LogAdvice log;
 	
 	@Autowired
-	public CalendarServiceImpl(AttandanceMapper dao,LogAdvice log) {
+	public CalendarServiceImpl(CalendarMapper dao,LogAdvice log) {
 		this.dao = dao;
 		this.log = log;
 	}
 
-
+	//캘린더 일정삽입
 	@Override
-	public List<Attandance> getAttList() {
+	public int insertcal(Calendar cal) {
+		return dao.calInsert(cal);
 		
-		
-		
-		return dao.getAttList();
 	}
 
-	
+
+
 	@Override
-	public void AttOn(String on, String empno) {
-		HashMap<String,String>map = new HashMap<String,String>();
-		map.put("on",on);
-		map.put("empno", empno);
-		dao.AttOn(on,empno);
+	public int getListcount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public List<Calendar> getList(String dept) {
+	Map<String,String>map = new HashMap<String,String>();
+
+		map.put("dept",dept);
+		
+		return dao.getCalList(dept);
 		
 	}
+
+
+
 
 
 	
