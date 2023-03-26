@@ -37,6 +37,7 @@ public class AttandanceServiceImpl implements AttandanceService {
 		HashMap<String,String>map = new HashMap<String,String>();
 		map.put("on",on);
 		map.put("empno", empno);
+		
 		dao.AttOn(on,empno);
 		
 	}

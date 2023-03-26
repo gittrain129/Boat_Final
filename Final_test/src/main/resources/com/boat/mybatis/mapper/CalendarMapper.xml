@@ -4,6 +4,25 @@
   
   <mapper namespace="com.boat.mybatis.mapper.CalendarMapper">
   
+  <select id="getCalList" resultType="Calendar">
+  	select * 	from BOAT_CALENDAR 
+  <!--  -->
+		  <where>
+		    <if test="dept != null">
+			  dept = #{dept}
+		    </if>
+		  </where>
 		  
+  </select>
+  
+  <insert id="calInsert">
+	   insert into boat_calendar (
+	  	 SCHEDULE_CODE , EVENT_NAME, START_DATE, END_DATE, 
+	   	ALLDAY, DEPT, COLOR
+	   	)
+	   values
+	    (cal_seq.nextval,#{EVENT_NAME}
+		 #{START_DATE},#{END_DATE},#{ALLDAY},#{DEPT},#{COLOR}) 
+  </insert>
 		  
   </mapper>

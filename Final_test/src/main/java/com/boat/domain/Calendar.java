@@ -3,17 +3,19 @@ package com.boat.domain;
 import lombok.Getter;
 import lombok.Setter;
 
+
+@Getter
+@Setter
 public class Calendar {
 
-	@Getter
-	@Setter
-	private int schedule_code;
-	private String event_name;
-	private String start_date;
-	private String end_date;
-	private String allday;
+
+	private int SCHEDULE_CODE;
+	private String EVENT_NAME;
+	private String START_DATE;
+	private String END_DATE;
+	private String ALLDAY;
 	private String empno;
-	private String color;
-	private String dept;
+	private String COLOR;
+	private String DEPT;
 
 }

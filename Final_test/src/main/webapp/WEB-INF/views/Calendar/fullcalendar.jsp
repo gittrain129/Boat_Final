@@ -8,8 +8,8 @@
 <head>
  
   
-  <!-- fullcalendar 언어 CDN -->
-  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
+  <!-- fullcalendar 언어 CDN 
+  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>-->
   
   <!-- bootstrap -->
 
@@ -18,23 +18,20 @@
 
 <!-- the moment-to-fullcalendar connector. must go AFTER the moment lib -->
  
- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
- 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ko.js"></script>
  
  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   
   <link href ="${pageContext.request.contextPath}/jhLee/css/fullcalendar.css"  rel ="stylesheet">
   
  <script>
- var calendar =null;
- // calendar element 취득
+ 	var calendar =null;
+ 	// calendar element 취득
  	var obj = null;
  	var object = null;
  	var upobj = null;
 	var allEvent =null;
 	var deptevent = null;
- $(document).ready(function(){
+ 	$(document).ready(function(){
 	     console.log('dept정한 달력 페이지')
 	      var calendarEl = document.getElementById('calendar');
 	  	var dept = $('#dept').val();
@@ -42,20 +39,54 @@
 	  		location.href="${pageContext.request.contextPath}/project_calendarstart.cal";	
 	  	})
 	  	
+	  	//부서 선택시 새로운 캘린더페이지 
 	    $('#dept').change(function(){
 			 dept = $('#dept').val();
 	  	console.log(dept)
 	  	//var empno = ${empno}
 	      	location.href="${pageContext.request.contextPath}/project_calendarshow.cal?dept="+dept;
-	
-			sessionStorage.removeItem('dept');
-			sessionStorage.setItem('dept', dept)
 			
 			})
-	    var sessiondept =  sessionStorage.getItem('dept');
-	  	$('#dept').val(sessiondept);
-	      allEvent =${callist}
-		 
+	  		 let token = $("meta[name='_csrf']").attr("content");
+	  		 let header = $("meta[name='_csrf_header']").attr("content");
+			
+	      allEvent =
+	    	  function loadingEvents(){
+	  		 console.log("header ; "+header);
+	  		   var return_value = null;
+	  	  		$.ajax({
+	  	  			type:'POST',
+	  	  			url:'${pageContext.request.contextPath}/getEvent',
+	  	  			dataType:"json",
+	  	  			async:false,//  동기화
+	  	  		//	beforeSend: function (jqXHR, settings) {
+	  	  		//   jqXHR.setRequestHeader(header, token);
+	  	  		//	},
+	  	  			success:function(result){
+	  	  				return_value = result;
+	  	  				console.log(result);
+	  	  		    var events = [];
+                    
+                    if(result!=null){
+                        
+                        $.each(result, function(index, element) {
+                        	 var start_date=element.start_date;
+                        	 var end_date=element.end_date;
+                        	 var event_name=element.event_name;
+                        	 
+                        })//$.each end
+                     }//if(result..)end
+	  	  			},//success end
+	  	  			error:function(request,status,error){
+	  	  				console.log(status);
+	  	  				console.log("error");
+	  	  				console.log(error);
+	  	  			},
+	  	  			complete:function(){}
+	  	  		}) 
+	  		return return_value;   
+	  	  }
+	  	 
 	      
 	      
 	      // full-calendar 생성하기
@@ -72,6 +103,7 @@
 	        			  },
 	          
 	       		   editable: true, //재수정여부 가능
+	       		   //이벤트 수정
 	     			eventDrop:function(event){
 	     			console.log(event)
 	     			console.log(event.event.start)
@@ -117,6 +149,7 @@
 	          nowIndicator: true, // 현재 시간 마크
 	          dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
 	          locale: 'ko', // 한국어 설정
+	          
 	          eventAdd: function(arg) { // 이벤트가 추가되면 발생하는 이벤트
 	              console.log(arg);
 	          	console.log('이벤트 변경 및 추가');
@@ -305,18 +338,56 @@
 
  
 <!-- Modal -->
+
+  
 <div class="modal fade" id="addevent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">일정등록</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <h5 class="modal-title" id="exampleModalLabel">캘린더 일정등록</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
       일정추가
+      <form action="add"	method = 'post'>
         <input type="text" class = "form-control" id = 'title'>
+       <div class="form-control">
+         <input
+                    class=form-group
+                    id="allday"
+                    name=""
+                    type="checkbox"      />
+                  <label class="form-group">종일 여부</label>
+		</div>
+		
+		
+		<div class="cal_time" style ="display:none">
+		 <label>일정 시작 시간: </label>
+                    <div class="form-group">
+                      <input
+                        type="time"
+                        name="scheTimeStart"
+                        class="form-control"
+                      />
+                    </div>
+                    
+                    <label>일정 종료 시간: </label>
+                    <div class="form-group">
+                      <input
+                        type="time"
+                        name="scheTimeEnd"
+                        class="form-control"
+                      />
+                    </div>
+                </div>
+                <script>
+		if($('#allday').is(':checked')){
+			
+			$('.cal_time').css('display','block');
+		}
+		
+		</script>
+		
         <select class="form-control" id ="color">
   			<option value ="pink" class="ad">홍보팀</option>
   			<option value ="orange" class = "devel">개발팀</option>
@@ -324,19 +395,20 @@
   			<option value ="purple" class = "plan">기획팀</option>
   			<option value ="" class = "sales">영업팀</option>
   			<option value ="lightgray" class = "personal">개인일정</option>
-		<c:if test="${empno =='ADMIN'}">
-  			<option value ="red">(관리자)</option>
-		</c:if>
+				<c:if test="${empno =='ADMIN'}">
+		  			<option value ="red">(관리자)</option>
+				</c:if>
 			</select>
+		</form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" id ="undo">돌아가기</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id ="undo">돌아가기</button>
         <button type="button" class="btn btn-primary" id ="saveBtn">&nbsp;&nbsp;일정 저장&nbsp;&nbsp;</button>
       </div>
     </div>
   </div>
 </div>
-  <!-- Modal end -->
+<!-- Modal end -->  
   
  <input type="hidden" name ="empno" value="${empno}" id="empno">
  
@@ -344,7 +416,8 @@
  </div>
  </div><%--calcontainer --%>
  <script>
-
+ 
+ 
  </script>
  <jsp:include page="../Main/footer.jsp" />
 </body>
