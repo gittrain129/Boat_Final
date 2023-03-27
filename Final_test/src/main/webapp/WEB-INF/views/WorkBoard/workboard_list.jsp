@@ -121,7 +121,7 @@
 				  	<small class="text-muted">122309</small>
 				 </div>
 				  <div class="col-sm-9 border-left border-secondary">
-				    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+				    <p>내용</p>
 				  </div>
 			</div>
 		  </div>
@@ -145,7 +145,7 @@
 				  	<small class="text-muted">122309</small>
 				 </div>
 				  <div class="col-sm-9 border-left border-secondary">
-				    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+				    <p>내용</p>
 				  </div>
 			</div>
 		  </div>
@@ -169,7 +169,7 @@
 				  	<small class="text-muted">122309</small>
 				 </div>
 				  <div class="col-sm-9 border-left border-secondary">
-				    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+				    <p>내용</p>
 				  </div>
 			</div>
 		  </div>
@@ -193,7 +193,7 @@
 				  	<small class="text-muted">122309</small>
 				 </div>
 				  <div class="col-sm-9 border-left border-secondary">
-				    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+				    <p>내용</p>
 				  </div>
 			</div>
 		  </div>
@@ -217,7 +217,7 @@
 				  	<small class="text-muted">122309</small>
 				 </div>
 				  <div class="col-sm-9 border-left border-secondary">
-				    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+				    <p>내용</p>
 				  </div>
 			</div>
 		  </div>
@@ -241,7 +241,7 @@
 				  	<small class="text-muted">122309</small>
 				 </div>
 				  <div class="col-sm-9 border-left border-secondary">
-				    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+				    <p>내용</p>
 				  </div>
 			</div>
 		  </div>
@@ -265,7 +265,7 @@
 				  	<small class="text-muted">122309</small>
 				 </div>
 				  <div class="col-sm-9 border-left border-secondary">
-				    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+				    <p>내용</p>
 				  </div>
 			</div>
 		  </div>
