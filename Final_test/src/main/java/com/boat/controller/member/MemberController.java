@@ -1,14 +1,14 @@
 package com.boat.controller.member;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.Principal;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -18,19 +18,20 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.boat.Service.MemberService;
 import com.boat.Task.SendMail;
 import com.boat.domain.MailVO;
 import com.boat.domain.Member;
-import com.boat.domain.ProfileSaveFolder;
 import com.boat.naver.NaverLoginBO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.scribejava.core.model.OAuth2AccessToken;
@@ -43,16 +44,14 @@ public class MemberController {
 	private MemberService memberservice;
 	private NaverLoginBO naverloginbo;//네이버 api
 	private SendMail sendMail;
-	private ProfileSaveFolder profileSaveFolder;
 	
 	
 	@Autowired
 	public MemberController(MemberService memberservice, NaverLoginBO naverloginbo, 
-			SendMail sendMail, ProfileSaveFolder profileSaveFolder) {
+			SendMail sendMail) {
 		this.memberservice = memberservice;
 		this.naverloginbo = naverloginbo;
 		this.sendMail = sendMail;
-		this.profileSaveFolder = profileSaveFolder;
 	}
 
 	
@@ -102,7 +101,8 @@ public class MemberController {
 		if(!uploadfile.isEmpty()) {
 			String fileName = uploadfile.getOriginalFilename();//원래 파일명
 			
-			String saveFolder= profileSaveFolder.getProfilesavefolder();
+			String saveFolder = new File("src/main/resources/static/profile").getAbsolutePath();
+//			String saveFolder= profileSaveFolder.getProfilesavefolder();
 			String fileDBName = fileDBName(fileName, saveFolder, member.getEMPNO());
 			Logger.info("fileDBName : " + fileDBName);
 			
@@ -111,7 +111,9 @@ public class MemberController {
 			Logger.info("transferTo path : " + saveFolder + fileDBName);
 			//바뀐 파일명으로 저장
 			member.setPROFILE_IMG(fileDBName);
-			member.setPROFILE_FILE(saveFolder + fileDBName);
+			System.out.println("absolutePathss " +saveFolder);
+			//파일 경로 이름
+			member.setPROFILE_FILE("../profile" + fileDBName);
 		}
 		
 		
@@ -232,9 +234,27 @@ public class MemberController {
 	
 	
 	
-	@RequestMapping(value = "/sign_in", method = RequestMethod.GET)
-	public String signIn() {
-		return "/Member/sign_in";
+	
+	
+	
+	
+	//로그인
+	@GetMapping(value = "/sign_in")
+	public ModelAndView signIn(ModelAndView mv, 
+			@CookieValue(value="remember-me", required=false) Cookie readCookie,
+			HttpSession session, Principal userPrincipal) {
+		
+		if(readCookie != null) {
+			Logger.info("저장된 아이디 : " + userPrincipal.getName());//Principal.getName() : 로그인한 아이디
+			mv.setViewName("redirect:/index");
+		}else {
+			mv.setViewName("Member/sign_in");
+			mv.addObject("loginfail", session.getAttribute("loginfail"));
+			//세션에 저장된 값을 한 번만 실행될 수 있도록 mv에 저장하고
+			session.removeAttribute("loginfail");//세션의 값은 제거합니다.
+		}
+		
+		return mv;	
 	}
 	
 	@RequestMapping("/id_check")

@@ -14,7 +14,7 @@
      insert into CONFER_MAIN
      (id,rental,start_time,end_time,content,start_t,end_t)
      values
-     ('admin',#{RENTAL},#{START_TIME},#{END_TIME},#{CONTENT},#{START_T},#{END_T})
+     (#{ID},#{RENTAL},#{START_TIME},#{END_TIME},#{CONTENT},#{START_T},#{END_T})
   
   
    </insert>

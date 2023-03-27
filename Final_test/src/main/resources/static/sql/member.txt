@@ -8,7 +8,9 @@ CREATE TABLE MEMBER(
 	PASSWORD VARCHAR2(60),
 	NAME VARCHAR2(15),
 	EMAIL VARCHAR2(30),
-	PROFILE_FILE VARCHAR2(50), --프로필 사진 경로 ex)
+	PROFILE_FILE VARCHAR2(50), --프로필 사진 경로 ex)C:\Users\admin\git\Boat_Final\Final_test\src\main\resources\static\profile
+								--static => profile => 가입 날짜 => 사진
+								--<img src="../profile/2023-3-26/2310004.png">
 	PROFILE_IMG VARCHAR2(50),
 	REGISTER_DATE DATE DEFAULT SYSDATE,
 	AUTH VARCHAR2(50) DEFAULT 'ROLE_MEMBER' NOT NULL,
@@ -17,6 +19,7 @@ CREATE TABLE MEMBER(
 );
 
 	PWCHECK VARCHAR2(60),--비밀번호 확인 테이블 제외
+	--ROLE_MEMBER , ROLE_MGR , ROLE_ADMIN
 
 SELECT*FROM MEMBER;
 
