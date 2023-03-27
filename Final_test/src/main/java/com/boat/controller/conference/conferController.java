@@ -66,6 +66,8 @@ public class conferController {
        
        for (ConferenceReservation con : cs) {
            Map<String, Object> event = new HashMap<>();
+           //여기에 if(con.getSTATUS() == 1){ 
+           //admit에서 status바뀌는 작업후에 if문 추가
            event.put("id", con.getID());
            event.put("rental",con.getRENTAL());
            event.put("start", con.getSTART_TIME());
@@ -73,14 +75,13 @@ public class conferController {
            event.put("title", con.getCONTENT());
            event.put("start_t", con.getSTART_T());
            event.put("end_t", con.getEND_T());
+           event.put("status", con.getSTATUS());
            
        
            cList.add(event);
            
        }
 
-      
-       
        model.addAttribute("list", cList);
 
        System.out.println(cList);
@@ -97,6 +98,8 @@ public class conferController {
 		List<ConferenceReservation> cs = co.getcal(tab);
 		 List<Map<String, Object>> cList = new ArrayList<>();
 		  for (ConferenceReservation con : cs) {
+			  //여기에 if(con.getSTATUS() == 1){ 
+	           //admit에서 status바뀌는 작업후에 if문 추가
 	           Map<String, Object> event = new HashMap<>();
 	           event.put("id", con.getID());
 	           event.put("rental",con.getRENTAL());
@@ -133,5 +136,47 @@ public class conferController {
 		return "/Conference_Res/conferAdmit";
 	}
    
+    @ResponseBody
+	@RequestMapping(value="/admit_ajax")
+	public String admit_Ajax(@RequestParam("rental") String rental,
+												@RequestParam("start_time") String startTime,
+												@RequestParam("end_time") String endTime,
+												@RequestParam("id") String id
+												){
+		
+    	ConferenceReservation c2 = new ConferenceReservation();
+        c2.setSTART_TIME(startTime);
+        c2.setEND_TIME(endTime);
+        c2.setRENTAL(rental);
+        c2.setID(id.toString());
+        
+        System.out.println("admit_ajax의 id = "+c2.getID());
+        co.admit_pro(c2);
+        
+        
+        return "redirect:/confer/admit";	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+	}
+    
+
+      
+      
    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

@@ -99,12 +99,16 @@
                         		<img class="img-fluid rounded" src="${pageContext.request.contextPath}/jkKim/image/small.jpg" alt="">
                         		<a href="${pageContext.request.contextPath}/jkKim/image/small.jpg" data-lightbox="project"><i class="fa fa-eye fa-2x"></i></a>
                        		</c:when>
+                       		<c:when test="${r.RENTAL eq '회의실2'}">
+                        		<img class="img-fluid rounded" src="${pageContext.request.contextPath}/jkKim/image/small2.jpg" alt="">
+                        		<a href="${pageContext.request.contextPath}/jkKim/image/small2.jpg" data-lightbox="project"><i class="fa fa-eye fa-2x"></i></a>
+                       		</c:when>
                     		</c:choose>
                         </div>
                         <h6>${r.RENTAL}</h6>
-                        <span>신청자: 김정근</span>
+                        <span>신청자: ${r.ID}</span>
                         <span>일정 : ${r.START_T} - ${r.END_T}</span>
-                      <button type="button" class="btn btn-primary" onclick="modal('${r.RENTAL}','${r.START_T}','${r.END_T}','${r.CONTENT}')">처리</button>
+                      <button type="button" class="btn btn-primary" onclick="modal('${r.ID }','${r.RENTAL}','${r.START_TIME }','${r.START_T}','${r.END_TIME }','${r.END_T}','${r.CONTENT}')">처리</button>
 				      
                     </div>
                 </div>
@@ -154,15 +158,7 @@
         </div>
     </div>
     <!-- Project End -->
-                
-                
-                
-                
-                
-                
-                
-                
-                
+             
                 
               </div>
               <div class="tab-pane fade" id="asd">
@@ -188,6 +184,11 @@
       <div class="modal-body">
         <form id="res_Form">
         
+         <div class="form-group">
+            <label for="rental">신청자</label>
+            <input type="text" class="form-control" id="rental_id" name="rental" readonly>
+          </div>
+        
           <div class="form-group" style="display:none">
             <label for="rental">대여대상</label>
             <input type="hidden" id="rental" name="rental">
@@ -211,7 +212,9 @@
       </div>
       <div class="modal-footer">
        <button type="button" class="btn btn-secondary" onclick="$('#res_Modal').modal('hide')">취소</button>
+        <button type="button" class="btn btn-danger" id="reject_button" onclick="reject()">거절</button>
         <button type="button" class="btn btn-primary" onclick="confirm()">승인</button>
+    
       </div>
     </div>
   </div>
@@ -220,13 +223,55 @@
 
 
 <script>
-function modal(rental,start,end,content) {
+var token = $("meta[name='_csrf']").attr("content");
+var header = $("meta[name='_csrf_header']").attr("content");
+
+function modal(id,rental,start_time,start_t,end_time,end_t,content) {
+	  $('#rental_id').val(id);	
 	  $('#rental').val(rental);
-	  $('#startTime').val(start);
-	  $('#endTime').val(end);
+	  $('#startTimeISO').val(start_time);
+	  $('#startTime').val(start_t);
+	  $('#endTimeISO').val(end_time);
+	  $('#endTime').val(end_t);
 	  $('#content').val(content);
 	  $('#res_Modal').modal('show');
 	}
+	
+function confirm() {
+	var id = $('#rental_id').val();
+	var rental = $('#rental').val();
+	var start_time = $('#startTimeISO').val();
+	var end_time =  $('#endTimeISO').val();
+	
+	console.log(id);
+	console.log(rental);
+	console.log(start_time);
+	console.log(end_time);
+	
+	   $.ajax({
+           url: "${pageContext.request.contextPath}/confer/admit_ajax/",
+           type: 'POST',
+           data: {
+               "start_time": start_time,
+               "end_time": end_time,
+               "rental": rental,
+               "id": id
+           },
+           beforeSend : function(xhr)
+           {   //데이터를 전송하기 전에 헤더에 csrf값을 설정합니다.
+             xhr.setRequestHeader(header, token);         
+          },
+           success: function(response) {
+               $('#res_Modal').modal('hide');
+               document.location.reload(); //나중에 삭제해야댐 확인용
+           },
+           error: function(request,error) {
+               
+               alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+           }
+       }); //ajax 끝
+}
+	
 </script>
 
 
