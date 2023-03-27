@@ -45,7 +45,8 @@ import com.boat.domain.MySaveFolder;
   private FileCommentService commentService;
   
   
-  @Autowired public FileBoardController(FileBoService boardService, 
+  @Autowired 
+  public FileBoardController(FileBoService boardService, 
 		  								FileCommentService commentService, 
 		  								MySaveFolder mysavefolder)  {
 	  this.boardService = boardService;
@@ -124,7 +125,6 @@ import com.boat.domain.MySaveFolder;
 		  logger.info("transferTo path ="  +saveFolder+fileDBName); //바뀐 파일명으로 저장 
 		   
 		  board.setFILE_FILE(fileDBName); 
-		   logger.info("왜 널이뜨는지 보자고"+uploadfile2.getOriginalFilename());
 		   
 		  	if(!uploadfile2.isEmpty()) {
 		  		
