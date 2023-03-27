@@ -302,10 +302,9 @@ sceditor.create(textarea, {
 	format: 'bbcode',
 	style: 'workboard_lib/sceditor/minified/themes/content/default.min.css'
 });
+
 </script>
-	
-	
-	
+
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/Kimsj/workboard_lib/jquery-3.3.1.min.js"></script>
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/Kimsj/workboard_lib/bootstrap-4/js/bootstrap.min.js"></script>
