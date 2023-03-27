@@ -110,31 +110,24 @@
     <table class="table table-hover" id="mytable">
   <thead class="table-light">
   <tr>
-      <th scope="col">#</th>
-      <th scope="col">자산</th>
-      <th scope="col">이름</th>
+      
+      <th scope="col">신청대상</th>
+      <th scope="col">신청자</th>
       <th scope="col" style="text-align:center;">예약시간</th>
     </tr>
   </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>대회의실</td>
-      <td>김정근</td>
-      <td align="center">23-03-16 14:00 ~ 23-03-16 16:00</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>노트북</td>
-      <td>김정근</td>
-      <td align="center">23-03-16 14:00 ~ 23-03-16 16:00</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>회의실2</td>
-      <td>김정근</td>
-      <td align="center">23-03-18 09:00 ~ 23-03-18 10:00</td>
-    </tr>
+  <tbody id="printBody">
+     <c:forEach var="r" items="${list}">
+     <c:set var="loginid" value="${loginid }"/>
+          <c:if test="${loginid eq r.ID}">
+        <tr>
+          <td>${r.RENTAL}</td>
+          <td>${r.ID}</td>
+          <td>${r.START_TIME} - ${r.END_TIME}</td>
+        </tr>
+      </c:if>
+    </c:forEach>
+
   </tbody>
 </table>
 
@@ -148,6 +141,11 @@
        </div>
       <div class="modal-body">
         <form id="res_Form">
+        
+        <div class="form-group">
+            <label for="rental">신청자</label>
+            <input type="text" class="form-control" id="rental_id" name="rental" readonly>
+          </div>
         
           <div class="form-group" style="display:none">
             <label for="rental">대여대상</label>
@@ -190,7 +188,8 @@
        {
            start: '${l.start}',
            end: '${l.end}',
-           title: '${l.title}'
+           title: '${l.title}',
+           id: '${l.id}'
          },
          </c:forEach>]);
        
@@ -231,16 +230,18 @@
                var start = moment(info.event.start).format('MM-DD HH:mm');
                var end = moment(info.event.end).format('MM-DD HH:mm');
                var tab = $('.nav-tabs .active').text();
-               var modalTitle = tab + ' 대여 신청';
+               var modalTitle = tab + ' 예약 내역';
+               var rental_id = info.event.id;
                
               
               
-               
+               $('#rental_id').val('');
                $('#res_ModalLabel').text('');
                $('#content').text('');
                $('#startTime').val('');
                $('#endTime').val('');
                
+               $('#rental_id').val(rental_id);
                $('#res_ModalLabel').text(modalTitle);
                $('#content').text(title);
                $('#startTime').val(start);
@@ -258,18 +259,23 @@
                var endTimeString = moment(endTime).format('MM-DD HH:mm');
                var tab = $('.nav-tabs .active').text();
                var modalTitle = tab + ' 대여 신청';
+               var loginid = $('#loginid').text();
+              
                
                //저장용데이터
+               $('#rental_id').val(loginid);
                $('#rental').val(tab);
                $('#startTimeISO').val(startTime);
                $('#endTimeISO').val(endTime);
 
                // 모달에 띄울 데이터 .val
+               $('#rental_id').val('');
                $('#res_ModalLabel').text('');
                $('#content').text('');
                $('#startTime').val('');
                $('#endTime').val('');
                
+               $('#rental_id').val(loginid);
                $('#res_ModalLabel').text(modalTitle);
                $('#startTime').val(startTimeString);
                $('#endTime').val(endTimeString);
@@ -321,8 +327,6 @@
 
    
    
-   
-   
    function reservation() {
        // modal에서 데이터 저장하기
        var startTime =  $('#startTimeISO').val();
@@ -331,12 +335,14 @@
        var rental = $('#rental').val();
        var start = $('#startTime').val();
        var end = $('#endTime').val();
+       var rental_id = $('#rental_id').val();
        
        console.log('confermain의 ajax중');
        console.log(startTime);
        console.log(endTime);
        console.log(content);
        console.log(rental);
+       console.log('로그인아이디 = ' + rental_id);
              
        $.ajax({
            url: "${pageContext.request.contextPath}/confer/reservation/",
@@ -347,7 +353,8 @@
                "content": content,
                "rental": rental,
                "start": start,
-               "end": end
+               "end": end,
+               "id": rental_id
            },
            success: function(response) {
                $('#res_Modal').modal('hide');
