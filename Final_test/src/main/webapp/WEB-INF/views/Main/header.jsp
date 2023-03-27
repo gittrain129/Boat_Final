@@ -73,13 +73,6 @@
 
 <body>
 	<!-- isAnonymous() : 익명 사용자인 경우 로그인 페이지로 이동하도록 합니다. -->
-	<sec:authorize access="isAnonymous()">
-		<script>
-			location.href = "${pageContext.request.contextPath}/member/sign_in";
-		</script>
-	</sec:authorize>
-	<sec:authorize access="isAuthenticated()">
-  		<sec:authentication property="principal" var="pinfo"/>
 
 	
     <!-- Spinner Start -->
@@ -237,7 +230,6 @@
     <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
 	
     
-	</sec:authorize> 
 </body>
 </html>
 
