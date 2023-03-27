@@ -33,7 +33,8 @@ public class conferController {
                                    @RequestParam("end_time") String endTime,
                                    @RequestParam("content") String content,
                                    @RequestParam("start") String start,
-                                   @RequestParam("end") String end
+                                   @RequestParam("end") String end,
+                                   @RequestParam("id") String id
 		   						) {
     
      
@@ -44,6 +45,8 @@ public class conferController {
      c1.setRENTAL(rental);
      c1.setSTART_T(start);
      c1.setEND_T(end);
+     c1.setID(id.toString());
+     System.out.println("VO의 id = "+c1.getID());
      co.insert1(c1);
      
      return "redirect:/confer/view";
@@ -55,12 +58,10 @@ public class conferController {
    @GetMapping("/view")
    public String mainView(	@RequestParam(value="tab_info",defaultValue="대회의실",required=false) String tab,
 		   					Model model) {	
-	   								
-      System.out.println("tab = " + tab);
-      
+	   
        List<ConferenceReservation> cs = co.getcal(tab);
-
        
+
        List<Map<String, Object>> cList = new ArrayList<>();
        
        for (ConferenceReservation con : cs) {
@@ -70,8 +71,12 @@ public class conferController {
            event.put("start", con.getSTART_TIME());
            event.put("end", con.getEND_TIME());
            event.put("title", con.getCONTENT());
+           event.put("start_t", con.getSTART_T());
+           event.put("end_t", con.getEND_T());
            
+       
            cList.add(event);
+           
        }
 
       
