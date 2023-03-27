@@ -7,35 +7,38 @@
  	<script src="http://code.jquery.com/jquery-latest.js"></script>
  	<script src="${pageContext.request.contextPath}/resources/ejyang/js/signin.js"></script>
  	<jsp:include page="../Main/header.jsp" />
+ 	<script>
+ 		var result="${result}";
+ 		if(result == 'joinSuccess'){
+ 			alert("회원가입을 축하합니다.")
+ 		}else if("${loginfail}" == "loginFailMsg"){
+ 			alert("아이디나 비밀번호 오류 입니다.")
+ 		}
+ 	</script>
  </head>
  <body>
    <div id="form-container">
       <div id="form-inner-container">
         <!-- Sign up form -->
         <div id="sign-up-container">
-          <h3>로그인</h3>
-          <form>
+          <h3 class="fw-bold text">로그인</h3>
+          <form name="loginform" action="${pageContext.request.contextPath}/member/loginProcess" method="post">
             <label for="name">사번</label>
             <i class= "fas fa-user"></i>
-            <input type="text" name="name" id="name" placeholder="사번을 입력해주세요">
+            <input type="text" name="EMPNO" id="name" class="form-control" placeholder="사번을 입력해주세요">
 
             <label for="password">비밀번호</label>
             <i class= "fas fa-lock"></i>
-            <input type="password" name="password" id="password" placeholder="비밀번호를 입력해주세요">
+            <input type="password" name="PASSWORD" id="password" class="form-control" placeholder="비밀번호를 입력해주세요">
 		    <i class= "fa fa-solid fa-eye-slash" ></i>
 
-			<!--
-            <input type="checkbox" name="terms" id="terms">
-            <label for="terms">로그인 유지하기</label>
-             -->
-             
             <div>
-	        	<input type="checkbox" id="terms" name="terms">
+	        	<input type="checkbox" id="terms" name="remember-me">
 	        	<label for="terms" class="terms_lable">로그인 유지하기</label>
 			</div>
 			 
             <div id="form-controls">
-              <button type="submit"  class="btn-primary">로그인</button>
+              <button type="submit"  class="btn btn-primary py-3 px-5">로그인</button>
               <!--<button type="button" id="toggleSignIn">Sign In</button> -->
             </div>
             
@@ -63,7 +66,7 @@
                 <a href="pwd_check">비밀번호 찾기</a>
                 <a href="sign_up">회원 가입</a>
             </div>
-
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
           </form>
         </div>
 
