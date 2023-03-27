@@ -34,25 +34,65 @@
   
 <body>
 
-<!-- 내일정 추가 Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- 내 할일 TODO 추가 Modal -->
+ 
+<div class="modal fade" id="addTodo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">새 할 일 등록</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+      <div class="modal-body" style="color:black;">
+      일정<br>
+      <form action="add"	method = 'post'>
+        <input type="text" name="T_CONTENT" class = "form-control" id = 'title'>
+     
+		
+		<div class="cal_time" style="margin-top:15px" >
+		 <label>일정 시작 시간: </label><br>
+                    <div class="form-group"style="margin-top:15px">
+                      <input
+                        type="DATE"
+                        name="START_DATE"
+                        class="form-control time"
+                      />
+                    </div>
+                    
+           <label style="margin-top:15px" >일정 종료 시간: </label><br>
+                    <div class="form-group" style="margin-top:15px" >
+                      <input
+                        type="DATE"
+                        name="END_DATE"
+                        class="form-control time"
+                      />
+                    </div>
+            </div><!-- cal_time-->
+                
+                <script>
+                $(document).ready(function(){
+                    const loginid =$('#loginid').text();
+
+					if($('#allday').is(':checked')){
+						console.log($('#allday').is(':checked'))
+						$('.time').attr('readonly',true);
+						
+					}
+                })
+	        	</script>
+      
+			 <input type="hidden" name ="EMPNO" value="${loginid}" id="empno">
+			 <input type="hidden" name ="DEPT" value="${dept}" id="dept">
+             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+             <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id ="undo">돌아가기</button>
+               <button type="submit" class="btn btn-primary" id ="saveBtn">&nbsp;&nbsp;일정 저장&nbsp;&nbsp;</button>
+            </div>
+         </form>
+        </div>
     </div>
   </div>
 </div>
-<!-- 내일정 추가 Modal end -->
 
 
 <!-- Page Header Start -->
@@ -93,7 +133,7 @@
 
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTodo">
   <i class="fas fa-plus"></i> 새 일정 추가</a>
 </button>
 	

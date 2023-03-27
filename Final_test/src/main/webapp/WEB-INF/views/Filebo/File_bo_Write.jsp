@@ -84,6 +84,7 @@
  		<button type="submit" class="btn btn-primary" style="background-color :  rgb(0, 173, 238)!important;border-color:rgb(0, 173, 238)!important">등록</button>
  		<button type="reset" class="btn btn-danger" onclick="history.go(-1)">취소</button>
  	</div>
+ 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
  </form>
 </div><!-- container끝 -->
 
