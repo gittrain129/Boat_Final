@@ -94,6 +94,7 @@
   </div>
 </div>
 
+<!-- 내 할일 TODO 추가 Modal end-->
 
 <!-- Page Header Start -->
     <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
@@ -160,21 +161,17 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <c:forEach var="mt" items="${MyTodo}">
                                         <tr>
-                                            <td><a href="#">첫 번째 할 일</a></td>
-                                            <td>2023-03-10</td>
-                                            <td>2023-03-12</td>
+                                            <td><a href="#">${mt.T_CONTENT}</a></td>
+                                            <td>${mt.START_DATE}</td>
+                                            <td>${mt.END_DATE}</td>
                                         </tr>
-                                        <tr>
-                                            <td><a href="#">두 번째 할 일</a></td>
-                                            <td>2023-03-10</td>
-                                            <td>2023-03-12</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">세번째 할 일</a></td>
-                                            <td>2023-03-10</td>
-                                            <td>2023-03-12</td>
-                                        </tr>
+                                    
+                                    </c:forEach>
+                                <c:if test="${listcount==0}">
+		                            <h3 style="text-align: center">등록된 글이 없습니다.</h3>
+	                            </c:if>
                                     </tbody>
                                 </table>
                             </div>

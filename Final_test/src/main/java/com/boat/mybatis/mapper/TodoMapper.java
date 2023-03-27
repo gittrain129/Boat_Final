@@ -9,4 +9,6 @@ public interface TodoMapper {
 
 	void Todoinsert(Todo todo);
 
+	Todo myTodolist(String empno);
+
 }

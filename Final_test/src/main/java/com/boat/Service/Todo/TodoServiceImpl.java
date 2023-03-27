@@ -22,6 +22,14 @@ public class TodoServiceImpl implements TodoService {
 		dao.Todoinsert(todo);
 		
 	}
+
+	//내할일보기 할일목록
+	@Override
+	public Todo mytodolist(String empno) {
+		//log.info(todo.toString());
+		return dao.myTodolist(empno);
+		
+	}
 	
 	
 

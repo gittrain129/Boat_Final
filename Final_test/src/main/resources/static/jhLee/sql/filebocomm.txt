@@ -10,6 +10,7 @@ COL F_COMMENT_RE_REF FORMAT A20
 
  COL Null?  FORMAT A20  
  COL Type  FORMAT A20  
+ 
 create table Filecomm (
 F_C_NUM number primary key,
 F_C_ID varchar2(30) references member(empno),

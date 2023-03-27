@@ -31,7 +31,10 @@ public class TodoContoroller {
 	public ModelAndView Todomain(String empno,
 							ModelAndView mv) {
 
+		
+		//select * from todolist where empno= '로그인한사람;
 		//1. select * from Todo where empno = #{empno}
+		Todo Mytodolist = todoService.mytodolist(empno);
 		
 		
 		
@@ -50,6 +53,8 @@ public class TodoContoroller {
 		
 		mv.setViewName("Todo/Todonew");
 		
+		//Mytodolist
+		mv.addObject("MyTodo",Mytodolist);
 		
 	return mv;
 

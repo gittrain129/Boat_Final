@@ -9,9 +9,12 @@
 		<insert id="Todoinsert">
 		insert into TODOLIST (NUM,EMPNO, T_CONTENT,START_DATE,END_DATE) 
 		values(todo_seq.nextval, #{EMPNO},#{T_CONTENT},#{START_DATE},#{END_DATE})
-		
 		</insert>
 		  
-		  
+		 <select id ="myTodolist" resultType="Todo">
+		 select * from TODOLIST
+		 <if> 
+		 where empno = #{empno}
+		 </select> 
 		  
   </mapper>

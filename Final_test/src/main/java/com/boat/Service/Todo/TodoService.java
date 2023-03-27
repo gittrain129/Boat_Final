@@ -5,7 +5,9 @@ import com.boat.domain.Todo;
 
 public interface TodoService {
 
-	void insertTodo(Todo todo); 
+	void insertTodo(Todo todo);
+
+	Todo mytodolist(String empno); 
 	
 	
 	
