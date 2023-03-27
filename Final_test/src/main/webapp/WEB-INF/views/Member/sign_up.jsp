@@ -25,7 +25,7 @@
         <div id="sign-up-container">
           <h3>환영합니다!</h3>
           <h4>원하시는 회원가입 방법을 선택해주세요.</h4>
-          <form name="sign_up" action="${pageContext.request.contextPath}/member/join" method="POST">
+          <form name="sign_up" action="${pageContext.request.contextPath}/member/join" method="GET">
             <label for="email" >이메일</label>
             <input type="email" class="form-control" name="email" id="email" placeholder="이메일을 입력해주세요">
             <div id="user_mail" style="display:none">
@@ -36,6 +36,7 @@
             <div id="form-controls">
               <button type="submit"  class="btn btn-primary py-3 px-5" disabled>이메일로 계속하기</button>
             </div>
+            
           </form>
             
            	<div class="text-center other"> 또는 </div>

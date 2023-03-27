@@ -32,9 +32,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.authorizeRequests()
 			.antMatchers("/resources/**/**").permitAll()
-			.antMatchers("/**").permitAll()
 			.antMatchers("/member/list").access("hasRole('ROLE_ADMIN')")
-			.antMatchers("/member/info").access("hasRole('ROLE_ADMIN')");
+			.antMatchers("/member/info").access("hasRole('ROLE_ADMIN')")
+			
+		.antMatchers("/**").permitAll();
 		
 //		http.authorizeRequests()
 //			.antMatchers("/resources/**/**").permitAll()
@@ -61,8 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		    .usernameParameter("EMPNO")
 		    .passwordParameter("PASSWORD")
 		    .successHandler(loginSuccessHandler())
-		    .failureHandler(loginFailHandler())
-		    .defaultSuccessUrl("/index", true);
+		    .failureHandler(loginFailHandler());
 		
 		/*
 		 (1) logoutSuccessUrl : 로그아웃 후 이동할 주소
