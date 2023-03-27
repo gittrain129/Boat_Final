@@ -66,7 +66,7 @@ public class MemberController {
 	}
 	
 	//일반 회원가입 => 정보 작성폼
-	@PostMapping(value = "/join")
+	@GetMapping(value = "/join")
 	public String join(@RequestParam("email") String email, Model model) {
 		model.addAttribute("email", email);
 		return "/Member/joinForm";
