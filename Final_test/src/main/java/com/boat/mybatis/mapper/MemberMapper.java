@@ -20,5 +20,7 @@ public interface MemberMapper {
 	
 	//회원가입 처리
 	public int insert(Member m);
+
+	public Member isId(String empno);
 	
 }

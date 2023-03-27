@@ -32,4 +32,9 @@
 		#{PROFILE_FILE}, #{PROFILE_IMG}, SYSDATE, #{AUTH}, NULL)
 	</insert>
 
+	<select id="isId" resultType="member">
+		SELECT * FROM MEMBER
+		WHERE EMPNO = #{empno}
+	</select>
+
 </mapper>
