@@ -40,6 +40,14 @@ public class ConferenceReservationServiceImpl implements ConferenceReservationSe
 		return c3.listcount();
 	}
 
+	@Override
+	public void admit_pro(ConferenceReservation c2) {
+		c3.admit_pro(c2);
+		
+	}
+	
+	
+
 
 
 

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ taglib prefix ="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html lang='en'>
   <head>
@@ -9,8 +11,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
-
-
+  
 
 
     <style>
@@ -36,7 +37,7 @@
  </style>
 
   </head>
- 
+
   <body>
   <jsp:include page="../Main/header.jsp"/>
   
@@ -114,20 +115,12 @@
       <th scope="col">신청대상</th>
       <th scope="col">신청자</th>
       <th scope="col" style="text-align:center;">예약시간</th>
+      <th scope="col" style="text-align:center;">처리상태</th>
     </tr>
   </thead>
-  <tbody id="printBody">
-     <c:forEach var="r" items="${list}">
-     <c:set var="loginid" value="${loginid }"/>
-          <c:if test="${loginid eq r.ID}">
-        <tr>
-          <td>${r.RENTAL}</td>
-          <td>${r.ID}</td>
-          <td>${r.START_TIME} - ${r.END_TIME}</td>
-        </tr>
-      </c:if>
-    </c:forEach>
 
+  <tbody id="printBody">
+   
   </tbody>
 </table>
 
@@ -166,11 +159,12 @@
             <label for="content">용도</label>
             <textarea class="form-control" id="content" rows="3"></textarea>
           </div>
+          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
       </div>
       <div class="modal-footer">
        <button type="button" class="btn btn-secondary" onclick="$('#res_Modal').modal('hide')">취소</button>
-        <button type="button" class="btn btn-primary" onclick="reservation()">대여신청</button>
+        <button type="button" class="btn btn-primary" onclick="reservation()" id="submitbtn">대여신청</button>
       </div>
     </div>
   </div>
@@ -179,9 +173,35 @@
 
 
    <script>
-
-       
+   /*security 용 선언 */
+   var token = $("meta[name='_csrf']").attr("content");
+   var header = $("meta[name='_csrf_header']").attr("content");
+   
+   
+      /*table 생성 코드 */ 
    $(document).ready(function(){
+	   var loginid = $('#loginid').text();
+	   var tbody = $('#printBody');
+	   <c:forEach var="r" items="${list}">
+	       var rental = "${r.rental}";
+	       var id = "${r.id}";
+	       var startTime = "${r.start_t}";
+	       var endTime = "${r.end_t}";
+	       var status = "${r.status}";
+	       
+	       if (loginid === id) {
+	           var output = $('<tr>');
+	           output.append($('<td>').text(rental));
+	           output.append($('<td>').text(id));
+	           output.append($('<td>').text(startTime + ' - ' + endTime).css('text-align', 'center'));
+	           output.append($('<td>').text(status).css('text-align', 'center'));
+	           tbody.append(output);
+	       }
+	   </c:forEach>
+	   /*table 생성 코드 */
+	   
+	   
+	   
        var calendarEl = document.getElementById('calendar');
        
        var asdf =   ([<c:forEach items="${list}" var="l">
@@ -232,20 +252,28 @@
                var tab = $('.nav-tabs .active').text();
                var modalTitle = tab + ' 예약 내역';
                var rental_id = info.event.id;
+               var login_id = $('#loginid').text(); 
                
-              
+               
               
                $('#rental_id').val('');
                $('#res_ModalLabel').text('');
                $('#content').text('');
                $('#startTime').val('');
                $('#endTime').val('');
+               $('#cancel_button').remove(); 
+               $('#submitbtn').remove();
                
                $('#rental_id').val(rental_id);
                $('#res_ModalLabel').text(modalTitle);
                $('#content').text(title);
                $('#startTime').val(start);
                $('#endTime').val(end);
+               
+               if (rental_id == login_id) {
+                  $('#res_Modal .modal-footer').append('<button type="button" class="btn btn-danger" id="cancel_button" onclick="cancel()">삭제</button>');
+
+               }
                
                $('#res_Modal').modal('show');
            },
@@ -260,7 +288,7 @@
                var tab = $('.nav-tabs .active').text();
                var modalTitle = tab + ' 대여 신청';
                var loginid = $('#loginid').text();
-              
+               
                
                //저장용데이터
                $('#rental_id').val(loginid);
@@ -274,6 +302,11 @@
                $('#content').text('');
                $('#startTime').val('');
                $('#endTime').val('');
+               $('#cancel_button').remove(); 
+               $('#submitbtn').remove();
+               
+               $('#res_Modal .modal-footer').append(' <button type="button" class="btn btn-primary" onclick="reservation()" id="submitbtn">대여신청</button>');
+
                
                $('#rental_id').val(loginid);
                $('#res_ModalLabel').text(modalTitle);
@@ -302,6 +335,10 @@
       	            type: "GET",
       	            url: "${pageContext.request.contextPath}/confer/view_ajax",
       	            data: {"tab_info": tab_info},
+      	            beforeSend : function(xhr)
+                    {   //데이터를 전송하기 전에 헤더에 csrf값을 설정합니다.
+                      xhr.setRequestHeader(header, token);         
+                   },
       	            success: function (response) {
       	              calendar.getEventSources().forEach(function(source) {
       	                source.remove();
@@ -335,15 +372,12 @@
        var rental = $('#rental').val();
        var start = $('#startTime').val();
        var end = $('#endTime').val();
-       var rental_id = $('#rental_id').val();
-       
+       var rental_id = $('#rental_id').val();//모달에서 가져온 loginid
+       var login_id = $('#loginid').text(); //헤더에서 가져온 loginid
+              
        console.log('confermain의 ajax중');
-       console.log(startTime);
-       console.log(endTime);
-       console.log(content);
-       console.log(rental);
-       console.log('로그인아이디 = ' + rental_id);
-             
+      
+                    
        $.ajax({
            url: "${pageContext.request.contextPath}/confer/reservation/",
            type: 'POST',
@@ -356,15 +390,22 @@
                "end": end,
                "id": rental_id
            },
+           beforeSend : function(xhr)
+           {   //데이터를 전송하기 전에 헤더에 csrf값을 설정합니다.
+             xhr.setRequestHeader(header, token);         
+          },
            success: function(response) {
                $('#res_Modal').modal('hide');
                document.location.reload(); //나중에 삭제해야댐 확인용
            },
            error: function(request,error) {
-             
+               
                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
            }
-       });
+       }); //ajax 끝
+       
+       
+       
    }
 
  

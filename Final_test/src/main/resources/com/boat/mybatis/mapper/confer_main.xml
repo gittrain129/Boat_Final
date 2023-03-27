@@ -29,5 +29,19 @@
 		select count(*) from CONFER_MAIN
 	</select>
   
+  <update id="admit_pro" >
+  update CONFER_MAIN 
+  	set STATUS = 1 
+  	where ID = #{ID} and 
+  		  RENTAL = #{RENTAL} and  
+  		  START_TIME = #{START_TIME} and  
+  		  END_TIME = #{END_TIME}
+  
+  </update>
+  
+  
+  
+  
+  
   
   </mapper>

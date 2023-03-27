@@ -17,5 +17,7 @@ public interface ConferenceReservationMapper {
 
 	public int listcount();
 
+	public void admit_pro(ConferenceReservation c2);
+
 	
 }

@@ -8,14 +8,15 @@ public class ConferenceReservation {
      private String CONTENT;
      private String START_T; //moment처리된 값
      private String END_T;
-     private String STATE;//예약승인 처리여부
+     private String STATUS;//예약승인 처리여부
      
   
-	public String getSTATE() {
-		return STATE;
+	
+	public String getSTATUS() {
+		return STATUS;
 	}
-	public void setSTATE(String sTATE) {
-		STATE = sTATE;
+	public void setSTATUS(String sTATUS) {
+		STATUS = sTATUS;
 	}
 	public String getSTART_T() {
 		return START_T;
