@@ -47,6 +47,7 @@ public class MemberController {
 	private PasswordEncoder passwordEncoder;
 	
 	
+	
 	@Autowired
 	public MemberController(MemberService memberservice, NaverLoginBO naverloginbo, 
 			SendMail sendMail, PasswordEncoder passwordEncoder) {
@@ -56,8 +57,6 @@ public class MemberController {
 		this.passwordEncoder = passwordEncoder;
 	}
 
-	
-	
 	
 	//회원가입
 	@GetMapping(value = "/sign_up")
@@ -114,7 +113,7 @@ public class MemberController {
 			member.setPROFILE_IMG(fileDBName);
 			System.out.println("absolutePathss " +saveFolder);
 			//파일 경로 이름
-			member.setPROFILE_FILE("../profile" + fileDBName);
+			member.setPROFILE_FILE("profile" + fileDBName);
 		}
 		
 		

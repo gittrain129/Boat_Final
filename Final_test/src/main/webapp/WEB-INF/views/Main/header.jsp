@@ -82,6 +82,16 @@
 
 .flex-shrink-0{font-family : 'Pretendard-Regular';}
 
+.img-circle {
+	position: relative;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 0;
+    background: none;
+    margin-bottom: 20px;
+    margin-top:16px;
+}
 </style>
 </head>
 
@@ -245,14 +255,15 @@
             </div>
             
     </sec:authorize>
-  		
 	<sec:authorize access="isAuthenticated()">
-  		<sec:authentication property="principal" var="pinfo"/>
+  		<sec:authentication property="principal.member" var="pinfo"/>
   		
   			<div class="d-flex align-items-center justify-content-end" style="height:70.4px !important;">
                 <div class="flex-shrink-0 btn-lg-square border rounded-circle" style="background-color:white !important">
-                    <i class="bi bi-person-circle text-primary" style="font-size:45px; margin-top:15px"></i>
+                    <img class="bi img-circle" 
+                    	 src="${pinfo.PROFILE_FILE}">
                 </div>
+                <div class="text-white ms-3">${pinfo.NAME}님</div>
                 <div class="ps-3">
                     <div class="btn btn-sm btn-light rounded-pill py-2 px-4 d-none d-lg-block">
                     	<form action="${pageContext.request.contextPath}/member/logout" method="post" name="logout">
