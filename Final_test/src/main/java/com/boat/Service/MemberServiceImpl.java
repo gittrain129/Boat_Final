@@ -57,6 +57,12 @@ public class MemberServiceImpl implements MemberService {
 		return dao.insert(member);
 	}
 
+	//정보
+	@Override
+	public Member member_info(String id) {
+		return dao.isId(id);
+	}
+
 	
 	
 }
