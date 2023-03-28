@@ -198,7 +198,7 @@
 	           tbody.append(output);
 	       }
 	   </c:forEach>
-	   /*table 생성 코드 */
+	   /*table 생성 코드 */  
 	   
 	   
 	   
