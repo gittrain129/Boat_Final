@@ -10,7 +10,7 @@ public interface ConferenceReservationService {
 
 	public void insert1(ConferenceReservation conferenceReservation);
 
-	public List<ConferenceReservation> admit();
+	public List<ConferenceReservation> admit(int startrow, int endrow, String tab);
 
 	public int listcount();
 

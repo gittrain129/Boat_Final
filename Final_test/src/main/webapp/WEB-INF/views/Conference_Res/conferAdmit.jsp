@@ -49,7 +49,7 @@
          
             <ul class="nav nav-tabs">
               <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#qwe">전체요청</a>
+                <a class="nav-link active" data-toggle="tab" href="#qwe">전체</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#asd" >회의실 예약</a>
@@ -113,8 +113,14 @@
                     </div>
                 </div>
             </c:forEach>
-              
-            	<div class="center-block">
+                 
+        
+            
+            </div>
+        </div>
+    </div>
+    
+    <div class="center-block">
 			<ul class="pagination justify-content-center">
 				<c:if test="${page<=1}">
 					<li class="page-item">
@@ -123,7 +129,7 @@
 				</c:if>
 				<c:if test="${page>1}">
 					<li class="page-item">
-						<a href="list?page=${page-1}" class="page-link">이전&nbsp;</a>
+						 <a href="#" class="page-link">이전&nbsp;</a>
 					</li>
 				</c:if>
 				
@@ -135,7 +141,7 @@
 					</c:if>
 					<c:if test="${a!=page }">
 						<li class="page-item">
-							<a href="list?page=${a}" class="page-link">${a}</a>
+							<a href="#" class="page-link">${a}</a>
 						</li>
 					</c:if>
 				</c:forEach>
@@ -147,16 +153,12 @@
 				</c:if>
 				<c:if test="${page < maxpage }">
 						<li class="page-item">
-							<a href="list?page=${page+1}" class="page-link">&nbsp;다음</a>
+							<a href="#" class="page-link">&nbsp;다음</a>
 						</li>
 				</c:if>
 		
 			</ul>			
 		</div>
-            
-            </div>
-        </div>
-    </div>
     <!-- Project End -->
              
                 
@@ -270,7 +272,19 @@ function confirm() {
                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
            }
        }); //ajax 끝
-}
+}//confirm 끝
+
+$(document).ready(function() {
+	  $('.page-link').click(function(e) {
+	    e.preventDefault();
+	    var page = $(this).text();
+	    var tab = $('.nav-tabs .active').text();
+	    console.log(page);
+	    var url = "admit?page=" +page+ "&tab=" +tab;
+	    window.location.href = url;
+	  });
+	});
+
 	
 </script>
 
