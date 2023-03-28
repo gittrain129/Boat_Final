@@ -25,11 +25,11 @@
           <form name="loginform" action="${pageContext.request.contextPath}/member/loginProcess" method="post">
             <label for="name">사번</label>
             <i class= "fas fa-user"></i>
-            <input type="text" name="EMPNO" id="name" class="form-control" placeholder="사번을 입력해주세요">
+            <input type="text" name="id" id="name" class="form-control" placeholder="사번을 입력해주세요">
 
             <label for="password">비밀번호</label>
             <i class= "fas fa-lock"></i>
-            <input type="password" name="PASSWORD" id="password" class="form-control" placeholder="비밀번호를 입력해주세요">
+            <input type="password" name="password" id="password" class="form-control" placeholder="비밀번호를 입력해주세요">
 		    <i class= "fa fa-solid fa-eye-slash" ></i>
 
             <div>

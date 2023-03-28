@@ -34,8 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/resources/**/**").permitAll()
 			.antMatchers("/member/list").access("hasRole('ROLE_ADMIN')")
 			.antMatchers("/member/info").access("hasRole('ROLE_ADMIN')")
-			
-		.antMatchers("/**").permitAll();
+			.antMatchers("/**").permitAll();
 		
 //		http.authorizeRequests()
 //			.antMatchers("/resources/**/**").permitAll()
@@ -55,12 +54,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //		 				.successHandler(loginSuccessHandler())
 //		 				.failureHandler(loginFailHandler());
 			
-		//메인으로 접속하려고 변경
 		http.formLogin()
 		    .loginPage("/member/sign_in")
 		    .loginProcessingUrl("/member/loginProcess")
-		    .usernameParameter("EMPNO")
-		    .passwordParameter("PASSWORD")
+		    .usernameParameter("id")
+		    .passwordParameter("password")
 		    .successHandler(loginSuccessHandler())
 		    .failureHandler(loginFailHandler());
 		
@@ -71,14 +69,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		 (4) deleteCookies : 쿠키 제거
 		 */
 		http.logout().logoutSuccessUrl("/index")
-		.logoutUrl("/member/logout")
-		.invalidateHttpSession(true)
-		.deleteCookies("remember-me", "JSESSION_ID");
+			.logoutUrl("/member/logout")
+			.invalidateHttpSession(true)
+			.deleteCookies("remember-me", "JSESSION_ID");
 		
 		http.rememberMe()
-		.rememberMeParameter("remember-me")
-		.rememberMeCookieName("remember-me")
-		.tokenValiditySeconds(2419200);
+			.rememberMeParameter("remember-me")
+			.rememberMeCookieName("remember-me")
+			.tokenValiditySeconds(2419200);
 		
 		http.exceptionHandling().accessDeniedHandler(accessDeniedHandler());
 	}

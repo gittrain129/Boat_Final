@@ -16,11 +16,11 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,14 +44,16 @@ public class MemberController {
 	private MemberService memberservice;
 	private NaverLoginBO naverloginbo;//네이버 api
 	private SendMail sendMail;
+	private PasswordEncoder passwordEncoder;
 	
 	
 	@Autowired
 	public MemberController(MemberService memberservice, NaverLoginBO naverloginbo, 
-			SendMail sendMail) {
+			SendMail sendMail, PasswordEncoder passwordEncoder) {
 		this.memberservice = memberservice;
 		this.naverloginbo = naverloginbo;
 		this.sendMail = sendMail;
+		this.passwordEncoder = passwordEncoder;
 	}
 
 	
@@ -90,11 +92,10 @@ public class MemberController {
 	public String joinProcess(Member member, RedirectAttributes rattr,
 								Model model, HttpServletRequest request) throws Exception {
 		
-//		//비밀번호 암호화 추가
-//		String encPassword = passwordEncoder.encode(member.getPASSWORD());
-//		Logger.info(encPassword);
-//		member.setPASSWORD(encPassword);
-		
+		//비밀번호 암호화 추가
+		String encPassword = passwordEncoder.encode(member.getPASSWORD());
+		Logger.info(encPassword);
+		member.setPASSWORD(encPassword);
 		
 		MultipartFile uploadfile = member.getUploadfile();
 		

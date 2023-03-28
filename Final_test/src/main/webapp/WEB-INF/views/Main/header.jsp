@@ -17,7 +17,21 @@
     
 	<jsp:include page="headertag.jsp"/>
     <jsp:include page="process_bar.jsp"/>
-  	
+
+<script>
+	$(function(){
+		$("#logout").click(function(event){
+			event.preventDefault();
+			$("form[name=logout]").submit();
+		})
+		
+		var username = "${pinfo.username}";
+		if (username != null) {
+			$('.username').hide();
+		}
+	})
+</script>
+
 <style>
   	.inout_button:focus {
 	  background-color: #29d329;
@@ -215,7 +229,11 @@
                 
             </div>
             
-            <div class="d-flex align-items-center justify-content-end" style="height:70.4px !important;">
+            
+	<sec:authorize access="isAnonymous()">
+		<sec:authentication property="principal" var="pinfo"/>
+  		
+            <div class="d-flex align-items-center justify-content-end username" style="height:70.4px !important;">
                 <div class="flex-shrink-0 btn-lg-square border rounded-circle" style="background-color:white !important">
                     <i class="bi bi-person-circle text-primary" style="font-size:45px; margin-top:15px"></i>
                 </div>
@@ -225,11 +243,27 @@
                     </div>
                 </div>
             </div>
-        <sec:authorize access="isAuthenticated()">
-  			<sec:authentication property="principal" var="pinfo"/>
-  			
-  			
-  		</sec:authorize>
+            
+    </sec:authorize>
+  		
+	<sec:authorize access="isAuthenticated()">
+  		<sec:authentication property="principal" var="pinfo"/>
+  		
+  			<div class="d-flex align-items-center justify-content-end" style="height:70.4px !important;">
+                <div class="flex-shrink-0 btn-lg-square border rounded-circle" style="background-color:white !important">
+                    <i class="bi bi-person-circle text-primary" style="font-size:45px; margin-top:15px"></i>
+                </div>
+                <div class="ps-3">
+                    <div class="btn btn-sm btn-light rounded-pill py-2 px-4 d-none d-lg-block">
+                    	<form action="${pageContext.request.contextPath}/member/logout" method="post" name="logout">
+                    		<a href="#" id="logout">로그아웃</a>
+   							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                    	</form>
+                    </div>
+                </div>
+            </div>
+            
+  	</sec:authorize>
             
         </div>
         

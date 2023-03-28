@@ -21,5 +21,8 @@ public interface MemberService {
 	//회원가입 처리
 	public int insert(Member member);
 
+	//정보
+	public Member member_info(String id);
+
 
 }
