@@ -1,5 +1,8 @@
 package com.boat.controller.Todo;
 
+import java.security.Principal;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -28,22 +31,22 @@ public class TodoContoroller {
 	}
 	
 	@RequestMapping(value="/list",method=RequestMethod.GET)
-	public ModelAndView Todomain(String empno,
+	public ModelAndView Todomain(Principal principal,
 							ModelAndView mv) {
-
+		String empno = principal.getName();
+		String dept = todoService.getDept(empno);
+		logger.info("로그인한 empno : "+empno);
+		logger.info("로그인한 dept : "+dept);
 		
 		//select * from todolist where empno= '로그인한사람;
 		//1. select * from Todo where empno = #{empno}
-		Todo Mytodolist = todoService.mytodolist(empno);
+		List<Todo> Mytodolist = todoService.mytodolist(empno);
 		
 		
 		
-		//2.
-		//select key 
-		//select dept from member where empno = #{empno}
-
 		//select * from TODOLIST where dept = #{dept}
 		// order by empno
+		List<Todo> mydeptTodolist = todoService.deptList(dept);
 		
 		//3.
 		//select key
@@ -55,6 +58,8 @@ public class TodoContoroller {
 		
 		//Mytodolist
 		mv.addObject("MyTodo",Mytodolist);
+		//deptList
+		mv.addObject("MydeptList",mydeptTodolist);
 		
 	return mv;
 

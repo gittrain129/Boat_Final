@@ -1,5 +1,7 @@
 package com.boat.Service.Todo;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.boat.aop.LogAdvice;
@@ -25,9 +27,23 @@ public class TodoServiceImpl implements TodoService {
 
 	//내할일보기 할일목록
 	@Override
-	public Todo mytodolist(String empno) {
+	public List<Todo> mytodolist(String empno) {
 		//log.info(todo.toString());
 		return dao.myTodolist(empno);
+		
+	}
+
+	//dept가져오기
+	@Override
+	public String getDept(String empno) {
+
+		return dao.getDept(empno);
+	}
+
+	//내 팀원 리스트 가져오기
+	@Override
+	public List<Todo> deptList(String dept) {
+		return dao.myDeptTodo(dept);
 		
 	}
 	

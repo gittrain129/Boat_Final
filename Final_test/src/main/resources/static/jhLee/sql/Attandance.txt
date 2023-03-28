@@ -1,9 +1,8 @@
 drop table MYINFO cascade constraints purge;
 
-create table MYINFO (
-	T_EMPNO VARCHAR2(12),
-	T_CONTENT VARCHAR2(1000),
-	T_DATE DATE DEFAULT SYSDATE, 
-	T_GRAPH VARCHAR2(2),
-	CONSTRAINT MYINFO_GP_CK check(T_GRAPH in ('Y','N'))
+create table create table attandance (
+	EMPNO VARCHAR2(12),
+	CONTENT VARCHAR2(1000),
+	on_time varchar2(20),
+	curdate DATE DEFAULT SYSDATE
 );

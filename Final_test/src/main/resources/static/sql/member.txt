@@ -25,7 +25,7 @@ SELECT*FROM MEMBER;
 
 INSERT INTO MEMBER 
 VALUES('ADMIN', '인사팀', '부서장','123456', '홍길동','admin@boat.com',
-'adminImage.png', SYSDATE, 'ROLE_MEMBER', null);
+'adminImage.png','adminImage.png', SYSDATE, 'ROLE_MEMBER', null);
 
 INSERT INTO MEMBER 
 VALUES('2330001', '인사팀', '부서장','123456', '홍길동','admin2@boat.com',
