@@ -119,8 +119,6 @@ public class conferController {
     public String confer_admit(@RequestParam(value="page", defaultValue="1", required=false) int page,
                                @RequestParam(value="tab", defaultValue="전체", required=false) String tab,
                                Model model) {
-        System.out.println(tab);
-        System.out.println(page);
         int limit = 8;
         int listcount = co.listcount();
         int maxpage = (listcount + limit - 1) / limit;

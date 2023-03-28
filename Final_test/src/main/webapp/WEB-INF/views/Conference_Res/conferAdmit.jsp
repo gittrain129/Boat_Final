@@ -108,8 +108,18 @@
                         <h6>${r.RENTAL}</h6>
                         <span>신청자: ${r.ID}</span>
                         <span>일정 : ${r.START_T} - ${r.END_T}</span>
-                      <button type="button" class="btn btn-primary" onclick="modal('${r.ID }','${r.RENTAL}','${r.START_TIME }','${r.START_T}','${r.END_TIME }','${r.END_T}','${r.CONTENT}')">처리</button>
+                        <c:choose>
+                        <c:when test="${r.STATUS ==0 }">
+                      <button type="button" class="btn btn-primary" onclick="modal('${r.ID }','${r.RENTAL}','${r.START_TIME }','${r.START_T}','${r.END_TIME }','${r.END_T}','${r.CONTENT}')">처리대기</button>
+				      	</c:when>
+				      	<c:when test="${r.STATUS ==1 }">
+				      <button type="button" class="btn btn-success" onclick="modal('${r.ID }','${r.RENTAL}','${r.START_TIME }','${r.START_T}','${r.END_TIME }','${r.END_T}','${r.CONTENT}')">처리완료</button>
+				      	</c:when>
+				      	<c:when test="${r.STATUS ==2 }">
+				      <button type="button" class="btn btn-danger" onclick="modal('${r.ID }','${r.RENTAL}','${r.START_TIME }','${r.START_T}','${r.END_TIME }','${r.END_T}','${r.CONTENT}')">반려</button>
+				      	</c:when>
 				      
+				      </c:choose>
                     </div>
                 </div>
             </c:forEach>
