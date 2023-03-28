@@ -7,6 +7,8 @@ import javax.mail.internet.MimeMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -62,16 +64,20 @@ public class SendMail {
 				String content = "<img src='cid:Home'>" + vo.getContent();
 				helper.setText(content, true);
 				
-				FileSystemResource file = new FileSystemResource(new File(sendfile));
+				//FileSystemResource file = new FileSystemResource(new File(sendfile));
+				ClassPathResource path = new ClassPathResource("/static/img/welcome.jpg");
+				byte[] file = path.getInputStream().readAllBytes();
+
+
 				//addInline메서드의 첫번째 메서드에는 cid(content id)를 지정합니다.
-				helper.addInline("Home", file);
+				helper.addInline("Home", new ByteArrayResource(file),"image/jpeg");
 				
 				/*
 				 3. 파일을 첨부해서 보내는 경우
 				 첫번째 인자 : 첨부될 파일의 이름입니다.
 				 두번째 인자 : 첨부파일
 				 */
-				helper.addAttachment("BOAT 회원가입을 축하드립니다.jpg", file);
+				helper.addAttachment("BOAT 회원가입을 축하드립니다.jpg", path);
 			}
 			
 		};//MimeMessagePreparator
