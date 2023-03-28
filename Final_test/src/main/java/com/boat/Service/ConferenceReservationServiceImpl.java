@@ -31,9 +31,11 @@ public class ConferenceReservationServiceImpl implements ConferenceReservationSe
 	}
 
 	@Override
-	public List<ConferenceReservation> admit() {
-		return c3.admit();
+	public List<ConferenceReservation> admit(int startrow, int endrow, String tab) {
+		return c3.admit(startrow,endrow,tab);
 	}
+
+
 
 	@Override
 	public int listcount() {

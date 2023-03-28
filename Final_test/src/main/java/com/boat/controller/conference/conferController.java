@@ -116,27 +116,36 @@ public class conferController {
 	}
    
     @RequestMapping(value="/admit")
-    public String confer_admit(@RequestParam(value="page",defaultValue="1",required=false) int page,
-    											Model model) {
-    	
-    	int limit = 8;
-    	int listcount= co.listcount();
-    	int maxpage = (listcount + limit - 1) / limit;
-		
-		int startpage = ((page-1) /8) *8 +1;
-		int endpage = startpage +8 -1;
-		
-		if(endpage>maxpage)
-			endpage=maxpage;
-		
-		List<ConferenceReservation> reservation = co.admit();
-		model.addAttribute("page",page);
-		model.addAttribute("startpage",startpage);
-		model.addAttribute("endpage",endpage);
-		model.addAttribute("maxpage",maxpage);
+    public String confer_admit(@RequestParam(value="page", defaultValue="1", required=false) int page,
+                               @RequestParam(value="tab", defaultValue="전체", required=false) String tab,
+                               Model model) {
+        System.out.println(tab);
+        System.out.println(page);
+        int limit = 8;
+        int listcount = co.listcount();
+        int maxpage = (listcount + limit - 1) / limit;
+
+        int startpage = ((page-1) /limit) *limit +1;
+        int endpage = startpage +limit -1;
+
+        int startrow = (page -1) * limit +1; 
+		int endrow = startrow + limit -1;	
+        
+        if(endpage>maxpage)
+            endpage=maxpage;
+        if(tab.equals("전체")) {
+        	tab="";
+        }
+
+        List<ConferenceReservation> reservation = co.admit(startrow,endrow,tab);
+        model.addAttribute("page", page);
+        model.addAttribute("startpage", startpage);
+        model.addAttribute("endpage", endpage);
+        model.addAttribute("maxpage", maxpage);
         model.addAttribute("reservation", reservation);
-		return "/Conference_Res/conferAdmit";
-	}
+        return "/Conference_Res/conferAdmit";
+    }
+
    
     @ResponseBody
 	@RequestMapping(value="/admit_ajax")
