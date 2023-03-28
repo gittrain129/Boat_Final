@@ -13,8 +13,8 @@
 		  
 		 <select id ="myTodolist" resultType="Todo">
 		 select * from TODOLIST
-		 <if> 
-		 where empno = #{empno}
+		<!--  <if> 
+		 where empno = #{empno} -->
 		 </select> 
 		  
   </mapper>
