@@ -13,8 +13,34 @@
 		  
 		 <select id ="myTodolist" resultType="Todo">
 		 select * from TODOLIST
-		<!--  <if> 
-		 where empno = #{empno} -->
+		 where empno = #{empno}
+		 order by reg_date desc
 		 </select> 
 		  
+		 <select id="getDept" resultType="string">
+		 select dept from member 
+		 where empno = #{empno}
+		 </select>
+		 
+		 <select id="myDeptTodo" resultMap ="depttodomember" resultType ="Member2">
+		 select * from member 
+		 where dept = #{dept}
+		 join
+		 select * from todolist 
+		 where dept = #{dept}
+		 on
+		 member.empno=todolist.empno
+		 
+		 </select>
+		 
+		 <resultMap id="depttodomember" type="com.boat.domain.Member2">
+		 	<result property="EMPNO" column="EMPNO"/>
+		 	<result property="JOB" column="JOB"/>
+		 	<result property="NAME" column="NAME"/>
+		 </resultMap>
+		 
+		 
+		 
+		 
+		 
   </mapper>

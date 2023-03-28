@@ -81,8 +81,8 @@
                 })
 	        	</script>
       
-			 <input type="hidden" name ="EMPNO" value="${loginid}" id="empno">
-			 <input type="hidden" name ="DEPT" value="${dept}" id="dept">
+			 <input type="hidden" name ="EMPNO" value="2310001" id="empno">
+			 <input type="hidden" name ="DEPT" value="홍보팀" id="dept">
              <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
              <div class="modal-footer">
                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id ="undo">돌아가기</button>
@@ -143,7 +143,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <nav>
+                        <nav> 
                             <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                                 <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">할 일 목록</a>
                                 <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">진행정도</a>
@@ -163,7 +163,9 @@
                                     <tbody>
                                         <c:forEach var="mt" items="${MyTodo}">
                                         <tr>
-                                            <td><a href="#">${mt.T_CONTENT}</a></td>
+                                            <td> 
+                                          <a href="#">${mt.t_CONTENT}</a>
+                                          </td>
                                             <td>${mt.START_DATE}</td>
                                             <td>${mt.END_DATE}</td>
                                         </tr>
@@ -177,24 +179,16 @@
                             </div>
                             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                                 <table class="table" cellspacing="0">
+                                 <c:forEach var="mt" items="${MyTodo}">
                                     <thead>
                                         <tr>
-                                            <th>첫 번째 할 일</th>
+                                            <th>${mt.t_CONTENT}</th>
                                             <th><div class='progress'></div></th>
                                             <th></th>
                                         </tr> 
-                                         <tr>
-                                            <th>두 번째 할 일</th>
-                                            <th><div class='progress'></div></th>
-                                            <th></th>
-                                        </tr>
-                                          <tr>
-                                            <th>세 번째 할 일</th>
-                                           <th><div class='progress'></div></th>
-                                            <th></th>
-                                        </tr>
+                                      
                                     </thead>
-                               
+                               </c:forEach>
                                 </table>
                             </div>
                             <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
