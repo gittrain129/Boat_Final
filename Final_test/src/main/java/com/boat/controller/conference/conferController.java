@@ -58,7 +58,7 @@ public class conferController {
    @GetMapping("/view")
    public String mainView(	@RequestParam(value="tab_info",defaultValue="대회의실",required=false) String tab,
 		   					Model model) {	
-	   
+	   String[] st = {"승인대기중","승인완료","거절"};
        List<ConferenceReservation> cs = co.getcal(tab);
        
 
@@ -75,7 +75,9 @@ public class conferController {
            event.put("title", con.getCONTENT());
            event.put("start_t", con.getSTART_T());
            event.put("end_t", con.getEND_T());
-           event.put("status", con.getSTATUS());
+           
+           String status = st[Integer.parseInt(con.getSTATUS())];
+           event.put("status", status);
            
        
            cList.add(event);
