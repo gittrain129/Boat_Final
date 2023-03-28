@@ -4,7 +4,7 @@ create sequence todo_seq nocache;
 
 create table TODOLIST (
 	NUM VARCHAR2(12),
-	EMPNO VARCHAR2(1000) references member(empno),
+	EMPNO VARCHAR2(12) references member(empno),
 	T_CONTENT VARCHAR2(200),
 	START_DATE VARCHAR2(15),
 	END_DATE VARCHAR2(15),

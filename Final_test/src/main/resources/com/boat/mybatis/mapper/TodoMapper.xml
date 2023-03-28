@@ -22,7 +22,7 @@
 		 where empno = #{empno}
 		 </select>
 		 
-		 <select id="myDeptTodo" resultMap ="depttodomember" resultType ="Member2">
+		 <select id="myDeptTodo" resultMap ="depttodomember" resultType ="Todo">
 		 select * from member 
 		 where dept = #{dept}
 		 join
@@ -33,7 +33,7 @@
 		 
 		 </select>
 		 
-		 <resultMap id="depttodomember" type="com.boat.domain.Member2">
+		 <resultMap id="depttodomember" type="Todo">
 		 	<result property="EMPNO" column="EMPNO"/>
 		 	<result property="JOB" column="JOB"/>
 		 	<result property="NAME" column="NAME"/>
