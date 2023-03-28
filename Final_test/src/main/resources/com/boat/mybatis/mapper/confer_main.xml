@@ -21,6 +21,7 @@
   
    <select id = "admit" resultType="ConferenceReservation" parameterType="java.util.Map">
      select * from CONFER_MAIN
+     order by status asc
      
   </select>
   
