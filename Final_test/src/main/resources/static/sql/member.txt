@@ -10,7 +10,7 @@ CREATE TABLE MEMBER(
 	EMAIL VARCHAR2(30),
 	PROFILE_FILE VARCHAR2(50), --프로필 사진 경로 ex)C:\Users\admin\git\Boat_Final\Final_test\src\main\resources\static\profile
 								--static => profile => 가입 날짜 => 사진
-								--<img src="../profile/2023-3-26/2310004.png">
+								--<img src="profile/2023-3-26/2310004.png">
 	PROFILE_IMG VARCHAR2(50),
 	REGISTER_DATE DATE DEFAULT SYSDATE,
 	AUTH VARCHAR2(50) DEFAULT 'ROLE_MEMBER' NOT NULL,
