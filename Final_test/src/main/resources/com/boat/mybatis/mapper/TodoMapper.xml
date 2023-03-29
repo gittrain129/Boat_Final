@@ -23,23 +23,23 @@
 		 </select>
 		 
 		 <select id="myDeptTodo" resultMap ="depttodomember" resultType ="Todo">
-		 select * from member 
-		 where dept = #{dept}
-		 join
-		 select * from todolist 
-		 where dept = #{dept}
-		 on
-		 member.empno=todolist.empno
+		<!-- 부서별 Todo값 가져오기 -->
+			SELECT num, empno, T_content, start_date, end_date, reg_date,dept, job, 
+			FROM (select * from todolist where dept = '인사팀')T
+			 JOIN (select * from member where dept = '인사팀')M
+			ON T.empno = M.empno
+			order by empno;
+
 		 
 		 </select>
+		 
+		 
 		 
 		 <resultMap id="depttodomember" type="Todo">
 		 	<result property="EMPNO" column="EMPNO"/>
 		 	<result property="JOB" column="JOB"/>
 		 	<result property="NAME" column="NAME"/>
 		 </resultMap>
-		 
-		 
 		 
 		 
 		 

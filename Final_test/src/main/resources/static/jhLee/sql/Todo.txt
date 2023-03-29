@@ -1,7 +1,11 @@
 drop table TODOLIST cascade constraints purge;
 
+ALTER TABLE TODOLIST
+MODIFY EMPNO VARCHAR2(12);
+
 create sequence todo_seq nocache;
 
+--현재 진행중 테이블입니다.230329
 create table TODOLIST (
 	NUM VARCHAR2(12),
 	EMPNO VARCHAR2(12) references member(empno),
@@ -13,31 +17,15 @@ create table TODOLIST (
 );
 
 
-ALTER TABLE TODOLIST
-MODIFY EMPNO VARCHAR2(12);
 
-SELECT TODOLIST.EMPNO
-    FROM TODOLIST
-    INNER JOIN MEMBER
-    ON TODOLIST.DEPT = MEMBER.DEPT
-    WHERE TODOLIST.DEPT = '인사팀';
-65ROW....
-
-SELECT * FROM TODOLIST WHERE DEPT = '인사팀';
-13ROW
-
-SELECT * FROM TODOLIST 
-NATURAL JOIN MEMBER WHERE EMPNO IN (2330006,2330005,2330004,2330003,2330002);
+--부서별 Todo값 가져오기
+SELECT *
+FROM (select * from todolist where dept = '인사팀')T
+ JOIN (select * from member where dept = '인사팀')M
+ON T.empno = M.empno
+order by empno;
 
 
-
- USING(EMPNO); 
-
-SELECT TODOLIST.EMPNO
-FROM TODOLIST
-INNER JOIN MEMBER
-ON TODOLIST.DEPT = MEMBER.DEPT
-WHERE TODOLIST.DEPT = '인사팀'
 
 INSERT INTO TODOLIST VALUES(
 TODO_SEQ.NEXTVAL, '2330006','1할일1','2023-03-01','2023-03-02',SYSDATE,'인사팀');
