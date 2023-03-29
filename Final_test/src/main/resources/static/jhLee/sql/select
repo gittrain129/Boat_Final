@@ -10,7 +10,7 @@ select * from member;
 
 select * from boat_calendar;
 
-select * from attandance;
+select * from BOAT_ATTENDANCE;
 
 
  

@@ -1,8 +1,10 @@
-drop table MYINFO cascade constraints purge;
+drop table BOAT_ATTENDANCE cascade constraints purge;
 
-create table create table attandance (
+create table BOAT_ATTENDANCE (
 	EMPNO VARCHAR2(12),
-	CONTENT VARCHAR2(1000),
+	CONTENT VARCHAR2(200),
 	on_time varchar2(20),
-	curdate DATE DEFAULT SYSDATE
+	off_time varchar2(20),
+	OUT_time varchar2(20),
+	reg_date DATE DEFAULT SYSDATE
 );

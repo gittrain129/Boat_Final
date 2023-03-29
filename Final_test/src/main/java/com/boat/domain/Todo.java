@@ -20,7 +20,7 @@ public class Todo {
 	private String DEPT;
 	private String NUM;
 	private Member member;
-	private List<Member> memberlist;
+	//private List<Member> member;
 	
 	
 }

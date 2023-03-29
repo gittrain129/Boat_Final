@@ -13,6 +13,8 @@ public interface AttandanceService {
 	//출퇴근 리스트 불러오기
 	public List<Attandance> getAttList();
 
+	public void AttOff(String off, String empno);
+
 	
 	
 	

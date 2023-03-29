@@ -5,7 +5,7 @@
   <mapper namespace="com.boat.mybatis.mapper.AttandanceMapper">
   
 		<select id="getAttList" resultType = 'Attandance'>
-		select * from attandance
+		select * from BOAT_ATTENDANCE
 		<!--
 		개인 회원 전용
 		select * from attandance where empno = #{empno}
@@ -16,8 +16,11 @@
 		</select>
 		
 		<insert id="AttOn">
-		insert into attandance (empno, on_time) values(#{empno},#{on})
+		insert into BOAT_ATTENDANCE (empno, on_time,REG_DATE) values(#{empno},#{on},SYSDATE)
 		</insert>
+		<update id="AttOff">
+		update BOAT_ATTENDANCE SET   off_time =#{off} WHERE REG_DATE= SYSDATE
+		</update>
 		  
 		  
 		  
