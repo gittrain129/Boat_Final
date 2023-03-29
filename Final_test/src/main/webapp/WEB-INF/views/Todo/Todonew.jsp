@@ -81,8 +81,8 @@
                 })
 	        	</script>
       
-			 <input type="hidden" name ="EMPNO" value="2310001" id="empno">
-			 <input type="hidden" name ="DEPT" value="홍보팀" id="dept">
+			 <input type="hidden" name ="EMPNO" value="2330006" id="empno">
+			 <input type="hidden" name ="DEPT" value="인사팀" id="dept">
              <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
              <div class="modal-footer">
                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id ="undo">돌아가기</button>

@@ -206,6 +206,9 @@
 		    	   	data:obj,
 		    	   	async:false,
 		    	   	success:function(rdata){
+		                        console.log(rdata);
+		                        eventData.id = rdata.id;
+		                        $('#calendar').fullCalendar('renderEvent', eventData, true);
 		    	   	console.log('모든 데이터 저장하였습니다.');
 		    	   	$('#title').val("");		
 		    	   	//location.reload();
@@ -214,15 +217,19 @@
 		    	   	error:function(request,status,error){
 		    	   	console.log('saveerror')
     	   			},
-    	   			complete:function(){}
+    	   			complete:function(){
+    	   				
+    	   				$("#addevent").modal('hide');
+    	   				$('#undo').click(function(){
+    		            	$('#title').val("");
+    		            	 location.reload();
+    	   			}
 	    	   		}) 
 
-	    	   		$("#addevent").modal('hide');
+	    	   		
 	            });
 
-           	 	$('#undo').click(function(){
-	            	$('#title').val("");
-	            	 location.reload();
+           	 	
 	            })
 	            calendar.unselect();  //ok
 	            }, 
@@ -280,7 +287,7 @@
    		        }
 
    		        function deleteEvent(event) {
-   		            if (confirm("Do you really want to delete this event?")) {
+   		            if (confirm("일정을 삭제하시겠습니까?")) {
    		                $.ajax({
    		                    type: 'POST',
    		                    url: 'delete',
