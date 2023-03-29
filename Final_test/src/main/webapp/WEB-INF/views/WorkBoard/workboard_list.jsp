@@ -57,6 +57,8 @@
 	<div class="row">
 		<div class="col-lg-9 col-12">
 		
+	<div class="container">
+	   <form action="add" method="post" enctype="multipart/form-data" name="boardform">
 	
 		<h3>워크보드 게시판</h3>
 		<hr class="border-secondary mb-4" />
@@ -73,7 +75,7 @@
 					</tr>
 					<tr>
 					<tr>					
-						<th>카테고리</th>
+						<th style="width:120px;">카테고리</th>
 						<td>
 							<select name="likeLanguage" id="" class="pl">
 					            <option value="0" selected>선택해주세요</option>
@@ -88,23 +90,29 @@
 					<tr>
 						<th>제목</th>
 						<td>
-							<input type="text" name="_subject" class="form-control" name="" />
+							<input name="BOARD_SUBJECT" id="board_subject" type="text" maxlength="100"
+	    	   					class="form-control" placeholder="제목을 입력해주세요">			
 						</td>
 					</tr>
 					<tr>
 						<th>내용</th>
 						<td>
-							<textarea id="text" name="_text" class="form-control" rows="5"></textarea>
+							<textarea name="BOARD_CONTENT" id="board_content" 
+	    		 				cols="67" rows="5" class="form-control" placeholder="내용을 입력해주세요"></textarea>
 						</td>
 					</tr>
 					<tr>
 						<td colspan="2">
-							<input type="submit" class="btn btn-danger" name="" style="background-color:#1ca7ff; border-color:#1ca7ff;"/>
+							<button type=submit class="btn btn-primary" style="background-color:#1ca7ff; border-color:#1ca7ff;">등록</button>
+	  						<button type=reset class="btn btn-danger">취소</button>
 						</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
+		
+	  </form>
+	</div>
 		
 			
 		<div class="card">
