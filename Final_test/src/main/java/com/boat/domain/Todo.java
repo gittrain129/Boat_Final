@@ -19,7 +19,8 @@ public class Todo {
 	private String REG_DATE;  	
 	private String DEPT;
 	private String NUM;
-	//private List<Member> member;
+	private Member member;
+	private List<Member> memberlist;
 	
 	
 }
