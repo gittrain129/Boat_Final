@@ -51,7 +51,15 @@
   
   </update>
   
+    <update id="reject_pro" >
+  update CONFER_MAIN 
+  	set MEMO = #{MEMO} , STATUS = 2 
+  	where ID = #{ID} and 
+  		  RENTAL = #{RENTAL} and  
+  		  START_TIME = #{START_TIME} and  
+  		  END_TIME = #{END_TIME}
   
+  </update>
   
   
   

@@ -9,9 +9,16 @@ public class ConferenceReservation {
      private String START_T; //moment처리된 값
      private String END_T;
      private String STATUS;//예약승인 처리여부
+     private String MEMO;//예약거절 사유입력
      
   
 	
+	public String getMEMO() {
+		return MEMO;
+	}
+	public void setMEMO(String mEMO) {
+		MEMO = mEMO;
+	}
 	public String getSTATUS() {
 		return STATUS;
 	}

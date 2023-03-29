@@ -15,6 +15,8 @@ public interface ConferenceReservationService {
 	public int listcount();
 
 	public void admit_pro(ConferenceReservation c2);
+
+	public void reject_pro(ConferenceReservation c2);
 	
 	
 }
