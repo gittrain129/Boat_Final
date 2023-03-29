@@ -1,4 +1,29 @@
 $(document).ready(function(){
+
+	$(".emailbtn").on('click',function () {
+		console.log($('#email').val())
+		var email = $('#email').val();
+		
+		if(email == ''){
+    	 	alert("이메일을 입력해주세요.");
+    	 	return false;
+    	 }
+		
+			$.ajax({
+				type : "POST",
+				url : "/emailAuth",
+				data : {email : email},
+				success: function(data){
+					alert("인증번호가 발송되었습니다.");
+					email_auth_cd = data;
+				},
+				error: function(data){
+					alert("메일 발송에 실패했습니다.");
+				}
+			}); //ajax end
+	});
+
+
 	// 초기값은 모든 필드의 검사를 통과하지 않은 상태로 설정합니다
 	var agree_chk = false;
 	var agree_chk2 = false;
@@ -303,9 +328,9 @@ $(document).ready(function(){
 		console.log("valid_name"+valid_name)
 		console.log("valid_file"+valid_file)
 	    if (agree_chk && agree_chk2 && valid_select && valid_empno && valid_password && valid_password_ck && valid_email && valid_name && valid_file) {
-	      $('button[type="submit"]').prop('disabled', false);
+	      $('.submit').prop('disabled', false);
 	    } else {
-	      $('button[type="submit"]').prop('disabled', true);
+	      $('.submit').prop('disabled', true);
 	    }
 	  }
 });

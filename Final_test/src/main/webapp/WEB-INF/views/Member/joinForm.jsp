@@ -77,7 +77,7 @@
                 <div class="head col-sm-12 col-md-3 fw-bold">부서명</div>
                 
                 <div class="body col-sm-12 col-md-9">
-	                <select class="col-sm-12 col-md-9 form-select" aria-label="Default select example" name="DEPT" required>
+	                <select class="col-sm-12 col-md-9 form-select" aria-label="Default select example" name="DEPT">
 					  <option selected>부서명을 선택해 주세요</option>
 					  <option value="홍보팀">홍보팀</option>
 					  <option value="개발팀">개발팀</option>
@@ -95,7 +95,7 @@
             <div class="row row-container align-items-center">
                 <div class="head col-sm-12 col-md-3 fw-bold">사원번호</div>
                 <div class="body col-sm-12 col-md-9">
-                    <input type="text" name="EMPNO" placeholder="부서명을 선택하면 사원번호가 자동 생성됩니다" class="input-empno _input" id="_label-id" readOnly required>
+                    <input type="text" name="EMPNO" placeholder="부서명을 선택하면 사원번호가 자동 생성됩니다" class="input-empno _input" id="_label-id" readOnly>
                 </div>
                 <div id="validationServerUsernameFeedback2" class="invalid-feedback fw-bold">
 			        부서명을 선택해 주세요
@@ -108,7 +108,7 @@
                 </div>
                 <div class="body col-sm-12 col-md-9">
                     <input type="password" name="PASSWORD" class="_input" autocomplete="off" placeholder="6~16자 / 문자, 숫자, 특수 문자 모두 혼용 가능"
-                    	    id="_label-pwd" maxlength="16" required>
+                    	    id="_label-pwd" maxlength="16">
                 	<i class= "fa fa-solid fa-eye-slash" ></i>
                 </div>
                 <div id="validationServerUsernameFeedback3" class="invalid-feedback fw-bold">
@@ -121,7 +121,7 @@
                 <div class="head col-sm-12 col-md-3 fw-bold">비밀번호 확인</div>
                 <div class="body col-sm-12 col-md-9">
                     <input type="password" name="user_pwd2" autocomplete="off" placeholder="비밀번호를 다시 입력해 주세요" 
-                    	   id="_label-pwd-ck" class="_input" maxlength="16" required>
+                    	   id="_label-pwd-ck" class="_input" maxlength="16">
                 	<i class= "fa fa-solid fa-eye-slash" ></i>
                 </div>
                 <div id="validationServerUsernameFeedback4" class="invalid-feedback fw-bold">
@@ -133,7 +133,7 @@
             <div class="row row-container align-items-center">
                 <div class="head col-sm-12 col-md-3 fw-bold">이름</div>
                 <div class="body col-sm-12 col-md-9">
-                    <input type="text" name="NAME" placeholder="이름을 입력해 주세요" class="input-id _input" id="_label-name" required>
+                    <input type="text" name="NAME" placeholder="이름을 입력해 주세요" class="input-id _input" id="_label-name">
                 </div>
                 <div id="validationServerUsernameFeedback5" class="invalid-feedback fw-bold">
 			        이름을 입력해 주세요
@@ -141,18 +141,30 @@
             </div>
             
             <!-- 메일 -->
-            <div class="row row-container align-items-center">
-                <div class="head col-sm-12 col-md-3 fw-bold">메일</div>
-                <div class="body col-sm-12 col-md-9">
-                    <input type="email" name="EMAIL" placeholder="이메일을 입력해주세요" class="_input" id="email" value="${email}" required readOnly>
-                </div>
-                <div id="validationServerUsernameFeedback6" class="invalid-feedback fw-bold">
-			        올바른 이메일을 입력해주세요
-			    </div>
-            </div>
+	            <div class="row row-container align-items-center">
+	                <div class="head col-sm-12 col-md-3 fw-bold">메일</div>
+	                <div class="body col-sm-12 col-md-7">
+	                    <input type="email" name="EMAIL" placeholder="이메일을 입력해주세요" class="_input" id="email" value="${email}" readonly>
+	                </div>
+	                <div id="validationServerUsernameFeedback6" class="invalid-feedback fw-bold">
+				        올바른 이메일을 입력해주세요
+				    </div>
+				    <div class="body col-sm-12 col-md-2">
+				    		<button type="button" class="emailbtn btn btn-outline-primary w-100">인증</button>
+	                </div>
+	            </div>
+            
+            	<!-- 메일 인증 -->
+	            <div class="row row-container align-items-center">
+	                <div class="head col-sm-12 col-md-3 fw-bold"></div>
+	                <div class="body col-sm-12 col-md-9">
+	                	<input type="text" placeholder="인증번호를 입력해주세요" name="authCode" id="authCode" readonly 
+	                			class="w-100 rounded form-control" value="" style="height:55px;">
+	                </div>
+	            </div>
             
             
-        </div>
+       
 
 
         <!-- 가입 약관 동의 -->
@@ -169,7 +181,7 @@
             <div class="row row-container align-items-center">
                 <div class="head col-sm-12 col-md-10">
                     <label class="checkbox_wrap mb-2">
-                    	<input id="agree_chk" class="_checkbox" type="checkbox" required>
+                    	<input id="agree_chk" class="_checkbox" type="checkbox" >
                         BOAT&nbsp; <a href="" data-bs-toggle="modal" data-bs-target="#Modal">이용 약관</a>   에 동의합니다.<span class="essential">(필수)</span>                    
                     </label>
                 </div>
@@ -177,7 +189,7 @@
             <div class="row row-container align-items-center">
                 <div class="head col-sm-12 col-md-10">
                     <label class="checkbox_wrap mb-2">
-                    	<input id="agree_chk2" class="_checkbox" type="checkbox" required>
+                    	<input id="agree_chk2" class="_checkbox" type="checkbox" >
                     	<a href="" data-bs-toggle="modal" data-bs-target="#Modal2">개인정보 수집 및 이용에 동의합니다.</a>
                         <span class="essential">(필수)</span>
                     </label>
@@ -194,9 +206,10 @@
         <!--  -->
 
         <div id="form-controls">
-        	<button type="submit"  class="btn-primary btn py-3 px-5 w-100 fw-bold fs-5 text" disabled>가입하기</button>
+        	<button type="submit"  class="submit btn-primary btn py-3 px-5 w-100 fw-bold fs-5 text" disabled>가입하기</button>
         </div>
         
+        </div>
         
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	</form>
