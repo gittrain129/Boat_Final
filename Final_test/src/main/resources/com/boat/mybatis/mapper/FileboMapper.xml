@@ -4,7 +4,28 @@
   
   <mapper namespace="com.boat.mybatis.mapper.FileboMapper">
   
+  
+	 <select id="heartcount">
+	 	select count(FLIKE_NO) from filebo_like 
+	 	where empno = #{EMPNO}
+	 </select>
  
+	  <select id="getheartlist" resultType="Filelike">
+	  	select count(*) from filebo_like where File_num = #{file_num} and empno = #{empno}
+	  </select>
+  
+	  <insert id = "hearUp">
+		  <selectKey  keyProperty="FLIKE_NO" order="BEFORE">
+		  select max(FILEBO_LIKE)+1 from filebo_like
+		  </selectKey>
+			  insert into filebo_like (FLIKE_NO,FILE_NUM,EMPNO,FILEBO_LIKE)
+			  values (#{"FLIKE_NO"},#{FILE_NUM},#{EMPNO},1))
+	  </insert>
+  
+	    <delete id="hearDown">
+		  	delete from filebo_like where board_no = #{FILE_NUM} and user_no = #{EMPNO} 
+		</delete>
+  
   
   
 	<select id="getListCount" resultType="int">

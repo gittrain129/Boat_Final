@@ -113,7 +113,7 @@
   <tr>
       
       <th scope="col">신청대상</th>
-      <th scope="col">신청자</th>
+      <th scope="col">신청자 사번</th>
       <th scope="col" style="text-align:center;">예약시간</th>
       <th scope="col" style="text-align:center;">처리상태</th>
     </tr>
@@ -136,7 +136,7 @@
         <form id="res_Form">
         
         <div class="form-group">
-            <label for="rental">신청자</label>
+            <label for="rental">신청자 사번</label>
             <input type="text" class="form-control" id="rental_id" name="rental" readonly>
           </div>
         
@@ -183,21 +183,32 @@
 	   var loginid = $('#loginid').text();
 	   var tbody = $('#printBody');
 	   <c:forEach var="r" items="${list}">
-	       var rental = "${r.rental}";
-	       var id = "${r.id}";
-	       var startTime = "${r.start_t}";
-	       var endTime = "${r.end_t}";
-	       var status = "${r.status}";
-	       
-	       if (loginid === id) {
-	           var output = $('<tr>');
-	           output.append($('<td>').text(rental));
-	           output.append($('<td>').text(id));
-	           output.append($('<td>').text(startTime + ' - ' + endTime).css('text-align', 'center'));
-	           output.append($('<td>').text(status).css('text-align', 'center'));
-	           tbody.append(output);
-	       }
-	   </c:forEach>
+	    var rental = "${r.rental}";
+	    var id = "${r.id}";
+	    var startTime = "${r.start_t}";
+	    var endTime = "${r.end_t}";
+	    var status = "${r.status}";
+	    var memo = "${r.memo}";
+	    
+
+	    if (loginid === id) {
+	        var output = $('<tr>');
+	        output.append($('<td>').text(rental));
+	        output.append($('<td>').text(id));
+	        output.append($('<td>').text(startTime + ' - ' + endTime).css('text-align', 'center'));
+
+	        if (status === '거절') {
+	            output.append($('<td>').text(status + ' [' + memo + ']').css('text-align', 'center'));
+	            
+	        } else {
+	            output.append($('<td>').text(status).css('text-align', 'center'));
+	        }
+
+	        tbody.append(output);
+	    }
+	</c:forEach>
+
+	   
 	   /*table 생성 코드 */  
 	   
 	   
@@ -272,7 +283,6 @@
                
                if (rental_id == login_id) {
                   $('#res_Modal .modal-footer').append('<button type="button" class="btn btn-danger" id="cancel_button" onclick="cancel()">삭제</button>');
-
                }
                
                $('#res_Modal').modal('show');
@@ -281,7 +291,6 @@
               
               var startTime = info.start.toISOString();
                var endTime = info.end.toISOString();
-
                // moment라이브러리로 출력 방식 바꾸기
                var startTimeString = moment(startTime).format('MM-DD HH:mm');
                var endTimeString = moment(endTime).format('MM-DD HH:mm');
@@ -295,7 +304,6 @@
                $('#rental').val(tab);
                $('#startTimeISO').val(startTime);
                $('#endTimeISO').val(endTime);
-
                // 모달에 띄울 데이터 .val
                $('#rental_id').val('');
                $('#res_ModalLabel').text('');
@@ -306,7 +314,6 @@
                $('#submitbtn').remove();
                
                $('#res_Modal .modal-footer').append(' <button type="button" class="btn btn-primary" onclick="reservation()" id="submitbtn">대여신청</button>');
-
                
                $('#rental_id').val(loginid);
                $('#res_ModalLabel').text(modalTitle);
@@ -354,14 +361,12 @@
       		   
       		   
       		 });
-
       	 });
        
        
        
    });
   
-
    
    
    function reservation() {
@@ -407,7 +412,6 @@
        
        
    }
-
  
    
   

@@ -106,10 +106,20 @@
                     		</c:choose>
                         </div>
                         <h6>${r.RENTAL}</h6>
-                        <span>신청자: ${r.ID}</span>
+                        <span>신청자 사번: ${r.ID}</span>
                         <span>일정 : ${r.START_T} - ${r.END_T}</span>
-                      <button type="button" class="btn btn-primary" onclick="modal('${r.ID }','${r.RENTAL}','${r.START_TIME }','${r.START_T}','${r.END_TIME }','${r.END_T}','${r.CONTENT}')">처리</button>
+                        <c:choose>
+                        <c:when test="${r.STATUS ==0 }">
+                      <button type="button" class="btn btn-primary" onclick="modal('${r.ID }','${r.RENTAL}','${r.START_TIME }','${r.START_T}','${r.END_TIME }','${r.END_T}','${r.CONTENT}')">처리대기</button>
+				      	</c:when>
+				      	<c:when test="${r.STATUS ==1 }">
+				      <button type="button" class="btn btn-success" onclick="modal('${r.ID }','${r.RENTAL}','${r.START_TIME }','${r.START_T}','${r.END_TIME }','${r.END_T}','${r.CONTENT}')" disabled>승인완료</button>
+				      	</c:when>
+				      	<c:when test="${r.STATUS ==2 }">
+				      <button type="button" class="btn btn-danger" onclick="modal('${r.ID }','${r.RENTAL}','${r.START_TIME }','${r.START_T}','${r.END_TIME }','${r.END_T}','${r.CONTENT}')" disabled>반려</button>
+				      	</c:when>
 				      
+				      </c:choose>
                     </div>
                 </div>
             </c:forEach>
@@ -274,6 +284,74 @@ function confirm() {
        }); //ajax 끝
 }//confirm 끝
 
+function reject() {
+	var id = $('#rental_id').val();
+	var rental = $('#rental').val();
+	var start_time = $('#startTimeISO').val();
+	var end_time =  $('#endTimeISO').val();
+
+	
+	  // open a new modal with dropdown bar
+    var modalHtml = '<div class="modal fade" id="rejectModal" tabindex="-1" role="dialog" aria-labelledby="rejectModalLabel" aria-hidden="true">';
+    modalHtml += '<div class="modal-dialog" role="document">';
+    modalHtml += '<div class="modal-content">';
+    modalHtml += '<div class="modal-header">';
+    modalHtml += '<h5 class="modal-title" id="rejectModalLabel">반려사유 선택</h5>';
+    modalHtml += '</div>';
+    modalHtml += '<div class="modal-body">';
+    modalHtml += '<label for="rejectReason">반려사유 선택(클릭)</label>';
+    modalHtml += '<select class="form-control" id="rejectReason">';
+    modalHtml += '<option value="1">먼저 승인된 일정이 있습니다.</option>';
+    modalHtml += '<option value="2">수리,보수등으로 인한 사용불가 상태입니다.</option>';
+    modalHtml += '<option value="3">일정관리자에게 유선문의 부탁드립니다.</option>';
+    modalHtml += '</select>';
+    modalHtml += '</div>';
+    modalHtml += '<div class="modal-footer">';
+    modalHtml += '<button type="button" class="btn btn-danger" id="rejectSubmit">거절사유입력</button>';
+    modalHtml += '</div>';
+    modalHtml += '</div>';
+    modalHtml += '</div>';
+    modalHtml += '</div>';
+    $('body').append(modalHtml);
+    $('#rejectModal').modal('show');
+
+    // handle click event for reject button in the modal
+    $('#rejectSubmit').on('click', function() {
+        var reason = $('#rejectReason').val();
+	
+	   $.ajax({
+           url: "${pageContext.request.contextPath}/confer/reject_ajax/",
+           type: 'POST',
+           data: {
+               "start_time": start_time,
+               "end_time": end_time,
+               "rental": rental,
+               "id": id,
+               "reason" : reason
+           },
+           beforeSend : function(xhr)
+           {   //데이터를 전송하기 전에 헤더에 csrf값을 설정합니다.
+             xhr.setRequestHeader(header, token);         
+          },
+           success: function(response) {
+               $('#res_Modal').modal('hide');
+               document.location.reload(); //나중에 삭제해야댐 확인용
+           },
+           error: function(request,error) {
+               
+               alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+           }
+       }); //ajax 끝
+    });
+}//reject 끝
+
+
+
+
+
+
+
+//페이징처리
 $(document).ready(function() {
 	  $('.page-link').click(function(e) {
 	    e.preventDefault();

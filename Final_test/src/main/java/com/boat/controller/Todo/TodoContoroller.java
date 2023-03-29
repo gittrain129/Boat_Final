@@ -33,7 +33,10 @@ public class TodoContoroller {
 	@RequestMapping(value="/list",method=RequestMethod.GET)
 	public ModelAndView Todomain(Principal principal,
 							ModelAndView mv) {
-		String empno = principal.getName();
+		//String empno = principal.getName();
+		String empno = "2330006";
+		
+		
 		String dept = todoService.getDept(empno);
 		logger.info("로그인한 empno : "+empno);
 		logger.info("로그인한 dept : "+dept);
@@ -42,11 +45,13 @@ public class TodoContoroller {
 		//1. select * from Todo where empno = #{empno}
 		List<Todo> Mytodolist = todoService.mytodolist(empno);
 		
+		logger.info("todo :	"+ Mytodolist );
+		
 		
 		
 		//select * from TODOLIST where dept = #{dept}
 		// order by empno
-		List<Todo> mydeptTodolist = todoService.deptList(dept);
+		//List<Todo> mydeptTodolist = todoService.deptList(dept);
 		
 		//3.
 		//select key
@@ -59,7 +64,7 @@ public class TodoContoroller {
 		//Mytodolist
 		mv.addObject("MyTodo",Mytodolist);
 		//deptList
-		mv.addObject("MydeptList",mydeptTodolist);
+	//	mv.addObject("MydeptList",mydeptTodolist);
 		
 	return mv;
 

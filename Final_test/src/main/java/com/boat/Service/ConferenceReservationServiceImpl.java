@@ -48,7 +48,11 @@ public class ConferenceReservationServiceImpl implements ConferenceReservationSe
 		
 	}
 	
-	
+	@Override
+	public void reject_pro(ConferenceReservation c2) {
+		c3.reject_pro(c2);
+		
+	}
 
 
 

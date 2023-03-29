@@ -210,13 +210,13 @@
 				<div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">내 정보</a>
        	<sec:authorize access="isAuthenticated()">
-  		<sec:authentication property="principal" var="pinfo"/>
+  		<sec:authentication property="principal" var="pinfo"/> 
                     <div class="dropdown-menu border-0 rounded-0 rounded-bottom m-0 shadow">
                         <a href="${pageContext.request.contextPath}/Attendance/list" class="dropdown-item">근태 관리</a>
                         <a href="${pageContext.request.contextPath}/member/myboardList" class="dropdown-item">내 글 보기</a>
                         <a href="${pageContext.request.contextPath}/Todo/list" class="dropdown-item">내 할일 보기</a>
                     </div>
-        </sec:authorize>
+        </sec:authorize> 
                 </div>
                 
                 <div class="nav-item dropdown">

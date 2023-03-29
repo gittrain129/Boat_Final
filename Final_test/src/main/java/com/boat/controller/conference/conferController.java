@@ -18,7 +18,6 @@ import com.boat.Service.ConferenceReservationService;
 import com.boat.domain.ConferenceReservation;
 
 
-
 @Controller
 @RequestMapping(value="/confer")
 public class conferController {
@@ -46,7 +45,7 @@ public class conferController {
      c1.setSTART_T(start);
      c1.setEND_T(end);
      c1.setID(id.toString());
-     System.out.println("VO의 id = "+c1.getID());
+     
      co.insert1(c1);
      
      return "redirect:/confer/view";
@@ -78,6 +77,7 @@ public class conferController {
            
            String status = st[Integer.parseInt(con.getSTATUS())];
            event.put("status", status);
+           event.put("memo", con.getMEMO());
            
        
            cList.add(event);
@@ -120,7 +120,7 @@ public class conferController {
                                @RequestParam(value="tab", defaultValue="전체", required=false) String tab,
                                Model model) {
         System.out.println(tab);
-        System.out.println(page);
+        System.out.println("승인페이지의 페이지 = " + page);
         int limit = 8;
         int listcount = co.listcount();
         int maxpage = (listcount + limit - 1) / limit;
@@ -161,21 +161,38 @@ public class conferController {
         c2.setRENTAL(rental);
         c2.setID(id.toString());
         
-        System.out.println("admit_ajax의 id = "+c2.getID());
+        
         co.admit_pro(c2);
         
         
         return "redirect:/confer/admit";	
     	
-    	
-    	
-    	
-    	
-    	
-    	
 	}
     
-
+    @ResponseBody
+  	@RequestMapping(value="/reject_ajax")
+  	public String reject_Ajax(@RequestParam("rental") String rental,
+  												@RequestParam("start_time") String startTime,
+  												@RequestParam("end_time") String endTime,
+  												@RequestParam("id") String id,
+  												@RequestParam("reason") int reason
+  												){
+    	 String[] reject_reason = {"먼저 승인된 일정이 있습니다.","수리,보수등으로 인한 사용불가 상태입니다.","일정관리자에게 유선문의 부탁드립니다."};
+  		
+      	ConferenceReservation c2 = new ConferenceReservation();
+          c2.setSTART_TIME(startTime);
+          c2.setEND_TIME(endTime);
+          c2.setRENTAL(rental);
+          c2.setID(id.toString());
+          c2.setMEMO(reject_reason[reason]);
+          
+        
+          co.reject_pro(c2);
+          
+          
+          return "redirect:/confer/admit";	
+      	
+  	}
       
       
    

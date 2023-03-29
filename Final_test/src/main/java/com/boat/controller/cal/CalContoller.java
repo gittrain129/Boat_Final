@@ -55,7 +55,7 @@ public class CalContoller {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/add",method=RequestMethod.POST)
+	@RequestMapping(value="/cal/add",method=RequestMethod.POST)
 	public int CalAdd(
 			Calendar cal,
 			HttpServletRequest request) throws Exception{
