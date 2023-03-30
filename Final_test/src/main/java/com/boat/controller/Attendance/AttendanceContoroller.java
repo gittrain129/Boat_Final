@@ -32,6 +32,11 @@ public class AttendanceContoroller {
 	public ModelAndView attList(ModelAndView mv) {
 		List<Attandance> attlist = attandanceService.getAttList();
 		
+		//On_time _ EMPNO 받아서 넣기!
+//		Attandance TodayMyatt = attandanceService.TodayMyatt(EMPNO);
+		Attandance TodayMyatt = attandanceService.TodayMyatt();
+		
+		mv.addObject("TodayMyatt",TodayMyatt);
 		mv.addObject("listcount",attlist);
 		mv.setViewName("Attendance/main");
 	return mv;
@@ -39,32 +44,30 @@ public class AttendanceContoroller {
 	
 	@ResponseBody
 	@RequestMapping(value="/on")
-	public ModelAndView on(Attandance attandance,
+	public ModelAndView on(String EMONO,String ON_TIME,
 			 ModelAndView mv) {
-		String on = attandance.getON_TIME();
-		String empno =attandance.getEMPNO();
-		logger.info("출근시간 :"+ attandance.getON_TIME());
-		logger.info("사번 :"+  attandance.getEMPNO());
 		
-		attandanceService.AttOn(on,empno);
+		attandanceService.AttOn(ON_TIME,EMONO);
+	
+		
+		mv.addObject("ON_TIME", ON_TIME);
 		mv.setViewName("Attendance/main");
-		mv.addObject("ON_TIME", on);
 		return mv;
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="/off")
-	public ModelAndView off(Attandance attandance
+	public ModelAndView off(String EMONO,String OFF_TIME
 			, ModelAndView mv) {
-		String off = attandance.getOFF_TIME();
-		String empno =attandance.getEMPNO();
+	//	String off = attandance.getOFF_TIME();
+	//	String empno =attandance.getEMPNO();
 		
-		logger.info("퇴근시간 :"+ off);
-		logger.info("사번 :"+ empno);
+	//	logger.info("퇴근시간 :"+ off);
+	//	logger.info("사번 :"+ empno);
 		
-		attandanceService.AttOff(off,empno);
+		attandanceService.AttOff(OFF_TIME,EMONO);
 		mv.setViewName("Attendance/main");
-		mv.addObject("OFF_TIME", off);
+		mv.addObject("OFF_TIME", OFF_TIME);
 		return mv;
 	}
 	

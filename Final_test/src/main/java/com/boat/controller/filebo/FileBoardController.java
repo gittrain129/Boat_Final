@@ -71,7 +71,7 @@ import com.boat.domain.MySaveFolder;
 		endpage=maxpage;
 		
 		List<Filebo> boardlist = boardService.getBoardList(page,limit);//리스트를 받아옴
-		
+		logger.info(boardlist.toString());
 		mv.setViewName("Filebo/Newfilelist");
 		mv.addObject("page",page);
 		mv.addObject("maxpage",maxpage);
@@ -377,6 +377,8 @@ import com.boat.domain.MySaveFolder;
 			boardService.setReadCountUpdate(num);
 		}
 		Filebo board = boardService.getDetail(num);
+		
+		
 		//board=null; //error 페이지 이동 확인하고자 임의로 지정합니다.
 		if(board==null){
 			logger.info("상세보기 실패");
@@ -384,10 +386,11 @@ import com.boat.domain.MySaveFolder;
 			mv.addObject("url",request.getRequestURL());
 			mv.addObject("message","상세보기 실패입니다.");
 		}else {
+			logger.info(board.toString());
 			logger.info("상세보기 성공");
-			int count = commentService.getListCount(num);
+			//int count = commentService.getListCount(num);
 			mv.setViewName("Filebo/File_bo_view2");
-			mv.addObject("count",count);
+			//mv.addObject("count",count);
 			mv.addObject("boarddata",board);
 		}
 		return mv;}

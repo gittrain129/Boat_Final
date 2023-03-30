@@ -7,8 +7,6 @@
 <!DOCTYPE html>
 <html>
 <head>
- <meta name="_csrf" content="${_csrf.token }">
-  <meta name="_csrf_header" content="${_csrf.headerName }">
   
 <title>일별근무시간</title>
 <jsp:include page="../Main/header.jsp" />
@@ -61,7 +59,7 @@
                 <input type="hidden" name="ON_TIME"  value="" id="on">
                 <input type="hidden" class ="empno" name="EMPNO" value="">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-                <input type="submit" id="start-btn" class="btn" value="출근">
+                <input type="button" id="start-btn" class="btn" value="출근">
                 
                 </form>
                 
@@ -72,7 +70,7 @@
                 <input type="hidden" name="OFF_TIME" value="" id="off"          >
                 <input type="hidden" class ="empno" name="EMPNO" value="">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-                <input type="submit"  id="end-btn" class="c-btn" value="퇴근">
+                <input type="button"  id="end-btn" class="c-btn" value="퇴근">
                 
                 
                 </form>
@@ -80,8 +78,8 @@
             
             </div>
             <div id="result-box">
-                <div>시작:${ON_TIME} </div>
-                <div>종료:${OFF_TIME} </div>
+                <div>시작:${fn:substring(TodayMyatt.ON_TIME,11,16)} </div>
+                <div>종료:${fn:substring(TodayMyatt.OFF_TIME,11,16)} </div>
             </div>
         </div>
         <div id="work-week" class="box">
