@@ -120,16 +120,29 @@ public class conferController {
 	}
    
     @RequestMapping(value="/admit") //admit 최초 접속시 뷰페이지 처리
-    public String confer_admit(@RequestParam(value="page", defaultValue="1", required=false) int page,
-                               @RequestParam(value="tab",  required=false) String tab,
+    public String confer_admit(@RequestParam(value="page", defaultValue="1", required=false) String r_page,
+                               @RequestParam(value="tab",defaultValue="전체",  required=false) String tab,
                                Model model) {
     	if(tab.equals("전체")) {
         	tab="";
-        }
-        int limit = 8;
-        int listcount = co.listcount(tab);
-        int maxpage = (listcount + limit - 1) / limit;
+        	} 
+    	int page = 1;
+    
+    	int limit = 8;
+    	int listcount = co.listcount(tab);
+    	int maxpage = (listcount + limit - 1) / limit;
 
+    	if(r_page.equals("이전") && page >1) {
+    		page--;
+    	}
+    	if(r_page.equals("다음") && page+1< maxpage) {
+    		page++;
+    	}
+    	
+    	if(!r_page.equals("이전") && r_page.equals("다음")) {
+    		page =Integer.parseInt(r_page);
+    		
+    	}
         int startpage = ((page-1) /limit) *limit +1;
         int endpage = startpage +limit -1;
 
@@ -199,17 +212,32 @@ public class conferController {
       
     @ResponseBody
    	@RequestMapping(value="/admitTab_ajax")
-   	public List<Map<String, Object>> admitTabAjax(@RequestParam(value="page", defaultValue="1", required=false) int page,
+   	public List<Map<String, Object>> admitTabAjax(@RequestParam(value="page", defaultValue="1", required=false) String r_page,
    												  @RequestParam(value="tab",required=false) String tab
    												 
    			){
     	if(tab.equals("전체")) {
         	tab="";
         	} 
+    	int page = 1;
+    
     	int limit = 8;
     	int listcount = co.listcount(tab);
     	int maxpage = (listcount + limit - 1) / limit;
 
+    	if(r_page.equals("이전") && page >1) {
+    		page--;
+    	}
+    	if(r_page.equals("다음") && page+1< maxpage) {
+    		page++;
+    	}
+    	
+    	if(!r_page.equals("이전") && r_page.equals("다음")) {
+    		page =Integer.parseInt(r_page);
+    		
+    	}
+    	
+    	
     	int startpage = ((page-1) /limit) *limit +1;
     	int endpage = startpage +limit -1;
 
