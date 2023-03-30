@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -113,8 +115,6 @@
     
     
     
-    <a href="${pageContext.request.contextPath}/Todo/sampleboard">js4이용 샘플보드</a>
-    <a href="${pageContext.request.contextPath}/Todo/sampleboard2ar">js4이용 샘플보드</a>
 <main class="main-box">
   <div id="right-content">
       
@@ -162,6 +162,7 @@
                                     </thead>
                                     <tbody>
                                         <c:forEach var="mt" items="${MyTodo}">
+                                           
                                         <tr>
                                             <td> 
                                           <a href="#">${mt.t_CONTENT}</a>
@@ -194,253 +195,173 @@
                             <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                                 
                                 <%--아코디언 시작 --%>
-                             <div class="accordion" id="accordionExample">
-							  <div class="accordion-item">
-							    <h2 class="accordion-header" id="headingOne">
-							      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-										A사원 <div class="progress"></div>	
-							      </button>
-							    </h2>
-							    <div id="collapseOne" class="accordion-collapse collapse " aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-							      <div class="accordion-body">
-							       
-							         <table class="table" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>A사원</th>
-                                            <th>시작날짜</th>
-                                            <th>예상 마감일</th>
-                                        </tr>
-                                    </thead>
-                                
-                                    <tbody>
-                                     <tr>
-                                            <th></th>
-                                            <th>그래프</th>
-                                            <th></th>
-                                        </tr> 
-                                        <tr>
-                                            <td><a href="#">첫 번째 할 일</a></td>
-                                            <td>2023-03-10</td>
-                                            <td>2023-03-12</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">두 번째 할 일</a></td>
-                                            <td>2023-03-10</td>
-                                            <td>2023-03-12</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">세번째 할 일</a></td>
-                                            <td>2023-03-10</td>
-                                            <td>2023-03-12</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td><b>더보기</b></td>
-                                        </tr>
-                                    </tbody>
-                                    </table><%--a 사원 todo 끝 --%>
-                                    
-							      </div>
-							    </div>
-							  </div>
-							    <div class="accordion-item">
-								    <h2 class="accordion-header" id="headingTwo">
-								      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-								        B사원 <div class="progress"></div>	
-								      </button>
-								       </h2>
-							  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-      								<div class="accordion-body">
-							       
-							         <table class="table" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>b사원</th>
-                                            <th>시작날짜</th>
-                                            <th>예상 마감일</th>
-                                        </tr>
-                                    </thead>
-                                
-                                    <tbody>
-                                     <tr>
-                                            <th></th>
-                                            <th>그래프</th>
-                                            <th></th>
-                                        </tr> 
-                                        <tr>
-                                            <td><a href="#">첫 번째 할 일</a></td>
-                                            <td>2023-03-10</td>
-                                            <td>2023-03-12</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">두 번째 할 일</a></td>
-                                            <td>2023-03-10</td>
-                                            <td>2023-03-12</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">세번째 할 일</a></td>
-                                            <td>2023-03-10</td>
-                                            <td>2023-03-12</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td><b>더보기</b></td>
-                                        </tr>
-                                    </tbody>
-                                    </table><%--a 사원 todo 끝 --%>
-                                    
-							      </div>
-							    </div>
-							  </div>
-							  
-							    <div class="accordion-item">
-								    <h2 class="accordion-header" id="headingThree">
-								      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-								      		C사원 <div class="progress"></div>	
-								      </button>
-								    </h2>
-								    
-							     <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-      								<div class="accordion-body">
-							       <div class="ibox-content forum-container">
-
-                <div class="forum-title">
-                    <div class="pull-right forum-desc">
-                        <samll></samll>
-                    </div>
-                    <h3>사원 이지현</h3>
-                </div>
-
-                <div class="forum-item active">
-                    <div class="row">
-                        <div class="col-md-9">
-                            <div class="forum-icon">
-                                <i class="fa fa-shield"></i>
-                            </div>
-                            <a href="forum_post.html" class="forum-item-title">진행중</a>
-                            <div class="forum-sub-title">
-                            첫 번째 할 일
-                            </div>
-                        </div>
-                    
-                        <div class="col-md-1 forum-info">
-                            <span class="views-number">
-                                
-                            </span>
-                            <div>
-                                <small></small>
-                            </div>
-                        </div>
-                        <div class="col-md-1 forum-info">
-                            <span class="views-number">
+                                <div class="accordion" id="accordionExample">
+                                  
                                
-                            </span>
-                            <div>
-                                <small></small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="forum-item">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="forum-icon">
-                                <i class="fa fa-bolt"></i>
-                            </div>
-                            <a href="forum_post.html" class="forum-item-title">두 번째 할 일</a>
-                            <div class="forum-sub-title">
-                            할일상세보기
-                            </div>
-                        </div>
-                        <div class="col-md-2 forum-info">
-                            <span class="views-number">
-                            </span>
-                            <div>
-                                <small>23-03-20</small>
-                            </div>
-                        </div>
-                       
-                        <div class="col-md-2 forum-info">
-                            <span class="views-number">
+                                 
+                                    <%--  <c:forEach var="i" begin="0" end="${fn:length(MDT.name)}"> </c:forEach> 
+                                     --%>
+
+                                            <c:set var = "num" value ="0"/>
+                                  <c:forEach var="MDT" items="${MydeptList}"> 
+                                            
+                                   <div class="accordion-item">
+                                       <h2 class="accordion-header" id="${'heading'}${num}">
+                                         <button class="accordion-button collapsed"
+                                          type="button" data-bs-toggle="collapse" data-bs-target="#${'collapse'}${num}" 
+                                          aria-expanded="false" aria-controls="${'collapse'}${num}">
+                                                ${MDT.NAME} <div class="progress"></div>	
+                                         </button>
+                                       </h2>
+                                     
+                                     
+                                    <div id="${'collapse'}${num}" class="accordion-collapse collapse" aria-labelledby="${'heading'}${num}" data-bs-parent="#accordionExample">
+                    <c:set var = "num" value ="${num+1}"/>
+                                   
+                     <div class="accordion-body">
+                    <div class="ibox-content forum-container">
                                 
-                            </span>
-                            <div>
-                                <small>23-03-20</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="forum-item active">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="forum-icon">
-                                <i class="fa fa-calendar"></i>
-                            </div>
-                              <a href="forum_post.html" class="forum-item-title">두 번째 할 일</a>
-                            <div class="forum-sub-title">
-                            할일상세보기
-                            </div>
-                        </div>
-                        <div class="col-md-2 forum-info">
-                            <span class="views-number">
-                            </span>
-                            <div>
-                               <small>23-03-20</small>
-                            </div>
-                        </div>
-                      
-                        <div class="col-md-2 forum-info">
-                            <span class="views-number">
-                                
-                            </span>
-                            <div>
-                                <small>23-03-20</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="forum-item active">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="forum-icon">
-                                <i class="fa fa-calendar"></i>
-                            </div>
-                              <a href="forum_post.html" class="forum-item-title">두 번째 할 일</a>
-                            <div class="forum-sub-title">
-                            할일상세보기
-                            </div>
-                        </div>
-                        <div class="col-md-2 forum-info">
-                            <span class="views-number">
-                            </span>
-                            <div>
-                                <small>23-03-20</small>
-                            </div>
-                        </div>
-                       
-                        <div class="col-md-2 forum-info">
-                            <span class="views-number">
-                                
-                            </span>
-                            <div>
-                                <small>23-03-20</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-      
-               
                                     
-							      </div>
-							    </div>
-							  </div>
-							 
-							</div><%-- 아코디언 끝 --%>
+                   <div class="forum-title">
+                       <div class="pull-right forum-desc">
+                           <samll></samll>
+                       </div>
+                       <h3>${MDT.DEPT}  ${MDT.NAME} </h3>
+                   </div>
+   
+                   <div class="forum-item active">
+                       <div class="row">
+                           <div class="col-md-9">
+                               <div class="forum-icon">
+                                   <i class="fa fa-shield"></i>
+                               </div>
+                               <a href="forum_post.html" class="forum-item-title">진행중</a>
+                               <div class="forum-sub-title">
+                              
+                               </div>
+                           </div>
+                       
+                           <div class="col-md-1 forum-info">
+                               <span class="views-number">
+                                   
+                               </span>
+                               <div>
+                                   <small></small>
+                               </div>
+                           </div>
+                           <div class="col-md-1 forum-info">
+                               <span class="views-number">
+                                  
+                               </span>
+                               <div>
+                                   <small></small>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="forum-item">
+                       <div class="row">
+                           <div class="col-md-6">
+                               <div class="forum-icon">
+                                   <i class="fa fa-bolt"></i>
+                               </div>
+                               <a href="forum_post.html" class="forum-item-title">두 번째 할 일</a>
+                               <div class="forum-sub-title">
+                               할일상세보기
+                               </div>
+                           </div>
+                           <div class="col-md-2 forum-info">
+                               <span class="views-number">
+                               </span>
+                               <div>
+                                   <small>23-03-20</small>
+                               </div>
+                           </div>
+                          
+                           <div class="col-md-2 forum-info">
+                               <span class="views-number">
+                                   
+                               </span>
+                               <div>
+                                   <small>23-03-20</small>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="forum-item active">
+                       <div class="row">
+                           <div class="col-md-6">
+                               <div class="forum-icon">
+                                   <i class="fa fa-calendar"></i>
+                               </div>
+                                 <a href="forum_post.html" class="forum-item-title">두 번째 할 일</a>
+                               <div class="forum-sub-title">
+                               할일상세보기
+                               </div>
+                           </div>
+                           <div class="col-md-2 forum-info">
+                               <span class="views-number">
+                               </span>
+                               <div>
+                                  <small>23-03-20</small>
+                               </div>
+                           </div>
+                         
+                           <div class="col-md-2 forum-info">
+                               <span class="views-number">
+                                   
+                               </span>
+                               <div>
+                                   <small>23-03-20</small>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="forum-item active">
+                       <div class="row">
+                           <div class="col-md-6">
+                               <div class="forum-icon">
+                                   <i class="fa fa-calendar"></i>
+                               </div>
+                                 <a href="forum_post.html" class="forum-item-title">두 번째 할 일</a>
+                               <div class="forum-sub-title">
+                               할일상세보기
+                               </div>
+                           </div>
+                           <div class="col-md-2 forum-info">
+                               <span class="views-number">
+                               </span>
+                               <div>
+                                   <small>23-03-20</small>
+                               </div>
+                           </div>
+                          
+                           <div class="col-md-2 forum-info">
+                               <span class="views-number">
+                                   
+                               </span>
+                               <div>
+                                   <small>23-03-20</small>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+                   <!--   <div class="forum-item active"> -->
+         
+                  
+                                       
+                                     </div>
+                                     <!--  <div class="ibox-content forum-container"> -->
+                                   </div>
+                                   <!--<div class="accordion-body">  -->
+                                 </div>
+                                <!--   <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample"> -->
+                               </div>
+                                <!--    <div class="accordion-item"> -->
+                         </c:forEach>
+                                       
+                               </div>
+                               <%-- 아코디언 끝 --%>
                              
                              
                                     

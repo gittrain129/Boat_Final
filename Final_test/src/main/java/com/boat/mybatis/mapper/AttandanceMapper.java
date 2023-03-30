@@ -17,5 +17,10 @@ public interface AttandanceMapper {
 
 	public void AttOff(String off, String empno);
 
+	//오늘 출근기록
+	//EMPNO받아서 넣기!!
+	//public Attandance TodayMyatt(EMPNO);
+	public Attandance TodayMyatt();
+
 
 }

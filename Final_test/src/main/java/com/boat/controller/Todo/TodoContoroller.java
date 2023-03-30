@@ -36,18 +36,13 @@ public class TodoContoroller {
 		String empno = principal.getName();
 		//String empno = "2310001";
 		
-		
 		String dept = todoService.getDept(empno);
 		logger.info("로그인한 empno : "+empno);
 		logger.info("로그인한 dept : "+dept);
 		Todo todo = new Todo();
-		todo.setEMPNO("하이염");
-		String empno1 = todo.getEMPNO();
-		System.out.println(empno1);
-		//select * from todolist where empno= '로그인한사람;
-		//1. select * from Todo where empno = #{empno}
-		List<Todo> Mytodolist = todoService.mytodolist(empno);
 		
+		//select * from todolist where empno= '로그인한사람;
+		List<Todo> Mytodolist = todoService.mytodolist(empno);
 		logger.info("todo :	"+ Mytodolist );
 		
 		
@@ -67,7 +62,7 @@ public class TodoContoroller {
 		//Mytodolist
 		mv.addObject("MyTodo",Mytodolist);
 		//deptList
-		//mv.addObject("MydeptList",mydeptTodolist);
+		mv.addObject("MydeptList",mydeptTodolist);
 		
 	return mv;
 

@@ -165,6 +165,7 @@ http://localhost:8088/Boat/FileBoardList.filebo
 				</c:if>
 
 				</div></td>
+				
 				</tr>
 				</c:forEach>
             	

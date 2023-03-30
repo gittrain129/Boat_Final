@@ -15,11 +15,21 @@
 		  -->
 		</select>
 		
+		<select id="TodayMyatt" resultType = 'Attandance'>
+		select * from BOAT_ATTENDANCE 
+		where REG_DATE =  TO_CHAR(SYSDATE, 'YYYYMMDD')
+		and empno = '122309' 
+		<!--and empno = '#{EMPNO}'  -->
+		</select>
+		
 		<insert id="AttOn">
-		insert into BOAT_ATTENDANCE (empno, on_time,REG_DATE) values(#{empno},#{on},SYSDATE)
+		insert into BOAT_ATTENDANCE (empno, on_time,REG_DATE) values(#{empno},#{on},TO_CHAR(SYSDATE, 'YYYYMMDD'))
 		</insert>
+		
 		<update id="AttOff">
-		update BOAT_ATTENDANCE SET   off_time =#{off} WHERE REG_DATE= SYSDATE
+		UPDATE BOAT_ATTENDANCE
+		SET off_time = #{off}
+		WHERE REG_DATE = TO_CHAR(SYSDATE, 'YYYYMMDD')
 		</update>
 		  
 		  
