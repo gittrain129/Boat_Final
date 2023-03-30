@@ -5,7 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class Member {
 	private String EMPNO;
 	private String DEPT;
-	private String JOB;
+	private String JOB="사원";
 	private String PASSWORD;
 	private String NAME;
 	private String EMAIL;

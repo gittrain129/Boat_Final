@@ -24,5 +24,8 @@ public interface MemberService {
 	//정보
 	public Member member_info(String id);
 
+	//네이버 회원가입 처리
+	public int userNaverRegisterPro(Map<String, Object> paramMap);
+
 
 }

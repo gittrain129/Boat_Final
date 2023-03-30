@@ -245,13 +245,13 @@ public class MemberController {
 	
 	//네이버 회원가입 => 정보 작성폼
 	@RequestMapping(value = "/naverlogin", method = {RequestMethod.GET,RequestMethod.POST})
-	public String userNaverLoginPro(Model model,@RequestParam Map<String,Object> paramMap, @RequestParam String code, @RequestParam String state,HttpSession session) throws SQLException, Exception {
+	public String userNaverLoginPro(Model model,@RequestParam Map<String,Object> paramMap, @RequestParam String code, 
+			@RequestParam String state,HttpSession session) throws SQLException, Exception {
 		System.out.println("paramMap:" + paramMap);
 		Map <String, Object> resultMap = new HashMap<String, Object>();
-
+		
+		
 		OAuth2AccessToken oauthToken = naverloginbo.getAccessToken(session, code, state);
-		System.out.println("session:" + session);
-		Logger.info("oauthToken:" + oauthToken);
 		
 		//로그인 사용자 정보를 읽어온다.
 		String apiResult = naverloginbo.getUserProfile(oauthToken);
@@ -267,20 +267,87 @@ public class MemberController {
 		if(naverConnectionCheck == null) { //일치하는 이메일 없으면 가입
 			
 			model.addAttribute("email",apiJson.get("email"));
-			model.addAttribute("password",apiJson.get("id"));
-			return "/Member/joinForm";
+			model.addAttribute("id",apiJson.get("id"));
+			model.addAttribute("name",apiJson.get("name"));
+			System.out.println("apiJson.get(\"id\")="+apiJson.get("id"));
+			return "/Member/joinForm2";
 			
-		}else if(naverConnectionCheck.get("NAVERLOGIN") == null && naverConnectionCheck.get("EMAIL") != null) { //이메일 가입 되어있고 네이버 연동 안되어 있을시
-			memberservice.setNaverConnection(apiJson);
-			Map<String, Object> loginCheck = memberservice.userNaverLoginPro(apiJson);
-			session.setAttribute("userInfo", loginCheck);
-		}else { //모두 연동 되어있을시
-			Map<String, Object> loginCheck = memberservice.userNaverLoginPro(apiJson);
-			session.setAttribute("userInfo", loginCheck);
 		}
-
-		return "redirect:usermain.do";
+//		else if(naverConnectionCheck.get("NAVERLOGIN") == null && naverConnectionCheck.get("EMAIL") != null) { //이메일 가입 되어있고 네이버 연동 안되어 있을시
+//			memberservice.setNaverConnection(apiJson);
+//			Map<String, Object> loginCheck = memberservice.userNaverLoginPro(apiJson);
+//			session.setAttribute("userInfo", loginCheck);
+//			
+//		}
+		else { //모두 연동 되어있을시
+			Map<String, Object> loginCheck = memberservice.userNaverLoginPro(apiJson);
+			System.out.println("loginCheck="+loginCheck);
+			session.setAttribute("userInfo", loginCheck);
+			
+			String EMPNO = (String) loginCheck.get("EMPNO");
+			String NAME = (String) loginCheck.get("NAME");
+			String PROFILE_FILE = (String) loginCheck.get("PROFILE_FILE");
+			session.setAttribute("EMPNO", EMPNO);
+			session.setAttribute("NAME", NAME);
+			session.setAttribute("PROFILE_FILE", PROFILE_FILE);
+			
+			return "/Member/sign_in";
+		}
+		
+//		return "redirect:/index";
 	}
+	
+	//네이버 회원가입 처리
+	@RequestMapping(value="/userNaverRegisterPro", method=RequestMethod.POST)
+	public String userNaverRegisterPro(@RequestParam Map<String,Object> paramMap,HttpSession session, RedirectAttributes rattr,
+			@RequestParam String PASSWORD) throws SQLException, Exception {
+		System.out.println("paramMap=" + paramMap);
+		
+		//비밀번호 암호화 추가
+		String encPassword = passwordEncoder.encode(PASSWORD);
+		Logger.info(encPassword);
+		paramMap.put("PASSWORD", encPassword);
+//		member.setPASSWORD(encPassword);
+		
+//		MultipartFile uploadfile = uploadfile;
+//		
+//		if(!uploadfile.isEmpty()) {
+//			String fileName = uploadfile.getOriginalFilename();//원래 파일명
+//			
+//			String saveFolder = new File("src/main/resources/static/profile").getAbsolutePath();
+////			String saveFolder= profileSaveFolder.getProfilesavefolder();
+//			String fileDBName = fileDBName(fileName, saveFolder, EMPNO);
+//			Logger.info("fileDBName : " + fileDBName);
+//			
+//			//transferTo(file path) : 업로드된 파일을 매개변수의 경로에 저장합니다.
+//			uploadfile.transferTo(new File(saveFolder + fileDBName));
+//			Logger.info("transferTo path : " + saveFolder + fileDBName);
+//			//바뀐 파일명으로 저장
+//			paramMap.put("PASSWORD", encPassword);
+////			member.setPROFILE_IMG(fileDBName);
+//			System.out.println("absolutePathss " +saveFolder);
+//			//파일 경로 이름
+//			member.setPROFILE_FILE("profile" + fileDBName);
+//		}
+		
+		Map <String, Object> resultMap = new HashMap<String, Object>();
+		int registerCheck = memberservice.userNaverRegisterPro(paramMap);
+		System.out.println(registerCheck);
+		
+		if(registerCheck != 0 && registerCheck > 0) {
+			Map<String, Object> loginCheck = memberservice.userNaverLoginPro(paramMap);
+			session.setAttribute("userInfo", loginCheck);
+			rattr.addFlashAttribute("JavaData", "YES");
+//			resultMap.put("JavaData", "YES");
+		}else {
+			rattr.addFlashAttribute("JavaData", "NO");
+//			resultMap.put("JavaData", "NO");
+		}
+		
+		return "redirect:/index";
+//		return resultMap;
+	}
+	
 	
 	
 	

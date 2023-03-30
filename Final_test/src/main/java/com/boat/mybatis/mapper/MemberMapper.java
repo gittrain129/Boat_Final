@@ -23,4 +23,8 @@ public interface MemberMapper {
 
 	public Member isId(String empno);
 	
+	//네이버 회원가입 처리
+	public int userNaverRegisterPro(Map<String, Object> paramMap);
+
+	
 }

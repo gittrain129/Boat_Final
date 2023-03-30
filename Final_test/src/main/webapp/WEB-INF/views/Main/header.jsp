@@ -242,7 +242,6 @@
                 
             </div>
             
-            
 	<sec:authorize access="isAnonymous()">
 		<sec:authentication property="principal" var="pinfo"/>
   		
@@ -258,6 +257,7 @@
             </div>
             
     </sec:authorize>
+    
 	<sec:authorize access="isAuthenticated()">
   		<sec:authentication property="principal.member" var="pinfo"/>
   		
@@ -278,6 +278,8 @@
             </div>
             
   	</sec:authorize>
+  	
+  	
             
         </div>
         
