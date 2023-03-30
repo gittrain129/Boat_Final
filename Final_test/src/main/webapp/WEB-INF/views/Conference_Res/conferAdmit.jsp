@@ -52,10 +52,13 @@
                 <a class="nav-link active" data-toggle="tab" href="#qwe">전체</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#asd" >회의실 예약</a>
+                <a class="nav-link" data-toggle="tab" href="#asd" >대회의실</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#zxc" >비품</a>
+                <a class="nav-link" data-toggle="tab" href="#zxc" >회의실1</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#zxcd" >회의실2</a>
               </li>
                 
               
@@ -83,7 +86,7 @@
                   <!-- Project Start -->
     <div class="container-xxl py-5">
         <div class="container">
-              <div class="row row-cols-1 row-cols-md-4 g-4">
+              <div class="row row-cols-1 row-cols-md-4 g-4" id="admit_list">
                
                 <c:forEach var="r" items="${reservation}">          
                 <div class="col">
@@ -131,7 +134,7 @@
     </div>
     
     <div class="center-block">
-			<ul class="pagination justify-content-center">
+			<ul class="pagination justify-content-center" id="pagination">
 				<c:if test="${page<=1}">
 					<li class="page-item">
 						<a class="page-link gray">이전&nbsp;</a>
@@ -255,11 +258,7 @@ function confirm() {
 	var start_time = $('#startTimeISO').val();
 	var end_time =  $('#endTimeISO').val();
 	
-	console.log(id);
-	console.log(rental);
-	console.log(start_time);
-	console.log(end_time);
-	
+		
 	   $.ajax({
            url: "${pageContext.request.contextPath}/confer/admit_ajax/",
            type: 'POST',
@@ -291,7 +290,7 @@ function reject() {
 	var end_time =  $('#endTimeISO').val();
 
 	
-	  // open a new modal with dropdown bar
+	  
     var modalHtml = '<div class="modal fade" id="rejectModal" tabindex="-1" role="dialog" aria-labelledby="rejectModalLabel" aria-hidden="true">';
     modalHtml += '<div class="modal-dialog" role="document">';
     modalHtml += '<div class="modal-content">';
@@ -315,7 +314,7 @@ function reject() {
     $('body').append(modalHtml);
     $('#rejectModal').modal('show');
 
-    // handle click event for reject button in the modal
+    
     $('#rejectSubmit').on('click', function() {
         var reason = $('#rejectReason').val();
 	
@@ -357,23 +356,114 @@ $(document).ready(function() {
 	    e.preventDefault();
 	    var page = $(this).text();
 	    var tab = $('.nav-tabs .active').text();
-	    console.log(page);
 	    var url = "admit?page=" +page+ "&tab=" +tab;
 	    window.location.href = url;
 	  });
 	});
+	
+$(document).ready(function() {
+	   $('.nav-tabs a').on('click', function (e) {
+		   e.preventDefault();
+		   $('.nav-tabs a').removeClass('active'); 
+		   $(this).addClass('active'); 
+		   var tab_info = $('.nav-tabs .active').text();
+		   
+		   
+		   $.ajax({
+	            type: "GET",
+	            url: "${pageContext.request.contextPath}/confer/admitTab_ajax",
+	            data: {"tab": tab_info},
+	            dataType : "json",
+	            beforeSend : function(xhr)
+             {   //데이터를 전송하기 전에 헤더에 csrf값을 설정합니다.
+               xhr.setRequestHeader(header, token);         
+            },
+	            success: function (response) {
+	            	 $("#admit_list").empty();
+	            	 $("#pagination").empty();
 
+	            	  if (response.length < 1) {
+	            		    $("#admit_list").append("<p>신청된 스케줄이 없습니다</p>");
+	            		    return;
+	            		  }
+
+	            		  for (var i = 0; i < response.length; i++) {
+	            			  var id = response[i].id
+	            			  var rental = response[i].rental
+	            			  var start = response[i].start_t
+	            			  var end = response[i].end_t
+	            			  var status = response[i].status
+	            			  
+	            			  var button;
+	            			  if (response[i].status == 0) {
+	            			    button = `<button type="button" class="btn btn-primary" onclick="modal('${response[i].ID }','${response[i].RENTAL}','${response[i].START_TIME }','${response[i].START_T}','${response[i].END_TIME }','${response[i].END_T}','${response[i].CONTENT}')">처리대기</button>`;
+	            			  } else if (response[i].status == 1) {
+	            			    button = `<button type="button" class="btn btn-success" onclick="modal('${response[i].ID }','${response[i].RENTAL}','${response[i].START_TIME }','${response[i].START_T}','${response[i].END_TIME }','${response[i].END_T}','${response[i].CONTENT}')" disabled>승인완료</button>`;
+	            			  } else {
+	            			    button = `<button type="button" class="btn btn-danger" onclick="modal('${response[i].ID }','${response[i].RENTAL}','${response[i].START_TIME }','${response[i].START_T}','${response[i].END_TIME }','${response[i].END_T}','${response[i].CONTENT}')" disabled>반려</button>`;
+	            			  }
+	            			  var image;
+	            			  if(rental == '대회의실'){
+	            		      	image = '<img class="img-fluid rounded" src="${pageContext.request.contextPath}/jkKim/image/large.jpg" alt="">'
+                           	  	image += '<a href="${pageContext.request.contextPath}/jkKim/image/large.jpg" data-lightbox="project"><i class="fa fa-eye fa-2x"></i></a>'
+	            			  }else if(rental =='회의실1'){
+	            			  	image =  '<img class="img-fluid rounded" src="${pageContext.request.contextPath}/jkKim/image/small.jpg" alt="">'
+	                          	image +=	'<a href="${pageContext.request.contextPath}/jkKim/image/small.jpg" data-lightbox="project"><i class="fa fa-eye fa-2x"></i></a>'
+	                       	 
+	            			  }else if(rental =='회의실2'){
+	            			 	 image = '<img class="img-fluid rounded" src="${pageContext.request.contextPath}/jkKim/image/small2.jpg" alt="">'
+	                        	 image +=	'<a href="${pageContext.request.contextPath}/jkKim/image/small2.jpg" data-lightbox="project"><i class="fa fa-eye fa-2x"></i></a>'
+		                       		
+	            			  }
+	            			  
+	            		    var output = `
+	            		      <div class="col">
+	            		        <div class="project-item border rounded h-100 p-4" data-dot="01">
+	            		          <div class="position-relative mb-4">
+	            		         `+ image + `
+	            		          </div>
+	            		          <h6>`+rental+`</h6>
+	            		          <span>신청자 사번:` +  id +`</span>
+	            		          <span>일정: `+start+` - `+end+`</span>
+	            		          `+ button +`
+	            		        </div>
+	            		      </div>
+	            		    `;
+	            		    $("#admit_list").append(output);
+	            		  }
+
+	            	   
+	            		 
+	            		  var paging = "";
+	            		  for (var i = 1; i <= response[0].maxpage; i++) {
+	            		    paging += `<li class="page-item"><a class="page-link" href="#" data-page=`+i+`>`+i+`</a></li>`;
+	            		  }
+	            		  $("#pagination").append(paging);
+
+	            		  $("#pagination").on("click", "a.page-link", function(event) {
+	            		    event.preventDefault();
+	            		    var page = $(this).data("page");
+	            		    var tab = $('.nav-tabs .active').text();
+	            		    var url = "admitTab_ajax_page?page=" +page+ "&tab=" +tab;
+	            		    window.location.href = url;
+	            		  });
+	            	
+	               
+	            },
+	            error: function(request,error) {
+	                
+	                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	            }
+	        });
+		   
+		   
+		 });
+	 });
+	
+	
+	
 	
 </script>
-
-
-
-
-
-
-
-
-
 
 
 
