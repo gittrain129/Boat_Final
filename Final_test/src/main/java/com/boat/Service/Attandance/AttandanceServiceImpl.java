@@ -25,13 +25,15 @@ public class AttandanceServiceImpl implements AttandanceService {
 
 	@Override
 	public List<Attandance> getAttList() {
-		
-		
-		
 		return dao.getAttList();
 	}
 
-	
+
+	@Override//EMPNO받아서 넣기!!
+	public Attandance TodayMyatt() {
+		return dao.TodayMyatt();
+	}
+
 	@Override
 	public void AttOn(String on, String empno) {
 		HashMap<String,String>map = new HashMap<String,String>();
@@ -48,9 +50,11 @@ public class AttandanceServiceImpl implements AttandanceService {
 		HashMap<String,String>map = new HashMap<String,String>();
 		map.put("off",off);
 		map.put("empno", empno);
-		
+		System.out.println("offupdate param"+off);
+		//log.info("offupdate param"+off);
 		dao.AttOff(off,empno);
 	}
+
 
 
 	

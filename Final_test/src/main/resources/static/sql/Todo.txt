@@ -1,4 +1,5 @@
 drop table TODOLIST cascade constraints purge;
+drop table MEMBER cascade constraints purge;
 
 create sequence todo_seq nocache;
 

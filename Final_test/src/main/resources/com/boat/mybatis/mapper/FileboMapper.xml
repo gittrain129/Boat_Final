@@ -60,7 +60,8 @@
 	WHERE rnum&gt;= #{start}  and rnum&lt;= #{end}  
   
   
-   SELECT * FROM (select rownum rnum, j.* from (select board_num, board_subject, nvl(CNT ,0)
+   SELECT * FROM (select rownum rnum, j.* from 
+   (select board_num, board_subject, nvl(CNT ,0)
 			from board left outer join (select comment_board_num,count(*) CNT 
 										from comm 
 										group by comment_board_num)
@@ -72,8 +73,18 @@ where rownum<=?) WHERE rnum>=? and rnum<=?;
 	</select>
 	
   <select id = "getBoardList" resultType="Filebo" parameterType="java.util.Map">
-	
-	select * from file_board
+	 <![CDATA[
+	 SELECT * FROM (select rownum rnum, j.* from (
+							 select file_board.*, nvl(CNT ,0) CNT 
+							from file_board left outer join (select F_COMMENT_NUM ,count(*) CNT  
+														from FILE_COMMENT  
+														group by  F_COMMENT_NUM )b 
+												on file_board.FILE_NUM  = b.F_COMMENT_NUM   
+							order by FILE_RE_REF  desc,  
+							FILE_RE_SEQ  asc)j
+							 				where rownum<= 10  ) 
+							WHERE rnum>=1  and rnum<= 10  
+							 ]]>
   
   </select>
   
@@ -96,11 +107,15 @@ where rownum<=?) WHERE rnum>=? and rnum<=?;
   </insert>
   
   <select id ="getDetail" parameterType ="Filebo" resultType = "Filebo">
-
+	select * from file_board  
+   where 
+  FILE_NUM = #{number}
   </select>
   
   <update id="setReadCountUpdate" parameterType ="int">
-	
+	update file_board
+  set FILE_READCOUNT  = FILE_READCOUNT +1
+  where FILE_NUM = #{number}
   </update>
   
   <!--  map은 java.util.Map의 별칭입니다.-->

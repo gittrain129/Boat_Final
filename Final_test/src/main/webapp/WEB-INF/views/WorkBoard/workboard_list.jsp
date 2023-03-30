@@ -7,7 +7,7 @@
 <title>워크보드 게시판</title>
 
 	<jsp:include page="../Main/header.jsp"/>
-	<script src="${pageContext.request.contextPath}/resources/js/list.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/Kimsj/js/list.js"></script>
 	 
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/Kimsj/workboard_lib/fa-5/css/all.css" />  	
 	<!-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/Kimsj/workboard_lib/bootstrap-4/css/bootstrap.min.css" />  -->
@@ -34,7 +34,9 @@
 		    outline: 3px solid #d2eeff;
 		    border-radius: 10px;
 		}
-		
+		.navbar .navbar-nav .nav-link {
+		    color: #FFFFFF;
+		}
 
 	</style>
 	
@@ -185,6 +187,7 @@
 
 		
 		<hr class="border-danger mb-4 mt-4" />
+			
 				
 		<div class="card">
 		  <div class="card-header">
@@ -208,6 +211,8 @@
 		  	2일 전
 		  </div>
 		</div>
+		
+		
 		<hr class="border-danger mb-4 mt-4" />
 				
 		<div class="card">

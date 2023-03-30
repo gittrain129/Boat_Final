@@ -15,6 +15,9 @@ public interface AttandanceService {
 
 	public void AttOff(String off, String empno);
 
+	//오늘 출근기록_EMPNO받아서 넣기!!
+	public Attandance TodayMyatt();
+
 	
 	
 	

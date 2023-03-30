@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+    
 <jsp:include page="../Main/header.jsp" />
 	
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/jhLee/css/filelist.css">
@@ -117,19 +120,55 @@ background-color: white;
 					</tr>
 				</thead>
 				<tbody>
+					<c:set var = "num" value ="${listcount-(page-1)*limit }"/>
+					<c:forEach var="FILIBO" items="${boardlist}">
 					<tr>
-					<td></td>
+					<td><i class="bi bi-star"></i></td>
 						<td>
 						
-							<a href="discussion-detail.html">자료실게시판 제목1
-							<span class="badge badge-pill badge-primary float-right">Admin</span>
-							</a>
+							<c:if test="${FILIBO.FILE_SUBJECT.length()>=20}">
+								&nbsp;	&nbsp;	&nbsp;
+								<a href="hi?num=${FILIBO.FILE_NUM}">
+									<c:out value="${FILIBO.FILE_SUBJECT.substring(0,20)}..."/>
+								</a>
+							</c:if>
+							
+							<c:if test="${FILIBO.FILE_SUBJECT.length()< 20}">
+								<a href="hi?num=${FILIBO.FILE_NUM}">
+								&nbsp;	&nbsp;	&nbsp;	<c:out value="${FILIBO.FILE_SUBJECT}"/>
+								</a>
+							</c:if>
+						</a>
+						[${FILIBO.CNT}]
+
+						
+						<!-- <c:if test="${b.FILE_DATE}"> -->
+	 		      	  		<img src="${pageContext.request.contextPath}/jhLee/img/new.jpg" id="new" style="width:20px">
+	 		      	  	<!-- </c:if> -->
+
+							<span class="badge badge-pill badge-primary float-right">${FILIBO.DEPT}</span>
+							
 						</td>
-						<td><a href="profile.html"><small>Carroll Hintz</small></a></td>
-						<td>538</td>
-						<td>1 week ago</td>
-						<td></td><td></td>
+
+						<td><small>${FILIBO.FILE_NAME} </small></a></td>
+						<td>${FILIBO.FILE_READCOUNT}</td>
+						<td>${FILIBO.FILE_DATE}</td>
+					
+						<td><div class = "file1">
+							<c:if test="${!empty b.FILE_FILE}">
+							<img alt="파일다운2" src="${pageContext.request.contextPath}/jhLee/img/download.png" class = 'file'style="width:20px">
+							</c:if>
+							</div>
+						</td>
+						<td>
+							<div class = "file2">
+							<c:if test="${!empty b.FILE_FILE2}">
+								<img alt="파일다운2" src="${pageContext.request.contextPath}/jhLee/img/download.png" class = 'file'style="width:20px">
+							</c:if>
+							</div>
+						</td>
 					</tr>
+				</c:forEach>
 					<tr>
 					<td></td>
 						<td>
