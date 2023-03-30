@@ -41,11 +41,11 @@
             
            	<div class="text-center other"> 또는 </div>
             
-            <form name="naverlogin" action="${pageContext.request.contextPath}/member/naverlogin" method="POST">
+            <!-- <form name="naverlogin" action="naverlogin" method="POST"> -->
 	            <div class="form-group d-grid gap-2 col-10 mx-auto">
 					<a href="${naverUrl}" class="btn-naver btn-block text-center"> 네이버 회원가입</a>
 				</div>
-			</form>
+			<!-- </form> -->
 			
 			
 			

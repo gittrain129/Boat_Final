@@ -1,29 +1,5 @@
 $(document).ready(function(){
 
-	$(".emailbtn").on('click',function () {
-		console.log($('#email').val())
-		var email = $('#email').val();
-		
-		if(email == ''){
-    	 	alert("이메일을 입력해주세요.");
-    	 	return false;
-    	 }
-		
-			$.ajax({
-				type : "POST",
-				url : "/emailAuth",
-				data : {email : email},
-				success: function(data){
-					alert("인증번호가 발송되었습니다.");
-					email_auth_cd = data;
-				},
-				error: function(data){
-					alert("메일 발송에 실패했습니다.");
-				}
-			}); //ajax end
-	});
-
-
 	// 초기값은 모든 필드의 검사를 통과하지 않은 상태로 설정합니다
 	var agree_chk = false;
 	var agree_chk2 = false;
@@ -34,8 +10,51 @@ $(document).ready(function(){
 	var valid_email = true;
 	var valid_name = false;
 	var valid_file = false;
+	var valid_email_ck = false;
 	
 	activateButton();
+
+
+
+
+	let token = $("meta[name='_csrf']").attr("content");
+	let header = $("meta[name='_csrf_header']").attr("content");
+	
+	var email_auth_cd = '';
+
+	$("#email_auth_btn").on('click',function () {
+		console.log($('#email').val())
+		var email = $('#email').val();
+		$("#email_auth_key").prop('disabled', false);
+		
+			$.ajax({
+				type : "POST",
+				url : "emailAuth",
+				data : {email : email},
+				beforeSend : function(xhr)
+		        {   
+		        	xhr.setRequestHeader(header, token);			
+		        },
+				success: function(data){
+					email_auth_cd = data;
+					$('#validationServerUsernameFeedback8').show();
+					
+					$("#email_auth_key").keyup(function() {
+						if($("#email_auth_key").val() == email_auth_cd) {
+							$('#validationServerUsernameFeedback8').hide();
+							valid_email_ck = true;
+						}
+					});
+				},
+				error: function(data){
+					$('#validationServerUsernameFeedback9').show();
+					valid_email_ck = false;
+				}
+			}); //ajax end
+	});
+
+
+	
 	
 	//비밀번호 눈
     $('.fa-eye-slash').on('click',function(){
@@ -106,6 +125,8 @@ $(document).ready(function(){
 		}else {	
 			$(this).removeClass('border-danger ');
 			$('#validationServerUsernameFeedback').hide();
+			$('.input-empno').removeClass('border-danger ');
+			$('#validationServerUsernameFeedback2').hide();
 			 valid_select = true;
 			 valid_empno = true;
 		}
@@ -185,6 +206,8 @@ $(document).ready(function(){
 		if(pattern.test(pwd)){
 			$(this).removeClass('border-danger ');
 			$('#validationServerUsernameFeedback3').hide();
+			$('#_label-pwd-ck').removeClass('border-danger ');
+			$('#validationServerUsernameFeedback4').hide();
 			valid_password = true;
 		}else {	
 			$(this).addClass('border-danger ');
@@ -298,6 +321,8 @@ $(document).ready(function(){
 		activateButton();
     });
     
+    $('#validationServerUsernameFeedback7').show();
+    
     //사진 첨부
     $("#upfile").on('change',function(){
 		const reader = new FileReader();
@@ -308,9 +333,28 @@ $(document).ready(function(){
 			$('.profile img').show();
 			$(".profile label").removeAttr("style");
 			$(".profile svg").hide();
+			$('#validationServerUsernameFeedback7').hide();
 		};
 		
-			 valid_file = true;
+		valid_file = true;
+		activateButton();
+		
+	});
+    
+    //사진 첨부
+    $("#profilebtn").on('click',function(){
+		const reader = new FileReader();
+		reader.readAsDataURL(event.target.files[0]);
+					
+		reader.onload = function() { //읽기에 성공했을 때 실행되는 이벤트 핸들러
+			$('.profile img').attr('src', $("#upfile").result); 
+			$('.profile img').show();
+			$(".profile label").removeAttr("style");
+			$(".profile svg").hide();
+			$('#validationServerUsernameFeedback7').hide();
+		};
+		
+		valid_file = true;
 		activateButton();
 		
 	});
@@ -327,7 +371,8 @@ $(document).ready(function(){
 		console.log("valid_email"+valid_email)
 		console.log("valid_name"+valid_name)
 		console.log("valid_file"+valid_file)
-	    if (agree_chk && agree_chk2 && valid_select && valid_empno && valid_password && valid_password_ck && valid_email && valid_name && valid_file) {
+		console.log("valid_email_ck"+valid_email_ck)
+	    if (agree_chk && agree_chk2 && valid_select && valid_empno && valid_password && valid_password_ck && valid_email && valid_name && valid_file && valid_email_ck) {
 	      $('.submit').prop('disabled', false);
 	    } else {
 	      $('.submit').prop('disabled', true);
@@ -335,4 +380,7 @@ $(document).ready(function(){
 	  }
 });
 
-
+function onClickUpload() {
+	let myInput = document.getElementById("upfile");
+	myInput.click();
+}

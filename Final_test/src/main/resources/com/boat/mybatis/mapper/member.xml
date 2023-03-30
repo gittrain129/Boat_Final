@@ -5,7 +5,7 @@
 <mapper namespace="com.boat.mybatis.mapper.MemberMapper">
 
 	<select id="naverConnectionCheck" resultType="java.util.Map">
-		SELECT * FROM MEMBERS WHERE EMAIL = #{email}
+		SELECT * FROM MEMBER WHERE EMAIL = #{email}
 	</select>
 
 	<select id="userNaverLoginPro" resultType="java.util.Map">
