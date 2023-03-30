@@ -8,9 +8,9 @@ $(document).ready(function(){
 	var valid_password = false;
 	var valid_password_ck = false;
 	var valid_email = true;
-	var valid_name = false;
+	var valid_name = ($('#_label-name').val() != null && $('#_label-name').val() != '');
 	var valid_file = false;
-	var valid_email_ck = false;
+	var valid_email_ck = true;
 	
 	activateButton();
 
@@ -43,7 +43,10 @@ $(document).ready(function(){
 						if($("#email_auth_key").val() == email_auth_cd) {
 							$('#validationServerUsernameFeedback8').hide();
 							valid_email_ck = true;
+							console.log('valid_email_ck='+valid_email_ck)
 						}
+						
+						activateButton();
 					});
 				},
 				error: function(data){
@@ -120,6 +123,7 @@ $(document).ready(function(){
     	if($(this).val() == '부서명을 선택해 주세요'){
 			$(this).addClass('border-danger ');
 			$('#validationServerUsernameFeedback').show();
+			$('.input-empno').val('');
 			 valid_select = false;
 			 valid_empno = false;
 		}else {	
@@ -342,22 +346,6 @@ $(document).ready(function(){
 	});
     
     //사진 첨부
-    $("#profilebtn").on('click',function(){
-		const reader = new FileReader();
-		reader.readAsDataURL(event.target.files[0]);
-					
-		reader.onload = function() { //읽기에 성공했을 때 실행되는 이벤트 핸들러
-			$('.profile img').attr('src', $("#upfile").result); 
-			$('.profile img').show();
-			$(".profile label").removeAttr("style");
-			$(".profile svg").hide();
-			$('#validationServerUsernameFeedback7').hide();
-		};
-		
-		valid_file = true;
-		activateButton();
-		
-	});
     
 	//가입하기 버튼 활성화
 	function activateButton() {

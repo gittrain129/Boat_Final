@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
  <head>
@@ -13,6 +14,10 @@
  			alert("회원가입을 축하합니다.")
  		}else if("${loginfail}" == "loginFailMsg"){
  			alert("아이디나 비밀번호 오류 입니다.")
+ 		}else if("${JavaData}" == "YES"){
+ 			alert("네이버 회원가입을 축하합니다.")
+ 		}else if("${JavaData}" == "NO"){
+ 			alert("네이버 회원가입에 실패했습니다.")
  		}
  	</script>
  </head>
@@ -58,6 +63,7 @@
                     	네이버 로그인
                     </a>
                 </div>
+                    <!-- <button type="submit"  class="btn btn-primary py-3 px-5">네이버 로그인</button> -->
             </div>
             
             

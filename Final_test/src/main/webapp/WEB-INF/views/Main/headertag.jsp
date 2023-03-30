@@ -54,5 +54,5 @@
  	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ko.js"></script>
  
-    <!-- favicon error -->
-    <link rel="shortcut icon" href="#">
+    <!-- favicon error 
+    <link rel="shortcut icon" href="#">-->

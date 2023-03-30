@@ -19,12 +19,14 @@ import com.boat.Security.CustomUserDetailsService;
 import com.boat.Security.LoginFailHandler;
 import com.boat.Security.LoginSuccessHandler;
 
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 @EnableWebSecurity	//스프링과 시큐리티 결합
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	
+    
 	//<security:http> 설정 부분
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {

@@ -36,5 +36,11 @@
 		SELECT * FROM MEMBER
 		WHERE EMPNO = #{empno}
 	</select>
+	
+	<insert id="userNaverRegisterPro">
+		INSERT INTO MEMBER 
+		VALUES (#{EMPNO}, #{DEPT}, '사원', #{PASSWORD}, #{NAME}, #{EMAIL},
+		#{PROFILE_FILE}, #{PROFILE_IMG}, SYSDATE, 'ROLE_MEMBER', #{id})
+	</insert>
 
 </mapper>
