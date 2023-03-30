@@ -251,7 +251,7 @@
            editable: false,
            selectable: true,
            selectMirror: true,
-           nowIndicator: true,
+           
            locale : 'ko',
            slotMinTime: '09:00',
            slotMaxTime: '19:00',
