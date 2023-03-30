@@ -216,17 +216,18 @@
        var calendarEl = document.getElementById('calendar');
        
        var asdf =   ([<c:forEach items="${list}" var="l">
+       <c:if test="${l.status eq '승인완료'}">
        {
            start: '${l.start}',
            end: '${l.end}',
            title: '${l.title}',
            id: '${l.id}'
          },
+        </c:if>
          </c:forEach>]);
        
        var ttt = $('.nav-tabs .active').text();
-       console.log(ttt);
-            
+                   
        var calendar = new FullCalendar.Calendar(calendarEl, {
            headerToolbar: {
               left: 'title',
@@ -304,6 +305,7 @@
                $('#rental').val(tab);
                $('#startTimeISO').val(startTime);
                $('#endTimeISO').val(endTime);
+               
                // 모달에 띄울 데이터 .val
                $('#rental_id').val('');
                $('#res_ModalLabel').text('');
@@ -336,7 +338,7 @@
       		   $('.nav-tabs a').removeClass('active'); 
       		   $(this).addClass('active'); 
       		   var tab_info = $('.nav-tabs .active').text();
-      		   console.log(tab_info);
+      		   
       		   
       		   $.ajax({
       	            type: "GET",
@@ -380,7 +382,7 @@
        var rental_id = $('#rental_id').val();//모달에서 가져온 loginid
        var login_id = $('#loginid').text(); //헤더에서 가져온 loginid
               
-       console.log('confermain의 ajax중');
+       
       
                     
        $.ajax({

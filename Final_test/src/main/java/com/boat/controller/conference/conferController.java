@@ -55,18 +55,18 @@ public class conferController {
    
 
    @GetMapping("/view")
-   public String mainView(	@RequestParam(value="tab_info",defaultValue="대회의실",required=false) String tab,
+   public String mainView(	@RequestParam(value="tab_info",defaultValue="",required=false) String tab,
 		   					Model model) {	
 	   String[] st = {"승인대기중","승인완료","거절"};
+	   
        List<ConferenceReservation> cs = co.getcal(tab);
-       
-
        List<Map<String, Object>> cList = new ArrayList<>();
        
        for (ConferenceReservation con : cs) {
-           Map<String, Object> event = new HashMap<>();
-           //여기에 if(con.getSTATUS() == 1){ 
-           //admit에서 status바뀌는 작업후에 if문 추가
+    	   
+    	   
+    	   Map<String, Object> event = new HashMap<>();
+                     
            event.put("id", con.getID());
            event.put("rental",con.getRENTAL());
            event.put("start", con.getSTART_TIME());
@@ -74,20 +74,16 @@ public class conferController {
            event.put("title", con.getCONTENT());
            event.put("start_t", con.getSTART_T());
            event.put("end_t", con.getEND_T());
-           
            String status = st[Integer.parseInt(con.getSTATUS())];
            event.put("status", status);
            event.put("memo", con.getMEMO());
            
-       
            cList.add(event);
-           
-       }
-
+    	  
+          }
+       System.out.println(cList);
        model.addAttribute("list", cList);
 
-       System.out.println(cList);
-     
        return "/Conference_Res/conferMain";
    }
    
@@ -97,32 +93,41 @@ public class conferController {
 	public List<Map<String, Object>> ListAjax(@RequestParam(value="tab_info",defaultValue="대회의실",required=false) String tab
 			){
 		
-		List<ConferenceReservation> cs = co.getcal(tab);
-		 List<Map<String, Object>> cList = new ArrayList<>();
-		  for (ConferenceReservation con : cs) {
-			  //여기에 if(con.getSTATUS() == 1){ 
-	           //admit에서 status바뀌는 작업후에 if문 추가
-	           Map<String, Object> event = new HashMap<>();
-	           event.put("id", con.getID());
-	           event.put("rental",con.getRENTAL());
-	           event.put("start", con.getSTART_TIME());
-	           event.put("end", con.getEND_TIME());
-	           event.put("title", con.getCONTENT());
-	           
-	           cList.add(event);
-	       }
-		
+    	 String[] st = {"승인대기중","승인완료","거절"};
+  	   
+         List<ConferenceReservation> cs = co.getcal(tab);
+         List<Map<String, Object>> cList = new ArrayList<>();
+         
+         for (ConferenceReservation con : cs) {
+        	 if(Integer.parseInt(con.getSTATUS()) ==1) {
+      	   	 Map<String, Object> event = new HashMap<>(); 
+             event.put("id", con.getID());
+             event.put("rental",con.getRENTAL());
+             event.put("start", con.getSTART_TIME());
+             event.put("end", con.getEND_TIME());
+             event.put("title", con.getCONTENT());
+             event.put("start_t", con.getSTART_T());
+             event.put("end_t", con.getEND_T());
+             String status = st[Integer.parseInt(con.getSTATUS())];
+             event.put("status", status);
+             event.put("memo", con.getMEMO());
+             
+             cList.add(event);
+        	 }
+            }
+         
 		return cList;
 	}
    
-    @RequestMapping(value="/admit")
+    @RequestMapping(value="/admit") //admit 최초 접속시 뷰페이지 처리
     public String confer_admit(@RequestParam(value="page", defaultValue="1", required=false) int page,
-                               @RequestParam(value="tab", defaultValue="전체", required=false) String tab,
+                               @RequestParam(value="tab",  required=false) String tab,
                                Model model) {
-        System.out.println(tab);
-        System.out.println("승인페이지의 페이지 = " + page);
+    	if(tab.equals("전체")) {
+        	tab="";
+        }
         int limit = 8;
-        int listcount = co.listcount();
+        int listcount = co.listcount(tab);
         int maxpage = (listcount + limit - 1) / limit;
 
         int startpage = ((page-1) /limit) *limit +1;
@@ -133,9 +138,7 @@ public class conferController {
         
         if(endpage>maxpage)
             endpage=maxpage;
-        if(tab.equals("전체")) {
-        	tab="";
-        }
+        
 
         List<ConferenceReservation> reservation = co.admit(startrow,endrow,tab);
         model.addAttribute("page", page);
@@ -194,16 +197,85 @@ public class conferController {
       	
   	}
       
-      
+    @ResponseBody
+   	@RequestMapping(value="/admitTab_ajax")
+   	public List<Map<String, Object>> admitTabAjax(@RequestParam(value="page", defaultValue="1", required=false) int page,
+   												  @RequestParam(value="tab",required=false) String tab
+   												 
+   			){
+    	if(tab.equals("전체")) {
+        	tab="";
+        	} 
+    	int limit = 8;
+    	int listcount = co.listcount(tab);
+    	int maxpage = (listcount + limit - 1) / limit;
+
+    	int startpage = ((page-1) /limit) *limit +1;
+    	int endpage = startpage +limit -1;
+
+    	int startrow = (page -1) * limit +1; 
+    	int endrow = startrow + limit -1;	
+
+    	if(endpage>maxpage)
+    	endpage=maxpage;
+    	
+
+    	List<ConferenceReservation> reservation = co.admit(startrow,endrow,tab);
+     	List<Map<String, Object>> cList = new ArrayList<>();
+        
+        for (ConferenceReservation con : reservation) {
+       	 
+     	   	 Map<String, Object> event = new HashMap<>(); 
+            event.put("id", con.getID());
+            event.put("rental",con.getRENTAL());
+            event.put("start", con.getSTART_TIME());
+            event.put("end", con.getEND_TIME());
+            event.put("title", con.getCONTENT());
+            event.put("start_t", con.getSTART_T());
+            event.put("end_t", con.getEND_T());
+            event.put("memo", con.getMEMO());
+            event.put("status", con.getSTATUS());
+            event.put("page", page);
+            event.put("startpage", startpage);
+            event.put("endpage", endpage);
+            event.put("maxpage", maxpage);
+            event.put("tab", tab);
+            
+            cList.add(event);
+       	 }         
+     System.out.println(cList);
+	        return cList;
+   	}
    
-    
-    
-    
-    
-    
-    
-    
-    
+    @RequestMapping(value="/admitTab_ajax_page") //admit 최초 접속시 뷰페이지 처리
+    public String admitTab_ajax_page(@RequestParam(value="page", defaultValue="1", required=false) int page,
+                               @RequestParam(value="tab", required=false) String tab,
+                               Model model) {
+    	if(tab.equals("전체")) {
+        	tab="";
+        }
+        int limit = 8;
+        int listcount = co.listcount(tab);
+        int maxpage = (listcount + limit - 1) / limit;
+
+        int startpage = ((page-1) /limit) *limit +1;
+        int endpage = startpage +limit -1;
+
+        int startrow = (page -1) * limit +1; 
+		int endrow = startrow + limit -1;	
+        
+        if(endpage>maxpage)
+            endpage=maxpage;
+        
+
+        List<ConferenceReservation> reservation = co.admit(startrow,endrow,tab);
+        model.addAttribute("page", page);
+        model.addAttribute("startpage", startpage);
+        model.addAttribute("endpage", endpage);
+        model.addAttribute("maxpage", maxpage);
+        model.addAttribute("reservation", reservation);
+        return "/Conference_Res/conferAdmit";
+    }
     
     
     

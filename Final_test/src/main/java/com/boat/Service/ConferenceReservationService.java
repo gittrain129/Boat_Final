@@ -12,7 +12,7 @@ public interface ConferenceReservationService {
 
 	public List<ConferenceReservation> admit(int startrow, int endrow, String tab);
 
-	public int listcount();
+	public int listcount(String tab);
 
 	public void admit_pro(ConferenceReservation c2);
 

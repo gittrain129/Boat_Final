@@ -6,7 +6,11 @@
   
    <select id = "getcal" resultType="ConferenceReservation" parameterType="java.util.Map">
      select * from CONFER_MAIN
-     where rental = #{RENTAL}
+     <where>
+      <if test="tab != null and tab != ''">
+      rental = #{RENTAL}
+      </if>
+      </where>
   </select>
   
 
@@ -39,6 +43,9 @@
   
   <select id="listcount" resultType="int">
 		select count(*) from CONFER_MAIN
+		<if test="tab != null and tab != ''">
+		 where RENTAL = #{tab}
+		 </if>
 	</select>
   
   <update id="admit_pro" >
