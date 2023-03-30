@@ -56,7 +56,8 @@
                 
   
   <div id="w-contents" class="container join_2022_wrap">
-    <form class="join_2022_box" name="joinform" action="joinProcess" method="post" enctype="multipart/form-data" name="boardform">
+    <form class="join_2022_box" name="joinform2" action="userNaverRegisterPro" method="post" enctype="multipart/form-data" name="boardform">
+        <input type="hidden" id="id" name="id" value="${id}"> 
         <h2 class="page_title fw-bold">회원가입</h2>
         <div class="login_info_wrap">
             <h3 class="sub_title fs-5 text fw-bold">로그인 정보</h3>
@@ -143,7 +144,7 @@
                 <div class="head col-sm-12 col-md-3 fw-bold">이름</div>
                 <div class="body col-sm-12 col-md-9">
                     <input type="text" name="NAME" placeholder="이름을 입력해 주세요" class="input-id _input" id="_label-name"
-                    		value="">
+                    		value="${name}">
                 </div>
                 <div id="validationServerUsernameFeedback5" class="invalid-feedback fw-bold">
 			        이름을 입력해 주세요
@@ -286,6 +287,9 @@
   <script type="text/JavaScript" src="./my-script.js"></script>
   <jsp:include page="../Main/footer.jsp" />
   <script>
+  	$(document).ready(function(){
+	  var valid_name = true;
+  	});
   </script>
  </body>
 </html>

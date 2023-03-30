@@ -8,7 +8,9 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,12 +20,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,8 +52,9 @@ public class MemberController {
 	private NaverLoginBO naverloginbo;//네이버 api
 	private SendMail sendMail;
 	private PasswordEncoder passwordEncoder;
-	private JavaMailSender javaMailSender;
 	
+	@Autowired
+	private JavaMailSenderImpl mailSender;
 	
 	
 	@Autowired
@@ -60,7 +64,6 @@ public class MemberController {
 		this.naverloginbo = naverloginbo;
 		this.sendMail = sendMail;
 		this.passwordEncoder = passwordEncoder;
-		this.javaMailSender = javaMailSender;
 	}
 
 	
@@ -69,12 +72,14 @@ public class MemberController {
 	public String signUp(Model model,HttpSession session) {
 		String naverAuthUrl = naverloginbo.getAuthorizationUrl(session);
 		model.addAttribute("naverUrl", naverAuthUrl);
+		Logger.info("naverAuthUrl="+naverAuthUrl);
 		return "/Member/sign_up";
 	}
 	
 	//일반 회원가입 => 정보 작성폼
 	@GetMapping(value = "/join")
-	public String join(@RequestParam("email") String email, Model model) {
+	public String join(@RequestParam("email") String email, Model model, HttpSession session) {
+		
 		model.addAttribute("email", email);
 		return "/Member/joinForm";
 	}
@@ -194,6 +199,43 @@ public class MemberController {
 	
 	
 	
+	//이메일 인증
+	@ResponseBody
+	@RequestMapping(value = "/emailAuth", method = RequestMethod.POST)
+	public String emailAuth(String email) {	
+		System.out.println("전달받은 이메일:"+email);
+		Random random = new Random();
+		int checkNum = random.nextInt(888888) + 111111;
+
+		/* 이메일 보내기 */
+        String setFrom = "dmswjddid37@naver.com";
+        String toMail = email;
+        String title = "회원가입 인증 이메일 입니다.";
+        String content = 
+                "BOAT 홈페이지를 방문해주셔서 감사합니다." +
+                "<br><br>" + 
+                "인증 번호는 " + checkNum + " 입니다." + 
+                "<br>" + 
+                "해당 인증번호를 인증번호 확인란에 기입하여 주세요.";
+        
+        try {
+            
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+            helper.setFrom(setFrom);
+            helper.setTo(toMail);
+            helper.setSubject(title);
+            helper.setText(content,true);
+            mailSender.send(message);
+            
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+        
+        return Integer.toString(checkNum);
+ 
+	}
+	
 	
 	
 	
@@ -202,43 +244,110 @@ public class MemberController {
 	
 	
 	//네이버 회원가입 => 정보 작성폼
-	@RequestMapping(value = "/naverlogin", method = {RequestMethod.GET, RequestMethod.POST})
-	public String userNaverLoginPro(Model model,
-			@RequestParam Map<String,Object> paramMap, @RequestParam String code, 
-			@RequestParam String state, HttpSession session) throws SQLException, Exception {
-		
-		Logger.info("paramMap:" + paramMap);
+	@RequestMapping(value = "/naverlogin", method = {RequestMethod.GET,RequestMethod.POST})
+	public String userNaverLoginPro(Model model,@RequestParam Map<String,Object> paramMap, @RequestParam String code, 
+			@RequestParam String state,HttpSession session) throws SQLException, Exception {
+		System.out.println("paramMap:" + paramMap);
 		Map <String, Object> resultMap = new HashMap<String, Object>();
 		
-		OAuth2AccessToken oauthToken;
-		oauthToken = naverloginbo.getAccessToken(session, code, state);
+		
+		OAuth2AccessToken oauthToken = naverloginbo.getAccessToken(session, code, state);
+		
 		//로그인 사용자 정보를 읽어온다.
 		String apiResult = naverloginbo.getUserProfile(oauthToken);
-		Logger.info("apiResult =>"+apiResult);
+		System.out.println("apiResult =>"+apiResult);
 		
 		ObjectMapper objectMapper =new ObjectMapper();
 		Map<String, Object> apiJson = (Map<String, Object>) objectMapper.readValue(apiResult, Map.class).get("response");
+		System.out.println("apiJson="+apiJson);
 		
 		Map<String, Object> naverConnectionCheck = memberservice.naverConnectionCheck(apiJson);
+		System.out.println("naverConnectionCheck="+naverConnectionCheck);
 		
 		if(naverConnectionCheck == null) { //일치하는 이메일 없으면 가입
 			
 			model.addAttribute("email",apiJson.get("email"));
-			model.addAttribute("password",apiJson.get("id"));
-			return "/Member/joinForm";
+			model.addAttribute("id",apiJson.get("id"));
+			model.addAttribute("name",apiJson.get("name"));
+			System.out.println("apiJson.get(\"id\")="+apiJson.get("id"));
+			return "/Member/joinForm2";
 			
-		}else if(naverConnectionCheck.get("NAVERLOGIN") == null && naverConnectionCheck.get("EMAIL") != null) { //이메일 가입 되어있고 네이버 연동 안되어 있을시
-			memberservice.setNaverConnection(apiJson);
+		}
+//		else if(naverConnectionCheck.get("NAVERLOGIN") == null && naverConnectionCheck.get("EMAIL") != null) { //이메일 가입 되어있고 네이버 연동 안되어 있을시
+//			memberservice.setNaverConnection(apiJson);
+//			Map<String, Object> loginCheck = memberservice.userNaverLoginPro(apiJson);
+//			session.setAttribute("userInfo", loginCheck);
+//			
+//		}
+		else { //모두 연동 되어있을시
 			Map<String, Object> loginCheck = memberservice.userNaverLoginPro(apiJson);
+			System.out.println("loginCheck="+loginCheck);
 			session.setAttribute("userInfo", loginCheck);
 			
-		}else { //모두 연동 되어있을시
-			Map<String, Object> loginCheck = memberservice.userNaverLoginPro(apiJson);
-			session.setAttribute("userInfo", loginCheck);
+			String EMPNO = (String) loginCheck.get("EMPNO");
+			String NAME = (String) loginCheck.get("NAME");
+			String PROFILE_FILE = (String) loginCheck.get("PROFILE_FILE");
+			session.setAttribute("EMPNO", EMPNO);
+			session.setAttribute("NAME", NAME);
+			session.setAttribute("PROFILE_FILE", PROFILE_FILE);
+			
+			return "/Member/sign_in";
 		}
 		
-		return "redirect:index";
+//		return "redirect:/index";
 	}
+	
+	//네이버 회원가입 처리
+	@RequestMapping(value="/userNaverRegisterPro", method=RequestMethod.POST)
+	public String userNaverRegisterPro(@RequestParam Map<String,Object> paramMap,HttpSession session, RedirectAttributes rattr,
+			@RequestParam String PASSWORD) throws SQLException, Exception {
+		System.out.println("paramMap=" + paramMap);
+		
+		//비밀번호 암호화 추가
+		String encPassword = passwordEncoder.encode(PASSWORD);
+		Logger.info(encPassword);
+		paramMap.put("PASSWORD", encPassword);
+//		member.setPASSWORD(encPassword);
+		
+//		MultipartFile uploadfile = uploadfile;
+//		
+//		if(!uploadfile.isEmpty()) {
+//			String fileName = uploadfile.getOriginalFilename();//원래 파일명
+//			
+//			String saveFolder = new File("src/main/resources/static/profile").getAbsolutePath();
+////			String saveFolder= profileSaveFolder.getProfilesavefolder();
+//			String fileDBName = fileDBName(fileName, saveFolder, EMPNO);
+//			Logger.info("fileDBName : " + fileDBName);
+//			
+//			//transferTo(file path) : 업로드된 파일을 매개변수의 경로에 저장합니다.
+//			uploadfile.transferTo(new File(saveFolder + fileDBName));
+//			Logger.info("transferTo path : " + saveFolder + fileDBName);
+//			//바뀐 파일명으로 저장
+//			paramMap.put("PASSWORD", encPassword);
+////			member.setPROFILE_IMG(fileDBName);
+//			System.out.println("absolutePathss " +saveFolder);
+//			//파일 경로 이름
+//			member.setPROFILE_FILE("profile" + fileDBName);
+//		}
+		
+		Map <String, Object> resultMap = new HashMap<String, Object>();
+		int registerCheck = memberservice.userNaverRegisterPro(paramMap);
+		System.out.println(registerCheck);
+		
+		if(registerCheck != 0 && registerCheck > 0) {
+			Map<String, Object> loginCheck = memberservice.userNaverLoginPro(paramMap);
+			session.setAttribute("userInfo", loginCheck);
+			rattr.addFlashAttribute("JavaData", "YES");
+//			resultMap.put("JavaData", "YES");
+		}else {
+			rattr.addFlashAttribute("JavaData", "NO");
+//			resultMap.put("JavaData", "NO");
+		}
+		
+		return "redirect:/index";
+//		return resultMap;
+	}
+	
 	
 	
 	

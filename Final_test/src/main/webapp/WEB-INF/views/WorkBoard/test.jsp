@@ -126,5 +126,93 @@
 	  </div>
 	  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	 </form>
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 <table class="table table-striped">
+	   <thead>
+	    <tr>
+	    	<th colspan="3">MVC 게시판 - list</th>
+	    	<th colspan="2">
+	    		<span>글 개수 : ${listcount}</span>
+	    	</th>
+	    </tr>
+	    <tr>
+	    	<th><div>번호</div></th>
+	    	<th><div>제목</div></th>
+	    	<th><div>작성자</div></th>
+	    	<th><div>날짜</div></th>
+	    	<th><div>조회수</div></th>
+	    </tr>
+	   </thead>
+	   <tbody>
+	    <c:set var="num" value="${listcount-(page-1)*limit}"/>
+	    <c:forEach var="b" items="${boardlist}">
+	      <tr>
+	        <td><%-- 번호 --%>
+	          <c:out value="${num}"/> <%-- num 출력 --%>
+	          <c:set var="num" value="${num-1}"/>  <%-- num=num-1; 의미 --%>
+	         </td>
+	         <td><%-- 제목 --%>
+	         	<div>
+	         		<%-- 답변글 제목앞에 여백 처리 부분 
+	         			 board_re_lev, board_num,
+	         			 board_subject, board_name, board_date,
+	         			 board_readcount : property 이름
+	         		--%>
+	         		<c:if test="${b.BOARD_RE_LEV != 0}">  <%-- 답글인 경우 --%>
+	         			<c:forEach var="a" begin="0" end="${b.BOARD_RE_LEV*2}" step="1">
+	         			&nbsp;
+	         			</c:forEach>
+	         			<img src='${pageContext.request.contextPath}/resources/image/line.gif'>
+	         		</c:if>
+	         		
+	         		<c:if test="${b.BOARD_RE_LEV == 0}"> <%-- 원문인 경우 --%>
+	         			&nbsp;
+	         		</c:if>
+	         		
+	         		<a href="detail?num=${b.BOARD_NUM}">
+	         			  <c:out value="${b.BOARD_SUBJECT}" escapeXml="true"/><%-- escapeXml="true" : HTML 태그를 화면에 그 --%>
+	         			  <span class="gray small">[<c:out value="${b.CNT}"/>]</span> <%-- excapeXml="ture" : HTML 태그를 화 --%>
+	         		</a>
+	         	</div>
+	         </td>
+	         <td><div>${b.BOARD_NAME}</div></td>
+	         <td><div>${b.BOARD_DATE}</div></td>
+	         <td><div>${b.BOARD_READCOUNT}</div></td>
+	        </tr>
+	       </c:forEach>
+	    </tbody>
+	  </table>
+	  
+	  
+	  
+	  
+	  
+	  <div id="comment">
+			<button class="btn btn-info float-left">총 50자까지 가능합니다.</button>
+			<button id="write" class="btn btn-info float-right">등록</button>
+			<textarea rows=3 class="form-control" id="content" maxLength="50"></textarea>
+			<table class="table table-striped">
+				<thead>
+					<tr><td>아이디</td><td>내용</td><td>날짜</td></tr>
+				</thead>
+				<tbody>
+				
+				</tbody>
+			</table>
+				<div id="message"></div>
+		</div >
+		
+		
+		
 </body>
 </html>

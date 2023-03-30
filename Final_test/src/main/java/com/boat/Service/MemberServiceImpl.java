@@ -63,6 +63,11 @@ public class MemberServiceImpl implements MemberService {
 		return dao.isId(id);
 	}
 
+	@Override
+	public int userNaverRegisterPro(Map<String, Object> paramMap) {
+		return dao.userNaverRegisterPro(paramMap);
+	}
+
 	
 	
 }

@@ -18,7 +18,7 @@
 	<jsp:include page="headertag.jsp"/>
     <jsp:include page="process_bar.jsp"/>
 
-<script>
+<script>h
 	$(function(){
 		$("#logout").click(function(event){
 			event.preventDefault();
@@ -91,6 +91,12 @@
     background: none;
     margin-bottom: 20px;
     margin-top:16px;
+}
+
+/*메뉴바 간격*/
+.navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
 }
 </style>
 </head>
@@ -242,7 +248,6 @@
                 
             </div>
             
-            
 	<sec:authorize access="isAnonymous()">
 		<sec:authentication property="principal" var="pinfo"/>
   		
@@ -258,6 +263,7 @@
             </div>
             
     </sec:authorize>
+    
 	<sec:authorize access="isAuthenticated()">
   		<sec:authentication property="principal.member" var="pinfo"/>
   		
@@ -278,6 +284,8 @@
             </div>
             
   	</sec:authorize>
+  	
+  	
             
         </div>
         

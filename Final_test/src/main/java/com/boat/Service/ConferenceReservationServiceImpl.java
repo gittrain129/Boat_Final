@@ -38,9 +38,11 @@ public class ConferenceReservationServiceImpl implements ConferenceReservationSe
 
 
 	@Override
-	public int listcount() {
-		return c3.listcount();
+	public int listcount(String tab) {
+		return c3.listcount(tab);
 	}
+
+	
 
 	@Override
 	public void admit_pro(ConferenceReservation c2) {

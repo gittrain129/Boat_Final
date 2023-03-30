@@ -7,7 +7,8 @@
 <title>워크보드 게시판</title>
 
 	<jsp:include page="../Main/header.jsp"/>
-	
+	<script src="${pageContext.request.contextPath}/resources/Kimsj/js/list.js"></script>
+	 
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/Kimsj/workboard_lib/fa-5/css/all.css" />  	
 	<!-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/Kimsj/workboard_lib/bootstrap-4/css/bootstrap.min.css" />  -->
 	<link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -33,7 +34,9 @@
 		    outline: 3px solid #d2eeff;
 		    border-radius: 10px;
 		}
-		
+		.navbar .navbar-nav .nav-link {
+		    color: #FFFFFF;
+		}
 
 	</style>
 	
@@ -50,6 +53,8 @@
 		        }
 		    });
 	</script>
+	
+	
 </head>
 <body>
 
@@ -73,7 +78,6 @@
 							
 						</td>
 					</tr>
-					<tr>
 					<tr>					
 						<th style="width:120px;">카테고리</th>
 						<td>
@@ -115,29 +119,75 @@
 	</div>
 		
 			
-		<div class="card">
-		  <div class="card-header">
-		    제목
-		  </div>
-		  <div class="card-body">
-		    <div class="row">
-				<div class="col-sm-2">
-				  	<a href="#">
-				  		<img class="mr-3 rounded img-thumbnail" src="public/imgs/user.jpg" alt="Generic placeholder image">
-				  	</a>
-				  	<h6 class="mt-2"><a href="#">아이디</a></h6>
-				  	<small class="text-muted">122309</small>
-				 </div>
-				  <div class="col-sm-9 border-left border-secondary">
-				    <p>내용</p>
-				  </div>
-			</div>
-		  </div>
-		  <div class="card-footer text-muted">
-		  	2일 전
-		  </div>
-		</div>
+		<tbody>
+		    <c:set var="num" value="${listcount-(page-1)*limit}"/>
+		    <c:forEach var="b" items="${boardlist}">
+		      <tr>
+
+		         <td><%-- 제목 --%>
+		         	<div>
+		         		<c:if test="${b.BOARD_RE_LEV == 0}"> <%-- 원문인 경우 --%>
+		         			&nbsp;
+		         		</c:if>
+		         		
+		         		<a href="detail?num=${b.BOARD_NUM}">
+		         			  <c:out value="${b.BOARD_SUBJECT}" escapeXml="true"/><%-- escapeXml="true" : HTML 태그를 화면에 그 --%>
+		         			  <span class="gray small">[<c:out value="${b.CNT}"/>]</span> <%-- excapeXml="ture" : HTML 태그를 화 --%>
+		         		</a>
+		         	</div>
+		         </td>
+		         <td><div>${b.BOARD_NAME}</div></td>
+		         <td><div>${b.BOARD_DATE}</div></td>
+		         <td><div>${b.BOARD_READCOUNT}</div></td>
+		        </tr>
+		       </c:forEach>
+		    </tbody>
+		
 		<hr class="border-danger mb-4 mt-4" />
+	
+	<tbody>
+	    <c:set var="num" value="${listcount-(page-1)*limit}"/>
+	    <c:forEach var="b" items="${boardlist}">
+	    	
+			<div class="card">
+			  <div class="card-header">
+			    <td><%-- 제목 --%>
+		         	<div>
+		         		<c:if test="${b.BOARD_RE_LEV == 0}"> <%-- 원문인 경우 --%>
+		         			&nbsp;
+		         		</c:if>
+		         		
+		         		<a href="detail?num=${b.BOARD_NUM}">
+		         			  <c:out value="${b.BOARD_SUBJECT}" escapeXml="true"/><%-- escapeXml="true" : HTML 태그를 화면에 그 --%>
+		         			  <span class="gray small">[<c:out value="${b.CNT}"/>]</span> <%-- excapeXml="ture" : HTML 태그를 화 --%>
+		         		</a>
+		         	</div>
+		         </td>
+			  </div>
+			  <div class="card-body">
+			    <div class="row">
+					<div class="col-sm-2">
+					  	<a href="#">
+					  		<img class="mr-3 rounded img-thumbnail" src="public/imgs/user.jpg" alt="Generic placeholder image">
+					  	</a>
+					  	<h6 class="mt-2"><a href="#"><td><div>${b.BOARD_NAME}</div></td></a></h6>
+					  	<small class="text-muted">122309</small>
+					 </div>
+					  <div class="col-sm-9 border-left border-secondary">
+					    <p>내용</p>
+					  </div>
+				</div>
+			  </div>
+			  <div class="card-footer text-muted">
+			  	2일 전
+			  </div>
+			</div>
+		</c:forEach>
+	</tbody>
+
+		
+		<hr class="border-danger mb-4 mt-4" />
+			
 				
 		<div class="card">
 		  <div class="card-header">
@@ -161,30 +211,8 @@
 		  	2일 전
 		  </div>
 		</div>
-		<hr class="border-danger mb-4 mt-4" />
-				
-		<div class="card">
-		  <div class="card-header">
-		    제목
-		  </div>
-		  <div class="card-body">
-		    <div class="row">
-				<div class="col-sm-2">
-				  	<a href="#">
-				  		<img class="mr-3 rounded img-thumbnail" src="public/imgs/user.jpg" alt="Generic placeholder image">
-				  	</a>
-				  	<h6 class="mt-2"><a href="#">아이디</a></h6>
-				  	<small class="text-muted">122309</small>
-				 </div>
-				  <div class="col-sm-9 border-left border-secondary">
-				    <p>내용</p>
-				  </div>
-			</div>
-		  </div>
-		  <div class="card-footer text-muted">
-		  	2일 전
-		  </div>
-		</div>
+		
+		
 		<hr class="border-danger mb-4 mt-4" />
 				
 		<div class="card">
