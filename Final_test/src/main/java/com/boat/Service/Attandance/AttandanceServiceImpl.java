@@ -43,6 +43,16 @@ public class AttandanceServiceImpl implements AttandanceService {
 	}
 
 
+	@Override
+	public void AttOff(String off, String empno) {
+		HashMap<String,String>map = new HashMap<String,String>();
+		map.put("off",off);
+		map.put("empno", empno);
+		
+		dao.AttOff(off,empno);
+	}
+
+
 	
 
 }

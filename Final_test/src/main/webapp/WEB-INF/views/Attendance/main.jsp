@@ -58,10 +58,10 @@
             
             <!--출근버튼  -->
                 <form action="${pageContext.request.contextPath}/Attendance/on" method="post">
-                <input type="hidden" name="on"  value="" id="on">
-                <input type="button" id="start-btn" class="btn" value="출근">
-                <input type="hidden" class ="empno" name="empno" value="">
+                <input type="hidden" name="ON_TIME"  value="" id="on">
+                <input type="hidden" class ="empno" name="EMPNO" value="">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                <input type="submit" id="start-btn" class="btn" value="출근">
                 
                 </form>
                 
@@ -69,10 +69,10 @@
             <!--퇴근버튼  -->
                 <form action="${pageContext.request.contextPath}/Attendance/off" method="post">
                 
-                <input type="hidden" name="off" value="" id="off"          >
-                <input type="button"  id="end-btn" class="c-btn" value="퇴근">
-                <input type="hidden" class ="empno" name="empno" value="">
+                <input type="hidden" name="OFF_TIME" value="" id="off"          >
+                <input type="hidden" class ="empno" name="EMPNO" value="">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                <input type="submit"  id="end-btn" class="c-btn" value="퇴근">
                 
                 
                 </form>
@@ -80,8 +80,8 @@
             
             </div>
             <div id="result-box">
-                <div>시작: </div>
-                <div>종료: </div>
+                <div>시작:${ON_TIME} </div>
+                <div>종료:${OFF_TIME} </div>
             </div>
         </div>
         <div id="work-week" class="box">
@@ -137,21 +137,13 @@
                                 <p>${fn:substring(x.ON_TIME,5,10)}</p>
                                 <p></p>
                                 <p>${fn:substring(x.ON_TIME,11,16)}</p>
-                                <p></p>
+                                <p>${fn:substring(x.OFF_TIME,11,16)}</p>
                                 <p></p>
                                 <p></p>
                             </div>
                         </c:forEach>
                 </div>
-              <%--   <div class="page-box">
-                	<span class="material-symbols-outlined" <c:if test="${pv.currentPage ne 1}">onclick="location.href='/sixman/attendance/board?page=1'"</c:if>> keyboard_double_arrow_left </span>
-                    <span class="material-symbols-outlined" <c:if test="${pv.currentPage ne 1}">onclick="location.href='/sixman/attendance/board?page=${pv.currentPage - 1}'"</c:if>> chevron_left </span>
-                    <c:forEach var="i" begin="${pv.startPage}" end="${pv.endPage}">
-                    <div class="page-btn <c:if test="${i eq pv.currentPage}"> checked-p-btn</c:if>" onclick="location.href='/sixman/attendance/board?page=${i}'">${i}</div>
-                    </c:forEach>
-                    <span class="material-symbols-outlined" <c:if test="${pv.maxPage ne pv.currentPage}">onclick="location.href='/sixman/attendance/board?page=${pv.currentPage + 1}'"</c:if>> chevron_right </span>
-                    <span class="material-symbols-outlined" <c:if test="${pv.maxPage ne 1 and pv.maxPage eq pv.currentPage}">onclick="location.href='/sixman/attendance/board?page=${pv.maxPage}'"</c:if>> keyboard_double_arrow_right </span>
-                </div> --%>
+           
             </div>
         </div>
     </div>

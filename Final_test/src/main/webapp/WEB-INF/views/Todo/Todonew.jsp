@@ -50,7 +50,7 @@
      
 		
 		<div class="cal_time" style="margin-top:15px" >
-		 <label>일정 시작 시간: </label><br>
+		 <label>일정 시작 날짜: </label><br>
                     <div class="form-group"style="margin-top:15px">
                       <input
                         type="DATE"
@@ -59,7 +59,7 @@
                       />
                     </div>
                     
-           <label style="margin-top:15px" >일정 종료 시간: </label><br>
+           <label style="margin-top:15px" >일정 종료 날짜: </label><br>
                     <div class="form-group" style="margin-top:15px" >
                       <input
                         type="DATE"
@@ -81,7 +81,7 @@
                 })
 	        	</script>
       
-			 <input type="hidden" name ="EMPNO" value="2330006" id="empno">
+			 <input type="hidden" name ="EMPNO" value="23100001" id="empno">
 			 <input type="hidden" name ="DEPT" value="인사팀" id="dept">
              <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
              <div class="modal-footer">

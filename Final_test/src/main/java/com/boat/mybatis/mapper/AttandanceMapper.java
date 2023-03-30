@@ -15,5 +15,7 @@ public interface AttandanceMapper {
 	//출퇴근 리스트 가져오기 
 	public List<Attandance> getAttList();
 
+	public void AttOff(String off, String empno);
+
 
 }

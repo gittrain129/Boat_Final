@@ -1,5 +1,8 @@
 package com.boat.domain;
 
+import lombok.Data;
+
+@Data
 public class Attandance {
 
 	//MEMBER_ATTENDANCE
@@ -9,18 +12,11 @@ public class Attandance {
 //	4	OFF_TIME	퇴근시간
 //	5	OUT_TIME	외출시간
 	
-	private String empno;
-	public String getEmpno() {
-		return empno;
-	}
-	public void setEmpno(String empno) {
-		this.empno = empno;
-	}
-	public String getON_TIME() {
-		return ON_TIME;
-	}
-	public void setON_TIME(String oN_TIME) {
-		ON_TIME = oN_TIME;
-	}
+	private String EMPNO;
+	private String CONTENT;
 	private String ON_TIME;
+	private String OFF_TIME;
+	private String OUT_TIME;
+	private String REG_DATE;
+	
 }

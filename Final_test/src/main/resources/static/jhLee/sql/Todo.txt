@@ -15,64 +15,109 @@ create table TODOLIST (
 	REG_DATE  DATE DEFAULT SYSDATE,	
 	DEPT VARCHAR2(15)
 );
-
-
-
+CREATE TABLE MEMBER(
+	EMPNO VARCHAR2(12),
+	DEPT VARCHAR2(10),
+	CONSTRAINT BOAT_DEPT_CK CHECK (DEPT IN('홍보팀','개발팀','인사팀','기획팀','영업팀')),
+	JOB VARCHAR2(20) DEFAULT '사원',
+	PASSWORD VARCHAR2(60),
+	NAME VARCHAR2(15),
+	EMAIL VARCHAR2(30),
+	PROFILE_FILE VARCHAR2(50),
+	PROFILE_IMG VARCHAR2(50),
+	REGISTER_DATE DATE DEFAULT SYSDATE,
+	AUTH VARCHAR2(50) DEFAULT 'ROLE_MEMBER' NOT NULL,
+	NAVERLOGIN VARCHAR2(30),
+	PRIMARY KEY(EMPNO)
+);
+SELECT T.*, M.name name, M.job job, M.dept dept
+FROM member M
+LEFT OUTER JOIN todolist T
+ON T.empno = M.empno AND T.dept = M.dept
+WHERE M.dept = '인사팀'
+ORDER BY M.empno;
+	--틀림
+	SELECT T.*, M.name name,M.job job,M.dept dept
+			FROM (select * from member where dept = '인사팀')M
+			full outer JOIN (select * from todolist where dept = '인사팀')T
+			ON T.empno = M.empno
+			order by M.empno;
+			--틀림
 --부서별 Todo값 가져오기
-SELECT *
-FROM (select * from todolist where dept = '인사팀')T
- JOIN (select * from member where dept = '인사팀')M
+SELECT T.*,M.job,M.name,M.profile_file
+FROM (select * from member where dept = '홍보팀')M
+full outer JOIN (select * from todolist where dept = '홍보팀')T
 ON T.empno = M.empno
-order by empno;
-
-
-
-INSERT INTO TODOLIST VALUES(
-TODO_SEQ.NEXTVAL, '2330006','1할일1','2023-03-01','2023-03-02',SYSDATE,'인사팀');
-
-INSERT INTO TODOLIST VALUES(
-TODO_SEQ.NEXTVAL, '2330006','2할일2','2023-03-02','2023-03-03',SYSDATE,'인사팀');
-
-INSERT INTO TODOLIST VALUES(
-TODO_SEQ.NEXTVAL, '2330006','3할일3','2023-03-03','2023-03-04',SYSDATE,'인사팀');
-
-INSERT INTO TODOLIST VALUES(
-TODO_SEQ.NEXTVAL, '2330006','4할일4','2023-03-04','2023-03-05',SYSDATE,'인사팀');
-
-INSERT INTO TODOLIST VALUES(
-TODO_SEQ.NEXTVAL, '2330006','5할일5','2023-03-05','2023-03-06',SYSDATE,'인사팀');
+order by T.empno;
+update todolist dept='인사팀';
 
 
 INSERT INTO TODOLIST VALUES(
-TODO_SEQ.NEXTVAL, '2330005','11할일11','2023-03-05','2023-03-06',SYSDATE,'인사팀');
+TODO_SEQ.NEXTVAL, '2330002','301할일1','2023-03-01','2023-03-02',SYSDATE,'인사팀');
 
 INSERT INTO TODOLIST VALUES(
-TODO_SEQ.NEXTVAL, '2330004','22할일22','2023-03-05','2023-03-06',SYSDATE,'인사팀');
+TODO_SEQ.NEXTVAL, '2330002','302할일2','2023-03-02','2023-03-03',SYSDATE,'인사팀');
 
 INSERT INTO TODOLIST VALUES(
-TODO_SEQ.NEXTVAL, '2330003','33할일33','2023-03-05','2023-03-06',SYSDATE,'인사팀');
+TODO_SEQ.NEXTVAL, '2330003','303할일3','2023-03-03','2023-03-04',SYSDATE,'인사팀');
 
 INSERT INTO TODOLIST VALUES(
-TODO_SEQ.NEXTVAL, '2330002','44할일44','2023-03-05','2023-03-06',SYSDATE,'인사팀');
+TODO_SEQ.NEXTVAL, '2330003','304할일4','2023-03-04','2023-03-05',SYSDATE,'인사팀');
+
+INSERT INTO TODOLIST VALUES(
+TODO_SEQ.NEXTVAL, '2330003','305할일5','2023-03-05','2023-03-06',SYSDATE,'인사팀');
+
+
+INSERT INTO TODOLIST VALUES(
+TODO_SEQ.NEXTVAL, '2330003','3011할일11','2023-03-05','2023-03-06',SYSDATE,'홍보팀');
+
+INSERT INTO TODOLIST VALUES(
+TODO_SEQ.NEXTVAL, '2330004','3022할일22','2023-03-05','2023-03-06',SYSDATE,'홍보팀');
+
+INSERT INTO TODOLIST VALUES(
+TODO_SEQ.NEXTVAL, '2330004','3033할일33','2023-03-05','2023-03-06',SYSDATE,'홍보팀');
+
+INSERT INTO TODOLIST VALUES(
+TODO_SEQ.NEXTVAL, '2330005','3044할일44','2023-03-05','2023-03-06',SYSDATE,'홍보팀');
 
 
 
 INSERT INTO MEMBER 
-VALUES('2330006', '인사팀', '부서장','123456', '홍길동','admin@boat.com',
+VALUES('2310006', '홍보팀', '부서장','123456', '홍길동','admin@boat.com',
 'adminImage.png','adminImage.png', SYSDATE, 'ROLE_MEMBER', null);
 
 INSERT INTO MEMBER 
-VALUES('2330005', '인사팀', '부서장','123456', '김길동','admin@boat.com',
+VALUES('2310005', '홍보팀', '부서장','123456', '김길동','admin@boat.com',
 'adminImage.png','adminImage.png', SYSDATE, 'ROLE_MEMBER', null);
 
 INSERT INTO MEMBER 
-VALUES('2330004', '인사팀', '부서장','123456', '이길동','admin@boat.com',
+VALUES('2310004', '홍보팀', '부서장','123456', '이길동','admin@boat.com',
 'adminImage.png','adminImage.png', SYSDATE, 'ROLE_MEMBER', null);
 
 INSERT INTO MEMBER 
-VALUES('2330003', '인사팀', '부서장','123456', '신길동','admin@boat.com',
+VALUES('2310003', '홍보팀', '부서장','123456', '신길동','admin@boat.com',
 'adminImage.png','adminImage.png', SYSDATE, 'ROLE_MEMBER', null);
 
 INSERT INTO MEMBER 
-VALUES('2330002', '인사팀', '부서장','123456', '천길동','admin2@boat.com',
+VALUES('2310002', '홍보팀', '부서장','123456', '천길동','admin2@boat.com',
+'adminImage2.png', 'adminImage2.png',SYSDATE, 'ROLE_MEMBER', null);
+
+INSERT INTO MEMBER 
+VALUES('2310006', '홍보팀', '부서장','123456', '홍길동','admin@boat.com',
+'adminImage.png','adminImage.png', SYSDATE, 'ROLE_MEMBER', null);
+
+INSERT INTO MEMBER 
+VALUES('2310005', '홍보팀', '부서장','123456', '김길동','admin@boat.com',
+'adminImage.png','adminImage.png', SYSDATE, 'ROLE_MEMBER', null);
+
+INSERT INTO MEMBER 
+VALUES('2310004', '홍보팀', '부서장','123456', '이길동','admin@boat.com',
+'adminImage.png','adminImage.png', SYSDATE, 'ROLE_MEMBER', null);
+
+INSERT INTO MEMBER 
+VALUES('2310003', '홍보팀', '부서장','123456', '신길동','admin@boat.com',
+'adminImage.png','adminImage.png', SYSDATE, 'ROLE_MEMBER', null);
+
+INSERT INTO MEMBER 
+VALUES('2310002', '홍보팀', '부서장','123456', '천길동','admin2@boat.com',
 'adminImage2.png', 'adminImage2.png',SYSDATE, 'ROLE_MEMBER', null);
