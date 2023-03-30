@@ -9,6 +9,9 @@
  	<script src="http://code.jquery.com/jquery-latest.js"></script>
  	<script src="${pageContext.request.contextPath}/resources/ejyang/js/joinForm.js"></script>
  	
+ 	<meta name="_csrf" content="${_csrf.token }">
+  	<meta name="_csrf_header" content="${_csrf.headerName }">
+ 	
     <style>
 		@font-face {
 		    font-family: 'Pretendard-Regular';
@@ -70,6 +73,12 @@
 		 	  	</label>
 	            <input type="file" name="uploadfile" id="upfile" accept="image/.jpg, .jpeg, .png, .gif" hidden="">
             </div>
+            <div class="body col-sm-12 col-md-12 text-center mb-2">
+				<button type="button" id="profilebtn" class="btn btn-outline-primary w-25" onclick="onClickUpload();">프로필 등록</button>
+	        </div>
+            <div id="validationServerUsernameFeedback7" class="invalid-feedback fw-bold ps-0 text-center mb-3">
+				프로필 사진을 등록해 주세요
+			</div>
             
             <!-- 입력 -->
             <!-- 부서명 -->
@@ -133,7 +142,8 @@
             <div class="row row-container align-items-center">
                 <div class="head col-sm-12 col-md-3 fw-bold">이름</div>
                 <div class="body col-sm-12 col-md-9">
-                    <input type="text" name="NAME" placeholder="이름을 입력해 주세요" class="input-id _input" id="_label-name">
+                    <input type="text" name="NAME" placeholder="이름을 입력해 주세요" class="input-id _input" id="_label-name"
+                    		value="">
                 </div>
                 <div id="validationServerUsernameFeedback5" class="invalid-feedback fw-bold">
 			        이름을 입력해 주세요
@@ -150,7 +160,7 @@
 				        올바른 이메일을 입력해주세요
 				    </div>
 				    <div class="body col-sm-12 col-md-2">
-				    		<button type="button" class="emailbtn btn btn-outline-primary w-100">인증</button>
+				    		<button type="button" id="email_auth_btn" class="emailbtn btn btn-outline-primary w-100">인증</button>
 	                </div>
 	            </div>
             
@@ -158,9 +168,15 @@
 	            <div class="row row-container align-items-center">
 	                <div class="head col-sm-12 col-md-3 fw-bold"></div>
 	                <div class="body col-sm-12 col-md-9">
-	                	<input type="text" placeholder="인증번호를 입력해주세요" name="authCode" id="authCode" readonly 
-	                			class="w-100 rounded form-control" value="" style="height:55px;">
+	                	<input type="text" placeholder="인증번호를 입력해주세요" name="authCode" id="email_auth_key" 
+	                			class="w-100 rounded form-control" value="" style="height:55px;" disabled>
 	                </div>
+	                <div id="validationServerUsernameFeedback8" class="invalid-feedback fw-bold">
+				        인증인증번호가 요청되었습니다
+				    </div>
+	                <div id="validationServerUsernameFeedback9" class="invalid-feedback fw-bold">
+				        메일 발송에 실패했습니다. 재시도 해주시기 바랍니다
+				    </div>
 	            </div>
             
             
