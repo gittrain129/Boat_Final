@@ -56,6 +56,11 @@ public class ConferenceReservationServiceImpl implements ConferenceReservationSe
 		
 	}
 
+	@Override
+	public int check_pro(ConferenceReservation c2) {
+		return c3.check_pro(c2);
+	}
+
 
 
 

@@ -17,6 +17,8 @@ public interface ConferenceReservationService {
 	public void admit_pro(ConferenceReservation c2);
 
 	public void reject_pro(ConferenceReservation c2);
+
+	public int check_pro(ConferenceReservation c2);
 	
 	
 }
