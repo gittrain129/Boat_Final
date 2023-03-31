@@ -159,20 +159,34 @@
                 <div class="row">
                     <div class="col-4">
                         <div class="d-flex align-items-center justify-content-end">
-                            
+                        <sec:authorize access="isAuthenticated()">
+                            <sec:authentication property="principal" var="pinfo"/>
 								<!-- <button class='inout_button'> -->
-			                    	<div class="flex-shrink-0 btn-lg-square border rounded-circle" style="display:inline-flex !important; background-color : green;">
-			                    	
+                                    <div id="attColor" class="flex-shrink-0 btn-lg-square border rounded-circle" 
+                                    style="display:inline-flex !important; background-color : green;">
 		                                <i class="far fa-clock text-primary" style="font-family: Font Awesome 5 Free !important"></i>
-		                               
 		                            </div>
-			                  	<!-- </button> -->
-			                    
-			            
-                
-                            <div class="ps-3">
-                                <p class="mb-2">근태관리</p>
-                                <h6 class="mb-0">월 am8:00</h6>
+                                   	<!-- </button> -->
+                                  <div class="ps-3">
+                                <sec:authentication property="principal" var="pinfo"/>
+                                <p class="mb-2"><span id="attText">하이염</span></p>
+                                <h6 class="mb-0"><span id="attTime">출근시간나올예정</span></h6>
+                            </sec:authorize>
+                            <!-- 비로그인 -->
+                            <sec:authorize access="isAnonymous()">
+                                <sec:authentication property="principal" var="pinfo"/>
+                                    <!-- <button class='inout_button'> -->
+                                        <div id="attColor" class="flex-shrink-0 btn-lg-square border rounded-circle" 
+                                        style="display:inline-flex !important;">
+                                            <i class="far fa-clock text-primary" style="font-family: Font Awesome 5 Free !important"></i>
+                                        </div>
+                                    <!-- </button> -->
+                                      <div class="ps-3">
+                                    <p class="mb-2"><span id="attText">로그인하세여</span></p>
+                                    <h6 class="mb-0"><span id="attTime">비로그인</span></h6>
+                                </sec:authorize>
+
+
                             </div>
                         </div>
                     </div>
@@ -181,9 +195,27 @@
                             <div class="flex-shrink-0 btn-lg-square border rounded-circle">
                                 <i class="fa fa-phone text-primary"></i>
                             </div>
-                            <div class="ps-3">
-                                <p class="mb-2">인사팀</p>
-                                <h6 class="mb-0"><span id="loginid">122309</span></h6>
+                            <div class="ps-3"> 
+
+                        <sec:authorize access="isAuthenticated()">
+                                <sec:authentication property="principal" var="pinfo"/>
+                            <p class="mb-2"><span id="loginDept">홍보부</span></p>
+                            <h6 class="mb-0">
+                                <span id="loginid">2310001</span></h6>
+                       </sec:authorize>
+
+                        <sec:authorize access="isAnonymous()">
+                            <p class="mb-2"><span id="">방가방가</span></p>
+                            <h6 class="mb-0">
+                                <span id="">로그인해요</span></h6>
+                       </sec:authorize>
+                       
+                                <sec:authorize access="isAuthenticated()">
+                                    <sec:authentication property="principal" var="pinfo"/>
+                                <p class="mb-2"><span id="loginDept"></span></p>
+                                <h6 class="mb-0">
+                                    <span id="loginid"></span></h6>
+                                </sec:authorize>
                             </div>
                         </div>
                     </div>

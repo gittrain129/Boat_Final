@@ -169,37 +169,7 @@ background-color: white;
 						</td>
 					</tr>
 				</c:forEach>
-					<tr>
-					<td></td>
-						<td>
-						
-							<%--<a href="detail?num=${b.BOARD_NUM}">자료실게시판 제목1
-							
-							<a href="detail">자료실게시판 제목1
-							 --%>
-							 <a href="discussion-detail.html">자료실게시판 제목1
-							<span class="badge badge-pill badge-primary float-right">Admin</span>
-							</a>
-						</td>
-						<td><a href="profile.html"><small>Carroll Hintz</small></a></td>
-						<td>538</td>
-						<td>1 week ago</td>
-						<td></td><td></td>
-					</tr>
-					<tr>
-					<td></td>
-						<td>
-					<a href="discussion-detail.html">자료실게시판 제목1
-							<span class="badge badge-pill badge-primary float-right">Admin</span>
-							</a>
-						</td>
-						<td><a href="profile.html"><small>Carroll Hintz</small></a></td>
-						<td>538</td>
-						<td>1 week ago</td>
-						<td></td><td></td>
-					</tr>
-							
-														</tbody>
+				</tbody>
 				<tfoot>
 				</tfoot>
 			</table>
