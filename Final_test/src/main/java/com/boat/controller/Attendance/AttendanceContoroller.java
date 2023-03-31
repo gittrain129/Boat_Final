@@ -1,6 +1,7 @@
 package com.boat.controller.Attendance;
 
 
+import java.security.Principal;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -29,25 +30,31 @@ public class AttendanceContoroller {
 	//현재는 전체 리스트 가져오지만 추후 어드민과 개인 회원 나눠서 가저와야함
 	//쿼리 변경 및 버튼 변경 후 
 	@RequestMapping(value="/list")
-	public ModelAndView attList(ModelAndView mv) {
-		List<Attandance> attlist = attandanceService.getAttList();
+	public ModelAndView attList(ModelAndView mv,
+								Principal principal) {
+		String EMPNO = principal.getName();
+		logger.info("attlist접속중......로그인한 empno = "+EMPNO);
+		List<Attandance> attlist = attandanceService.getAttList(EMPNO);
 		
 		//On_time _ EMPNO 받아서 넣기!
-//		Attandance TodayMyatt = attandanceService.TodayMyatt(EMPNO);
-		Attandance TodayMyatt = attandanceService.TodayMyatt();
+		Attandance TodayMyatt = attandanceService.TodayMyatt(EMPNO);
+		
 		
 		mv.addObject("TodayMyatt",TodayMyatt);
-		mv.addObject("listcount",attlist);
+		mv.addObject("TodayMyatt",TodayMyatt);
+		//전체리스트....? admin 사용...?
+		mv.addObject("attlist",attlist);
 		mv.setViewName("Attendance/main");
 	return mv;
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="/on")
-	public ModelAndView on(String EMONO,String ON_TIME,
-			 ModelAndView mv) {
-		
-		attandanceService.AttOn(ON_TIME,EMONO);
+	public ModelAndView on(String EMPNO,String ON_TIME,String DEPT,
+			 				ModelAndView mv) {
+		logger.info("att접속중......출근한 empno = "+EMPNO);
+		logger.info("att접속중......출근한 ON_TIME = "+ON_TIME);
+		attandanceService.AttOn(ON_TIME,EMPNO,DEPT);
 	
 		
 		mv.addObject("ON_TIME", ON_TIME);

@@ -8,15 +8,21 @@ import com.boat.domain.Attandance;
 public interface AttandanceService { 
 	
 	//출근 시간 저장
-	public void AttOn(String on, String empno);
+	public void AttOn(String on, String empno,String dept);
 
 	//출퇴근 리스트 불러오기
 	public List<Attandance> getAttList();
+	
+	//개인출퇴근 리스트 불러오기
+	public List<Attandance> getAttList(String eMPNO);
+
 
 	public void AttOff(String off, String empno);
 
 	//오늘 출근기록_EMPNO받아서 넣기!!
-	public Attandance TodayMyatt();
+	public Attandance TodayMyatt(String empno);
+
+	
 
 	
 	
