@@ -9,6 +9,7 @@
  	<script src="${pageContext.request.contextPath}/resources/ejyang/js/signup.js"></script>
  	<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js"charset="utf-8"></script>
  	<jsp:include page="../Main/header.jsp" />
+ 	
  </head>
  <body>
  
@@ -41,9 +42,9 @@
             
            	<div class="text-center other"> 또는 </div>
             
-			<div class="form-group d-grid gap-2 col-10 mx-auto mb-3" onclick="init();">
+			<div class="form-group d-grid gap-2 col-10 mx-auto mb-3">
 				<a href="#" class="btn-google btn-block text-center border circle google" id="google_login" 
-					> 구글 회원가입</a>
+					 onload="init()"> 구글 회원가입</a>
 			</div>
 			
             <!-- <form name="naverlogin" action="naverlogin" method="POST"> -->
@@ -63,6 +64,7 @@
 
   <script type="text/JavaScript" src="./my-script.js"></script>
   <jsp:include page="../Main/footer.jsp" />
+  <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
   <script>
 	//google signin API
 	  var googleUser = {};
@@ -70,7 +72,7 @@
 	  	 gapi.load('auth2', function() {
 	  	  console.log("init()시작");
 	  	  auth2 = gapi.auth2.init({
-	  	        client_id: '구글API의 클라이언트 ID 입력'
+	  	        client_id: '',
 	  	        cookiepolicy: 'single_host_origin',
 	  	      });
 	  	      attachSignin(document.getElementById('google_login'));
@@ -89,11 +91,9 @@
 	  	  	  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 	  			$(function() {
 	  				$.ajax({
-	  				    url: '/member/loginGoogle',
+	  				    url: 'loginGoogle',
 	  				    type: 'post',
 	  				    data: {
-	  						"id" : <!-- 필요한 데이터 담기 -->,
-	  						"pw" : <!-- 필요한 데이터 담기 -->,
 	  				        "username": profile.getName(),
 	  						"email": profile.getEmail()
 	  					    },
