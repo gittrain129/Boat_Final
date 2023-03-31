@@ -199,7 +199,7 @@
 
                         <sec:authorize access="isAuthenticated()">
                                 <sec:authentication property="principal" var="pinfo"/>
-                            <p class="mb-2"><span id="loginDept">홍보부</span></p>
+                            <p class="mb-2"><span id="loginDept">${pinfo.member.DEPT}</span></p>
                             <h6 class="mb-0">
                                 <span id="loginid">${pinfo.username}</span></h6>
                        </sec:authorize>
