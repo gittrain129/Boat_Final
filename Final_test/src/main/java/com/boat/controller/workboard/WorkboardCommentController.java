@@ -8,19 +8,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value="/comment")
-public class CommentController {
+public class  WorkboardCommentController {
 	
-private CommentService commentService;
+private  WorkboardCommentService commentService;
 	
 	@Autowired
-	public CommentController(CommentService commentService) {
+	public  WorkboardCommentController( WorkboardCommentService commentService) {
 		this.commentService = commentService;
 	}
 
 
 	
 	@PostMapping(value="/add")
-	public int CommentAdd(Comment co) {
+	public int CommentAdd(WorkboardComment co) {
 		return commentService.commentsInsert(co);				
 	}
 	

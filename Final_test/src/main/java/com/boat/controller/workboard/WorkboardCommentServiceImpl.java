@@ -7,18 +7,16 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.boat.controller.workboard.LogAdvice;
-import com.boat.controller.workboard.Comment;
-import com.boat.controller.workboard.CommentMapper;
+import com.boat.aop.LogAdvice;
 
 @Service
-public class CommentServiceImpl implements CommentService{
+public class WorkboardCommentServiceImpl implements WorkboardCommentService{
 	
-	private CommentMapper dao;
+	private  WorkboardCommentMapper dao;
 	private LogAdvice log;
 	
 	@Autowired
-	public CommentServiceImpl(CommentMapper dao, LogAdvice log) {
+	public  WorkboardCommentServiceImpl( WorkboardCommentMapper dao, LogAdvice log) {
 		this.dao = dao;
 		this.log = log;
 	}
@@ -35,7 +33,7 @@ public class CommentServiceImpl implements CommentService{
 	
 
 	@Override
-	public List<Comment> getCommentList(int board_num, int page) {
+	public List<WorkboardComment> getCommentList(int board_num, int page) {
 		int startrow = 1;
 		int endrow = page * 3;
 		
@@ -49,7 +47,7 @@ public class CommentServiceImpl implements CommentService{
 	
 	
 	@Override
-	public int commentsInsert(Comment c) {
+	public int commentsInsert(WorkboardComment c) {
 		return dao.commentsInsert(c);
 	}
 
@@ -61,7 +59,7 @@ public class CommentServiceImpl implements CommentService{
 
 	
 	@Override
-	public int commentsUpdate(Comment co) {
+	public int commentsUpdate(WorkboardComment co) {
 		return dao.commentsUpdate(co);
 	}
 
