@@ -2,7 +2,9 @@ package com.boat.domain;
 
 public class Workboard {
 	private int num;
-	private String id;
+	private String EMPNO;
+	private String DEPT;
+	private String NAME;
 	private String content;
 	private String reg_date; //2020-12-24 16:08:35
 	private int board_num;
@@ -14,11 +16,23 @@ public class Workboard {
 	public void setNum(int num) {
 		this.num = num;
 	}
-	public String getId() {
-		return id;
+	public String getEMPNO() {
+		return EMPNO;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setEMPNO(String eMPNO) {
+		EMPNO = eMPNO;
+	}
+	public String getDEPT() {
+		return DEPT;
+	}
+	public void setDEPT(String dEPT) {
+		DEPT = dEPT;
+	}
+	public String getNAME() {
+		return NAME;
+	}
+	public void setNAME(String nAME) {
+		NAME = nAME;
 	}
 	public String getContent() {
 		return content;
@@ -38,6 +52,9 @@ public class Workboard {
 	public void setBoard_num(int board_num) {
 		this.board_num = board_num;
 	}
+	
+	
+	
 	
 	
 }

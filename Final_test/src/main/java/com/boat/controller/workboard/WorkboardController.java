@@ -15,29 +15,29 @@ import com.boat.domain.Workboard;
 
 
 @Controller
-@RequestMapping(value="/comment")
+@RequestMapping(value="/workboard")
 public class  WorkboardController {
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
-	private  WorkboardService commentService;
+	private  WorkboardService WorkboardService;
 	
-	@GetMapping("/workboard")
+	@GetMapping("/workboard_list")
 	public String hello() {
 		return "/WorkBoard/workboard_list";
 	}
 	
 	
 	@Autowired
-	public  WorkboardController( WorkboardService commentService) {
-		this.commentService = commentService;
+	public  WorkboardController( WorkboardService WorkboardService) {
+		this.WorkboardService = WorkboardService;
 	}
 
 
 	
 	@PostMapping(value="/add")
 	public int CommentAdd(Workboard co) {
-		return commentService.commentsInsert(co);				
+		return WorkboardService.commentsInsert(co);				
 	}
 	
 }
