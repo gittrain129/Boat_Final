@@ -13,6 +13,7 @@ public class Attandance {
 //	5	OUT_TIME	외출시간
 	
 	private String EMPNO;
+	private String DEPT;
 	private String CONTENT;
 	private String ON_TIME;
 	private String OFF_TIME;
