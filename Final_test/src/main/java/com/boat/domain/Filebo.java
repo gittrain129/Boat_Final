@@ -8,8 +8,7 @@ import lombok.Setter;
 
 
 @Data
-@Getter
-@Setter
+
 public class Filebo {
 	
 	private int FILE_NUM ;

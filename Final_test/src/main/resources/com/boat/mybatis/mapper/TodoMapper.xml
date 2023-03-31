@@ -53,7 +53,7 @@
 			  </collection>
 		 </resultMap>
 		 
-		 	<!-- 	 <resultMap id="deptTodomember" type="com.boat.domain.Todo">
+	<!-- 	 <resultMap id="deptTodomember" type="com.boat.domain.Todo">
 		 	<result property="T_CONTENT" column="T_CONTENT"/>
 		 	<result property="START_DATE" column="START_DATE"/>
 		 	<result property="END_DATE" column="END_DATE"/>
