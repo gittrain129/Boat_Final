@@ -353,7 +353,7 @@ function reject() {
 
 //페이징처리
 $(document).ready(function() {
-	  $('#origin_page').click(function(e) {
+	  $('.page-link').click(function(e) {
 	    e.preventDefault();
 	    var page = $(this).text();
 	    var tab = $('.nav-tabs .active').text();
@@ -474,7 +474,7 @@ $(document).ready(function() {
 	            		      $("#next-btn a").addClass("gray");
 	            		  }
 						
-	            		  // Add click listeners for prev and next buttons
+	            		  /* 
 	            		  $("#prev-btn").on("click", function(event) {
 	            		      event.preventDefault();
 	            		      if (!$(this).hasClass("disabled")) {
@@ -523,7 +523,7 @@ $(document).ready(function() {
 	            		      }
 	            		  });
 
-	            	
+	            	*/
 	            	
 	               
 	            },
