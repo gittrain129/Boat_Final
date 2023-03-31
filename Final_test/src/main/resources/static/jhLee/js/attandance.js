@@ -36,13 +36,7 @@ $(function(){
         console.log($('#start-btn').prop('disabled')==false);
         //true
 
-//  if($('#start-btn').hasClass('c-btn')){
-//                         $('#start-btn').removeClass('btn')
-//                         .addClass('c-btn')
-//                         .css('pointer-events','none');
-//                         //.attr('disabled', true);
 
-//  }
  if($('#offTimeText').text()){
         $('#end-btn').removeClass('btn')
                         .addClass('c-btn');
@@ -89,7 +83,7 @@ $('#start-btn').click(function(){
                 toastr.options.closeButton = true;
                 toastr.options.newestOnTop = false;
                 toastr.options.progressBar = true;
-                toastr.info('오늘은 이미 출근, 퇴근 하셨습니다.', '근태관리', {timeOut: 3000});
+                toastr.info('오늘은 이미 출근 하셨습니다.', '근태관리', {timeOut: 3000});
         }else{
       //출근시간 db 입력
       $.ajax({
@@ -141,7 +135,7 @@ $('#end-btn').click(function(){
                 toastr.options.newestOnTop = false;
                 toastr.options.progressBar = true;
                 toastr.info('오늘은 이미 퇴근 하셨습니다.', '근태관리', {timeOut: 3000});
-         }
+         }else{
         console.log("퇴근시간="+currenttime);
         //퇴근시간 db 입력
         $.ajax({
@@ -179,7 +173,7 @@ $('#end-btn').click(function(){
 
     
         })//ajax
-
+	}
 })
 
 //오늘날짜 이후는 선택못하게 제한설정

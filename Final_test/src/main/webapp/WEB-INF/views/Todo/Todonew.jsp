@@ -172,8 +172,8 @@
                                         </tr>
                                     
                                     </c:forEach>
-                                <c:if test="${listcount==0}">
-		                            <h3 style="text-align: center">등록된 글이 없습니다.</h3>
+                                <c:if test="${MyTodo.length()==0}">
+		                            <h3 style="text-align: center">등록된 할일이 없습니다.</h3>
 	                            </c:if>
                                     </tbody>
                                 </table>
@@ -359,6 +359,9 @@
                                </div>
                                 <!--    <div class="accordion-item"> -->
                          </c:forEach>
+                          <c:if test="${MydeptList.length()==0}">
+		                            <h3 style="text-align: center">등록된 할일이 없습니다.</h3>
+	                            </c:if>
                                        
                                </div>
                                <%-- 아코디언 끝 --%>
