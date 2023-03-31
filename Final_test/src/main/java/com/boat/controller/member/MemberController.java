@@ -398,10 +398,11 @@ public class MemberController {
 	/* 구글아이디로 로그인 */	
     @ResponseBody
 	@RequestMapping(value = "/loginGoogle", method = RequestMethod.POST)
-	public String loginGooglePOST(@RequestParam String username, HttpSession session, RedirectAttributes rttr) throws Exception{
+	public String loginGooglePOST(@RequestParam String name, HttpSession session, 
+			RedirectAttributes rttr) throws Exception{
     	
-    	System.out.println("username="+username);
-    	
+    	System.out.println("name="+name);
+
 //		MemberVO returnVO = service.loginMemberByGoogle(vo);
 //		String mvo_ajaxid = mvo.getId(); 
 //		System.out.println("C: 구글아이디 포스트 db에서 가져온 vo "+ vo);
@@ -431,10 +432,9 @@ public class MemberController {
 //			session.setAttribute("id", returnVO.getId());			
 //			rttr.addFlashAttribute("mvo", returnVO);
 //		}
-		
+//		
 		return "redirect:/index";
 	}
-	
 	
     
     

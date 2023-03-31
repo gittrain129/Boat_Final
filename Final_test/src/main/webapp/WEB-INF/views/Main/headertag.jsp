@@ -56,3 +56,6 @@
  
     <!-- favicon error 
     <link rel="shortcut icon" href="#">-->
+    
+ 	<!-- Include the Google API library -->
+	<script src="https://apis.google.com/js/api.js"></script>
