@@ -80,6 +80,8 @@
             <div id="result-box">
                 <div>시작:<span id="onTimeText">${fn:substring(TodayMyatt.ON_TIME,11,16)}</span> </div>
                 <div>종료:<span id="offTimeText">${fn:substring(TodayMyatt.OFF_TIME,11,16)}</span> </div>
+                <!-- <div>시작:<span id="onTimeText">${fn:substring(ON_TIME,11,16)}</span> </div> -->
+                <!-- <div>종료:<span id="offTimeText">${fn:substring(OFF_TIME,11,16)}</span> </div> -->
             </div>
         </div>
         <div id="work-week" class="box">
