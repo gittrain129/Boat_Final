@@ -47,6 +47,7 @@
       </div>
       <div class="modal-body" style="color:black;">
       일정<br>
+      
       <form action="add"	method = 'post'>
         <input type="text" name="T_CONTENT" class = "form-control" id = 'title'>
      
@@ -73,7 +74,10 @@
                 
                 <script>
                 $(document).ready(function(){
-                    const loginid =$('#loginid').text();
+                    let empno =$('#loginid').text();
+                    let dept = $('#loginDept').text();
+                    $('#dept').val(dept);
+                    $('#empno').val(empno);
 
 					if($('#allday').is(':checked')){
 						console.log($('#allday').is(':checked'))
@@ -83,8 +87,8 @@
                 })
 	        	</script>
       
-			 <input type="hidden" name ="EMPNO" value="23100001" id="empno">
-			 <input type="hidden" name ="DEPT" value="인사팀" id="dept">
+			 <input type="hidden" name ="EMPNO" value="" id="empno">
+			 <input type="hidden" name ="DEPT" value="" id="dept">
              <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
              <div class="modal-footer">
                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id ="undo">돌아가기</button>
@@ -161,8 +165,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <!-- 위치이상해서 바꿔야함 새로 회원가입해서 ㅇㅇ -->
+                                        <c:if test="${fn:length(MyTodo)==0}">
+                                            <h3 style="text-align: center">등록된 할일이 없습니다.</h3>
+                                        </c:if>
+                                        <!-- 내 할일보기 -->
                                         <c:forEach var="mt" items="${MyTodo}">
-                                           
                                         <tr>
                                             <td> 
                                           <a href="#">${mt.t_CONTENT}</a>
@@ -172,14 +180,13 @@
                                         </tr>
                                     
                                     </c:forEach>
-                                <c:if test="${MyTodo.length()==0}">
-		                            <h3 style="text-align: center">등록된 할일이 없습니다.</h3>
-	                            </c:if>
+                              
                                     </tbody>
                                 </table>
                             </div>
                             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                                 <table class="table" cellspacing="0">
+                                    <!-- 내 할일보기 그래프 -->
                                  <c:forEach var="mt" items="${MyTodo}">
                                     <thead>
                                         <tr>
@@ -194,53 +201,56 @@
                             </div>
                             <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                                 
-                                <%--아코디언 시작 --%>
-                                <div class="accordion" id="accordionExample">
+                  <%--아코디언 시작 --%>
+                    <div class="accordion" id="accordionExample">
                                   
-                               
-                                 
-                                    <%--  <c:forEach var="i" begin="0" end="${fn:length(MDT.name)}"> </c:forEach> 
-                                     --%>
+                        <div class="accordion-item">
+                        <c:set var = "num" value ="0"/>
+                        <c:forEach var="MDT" items="${MydeptList}"> 
+                          <h2 class="accordion-header" id="${'heading'}${num}">
+                            <button class="accordion-button collapsed"
+                            type="button" data-bs-toggle="collapse" data-bs-target="#${'collapse'}${num}" 
+                            aria-expanded="false" aria-controls="${'collapse'}${num}">
+                            ${MDT.NAME} <div class="progress"></div>	
+                             </button>
+                          </h2>
+                                     
+                                     
+                     <div id="${'collapse'}${num}" class="accordion-collapse collapse" aria-labelledby="${'heading'}${num}" data-bs-parent="#accordionExample">
+                        <c:set var = "num" value ="${num+1}"/>
 
-                                            <c:set var = "num" value ="0"/>
-                                  <c:forEach var="MDT" items="${MydeptList}"> 
-                                            
-                                   <div class="accordion-item">
-                                       <h2 class="accordion-header" id="${'heading'}${num}">
-                                         <button class="accordion-button collapsed"
-                                          type="button" data-bs-toggle="collapse" data-bs-target="#${'collapse'}${num}" 
-                                          aria-expanded="false" aria-controls="${'collapse'}${num}">
-                                                ${MDT.NAME} <div class="progress"></div>	
-                                         </button>
-                                       </h2>
-                                     
-                                     
-                                    <div id="${'collapse'}${num}" class="accordion-collapse collapse" aria-labelledby="${'heading'}${num}" data-bs-parent="#accordionExample">
-                    <c:set var = "num" value ="${num+1}"/>
-                                   
-                     <div class="accordion-body">
-                    <div class="ibox-content forum-container">
-                                
-                                    
-                   <div class="forum-title">
-                       <div class="pull-right forum-desc">
-                           <samll></samll>
-                       </div>
-                       <h3>${MDT.DEPT}  ${MDT.NAME} </h3>
-                   </div>
+                        <!--   아래에서 할일!
+                            <c:forEach items="${list.emp}" var="e">
+            <tr>
+               <td>${e.ename}</td>
+               <td>${e.job}</td>
+               <td>${e.hiredate}</td>
+            </tr>
+         </c:forEach>
+ -->
+ <div class="accordion-body">
+            <div class="ibox-content forum-container">
+        <div class="forum-title">
+            <div class="pull-right forum-desc">
+                <samll></samll>
+            </div>
+            <h3>${MDT.DEPT}  ${MDT.NAME} </h3>
+        </div>
    
-                   <div class="forum-item active">
+                      
+   
+                 <div class="forum-item active">
                        <div class="row">
-                           <div class="col-md-9">
-                               <div class="forum-icon">
+                             <div class="col-md-9">
+                              <div class="forum-icon">
                                    <i class="fa fa-shield"></i>
                                </div>
-                               <a href="forum_post.html" class="forum-item-title">진행중</a>
-                               <div class="forum-sub-title">
-                              
+                              부서명 사원명 end 
+                             <a href="forum_post.html" class="forum-item-title"> 진행중</a> 
+                              <div class="forum-sub-title">
                                </div>
                            </div>
-                       
+                        
                            <div class="col-md-1 forum-info">
                                <span class="views-number">
                                    
@@ -254,115 +264,64 @@
                                   
                                </span>
                                <div>
-                                   <small></small>
+                                   <small>${e.START_DATE}</small>
                                </div>
                            </div>
                        </div>
-                   </div>
+                   </div> 
+                   <c:forEach items="${MDT.todo}" var="e">
                    <div class="forum-item">
                        <div class="row">
                            <div class="col-md-6">
-                               <div class="forum-icon">
-                                   <i class="fa fa-bolt"></i>
-                               </div>
-                               <a href="forum_post.html" class="forum-item-title">두 번째 할 일</a>
-                               <div class="forum-sub-title">
-                               할일상세보기
-                               </div>
+<div class="forum-icon">
+<i class="fa fa-bolt"></i>
+</div>
+<a href="forum_post.html" class="forum-item-title">${e.t_CONTENT}</a>
+<div class="forum-sub-title">
+할일상세보기
+</div>
                            </div>
-                           <div class="col-md-2 forum-info">
-                               <span class="views-number">
-                               </span>
-                               <div>
-                                   <small>23-03-20</small>
-                               </div>
-                           </div>
-                          
-                           <div class="col-md-2 forum-info">
-                               <span class="views-number">
-                                   
-                               </span>
-                               <div>
-                                   <small>23-03-20</small>
-                               </div>
-                           </div>
+<div class="col-md-2 forum-info">
+<span class="views-number">
+</span>
+<div>
+<small>${e.START_DATE}</small>
+</div>
+</div>
+
+<div class="col-md-2 forum-info">
+<span class="views-number">
+
+</span>
+<div>
+<small>${e.END_DATE}</small>
+</div>
+</div>
+
                        </div>
-                   </div>
-                   <div class="forum-item active">
-                       <div class="row">
-                           <div class="col-md-6">
-                               <div class="forum-icon">
-                                   <i class="fa fa-calendar"></i>
-                               </div>
-                                 <a href="forum_post.html" class="forum-item-title">두 번째 할 일</a>
-                               <div class="forum-sub-title">
-                               할일상세보기
-                               </div>
-                           </div>
-                           <div class="col-md-2 forum-info">
-                               <span class="views-number">
-                               </span>
-                               <div>
-                                  <small>23-03-20</small>
-                               </div>
-                           </div>
-                         
-                           <div class="col-md-2 forum-info">
-                               <span class="views-number">
-                                   
-                               </span>
-                               <div>
-                                   <small>23-03-20</small>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-                   <div class="forum-item active">
-                       <div class="row">
-                           <div class="col-md-6">
-                               <div class="forum-icon">
-                                   <i class="fa fa-calendar"></i>
-                               </div>
-                                 <a href="forum_post.html" class="forum-item-title">두 번째 할 일</a>
-                               <div class="forum-sub-title">
-                               할일상세보기
-                               </div>
-                           </div>
-                           <div class="col-md-2 forum-info">
-                               <span class="views-number">
-                               </span>
-                               <div>
-                                   <small>23-03-20</small>
-                               </div>
-                           </div>
-                          
-                           <div class="col-md-2 forum-info">
-                               <span class="views-number">
-                                   
-                               </span>
-                               <div>
-                                   <small>23-03-20</small>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-                   <!--   <div class="forum-item active"> -->
+                    </div>
+                </c:forEach>
+                </div>
+                <!--  <div class="ibox-content forum-container"> -->
          
-                  
-                                       
-                                     </div>
-                                     <!--  <div class="ibox-content forum-container"> -->
-                                   </div>
-                                   <!--<div class="accordion-body">  -->
+              
+                </div>
+                <!--<div class="accordion-body">  -->
+     
+                 
+         
+              
                                  </div>
                                 <!--   <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample"> -->
-                               </div>
+                                
+                                          
+                </c:forEach>
+                <c:if test="${fn:length(MydeptList)==0}">
+                          <h3 style="text-align: center">등록된 할일이 없습니다.</h3>
+                      </c:if>           
+                                </div>
                                 <!--    <div class="accordion-item"> -->
-                         </c:forEach>
-                          <c:if test="${MydeptList.length()==0}">
-		                            <h3 style="text-align: center">등록된 할일이 없습니다.</h3>
-	                            </c:if>
-                                       
+             
                                </div>
                                <%-- 아코디언 끝 --%>
                              

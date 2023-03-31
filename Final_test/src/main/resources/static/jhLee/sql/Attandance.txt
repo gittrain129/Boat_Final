@@ -12,3 +12,5 @@ create table BOAT_ATTENDANCE (
 	dept varchar2(10),
 	reg_date DATE DEFAULT SYSDATE
 );
+
+delete BOAT_ATTENDANCE where reg_date = sysdate;

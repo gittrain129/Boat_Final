@@ -72,12 +72,14 @@ console.log($('#onTimeText').text());
 //console.log(Typeof($('#offTimeText').text()))
 
 
-
+//출근버튼 클릭
 $('#start-btn').click(function(){
 
-        console.log($('#start-btn').attr('disabled')==true);
-        console.log("보낼 empno ......"+empno);
-        console.log("보낼 dept ......"+dept);
+       // console.log($('#start-btn').attr('disabled')==true);
+       // console.log("보낼 empno ......"+empno);
+       // console.log("보낼 dept ......"+dept);
+
+        //버튼클릭시 1. 알럿창 2. 값전송 db 저장
         if($('#start-btn').hasClass('c-btn')){
                 toastr.options.escapeHtml = true;
                 toastr.options.closeButton = true;
@@ -101,7 +103,6 @@ $('#start-btn').click(function(){
                 if($('#start-btn').hasClass('btn')){
                         $('#start-btn').removeClass('btn')
                                 .addClass('c-btn')
-                                .attr('disabled', true)
                                 .css('pointer-events','none');
                                 //하얗게
                         $('#end-btn').removeClass('c-btn')
@@ -114,22 +115,19 @@ $('#start-btn').click(function(){
                 console.log(rdata.ON_TIME);
 
                $('#onTimeText').text(rdata.ON_TIME);
+
         }, error: function(error){
                 console.log("hi")
                 console.log(error);
         }
         })//ajax
-}
-
-//$('#result-box').children('div:eq(0)').text('시작 :'+ currenttime.substring(11,16));
-
-      
-
+        }
         
 })
 
+//퇴근 버튼 클릭시
 $('#end-btn').click(function(){
-        if($('#end-btn').attr('disabled', true)){
+        if($('#end-btn').hasClass('c-btn')){
                 toastr.options.escapeHtml = true;
                 toastr.options.closeButton = true;
                 toastr.options.newestOnTop = false;
@@ -153,11 +151,11 @@ $('#end-btn').click(function(){
                                 $('#end-btn').removeClass('btn')
                                         .addClass('c-btn')     
                                          .attr('disabled', true);  
-                                        
-                                        //하얗게
+                                         //하얗게
+
                            //     $('#start-btn') .removeClass('c-btn')
-                            //                     .addClass('btn')       
-                             //                    .attr('disabled', true);
+                           //                     .addClass('btn')       
+                           //                    .attr('disabled', true);
                                         //파랗게
                         }
                         console.log(rdata.OFF_TIME);
