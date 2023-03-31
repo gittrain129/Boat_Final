@@ -1,6 +1,6 @@
-package com.boat.controller.workboard;
+package com.boat.domain;
 
-public class WorkboardComment {
+public class Workboard {
 	private int num;
 	private String id;
 	private String content;

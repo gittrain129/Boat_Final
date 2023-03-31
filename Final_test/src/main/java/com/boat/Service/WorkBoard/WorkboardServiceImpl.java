@@ -1,4 +1,4 @@
-package com.boat.controller.workboard;
+package com.boat.Service.WorkBoard;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,15 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.boat.aop.LogAdvice;
+import com.boat.domain.Workboard;
+import com.boat.mybatis.mapper.WorkboardMapper;
 
 @Service
-public class WorkboardCommentServiceImpl implements WorkboardCommentService{
+public class WorkboardServiceImpl implements WorkboardService{
 	
-	private  WorkboardCommentMapper dao;
+	private  WorkboardMapper dao;
 	private LogAdvice log;
 	
 	@Autowired
-	public  WorkboardCommentServiceImpl( WorkboardCommentMapper dao, LogAdvice log) {
+	public  WorkboardServiceImpl( WorkboardMapper dao, LogAdvice log) {
 		this.dao = dao;
 		this.log = log;
 	}
@@ -33,7 +35,7 @@ public class WorkboardCommentServiceImpl implements WorkboardCommentService{
 	
 
 	@Override
-	public List<WorkboardComment> getCommentList(int board_num, int page) {
+	public List<Workboard> getCommentList(int board_num, int page) {
 		int startrow = 1;
 		int endrow = page * 3;
 		
@@ -47,7 +49,7 @@ public class WorkboardCommentServiceImpl implements WorkboardCommentService{
 	
 	
 	@Override
-	public int commentsInsert(WorkboardComment c) {
+	public int commentsInsert(Workboard c) {
 		return dao.commentsInsert(c);
 	}
 
@@ -59,7 +61,7 @@ public class WorkboardCommentServiceImpl implements WorkboardCommentService{
 
 	
 	@Override
-	public int commentsUpdate(WorkboardComment co) {
+	public int commentsUpdate(Workboard co) {
 		return dao.commentsUpdate(co);
 	}
 
