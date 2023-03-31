@@ -27,5 +27,8 @@ public interface MemberService {
 	//네이버 회원가입 처리
 	public int userNaverRegisterPro(Map<String, Object> paramMap);
 
+	//구글
+	public Member loginMemberByGoogle(Member member);
+
 
 }
