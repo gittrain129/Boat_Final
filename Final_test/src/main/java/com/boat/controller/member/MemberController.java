@@ -392,9 +392,9 @@ public class MemberController {
 	
 	
 	
+
 	
-	
-	/* 구글아이디로 로그인 */	
+	/* 구글아이디로 로그인 	
     @ResponseBody
 	@RequestMapping(value = "/loginGoogle", method = RequestMethod.POST)
 	public String loginGooglePOST(MemberVO vo, HttpSession session, RedirectAttributes rttr, MemberVO mvo) throws Exception{
@@ -439,7 +439,7 @@ public class MemberController {
     
     
     
-	
+    */
 	
 	
 	
