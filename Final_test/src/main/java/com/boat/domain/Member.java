@@ -7,6 +7,7 @@ public class Member {
 	private String DEPT;
 	private String JOB="사원";
 	private String PASSWORD;
+	private String PASSWORD_OG;
 	private String NAME;
 	private String EMAIL;
 	
@@ -21,6 +22,12 @@ public class Member {
 	private String NAVERLOGIN;
 	
 	
+	public String getPASSWORD_OG() {
+		return PASSWORD_OG;
+	}
+	public void setPASSWORD_OG(String pASSWORD_OG) {
+		PASSWORD_OG = pASSWORD_OG;
+	}
 	public String getPROFILE_FILE() {
 		return PROFILE_FILE;
 	}

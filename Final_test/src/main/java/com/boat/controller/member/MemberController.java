@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -101,11 +102,13 @@ public class MemberController {
 	@RequestMapping(value = "/joinProcess", method = RequestMethod.POST)
 	public String joinProcess(Member member, RedirectAttributes rattr,
 								Model model, HttpServletRequest request) throws Exception {
+		member.setPASSWORD_OG(member.getPASSWORD());
 		
 		//비밀번호 암호화 추가
 		String encPassword = passwordEncoder.encode(member.getPASSWORD());
 		Logger.info(encPassword);
 		member.setPASSWORD(encPassword);
+		
 		
 		MultipartFile uploadfile = member.getUploadfile();
 		
@@ -198,7 +201,6 @@ public class MemberController {
 	}
 	
 	
-	
 	//이메일 인증
 	@ResponseBody
 	@RequestMapping(value = "/emailAuth", method = RequestMethod.POST)
@@ -243,10 +245,12 @@ public class MemberController {
 	
 	
 	
+	
+	
 	//네이버 회원가입 => 정보 작성폼
 	@RequestMapping(value = "/naverlogin", method = {RequestMethod.GET,RequestMethod.POST})
 	public String userNaverLoginPro(Model model,@RequestParam Map<String,Object> paramMap, @RequestParam String code, 
-			@RequestParam String state,HttpSession session) throws SQLException, Exception {
+			@RequestParam String state,HttpSession session, RedirectAttributes rattr) throws SQLException, Exception {
 		System.out.println("paramMap:" + paramMap);
 		Map <String, Object> resultMap = new HashMap<String, Object>();
 		
@@ -285,13 +289,14 @@ public class MemberController {
 			session.setAttribute("userInfo", loginCheck);
 			
 			String EMPNO = (String) loginCheck.get("EMPNO");
-			String NAME = (String) loginCheck.get("NAME");
-			String PROFILE_FILE = (String) loginCheck.get("PROFILE_FILE");
+			String PASSWORD_OG = (String) loginCheck.get("PASSWORD_OG");
 			session.setAttribute("EMPNO", EMPNO);
-			session.setAttribute("NAME", NAME);
-			session.setAttribute("PROFILE_FILE", PROFILE_FILE);
+			session.setAttribute("PASSWORD_OG", PASSWORD_OG);
 			
-			return "/Member/sign_in";
+//			rattr.addFlashAttribute("EMPNO", EMPNO);
+//			rattr.addFlashAttribute("PASSWORD_OG", PASSWORD_OG);
+			
+			return "redirect:sign_in";
 		}
 		
 //		return "redirect:/index";
@@ -300,57 +305,140 @@ public class MemberController {
 	//네이버 회원가입 처리
 	@RequestMapping(value="/userNaverRegisterPro", method=RequestMethod.POST)
 	public String userNaverRegisterPro(@RequestParam Map<String,Object> paramMap,HttpSession session, RedirectAttributes rattr,
-			@RequestParam String PASSWORD) throws SQLException, Exception {
+			@RequestParam String PASSWORD, @RequestParam MultipartFile uploadfile, Model model, HttpServletRequest request) throws SQLException, Exception {
 		System.out.println("paramMap=" + paramMap);
 		
 		//비밀번호 암호화 추가
 		String encPassword = passwordEncoder.encode(PASSWORD);
 		Logger.info(encPassword);
 		paramMap.put("PASSWORD", encPassword);
+		paramMap.put("PASSWORD_OG", PASSWORD);
 //		member.setPASSWORD(encPassword);
 		
-//		MultipartFile uploadfile = uploadfile;
-//		
-//		if(!uploadfile.isEmpty()) {
-//			String fileName = uploadfile.getOriginalFilename();//원래 파일명
-//			
-//			String saveFolder = new File("src/main/resources/static/profile").getAbsolutePath();
-////			String saveFolder= profileSaveFolder.getProfilesavefolder();
-//			String fileDBName = fileDBName(fileName, saveFolder, EMPNO);
-//			Logger.info("fileDBName : " + fileDBName);
-//			
-//			//transferTo(file path) : 업로드된 파일을 매개변수의 경로에 저장합니다.
-//			uploadfile.transferTo(new File(saveFolder + fileDBName));
-//			Logger.info("transferTo path : " + saveFolder + fileDBName);
-//			//바뀐 파일명으로 저장
-//			paramMap.put("PASSWORD", encPassword);
-////			member.setPROFILE_IMG(fileDBName);
-//			System.out.println("absolutePathss " +saveFolder);
-//			//파일 경로 이름
+		MultipartFile uploadfiles = uploadfile;
+		
+		if(!uploadfiles.isEmpty()) {
+			String fileName = uploadfiles.getOriginalFilename();//원래 파일명
+			String EMPNO = (String) paramMap.get("EMPNO");
+			
+			String saveFolder = new File("src/main/resources/static/profile").getAbsolutePath();
+//			String saveFolder= profileSaveFolder.getProfilesavefolder();
+			String fileDBName = fileDBName(fileName, saveFolder, EMPNO);
+			Logger.info("fileDBName : " + fileDBName);
+			
+			//transferTo(file path) : 업로드된 파일을 매개변수의 경로에 저장합니다.
+			uploadfile.transferTo(new File(saveFolder + fileDBName));
+			Logger.info("transferTo path : " + saveFolder + fileDBName);
+			//바뀐 파일명으로 저장
+			paramMap.put("PASSWORD", encPassword);
+//			member.setPROFILE_IMG(fileDBName);
+			System.out.println("absolutePathss " +saveFolder);
+			//파일 경로 이름
 //			member.setPROFILE_FILE("profile" + fileDBName);
-//		}
+			paramMap.put("PROFILE_FILE", "profile" + fileDBName);
+		}
 		
 		Map <String, Object> resultMap = new HashMap<String, Object>();
 		int registerCheck = memberservice.userNaverRegisterPro(paramMap);
 		System.out.println(registerCheck);
 		
-		if(registerCheck != 0 && registerCheck > 0) {
-			Map<String, Object> loginCheck = memberservice.userNaverLoginPro(paramMap);
-			session.setAttribute("userInfo", loginCheck);
-			rattr.addFlashAttribute("JavaData", "YES");
-//			resultMap.put("JavaData", "YES");
+		String EMAIL = (String) paramMap.get("EMAIL");
+		String EMPNO = (String) paramMap.get("EMPNO");
+		
+		//삽입이 된 경우
+		if(registerCheck == 1) {
+			MailVO vo = new MailVO();
+			vo.setTo(EMAIL);
+			vo.setContent(EMPNO + "님 회원 가입을 축하드립니다.");
+			sendMail.sendMail(vo);
+				
+			rattr.addFlashAttribute("result", "joinSuccess");
+			return "redirect:sign_in";
+			
 		}else {
-			rattr.addFlashAttribute("JavaData", "NO");
-//			resultMap.put("JavaData", "NO");
+			model.addAttribute("url", request.getRequestURI());
+			model.addAttribute("message","회원 가입 실패");
+					
+			return "error/error";
 		}
 		
-		return "redirect:/index";
+//		if(registerCheck != 0 && registerCheck > 0) {
+//			Map<String, Object> loginCheck = memberservice.userNaverLoginPro(paramMap);
+//			session.setAttribute("userInfo", loginCheck);
+//			rattr.addFlashAttribute("JavaData", "YES");
+////			resultMap.put("JavaData", "YES");
+//		}else {
+//			rattr.addFlashAttribute("JavaData", "NO");
+////			resultMap.put("JavaData", "NO");
+//		}
+		
+//		return "redirect:sign_in";
 //		return resultMap;
+	}
+	
+	//네이버 로그아웃
+	@RequestMapping(value = "/snslogout", method = RequestMethod.POST)
+	public String logout(HttpServletRequest request, HttpSession session) {
+	    session.invalidate();
+	    SecurityContextHolder.clearContext();
+	    return "redirect:/index";
 	}
 	
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	/* 구글아이디로 로그인 */	
+    @ResponseBody
+	@RequestMapping(value = "/loginGoogle", method = RequestMethod.POST)
+	public String loginGooglePOST(MemberVO vo, HttpSession session, RedirectAttributes rttr, MemberVO mvo) throws Exception{
+
+
+		MemberVO returnVO = service.loginMemberByGoogle(vo);
+		String mvo_ajaxid = mvo.getId(); 
+		System.out.println("C: 구글아이디 포스트 db에서 가져온 vo "+ vo);
+		System.out.println("C: 구글아이디 포스트 ajax에서 가져온 id "+ mvo_ajaxid);
+		
+		if(returnVO == null) { //아이디가 DB에 존재하지 않는 경우
+			//구글 회원가입
+			service.joinMemberByGoogle(vo);	
+			
+			//구글 로그인
+			returnVO = service.loginMemberByGoogle(vo);
+			session.setAttribute("id", returnVO.getId());			
+			rttr.addFlashAttribute("mvo", returnVO);
+		}
+		
+		if(mvo_ajaxid.equals(returnVO.getId())){ //아이디가 DB에 존재하는 경우
+			//구글 로그인
+			service.loginMemberByGoogle(vo);
+			session.setAttribute("id", returnVO.getId());			
+			rttr.addFlashAttribute("mvo", returnVO);
+		}else {//아이디가 DB에 존재하지 않는 경우
+			//구글 회원가입
+			service.joinMemberByGoogle(vo);	
+			
+			//구글 로그인
+			returnVO = service.loginMemberByGoogle(vo);
+			session.setAttribute("id", returnVO.getId());			
+			rttr.addFlashAttribute("mvo", returnVO);
+		}
+		
+		return "redirect:/member/main";
+	}
+	
+	
+    
+    
+    
+    
+    
 	
 	
 	
@@ -360,12 +448,16 @@ public class MemberController {
 	@GetMapping(value = "/sign_in")
 	public ModelAndView signIn(ModelAndView mv, 
 			@CookieValue(value="remember-me", required=false) Cookie readCookie,
-			HttpSession session, Principal userPrincipal) {
+			HttpSession session, Principal userPrincipal, Model model) {
 		
 		if(readCookie != null) {
 			Logger.info("저장된 아이디 : " + userPrincipal.getName());//Principal.getName() : 로그인한 아이디
 			mv.setViewName("redirect:/index");
 		}else {
+			String naverAuthUrl = naverloginbo.getAuthorizationUrl(session);
+			model.addAttribute("naverUrl", naverAuthUrl);
+			Logger.info("naverAuthUrl="+naverAuthUrl);
+			
 			mv.setViewName("Member/sign_in");
 			mv.addObject("loginfail", session.getAttribute("loginfail"));
 			//세션에 저장된 값을 한 번만 실행될 수 있도록 mv에 저장하고

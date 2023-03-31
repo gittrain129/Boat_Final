@@ -6,6 +6,7 @@ CREATE TABLE MEMBER(
 	CONSTRAINT BOAT_DEPT_CK CHECK (DEPT IN('홍보팀','개발팀','인사팀','기획팀','영업팀')),
 	JOB VARCHAR2(20) DEFAULT '사원',
 	PASSWORD VARCHAR2(60),
+	PASSWORD_OG VARCHAR2(60),
 	NAME VARCHAR2(15),
 	EMAIL VARCHAR2(30),
 	PROFILE_FILE VARCHAR2(50), --프로필 사진 경로 ex)C:\Users\admin\git\Boat_Final\Final_test\src\main\resources\static\profile

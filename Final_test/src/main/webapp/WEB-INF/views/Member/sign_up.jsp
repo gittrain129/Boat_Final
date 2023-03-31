@@ -41,6 +41,11 @@
             
            	<div class="text-center other"> 또는 </div>
             
+			<div class="form-group d-grid gap-2 col-10 mx-auto mb-3">
+				<a href="#" class="btn-google btn-block text-center border circle google" id="google_login" 
+					onclick="init();"> 구글 회원가입</a>
+			</div>
+			
             <!-- <form name="naverlogin" action="naverlogin" method="POST"> -->
 	            <div class="form-group d-grid gap-2 col-10 mx-auto">
 					<a href="${naverUrl}" class="btn-naver btn-block text-center"> 네이버 회원가입</a>

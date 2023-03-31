@@ -18,11 +18,16 @@
 	<jsp:include page="headertag.jsp"/>
     <jsp:include page="process_bar.jsp"/>
 
-<script>h
+<script>
 	$(function(){
 		$("#logout").click(function(event){
 			event.preventDefault();
 			$("form[name=logout]").submit();
+		})
+		
+		$("#snslogout").click(function(event){
+			event.preventDefault();
+			$("form[name=snslogout]").submit();
 		})
 		
 		var username = "${pinfo.username}";
@@ -275,10 +280,19 @@
                 <div class="text-white ms-3">${pinfo.NAME}님</div>
                 <div class="ps-3">
                     <div class="btn btn-sm btn-light rounded-pill py-2 px-4 d-none d-lg-block">
+                    <c:if test="${empty EMPNO}">
                     	<form action="${pageContext.request.contextPath}/member/logout" method="post" name="logout">
                     		<a href="#" id="logout">로그아웃</a>
    							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                     	</form>
+                    </c:if>
+                    
+                    <c:if test="${!empty EMPNO}">
+                    	<form action="${pageContext.request.contextPath}/member/snslogout" method="post" name="snslogout">
+                    		<a href="#" id="snslogout">로그아웃</a>
+   							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                    	</form>
+                    </c:if>
                     </div>
                 </div>
             </div>
