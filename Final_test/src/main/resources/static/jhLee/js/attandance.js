@@ -17,7 +17,7 @@ let header = $("meta[name='_csrf_header']").attr("content");
  var resulttime= moment().format('MM-DD HH:mm');
  //로그인한 아이디  폼에 입력
  let empno =$("#loginid").text();
- let dept = $(#loginDept).text();
+ let dept = $('#loginDept').text();
 
  
 //실시간 시계
@@ -33,22 +33,64 @@ $('#date-box').text(today.toLocaleString());
 
 
 $(function(){
+        console.log($('#start-btn').prop('disabled')==false);
+        //true
 
-//  if($('#onTimeText').text()===''){
-//         $('#start-btn').addClass('btn')       
-//         .removeClass('c-btn');
+//  if($('#start-btn').hasClass('c-btn')){
+//                         $('#start-btn').removeClass('btn')
+//                         .addClass('c-btn')
+//                         .css('pointer-events','none');
+//                         //.attr('disabled', true);
 
 //  }
-//  if($('#offTimeText').text()==''){
-//         $('#start-btn').addClass('btn')       
-//         .removeClass('c-btn');
+ if($('#offTimeText').text()){
+        $('#end-btn').removeClass('btn')
+                        .addClass('c-btn');
+                        //.attr('disabled', true);
 
+ }
+
+//  $('button').click(function(){
+//  if($('#start-btn').prop('disabled')==false){
+//         toastr.options.escapeHtml = true;
+//         toastr.options.closeButton = true;
+//         toastr.options.newestOnTop = false;
+//         toastr.options.progressBar = true;
+//         toastr.info('오늘은 이미 출근, 퇴근 하셨습니다.', '근태관리', {timeOut: 3000});
 //  }
+//  if( $('#start-btn').prop('disabled')==false){
+//         toastr.options.escapeHtml = true;
+//         toastr.options.closeButton = true;
+//         toastr.options.newestOnTop = false;
+//         toastr.options.progressBar = true;
+//         toastr.info('오늘은 이미 출근, 퇴근 하셨습니다.', '근태관리', {timeOut: 3000});
+//  }
+// })
+
+console.log($('#onTimeText').text());
+ if($('#onTimeText').text()){
+     //  if( $('#end-btn').hasClass('btn')){
+        $('#start-btn').removeClass('btn')
+                        .addClass('c-btn');
+                       // .attr('disabled', true);       
+//       }
+}
+//console.log(Typeof($('#offTimeText').text()))
 
 
 
 $('#start-btn').click(function(){
+
+        console.log($('#start-btn').attr('disabled')==true);
         console.log("보낼 empno ......"+empno);
+        console.log("보낼 dept ......"+dept);
+        if($('#start-btn').hasClass('c-btn')){
+                toastr.options.escapeHtml = true;
+                toastr.options.closeButton = true;
+                toastr.options.newestOnTop = false;
+                toastr.options.progressBar = true;
+                toastr.info('오늘은 이미 출근, 퇴근 하셨습니다.', '근태관리', {timeOut: 3000});
+        }else{
       //출근시간 db 입력
       $.ajax({
         url : 'on',
@@ -62,24 +104,28 @@ $('#start-btn').click(function(){
         success : function(rdata){
                 //버튼 색변경
                 console.log("출근 success");
-                if($(this).hasClass("btn")){
-                        $(this).addClass('c-btn')
-                                .attr('disabled')       
-                                .removeClass('btn')
-                                .attr('disabled', true);
+                if($('#start-btn').hasClass('btn')){
+                        $('#start-btn').removeClass('btn')
+                                .addClass('c-btn')
+                                .attr('disabled', true)
+                                .css('pointer-events','none');
                                 //하얗게
-                        $('#end-btn').addClass('btn')       
-                                .removeClass('c-btn')
+                        $('#end-btn').removeClass('c-btn')
+                                .addClass('btn')       
                                 .attr('disabled', false);
                                 //파랗게
                 }
-                //출근시간 표시
                 
+                //출근시간 표시
+                console.log(rdata.ON_TIME);
+
+               $('#onTimeText').text(rdata.ON_TIME);
         }, error: function(error){
                 console.log("hi")
                 console.log(error);
         }
-})//ajax
+        })//ajax
+}
 
 //$('#result-box').children('div:eq(0)').text('시작 :'+ currenttime.substring(11,16));
 
@@ -89,12 +135,18 @@ $('#start-btn').click(function(){
 })
 
 $('#end-btn').click(function(){
-        
+        if($('#end-btn').attr('disabled', true)){
+                toastr.options.escapeHtml = true;
+                toastr.options.closeButton = true;
+                toastr.options.newestOnTop = false;
+                toastr.options.progressBar = true;
+                toastr.info('오늘은 이미 퇴근 하셨습니다.', '근태관리', {timeOut: 3000});
+         }
         console.log("퇴근시간="+currenttime);
         //퇴근시간 db 입력
         $.ajax({
                 url : 'off',
-                data : {'EMONO':empno,
+                data : {'EMPNO':empno,
                         'OFF_TIME':currenttime},
                 type :'post',
                 beforeSend: function (jqXHR, settings) {
@@ -104,17 +156,20 @@ $('#end-btn').click(function(){
                         console.log("퇴근 success");
                         //버튼 색변경
                         if($('#end-btn').hasClass("btn")){
-                                $(this).addClass('c-btn')       
-                                        .removeClass('btn')
-                                        .attr('disabled', true);
+                                $('#end-btn').removeClass('btn')
+                                        .addClass('c-btn')     
+                                         .attr('disabled', true);  
+                                        
                                         //하얗게
-                                $('#start-btn').addClass('btn')       
-                                        .removeClass('c-btn')
-                                        .attr('disabled', true);
+                           //     $('#start-btn') .removeClass('c-btn')
+                            //                     .addClass('btn')       
+                             //                    .attr('disabled', true);
                                         //파랗게
                         }
-                        //출근시간 표시
-                     // $('#result-box').children('div:eq(1)').text('종료 :'+currenttime.substring(11,16));
+                        console.log(rdata.OFF_TIME);
+
+                        //퇴근시간 표시
+                        $('#offTimeText').text(rdata.OFF_TIME);
         
                 }, error: function(){
                         console.log("hi")

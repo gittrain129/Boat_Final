@@ -2,13 +2,15 @@ package com.boat.controller.Attendance;
 
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -37,45 +39,41 @@ public class AttendanceContoroller {
 		List<Attandance> attlist = attandanceService.getAttList(EMPNO);
 		
 		//On_time _ EMPNO 받아서 넣기!
-		Attandance TodayMyatt = attandanceService.TodayMyatt(EMPNO);
+		Attandance TodayMyatt = attandanceService.getTodayMyatt(EMPNO);
 		
 		
-		mv.addObject("TodayMyatt",TodayMyatt);
 		mv.addObject("TodayMyatt",TodayMyatt);
 		//전체리스트....? admin 사용...?
 		mv.addObject("attlist",attlist);
 		mv.setViewName("Attendance/main");
 	return mv;
+	
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/on")
-	public ModelAndView on(String EMPNO,String ON_TIME,String DEPT,
+	@PostMapping(value="/on")
+	public Map<String,String> on(String ON_TIME,String EMPNO,String DEPT,
 			 				ModelAndView mv) {
 		logger.info("att접속중......출근한 empno = "+EMPNO);
 		logger.info("att접속중......출근한 ON_TIME = "+ON_TIME);
 		attandanceService.AttOn(ON_TIME,EMPNO,DEPT);
 	
-		
-		mv.addObject("ON_TIME", ON_TIME);
-		mv.setViewName("Attendance/main");
-		return mv;
+		Map<String,String> map =new HashMap<String,String>();
+		map.put("ON_TIME", ON_TIME);
+		return map;
 	}
-	
 	@ResponseBody
-	@RequestMapping(value="/off")
-	public ModelAndView off(String EMONO,String OFF_TIME
+	@PostMapping(value="/off")
+	public Map<String,String> off(String EMPNO,String OFF_TIME
 			, ModelAndView mv) {
-	//	String off = attandance.getOFF_TIME();
-	//	String empno =attandance.getEMPNO();
+		logger.info("att접속중......퇴근할 empno = "+EMPNO);
+		logger.info("att접속중......퇴근할 OFF_TIME = "+OFF_TIME);
 		
-	//	logger.info("퇴근시간 :"+ off);
-	//	logger.info("사번 :"+ empno);
-		
-		attandanceService.AttOff(OFF_TIME,EMONO);
-		mv.setViewName("Attendance/main");
+		attandanceService.AttOff(OFF_TIME,EMPNO);
 		mv.addObject("OFF_TIME", OFF_TIME);
-		return mv;
+		Map<String,String> map =new HashMap<String,String>();
+		map.put("OFF_TIME", OFF_TIME);
+		return map;
 	}
 	
 	
