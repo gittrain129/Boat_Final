@@ -30,11 +30,24 @@
           <form name="loginform" action="${pageContext.request.contextPath}/member/loginProcess" method="post">
             <label for="name">사번</label>
             <i class= "fas fa-user"></i>
-            <input type="text" name="id" id="name" class="form-control" placeholder="사번을 입력해주세요">
-
-            <label for="password">비밀번호</label>
-            <i class= "fas fa-lock"></i>
-            <input type="password" name="password" id="password" class="form-control" placeholder="비밀번호를 입력해주세요">
+            
+            <!-- sns 로그인 경우 -->
+            <c:if test="${!empty EMPNO}">
+	            <input type="text" name="id" id="name" class="form-control" placeholder="사번을 입력해주세요" value="${EMPNO}">
+	
+	            <label for="password">비밀번호</label>
+	            <i class= "fas fa-lock"></i>
+	            <input type="password" name="password" id="password" class="form-control" placeholder="비밀번호를 입력해주세요" 
+	            		value="${PASSWORD_OG}">
+            </c:if>
+            <c:if test="${empty EMPNO}">
+	            <input type="text" name="id" id="name" class="form-control" placeholder="사번을 입력해주세요">
+	
+	            <label for="password">비밀번호</label>
+	            <i class= "fas fa-lock"></i>
+	            <input type="password" name="password" id="password" class="form-control" placeholder="비밀번호를 입력해주세요">
+            </c:if>
+            
 		    <i class= "fa fa-solid fa-eye-slash" ></i>
 
             <div>
@@ -47,6 +60,10 @@
               <!--<button type="button" id="toggleSignIn">Sign In</button> -->
             </div>
             
+		<c:if test="${!empty EMPNO}"> 
+            <button type="submit" id="loginButton" class="btn btn-primary py-3 px-5" autofocus hidden="">Log in</button>
+        </c:if>
+            
             <div class="sns_login">
             	<div class="brick-login_2023__sns"> 다른 계정으로 로그인 하기 </div>
             </div>
@@ -57,12 +74,10 @@
                     	구글 로그인
                     </a>
                 </div>
-            	<div class="naver">
-            		<img src="${pageContext.request.contextPath}/resources/ejyang/image/btnG_아이콘원형.png"><br>
-                	<a href="#">
-                    	네이버 로그인
-                    </a>
-                </div>
+                <div class="naver" style="cursor:pointer;" onclick="document.getElementById('naverLink').click();">
+				    <img src="${pageContext.request.contextPath}/resources/ejyang/image/btnG_아이콘원형.png" ><br>
+				    <a href="${naverUrl}" id="naverLink">네이버 로그인</a>
+				</div>
                     <!-- <button type="submit"  class="btn btn-primary py-3 px-5">네이버 로그인</button> -->
             </div>
             
@@ -84,5 +99,10 @@
 
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
   <jsp:include page="../Main/footer.jsp" />
+  <script>
+    window.onload = function() {
+      document.getElementById("loginButton").click();
+    };
+  </script>
  </body>
 </html>

@@ -28,7 +28,7 @@
 	<insert id="insert">
 		INSERT INTO MEMBER
 		VALUES
-		(#{EMPNO}, #{DEPT}, #{JOB}, #{PASSWORD}, #{NAME}, #{EMAIL}, 
+		(#{EMPNO}, #{DEPT}, #{JOB}, #{PASSWORD}, #{PASSWORD_OG}, #{NAME}, #{EMAIL}, 
 		#{PROFILE_FILE}, #{PROFILE_IMG}, SYSDATE, #{AUTH}, NULL)
 	</insert>
 
@@ -39,7 +39,7 @@
 	
 	<insert id="userNaverRegisterPro">
 		INSERT INTO MEMBER 
-		VALUES (#{EMPNO}, #{DEPT}, '사원', #{PASSWORD}, #{NAME}, #{EMAIL},
+		VALUES (#{EMPNO}, #{DEPT}, '사원', #{PASSWORD}, #{PASSWORD_OG}, #{NAME}, #{EMAIL},
 		#{PROFILE_FILE}, #{PROFILE_IMG}, SYSDATE, 'ROLE_MEMBER', #{id})
 	</insert>
 

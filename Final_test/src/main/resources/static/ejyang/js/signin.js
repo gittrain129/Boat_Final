@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
     $('.fa-eye-slash').on('click',function(){
         $('input').toggleClass('active');
         if($('input').hasClass('active')){
