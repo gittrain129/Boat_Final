@@ -3,6 +3,7 @@ package com.boat.controller.member;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.security.Principal;
 import java.sql.SQLException;
 import java.util.Calendar;
@@ -40,7 +41,6 @@ import com.boat.Service.MemberService;
 import com.boat.Task.SendMail;
 import com.boat.domain.MailVO;
 import com.boat.domain.Member;
-import com.boat.sns.MemberVO;
 import com.boat.sns.NaverLoginBO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.scribejava.core.model.OAuth2AccessToken;
@@ -49,14 +49,14 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 @RequestMapping(value = "/member")
 public class MemberController {
 	private static final Logger Logger = LoggerFactory.getLogger(MemberController.class);
-
+ 
 	private MemberService memberservice;
 	private NaverLoginBO naverloginbo;//네이버 api
 	private SendMail sendMail;
 	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
-	private JavaMailSenderImpl mailSender;
+	private JavaMailSenderImpl mailSender; 
 	
 	
 	@Autowired
