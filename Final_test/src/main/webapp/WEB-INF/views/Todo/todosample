@@ -152,151 +152,15 @@
                         </nav>
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                                <table class="table" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>내 할일</th>
-                                            <th>시작날짜</th>
-                                            <th>예상 마감일</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <c:forEach var="mt" items="${MyTodo}">
-                                        <tr>
-                                            <td> 
-                                          <a href="#">${mt.t_CONTENT}</a>
-                                          </td>
-                                            <td>${mt.START_DATE}</td>
-                                            <td>${mt.END_DATE}</td>
-                                        </tr>
-                                    
-                                    </c:forEach>
-                                <c:if test="${listcount==0}">
-		                            <h3 style="text-align: center">등록된 글이 없습니다.</h3>
-	                            </c:if>
-                                    </tbody>
-                                </table>
+                             
                             </div>
-                            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                                <table class="table" cellspacing="0">
-                                 <c:forEach var="mt" items="${MyTodo}">
-                                    <thead>
-                                        <tr>
-                                            <th>${mt.t_CONTENT}</th>
-                                            <th><div class='progress'></div></th>
-                                            <th></th>
-                                        </tr> 
-                                      
-                                    </thead>
-                               </c:forEach>
-                                </table>
-                            </div>
+                         
                             <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                                 
                                 <%--아코디언 시작 --%>
                              <div class="accordion" id="accordionExample">
-							  <div class="accordion-item">
-							    <h2 class="accordion-header" id="headingOne">
-							      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-										A사원 <div class="progress"></div>	
-							      </button>
-							    </h2>
-							    <div id="collapseOne" class="accordion-collapse collapse " aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-							      <div class="accordion-body">
-							       
-							         <table class="table" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>A사원</th>
-                                            <th>시작날짜</th>
-                                            <th>예상 마감일</th>
-                                        </tr>
-                                    </thead>
-                                
-                                    <tbody>
-                                     <tr>
-                                            <th></th>
-                                            <th>그래프</th>
-                                            <th></th>
-                                        </tr> 
-                                        <tr>
-                                            <td><a href="#">첫 번째 할 일</a></td>
-                                            <td>2023-03-10</td>
-                                            <td>2023-03-12</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">두 번째 할 일</a></td>
-                                            <td>2023-03-10</td>
-                                            <td>2023-03-12</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">세번째 할 일</a></td>
-                                            <td>2023-03-10</td>
-                                            <td>2023-03-12</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td><b>더보기</b></td>
-                                        </tr>
-                                    </tbody>
-                                    </table><%--a 사원 todo 끝 --%>
-                                    
-							      </div>
-							    </div>
-							  </div>
-							    <div class="accordion-item">
-								    <h2 class="accordion-header" id="headingTwo">
-								      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-								        B사원 <div class="progress"></div>	
-								      </button>
-								       </h2>
-							  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-      								<div class="accordion-body">
-							       
-							         <table class="table" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>b사원</th>
-                                            <th>시작날짜</th>
-                                            <th>예상 마감일</th>
-                                        </tr>
-                                    </thead>
-                                
-                                    <tbody>
-                                     <tr>
-                                            <th></th>
-                                            <th>그래프</th>
-                                            <th></th>
-                                        </tr> 
-                                        <tr>
-                                            <td><a href="#">첫 번째 할 일</a></td>
-                                            <td>2023-03-10</td>
-                                            <td>2023-03-12</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">두 번째 할 일</a></td>
-                                            <td>2023-03-10</td>
-                                            <td>2023-03-12</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">세번째 할 일</a></td>
-                                            <td>2023-03-10</td>
-                                            <td>2023-03-12</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td><b>더보기</b></td>
-                                        </tr>
-                                    </tbody>
-                                    </table><%--a 사원 todo 끝 --%>
-                                    
-							      </div>
-							    </div>
-							  </div>
+							   
+							
 							  
 							    <div class="accordion-item">
 								    <h2 class="accordion-header" id="headingThree">
@@ -440,12 +304,14 @@
 							    </div>
 							  </div>
 							 
-							</div><%-- 아코디언 끝 --%>
+							</div>
                              
                              
                                     
                             </div>
+                            <%-- 아코디언 끝 --%>
                         </div>
+                        <!--  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab"> end -->
                     </div>
                 </div>
             </div>
@@ -458,7 +324,6 @@
   
 
 </main>
-<jsp:include page="../Main/footer.jsp" />
 
 </body>
 </html>

@@ -27,20 +27,31 @@ public class AttandanceServiceImpl implements AttandanceService {
 	public List<Attandance> getAttList() {
 		return dao.getAttList();
 	}
+	
+	//개인 리스트가져오기(여러날)
+	@Override
+	public List<Attandance> getAttList(String eMPNO) {
+		 return dao.getAttList(eMPNO);
+	}
 
 
-	@Override//EMPNO받아서 넣기!!
-	public Attandance TodayMyatt() {
-		return dao.TodayMyatt();
+
+	@Override//(당일)
+	public Attandance TodayMyatt(String EMPNO) {
+		HashMap<String,String>map = new HashMap<String,String>();
+		map.put("EMPNO", EMPNO);
+		
+		return dao.TodayMyatt(EMPNO);
 	}
 
 	@Override
-	public void AttOn(String on, String empno) {
+	public void AttOn(String on, String EMPNO,String DEPT) {
 		HashMap<String,String>map = new HashMap<String,String>();
 		map.put("on",on);
-		map.put("empno", empno);
+		map.put("EMPNO", EMPNO);
+		map.put("DEPT", DEPT);
 		
-		dao.AttOn(on,empno);
+		dao.AttOn(on,EMPNO,DEPT);
 		
 	}
 
@@ -56,6 +67,7 @@ public class AttandanceServiceImpl implements AttandanceService {
 	}
 
 
+	
 
 	
 

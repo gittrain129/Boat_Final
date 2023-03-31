@@ -201,7 +201,7 @@
                                 <sec:authentication property="principal" var="pinfo"/>
                             <p class="mb-2"><span id="loginDept">홍보부</span></p>
                             <h6 class="mb-0">
-                                <span id="loginid">2310001</span></h6>
+                                <span id="loginid">${pinfo.username}</span></h6>
                        </sec:authorize>
 
                         <sec:authorize access="isAnonymous()">

@@ -8,6 +8,18 @@
 	값을 글쓴이 값으로 설정필요
 */
 
+let token = $("meta[name='_csrf']").attr("content");
+let header = $("meta[name='_csrf_header']").attr("content");
+ //출퇴근 버튼 클릭시 시간 설정
+ moment.locale('ko');
+ var currenttime= moment().format('YYYY-MM-DD HH:mm');
+ //출근시간 :2023-03-23 15:38
+ var resulttime= moment().format('MM-DD HH:mm');
+ //로그인한 아이디  폼에 입력
+ let empno =$("#loginid").text();
+ let dept = $(#loginDept).text();
+
+ 
 //실시간 시계
 
 setInterval(time,1000);
@@ -18,32 +30,31 @@ var today = new Date();
 $('#date-box').text(today.toLocaleString());
 }
 
-let token = $("meta[name='_csrf']").attr("content");
-let header = $("meta[name='_csrf_header']").attr("content");
-
 
 
 $(function(){
 
- //출퇴근 버튼 클릭시 시간 설정
-moment.locale('ko');
-var currenttime= moment().format('YYYY-MM-DD HH:mm');
-//출근시간 :2023-03-23 15:38
-var resulttime= moment().format('MM-DD HH:mm');
-console.log("resulttime : "+resulttime)
-//로그인한 아이디  폼에 입력
-let empno =$("#loginid").text();
-console.log("로그인한 사번"+empno)
-$('#start-btn').click(function(){
-        
-        let val =$('#on').val(currenttime);
+//  if($('#onTimeText').text()===''){
+//         $('#start-btn').addClass('btn')       
+//         .removeClass('c-btn');
 
-      //  console.log("출근시간="+currenttime);
+//  }
+//  if($('#offTimeText').text()==''){
+//         $('#start-btn').addClass('btn')       
+//         .removeClass('c-btn');
+
+//  }
+
+
+
+$('#start-btn').click(function(){
+        console.log("보낼 empno ......"+empno);
       //출근시간 db 입력
       $.ajax({
         url : 'on',
-        data : {'EMONO':empno,
-                'ON_TIME':currenttime},
+        data : {'EMPNO':empno,
+                'ON_TIME':currenttime
+                ,'DEPT':dept},
         type :'post',
         beforeSend: function (jqXHR, settings) {
                  jqXHR.setRequestHeader(header, token);
@@ -52,11 +63,14 @@ $('#start-btn').click(function(){
                 //버튼 색변경
                 console.log("출근 success");
                 if($(this).hasClass("btn")){
-                        $(this).addClass('c-btn')       
-                                .removeClass('btn');
+                        $(this).addClass('c-btn')
+                                .attr('disabled')       
+                                .removeClass('btn')
+                                .attr('disabled', true);
                                 //하얗게
                         $('#end-btn').addClass('btn')       
-                                .removeClass('c-btn');
+                                .removeClass('c-btn')
+                                .attr('disabled', false);
                                 //파랗게
                 }
                 //출근시간 표시
@@ -74,12 +88,8 @@ $('#start-btn').click(function(){
         
 })
 
-
 $('#end-btn').click(function(){
         
-       // let val =$('#off').val(currenttime);
-        $('#off').val(currenttime);
-
         console.log("퇴근시간="+currenttime);
         //퇴근시간 db 입력
         $.ajax({
@@ -91,12 +101,20 @@ $('#end-btn').click(function(){
                          jqXHR.setRequestHeader(header, token);
                               },
                 success : function(rdata){
-                        //버튼 색변경
                         console.log("퇴근 success");
-                      
+                        //버튼 색변경
+                        if($('#end-btn').hasClass("btn")){
+                                $(this).addClass('c-btn')       
+                                        .removeClass('btn')
+                                        .attr('disabled', true);
+                                        //하얗게
+                                $('#start-btn').addClass('btn')       
+                                        .removeClass('c-btn')
+                                        .attr('disabled', true);
+                                        //파랗게
+                        }
                         //출근시간 표시
-
-                      $('#result-box').children('div:eq(1)').text('종료 :'+currenttime.substring(11,16));
+                     // $('#result-box').children('div:eq(1)').text('종료 :'+currenttime.substring(11,16));
         
                 }, error: function(){
                         console.log("hi")

@@ -10,17 +10,21 @@ import com.boat.domain.Attandance;
 public interface AttandanceMapper {
 
 	//출근버튼
-	public void AttOn(String on, String empno);
+	public void AttOn(String on, String empno, String DEPT);
+
+	//퇴근버튼
+	public void AttOff(String off, String EMPNO);
 
 	//출퇴근 리스트 가져오기 
 	public List<Attandance> getAttList();
 
-	public void AttOff(String off, String empno);
 
-	//오늘 출근기록
-	//EMPNO받아서 넣기!!
-	//public Attandance TodayMyatt(EMPNO);
-	public Attandance TodayMyatt();
+	//당일 출근기록
+	public Attandance TodayMyatt(String EMPNO);
+	//EMPNO받아서 넣기!!(완)public Attandance TodayMyatt();
+
+	//개인 출퇴근 리스트
+	public List<Attandance> getAttList(String eMPNO);
 
 
 }

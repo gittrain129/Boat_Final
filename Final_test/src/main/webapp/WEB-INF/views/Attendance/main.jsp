@@ -78,8 +78,8 @@
             
             </div>
             <div id="result-box">
-                <div>시작:${fn:substring(TodayMyatt.ON_TIME,11,16)} </div>
-                <div>종료:${fn:substring(TodayMyatt.OFF_TIME,11,16)} </div>
+                <div>시작:<span id="onTimeText">${fn:substring(TodayMyatt.ON_TIME,11,16)}</span> </div>
+                <div>종료:<span id="offTimeText">${fn:substring(TodayMyatt.OFF_TIME,11,16)}</span> </div>
             </div>
         </div>
         <div id="work-week" class="box">
@@ -130,7 +130,7 @@
                         <p>추가근무시간</p>
                         <p>총 근무시간</p>
                     </div>
-                        <c:forEach items="${listcount}" var="x">
+                        <c:forEach items="${attlist}" var="x">
                             <div class="list-item">
                                 <p>${fn:substring(x.ON_TIME,5,10)}</p>
                                 <p></p>
