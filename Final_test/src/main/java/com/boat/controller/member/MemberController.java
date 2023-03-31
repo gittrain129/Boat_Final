@@ -40,7 +40,8 @@ import com.boat.Service.MemberService;
 import com.boat.Task.SendMail;
 import com.boat.domain.MailVO;
 import com.boat.domain.Member;
-import com.boat.naver.NaverLoginBO;
+import com.boat.sns.MemberVO;
+import com.boat.sns.NaverLoginBO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
@@ -394,43 +395,44 @@ public class MemberController {
 	
 
 	
-	/* 구글아이디로 로그인 	
+	/* 구글아이디로 로그인 */	
     @ResponseBody
 	@RequestMapping(value = "/loginGoogle", method = RequestMethod.POST)
-	public String loginGooglePOST(MemberVO vo, HttpSession session, RedirectAttributes rttr, MemberVO mvo) throws Exception{
-
-
-		MemberVO returnVO = service.loginMemberByGoogle(vo);
-		String mvo_ajaxid = mvo.getId(); 
-		System.out.println("C: 구글아이디 포스트 db에서 가져온 vo "+ vo);
-		System.out.println("C: 구글아이디 포스트 ajax에서 가져온 id "+ mvo_ajaxid);
+	public String loginGooglePOST(@RequestParam String username, HttpSession session, RedirectAttributes rttr) throws Exception{
+    	
+    	System.out.println("username="+username);
+    	
+//		MemberVO returnVO = service.loginMemberByGoogle(vo);
+//		String mvo_ajaxid = mvo.getId(); 
+//		System.out.println("C: 구글아이디 포스트 db에서 가져온 vo "+ vo);
+//		System.out.println("C: 구글아이디 포스트 ajax에서 가져온 id "+ mvo_ajaxid);
+//		
+//		if(returnVO == null) { //아이디가 DB에 존재하지 않는 경우
+//			//구글 회원가입
+//			service.joinMemberByGoogle(vo);	
+//			
+//			//구글 로그인
+//			returnVO = service.loginMemberByGoogle(vo);
+//			session.setAttribute("id", returnVO.getId());			
+//			rttr.addFlashAttribute("mvo", returnVO);
+//		}
+//		
+//		if(mvo_ajaxid.equals(returnVO.getId())){ //아이디가 DB에 존재하는 경우
+//			//구글 로그인
+//			service.loginMemberByGoogle(vo);
+//			session.setAttribute("id", returnVO.getId());			
+//			rttr.addFlashAttribute("mvo", returnVO);
+//		}else {//아이디가 DB에 존재하지 않는 경우
+//			//구글 회원가입
+//			service.joinMemberByGoogle(vo);	
+//			
+//			//구글 로그인
+//			returnVO = service.loginMemberByGoogle(vo);
+//			session.setAttribute("id", returnVO.getId());			
+//			rttr.addFlashAttribute("mvo", returnVO);
+//		}
 		
-		if(returnVO == null) { //아이디가 DB에 존재하지 않는 경우
-			//구글 회원가입
-			service.joinMemberByGoogle(vo);	
-			
-			//구글 로그인
-			returnVO = service.loginMemberByGoogle(vo);
-			session.setAttribute("id", returnVO.getId());			
-			rttr.addFlashAttribute("mvo", returnVO);
-		}
-		
-		if(mvo_ajaxid.equals(returnVO.getId())){ //아이디가 DB에 존재하는 경우
-			//구글 로그인
-			service.loginMemberByGoogle(vo);
-			session.setAttribute("id", returnVO.getId());			
-			rttr.addFlashAttribute("mvo", returnVO);
-		}else {//아이디가 DB에 존재하지 않는 경우
-			//구글 회원가입
-			service.joinMemberByGoogle(vo);	
-			
-			//구글 로그인
-			returnVO = service.loginMemberByGoogle(vo);
-			session.setAttribute("id", returnVO.getId());			
-			rttr.addFlashAttribute("mvo", returnVO);
-		}
-		
-		return "redirect:/member/main";
+		return "redirect:/index";
 	}
 	
 	
@@ -439,7 +441,7 @@ public class MemberController {
     
     
     
-    */
+    
 	
 	
 	

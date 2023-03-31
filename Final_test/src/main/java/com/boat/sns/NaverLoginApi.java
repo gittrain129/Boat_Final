@@ -1,4 +1,4 @@
-package com.boat.naver;
+package com.boat.sns;
 
 import com.github.scribejava.core.builder.api.DefaultApi20;
 

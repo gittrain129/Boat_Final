@@ -1,4 +1,4 @@
-package com.boat.naver;
+package com.boat.sns;
 
 import java.io.BufferedReader;
 import java.io.IOException;

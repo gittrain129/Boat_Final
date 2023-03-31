@@ -41,9 +41,9 @@
             
            	<div class="text-center other"> 또는 </div>
             
-			<div class="form-group d-grid gap-2 col-10 mx-auto mb-3">
+			<div class="form-group d-grid gap-2 col-10 mx-auto mb-3" onclick="init();">
 				<a href="#" class="btn-google btn-block text-center border circle google" id="google_login" 
-					onclick="init();"> 구글 회원가입</a>
+					> 구글 회원가입</a>
 			</div>
 			
             <!-- <form name="naverlogin" action="naverlogin" method="POST"> -->
@@ -60,9 +60,54 @@
 
       </div>
   </div>
-  
 
   <script type="text/JavaScript" src="./my-script.js"></script>
   <jsp:include page="../Main/footer.jsp" />
+  <script>
+	//google signin API
+	  var googleUser = {};
+	  function init() {
+	  	 gapi.load('auth2', function() {
+	  	  console.log("init()시작");
+	  	  auth2 = gapi.auth2.init({
+	  	        client_id: '구글API의 클라이언트 ID 입력'
+	  	        cookiepolicy: 'single_host_origin',
+	  	      });
+	  	      attachSignin(document.getElementById('google_login'));
+	  	 });
+	  }
+	
+	  //google signin API2
+	  function attachSignin(element) {
+	      auth2.attachClickHandler(element, {},
+	          function(googleUser) {
+	      	var profile = googleUser.getBasicProfile();
+	      	var id_token = googleUser.getAuthResponse().id_token;
+	  	  	  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+	  	  	  console.log('ID토큰: ' + id_token);
+	  	  	  console.log('Name: ' + profile.getName());
+	  	  	  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+	  			$(function() {
+	  				$.ajax({
+	  				    url: '/member/loginGoogle',
+	  				    type: 'post',
+	  				    data: {
+	  						"id" : <!-- 필요한 데이터 담기 -->,
+	  						"pw" : <!-- 필요한 데이터 담기 -->,
+	  				        "username": profile.getName(),
+	  						"email": profile.getEmail()
+	  					    },
+	  				    success: function (data) {
+	  				            alert("구글아이디로 로그인 되었습니다");
+	  				            location.href="/member/main";
+	  				        }
+	  				});
+	  			})
+	          }, function(error) {
+	            alert(JSON.stringify(error, undefined, 2));
+	          });
+	      console.log("구글API 끝");
+	    }
+  </script>
  </body>
 </html>
