@@ -49,16 +49,16 @@
          
             <ul class="nav nav-tabs">
               <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#qwe">전체</a>
+                <a class="nav-link ${tab == '' || '전체' ? 'active' : ''}" data-toggle="tab" href="admit">전체</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#asd" >대회의실</a>
+                <a class="nav-link ${tab == '대회의실' ? 'active' : ''}" data-toggle="tab" href="admit?tab=대회의실"  >대회의실</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#zxc" >회의실1</a>
+                <a class="nav-link ${tab == '회의실1' ? 'active' : ''}" data-toggle="tab" href="admit?tab=회의실1"  >회의실1</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#zxcd" >회의실2</a>
+                <a class="nav-link ${tab == '회의실2' ? 'active' : ''}" data-toggle="tab" href="admit?tab=대회의실2" >회의실2</a>
               </li>
                 
               
@@ -83,6 +83,7 @@
             
             <div class="tab-content">
               <div class="tab-pane fade show active" id="qwe">
+              
                   <!-- Project Start -->
     <div class="container-xxl py-5">
         <div class="container">
@@ -110,17 +111,17 @@
                         </div>
                         <h6>${r.RENTAL}</h6>
                         <span>신청자 사번: ${r.ID}</span>
-                        <span>신청일 : ${r.START_T} - ${r.END_T}</span>
-                        <span>신청시간</span>
+                        <span>예약날짜 : ${r.START_T.substring(0, 2)}월 ${r.START_T.substring(3, 5)}일</span>
+                        <span>신청시간 : ${r.START_T.substring(6, 8)}시${r.START_T.substring(9, 11)}분 - ${r.END_T.substring(6, 8)}시${r.END_T.substring(9, 11)}분</span>
                         <c:choose>
                         <c:when test="${r.STATUS ==0 }">
-                      <button type="button" class="btn btn-primary" onclick="modal('${r.ID }','${r.RENTAL}','${r.START_TIME }','${r.START_T}','${r.END_TIME }','${r.END_T}','${r.CONTENT}')">처리대기</button>
+                      <button type="button" class="btn btn-primary" onclick="modal('${r.ID }','${r.RENTAL}','${r.START_TIME }','${r.START_T}','${r.END_TIME }','${r.END_T}','${r.CONTENT}','${r.ABC}')">처리대기</button>
 				      	</c:when>
 				      	<c:when test="${r.STATUS ==1 }">
-				      <button type="button" class="btn btn-success" onclick="modal('${r.ID }','${r.RENTAL}','${r.START_TIME }','${r.START_T}','${r.END_TIME }','${r.END_T}','${r.CONTENT}')" disabled>승인완료</button>
+				      <button type="button" class="btn btn-success"  disabled>승인완료</button>
 				      	</c:when>
 				      	<c:when test="${r.STATUS ==2 }">
-				      <button type="button" class="btn btn-danger" onclick="modal('${r.ID }','${r.RENTAL}','${r.START_TIME }','${r.START_T}','${r.END_TIME }','${r.END_T}','${r.CONTENT}')" disabled>반려</button>
+				      <button type="button" class="btn btn-danger"  disabled>반려</button>
 				      	</c:when>
 				      
 				      </c:choose>
@@ -136,38 +137,39 @@
     
     <div class="center-block">
 			<ul class="pagination justify-content-center" id="pagination">
+			
 				<c:if test="${page<=1}">
 					<li class="page-item">
-						<a class="page-link gray" id="origin_page">이전&nbsp;</a>
+						<a class="page-link gray" >이전&nbsp;</a>
 					</li>
 				</c:if>
 				<c:if test="${page>1}">
 					<li class="page-item">
-						 <a href="#" class="page-link" id="origin_page">이전&nbsp;</a>
+						 <a href="admit?page=${page-1 }&tab=${tab}" class="page-link" >이전&nbsp;</a>
 					</li>
 				</c:if>
 				
 				<c:forEach var="a" begin="${startpage}" end="${endpage}">
 					<c:if test="${a==page }">
 						<li class="page-item active">
-							<a class="page-link" id="origin_page">${a}</a>
+							<a class="page-link" >${a}</a>
 						</li>
 					</c:if>
 					<c:if test="${a!=page }">
 						<li class="page-item">
-							<a href="#" class="page-link" id="origin_page">${a}</a>
+							<a href="admit?page=${a }&tab=${tab}" class="page-link" >${a}</a>
 						</li>
 					</c:if>
 				</c:forEach>
 				
 				<c:if test="${page >= maxpage }">
 						<li class="page-item">
-							<a class="page-link gray" id="origin_page">&nbsp;다음</a>
+							<a class="page-link gray" >&nbsp;다음</a>
 						</li>
 				</c:if>
 				<c:if test="${page < maxpage }">
 						<li class="page-item">
-							<a href="#" class="page-link" id="origin_page">&nbsp;다음</a>
+							<a href="admit?page=${page+1 }&tab=${tab}" class="page-link" >&nbsp;다음</a>
 						</li>
 				</c:if>
 		
@@ -177,17 +179,11 @@
              
                 
               </div>
-              <div class="tab-pane fade" id="asd">
-                 <div id='calendar'></div>
-              </div>
-              <div class="tab-pane fade" id="zxc">
-               <div id='calendar'></div>
-            </div>
-        </div>
+           </div>
       </div>
     </div>
 </div>
-<!-- 탭 끝 -->
+
 
 
     <!-- modal -->
@@ -224,6 +220,11 @@
             <label for="content">용도</label>
             <textarea class="form-control" id="content" rows="3"></textarea>
           </div>
+           <div class="form-group d-none" >
+            <label for="abc">고유값</label>
+            <textarea class="form-control" id="abc" rows="3"></textarea>
+          </div>
+          
         </form>
       </div>
       <div class="modal-footer">
@@ -242,7 +243,7 @@
 var token = $("meta[name='_csrf']").attr("content");
 var header = $("meta[name='_csrf_header']").attr("content");
 
-function modal(id,rental,start_time,start_t,end_time,end_t,content) {
+function modal(id,rental,start_time,start_t,end_time,end_t,content,abc) {
 	  $('#rental_id').val(id);	
 	  $('#rental').val(rental);
 	  $('#startTimeISO').val(start_time);
@@ -250,6 +251,7 @@ function modal(id,rental,start_time,start_t,end_time,end_t,content) {
 	  $('#endTimeISO').val(end_time);
 	  $('#endTime').val(end_t);
 	  $('#content').val(content);
+	  $('#abc').val(abc);
 	  $('#res_Modal').modal('show');
 	}
 	
@@ -258,16 +260,18 @@ function confirm() {
 	var rental = $('#rental').val();
 	var start_time = $('#startTimeISO').val();
 	var end_time =  $('#endTimeISO').val();
+	var abc = $('#abc').val();
 	
 		
 	   $.ajax({
-           url: "${pageContext.request.contextPath}/confer/admit_ajax/",
+           url: "${pageContext.request.contextPath}/confer/permit_ajax/",
            type: 'POST',
            data: {
                "start_time": start_time,
                "end_time": end_time,
                "rental": rental,
-               "id": id
+               "id": id,
+               "abc": abc
            },
            beforeSend : function(xhr)
            {   //데이터를 전송하기 전에 헤더에 csrf값을 설정합니다.
@@ -275,7 +279,11 @@ function confirm() {
           },
            success: function(response) {
                $('#res_Modal').modal('hide');
-               document.location.reload(); //나중에 삭제해야댐 확인용
+               if(response === "overlap") {
+                   alert("겹치는 시간이 존재합니다.");
+               } else {
+                   document.location.reload(); 
+               }
            },
            error: function(request,error) {
                
@@ -345,24 +353,24 @@ function reject() {
     });
 }//reject 끝
 
-
-
-
-
-
-
-//페이징처리
-$(document).ready(function() {
-	  $('.page-link').click(function(e) {
-	    e.preventDefault();
-	    var page = $(this).text();
-	    var tab = $('.nav-tabs .active').text();
-	    var url = "admit?page=" +page+ "&tab=" +tab;
-	    console.log("페이징처리 " + page);
-	    window.location.href = url;
-	  });
-	});
+function setPaging(href,digit){
+	let active="";
+	let gray="";
+	if(href==""){ //href가 빈문자열인 경우
+		if(isNaN(digit)){//이전&nbsp; 또는 다음&nbsp;
+			gray="gray";
+		}else{
+			active="active";
+		}
+	}
+	let output = '<li class="page-item ${active}">';
+	//let anchor = "<a class='page-link " + gray + "'" + href + ">" + digit + "</a></li>";
 	
+	let anchor = `<a class='page-link ${gray}' ${href}>${digit}</a></li>`;
+	output += anchor;
+	return output;
+}
+	/*
 $(document).ready(function() {
 	   $('.nav-tabs a').on('click', function (e) {
 		   e.preventDefault();
@@ -392,9 +400,10 @@ $(document).ready(function() {
 	            		  for (var i = 0; i < response.length; i++) {
 	            			  var id = response[i].id
 	            			  var rental = response[i].rental
-	            			  var start = response[i].start_t
+	            			  var start = response[i].start_t.substring(0, 2)}월 + response[i].start_t.substring(3, 5)}일
 	            			  var end = response[i].end_t
 	            			  var status = response[i].status
+	            			 
 	            			  
 	            			  var button;
 	            			  if (response[i].status == 0) {
@@ -437,95 +446,35 @@ $(document).ready(function() {
 
 	            	   
 	            		 
-	            		  var paging = "";
 	            		  
-	            		  //이전페이지
-	            		  if(response[0].maxpage <=1){
-	            		  paging += '<li class="page-item" id="prev-btn"><a class="page-link gray" href="#" data-page="이전">이전</a></li>';
-	            		  }else{
-	            		  paging += '<li class="page-item" id="prev-btn"><a class="page-link" href="#" data-page="이전">이전</a></li>';
-	            		  }
-	            		  
-	            		  
-	            		  //1페이지 고정생성
-	            		  paging += `<li class="page-item active"><a class="page-link" href="#" data-page=1>1</a></li>`;
-	            		  
-	            		  //본페이지
-	            		  for (var i = 2; i <= response[0].maxpage; i++) {
-	            		      paging += `<li class="page-item"><a class="page-link" href="#" data-page=`+i+`>`+i+`</a></li>`;
-	            		  }
-	            		  
-	            		  var max = response.length;
-	            		  if(response[max-1].page >= response[0].maxpage){
-		            		  paging += '<li class="page-item" id="next-btn"><a class="page-link gray" href="#" data-page="다음">다음</a></li>';
-		            		  }else{
-		            		  paging += '<li class="page-item" id="next-btn"><a class="page-link" href="#" data-page="다음">다음</a></li>';
-		            		  }
-	            		  
-	            		  
-
-	            		  $("#pagination").append(paging);
-
-	            		  if (response[0].maxpage <= 1) {
-	            		      // If there is only one page, disable the prev and next buttons
-	            		      $("#prev-btn").addClass("disabled");
-	            		      $("#next-btn").addClass("disabled");
-	            		      $("#prev-btn a").addClass("gray");
-	            		      $("#next-btn a").addClass("gray");
-	            		  }
+	            		  output = "";
+	  					
+	  					let digit = '이전&nbsp;'
+	  					let href="";
+	  					if(data.page > 1){
+	  						href = 'href=javascript:go(' + (data.page-1) + ')';
+	  					}
+	  					output += setPaging(href, digit);
+	  					
+	  					for (let i = data.startpage; i <= data.endpage; i++){
+	  						digit = i;
+	  						href ="";
+	  						if ( i != data.page){
+	  							href = 'href=javascript:go(' + i + ')';
+	  						}
+	  						output += setPaging(href, digit);
+	  					}
+	  					
+	  					digit = '다음&nbsp;';
+	  					href="";
+	  					if (data.page < data.maxpage) {
+	  						href = 'href=javascript:go(' + (data.page + 1) + ')';
+	  					}
+	  					output += setPaging(href,digit);
+	  					
+	  					$('.pagination').append(output);
+	  				}
 						
-	            		  /* 
-	            		  $("#prev-btn").on("click", function(event) {
-	            		      event.preventDefault();
-	            		      if (!$(this).hasClass("disabled")) {
-	            		         var page = parseInt($(".page-item.active a").data("page"));
-	            		         
-	            		         console.log('여기');
-	            		          console.log(page);
-	            		          
-	            		          if (page > 1) {
-	            		              page--;
-	            		              var tab = $('.nav-tabs .active').text();
-	            		              var url = "admitTab_ajax_page?page=" +page+ "&tab=" +tab;
-	            		              window.location.href = url;
-	            		          }
-	            		      }
-	            		  });
-
-	            		  $("#next-btn").on("click", function(event) {
-	            		      event.preventDefault();
-	            		      if (!$(this).hasClass("disabled")) {
-	            		          var page = parseInt($(".page-item.active a").data("page"));
-	            		          var maxPage = parseInt($("#pagination li:nth-last-child(2) a").data("page"));
-	            		          	            		          
-	            		          if (page < maxPage) {
-	            		              page++;
-	            		              var tab = $('.nav-tabs .active').text();
-	            		              var url = "admitTab_ajax_page?page=" +page+ "&tab=" +tab;
-	            		              window.location.href = url;
-	            		          }
-	            		      }
-	            		  });
-
-	            		  
-	            		  $("#pagination").on("click", "a.page-link", function(event) {
-	            		      event.preventDefault();
-	            		      alert($(this).text());
-	            		      var compare = $(this).text();
-	            		      if(compare !== '이전' && compare !== '다음' ){
-	            		      var page = $(this).data("page");
-	            		      var tab = $('.nav-tabs .active').text();
-	            		      var url = "admitTab_ajax_page?page=" +page+ "&tab=" +tab;
-	            		      window.location.href = url;
-	            		      
-	            		      $(".page-item.active").removeClass("active");
-	            		      $(this).parent().addClass("active");
-	            		      }
-	            		  });
-
-	            	*/
-	            	
-	               
 	            },
 	            error: function(request,error) {
 	                
@@ -537,7 +486,7 @@ $(document).ready(function() {
 		 });
 	 });
 	
-	
+	*/
 	
 	
 </script>

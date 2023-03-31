@@ -10,9 +10,17 @@ public class ConferenceReservation {
      private String END_T;
      private String STATUS;//예약승인 처리여부
      private String MEMO;//예약거절 사유입력
+     private String ABC; //예약신청입력된시간
      
-  
+     
+	  
 	
+	public String getABC() {
+		return ABC;
+	}
+	public void setABC(String aBC) {
+		ABC = aBC;
+	}
 	public String getMEMO() {
 		return MEMO;
 	}
@@ -77,6 +85,7 @@ public class ConferenceReservation {
    public void setCONTENT(String cONTENT) {
       CONTENT = cONTENT;
    }
+
   
 
 }

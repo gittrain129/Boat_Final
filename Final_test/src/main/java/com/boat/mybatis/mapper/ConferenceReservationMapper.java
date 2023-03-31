@@ -21,5 +21,7 @@ public interface ConferenceReservationMapper {
 
 	public void reject_pro(ConferenceReservation c2);
 
+	public int check_pro(ConferenceReservation c2);
+
 	
 }

@@ -221,7 +221,8 @@
            start: '${l.start}',
            end: '${l.end}',
            title: '${l.title}',
-           id: '${l.id}'
+           id: '${l.id}',
+           status: '${l.status}'
          },
         </c:if>
          </c:forEach>]);
@@ -266,8 +267,8 @@
                var rental_id = info.event.id;
                var login_id = $('#loginid').text(); 
                
-               
-              
+                   
+                
                $('#rental_id').val('');
                $('#res_ModalLabel').text('');
                $('#content').text('');
