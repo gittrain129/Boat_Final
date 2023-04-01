@@ -148,7 +148,7 @@
 		
 
 		<!-- 롬복 사용을 위해  -->
-
+	<dependency>
 		<groupId>org.projectlombok</groupId>
 		<artifactId>lombok</artifactId>
 		 <optional>true</optional>
