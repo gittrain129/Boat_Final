@@ -31,4 +31,8 @@ public interface MemberMapper {
 	
 	//구글 로그인
 	public Map<String, Object> userGoogleLoginPro(Map<String, Object> paramMap);
+	
+	//구글 회원가입
+	public int userGoogleRegisterPro(Map<String, Object> paramMap);
+
 }

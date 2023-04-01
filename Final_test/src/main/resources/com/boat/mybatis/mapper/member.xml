@@ -51,4 +51,10 @@
 		SELECT * FROM MEMBER WHERE EMAIL = #{email} AND GOOGLELOGIN = #{id}
 	</select>
 	
+	<insert id="userGoogleRegisterPro">
+		INSERT INTO MEMBER 
+		VALUES (#{EMPNO}, #{DEPT}, '사원', #{PASSWORD}, #{PASSWORD_OG}, #{NAME}, #{EMAIL},
+		#{PROFILE_FILE}, #{PROFILE_IMG}, SYSDATE, 'ROLE_MEMBER', NULL, #{id})
+	</insert>
+	
 </mapper>

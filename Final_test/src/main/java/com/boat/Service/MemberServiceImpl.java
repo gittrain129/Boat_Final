@@ -78,6 +78,12 @@ public class MemberServiceImpl implements MemberService {
 		return dao.userGoogleLoginPro(paramMap);
 	}
 
+	//구글 회원가입
+	@Override
+	public int userGoogleRegisterPro(Map<String, Object> paramMap) {
+		return dao.userGoogleRegisterPro(paramMap);
+	}
+
 
 	
 	

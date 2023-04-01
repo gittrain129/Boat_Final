@@ -7,6 +7,7 @@
  	<link href="${pageContext.request.contextPath}/resources/ejyang/css/login.css" type="text/css" rel="stylesheet">
  	<script src="http://code.jquery.com/jquery-latest.js"></script>
  	<script src="${pageContext.request.contextPath}/resources/ejyang/js/signin.js"></script>
+ 	<script src="https://accounts.google.com/gsi/client" async defer></script>
  	<jsp:include page="../Main/header.jsp" />
  	<script>
  		var result="${result}";
@@ -19,6 +20,8 @@
  		}else if("${JavaData}" == "NO"){
  			alert("네이버 회원가입에 실패했습니다.")
  		}
+ 		
+ 		
  	</script>
  </head>
  <body>
@@ -67,19 +70,44 @@
             <div class="sns_login">
             	<div class="brick-login_2023__sns"> 다른 계정으로 로그인 하기 </div>
             </div>
-            <div class="sns_login_button">
-            	<div class="naver">
-            		<img src="${pageContext.request.contextPath}/resources/ejyang/image/btn_google.png"><br>
-                	<a href="#">
-                    	구글 로그인
-                    </a>
-                </div>
-                <div class="naver" style="cursor:pointer;" onclick="document.getElementById('naverLink').click();">
-				    <img src="${pageContext.request.contextPath}/resources/ejyang/image/btnG_아이콘원형.png" ><br>
-				    <a href="${naverUrl}" id="naverLink">네이버 로그인</a>
-				</div>
-                    <!-- <button type="submit"  class="btn btn-primary py-3 px-5">네이버 로그인</button> -->
-            </div>
+            
+            <!-- 구글 가입 -->
+	        <form name="GoogleForm" id="GoogleForm" method = "post" action="setSnsInfo">
+	        	<input type="hidden" name="id" id="GoogleId">
+				<input type="hidden" name="name" id="GoogleName">
+				<input type="hidden" name="email" id="GoogleEmail">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+			</form>
+			  
+	        <!-- 구글 로그인 -->
+	        <form name="GoogleLogin" id="GoogleLogin" method = "post" action="GoogleLogin">
+	          	<input type="hidden" name="id" id="GoogleLoginId">
+				<input type="hidden" name="email" id="GoogleLoginEmail">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+			</form>
+            
+            <div class="container mt-5 mb-4">
+			  <div class="row">
+			    <div class="col">
+			      	<div class="form-group d-grid gap-2 col-10 mx-auto">
+						<div id="buttonDiv" aria-hidden="true"
+						      id="google-login-api"
+						      ref="onClickGooglelogin"
+						      style="display: none"></div> 
+						<a class="btn-google btn-block border rounded-circle m-auto" onClick="onClickGooglelogin()"
+							style="cursor: pointer">  </a>
+						<span class="text-center mt-2" style="cursor: pointer" onClick="onClickGooglelogin()">구글 로그인</span>
+					</div>
+			    </div>
+			    
+			    <div class="col">
+			    	<div class="form-group d-grid gap-2 col-10 mx-auto">
+						<a href="${naverUrl}" class="btn-naver btn-block rounded-circle m-auto"></a>
+						<span id="naver-login" class="text-center mt-2" style="cursor: pointer">네이버 로그인</span>
+					</div>
+			    </div>
+			  </div>
+			</div>
             
             
             <div class="findinfo">
@@ -100,9 +128,90 @@
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
   <jsp:include page="../Main/footer.jsp" />
   <script>
-    window.onload = function() {
+    
+    function onClickGooglelogin() {
+ 	    document.querySelector('[aria-labelledby="button-label"]').click();
+ 	  }
+	
+    function handleCredentialResponse(response) {
+      console.log("Encoded JWT ID token: " + response.credential);
+      
+      const responsePayload = decodeJwtResponse(response.credential);
+
+      console.log("ID: " + responsePayload.sub);
+      console.log('Full Name: ' + responsePayload.name);
+      console.log('Given Name: ' + responsePayload.given_name);
+      console.log('Family Name: ' + responsePayload.family_name);
+      console.log("Image URL: " + responsePayload.picture);
+      console.log("Email: " + responsePayload.email);
+      
+      let token = $("meta[name='_csrf']").attr("content");
+  	  let header = $("meta[name='_csrf_header']").attr("content");
+      
+      $.ajax({
+			type : "POST",
+			url : "loginGoogle",
+			data : {"id" : responsePayload.sub,
+					"name" : responsePayload.name,
+					"email" : responsePayload.email
+			},
+			beforeSend : function(xhr)
+	        {   
+	        	xhr.setRequestHeader(header, token);			
+	        },
+			success: function(data){
+				console.log(data)
+				if(data == "YES"){
+					console.log("로그인")
+					$("#GoogleLoginEmail").val(responsePayload.email);
+					$("#GoogleLoginId").val(responsePayload.sub);
+					$("#GoogleLogin").submit();
+					
+				}else if(data == "register"){
+					console.log("가입")
+					$("#GoogleEmail").val(responsePayload.email);
+					$("#GoogleId").val(responsePayload.sub);
+					$("#GoogleName").val(responsePayload.name);
+					$("#GoogleForm").submit();
+				}
+			},
+			error: function(data){
+				alert("로그인에 실패했습니다")
+			}
+		}); //ajax end
+      
+    }
+    
+    function decodeJwtResponse(token) {
+        var base64Url = token.split(".")[1];
+        var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+        var jsonPayload = decodeURIComponent(
+          atob(base64)
+            .split("")
+            .map(function (c) {
+              return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+            })
+            .join("")
+        );
+
+        return JSON.parse(jsonPayload);
+      }
+    
+    window.onload = function () {
+      google.accounts.id.initialize({
+        client_id: "",
+        callback: handleCredentialResponse,
+        context: "signup"
+      });
+      google.accounts.id.renderButton(
+        document.getElementById("buttonDiv"),
+        { theme: "outline", size: "large", type: "standard", text: "signup_with", width: "333px" }  // customization attributes
+      );
+      //google.accounts.id.prompt(); 
+      
       document.getElementById("loginButton").click();
-    };
+    	
+    }
   </script>
  </body>
 </html>

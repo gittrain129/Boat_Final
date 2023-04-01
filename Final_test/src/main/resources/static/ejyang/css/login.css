@@ -102,7 +102,6 @@ button[type="submit"] {
 }
 
 button[type="button"] {
-    padding: 16px 0 16px 35px;
     background-color: transparent;
     color: #ED4B5E;
 }
@@ -282,4 +281,39 @@ label[for="terms"] {
 
 .findinfo > a:last-child::after {
   content: none;
+}
+
+.btn-naver {
+    background: url(../image/naver_login2x.png) no-repeat #01c73c;
+    background-size: 35px;
+    background-position: 50%;
+    border-color: #01c73c;
+    color: #fff;
+    height:80px;
+    padding-top: 13px;
+    padding-bottom: 8px;
+    width: 80px;
+}
+.btn-naver:hover,.btn-naver:focus {
+    background: url(../image/naver_login2x.png) no-repeat #00bb38;
+    background-size: 35px;
+    background-position: 50%;
+	border-color : #00bb38;
+	color: #fff;
+}
+
+.btn-google {
+    background: url(../image/google_icon.png) no-repeat ;
+    background-size: 40px;
+    background-position: 50%;
+    height:80px;
+    padding-top: 13px;
+    padding-bottom: 8px;
+    width: 80px;
+}
+.btn-google:hover, .btn-google:focus {
+    background: url(../image/google_icon.png) no-repeat #fbfbfb;
+    background-size: 40px;
+    background-position: 50%;
+	border-color : #00bb38;
 }

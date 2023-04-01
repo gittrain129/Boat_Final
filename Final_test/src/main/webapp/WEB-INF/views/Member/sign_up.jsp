@@ -10,6 +10,10 @@
  	<script src="https://accounts.google.com/gsi/client" async defer></script>
  	<jsp:include page="../Main/header.jsp" />
  	<script>
+	 	 function onClickGooglelogin() {
+	 	    document.querySelector('[aria-labelledby="button-label"]').click();
+	 	  }
+ 	
         function handleCredentialResponse(response) {
           console.log("Encoded JWT ID token: " + response.credential);
           
@@ -39,8 +43,11 @@
 				success: function(data){
 					console.log(data)
 					if(data == "YES"){
-						alert("로그인되었습니다.");
-						location.href = '${pageContext.request.contextPath}/index'
+						console.log("로그인")
+						$("#GoogleLoginEmail").val(responsePayload.email);
+						$("#GoogleLoginId").val(responsePayload.sub);
+						$("#GoogleLogin").submit();
+						
 					}else if(data == "register"){
 						console.log("가입")
 						$("#GoogleEmail").val(responsePayload.email);
@@ -74,11 +81,12 @@
         window.onload = function () {
           google.accounts.id.initialize({
             client_id: "",
-            callback: handleCredentialResponse
+            callback: handleCredentialResponse,
+            context: "signup"
           });
           google.accounts.id.renderButton(
             document.getElementById("buttonDiv"),
-            { theme: "outline", size: "large" }  // customization attributes
+            { theme: "outline", size: "large", type: "standard", text: "signup_with", width: "333px" }  // customization attributes
           );
           //google.accounts.id.prompt(); 
         }
@@ -115,17 +123,30 @@
             
            	<div class="text-center other"> 또는 </div>
             
+          <!-- 구글 가입 -->
           <form name="GoogleForm" id="GoogleForm" method = "post" action="setSnsInfo">
           	<input type="hidden" name="id" id="GoogleId">
 			<input type="hidden" name="name" id="GoogleName">
 			<input type="hidden" name="email" id="GoogleEmail">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+		  </form>
+		  
+          <!-- 구글 로그인 -->
+          <form name="GoogleLogin" id="GoogleLogin" method = "post" action="GoogleLogin">
+          	<input type="hidden" name="id" id="GoogleLoginId">
+			<input type="hidden" name="email" id="GoogleLoginEmail">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 		  </form>
 			<div class="form-group d-grid gap-2 col-10 mx-auto mb-3" style="cursor: pointer">
-				<div id="buttonDiv"></div> 
+				<div id="buttonDiv" aria-hidden="true"
+				      id="google-login-api"
+				      ref="onClickGooglelogin"
+				      style="display: none"></div> 
+				<a class="btn-google btn-block text-center border" onClick="onClickGooglelogin()"> 구글 계정으로 회원가입 </a>
 			</div>
 			
 	            <div class="form-group d-grid gap-2 col-10 mx-auto">
-					<a href="${naverUrl}" class="btn-naver btn-block text-center fw-normal"> 네이버 계정으로 회원가입</a>
+					<a href="${naverUrl}" class="btn-naver btn-block text-center"> 네이버 계정으로 회원가입</a>
 				</div>
 			
 			

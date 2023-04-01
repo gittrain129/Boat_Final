@@ -5,8 +5,10 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.security.Principal;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -117,17 +119,22 @@ public class MemberController {
 			
 			String saveFolder = new File("src/main/resources/static/profile").getAbsolutePath();
 //			String saveFolder= profileSaveFolder.getProfilesavefolder();
-			String fileDBName = fileDBName(fileName, saveFolder, member.getEMPNO());
+			List<String> fileDBName = fileDBName(fileName, saveFolder, member.getEMPNO());
 			Logger.info("fileDBName : " + fileDBName);
 			
+			String fileDBNames = fileDBName.get(0);
+			String refileName = fileDBName.get(1);
+			
 			//transferTo(file path) : 업로드된 파일을 매개변수의 경로에 저장합니다.
-			uploadfile.transferTo(new File(saveFolder + fileDBName));
-			Logger.info("transferTo path : " + saveFolder + fileDBName);
+			uploadfile.transferTo(new File(saveFolder + fileDBNames));
+			Logger.info("transferTo path : " + saveFolder + fileDBNames);
 			//바뀐 파일명으로 저장
-			member.setPROFILE_IMG(fileDBName);
+			member.setPROFILE_IMG(refileName);
+			Logger.info("fileDBNames : " + fileDBNames);
+			
 			System.out.println("absolutePathss " +saveFolder);
 			//파일 경로 이름
-			member.setPROFILE_FILE("profile" + fileDBName);
+			member.setPROFILE_FILE("profile" + fileDBNames);
 		}
 		
 		
@@ -160,7 +167,7 @@ public class MemberController {
 	}
 	
 	//파일명
-	private String fileDBName(String fileName, String saveFolder, String empno) {
+	private List<String> fileDBName(String fileName, String saveFolder, String empno) {
 		//새로운 폴더 이름 : 오늘 년+월+일
 		Calendar c = Calendar.getInstance();
 		int year = c.get(Calendar.YEAR);//오늘 년도 구합니다.
@@ -197,7 +204,12 @@ public class MemberController {
 		//String fileDBName = "/" + year + "-" + month + "-" + date + "/" + refileName;
 		String fileDBName = File.separator + year + "-" + month + "-" + date + File.separator + refileName;
 		Logger.info("fileDBName = " + fileDBName);
-		return fileDBName;
+		
+		List<String> fileNames = new ArrayList<String>();
+		fileNames.add(fileDBName);
+		fileNames.add(refileName);
+		
+		return fileNames;
 	}
 	
 	
@@ -323,19 +335,22 @@ public class MemberController {
 			
 			String saveFolder = new File("src/main/resources/static/profile").getAbsolutePath();
 //			String saveFolder= profileSaveFolder.getProfilesavefolder();
-			String fileDBName = fileDBName(fileName, saveFolder, EMPNO);
+			List<String> fileDBName = fileDBName(fileName, saveFolder, EMPNO);
 			Logger.info("fileDBName : " + fileDBName);
 			
+			String fileDBNames = fileDBName.get(0);
+			String refileName = fileDBName.get(1);
+			
 			//transferTo(file path) : 업로드된 파일을 매개변수의 경로에 저장합니다.
-			uploadfile.transferTo(new File(saveFolder + fileDBName));
-			Logger.info("transferTo path : " + saveFolder + fileDBName);
+			uploadfile.transferTo(new File(saveFolder + fileDBNames));
+			Logger.info("transferTo path : " + saveFolder + fileDBNames);
 			//바뀐 파일명으로 저장
-			paramMap.put("PASSWORD", encPassword);
+			paramMap.put("PROFILE_IMG", refileName);
 //			member.setPROFILE_IMG(fileDBName);
 			System.out.println("absolutePathss " +saveFolder);
 			//파일 경로 이름
 //			member.setPROFILE_FILE("profile" + fileDBName);
-			paramMap.put("PROFILE_FILE", "profile" + fileDBName);
+			paramMap.put("PROFILE_FILE", "profile" + fileDBNames);
 		}
 		
 		Map <String, Object> resultMap = new HashMap<String, Object>();
@@ -399,8 +414,6 @@ public class MemberController {
 			return "register";
 			
 		}else{
-			Map<String, Object> loginCheck = memberservice.userGoogleLoginPro(paramMap);
-			session.setAttribute("userInfo", loginCheck);
 			return "YES";
 		}
 		
@@ -418,10 +431,91 @@ public class MemberController {
 		return "/Member/joinForm3";
 	}
     
+	//구글 회원가입 처리
+	@RequestMapping(value="/userGoogleRegisterPro", method=RequestMethod.POST)
+	public String userGoogleRegisterPro(@RequestParam Map<String,Object> paramMap,HttpSession session, RedirectAttributes rattr,
+			@RequestParam String PASSWORD, @RequestParam MultipartFile uploadfile, Model model, HttpServletRequest request) throws SQLException, Exception {
+		System.out.println("paramMap=" + paramMap);
+			
+		//비밀번호 암호화 추가
+		String encPassword = passwordEncoder.encode(PASSWORD);
+		Logger.info(encPassword);
+		paramMap.put("PASSWORD", encPassword);
+		paramMap.put("PASSWORD_OG", PASSWORD);
+			
+		MultipartFile uploadfiles = uploadfile;
+			
+		if(!uploadfiles.isEmpty()) {
+			String fileName = uploadfiles.getOriginalFilename();//원래 파일명
+			String EMPNO = (String) paramMap.get("EMPNO");
+			
+			String saveFolder = new File("src/main/resources/static/profile").getAbsolutePath();
+			List<String> fileDBName = fileDBName(fileName, saveFolder, EMPNO);
+			Logger.info("fileDBName : " + fileDBName);
+			
+			String fileDBNames = fileDBName.get(0);
+			String refileName = fileDBName.get(1);
+			
+			uploadfile.transferTo(new File(saveFolder + fileDBNames));
+			Logger.info("transferTo path : " + saveFolder + fileDBNames);
+			//바뀐 파일명으로 저장
+			paramMap.put("PROFILE_IMG", refileName);
+			System.out.println("absolutePathss " +saveFolder);
+			//파일 경로 이름
+			paramMap.put("PROFILE_FILE", "profile" + fileDBNames);
+		}
+		
+		int registerCheck = memberservice.userGoogleRegisterPro(paramMap);
+		System.out.println(registerCheck);
+			
+		String EMAIL = (String) paramMap.get("EMAIL");
+		String EMPNO = (String) paramMap.get("EMPNO");
+		
+		//삽입이 된 경우
+		if(registerCheck == 1) {
+			MailVO vo = new MailVO();
+			vo.setTo(EMAIL);
+			vo.setContent(EMPNO + "님 회원 가입을 축하드립니다.");
+			sendMail.sendMail(vo);
+				
+			rattr.addFlashAttribute("result", "joinSuccess");
+			return "redirect:sign_in";
+			
+		}else {
+			model.addAttribute("url", request.getRequestURI());
+			model.addAttribute("message","회원 가입 실패");
+					
+			return "error/error";
+		}
+			
+	}
+    
+	//구글 로그인
+	@PostMapping("/GoogleLogin")
+	public String GoogleLogin(HttpSession session, @RequestParam Map<String, Object> paramMap, @RequestParam String id) {
+		System.out.println("paramMap="+ paramMap);
+		System.out.println("id="+ id);
+		
+		Map<String, Object> loginCheck = memberservice.userGoogleLoginPro(paramMap);
+		System.out.println("userInfo="+ loginCheck);
+		session.setAttribute("userInfo", loginCheck);
+		
+		String EMPNO = (String) loginCheck.get("EMPNO");
+		String PASSWORD_OG = (String) loginCheck.get("PASSWORD_OG");
+		session.setAttribute("EMPNO", EMPNO);
+		session.setAttribute("PASSWORD_OG", PASSWORD_OG);
+		
+		return "redirect:sign_in";
+	}
     
     
-    
-    
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -450,13 +544,18 @@ public class MemberController {
 		return mv;	
 	}
 	
+	//아이디 찾기 페이지
 	@RequestMapping("/id_check")
 	public String idCheck() {
 		return "/Member/id_check";
 	}
 	
-	@RequestMapping("/id_list")
-	public String idList() {
+	
+	//아이디 찾기 => 아이디 목록
+	@GetMapping("/id_list")
+	public String idList(@RequestParam String name, @RequestParam String email) {
+		
+		
 		return "/Member/id_list";
 	}
 	
