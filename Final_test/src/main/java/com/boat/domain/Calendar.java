@@ -1,11 +1,8 @@
 package com.boat.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-
-@Getter
-@Setter
+@Data
 public class Calendar {
 
 
@@ -14,7 +11,7 @@ public class Calendar {
 	private String START_DATE;
 	private String END_DATE;
 	private String ALLDAY;
-	private String empno;
+	private String EMPNO;
 	private String COLOR;
 	private String DEPT;
 

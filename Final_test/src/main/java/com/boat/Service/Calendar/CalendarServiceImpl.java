@@ -15,12 +15,10 @@ import com.boat.mybatis.mapper.CalendarMapper;
 public class CalendarServiceImpl implements CalendarService {
 	
 	private CalendarMapper dao;
-	private LogAdvice log;
 	
 	@Autowired
-	public CalendarServiceImpl(CalendarMapper dao,LogAdvice log) {
+	public CalendarServiceImpl(CalendarMapper dao) {
 		this.dao = dao;
-		this.log = log;
 	}
 
 	//캘린더 일정삽입

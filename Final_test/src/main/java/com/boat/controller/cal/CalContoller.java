@@ -19,9 +19,10 @@ import com.boat.controller.Attendance.AttendanceContoroller;
 import com.boat.domain.Calendar;
 
 @Controller
+@RequestMapping(value = "/cal")
 public class CalContoller {
 	
-	private static final Logger logger = LoggerFactory.getLogger(AttendanceContoroller.class);
+	private static final Logger logger = LoggerFactory.getLogger(CalContoller.class);
 	
 	private CalendarService calendarService;
 	
@@ -55,13 +56,15 @@ public class CalContoller {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/cal/add",method=RequestMethod.POST)
+	@RequestMapping(value="/save",method=RequestMethod.POST)
 	public int CalAdd(
 			Calendar cal,
 			HttpServletRequest request) throws Exception{
 		
 		
-		logger.info(cal.toString());
+		logger.info("...."+cal.toString());
+		//String cal = 
+		
 		return calendarService.insertcal(cal);
 		
 		

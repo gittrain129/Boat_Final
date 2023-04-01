@@ -33,8 +33,13 @@
 	let header = $("meta[name='_csrf_header']").attr("content");
 		 
  	$(document).ready(function(){
-		
 
+		function cancelEventSelection() {
+  			calendar.unselect();
+			}
+
+
+	
 
 		var calendarEl = document.getElementById('calendar');
 		let selDept = $("#calDept").val();
@@ -56,6 +61,7 @@
 	      // full-calendar 생성하기
 	      calendar = new FullCalendar.Calendar(calendarEl, {
 			themeSystem: 'bootstrap5'
+			,unselectAuto:true
 	    	,events :Events
         	,height: '600px', // calendar 높이 설정
       		 expandRows: true, // 화면에 맞게 높이 재설정
@@ -72,6 +78,7 @@
 		     //월간 달력으로 시작합니다.
 			 initialView: 'dayGridMonth',
 	          selectable: true, // 달력 일자 드래그 설정가능
+			  default: true,
 	          nowIndicator: true, // 현재 시간 마크
 	          dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
 	          locale: 'ko', // 한국어 설정
@@ -129,13 +136,12 @@
 				
 				$('#START_DATE').val(startdate.substr(0,10))
 				$('#END_DATE').val(enddate.substr(0,10))
-				var title =$('#title').val();
-	            var color = $('#color').val();
-	            let dept = $('#color option:checked').text();
-				
 				
            	 	$('#saveBtn').click(function(){
 					var allDay =false
+					var title =$('#title').val();
+					let dept = $('#color option:checked').text();
+					var color = $('#color').val();
 
 	           	if($('#title').val()==""){
 	           	alert('일정을 입력해주세요');
@@ -189,37 +195,71 @@
 				console.log('찐막color............'+color);
 				console.log('찐막dept............'+dept);
 				console.log('찐막empno............'+Empno);
-				
-
-   		           // if (title) {
-				var eventData = {
-					TITLE: title,
-					START: startmoment,
-					END: endmoment,
-					COLOR: color,
-					AllDAY: allDay,
-					EMPNO:Empno
+				if(allDay){
+					alldayText='true'
+				}else{
+					alldayText='false'
 				}
+				console.log(';;;;;;;;;;;'+alldayText)
+				console.log(typeof(alldayText))
+
+				console.log(';;;;;;;;;;;'+title)
+					//받을때 이렇게 받읍시다
+				var eventData1 = {
+					title: title,
+					start: startmoment,
+					end: endmoment,
+					color: color,
+					allDay: allDay,
+				}
+				var eventData = {
+					"EVENT_NAME": title,
+					"START_DATE": startmoment,
+					"END_DATE": endmoment,
+					"COLOR": color,
+					"AllDAY": alldayText,
+					"EMPNO":Empno,
+					"DEPT":dept
+				}
+				//
 				$.ajax({
 					type: 'POST',
-					url: 'save',
-					data: JSON.stringify(eventData),
-					contentType: 'application/json',
+					url: '../boat/cal/save',
+					data: eventData,
+					dataType:'json',
+					//contentType: 'application/json',
+					beforeSend: function (jqXHR, settings) {
+                         	jqXHR.setRequestHeader(header, token);
+                     },
 					success: function(response) {
+						console.log('일정삽입 성공........이벤트렌더필요')
 						console.log(response);
-						eventData.id = response.id;
-						$('#calendar').fullCalendar('renderEvent', eventData, true);
+						//eventData.id = response.id;
+						//console.log(eventData1.id);
+						//calendar.unselect()
+						calendar.addEvent(eventData1);
+					
+						//calendar.refetchEvents();
+
+						//Calendar.('renderEvent', eventData, true);
 					},
 					error: function(xhr, status, error) {
 						console.log('error')
 						console.log(error)
 						},
 				complete:function(){
-				$("#addevent").modal('hide');
+				$("#addevent").modal('hide')
+				cancelEventSelection();
 				$('#undo').click(function(){
 					$('#title').val("");
+					$('#START_DATE').val('');
+					$('#END_DATE').val('');
+					$('#START_TIME').val('');
+					$('#END_TIME').val('');
 						location.reload();
+						
 					})
+
 				} //complete 끝
 				})//ajax끝
    		          //  }// if 끝

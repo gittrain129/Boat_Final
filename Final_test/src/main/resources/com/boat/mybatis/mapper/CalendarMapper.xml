@@ -21,7 +21,7 @@
 	   	ALLDAY, DEPT, COLOR
 	   	)
 	   values
-	    (cal_seq.nextval,#{EVENT_NAME}
+	    (cal_seq.nextval,#{EVENT_NAME},
 		 #{START_DATE},#{END_DATE},#{ALLDAY},#{DEPT},#{COLOR}) 
   </insert>
 		  
