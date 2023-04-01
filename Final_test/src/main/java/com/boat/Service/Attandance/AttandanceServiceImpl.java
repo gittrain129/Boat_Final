@@ -1,6 +1,5 @@
 package com.boat.Service.Attandance;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -8,22 +7,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.boat.aop.LogAdvice;
-import com.boat.controller.Attendance.AttendanceContoroller;
 import com.boat.domain.Attandance;
 import com.boat.mybatis.mapper.AttandanceMapper;
 
 @Service
 public class AttandanceServiceImpl implements AttandanceService {
 	
-	private static final Logger logger = LoggerFactory.getLogger(AttendanceContoroller.class);
+	private static final Logger logger = LoggerFactory.getLogger(AttandanceServiceImpl.class);
 	private AttandanceMapper dao;
-	private LogAdvice log;
+	//private LogAdvice log;
 	
 	@Autowired
-	public AttandanceServiceImpl(AttandanceMapper dao,LogAdvice log) {
+	public AttandanceServiceImpl(AttandanceMapper dao) {
 		this.dao = dao;
-		this.log = log;
 	}
 
 
