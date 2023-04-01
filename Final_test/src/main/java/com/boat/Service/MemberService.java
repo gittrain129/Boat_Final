@@ -28,7 +28,11 @@ public interface MemberService {
 	public int userNaverRegisterPro(Map<String, Object> paramMap);
 
 	//구글
-	public Member loginMemberByGoogle(Member member);
+	public Map<String, Object> GoogleConnectionCheck(Map<String, Object> paramMap);
+
+	//구글 로그인
+	public Map<String, Object> userGoogleLoginPro(Map<String, Object> paramMap);
+
 
 
 }

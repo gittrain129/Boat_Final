@@ -1,5 +1,9 @@
 package com;
 
+import java.security.Principal;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.security.core.Authentication;
@@ -18,8 +22,8 @@ public class HomeController2 {
 	
 	
 	@GetMapping("/index")
-	public String hello() {
-		
+	public String hello(HttpSession session) {
+		System.out.println("session="+session);
 		
 		return "/Main/index";
 		

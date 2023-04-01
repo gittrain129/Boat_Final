@@ -3,7 +3,6 @@ package com.boat.controller.member;
 
 import java.io.File;
 import java.io.PrintWriter;
-import java.io.Serializable;
 import java.security.Principal;
 import java.sql.SQLException;
 import java.util.Calendar;
@@ -23,12 +22,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -377,13 +376,6 @@ public class MemberController {
 //		return resultMap;
 	}
 	
-	//네이버 로그아웃
-	@RequestMapping(value = "/snslogout", method = RequestMethod.POST)
-	public String logout(HttpServletRequest request, HttpSession session) {
-	    session.invalidate();
-	    SecurityContextHolder.clearContext();
-	    return "redirect:/index";
-	}
 	
 	
 	
@@ -396,47 +388,35 @@ public class MemberController {
 
 	
 	/* 구글아이디로 로그인 */	
-    @ResponseBody
+	@ResponseBody
 	@RequestMapping(value = "/loginGoogle", method = RequestMethod.POST)
-	public String loginGooglePOST(@RequestParam String name, HttpSession session, 
-			RedirectAttributes rttr) throws Exception{
-    	
-    	System.out.println("name="+name);
-
-//		MemberVO returnVO = service.loginMemberByGoogle(vo);
-//		String mvo_ajaxid = mvo.getId(); 
-//		System.out.println("C: 구글아이디 포스트 db에서 가져온 vo "+ vo);
-//		System.out.println("C: 구글아이디 포스트 ajax에서 가져온 id "+ mvo_ajaxid);
-//		
-//		if(returnVO == null) { //아이디가 DB에 존재하지 않는 경우
-//			//구글 회원가입
-//			service.joinMemberByGoogle(vo);	
-//			
-//			//구글 로그인
-//			returnVO = service.loginMemberByGoogle(vo);
-//			session.setAttribute("id", returnVO.getId());			
-//			rttr.addFlashAttribute("mvo", returnVO);
-//		}
-//		
-//		if(mvo_ajaxid.equals(returnVO.getId())){ //아이디가 DB에 존재하는 경우
-//			//구글 로그인
-//			service.loginMemberByGoogle(vo);
-//			session.setAttribute("id", returnVO.getId());			
-//			rttr.addFlashAttribute("mvo", returnVO);
-//		}else {//아이디가 DB에 존재하지 않는 경우
-//			//구글 회원가입
-//			service.joinMemberByGoogle(vo);	
-//			
-//			//구글 로그인
-//			returnVO = service.loginMemberByGoogle(vo);
-//			session.setAttribute("id", returnVO.getId());			
-//			rttr.addFlashAttribute("mvo", returnVO);
-//		}
-//		
-		return "redirect:/index";
+	public String GoogleLoginPro(@RequestParam Map<String,Object> paramMap,HttpSession session) throws SQLException, Exception {
+		System.out.println("paramMap:" + paramMap);
+		
+		Map<String, Object> GoogleConnectionCheck = memberservice.GoogleConnectionCheck(paramMap);
+		System.out.println("GoogleConnectionCheck:" + GoogleConnectionCheck);
+		if(GoogleConnectionCheck == null) { //일치하는 이메일 없으면 가입
+			return "register";
+			
+		}else{
+			Map<String, Object> loginCheck = memberservice.userGoogleLoginPro(paramMap);
+			session.setAttribute("userInfo", loginCheck);
+			return "YES";
+		}
+		
 	}
 	
-    
+	//값 받아서 회원가입으로
+	@PostMapping("/setSnsInfo")
+	public String setKakaoInfo(Model model,HttpSession session,@RequestParam Map<String,Object> paramMap) {
+		System.out.println("setGoogleInfo");	
+		System.out.println("param ==>"+paramMap);
+		
+		model.addAttribute("email",paramMap.get("email"));
+		model.addAttribute("id",paramMap.get("id"));
+		model.addAttribute("name",paramMap.get("name"));
+		return "/Member/joinForm3";
+	}
     
     
     
@@ -450,7 +430,8 @@ public class MemberController {
 	@GetMapping(value = "/sign_in")
 	public ModelAndView signIn(ModelAndView mv, 
 			@CookieValue(value="remember-me", required=false) Cookie readCookie,
-			HttpSession session, Principal userPrincipal, Model model) {
+			HttpSession session, Principal userPrincipal, Model model, HttpServletRequest request) {
+		
 		
 		if(readCookie != null) {
 			Logger.info("저장된 아이디 : " + userPrincipal.getName());//Principal.getName() : 로그인한 아이디
