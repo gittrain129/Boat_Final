@@ -60,16 +60,20 @@ public class conferController {
    
 
    @GetMapping("/view")
-   public String mainView(	@RequestParam(value="tab_info",defaultValue="",required=false) String tab,
+   public String mainView(	@RequestParam(value="tab_info",defaultValue="대회의실",required=false) String tab,
 		   					Model model) {	
 	   String[] st = {"승인대기중","승인완료","거절"};
 	   
        List<ConferenceReservation> cs = co.getcal(tab);
+       /*메인 캘린더용*/
+       String tab2 = tab;
+       tab="";
+       List<ConferenceReservation> cs2 = co.getcal(tab);
+       tab=tab2;
+       /*메인 캘린더용*/
        List<Map<String, Object>> cList = new ArrayList<>();
        
        for (ConferenceReservation con : cs) {
-    	   
-    	   
     	   Map<String, Object> event = new HashMap<>();
                      
            event.put("id", con.getID());
@@ -85,11 +89,35 @@ public class conferController {
            event.put("abc",con.getABC());
            
            cList.add(event);
-    	  
-          }
+            }
        
+       /*메인 캘린더용*/
+       List<Map<String, Object>> cList2 = new ArrayList<>();
+       
+       for (ConferenceReservation con : cs2) {
+    	   Map<String, Object> event2 = new HashMap<>();
+                     
+           event2.put("id", con.getID());
+           event2.put("rental",con.getRENTAL());
+           event2.put("start", con.getSTART_TIME());
+           event2.put("end", con.getEND_TIME());
+           event2.put("title", con.getCONTENT());
+           event2.put("start_t", con.getSTART_T());
+           event2.put("end_t", con.getEND_T());
+           String status = st[Integer.parseInt(con.getSTATUS())];
+           event2.put("status", status);
+           event2.put("memo", con.getMEMO());
+           event2.put("abc",con.getABC());
+           
+           cList2.add(event2);
+            }
+       /*메인 캘린더용*/
+       model.addAttribute("list_main",cList2);
        model.addAttribute("list", cList);
 
+       
+       
+       
        return "/Conference_Res/conferMain";
    }
    
@@ -241,15 +269,18 @@ public class conferController {
   												@RequestParam("start_time") String startTime,
   												@RequestParam("end_time") String endTime,
   												@RequestParam("id") String id,
-  												@RequestParam("reason") int reason
+  												@RequestParam("reason") int reason,
+  												@RequestParam("abc") String abc
   												){
     	String[] reject_reason = {"먼저 승인된 일정이 있습니다.","수리,보수등으로 인한 사용불가 상태입니다.","일정관리자에게 유선문의 부탁드립니다."};
+    	
   		ConferenceReservation c2 = new ConferenceReservation();
           c2.setSTART_TIME(startTime);
           c2.setEND_TIME(endTime);
           c2.setRENTAL(rental);
           c2.setID(id.toString());
           c2.setMEMO(reject_reason[reason]);
+          c2.setABC(abc.toString());
                  
           co.reject_pro(c2);
                     

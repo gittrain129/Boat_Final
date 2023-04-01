@@ -180,9 +180,10 @@
    
       /*table 생성 코드 */ 
    $(document).ready(function(){
+	   $("#printBody").empty();
 	   var loginid = $('#loginid').text();
 	   var tbody = $('#printBody');
-	   <c:forEach var="r" items="${list}">
+	   <c:forEach var="r" items="${list_main}">
 	    var rental = "${r.rental}";
 	    var id = "${r.id}";
 	    var startTime = "${r.start_t}";
@@ -215,7 +216,7 @@
 	   
        var calendarEl = document.getElementById('calendar');
        
-       var asdf =   ([<c:forEach items="${list}" var="l">
+       var asdf =   ([<c:forEach items="${list_main}" var="l">
        <c:if test="${l.status eq '승인완료'}">
        {
            start: '${l.start}',

@@ -58,7 +58,7 @@
                 <a class="nav-link ${tab == '회의실1' ? 'active' : ''}" data-toggle="tab" href="admit?tab=회의실1"  >회의실1</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link ${tab == '회의실2' ? 'active' : ''}" data-toggle="tab" href="admit?tab=대회의실2" >회의실2</a>
+                <a class="nav-link ${tab == '회의실2' ? 'active' : ''}" data-toggle="tab" href="admit?tab=회의실2" >회의실2</a>
               </li>
                 
               
@@ -297,6 +297,7 @@ function reject() {
 	var rental = $('#rental').val();
 	var start_time = $('#startTimeISO').val();
 	var end_time =  $('#endTimeISO').val();
+	var abc = $('#abc').val();
 
 	
 	  
@@ -309,9 +310,9 @@ function reject() {
     modalHtml += '<div class="modal-body">';
     modalHtml += '<label for="rejectReason">반려사유 선택(클릭)</label>';
     modalHtml += '<select class="form-control" id="rejectReason">';
-    modalHtml += '<option value="1">먼저 승인된 일정이 있습니다.</option>';
-    modalHtml += '<option value="2">수리,보수등으로 인한 사용불가 상태입니다.</option>';
-    modalHtml += '<option value="3">일정관리자에게 유선문의 부탁드립니다.</option>';
+    modalHtml += '<option value="0">먼저 승인된 일정이 있습니다.</option>';
+    modalHtml += '<option value="1">수리,보수등으로 인한 사용불가 상태입니다.</option>';
+    modalHtml += '<option value="2">일정관리자에게 유선문의 부탁드립니다.</option>';
     modalHtml += '</select>';
     modalHtml += '</div>';
     modalHtml += '<div class="modal-footer">';
@@ -335,7 +336,8 @@ function reject() {
                "end_time": end_time,
                "rental": rental,
                "id": id,
-               "reason" : reason
+               "reason" : reason,
+               "abc":abc
            },
            beforeSend : function(xhr)
            {   //데이터를 전송하기 전에 헤더에 csrf값을 설정합니다.
