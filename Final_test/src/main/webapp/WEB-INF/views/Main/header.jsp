@@ -267,7 +267,7 @@
                     <div class="dropdown-menu border-0 rounded-0 rounded-bottom m-0 shadow">       
                         <a href="${pageContext.request.contextPath}/board/List" class="dropdown-item">업무 게시판</a>
                         <a href="${pageContext.request.contextPath}/Filebo/list" class="dropdown-item">자료 게시판</a>
-                        <a href="${pageContext.request.contextPath}/workboard" class="dropdown-item">워크 보드</a>
+                        <a href="${pageContext.request.contextPath}/workboard/workboard_list" class="dropdown-item">워크 보드</a>
 
                     </div>
                 </div>
