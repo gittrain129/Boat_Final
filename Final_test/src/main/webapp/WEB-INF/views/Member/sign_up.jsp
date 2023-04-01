@@ -7,9 +7,82 @@
  	<link href="${pageContext.request.contextPath}/resources/ejyang/css/signup.css" type="text/css" rel="stylesheet">
  	<script src="http://code.jquery.com/jquery-latest.js"></script>
  	<script src="${pageContext.request.contextPath}/resources/ejyang/js/signup.js"></script>
- 	<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js"charset="utf-8"></script>
+ 	<script src="https://accounts.google.com/gsi/client" async defer></script>
  	<jsp:include page="../Main/header.jsp" />
- 	
+ 	<script>
+        function handleCredentialResponse(response) {
+          console.log("Encoded JWT ID token: " + response.credential);
+          
+          const responsePayload = decodeJwtResponse(response.credential);
+
+          console.log("ID: " + responsePayload.sub);
+          console.log('Full Name: ' + responsePayload.name);
+          console.log('Given Name: ' + responsePayload.given_name);
+          console.log('Family Name: ' + responsePayload.family_name);
+          console.log("Image URL: " + responsePayload.picture);
+          console.log("Email: " + responsePayload.email);
+          
+          let token = $("meta[name='_csrf']").attr("content");
+      	  let header = $("meta[name='_csrf_header']").attr("content");
+          
+          $.ajax({
+				type : "POST",
+				url : "loginGoogle",
+				data : {"id" : responsePayload.sub,
+						"name" : responsePayload.name,
+						"email" : responsePayload.email
+				},
+				beforeSend : function(xhr)
+		        {   
+		        	xhr.setRequestHeader(header, token);			
+		        },
+				success: function(data){
+					console.log(data)
+					if(data == "YES"){
+						alert("로그인되었습니다.");
+						location.href = '${pageContext.request.contextPath}/index'
+					}else if(data == "register"){
+						console.log("가입")
+						$("#GoogleEmail").val(responsePayload.email);
+						$("#GoogleId").val(responsePayload.sub);
+						$("#GoogleName").val(responsePayload.name);
+						$("#GoogleForm").submit();
+					}
+				},
+				error: function(data){
+					alert("로그인에 실패했습니다")
+				}
+			}); //ajax end
+          
+        }
+        
+        function decodeJwtResponse(token) {
+            var base64Url = token.split(".")[1];
+            var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+            var jsonPayload = decodeURIComponent(
+              atob(base64)
+                .split("")
+                .map(function (c) {
+                  return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+                })
+                .join("")
+            );
+
+            return JSON.parse(jsonPayload);
+          }
+        
+        window.onload = function () {
+          google.accounts.id.initialize({
+            client_id: "",
+            callback: handleCredentialResponse
+          });
+          google.accounts.id.renderButton(
+            document.getElementById("buttonDiv"),
+            { theme: "outline", size: "large" }  // customization attributes
+          );
+          //google.accounts.id.prompt(); 
+        }
+    </script>
  </head>
  <body>
  
@@ -42,16 +115,18 @@
             
            	<div class="text-center other"> 또는 </div>
             
-			<div class="form-group d-grid gap-2 col-10 mx-auto mb-3">
-				<a href="#" class="btn-google btn-block text-center border circle google" id="google_login" 
-					 onload="init()"> 구글 회원가입</a>
+          <form name="GoogleForm" id="GoogleForm" method = "post" action="setSnsInfo">
+          	<input type="hidden" name="id" id="GoogleId">
+			<input type="hidden" name="name" id="GoogleName">
+			<input type="hidden" name="email" id="GoogleEmail">
+		  </form>
+			<div class="form-group d-grid gap-2 col-10 mx-auto mb-3" style="cursor: pointer">
+				<div id="buttonDiv"></div> 
 			</div>
 			
-            <!-- <form name="naverlogin" action="naverlogin" method="POST"> -->
 	            <div class="form-group d-grid gap-2 col-10 mx-auto">
-					<a href="${naverUrl}" class="btn-naver btn-block text-center"> 네이버 회원가입</a>
+					<a href="${naverUrl}" class="btn-naver btn-block text-center fw-normal"> 네이버 계정으로 회원가입</a>
 				</div>
-			<!-- </form> -->
 			
 			
 			
@@ -64,50 +139,6 @@
 
   <script type="text/JavaScript" src="./my-script.js"></script>
   <jsp:include page="../Main/footer.jsp" />
-  <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
-  <script>
-	//google signin API
-	  var googleUser = {};
-	  function init() {
-	  	 gapi.load('auth2', function() {
-	  	  console.log("init()시작");
-	  	  auth2 = gapi.auth2.init({
-	  	        client_id: '',
-	  	        cookiepolicy: 'single_host_origin',
-	  	      });
-	  	      attachSignin(document.getElementById('google_login'));
-	  	 });
-	  }
-	
-	  //google signin API2
-	  function attachSignin(element) {
-	      auth2.attachClickHandler(element, {},
-	          function(googleUser) {
-	      	var profile = googleUser.getBasicProfile();
-	      	var id_token = googleUser.getAuthResponse().id_token;
-	  	  	  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-	  	  	  console.log('ID토큰: ' + id_token);
-	  	  	  console.log('Name: ' + profile.getName());
-	  	  	  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-	  			$(function() {
-	  				$.ajax({
-	  				    url: 'loginGoogle',
-	  				    type: 'post',
-	  				    data: {
-	  				        "username": profile.getName(),
-	  						"email": profile.getEmail()
-	  					    },
-	  				    success: function (data) {
-	  				            alert("구글아이디로 로그인 되었습니다");
-	  				            location.href="/member/main";
-	  				        }
-	  				});
-	  			})
-	          }, function(error) {
-	            alert(JSON.stringify(error, undefined, 2));
-	          });
-	      console.log("구글API 끝");
-	    }
-  </script>
+  
  </body>
 </html>

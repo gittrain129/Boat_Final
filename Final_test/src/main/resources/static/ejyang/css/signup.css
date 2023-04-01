@@ -90,11 +90,12 @@ label {
     background: url(../image/naver_login2x.png) no-repeat #01c73c;
     background-size: 17px;
     background-position: 17px 50%;
-    padding: 13px 12px;
     border-color: #01c73c;
     color: #fff;
     border-radius: 3px;
-    font-weight: bold;
+    height:38px;
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 .btn-naver:hover,.btn-naver:focus {
     background: url(../image/naver_login2x.png) no-repeat #00bb38;
@@ -104,20 +105,4 @@ label {
 	color: #fff;
 }
 
-.btn-google {
-    background: url(../image/google_icon.png) no-repeat;
-    background-size: 17px;
-    background-position: 17px 50%;
-    padding: 13px 12px;
-    border: #ccc;
-    color: black;
-    border-radius: 3px;
-    font-weight: bold;
-}
 
-.btn-google:hover,.btn-google:focus {
-	color: black;
-	background: url(../image/google_icon.png) no-repeat #f9f9f9;
-	background-size: 17px;
-    background-position: 17px 50%;
-}

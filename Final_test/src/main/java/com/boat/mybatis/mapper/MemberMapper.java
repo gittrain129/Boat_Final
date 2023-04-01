@@ -26,5 +26,9 @@ public interface MemberMapper {
 	//네이버 회원가입 처리
 	public int userNaverRegisterPro(Map<String, Object> paramMap);
 
+	//구글
+	public Map<String, Object> GoogleConnectionCheck(Map<String, Object> paramMap);
 	
+	//구글 로그인
+	public Map<String, Object> userGoogleLoginPro(Map<String, Object> paramMap);
 }

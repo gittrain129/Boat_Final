@@ -20,8 +20,15 @@ public class Member {
 	private String REGISTER_DATE;
 	private String AUTH="ROLE_MEMBER";
 	private String NAVERLOGIN;
+	private String GOOGLELOGIN;
 	
 	
+	public String getGOOGLELOGIN() {
+		return GOOGLELOGIN;
+	}
+	public void setGOOGLELOGIN(String gOOGLELOGIN) {
+		GOOGLELOGIN = gOOGLELOGIN;
+	}
 	public String getPASSWORD_OG() {
 		return PASSWORD_OG;
 	}

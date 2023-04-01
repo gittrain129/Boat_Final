@@ -68,6 +68,17 @@ public class MemberServiceImpl implements MemberService {
 		return dao.userNaverRegisterPro(paramMap);
 	}
 
+	@Override
+	public Map<String, Object> GoogleConnectionCheck(Map<String, Object> paramMap) {
+		return dao.GoogleConnectionCheck(paramMap);
+	}
+
+	@Override
+	public Map<String, Object> userGoogleLoginPro(Map<String, Object> paramMap) {
+		return dao.userGoogleLoginPro(paramMap);
+	}
+
+
 	
 	
 }

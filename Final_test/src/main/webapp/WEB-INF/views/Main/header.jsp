@@ -199,7 +199,7 @@
 
                         <sec:authorize access="isAuthenticated()">
                                 <sec:authentication property="principal" var="pinfo"/>
-                            <p class="mb-2"><span id="loginDept">${pinfo.member.DEPT}</span></p>
+                            <p class="mb-2"><span id="loginDept">${DEPT}</span></p>
                             <h6 class="mb-0">
                                 <span id="loginid">${pinfo.username}</span></h6>
                        </sec:authorize>
@@ -302,29 +302,20 @@
     </sec:authorize>
     
 	<sec:authorize access="isAuthenticated()">
-  		<sec:authentication property="principal.member" var="pinfo"/>
+  		<sec:authentication property="principal" var="pinfo"/>
   		
   			<div class="d-flex align-items-center justify-content-end" style="height:70.4px !important;">
                 <div class="flex-shrink-0 btn-lg-square border rounded-circle" style="background-color:white !important">
                     <img class="bi img-circle" 
-                    	 src="${pinfo.PROFILE_FILE}">
+                    	 src="${pageContext.request.contextPath}/${PROFILE_FILE}">
                 </div>
-                <div class="text-white ms-3">${pinfo.NAME}님</div>
+                <div class="text-white ms-3">${NAME} 님</div>
                 <div class="ps-3">
                     <div class="btn btn-sm btn-light rounded-pill py-2 px-4 d-none d-lg-block">
-                    <c:if test="${empty EMPNO}">
                     	<form action="${pageContext.request.contextPath}/member/logout" method="post" name="logout">
                     		<a href="#" id="logout">로그아웃</a>
    							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                     	</form>
-                    </c:if>
-                    
-                    <c:if test="${!empty EMPNO}">
-                    	<form action="${pageContext.request.contextPath}/member/snslogout" method="post" name="snslogout">
-                    		<a href="#" id="snslogout">로그아웃</a>
-   							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-                    	</form>
-                    </c:if>
                     </div>
                 </div>
             </div>

@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class BoatApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BoatApplication.class, args);
+		SpringApplication.run(BoatApplication.class, args); 
 	}
 
 }
