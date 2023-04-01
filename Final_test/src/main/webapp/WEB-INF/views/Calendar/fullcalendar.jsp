@@ -218,16 +218,13 @@
 		    	   	console.log('saveerror')
     	   			},
     	   			complete:function(){
-    	   				
     	   				$("#addevent").modal('hide');
     	   				$('#undo').click(function(){
     		            	$('#title').val("");
     		            	 location.reload();
-    	   			}
-	    	   		}) 
-
-	    	   		
-	            });
+    	   			})
+	    	   		} //complete 끝
+	            });//ajax끝
 
            	 	
 	            })
