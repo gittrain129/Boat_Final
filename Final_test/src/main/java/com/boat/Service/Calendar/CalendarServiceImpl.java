@@ -15,12 +15,10 @@ import com.boat.mybatis.mapper.CalendarMapper;
 public class CalendarServiceImpl implements CalendarService {
 	
 	private CalendarMapper dao;
-	private LogAdvice log;
 	
 	@Autowired
-	public CalendarServiceImpl(CalendarMapper dao,LogAdvice log) {
+	public CalendarServiceImpl(CalendarMapper dao) {
 		this.dao = dao;
-		this.log = log;
 	}
 
 	//캘린더 일정삽입
@@ -30,8 +28,6 @@ public class CalendarServiceImpl implements CalendarService {
 		
 	}
 
-
-
 	@Override
 	public int getListcount() {
 		// TODO Auto-generated method stub
@@ -39,15 +35,31 @@ public class CalendarServiceImpl implements CalendarService {
 	}
 
 
-	@Override
-	public List<Calendar> getList(String dept) {
-	Map<String,String>map = new HashMap<String,String>();
+//	@Override
+//	public List<Calendar> getList(String dept) {
+//	Map<String,String>map = new HashMap<String,String>();
+//
+//		map.put("dept",dept);
+//		
+//		return dao.getCalList(dept);
+//		
+//	}
 
-		map.put("dept",dept);
+	public List<Calendar> getEvents(String dEPT) {
 		
-		return dao.getCalList(dept);
-		
+		return dao.getEvents(dEPT);
 	}
+
+	
+	@Override
+	public List<Calendar> getEventsByDept(String DEPT) {
+		return dao.getEventsByDept(DEPT);
+	}
+
+	@Override
+	public List<Calendar> getAllEvents() {
+		return dao.getAllEvents();
+    }
 
 
 
