@@ -5,52 +5,9 @@
     
 <jsp:include page="../Main/header.jsp" />
 	
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/jhLee/css/filelist.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/jhLee/css/filenew.css">
 <style>
-.float-right{float:right!important}
 
-
-input[class='sharch']:focus{
- outline: none;
-  width: 300px;
-  text-align: left;
-  border : none!important;}
-  
-  
-.searchimg {
-	width : 20px;
-}
-
-
-img {
-	width: 10px
-}
-.search{text-align:right}
-.btn-secondary {
-color: white;
-    background-color: #009CFF;
-    border-color: #009CFF;
-}
-.btn-secondary:focus ,.btn-secondary:active {
-    color: white;
-    background-color:  #009CFF;
-    border-color:  #009CFF;
-    box-shadow: 0 0 0 0;
-/*     box-shadow: 0 0 0 0.25rem rgba(101,101,101,0.5); */
-}
-.btn-secondary:hover {
-    color: white;
-    background-color: #009CFF;
-    border-color: #009CFF;
-}
-.btn-check:focus+.btn, .btn:focus {
-    outline: 0;
-    box-shadow: 0 0 0 0;
-}
-#searhcbtn2{
-border : none;
-background-color: white;
-}
 
 </style>
 
@@ -60,8 +17,8 @@ background-color: white;
             <h1 class="display-4 text-white animated slideInDown mb-3">자료실 게시판</h1>
             <nav aria-label="breadcrumb animated slideInDown">
                 <ol class="breadcrumb justify-content-center mb-0">
-                    <li class="breadcrumb-item"><a class="text-white" href="#"></a></li>
-                    <li class="breadcrumb-item"><a class="text-white" href="#"></a></li>
+                    <!-- <li class="breadcrumb-item"><a class="text-white" href="#"></a></li> -->
+                    <!-- <li class="breadcrumb-item"><a class="text-white" href="#"></a></li> -->
                     <li class="breadcrumb-item text-primary active" aria-current="page"></li>
                 </ol>
             </nav>
@@ -128,7 +85,7 @@ background-color: white;
 						
 							<c:if test="${FILIBO.FILE_SUBJECT.length()>=20}">
 								&nbsp;	&nbsp;	&nbsp;
-								<a href="hi?num=${FILIBO.FILE_NUM}">
+								<a href="detail?num=${FILIBO.FILE_NUM}">
 									<c:out value="${FILIBO.FILE_SUBJECT.substring(0,20)}..."/>
 								</a>
 							</c:if>
@@ -142,9 +99,9 @@ background-color: white;
 						[${FILIBO.CNT}]
 
 						
-						<!-- <c:if test="${b.FILE_DATE}"> -->
+						<c:if test="${FILIBO.FILE_DATE > nowday}">
 	 		      	  		<img src="${pageContext.request.contextPath}/jhLee/img/new.jpg" id="new" style="width:20px">
-	 		      	  	<!-- </c:if> -->
+	 		      	  	</c:if>
 
 							<span class="badge badge-pill badge-primary float-right">${FILIBO.DEPT}</span>
 							
@@ -152,17 +109,24 @@ background-color: white;
 
 						<td><small>${FILIBO.FILE_NAME} </small></a></td>
 						<td>${FILIBO.FILE_READCOUNT}</td>
-						<td>${FILIBO.FILE_DATE}</td>
-					
+						<td>
+							
+							<c:if test="${FILIBO.FILE_DATE!=today}">
+								${FILIBO.FILE_DATE.substring(5,10)}
+							</c:if>
+							<c:if test="${FILIBO.FILE_DATE.substring(0,10)==today}">
+								${FILIBO.FILE_DATE.substring(11,16)}
+							</c:if>
+				</td>
 						<td><div class = "file1">
-							<c:if test="${!empty b.FILE_FILE}">
+							<c:if test="${!empty FILIBO.FILE_FILE}">
 							<img alt="파일다운2" src="${pageContext.request.contextPath}/jhLee/img/download.png" class = 'file'style="width:20px">
 							</c:if>
 							</div>
 						</td>
 						<td>
 							<div class = "file2">
-							<c:if test="${!empty b.FILE_FILE2}">
+							<c:if test="${!empty FILIBO.FILE_FILE2}">
 								<img alt="파일다운2" src="${pageContext.request.contextPath}/jhLee/img/download.png" class = 'file'style="width:20px">
 							</c:if>
 							</div>
@@ -173,7 +137,8 @@ background-color: white;
 				<tfoot>
 				</tfoot>
 			</table>
-					
+					<div class="filebofooter">
+
 							<nav class="pt-3" aria-label="Page navigation example">
 							  <ul class="pagination">
 							    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
@@ -181,18 +146,22 @@ background-color: white;
 							    <li class="page-item"><a class="page-link" href="#">2</a></li>
 							    <li class="page-item"><a class="page-link" href="#">3</a></li>
 							    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-							  </ul>
-							</nav>
-					 <div class="btn-group search form-group">
+							</ul>
+						</nav>
+								
+			<div class="btn-group search form-group">
         
            <input type="hidden" name = "searchsel" id = "searcselhval" value =" ${searchsel}">
             <div class="dropdown" >
     		  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-    	    정렬
+    	    부서별
    			   </a>
 		      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-		        <li><a class="dropdown-item" href="#">작성자</a></li>
-		        <li><a class="dropdown-item" href="#">제목</a></li>
+		        <li><a class="dropdown-item" href="#">홍보팀</a></li>
+		        <li><a class="dropdown-item" href="#">개발팀</a></li>
+		        <li><a class="dropdown-item" href="#">인사팀</a></li>
+		        <li><a class="dropdown-item" href="#">기획팀</a></li>
+		        <li><a class="dropdown-item" href="#">영업팀</a></li>
 		      </ul>
   		  </div>
  
@@ -202,13 +171,15 @@ background-color: white;
     	    정렬
    			   </a>
 		      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-		        <li><a class="dropdown-item" href="#">작성자</a></li>
-		        <li><a class="dropdown-item" href="#">제목</a></li>
+		        <li><a class="dropdown-item" href="#">최신순</a></li>
+		        <li><a class="dropdown-item" href="#">조회순</a></li>
+		        <li><a class="dropdown-item" href="#">댓글순</a></li>
 		      </ul>
   		  </div>
- 
-          		
-          </div>
+		
+		</div>
+	<!-- .filebofooter end -->
+	</div>
 				
 		</div>
 	</div>
@@ -216,11 +187,6 @@ background-color: white;
 	
 	</div>
 </section>
-<script type="text/javascript" src="public/lib/feather/feather.min.js"></script>
-<script>
-  feather.replace({
-  	width:20
-  })
-</script>
+
 	
 	<jsp:include page="../Main/footer.jsp" />

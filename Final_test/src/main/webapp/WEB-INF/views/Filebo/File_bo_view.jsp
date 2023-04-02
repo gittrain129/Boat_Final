@@ -1,18 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
- <%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<jsp:include page="../Main/header.jsp" />
-	
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ <jsp:include page="../Main/header.jsp" />
   
-  
+  <%--
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script> --%>
+    
     <script src="jhLee/js/fileview.js"></script>
     <title>자료실 게시판</title>
 
@@ -24,10 +18,9 @@
 <body>
 <input type="hidden" id ="loginid" value ="${empno }" name="loginid"><%--view.js에서 사용하기 위해 추가합니다. --%>
 <%-- <input type="hidden" id ="loginid" value ="${id}" name="loginid"><%--view.js에서 사용하기 위해 추가합니다. --%>
-<hr class = "boardviewhr">
     <div class="board_wrap">
         <div class="board_title">
-            <strong><a href="${pageContext.request.contextPath}/FileBoardList.filebo" target="_self">자료실 게시판</a></strong>
+            <strong><a href="${pageContext.request.contextPath}/Filebo/list" target="_self">자료실 게시판</a></strong>
             <p>자료실 게시판 입니다.</p>
 
 
@@ -51,7 +44,7 @@
             </dl>
             <dl>
                 <dt>작성일</dt>
-                <dt>${boarddata.FILE_DATE}</dt>
+                <dt>${boarddata.FILE_DATE.substring(0,10)}</dt>
 
             </dl>
             <dl>
@@ -81,16 +74,26 @@
 		 
 		  <c:if test="${!empty boarddata.FILE_FILE}" >
 		    <dl>
-		 		 <dt>  <img alt="파일다운" src="${pageContext.request.contextPath}/jhLee/image/down.png" width="10px">
+		 		 <dt>  <img alt="파일다운" src="${pageContext.request.contextPath}/resources/jhLee/img/download.png" width="20px">
 		 		 &nbsp;&nbsp;
-		  		<a href = "FileBoardDownAction.filebo?filename=${boarddata.FILE_FILE}">${boarddata.FILE_FILE}</a>
+				  <form method = "post" action ="down" style="height:0px">
+					<input type ="hidden" value = "${boarddata.FILE_FILE}" name ="filename">
+					<input type ="hidden" value = "${boarddata.FILE_ORIGINAL}" name ="original">
+					<input type ="submit" value = "${boarddata.FILE_ORIGINAL}" style="border: none; background-color:rgb(238,247,250);;">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+				</form>
 		 		 </dt></dl>
 		   </c:if>
 		   <c:if test="${!empty boarddata.FILE_FILE2}">
 		   		<dl>
-		  		<dt>  <img alt="파일다운2" src="${pageContext.request.contextPath}/jhLee/image/down.png" width="10px">
+		  		<dt>   <img alt="파일다운2" src="${pageContext.request.contextPath}/resources/jhLee/img/download.png" width="20px">
 		  		&nbsp;&nbsp;
-		 		 <a href = "FileBoardDownAction.filebo?filename=${boarddata.FILE_FILE2}">${boarddata.FILE_FILE2}</a></dt>
+				  <form method = "post" action ="down2" style="height:0px">
+					<input type ="hidden" value = "${boarddata.FILE_FILE2}" name ="filename2">
+					<input type ="hidden" value = "${boarddata.FILE_ORIGINAL2}" name ="original2">
+					<input type ="submit" value = "${boarddata.FILE_ORIGINAL2}" style="border: none; background-color:rgb(238,247,250);;">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+				</form>
 		 		  </dl>
 		</c:if>
 
@@ -110,19 +113,24 @@
         <div class="bt_wrap">
         
            
-            <a href="FileBoardList.filebo" class="on">목록</a>
+            <a href="list" class="on">목록</a>
             
 			  
-            <a href ="FileBoardReplyView.filebo?num=${boarddata.FILE_NUM}">답변</a>
+<%--             <a href ="replyView?num=${boarddata.FILE_NUM}">답변</a>--%>
+            <a href ="reply">답변</a>
              
-		<c:if test="${boarddata.FIlE_EMPNO ==empno||empno=='ADMIN'}">
+		<c:if test="${boarddata.FILE_EMPNO ==empno||empno=='ADMIN'}">
 		<div class = "personal">
-			 <a href="FileBoardModifyView.filebo?num=${boarddata.FILE_NUM}" class = "update">
+			 <a href="modifyView?num=${boarddata.FILE_NUM}" class = "update">
 		         수정
 			  </a>
 			  <a id ='delete'>
-		  	<button id = 'deletebtn' class="btn btn-danger" data-toggle ="modal"
-			  data-target="#myModal">삭제</button>
+				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+				삭제
+			</button>
+				</a>
+		  
+
 			</a>
 			</div>
 		</c:if>
@@ -143,12 +151,15 @@
 </div>
         </div><%--"bt_wrap끝 --%>
 <%-- modal 시작 --%>
-	  <div class="modal" id="myModal">
-	    <div class="modal-dialog">
-	      <div class="modal-content">
-	      
-	        <!-- Modal body -->
-	        <div class="modal-body">
+
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLabel">글 비밀번호 확인</h5>
+		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body" style="color:black;">
 			  <form name="deleteForm" action="FileBoardDeleteAction.filebo" method="post">
 			  <%-- http://localhost:8088/Board/boardDetailACtion.bo?num=22
 			  	주소를 보면 num 을 파라미터로 너미고 있습니다.
@@ -163,10 +174,17 @@
 		<button type="submit" class="btn btn-primary">전송</button>
 		<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
 	    </form>
-	    </div>
+		  </div>
+	  </div>
+	</div>
+  </div>
+
+
+	      
+	    
 		</div>
 		</div>
-		</div>
+		</div> -->
 <%--id="myModal"end --%>
        <div class="commcard">
     
@@ -219,4 +237,7 @@
 
 
         </div>
-     <jsp:include page="../Main/footer.jsp" />
+        
+      <jsp:include page="../Main/footer.jsp" />
+</body>
+</html>

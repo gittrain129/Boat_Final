@@ -8,7 +8,6 @@ import lombok.Setter;
 
 
 @Data
-
 public class Filebo {
 	
 	private int FILE_NUM ;
@@ -26,7 +25,7 @@ public class Filebo {
 	private String FILE_DATE;
 	private int CNT;
 	private String DEPT;
-	private String FIlE_EMPNO;
+	private String FILE_EMPNO;
 	
 	private MultipartFile uploadfile;
 	private MultipartFile uploadfile2;

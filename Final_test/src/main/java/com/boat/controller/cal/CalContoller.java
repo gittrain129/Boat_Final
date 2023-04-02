@@ -6,10 +6,11 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,23 +49,42 @@ public class CalContoller {
 		
 		
 	}
+	
+	//@SuppressWarnings("unchecked")
 	@RequestMapping("/getEvents")
 	    @ResponseBody
-	    public Map<String,Object> getEvents(
+	    public  Map<String,Object> getEvents(
 	    		//@RequestParam("eventName") String eventName
-	    		@RequestParam(value = "dept", required = false)String DEPT) {
+	    		@RequestParam(value = "DEPT", required = false)String DEPT) {
 		 
+		 JSONObject jsonObj = new JSONObject();
+		// JSONArray jsonArr = new JSONArray();
+	        
 		  List<Calendar> events;
 	        if (DEPT != null && !DEPT.isEmpty()) {
 	            events = calendarService.getEventsByDept(DEPT);
 	        } else {
 	            events = calendarService.getAllEvents();
 	        }
-	        Map<String,Object>map = new HashMap<String,Object>();
-	        logger.info(events.toString());
-	    	map.put("events", events);
+	        //Map<String,Object>map = new HashMap<String,Object>();
+	        //map.put("events", events);
+	        JSONArray jsonArr = new JSONArray();
+	        logger.info("dddddd"+events.toString());
 	        
-	        return map;
+	        Map <String,Object> event = new HashMap<String,Object>();
+	        for(Calendar cal: events) {
+	        	 event.put("id",cal.getSCHEDULE_CODE());
+	             event.put("start", cal.getSTART_DATE());
+	             event.put("end", cal.getEND_DATE());
+	             event.put("title", cal.getEVENT_NAME());
+	             event.put("color",cal.getCOLOR());
+	             event.put("allDay", cal.getALLDAY());
+	             event.put("DEPT", cal.getDEPT());
+	            
+	           //  jsonArr.add(cal);
+	        }
+	       // logger.info(event);
+	        return event;
 		 
 	    }
 		

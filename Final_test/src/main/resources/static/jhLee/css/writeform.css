@@ -5,8 +5,8 @@
 	margin-top: 50px;
 	max-width :900px;
 }
-
-form{
+body > div.container > form
+{
 	min-height : 700px;
 	padding : 20px;
 	background-color: white;
@@ -43,16 +43,15 @@ input{width : 80%;
 		
 .writer{
     margin-left: 20px;
-    width: 76%;
+    width:45%;
 }
-#deptsel,#deptbutton{
+#dropdownMenuLink{
 	color : white!important;
 }
 .deptwriter{
 	padding : 0;
 	background-color : white!important;
 	border:none;
-	
 }
 
 .content label{
@@ -71,8 +70,10 @@ input{width : 80%;
 }
 #deptdrop{
 display : inline;
-height : 20px;
 	
+}
+#FILE_NAME{
+	display : inline;
 }
 
 .btn-group2{

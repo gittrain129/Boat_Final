@@ -51,8 +51,9 @@
 	  	//부서 선택시 새로운 캘린더페이지 
 	   var Events= $('#calDept').change(function(){
 			selDept = $(this).val();
-	  		console.log(selDept)
-	      	location.href="${pageContext.request.contextPath}cal/deptlist?DEPT="+selDept;
+			console.log('selDept'+selDept)
+	  	//	console.log(selDept)
+	      //	location.href="${pageContext.request.contextPath}cal/deptlist?DEPT="+selDept;
 			return  showEvents(selDept);
 		})
 	  		 console.log(Events)
@@ -82,7 +83,7 @@
 	      calendar = new FullCalendar.Calendar(calendarEl, {
 			themeSystem: 'bootstrap5'
 			,unselectAuto:true
-	    	,events :showEvents()
+	    	,events :Events
         	,height: '600px', // calendar 높이 설정
       		 expandRows: true, // 화면에 맞게 높이 재설정
       		 headerToolbar:
@@ -98,7 +99,6 @@
 		     //월간 달력으로 시작합니다.
 			 initialView: 'dayGridMonth',
 	          selectable: true, // 달력 일자 드래그 설정가능
-			  default: true,
 	          nowIndicator: true, // 현재 시간 마크
 	          dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
 	          locale: 'ko', // 한국어 설정

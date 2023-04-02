@@ -105,9 +105,9 @@ $('#start-btn').click(function(){
                 //출근시간 표시.substr(0,10)
                 console.log(rdata.ON_TIME);
                 let attTiemeee=rdata.ON_TIME;
-               $('#onTimeText').text(rdata.ON_TIME);
-               $('#attTime').text(attTiemeee);
-               $('#attColor').css('background','#55a94b')
+             //  $('#onTimeText').text(rdata.ON_TIME);
+             //  $('#attTime').text(attTiemeee);
+             //  $('#attColor').css('background','#55a94b')
 
         }, error: function(error){
                 console.log("hi")
