@@ -699,12 +699,24 @@ public class MemberController {
 	
 	
 	
-	
-	
-	
+	//MY BOAT
 	@GetMapping("/myinfo")
-	public String hello4() {
-		return "/Member/myinfo";
+	public ModelAndView hello4(Principal principal, ModelAndView mv) {
+
+		String id = principal.getName();
+		System.out.println("id="+id);
+		
+		if(id==null) {
+			mv.setViewName("redirect:sign_in");
+			Logger.info("id is null");
+			
+		}else {
+			Member m = memberservice.member_info(id);
+			mv.setViewName("/Member/myinfo");
+			mv.addObject("memberinfo", m);
+		}
+		
+		return mv;
 	}
 	
 	@GetMapping("/chat")

@@ -315,7 +315,7 @@
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle me-0" data-bs-toggle="dropdown">${NAME} 님</a>
                     <div class="dropdown-menu border-0 rounded-0 rounded-bottom m-0 shadow">
-                        <a href="${pageContext.request.contextPath}/cal" class="dropdown-item">MY BOAT</a>
+                        <a href="${pageContext.request.contextPath}/member/myinfo" class="dropdown-item">MY BOAT</a>
                     </div>
                 </div>
             </div>    

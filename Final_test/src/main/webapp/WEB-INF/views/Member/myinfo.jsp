@@ -5,7 +5,7 @@
  <head>
  	<link href="${pageContext.request.contextPath}/resources/ejyang/css/myinfo.css" type="text/css" rel="stylesheet">
  	<script src="http://code.jquery.com/jquery-latest.js"></script>
- 	<script src="${pageContext.request.contextPath}/ejyang/resources/js/signin.js"></script>
+ 	<script src="${pageContext.request.contextPath}/ejyang/resources/js/myinfo.js"></script>
  	<jsp:include page="../Main/header.jsp" />
  </head>
  <body>
@@ -36,9 +36,6 @@
                 <a class="nav-link active" data-toggle="tab" href="#qwe">회원 정보</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#asd">회원 수정</a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#zxc">회원 탈퇴</a>
               </li>
              	
@@ -53,103 +50,107 @@
               <div class="tab-pane fade show active" id="qwe">
                 <div id='calendar'></div>
               </div>
-              <div class="tab-pane fade" id="asd">
-             	 <div id='calendar2'></div>
-              </div>
               <div class="tab-pane fade" id="zxc">
 					<div id='calendar'></div>
-            </div>
+              </div>
         </div>
       </div>
     </div>
-</div>
-<div>
-
-<div class="wrap-container">
-<div class="left">
-	<div class="containers">
-		<div class="gt-mb-15">
-			<span class="id font-size-36 gt-vertical-middle">사번 : admin</span> <br>
-			<span class="id font-size-36 gt-vertical-middle">부서 : 인사팀</span> 
-			<span class="font-size-18 gt-vertical-middle">부서장 홍길동</span> 
-		</div>
-	</div> <!----> 
-	<div class="gt-mt-50">
-		<div class="title-area">
-			<i class="fas fa-chevron-right"></i> 
-			<span class="title">메일</span> <!----> 
-		</div> 
-		<div class="gt-mt-15 gt-mb-10">
-			<div class="width-160 el-input"><!----> 
-				<input type="text" autocomplete="off" class="el-input__inner"> <!----> <!---->
-			</div> 
-			<span class="gt-ml-5">@</span> 
-			<div class="el-select width-160 gt-ml-5"><!---->
-				<div class="el-input el-input--suffix"><!---->
-					<input type="text" readonly="readonly" autocomplete="off" placeholder="" class="el-input__inner"><!---->
-					<span class="el-input__suffix">
-						<span class="el-input__suffix-inner">
-							<i class="el-select__caret el-input__icon el-icon-arrow-up"></i>
-						</span><!---->
-					</span><!----><!---->
+  </div>
+  
+  
+  
+  	<!-- 내용 -->
+    <div class="container">
+	  <div class="row">
+	  
+	    <!-- 왼쪽 -->
+	    <div class="col border-end mt-5">
+	      <div class="left ps-3 pe-3">
+			<div class="containers">
+				<div class="gt-mb-15">
+					<span class="text-dark" style="font-size:3rem;">${memberinfo.EMPNO} / ${memberinfo.JOB}</span> 
+					<span class="fs-3 text-dark ms-4">${memberinfo.NAME}</span> 
 				</div>
-			</div> <!---->
-		</div> 
-	</div> 
-</div>
-<div class="right">
-	<div class="gt-mt-50">
-		<div class="title-area">
-			<i class="fal fa-angle-right"></i> 
-			<span class="title">SNS 연동</span>
-		</div> 
-		
-		<table class="my-table no-border gt-mt-10">
-			<colgroup>
-				<col width="75%"><col>
-			</colgroup> 
-			<tbody>
-				<tr>
-					<th>구분</th> 
-					<th>연동</th>
-				</tr> 
-				<tr>
-					<td class="text-gray-666">네이버
-                      <p>2023년 03월 11일 21시 14분 연동 완료</p>
-                    </td> 
-                    <td class="gt-center">
-                    	<button type="button" class="el-button el-button--info el-button--mini"><!----><!---->
-                    	<span>연동 해제</span>
-                    	</button>
-                    </td>
-                </tr> <!----> 
-                <tr>
-                	<td class="text-gray-666">카카오
-                      <p></p>
-                    </td> 
-                    <td class="gt-center">
-                    	<button type="button" class="el-button el-button--default el-button--mini"><!----><!---->
-                    	<span>연동하기</span>
-                    	</button>
-                    </td>
-                </tr> 
-                <tr>
-                	<td class="text-gray-666">구글
-                      <p></p>
-                    </td>
-                    <td class="gt-center">
-                    	<button type="button" class="el-button el-button--default el-button--mini"><!----><!---->
-                    	<span>연동하기</span>
-                    	</button>
-                    </td>
-                </tr>
-            </tbody>
-       </table>
-    </div> 
-</div>
+			</div> 
+			
+			<!----> 
+			<div class="mt-5">
+				<div class="title-area">
+					<i class="fas fa-chevron-right text-dark"></i> 
+					<span class="title fs-5 text-dark">SNS 연동</span> <!----> 
+				</div> 
+				<div class="mt-3">
+					<table class="table">
+						<thead class="table-light">
+							<tr>
+								<th class="text-center">구분</th> 
+								<th class="text-center">연동</th>
+							</tr> 
+						</thead>
+						<colgroup>
+							<col width="75%"><col>
+						</colgroup> 
+						<tbody>
+							<!-- 구글 --> 
+			                <tr>
+			                	<td class="pb-0 pt-3 ps-3">구글
+			                      <p></p>
+			                    </td>
+			                    <td class="text-center align-middle">
+			                    	<c:if test="${memberinfo.GOOGLELOGIN == null}">
+			                    		<span>비연동</span>
+			                    	</c:if>
+			                    	<c:if test="${memberinfo.GOOGLELOGIN != null}">
+			                    		<span>연동</span>
+			                    	</c:if>
+			                    </td>
+			                </tr>
+			                
+							<!-- 네이버 --> 
+							<tr>
+								<td class="pb-0 pt-3 ps-3">네이버
+			                      <p>2023년 03월 11일 21시 14분 연동 완료</p>
+			                    </td> 
+			                    <td class="text-center align-middle">
+			                    	<c:if test="${memberinfo.NAVERLOGIN == null}">
+			                    		<span>비연동</span>
+			                    	</c:if>
+			                    	<c:if test="${memberinfo.NAVERLOGIN != null}">
+			                    		<span>연동</span>
+			                    	</c:if>
+			                    </td>
+			                </tr> 
+			                
+							<!-- 일반 --> 
+			                <tr>
+			                	<td class="pb-0 pt-3 ps-3">이메일
+			                      <p></p>
+			                    </td> 
+			                    <td class="text-center align-middle">
+			                    	<c:if test="${memberinfo.NAVERLOGIN == null}">
+			                    		<span>비연동</span>
+			                    	</c:if>
+			                    	<c:if test="${memberinfo.NAVERLOGIN != null}">
+			                    		<span>연동</span>
+			                    	</c:if>
+			                    </td>
+			                </tr> 
+			                
+			            </tbody>
+			       </table>
+				</div> 
+				
+			</div> 
+		  </div>
+	    </div>
+	    
+	    <div class="col">
+	      Column
+	    </div>
+	  </div>
+	</div>
 
-</div>
-</div>
 </div>
 
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
