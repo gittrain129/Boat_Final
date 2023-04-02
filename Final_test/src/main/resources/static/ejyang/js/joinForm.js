@@ -10,7 +10,7 @@ $(document).ready(function(){
 	var valid_email = true;
 	var valid_name = ($('#_label-name').val() != null && $('#_label-name').val() != '');
 	var valid_file = false;
-	var valid_email_ck = true;
+	var valid_email_ck = false;
 	
 	activateButton();
 
@@ -299,7 +299,7 @@ $(document).ready(function(){
 	
 	//유효성 이름
 	$('#_label-name').keyup(function() {
-		if($(this).val() == ''){
+		if($(this).val() == '' || $(this).val().length <= 2){
 			$(this).addClass('border-danger ');
 			$('#validationServerUsernameFeedback5').show();
 			 valid_name = false;
@@ -312,7 +312,7 @@ $(document).ready(function(){
 		activateButton();
     });
     $('#_label-name').focusout(function() {
-    	if($(this).val() == ''){
+    	if($(this).val() == '' || $(this).val().length <= 2){
 			$(this).addClass('border-danger ');
 			$('#validationServerUsernameFeedback5').show();
 			 valid_name = false;

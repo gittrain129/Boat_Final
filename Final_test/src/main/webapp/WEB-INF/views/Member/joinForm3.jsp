@@ -56,7 +56,7 @@
                 
   
   <div id="w-contents" class="container join_2022_wrap">
-    <form class="join_2022_box" name="joinform2" action="loginGoogle" method="post" enctype="multipart/form-data" name="boardform">
+    <form class="join_2022_box" name="joinform2" action="userGoogleRegisterPro" method="post" enctype="multipart/form-data" name="boardform">
         <input type="hidden" id="id" name="id" value="${id}"> 
         <h2 class="page_title fw-bold">회원가입</h2>
         <div class="login_info_wrap">

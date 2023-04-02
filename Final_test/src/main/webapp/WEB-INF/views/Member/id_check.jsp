@@ -5,39 +5,70 @@
  	<title>BOAT - 아이디 찾기</title>
  	<link href="${pageContext.request.contextPath}/resources/ejyang/css/idcheck.css" type="text/css" rel="stylesheet">
  	<script src="http://code.jquery.com/jquery-latest.js"></script>
+ 	<script src="${pageContext.request.contextPath}/resources/ejyang/js/idcheck.js"></script>
  	<jsp:include page="../Main/header.jsp" />
+ 	<script>
+ 		var result="${message}";
+ 		if(result == 'idnull'){
+ 			toastr.options.escapeHtml = true;
+ 		    toastr.options.closeButton = true;
+ 		    toastr.options.newestOnTop = false;
+ 		    toastr.options.progressBar = true;
+ 		    toastr.info('일치하는 아이디가 없습니다.', '아이디 찾기', {timeOut: 5000});
+ 		}
+ 	</script>
  </head>
  <body>
-   <div id="form-container">
+   <div id="container">
       <div id="form-inner-container">
         <!-- Sign up form -->
         <div id="sign-up-container">
           <h3>아이디 찾기</h3>
-          <form>
+          <form action="id_list" method="get">
             <label for="name">이름</label>
             <input type="text" class="_input" name="name" placeholder="실명을 입력해 주세요." id="name">
+            <div id="validationServerUsernameFeedback" class="invalid-feedback fw-bold">
+				이름(실명)을 입력해 주세요
+			</div>
 
-            <label for="sub_title">이메일</label>
-            <div class="body multi_column" id="_input-email-body">
-            	<div class="column_wrap">
-                	<input type="text" name="email" class="clear focusInteraction" id="sub_title" placeholder="이메일">
-                    <span class="whelk clear">@</span>
-                    <div class="auto_complete_wrap" id="auto_complete">
-                    	<input type="text" name="email_domain" id="email_domain" class="clear focusInteraction" placeholder="직접 입력" autocomplete="off" style="width: 150px; padding-right: 30px;">
-                        <ul class="content" style="display: none;"></ul>
-                    </div>
-                </div>
-            </div>
+            <label for="email" class="mt-4">이메일</label>
+            <div class="row row-container">
+            	<div class="body col-sm-12 col-md-9">
+	            	<input type="email" name="email" class="clear focusInteraction" id="email" placeholder="이메일">
+	            </div>
+				<div class="body col-sm-12 col-sm-12 col-md-3 align-self-center">
+					<button type="button" id="email_auth_btn" class="emailbtn btn btn-outline-primary w-100" 
+							disabled>인증</button>
+	            </div>
+	            <div id="validationServerUsernameFeedback2" class="invalid-feedback fw-bold">
+					올바른 이메일을 입력해주세요
+				</div>
+			</div>
+			
+			<!-- 메일 인증 -->
+	            <div class="row row-container align-items-center mt-3">
+	                <div class="body col-sm-12">
+	                	<input type="text" placeholder="인증번호를 입력해주세요" name="authCode" id="email_auth_key" 
+	                			class="w-100 rounded form-control" value="" style="height:55px;" disabled>
+	                </div>
+	                <div id="validationServerUsernameFeedback3" class="invalid-feedback fw-bold">
+				        인증인증번호가 요청되었습니다
+				    </div>
+	                <div id="validationServerUsernameFeedback4" class="invalid-feedback fw-bold">
+				        메일 발송에 실패했습니다. 재시도 해주시기 바랍니다
+				    </div>
+	            </div>
+			
             
             <div id="form-controls">
-              <button type="submit"  class="btn-primary">아이디찾기</button>
+              <button type="submit"  class="btn btn-primary py-3 px-5 mt-4 w-100" disabled>아이디찾기</button>
             </div>
             
             <div class="find-userinfo__btn_text">
             	<a href="pwd_check">비밀번호를 찾으시나요?</a>
             </div>
 
-
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
           </form>
         </div>
 

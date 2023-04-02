@@ -10,4 +10,11 @@ $(document).ready(function(){
             .prev('input').attr('type','password');
         }
     });
+    
+    const naverLoginBtn = document.querySelector('.btn-naver');
+	const naverLoginSpan = document.querySelector('#naver-login');
+	
+	naverLoginSpan.addEventListener('click', () => {
+	  naverLoginBtn.click();
+	});
 });

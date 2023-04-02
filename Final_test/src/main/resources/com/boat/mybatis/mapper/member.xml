@@ -5,11 +5,15 @@
 <mapper namespace="com.boat.mybatis.mapper.MemberMapper">
 
 	<select id="naverConnectionCheck" resultType="java.util.Map">
-		SELECT * FROM MEMBER WHERE EMAIL = #{email}
+		SELECT * FROM MEMBER 
+		WHERE EMAIL = #{email}
+		AND NAVERLOGIN = #{id}
 	</select>
 
 	<select id="userNaverLoginPro" resultType="java.util.Map">
-		SELECT * FROM MEMBER WHERE EMAIL = #{email} AND NAVERLOGIN = #{id}
+		SELECT * FROM MEMBER 
+		WHERE EMAIL = #{email} 
+		AND NAVERLOGIN = #{id}
 	</select>
 
 	<update id="setNaverConnection">
@@ -44,11 +48,25 @@
 	</insert>
 
 	<select id="GoogleConnectionCheck" resultType="java.util.Map">
-		SELECT * FROM MEMBER WHERE EMAIL = #{email}
+		SELECT * FROM MEMBER 
+		WHERE EMAIL = #{email}
+		AND GOOGLELOGIN = #{id}
 	</select>
 
 	<select id="userGoogleLoginPro" resultType="java.util.Map">
 		SELECT * FROM MEMBER WHERE EMAIL = #{email} AND GOOGLELOGIN = #{id}
+	</select>
+	
+	<insert id="userGoogleRegisterPro">
+		INSERT INTO MEMBER 
+		VALUES (#{EMPNO}, #{DEPT}, '사원', #{PASSWORD}, #{PASSWORD_OG}, #{NAME}, #{EMAIL},
+		#{PROFILE_FILE}, #{PROFILE_IMG}, SYSDATE, 'ROLE_MEMBER', NULL, #{id})
+	</insert>
+	
+	<select id="getidlist" resultType="java.util.Map">
+		SELECT * FROM MEMBER 
+		WHERE NAME=#{name}
+		AND EMAIL = #{email}
 	</select>
 	
 </mapper>

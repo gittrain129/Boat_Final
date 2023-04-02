@@ -93,8 +93,8 @@ label {
     border-color: #01c73c;
     color: #fff;
     border-radius: 3px;
-    height:38px;
-    padding-top: 8px;
+    height:50px;
+    padding-top: 13px;
     padding-bottom: 8px;
 }
 .btn-naver:hover,.btn-naver:focus {
@@ -103,6 +103,25 @@ label {
     background-position: 17px 50%;
 	border-color : #00bb38;
 	color: #fff;
+}
+
+.btn-google {
+    background: url(../image/google_icon.png) no-repeat ;
+    background-size: 17px;
+    background-position: 17px 50%;
+    border-color: #01c73c;
+    color: black;
+    border-radius: 3px;
+    height:50px;
+    padding-top: 13px;
+    padding-bottom: 8px;
+}
+.btn-google:hover, .btn-google:focus {
+    background: url(../image/google_icon.png) no-repeat #fbfbfb;
+    background-size: 17px;
+    background-position: 17px 50%;
+	border-color : #00bb38;
+    color: black;
 }
 
 
