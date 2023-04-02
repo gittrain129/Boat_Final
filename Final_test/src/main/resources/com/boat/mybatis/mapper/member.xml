@@ -69,4 +69,17 @@
 		AND EMAIL = #{email}
 	</select>
 	
+	<select id="getPassword" resultType="member">
+		SELECT * FROM MEMBER
+		WHERE NAME = #{name}
+		AND EMPNO = #{empno}
+		AND EMAIL = #{email}
+	</select>
+	
+	<update id="pwdupdate">
+		update MEMBER
+		set PASSWORD = #{encPassword}, PASSWORD_OG = #{password}
+		where EMPNO = #{empno}
+	</update>
+	
 </mapper>

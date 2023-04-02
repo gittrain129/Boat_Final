@@ -12,13 +12,39 @@
  	<script>
  		var result="${result}";
  		if(result == 'joinSuccess'){
- 			alert("회원가입을 축하합니다.")
+ 			toastr.options.escapeHtml = true;
+ 		    toastr.options.closeButton = true;
+ 		    toastr.options.newestOnTop = false;
+ 		    toastr.options.progressBar = true;
+ 		    toastr.info('회원가입을 축하합니다.', '로그인', {timeOut: 5000});
+ 		    
+ 		}else if(result == "googleSuccess"){
+ 			toastr.options.escapeHtml = true;
+ 		    toastr.options.closeButton = true;
+ 		    toastr.options.newestOnTop = false;
+ 		    toastr.options.progressBar = true;
+ 		    toastr.info('구글 계정 회원가입을 축하합니다.', '로그인', {timeOut: 5000});
+ 		    
  		}else if("${loginfail}" == "loginFailMsg"){
- 			alert("아이디나 비밀번호 오류 입니다.")
- 		}else if("${JavaData}" == "YES"){
- 			alert("네이버 회원가입을 축하합니다.")
- 		}else if("${JavaData}" == "NO"){
- 			alert("네이버 회원가입에 실패했습니다.")
+ 			toastr.options.escapeHtml = true;
+ 		    toastr.options.closeButton = true;
+ 		    toastr.options.newestOnTop = false;
+ 		    toastr.options.progressBar = true;
+ 		    toastr.info('아이디나 비밀번호 오류 입니다.', '로그인', {timeOut: 5000});
+ 		    
+ 		}else if(result == "naverSuccess"){
+ 			toastr.options.escapeHtml = true;
+ 		    toastr.options.closeButton = true;
+ 		    toastr.options.newestOnTop = false;
+ 		    toastr.options.progressBar = true;
+ 		    toastr.info('네이버 계정 회원가입을 축하합니다.', '로그인', {timeOut: 5000});
+ 		    
+ 		}else if(result == 'passSuccess'){
+ 			toastr.options.escapeHtml = true;
+ 		    toastr.options.closeButton = true;
+ 		    toastr.options.newestOnTop = false;
+ 		    toastr.options.progressBar = true;
+ 		    toastr.info('비밀번호가 수정되었습니다.', '로그인', {timeOut: 5000});
  		}
  		
  		

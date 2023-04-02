@@ -6,14 +6,10 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-
 #form-inner-container {
     background-color: white;
     max-width: 70%;
     border-radius: 8px;
-    /*
-    box-shadow: 0 0 20px gainsboro;
-    */
 }
 
 #sign-up-container {
@@ -22,11 +18,9 @@
     position: relative;
 }
 
-
 form input:focus {
     border-color: #009CFF;
 }
-
 
 #sign-up-container h3 {
     font-size: 40px;
@@ -47,24 +41,11 @@ form input:focus {
     color: #3090d6 !important;
 }
 
-label {
-    font-weight: bold;
-}
-
 ::placeholder {
     color: #C0C7DB;
     font-size: 1rem;
     letter-spacing: 1.2px;
 }
-
-
-
-label[for="sub_title"], label[for="empno"] {
-	padding: 30px 0 0;
-}
-
-
-/* responsive display */
 
 @media(max-width:1438px) {
     lottie-player {
@@ -73,10 +54,6 @@ label[for="sub_title"], label[for="empno"] {
 }
 
 @media(max-width:1124px) {
-    #animation-container {
-        display: none;
-    }
-
     #form-inner-container{
         display: flex;
         justify-content: center;
@@ -88,28 +65,6 @@ label[for="sub_title"], label[for="empno"] {
         text-align: center;
         margin: 0;
         padding: 0;
-    }
-
-    button {
-        width: 100%;
-    }
-
-    form input:not(:last-of-type) {
-        width: 85%;
-    }
-
-    #toggleSignIn, #toggleSignUp {
-        padding: 16px 75px;
-    }
-
-    #terms {
-        width: 20px;
-        height: 20px;
-    }
-    
-    label[for="terms"] {
-        display: inline-block;
-        font-size: smaller;
     }
 }
 
@@ -124,140 +79,13 @@ label[for="sub_title"], label[for="empno"] {
     border-bottom: 1px solid #cdcdcd;
 }
 
-.multi_column {
-	position: relative;
-    display: flex;
-    flex-direction: row;
-}
-
-.column_wrap {
-	border-bottom: 1px solid #cdcdcd;
-	display: flex;
-    position: relative;
-    flex-grow: 1;
-    align-items: center;
-    box-sizing: border-box;
-}
-
-.column_wrap:focus-within, .multi_column:focus-within {
-    border-color: #009CFF;
-}
-
-.column_wrap .focusInteraction {
-	border: none;
-	font-size: 16px;
-    height: 60px;
-    outline: none;
-}
-
 #form-controls {
     margin-bottom: 20px;
-}
-
-#form-controls button {
-    border: none;
-    font-size: 100%;
-    margin-top: 40px;
 }
 
 #form-controls button:hover {
     cursor: pointer;
 }
-
-button[type="submit"] {
-    padding: 16px 75px;
-    border-radius: 6px;
-    color: white;
-    width: 100%;
-    height: 57px;
-    background-color: #009CFF;
-    border-color: #009CFF;
-    font-weight: bold;
-}
-
-button[type="submit"]:hover {
-    color: white;
-    background-color: #26abff;
-    border-color: #1aa6ff;
-    font-weight: bold;
-}
-
-#auth_email_btn {
-	background-color: #f2f4f7;
-	height: 40px;
-	width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    min-width: 110px;
-    padding: 0 20px;
-    border: 1px solid transparent;
-    border-radius: 3px;
-    margin-top: 10px;
-}
-
-@media only screen and (min-width: 768px){
-	.multi_column {
-	    flex-direction: row;
-	}
-}
-
-.borders {
-    margin-bottom: 0;
-    display: flex;
-    position: relative;
-    flex-grow: 1;
-    align-items: center;
-    box-sizing: border-box;
-}
-
-.borders ._input {
-    font-size: 16px;
-    height: 60px;
-    width: 100%;
-    flex-grow: 1;
-    border: none;
-    outline: none;
-}
-
-.icon_input {
-    position: absolute;
-    top: calc(50% - 10px);
-    display: flex;
-    gap: 5px;
-    text-align: center;
-}
-
-.column_wrap .limit_time {
-    height: 60px;
-    color: #009CFF;
-    letter-spacing: 0.1px;
-    font-size: 14px;
-    font-weight: bold;
-}
-
-.button_wrap {
-    display: flex;
-    align-items: center;
-    height: 61px;
-}
-
-.button {
-    width: auto;
-    display: block;
-    color: white;
-    background: #009CFF;
-    height: 40px;
-    text-align: center;
-    min-width: 110px;
-    padding: 0 20px;
-    border: 1px solid transparent;
-    border-radius: 3px;
-    transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
-    font-weight: bold;
-}
-
 
 .fa-eye:before{content:"\f06e"}.fa-eye-slash:before{content:"\f070"}
 
@@ -277,4 +105,10 @@ button[type="submit"]:hover {
     font-size: 20px;
     cursor: pointer;
     color: rgb(184, 184, 184);
+}
+
+#form-controls button:disabled {
+  color: #ccc;
+  background-color: #f2f4f7;
+  border: none;
 }

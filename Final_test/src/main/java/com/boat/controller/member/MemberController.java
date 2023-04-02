@@ -367,7 +367,7 @@ public class MemberController {
 			vo.setContent(EMPNO + "님 회원 가입을 축하드립니다.");
 			sendMail.sendMail(vo);
 				
-			rattr.addFlashAttribute("result", "joinSuccess");
+			rattr.addFlashAttribute("result", "naverSuccess");
 			return "redirect:sign_in";
 			
 		}else {
@@ -478,7 +478,7 @@ public class MemberController {
 			vo.setContent(EMPNO + "님 회원 가입을 축하드립니다.");
 			sendMail.sendMail(vo);
 				
-			rattr.addFlashAttribute("result", "joinSuccess");
+			rattr.addFlashAttribute("result", "googleSuccess");
 			return "redirect:sign_in";
 			
 		}else {
@@ -630,20 +630,74 @@ public class MemberController {
 	
 	
 	
-	
-	
-	
-	
-	//비번 찾기
+	//비번 찾기 페이지
 	@RequestMapping("/pwd_check")
 	public String pwdCheck() {
 		return "/Member/pwd_check";
 	}
 	
-	@RequestMapping("/pwd_check_ok")
-	public String pwdCheckok() {
-		return "/Member/pwd_check_ok";
+	//비번설정 페이지
+	@GetMapping("/pwd_check_ok")
+	public String pwdCheckok(@RequestParam String name, @RequestParam String empno, @RequestParam String email, 
+			Model mv, RedirectAttributes rattr) {
+		System.out.println("name="+name);
+		System.out.println("empno="+empno);
+		System.out.println("email="+email);
+		
+		String url = "";
+		
+		Member member = memberservice.getPassword(name, empno, email);
+		System.out.println("member="+member);
+		
+		if(member ==  null) {
+			System.out.println("member == null");
+			
+			rattr.addFlashAttribute("message", "membernull");
+			return "redirect:pwd_check";
+			
+		}else {
+			System.out.println("member != null");
+			
+			mv.addAttribute("empno", member.getEMPNO());
+			url="/Member/pwd_check_ok";
+			
+			return url;
+		}
+		
 	}
+	
+	//비밀번호 수정
+	@PostMapping("/pwdmodify")
+	public String pwdmodify(@RequestParam String empno, @RequestParam String password, RedirectAttributes rattr,
+			Model model, HttpServletRequest request) {
+		System.out.println("empno="+empno);
+		System.out.println("password="+password);
+		
+		//비밀번호 암호화 추가
+		String encPassword = passwordEncoder.encode(password);
+		Logger.info(encPassword);
+		
+		int pwdModify = memberservice.pwdupdate(empno, password, encPassword);
+		System.out.println("pwdModify="+pwdModify);
+		
+		if(pwdModify == 0) {
+			model.addAttribute("url", request.getRequestURL());
+			model.addAttribute("message", "비밀번호 수정 실패");
+			return "error/error";
+			
+		}else {
+			rattr.addFlashAttribute("result", "passSuccess");
+			return "redirect:sign_in";
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

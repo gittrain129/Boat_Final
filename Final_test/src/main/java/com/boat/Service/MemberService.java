@@ -40,6 +40,12 @@ public interface MemberService {
 	//아이디 찾기
 	public List<Member> getidlist(String name, String email);
 
+	//비번 설정하려고 찾기
+	public Member getPassword(String name, String empno, String email);
+
+	//비번 재설정
+	public int pwdupdate(String empno, String password, String encPassword);
+
 
 
 }

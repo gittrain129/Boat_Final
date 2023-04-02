@@ -94,6 +94,18 @@ public class MemberServiceImpl implements MemberService {
 		return dao.getidlist(map);
 	}
 
+	//비번 설정하려고 찾기
+	@Override
+	public Member getPassword(String name, String empno, String email) {
+		return dao.getPassword(name, empno, email);
+	}
+
+	//비번 재설정
+	@Override
+	public int pwdupdate(String empno, String password, String encPassword) {
+		return dao.pwdupdate(empno, password, encPassword);
+	}
+
 
 	
 	
