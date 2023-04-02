@@ -10,7 +10,7 @@ $(document).ready(function(){
 	var valid_email = true;
 	var valid_name = ($('#_label-name').val() != null && $('#_label-name').val() != '');
 	var valid_file = false;
-	var valid_email_ck = true;
+	var valid_email_ck = false;
 	
 	activateButton();
 

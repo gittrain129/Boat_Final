@@ -1,5 +1,6 @@
 package com.boat.Service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.boat.domain.Member;
@@ -35,6 +36,9 @@ public interface MemberService {
 
 	//구글 회원가입
 	public int userGoogleRegisterPro(Map<String, Object> paramMap);
+
+	//아이디 찾기
+	public List<Member> getidlist(String name, String email);
 
 
 

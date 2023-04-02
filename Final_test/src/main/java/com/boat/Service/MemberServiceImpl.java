@@ -1,5 +1,7 @@
 package com.boat.Service;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.boat.domain.Member;
 import com.boat.mybatis.mapper.MemberMapper;
-
-import lombok.RequiredArgsConstructor;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -82,6 +82,16 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int userGoogleRegisterPro(Map<String, Object> paramMap) {
 		return dao.userGoogleRegisterPro(paramMap);
+	}
+
+	//아이디 찾기
+	@Override
+	public List<Member> getidlist(String name, String email) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("name", name);
+		map.put("email", email);
+		
+		return dao.getidlist(map);
 	}
 
 

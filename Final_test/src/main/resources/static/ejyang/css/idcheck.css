@@ -1,4 +1,4 @@
-#form-container {
+#container {
 	padding: 70px 10px;
     display: flex;
     justify-content: center;
@@ -29,6 +29,10 @@
 
 
 form input:focus {
+    border-color: #009CFF;
+}
+
+#email:focus {
     border-color: #009CFF;
 }
 
@@ -133,17 +137,6 @@ label[for="sub_title"] {
     flex-grow: 1;
     align-items: center;
     box-sizing: border-box;
-}
-
-.column_wrap:focus-within {
-    border-color: #009CFF;
-}
-
-.column_wrap .focusInteraction {
-	border: none;
-	font-size: 16px;
-    height: 60px;
-    outline: none;
 }
 
 #form-controls {

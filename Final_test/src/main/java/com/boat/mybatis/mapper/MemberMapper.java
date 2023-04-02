@@ -1,5 +1,7 @@
 package com.boat.mybatis.mapper;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -35,4 +37,6 @@ public interface MemberMapper {
 	//구글 회원가입
 	public int userGoogleRegisterPro(Map<String, Object> paramMap);
 
+	//아이디 찾기
+	public List<Member> getidlist(HashMap<String, String> map);
 }

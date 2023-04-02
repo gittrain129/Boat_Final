@@ -224,7 +224,7 @@ public class MemberController {
 		/* 이메일 보내기 */
         String setFrom = "dmswjddid37@naver.com";
         String toMail = email;
-        String title = "회원가입 인증 이메일 입니다.";
+        String title = "BOAT 회원가입 인증 이메일 입니다.";
         String content = 
                 "BOAT 홈페이지를 방문해주셔서 감사합니다." +
                 "<br><br>" + 
@@ -550,13 +550,66 @@ public class MemberController {
 		return "/Member/id_check";
 	}
 	
+	//이메일 인증
+	@ResponseBody
+	@RequestMapping(value = "/emailcerti", method = RequestMethod.POST)
+	public String emailcerti(String email) {	
+		System.out.println("전달받은 이메일:"+email);
+		Random random = new Random();
+		int checkNum = random.nextInt(888888) + 111111;
+
+		/* 이메일 보내기 */
+        String setFrom = "dmswjddid37@naver.com";
+        String toMail = email;
+        String title = "BOAT 인증 이메일 입니다.";
+        String content = 
+                "BOAT 홈페이지를 방문해주셔서 감사합니다." +
+                "<br><br>" + 
+                "인증 번호는 " + checkNum + " 입니다." + 
+                "<br>" + 
+                "해당 인증번호를 인증번호 확인란에 기입하여 주세요.";
+        
+        try {
+            
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+            helper.setFrom(setFrom);
+            helper.setTo(toMail);
+            helper.setSubject(title);
+            helper.setText(content,true);
+            mailSender.send(message);
+            
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+        
+        return Integer.toString(checkNum);
+ 
+	}
 	
 	//아이디 찾기 => 아이디 목록
 	@GetMapping("/id_list")
-	public String idList(@RequestParam String name, @RequestParam String email) {
+	public String idList(RedirectAttributes rattr, @RequestParam String name, @RequestParam String email,
+			Model mv) {
+		List<Member> idlist = memberservice.getidlist(name, email);
+		System.out.println("idlist="+idlist);
+		String url = "";
 		
+		if(idlist.isEmpty()) {
+			System.out.println("idlist == null");
+			
+			rattr.addFlashAttribute("message", "idnull");
+			return "redirect:id_check";
+			
+		}else {
+			System.out.println("idlist != null");
+			
+			mv.addAttribute("idlist", idlist);
+			url="/Member/id_list";
+			
+			return url;
+		}
 		
-		return "/Member/id_list";
 	}
 	
 	
