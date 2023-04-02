@@ -13,6 +13,12 @@ public interface CalendarMapper {
 
 	int calInsert(Calendar cal);
 
+	List<Calendar> getEvents(String dEPT);
+
+	List<Calendar> getEventsByDept(String DEPT);
+
+	List<Calendar> getAllEvents();
+
 
 
 

@@ -13,7 +13,7 @@
   
   <!-- bootstrap -->
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js" integrity="sha512-42PE0rd+wZ2hNXftlM78BSehIGzezNeQuzihiBCvUEB3CVxHvsShF86wBWwQORNxNINlBPuq7rG4WWhNiTVHFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js" integrity="sha512-42PE0rd+wZ2hNXftlM78BSehIGzezNeQuzihiBCvUEB3CVxHvsShF86wBWwQORNxNINlBPuq7rG4WWhNiTVHFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
 
 <!-- the moment-to-fullcalendar connector. must go AFTER the moment lib -->
  
@@ -52,17 +52,37 @@
 	   var Events= $('#calDept').change(function(){
 			selDept = $(this).val();
 	  		console.log(selDept)
-	      	//location.href="${pageContext.request.contextPath}/project_calendarshow.cal?dept="+dept;
-			  showEvents(selDept);
+	      	location.href="${pageContext.request.contextPath}cal/deptlist?DEPT="+selDept;
+			return  showEvents(selDept);
 		})
-	  		 
+	  		 console.log(Events)
+	function showEvents(dept) {
+
+    // DB에서 이벤트 가져오기
+    $.ajax({
+        type: 'GET',
+        url: 'cal/getEvents',
+        data: { DEPT: dept },
+        success: function(events) {
+		//	calendar.getEvents().forEach(event => event.remove())
+		   calendar.getEventSources().forEach(function(source) {
+      	                source.remove();
+      	              });
+      	              calendar.addEventSource(events);
+      	              calendar.refetchEvents();
+        },
+        error: function(xhr, status, error) {
+            console.error(xhr.responseText);
+        	}
+    	});
+	}
 	  
 	      
 	      // full-calendar 생성하기
 	      calendar = new FullCalendar.Calendar(calendarEl, {
 			themeSystem: 'bootstrap5'
 			,unselectAuto:true
-	    	,events :Events
+	    	,events :showEvents()
         	,height: '600px', // calendar 높이 설정
       		 expandRows: true, // 화면에 맞게 높이 재설정
       		 headerToolbar:
@@ -134,6 +154,7 @@
 	           	var end = date.end;
 	           	var enddate = moment(end).format('YYYY-MM-DD hh:mm');
 				
+				
 				$('#START_DATE').val(startdate.substr(0,10))
 				$('#END_DATE').val(enddate.substr(0,10))
 				
@@ -171,6 +192,7 @@
 	         	  	return false;
 	         	  	$('#color').focus();
 	          	 	}
+
 					//시간선택시 값
 				starttime=$('#START_TIME').val()
 				endtime=$('#END_TIME').val()
@@ -205,13 +227,13 @@
 
 				console.log(';;;;;;;;;;;'+title)
 					//받을때 이렇게 받읍시다
-				var eventData1 = {
-					title: title,
-					start: startmoment,
-					end: endmoment,
-					color: color,
-					allDay: allDay,
-				}
+				// var eventData1 = {
+				// 	title: title,
+				// 	start: startmoment,
+				// 	end: endmoment,
+				// 	color: color,
+				// 	allDay: allDay,
+				// }
 				var eventData = {
 					"EVENT_NAME": title,
 					"START_DATE": startmoment,
@@ -232,12 +254,8 @@
                          	jqXHR.setRequestHeader(header, token);
                      },
 					success: function(response) {
-						console.log('일정삽입 성공........이벤트렌더필요')
 						console.log(response);
-						//eventData.id = response.id;
-						//console.log(eventData1.id);
-						//calendar.unselect()
-						calendar.addEvent(eventData1);
+					//	calendar.addEvent(eventData1);
 					
 						//calendar.refetchEvents();
 
@@ -249,7 +267,6 @@
 						},
 				complete:function(){
 				$("#addevent").modal('hide')
-				cancelEventSelection();
 				$('#undo').click(function(){
 					$('#title').val("");
 					$('#START_DATE').val('');
@@ -257,8 +274,11 @@
 					$('#START_TIME').val('');
 					$('#END_TIME').val('');
 						location.reload();
-						
+							
 					})
+					//이벤트 다시 읽어와서 랜더링,,,,?
+					//calendar.refetchEvents();
+					//Calendar.('renderEvent', eventData, true);
 
 				} //complete 끝
 				})//ajax끝
@@ -299,10 +319,11 @@
 
 
 
-
+//모달 창 안에 allday 클릭시 
 $("#allday").click(function(){ 
 	let chk = $('#allday').is(":checked");//.attr('checked'); 
 	console.log('allday..............'+chk)
+	console.log('hohohohoho')
         if(chk) {
 		$("input[name='START_TIME']").prop('readonly', true);
 		$("input[name='END_TIME']").prop('readonly', true);
@@ -363,7 +384,9 @@ $("#allday").click(function(){
  <button id = "everyevent"
   style = "width : 100px; height : 50px; background-color : rgb(0, 173, 238);  
   color :  white; margin-bottom : 20px; border : none;">전체보기</button>
-        <select class="form-control" id ="calDept">
+
+  <select class="form-control" id ="calDept">
+			<button id ="">
   			<option value ="" class="">팀별 일정 확인하기</option>
   			<option value ="홍보팀" class="ad">홍보팀</option>
   			<option value ="개발팀" class = "devel">개발팀</option>
@@ -458,16 +481,7 @@ $("#allday").click(function(){
 		</div>
 	
                 
-                <script>
-                $(document).ready(function(){
-					if($('#allday').is(':checked')){
-						console.log($('#allday').is(':checked'))
-						$('.time').attr('readonly',true);
-						
-					}
-                })
-		</script>
-		
+         
         <select class="form-control" id ="color" name='COLOR' style="margin-top:25px;">
   			<option value ="pink" name = "" class="ad">홍보팀</option>
   			<option value ="orange" class = "devel">개발팀</option>

@@ -4,12 +4,12 @@
   
   <mapper namespace="com.boat.mybatis.mapper.CalendarMapper">
   
-  <select id="getCalList" resultType="Calendar">
+  <select id="getEvents" resultType="Calendar">
   	select * 	from BOAT_CALENDAR 
   <!--  -->
 		  <where>
 		    <if test="dept != null">
-			  dept = #{dept}
+			  dept = #{DEPT}
 		    </if>
 		  </where>
 		  
@@ -24,5 +24,13 @@
 	    (cal_seq.nextval,#{EVENT_NAME},
 		 #{START_DATE},#{END_DATE},#{ALLDAY},#{DEPT},#{COLOR}) 
   </insert>
+  
+  <select id="getEventsByDept" resultType="Calendar">
+  SELECT * FROM boat_calendar WHERE DEPT = #{DEPT}
+  </select>
+  
+  <select id="getAllEvents" resultType="Calendar">
+  SELECT * FROM boat_calendar
+  </select>
 		  
   </mapper>
