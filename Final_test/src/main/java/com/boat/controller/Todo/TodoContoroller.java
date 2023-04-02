@@ -49,7 +49,7 @@ public class TodoContoroller {
 		
 		//select * from TODOLIST where dept = #{dept}
 		// order by empno
-		List<Todo> mydeptTodolist = todoService.deptList(dept);
+		List<Todo> mydeptTodolist = todoService.deptList(dept,empno);
 		
 		//3.
 		//select key

@@ -1,10 +1,14 @@
 package com.boat.controller.Attendance;
 
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,11 +57,20 @@ public class AttendanceContoroller {
 	@ResponseBody
 	@PostMapping(value="/on")
 	public Map<String,String> on(String ON_TIME,String EMPNO,String DEPT,
-			 				ModelAndView mv) {
+			 				ModelAndView mv
+			 				,HttpServletRequest request)throws IOException
+	{
+		
+		
+		
 		logger.info("att접속중......출근한 empno = "+EMPNO);
 		logger.info("att접속중......출근한 ON_TIME = "+ON_TIME);
 		attandanceService.AttOn(ON_TIME,EMPNO,DEPT);
 	
+		HttpSession session = request.getSession();
+		Attandance TodayMyatt = attandanceService.getTodayMyatt(EMPNO);
+		session.setAttribute("TodayOntime",TodayMyatt.getON_TIME());
+		
 		Map<String,String> map =new HashMap<String,String>();
 		map.put("ON_TIME", ON_TIME);
 		return map;

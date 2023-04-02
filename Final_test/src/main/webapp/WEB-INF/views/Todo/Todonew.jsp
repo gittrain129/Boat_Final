@@ -74,10 +74,10 @@
                 
                 <script>
                 $(document).ready(function(){
-                    let empno =$('#loginid').text();
-                    let dept = $('#loginDept').text();
-                    $('#dept').val(dept);
-                    $('#empno').val(empno);
+                  //  let empno =$('#loginid').text();
+                 //   let dept = $('#loginDept').text();
+                 //   $('#Todoempno').val(dept);
+                 //   $('#Tododept').val(empno);
 
 					if($('#allday').is(':checked')){
 						console.log($('#allday').is(':checked'))
@@ -87,8 +87,8 @@
                 })
 	        	</script>
       
-			 <input type="hidden" name ="EMPNO" value="" id="empno">
-			 <input type="hidden" name ="DEPT" value="" id="dept">
+			 <input type="hidden" name ="EMPNO" value="${EMPNO}" id="Todoempno">
+			 <input type="hidden" name ="DEPT" value="${DEPT}" id="Tododept">
              <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
              <div class="modal-footer">
                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id ="undo">돌아가기</button>
@@ -151,7 +151,7 @@
                             <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                                 <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">할 일 목록</a>
                                 <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">진행정도</a>
-                                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">팀별 할 일 목록</a>
+                                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">나의 팀 할 일 목록</a>
                             </div>
                         </nav>
                         <div class="tab-content" id="nav-tabContent">
@@ -192,7 +192,12 @@
                                         <tr>
                                             <th>${mt.t_CONTENT}</th>
                                             <th><div class='progress'></div></th>
+                                            <th>
+
+                                                
+                                            </th>
                                             <th></th>
+                                        </tr> 
                                         </tr> 
                                       
                                     </thead>
@@ -245,7 +250,7 @@
                               <div class="forum-icon">
                                    <i class="fa fa-shield"></i>
                                </div>
-                              부서명 사원명 end 
+                              <!-- 부서명 사원명 end /// -->
                              <a href="forum_post.html" class="forum-item-title"> 진행중</a> 
                               <div class="forum-sub-title">
                                </div>

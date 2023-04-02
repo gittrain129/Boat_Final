@@ -7,8 +7,8 @@
 		
 		
 		<insert id="Todoinsert">
-		insert into TODOLIST (NUM,EMPNO, T_CONTENT,START_DATE,END_DATE) 
-		values(todo_seq.nextval, #{EMPNO},#{T_CONTENT},#{START_DATE},#{END_DATE})
+		insert into TODOLIST (NUM,EMPNO, T_CONTENT,START_DATE,END_DATE,DEPT) 
+		values(todo_seq.nextval, #{EMPNO},#{T_CONTENT},#{START_DATE},#{END_DATE},#{DEPT})
 		</insert>
 		  
 		 <select id ="myTodolist" resultType="Todo">
@@ -32,6 +32,7 @@
 			RIGHT OUTER JOIN todolist T
 			ON T.empno = M.empno AND T.dept = M.dept
 			WHERE M.dept = #{DEPT}
+			and M.empno !=#{EMPNO}
 			ORDER BY M.empno
 			
 		 </select>

@@ -13,7 +13,7 @@ public interface TodoService {
 
 	String getDept(String empno);
 
-	List<Todo> deptList(String dept); 
+	List<Todo> deptList(String dept,String empno); 
 	
 	
 	

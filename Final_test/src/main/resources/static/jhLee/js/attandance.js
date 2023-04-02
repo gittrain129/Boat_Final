@@ -33,41 +33,31 @@ $('#date-box').text(today.toLocaleString());
 
 
 $(function(){
-        console.log($('#start-btn').prop('disabled')==false);
+     //   console.log($('#start-btn').prop('disabled')==false);
         //true
+ let endtimeeeeeee=$('#offTimeText').text()
+ let starttimeeeeeee=$('#onTimeText').text()
+console.log(endtimeeeeeee==='')
+console.log(endtimeeeeeee)
 
-
- if($('#offTimeText').text()){
-        $('#end-btn').removeClass('btn')
-                        .addClass('c-btn');
+ if(endtimeeeeeee===''&&starttimeeeeeee===''){
+        $('#end-btn').addClass('c-btn');
+                        //.addClass('btn');
                         //.attr('disabled', true);
 
  }
-
-//  $('button').click(function(){
-//  if($('#start-btn').prop('disabled')==false){
-//         toastr.options.escapeHtml = true;
-//         toastr.options.closeButton = true;
-//         toastr.options.newestOnTop = false;
-//         toastr.options.progressBar = true;
-//         toastr.info('오늘은 이미 출근, 퇴근 하셨습니다.', '근태관리', {timeOut: 3000});
-//  }
-//  if( $('#start-btn').prop('disabled')==false){
-//         toastr.options.escapeHtml = true;
-//         toastr.options.closeButton = true;
-//         toastr.options.newestOnTop = false;
-//         toastr.options.progressBar = true;
-//         toastr.info('오늘은 이미 출근, 퇴근 하셨습니다.', '근태관리', {timeOut: 3000});
-//  }
-// })
-
-console.log($('#onTimeText').text());
- if($('#onTimeText').text()){
-     //  if( $('#end-btn').hasClass('btn')){
+ if(starttimeeeeeee&&endtimeeeeeee===''){
         $('#start-btn').removeClass('btn')
                         .addClass('c-btn');
+        $('#end-btn').removeClass('c-btn')
+                        .addClass('btn'); 
                        // .attr('disabled', true);       
-//       }
+}
+if(starttimeeeeeee&&endtimeeeeeee){
+        $('#start-btn').removeClass('btn')
+                         .addClass('c-btn'); 
+        $('#end-btn').removeClass('btn')
+                        .addClass('c-btn'); 
 }
 //console.log(Typeof($('#offTimeText').text()))
 
@@ -103,18 +93,21 @@ $('#start-btn').click(function(){
                 if($('#start-btn').hasClass('btn')){
                         $('#start-btn').removeClass('btn')
                                 .addClass('c-btn')
-                                .css('pointer-events','none');
+                                .css('pointer-events','none');  }
                                 //하얗게
-                        $('#end-btn').removeClass('c-btn')
+                if($('#end-btn').hasClass('c-btn')){  
+                      $('#end-btn').removeClass('c-btn')
                                 .addClass('btn')       
                                 .attr('disabled', false);
                                 //파랗게
-                }
+                        }
                 
-                //출근시간 표시
+                //출근시간 표시.substr(0,10)
                 console.log(rdata.ON_TIME);
-
+                let attTiemeee=rdata.ON_TIME;
                $('#onTimeText').text(rdata.ON_TIME);
+               $('#attTime').text(attTiemeee);
+               $('#attColor').css('background','#55a94b')
 
         }, error: function(error){
                 console.log("hi")
@@ -162,7 +155,10 @@ $('#end-btn').click(function(){
 
                         //퇴근시간 표시
                         $('#offTimeText').text(rdata.OFF_TIME);
-        
+                        $('#attColor').css('background','white');
+                        $('#attTime').text('');
+
+
                 }, error: function(){
                         console.log("hi")
                         console.log('error');
