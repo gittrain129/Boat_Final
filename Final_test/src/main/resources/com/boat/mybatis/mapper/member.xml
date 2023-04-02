@@ -65,7 +65,7 @@
 	
 	<select id="getidlist" resultType="java.util.Map">
 		SELECT * FROM MEMBER 
-		WHERE NAME=#{name}
+		WHERE NAME = #{name}
 		AND EMAIL = #{email}
 	</select>
 	

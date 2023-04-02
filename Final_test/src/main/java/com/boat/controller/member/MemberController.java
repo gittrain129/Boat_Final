@@ -612,7 +612,29 @@ public class MemberController {
 		
 	}
 	
+	//아이디 리스트 => 로그인
+	@GetMapping("/id_login")
+	public ModelAndView id_login(ModelAndView mv, @RequestParam String userid) {
+		System.out.println("userid"+ userid);
+		mv.addObject("userid", userid);
+		mv.setViewName("/Member/sign_in");
+		
+		return mv;
+	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//비번 찾기
 	@RequestMapping("/pwd_check")
 	public String pwdCheck() {
 		return "/Member/pwd_check";

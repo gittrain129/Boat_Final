@@ -43,8 +43,10 @@
 	            <input type="password" name="password" id="password" class="form-control" placeholder="비밀번호를 입력해주세요" 
 	            		value="${PASSWORD_OG}">
             </c:if>
+            
             <c:if test="${empty EMPNO}">
-	            <input type="text" name="id" id="name" class="form-control" placeholder="사번을 입력해주세요">
+	            <input type="text" name="id" id="name" class="form-control" placeholder="사번을 입력해주세요"
+	            		<c:if test="${userid != null}"> value="${userid}" </c:if> >
 	
 	            <label for="password">비밀번호</label>
 	            <i class= "fas fa-lock"></i>
