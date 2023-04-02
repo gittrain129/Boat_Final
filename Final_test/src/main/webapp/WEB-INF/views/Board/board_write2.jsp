@@ -29,17 +29,21 @@
         </div>
     </div>
     <!-- Page Header End -->
+    
+    
 <div class="container">
 
- <form action="FileBoardAddAction.filebo" method="post" enctype = "multipart/form-data" name ="fileboardform">
+ <form action="/confer/add" method="post" enctype = "multipart/form-data" name ="boardform">
  
- 	<h1>boat_ 자료실 글쓰기</h1>
+ 	<h1>업무게시판 글쓰기</h1>
      
     <div class="form-group">
         <label for="board_subject">제목</label>
         <input name="board_subject" id="board_subject" type="text" maxlength="100"
         class="form-control" placeholder="제목을 입력하세요">
     </div>
+    
+    
     <input type ="hidden" name ="empno" value="${member.empno}">
  	
 
@@ -78,13 +82,12 @@
  	
 
  	
- 	<div class="form-group btn-group2">
- 		<button type="submit" class="btn btn-primary" style="background-color :  rgb(0, 173, 238)!important;border-color:rgb(0, 173, 238)!important">등록</button>
+ 	<div class="form-group">
+ 		<button type="submit" class="btn btn-primary">등록</button>
  		<button type="reset" class="btn btn-danger" onclick="history.go(-1)">취소</button>
  	</div>
  </form>
 </div><!-- container끝 -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script> -->
 
 
 </body>
