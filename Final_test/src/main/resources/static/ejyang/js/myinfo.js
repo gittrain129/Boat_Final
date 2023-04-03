@@ -1,7 +1,90 @@
+
+function getList(tab){
+	console.log('tab'+tab)
+      	
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+      		   
+    $.ajax({
+    	type: "POST",
+      	url: "view_ajax",
+      	data: {"tab": tab},
+      	dataType:"json",
+      	cache : false,
+      	beforeSend : function(xhr)
+        {   //데이터를 전송하기 전에 헤더에 csrf값을 설정합니다.
+        	xhr.setRequestHeader(header, token);         
+        },
+      	success: function (response) {
+      		console.log('response'+response.tab)
+      		let output = "";
+      		
+	      	$('.myinfo .container').remove();
+      		if(response.tab == '회원 탈퇴') {
+      			
+      			output += '<div class="container">';
+      			output += '<div class="row justify-content-md-center d-flex align-items-center" style="margin-top: 30px; padding: 150px 130px 150px;">';
+      			output += '<div class="col-sm-12 col-md-8">';
+      			output += '<p class="fs-3 text-dark">비밀번호 재확인</p>';
+      			output += '<p class="fs-5 fw-normal text-dark">정보를 안전하게 보호하기 위해 비밀번호를 다시 한 번 확인합니다.</p>';
+      			output += '<div class="mt-4 row row-container ps-2">';
+      			output += '<input type="password" autocomplete="off" class="form-control w-50"  style="height: 50px;">';
+      			output += '<button type="button" class="col-2 ms-3 btn btn-outline-primary">확인</button></div></div>';
+      			output += '<div class="col-sm-12 col-md-4">';
+      			output += '<img src="../resources/img/secession.png" style="width: 260px;">';
+      			output += '</div></div></div>';
+      			
+	      		$('.myinfo').append(output)
+      			
+      		}else {
+      			var baseUrl = window.location.origin;
+				var templateUrl = baseUrl + "../Member/template.html";
+				
+				$.get(templateUrl, function(data) {
+				    $('.myinfo').load(data);
+					//$('.myinfo').append(data)
+				});
+				
+      			//$('.container').load(templateUrl);
+      		}
+      		
+      	            	
+      	},
+      	error: function (error) {
+      		toastr.options.escapeHtml = true;
+			toastr.options.closeButton = true;
+			toastr.options.newestOnTop = false;
+			toastr.options.progressBar = true;
+			toastr.info('회원 탈퇴 페이지 오류입니다.', '내 정보', {timeOut: 5000});
+      	}
+	});//ajax
+	
+}//getList
+
 $(document).ready(function(){
+
+	var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+
+
+	var tab_info='회원 정보';
+
+	$('.nav-tabs a').on('click', function (e) {
+		e.preventDefault();
+		$('.nav-tabs a').removeClass('active');
+		$(this).addClass('active'); 
+		
+		tab_info = $('.nav-tabs .active').text();
+		console.log("tab_info"+tab_info)
+		getList(tab_info);
+	});
+	
+	
+
 	var valid_password = true;
 	var valid_password_ck = false;
 	var valid_name = true;
+	
 	
 	//사진 첨부
     $("#upfile").on('change',function(){
@@ -130,6 +213,8 @@ $(document).ready(function(){
 	      $('.submit').prop('disabled', true);
 	    }
 	  }
+	  
+	  
 });
 
 function onClickUpload() {
