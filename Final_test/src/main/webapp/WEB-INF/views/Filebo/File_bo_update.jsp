@@ -11,12 +11,22 @@
 	<%--썸머노트 --%>
  	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<style>
+.file2{
+
+	display : block;
+}
+</style>
 </head>
 
 <body>
 <div class="container">
-<form action="add" method="post" enctype = "multipart/form-data" name ="fileboardform">
- 
+<form action="update" method="post" enctype = "multipart/form-data" name ="fileboardform">
+ <input type="hidden" name="FILE_NUM" value="${boarddata.FILE_NUM}">
+			<input type="hidden" name="FILE_FILE"
+				value="${boarddata.FILE_FILE}">
+			<input type="hidden" name="FILE_FILE2"
+				value="${boarddata.FILE_FILE2}">
  	<h1>boat_ 자료실 글수정</h1>
      
 	 <div class="form-group">
@@ -28,8 +38,8 @@
  	
 
  	<div class="form-group">
-         <label for="board_pass">비밀번호</label>
- 		<input name="board_pass" id="fileboard_pass" type="password" maxlength="30"
+         <label for="FILE_PASS">비밀번호</label>
+ 		<input name="FILE_PASS" id="FILE_PASS" type="password" maxlength="30"
  		class="form-control" placeholder="비밀번호를 입력하세요">
     </div>
 
@@ -75,17 +85,20 @@
 		 </label>
 	 	
  		<span id ="filevalue">${boarddata.FILE_ORIGINAL}</span>
- 	</div>
+		 <img alt="파일삭제" src="${pageContext.request.contextPath}/resources/jhLee/img/remove.png" width ="10px" class="remove1">
+	</div>
  	
- 	<div class="form-group form-control deptwriter file2">
+	
+	<div class="form-group form-control deptwriter file2">
  		<label>
  		<img alt="파일첨부2" src="${pageContext.request.contextPath}/resources/jhLee/img/file.png">
  		 &nbsp;파일첨부2 &nbsp; &nbsp; &nbsp;
  		<input name="uploadfile2" id="upfile2" type="file" >
 		 </label>
 	 	
- 		<span id ="filevalue2">${boarddata.FILE_ORIGINAL}</span>
- 	</div>
+ 		<span id ="filevalue2">${boarddata.FILE_ORIGINAL2}</span>
+		 <img alt="파일삭제" src="${pageContext.request.contextPath}/resources/jhLee/img/remove.png" width ="10px" class="remove2">
+	</div>
  	
  	<div class="form-group btn-group2">
  		<button type="submit" class="btn btn-primary" style="background-color :  rgb(0, 173, 238)!important;border-color:rgb(0, 173, 238)!important">등록</button>

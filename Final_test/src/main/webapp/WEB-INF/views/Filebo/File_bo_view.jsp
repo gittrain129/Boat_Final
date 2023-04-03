@@ -79,7 +79,7 @@
 				  <form method = "post" action ="down" style="height:0px">
 					<input type ="hidden" value = "${boarddata.FILE_FILE}" name ="filename">
 					<input type ="hidden" value = "${boarddata.FILE_ORIGINAL}" name ="original">
-					<input type ="submit" value = "${boarddata.FILE_ORIGINAL}" style="border: none; background-color:rgb(238,247,250);;">
+					<input type ="submit" value = "${boarddata.FILE_ORIGINAL}" style="border: none; background-color:rgb(238,247,250);">
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 				</form>
 		 		 </dt></dl>
@@ -91,7 +91,7 @@
 				  <form method = "post" action ="down2" style="height:0px">
 					<input type ="hidden" value = "${boarddata.FILE_FILE2}" name ="filename2">
 					<input type ="hidden" value = "${boarddata.FILE_ORIGINAL2}" name ="original2">
-					<input type ="submit" value = "${boarddata.FILE_ORIGINAL2}" style="border: none; background-color:rgb(238,247,250);;">
+					<input type ="submit" value = "${boarddata.FILE_ORIGINAL2}" style="border: none; background-color:rgb(238,247,250);">
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 				</form>
 		 		  </dl>
@@ -184,7 +184,7 @@
 	    
 		</div>
 		</div>
-		</div> -->
+		</div> 
 <%--id="myModal"end --%>
        <div class="commcard">
     

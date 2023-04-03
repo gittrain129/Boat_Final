@@ -33,7 +33,7 @@
 		 <!--검색 및 글쓰기  -->
    			<div class = 'search '>
      		
-     <a href="${pageContext.request.contextPath}/Filebo/writee" class="btn btn-success btn">
+     <a href="${pageContext.request.contextPath}/Filebo/write" class="btn btn-success btn">
 			<i class="fas fa-plus"></i> 글쓰기
 			</a>
       
@@ -91,7 +91,7 @@
 							</c:if>
 							
 							<c:if test="${FILIBO.FILE_SUBJECT.length()< 20}">
-								<a href="hi?num=${FILIBO.FILE_NUM}">
+								<a href="detail?num=${FILIBO.FILE_NUM}">
 								&nbsp;	&nbsp;	&nbsp;	<c:out value="${FILIBO.FILE_SUBJECT}"/>
 								</a>
 							</c:if>

@@ -38,7 +38,8 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		HttpSession session = request.getSession();
 		
 		Attandance attendance = attdao.getTodayMyatt(EMPNO);
-		if(attendance !=null) {
+		String attoff=attendance.getOFF_TIME();
+		if(attendance != null&& attoff==null) {
 			session.setAttribute("TodayOntime",attendance.getON_TIME());
 			
 		}
