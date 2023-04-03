@@ -30,30 +30,26 @@
 		<div class="row">
 		
 		
-			<!-- <div class="col-lg-9 col-12 mb-4"> -->
-<div class="col-lg-12 col-12 mb-2 d-flex align-items-center justify-content-between">
-  <h3 class="pb-1 mb-2 flex-grow-1 align-self-start justify-content-start"> 업무용 게시판 </h3>
-  <div class="d-flex align-items-center ml-auto">
-    <div class="dropdown" style="margin-right: 20px;">
-      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-        Dropdown link
-      </a>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <li><a class="dropdown-item" href="#">Action</a></li>
-        <li><a class="dropdown-item" href="#">Another action</a></li>
-        <li><a class="dropdown-item" href="#">Something else here</a></li>
-      </ul>
-    </div>
-    <div class="d-flex align-items-center ml-3">
-      <input type="text" name="search" id="search" class="form-control" placeholder="Search...">
-      <button class="btn ml-2" type="button"><i class="bi bi-search"></i></button>
-    </div>
-    <a href="boardWrite" class="btn btn-success btn-sm ml-3"><i class="fas fa-plus"></i> 글쓰기</a>
-  </div>
-</div>
-
-
-
+	<div class="col-lg-12 col-12 mb-2 d-flex align-items-center justify-content-between">
+  		<h3 class="pb-1 mb-2 flex-grow-1 align-self-start justify-content-start"> 업무용 게시판 </h3>
+  			<div class="d-flex align-items-center ml-auto">
+    		<div class="dropdown" style="margin-right: 20px;">
+      		<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+        	Dropdown link
+      		</a>
+      			<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        			<li><a class="dropdown-item" href="#">Action</a></li>
+        			<li><a class="dropdown-item" href="#">Another action</a></li>
+        			<li><a class="dropdown-item" href="#">Something else here</a></li>
+      			</ul>
+    		</div>
+    		<div class="d-flex align-items-center ml-3">
+      			<input type="text" name="search" id="search" class="form-control" placeholder="Search...">
+      			<button class="btn ml-2" type="button"><i class="bi bi-search"></i></button>
+    		</div>
+    			<a href="boardWrite" class="btn btn-success btn-sm ml-3"><i class="fas fa-plus"></i> 글쓰기</a>
+  			</div>
+		</div>
 
 
 				<div class="table-responsive">
@@ -68,103 +64,58 @@
 							</tr>
 						</thead>
 						<tbody>
+							 <c:set var="num" value="${listcount-(page-1) * limit }"/>
+							 <c:forEach var="b" items="${boardlist }">
 							<tr>
-								<td title="like" class="text-center"><i class="bi bi-bookmark-star"></i></td>
+								<!-- 즐겨찾기 여부 -->
+								<td title="like" class="text-center"><i class="bi bi-star" id="star1" onclick="toggle(${b.BOARD_NUM},${b.BOARD_EMPNO })"></i></td>
 								
+								<!-- 제목 new뱃지 dept뱃지/공지 -->
 								<td style="display: flex; align-items: center;">
-  								<a href="discussion-detail.html" style="flex: 1; ">100% 가나다라마바사 한국어로 적어보기</a>
-  								<div class="ml-auto"><span class="badge badge-pill badge-primary float-right" style="background-color: #ffcb6b;">공지</span></div>
-								</td>
-
-
-								<td><div style="display: flex; justify-content: center; align-items: center;"><small>김정근</small></div></td>
-								<td><div style="display: flex; justify-content: center; align-items: center;">538</div></td>
-								<td><div style="display: flex; justify-content: center; align-items: center;">1시간</div></td>
-
-							</tr>
-							
-							<tr>
-								<td title="like" class="text-center"><i class="bi bi-star"></i></td>
-								<td><a href="discussion-detail.html" style="flex: 1; font-size:95%">95% 가나다라마바사 한국어로 적어보기<span class="badge badge-pill badge-warning float-right" style="background-color: #ffcb6b;">공지</span> </a></td>
-								<td><div style="display: flex; justify-content: center; align-items: center;"><small>홍길동</small></div></td>
-								<td><div style="display: flex; justify-content: center; align-items: center;">256</div></td>
-								<td><div style="display: flex; justify-content: center; align-items: center;">1 week ago</div></td>
-							</tr>
-							
-							<tr>
-								<td title="like" class="text-center"><i class="bi bi-star"></i></td>
-								<td style="display: flex; align-items: center;">
-								<a href="discussion-detail.html" style="flex: 1; font-size:90%">90% 가나다라마바사 한국어로 적어보기</a>
+								 <c:if test="${b.BOARD_RE_LEV !=0 }"><%--답글인경우 --%>
+            						<c:forEach var="a" begin="0" end="${b.BOARD_RE_LEV*2 }" step="1">
+            						&nbsp;	
+            						</c:forEach>
+            						<img src='${pageContext.request.contextPath}/resources/image/line.gif'>
+         						</c:if>
+         						<c:if test="${b.BOARD_RE_LEV ==0 }"><!--  원문 인경우 -->
+         	 						&nbsp;
+         						</c:if>
+								<a href="detail?num=${b.BOARD_NUM }" style="flex: 1; font-size:90%">
+								<c:out value="${b.BOARD_SUBJECT}" escapeXml="true"/> 
+						<!-- 		<span class="gray small">[<c:out value="${b.CNT}"/>]</span>  -->
+								</a>
+								
 								<div><span	class="badge badge-pill badge-warning" style="background-color: #89a5ea;">new</span></div>
 								<div><span	class="badge badge-pill badge-warning float-right" style="background-color: #89a5ea;">기획팀</span></div>
 								</td>
+								
+								
+								<!-- 글쓴이 -->
+								<td><div style="display: flex; justify-content: center; align-items: center;"><small>${b.BOARD_NAME }</small></div></td>
+								
+								<!-- 조회수 -->
+								<td><div style="display: flex; justify-content: center; align-items: center;">${b.BOARD_READCOUNT }</div></td>
+								
+								<!-- 올린날짜 -->
+								<td><div style="display: flex; justify-content: center; align-items: center;">${b.BOARD_DATE }</div></td>
+							</tr>
+							</c:forEach>
+							
+							
+							<tr>
+								<td title="like" class="text-center"><i class="bi bi-star" ></i></td>
+								<td style="display: flex; align-items: center;">
+								<a href="discussion-detail.html" style="flex: 1; font-size:90%">90% 가나다라마바사 한국어로 적어보기</a>
+								<div><span	class="badge badge-pill badge-warning" style="background-color: #89a5ea;">new</span></div>
+								<div class="ml-auto"><span class="badge badge-pill badge-primary float-right" style="background-color: #ffcb6b;">공지</span></div>
+								</td>
 								<td><div style="display: flex; justify-content: center; align-items: center;"><small>Mr. Felton Paucek II</small></div></td>
 								<td><div style="display: flex; justify-content: center; align-items: center;">256</div></td>
 								<td><div style="display: flex; justify-content: center; align-items: center;">1 week ago</div></td>
 							</tr>
 							
-							<tr>
-								<td title="like" class="text-center"><i class="bi bi-star"></i></td>
-								
-								<td style="display: flex; align-items: center;">
-								<a href="discussion-detail.html" style="flex: 1;">Qui id corporisnihil magnam.</a>
-  								<div class="ml-auto"><span class="badge badge-pill badge-primary float-right" style="background-color: #89a5ea;">홍보팀</span></div>
-								</td>
-								
-								<td><div style="display: flex; justify-content: center; align-items: center;"><small>Max Nikolaus</small></div></td>
-								<td><div style="display: flex; justify-content: center; align-items: center;">256</div></td>
-								<td><div style="display: flex; justify-content: center; align-items: center;">1 week ago</div></td>
-							</tr>
 							
-							<tr>
-								<td title="like" class="text-center"><i class="bi bi-star"></i></td>
-								<td style="display: flex; align-items: center;">
-								<a href="discussion-detail.html" style="flex: 1;">In et magnam nesciunt aperiam atque est culpa.</a>
-								<div class="ml-auto"><span class="badge badge-pill badge-primary float-right" style="background-color: #89a5ea;">홍보팀</span></div>
-								</td>
-								<td><div style="display: flex; justify-content: center; align-items: center;"><small>Geovanny	Stark</small></div></td>
-								<td><div style="display: flex; justify-content: center; align-items: center;">256</div></td>
-								<td><div style="display: flex; justify-content: center; align-items: center;">1 week ago</div></td>
-							</tr>
-							
-							<tr>
-								<td title="like" class="text-center"><i class="bi bi-star"></i></td>
-								<td><a href="discussion-detail.html">Aliquid incidunt non unde eveniet possimus exercitationem qu... <span class="badge badge-pill badge-primary float-right" style="background-color: #89a5ea;">개발팀</span> </a></td>
-								<td><div style="display: flex; justify-content: center; align-items: center;"><small>Max Nikolaus</small></div></td>
-								<td><div style="display: flex; justify-content: center; align-items: center;">256</div></td>
-								<td><div style="display: flex; justify-content: center; align-items: center;">1 week ago</div></td>
-							</tr>
-							
-							<tr>
-								<td title="like" class="text-center"><i class="bi bi-star"></i></td>
-								<td><a href="discussion-detail.html">Aspernatur optio consequatur quos ipsum qui sint. <span class="badge badge-pill badge-primary float-right" style="background-color: #89a5ea;">개발팀</span></a></td>
-								<td><div style="display: flex; justify-content: center; align-items: center;"><small>Carroll Hintz</small></div></td>
-								<td><div style="display: flex; justify-content: center; align-items: center;">256</div></td>
-								<td><div style="display: flex; justify-content: center; align-items: center;">1 week ago</div></td>
-							</tr>
-							
-							<tr>
-								<td title="like" class="text-center"><i class="bi bi-star"></i></td>
-								<td><a href="discussion-detail.html">Quidem aut	cupiditate qui nihil hic. <span	class="badge badge-pill badge-warning float-right" style="background-color: #89a5ea;">기획팀</span></a></td>
-								<td><div style="display: flex; justify-content: center; align-items: center;"><small>Mr. Felton Paucek II</small></div></td>
-								<td><div style="display: flex; justify-content: center; align-items: center;">256</div></td>
-								<td><div style="display: flex; justify-content: center; align-items: center;">1 week ago</div></td>
-							</tr>
-							
-							<tr>
-								<td title="like" class="text-center"><i class="bi bi-star"></i></td>
-								<td><a href="discussion-detail.html">Iusto explicabo eain odio architecto. <span class="badge badge-pill badge-primary float-right" style="background-color: #89a5ea;">기획팀</span></a></td>
-								<td><div style="display: flex; justify-content: center; align-items: center;"><small>Hans Pfannerstill</small></div></td>
-								<td><div style="display: flex; justify-content: center; align-items: center;">256</div></td>
-								<td><div style="display: flex; justify-content: center; align-items: center;">1 week ago</div></td>
-							</tr>
-							<tr>
-								<td title="like" class="text-center"><i class="bi bi-star"></i></td>
-								<td><a href="discussion-detail.html">Autem id consequatur consectetur et nobis consequuntur nulla... <span class="badge badge-pill badge-warning float-right" style="background-color: #89a5ea;">기획팀</span></a></td>
-								<td><div style="display: flex; justify-content: center; align-items: center;"><small>Geovanny Stark</small></dvi></td>
-								<td><div style="display: flex; justify-content: center; align-items: center;">256</div></td>
-								<td><div style="display: flex; justify-content: center; align-items: center;">1 week ago</div></td>
-							</tr>
 							
 						</tbody>
 						<tfoot>
@@ -172,13 +123,42 @@
 								<td colspan="5">
 									<nav class="pt-3" aria-label="Page navigation example">
 										<ul class="pagination">
-											<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-											<li class="page-item active"><a class="page-link"
-												href="#">1</a></li>
-											<li class="page-item"><a class="page-link" href="#">2</a></li>
-											<li class="page-item"><a class="page-link" href="#">3</a></li>
-											<li class="page-item"><a class="page-link" href="#">Next</a></li>
-										</ul>
+				<c:if test="${page<=1}">
+					<li class="page-item">
+						<a class="page-link gray">이전&nbsp;</a>
+					</li>
+				</c:if>
+				<c:if test="${page>1}">
+					<li class="page-item">
+						<a href="list?page=${page-1}" class="page-link">이전&nbsp;</a>
+					</li>
+				</c:if>
+				
+				<c:forEach var="a" begin="${startpage}" end="${endpage}">
+					<c:if test="${a==page }">
+						<li class="page-item active">
+							<a class="page-link">${a}</a>
+						</li>
+					</c:if>
+					<c:if test="${a!=page }">
+						<li class="page-item">
+							<a href="list?page=${a}" class="page-link">${a}</a>
+						</li>
+					</c:if>
+				</c:forEach>
+				
+				<c:if test="${page >= maxpage }">
+						<li class="page-item">
+							<a class="page-link gray">&nbsp;다음</a>
+						</li>
+				</c:if>
+				<c:if test="${page < maxpage }">
+						<li class="page-item">
+							<a href="list?page=${page+1}" class="page-link">&nbsp;다음</a>
+						</li>
+				</c:if>
+		
+			</ul>	
 									</nav>
 								</td>
 							</tr>
@@ -197,6 +177,20 @@
 		})
 	</script>
 
+<script src = "${pageContext.request.contextPath}/jkKim/js/list.js"></script>
+<script>
+function toggle(BOARD_NUM,BOARD_EMPNO) {
+	const star1 = document.getElementById('star1');
+	star1.classList.remove('bi-star');
+	star1.classList.add('bi-star-fill');
 
+ 
+		
+	
+
+	
+	}
+
+</script>
 </body>
 </html>

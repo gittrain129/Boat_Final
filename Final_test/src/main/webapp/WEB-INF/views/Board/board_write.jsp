@@ -6,7 +6,6 @@
 
 <title>업무 게시판 - write</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/jkKim/css/all.css" />
-
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
 
 <!-- 임시 css링크 -->
@@ -33,7 +32,7 @@
 
 
 	<div class="container mt-5">
-		<form action = "/board/add" method="post" enctype="multipart/form-data" name="boardform">
+		<form action = "${pageContext.request.contextPath}/board/add" method="post" enctype="multipart/form-data" name="boardform">
 		<h2 class="text-center mb-5">업무 게시판</h2>
 		 
 			<div class="form-group">
@@ -43,7 +42,7 @@
 			
 			<div class="form-group">
 				<label for="board_password">비밀번호</label>
-				 <input	type="password" class="form-control" id="board_password" name="BOARD_PASS">
+				 <input	type="password" class="form-control" id="board_pass" name="BOARD_PASS">
 			</div>
 
 			
@@ -68,13 +67,13 @@
 			
 				 <label for="notice" class="col-sm-2 col-form-label">게시물 유형
 				 <input	type="hidden" class="form-control" id="board_notice" name="BOARD_NOTICE">
-  				 	<div class="dropdown">
+  				 	
 						<button class="btn btn-secondary dropdown-toggle" type="button"  id="dropdownMenuButton" data-bs-toggle="dropdown" 	aria-expanded="false">일반게시물</button>
-							<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-								<li><a class="dropdown-item" href="#">일반게시물</a></li>
-								<li><a class="dropdown-item" href="#">공지사항</a></li>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" onclick="select('일반게시물')">일반게시물</a></li>
+								<li><a class="dropdown-item" onclick="select('공지사항')">공지사항</a></li>
 							</ul>
-					</div>
+					
 				</label>
 			</div>
 			
@@ -94,6 +93,14 @@
 	</div>
 
 	<!-- Bootstrap JavaScript -->
-
+	
+<script src = "${pageContext.request.contextPath}/jkKim/js/writeform.js"></script>
+<script>
+function select(con) {
+		var val = con.innerText;
+		var hidden = document.querySelector('#board_notice');
+		hidden.value = val;
+}
+</script>
 </body>
 </html>

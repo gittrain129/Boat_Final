@@ -1,0 +1,22 @@
+drop table comments cascade constraints purge;
+
+create table comments(
+num number primary key,
+EMPNO varchar2(30) references member(empno),
+content varchar2(200),
+reg_date date,
+board_num number references board(board_num) on delete cascade);
+
+-- comment_board_num comm 테이블이 참조하는 보드 글 번호
+-- comment_re_lev  원문이면0 답글이면 1
+-- comment_re_seq원문이면 0, 1레벨이면 1레벨시퀀스+1
+-- comment_re_ref  원문은 자신 글번호, 답글이면 원문 글번호
+--게시판 글이 삭제되면 참조하는 댓글도 삭제됨
+
+drop sequence com_seq;
+
+create sequence com_seq;
+
+delete comm;
+
+select * from comm;

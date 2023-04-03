@@ -7,9 +7,35 @@ private String BOARD_PASS;
 private String BOARD_SUBJECT;
 private String BOARD_CONTENT;
 private String BOARD_DEPT;
+private String BOARD_JOB;
+private String BOARD_NOTICE;
 private int BOARD_RE_REF;
 private int BOARD_RE_LEV;
 private int BOARD_RE_SEQ;
+private int BOARD_READCOUNT;
+private String BOARD_DATE;
+private int BOARD_EMPNO;
+private int CNT;
+
+public int getCNT() {
+	return CNT;
+}
+public void setCNT(int cNT) {
+	CNT = cNT;
+}
+public String getBOARD_NOTICE() {
+	return BOARD_NOTICE;
+}
+public void setBOARD_NOTICE(String bOARD_NOTICE) {
+	BOARD_NOTICE = bOARD_NOTICE;
+}
+public String getBOARD_JOB() {
+	return BOARD_JOB;
+}
+public void setBOARD_JOB(String bOARD_JOB) {
+	BOARD_JOB = bOARD_JOB;
+}
+
 public int getBOARD_NUM() {
 	return BOARD_NUM;
 }
@@ -82,7 +108,5 @@ public int getBOARD_EMPNO() {
 public void setBOARD_EMPNO(int bOARD_EMPNO) {
 	BOARD_EMPNO = bOARD_EMPNO;
 }
-private int BOARD_READCOUNT;
-private String BOARD_DATE;
-private int BOARD_EMPNO;
+
 }
