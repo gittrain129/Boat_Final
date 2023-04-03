@@ -37,12 +37,12 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		
 		HttpSession session = request.getSession();
 		
-		Attandance attendance = attdao.getTodayMyatt(EMPNO);
-		String attoff=attendance.getOFF_TIME();
-		if(attendance != null&& attoff==null) {
-			session.setAttribute("TodayOntime",attendance.getON_TIME());
-			
-		}
+//		Attandance attendance = attdao.getTodayMyatt(EMPNO);
+//		String attoff=attendance.getOFF_TIME();
+//		if(attendance != null&& attoff==null) {
+//			session.setAttribute("TodayOntime",attendance.getON_TIME());
+//			
+//		}
 		Member member = dao.isId(EMPNO);
 		session.setAttribute("EMPNO", EMPNO);
 		session.setAttribute("NAME", member.getNAME());
