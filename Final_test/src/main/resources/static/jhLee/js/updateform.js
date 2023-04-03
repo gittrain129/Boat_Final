@@ -1,5 +1,7 @@
 $(document).ready(function(){
-	
+	let check = 0;
+	let check2 = 0;
+
 	  $('#summernote').summernote({
 	        placeholder: '내용을 입력하세요',
 	        tabsize: 2,
@@ -9,12 +11,8 @@ $(document).ready(function(){
 	      
 	   var loginDept = $('#loginDept').text();
 	  // $('#dropdownMenuLink').text(loginDept);
-	      
-
-//dept dropdown 입력칸
-// #dropdownMenuLink
+	      //부서선택
 $('body > div.container > form > div:nth-child(5) > div > div > ul > li > a').click(function(){
-// $('#deptbutton+div a').click(function(){
 			const dept =$(this).text();
 				console.log(dept)
 			const sel =$('#dropdownMenuLink').text();
@@ -29,19 +27,59 @@ $('body > div.container > form > div:nth-child(5) > div > div > ul > li > a').cl
 	
 	})//drop downclick 끝
 	
-	
+	function show(){
+		//파일이름이 있는 경우 remove이미지를 보이게 하고
+		//파일이름이 없는 경우 remove 이미지를 보이지 않게 합니다.
+		
+		if($("#filevalue").text()==''){
+			$('.remove1').css('display','none');
+		}else{
+			$(".remove1").css({'display':'inline-block',
+							'position':'relative','top':'-5px'});
+			
+		}
+		if($("#filevalue2").text()==''){
+			$('.remove2').css('display','none');
+		}else{
+			$(".remove2").css({'display':'inline-block',
+							'position':'relative','top':'-5px'});
+		}
+	}//show end
+	show();
 
 $("#upfile").change(function(){
+	check++
 	console.log($(this).val())
 	const inputfile = $(this).val().split('\\');//c:\facepath\upload.png
 	$('#filevalue').text(inputfile[inputfile.length -1]);
+	$('.remove1').css('display','inline-block');
 	$('.file2').css('display','block');
-	});
+
+});
+
 $("#upfile2").change(function(){
+	check2++
 	console.log($(this).val())
 	const inputfile2 = $(this).val().split('\\');//c:\facepath\upload.png
 	$('#filevalue2').text(inputfile2[inputfile2.length -1]);
+	$('.remove2').css('display','block');
 	});
+
+$(".remove1").click(function(){
+			
+	$('#filevalue').text('');
+	$(this).css('display','none');
+	
+	
+	
+})
+	$(".remove2").click(function(){
+	$('#filevalue2').text('');
+	$(".remove2").css('display','none');
+	
+})
+
+
 	
 	
 	//submit 버튼 클릭할 때 이벤트 부분
@@ -60,7 +98,7 @@ $("#upfile2").change(function(){
 		}
 		
 		
-			const name=$.trim($("#board_name").val());
+			const name=$.trim($("#FILE_NAME").val());
 			
 		if($.trim($("#FILE_NAME").val())==""){
 			toastr.options.escapeHtml = true;
@@ -83,7 +121,7 @@ $("#upfile2").change(function(){
 			$("FILE_NAME").focus();
 			return false;
 		}
-		if($.trim($('#deptsel').text())== "부서"){
+		if($.trim($('#dropdownMenuLink').text())== "부서"||$.trim($('#dropdownMenuLink').text())== ""){
 			toastr.options.escapeHtml = true;
 			toastr.options.closeButton = true;
 			toastr.options.newestOnTop = false;
@@ -125,6 +163,22 @@ $("#upfile2").change(function(){
 			return false;
 		}
 		
+			//파일첨부를 변경하지 않으면 #('#filevalue').text()의 파일명을
+			//파라미터 'check'라는 이름으로 form에 추가하여 전송합니다.
+			if(check ==0){
+				const value =$('#filevalue').text();
+				const html = "<input type='hidden' value='"+value+"' name ='check'>";
+				console.log(html);
+				$(this).append(html);
+				
+			}
+			if(check2 ==0){
+				const value2 =$('#filevalue2').text();
+				const html = "<input type='hidden' value='"+value2+"' name ='check2'>";
+				console.log(html);
+				$(this).append(html);
+				
+			}
 	});//submit end
 	
 });//ready() end

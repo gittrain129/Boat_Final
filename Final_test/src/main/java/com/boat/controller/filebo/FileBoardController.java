@@ -115,24 +115,16 @@ import com.boat.domain.MySaveFolder;
 		  
 		  if(!uploadfile.isEmpty()) {
 			  String fileName = uploadfile.getOriginalFilename();//원래 파일명
-			 
 			  logger.info("있니?uploadfile1="+uploadfile.getOriginalFilename());//원래 파일명
-			  
 			  //==> 있음
 		  board.setFILE_ORIGINAL(fileName);//원래 파일명 저장
-
-		  
-		  
 		  String saveFolder= mysavefolder.getSavefolder();
 		  String fileDBName = fileDBName(fileName, saveFolder);//update에서도 쓸예정입니다.
-		  
 		  logger.info("fileDBName= "+fileDBName);
-		  
 		  
 		  //transferTo(File path) : 업로드한 파일을 매개변수의 경로에 저장합니다.
 		  uploadfile.transferTo(new File(saveFolder + fileDBName));
 		  logger.info("transferTo path ="  +saveFolder+fileDBName); //바뀐 파일명으로 저장 
-		   
 		  board.setFILE_FILE(fileDBName); 
 		   
 		  	if(!uploadfile2.isEmpty()) {
@@ -229,7 +221,6 @@ import com.boat.domain.MySaveFolder;
   
   
   @GetMapping(value="/modifyView")
- //  @GetMapping(value="/modify")
 	public ModelAndView Filebomodify(
 			int num, ModelAndView mv,
 			HttpServletRequest request
@@ -244,8 +235,6 @@ import com.boat.domain.MySaveFolder;
 			return mv;
 		}else {
 			logger.info("(수정)보기 성공");
-			//수정 폼 페이지로 이동할 떄 원문 글 내용을 보여주기 때문에 boarddata객체를 
-			//ModelAndView객체에 저장합니다.
 			
 			mv.addObject("boarddata",board);
 			mv.setViewName("Filebo/File_bo_update");
@@ -254,14 +243,17 @@ import com.boat.domain.MySaveFolder;
 		
 	}
 	
-   @PostMapping("/modifyAction")
+   @PostMapping("/update")
 	public String FileboModifyAction(
 			Filebo boarddata,
-			String check, Model mv,
+			String check,
+			String check2,
+			Model mv,
 			HttpServletRequest request,
 			RedirectAttributes rattr)throws Exception {
 		boolean usercheck = 
 				boardService.isBoardWriter(boarddata.getFILE_NUM(), boarddata.getFILE_PASS());
+		logger.info("이러면 나와야지요?"+String.valueOf(boarddata.getFILE_NUM()));
 		String url = "";
 		
 		//비밀번호가 다른 경우
@@ -271,7 +263,7 @@ import com.boat.domain.MySaveFolder;
 			return "redirect:modifyView";
 		}
 		MultipartFile uploadfile = boarddata.getUploadfile();
-//		String saveFolder = request.getSession().getServletContext().getRealPath("resources")+"/upload";
+		MultipartFile uploadfile2 = boarddata.getUploadfile2();
 		
 		if(check != null&& !check.equals("")) {//기존 파일 그대로 사용하는 경우입니다.
 			logger.info("기존파일 그대로 사용합니다.");
@@ -285,8 +277,7 @@ import com.boat.domain.MySaveFolder;
 			//<input type="file" id = "upfile" name="uploadfile">엘리먼트가 존재하지 않아
 			//private MultipartFile uploadfile;에서 uploadfile은 null입니다.
 		if(uploadfile!=null &&!uploadfile.isEmpty()) {
-			logger.info("파일 추가/변경되었습니다.");
-			
+			logger.info("첫번째 파일 추가/변경되었습니다.");
 			String fileName = uploadfile.getOriginalFilename();//원래 파일명
 			boarddata.setFILE_ORIGINAL(fileName);
 			
@@ -294,14 +285,13 @@ import com.boat.domain.MySaveFolder;
 			String fileDBName = fileDBName(fileName, saveFolder);//update에서도 쓸예정입니다.
 			
 			logger.info("fileDBNAME = " +fileDBName);
-			
-			
 			//transferTo(File path) : 업로드한 파일을 매개변수의 경로에 저장합니다.
 			uploadfile.transferTo(new File(saveFolder + fileDBName));
 			logger.info("transferTo path =" +saveFolder+fileDBName);
 			//바뀐 파일명으로 저장
 			
 			boarddata.setFILE_FILE(fileDBName);
+			
 		}else {//기존 파일이 없는데 파일 선택하지 않은 경우 또는 기존 파일이 있었는데 삭제한 경우
 			
 			logger.info("선택 파일 없습니다.");
@@ -309,6 +299,37 @@ import com.boat.domain.MySaveFolder;
 			//위 태그에 값이 있다면 ""값을 변경합니다.
 			boarddata.setFILE_FILE("");//""로 초기화
 			boarddata.setFILE_ORIGINAL("");//""로 초기화
+			}
+		}
+		
+		if(check2 != null&& !check2.equals("")) {//기존 파일 그대로 사용하는 경우입니다.
+			logger.info("기존파일 그대로 사용합니다.");
+			boarddata.setFILE_ORIGINAL(check2);
+			
+		}else {
+			if(uploadfile2!=null &&!uploadfile2.isEmpty()) {
+				logger.info("두번째 파일 추가/변경되었습니다.");
+				String fileName2 = uploadfile2.getOriginalFilename();//원래 파일명
+				boarddata.setFILE_ORIGINAL2(fileName2);
+				
+				String saveFolder= mysavefolder.getSavefolder();
+				String fileDBName2 = fileDBName(fileName2, saveFolder);//update에서도 쓸예정입니다.
+				
+				logger.info("fileDBNAME2 = " +fileDBName2);
+				//transferTo(File path) : 업로드한 파일을 매개변수의 경로에 저장합니다.
+				uploadfile2.transferTo(new File(saveFolder + fileDBName2));
+				logger.info("transferTo path =" +saveFolder+fileDBName2);
+				//바뀐 파일명으로 저장
+				
+				boarddata.setFILE_FILE(fileDBName2);
+				
+			}else {//기존 파일이 없는데 파일 선택하지 않은 경우 또는 기존 파일이 있었는데 삭제한 경우
+				
+				logger.info("선택 파일 없습니다.");
+				//<input type="hidden" name="BOARD_FILE" value="${boarddata.BOARD_FILE}">
+				//위 태그에 값이 있다면 ""값을 변경합니다.
+				boarddata.setFILE_FILE2("");//""로 초기화
+				boarddata.setFILE_ORIGINAL2("");//""로 초기화
 			}
 		}
 		//DAO에서 수정 메서드 호출하여 수정합니다.
@@ -367,19 +388,12 @@ import com.boat.domain.MySaveFolder;
 	}	
 	
   //조회수 증가 및 글쓴페이지 상세보기
- // @GetMapping(value="/detail")
-	@GetMapping(value="/hi")
+  	@GetMapping(value="/detail")
 	public ModelAndView Detail(
 			int num,ModelAndView mv,
 			HttpServletRequest request,
 			@RequestHeader(value="referer",required=false)String beforeURL) {
-		/*
-		  1. String beforeURL = request.getHeader("referer"); 의미로
-		 	어느 주소에서 detail로 이동했는지 header의 정보 중에서 "referer"를 통해 알 수 있습니다.
-		  2. 수정 후 이곳으로 이동하는 경우 조회수는 증가하지 않도록 합니다.
-		  3. myhome4/board/list에서 제목을 클릭한 경우 조회수가 증가하도록 합니다.
-		  4. detail을 새로고침 하는 경우 referer는 header에 존재하지 않아 오류 발생하므로 
-		  required = false 로 설정합니다. 이 경우 beforeURL 의 값은 null입니다.*/
+	
 		
 		logger.info("referer:" + beforeURL);
 		if(beforeURL!=null&&beforeURL.endsWith("list")) {
@@ -402,16 +416,11 @@ import com.boat.domain.MySaveFolder;
 			//mv.addObject("count",count);
 			mv.addObject("boarddata",board);
 		}
-		return mv;}
+		return mv;
+		}
 		
 		
-		@GetMapping(value="/hiff")
-		public ModelAndView dfDetail(ModelAndView mv) {
-				mv.setViewName("Filebo/File_bo_view");
-				return mv;
-		
-		
-	}
+
 	//파일다운
 		@ResponseBody
 		@PostMapping("/down")

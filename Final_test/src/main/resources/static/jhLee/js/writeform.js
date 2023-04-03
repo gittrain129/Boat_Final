@@ -60,7 +60,7 @@ $("#upfile2").change(function(){
 		}
 		
 		
-			const name=$.trim($("#board_name").val());
+			const name=$.trim($("#FILE_NAME").val());
 			
 		if($.trim($("#FILE_NAME").val())==""){
 			toastr.options.escapeHtml = true;
@@ -83,7 +83,7 @@ $("#upfile2").change(function(){
 			$("FILE_NAME").focus();
 			return false;
 		}
-		if($.trim($('#deptsel').text())== "부서"){
+		if($.trim($('#dropdownMenuLink').text())== "부서"){
 			toastr.options.escapeHtml = true;
 			toastr.options.closeButton = true;
 			toastr.options.newestOnTop = false;

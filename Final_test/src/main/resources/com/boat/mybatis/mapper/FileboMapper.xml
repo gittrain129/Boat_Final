@@ -80,13 +80,23 @@
   where FILE_NUM = #{number}
   </update>
   
-  <!--  map은 java.util.Map의 별칭입니다.-->
   <select id = "isBoardWriter" parameterType = "map" resultType="Filebo" >
-
+select * from file_board
+  where FILE_NUM=#{num}
+  and FILE_PASS=#{pass}
   </select>
   
   <update id="boardModify" parameterType = "Filebo" >
-	
+	update file_board
+  set
+  FILE_SUBJECT = #{FILE_SUBJECT},
+  FILE_CONTENT = #{FILE_CONTENT},
+  FILE_FILE  = #{FILE_FILE,jdbcType=VARCHAR},
+  FILE_FILE2  = #{FILE_FILE2,jdbcType=VARCHAR},
+  FILE_ORIGINAL = #{FILE_ORIGINAL,jdbcType=VARCHAR},
+  FILE_ORIGINAL2 = #{FILE_ORIGINAL2,jdbcType=VARCHAR}
+ where
+  FILE_NUM =#{FILE_NUM}
   
   </update>
   
