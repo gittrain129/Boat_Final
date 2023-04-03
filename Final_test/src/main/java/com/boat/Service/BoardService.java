@@ -32,4 +32,15 @@ public interface BoardService {
 	public void deleteFileList(String filename);
 	
 	public List<String> getDeleteFileList();
+
+	public void insertFav(int bOARD_NUM, int bOARD_EMPNO);
+
+	public int getFavListCount();
+
+	public List<Board> getFavBoardList(int page, int limit, int empno);
+
+	
+
+	
+	
 }

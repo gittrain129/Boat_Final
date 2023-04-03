@@ -109,7 +109,33 @@ import com.boat.mybatis.mapper.BoardMapper;
 		@Override
 		public void deleteFileList(String filename){
 			dao.deleteFileList(filename);
-}
+		}
 
+		@Override
+		public void insertFav(int bOARD_NUM, int bOARD_EMPNO) {
+			dao.insertFav(bOARD_NUM,bOARD_EMPNO);
+		}
+
+		@Override
+		public int getFavListCount() {
+			return dao.getFavListCount();
+		}
+
+		@Override
+		public List<Board> getFavBoardList(int page, int limit, int empno) {
+			HashMap<String, Integer> map = new HashMap<String, Integer>();
+			
+			int startrow = (page-1) * limit + 1;
+			int endrow = startrow + limit - 1;
+			
+			map.put("start", startrow);
+			map.put("end", endrow);
+			map.put("BOARD_EMPNO",empno);
+			
+			
+			return dao.getFavBoardList(map);
+		}
+
+		
 }
 

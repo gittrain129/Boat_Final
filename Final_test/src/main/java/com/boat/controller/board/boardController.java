@@ -1,7 +1,9 @@
 package com.boat.controller.board;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -80,7 +83,6 @@ public class boardController {
 	}
 	
 	@GetMapping("/detail")
-	
 	   public ModelAndView Detail (
 	            int num,ModelAndView mv, HttpServletRequest request,
 	            @RequestHeader(value="referer", required=false) String beforeURL){
@@ -108,9 +110,52 @@ public class boardController {
 		return mv;
 	}
 	
+	@PostMapping("/Fav_add")
+	public String fav_add(@RequestParam(value="BOARD_NUM") int bOARD_NUM,
+						  @RequestParam(value="BOARD_EMPNO") int bOARD_EMPNO){
+				//뷰페이지에 empno를 구해오는 쿼리문도 넣어야함
+		boardService.insertFav(bOARD_NUM,bOARD_EMPNO);
+		
+		
+		return"redirect:List";
+
+	}
 	
 	
-	
+	@ResponseBody
+	@RequestMapping(value="/Fav_list")
+	public Map<String, Object> FavAjax(@RequestParam(value="page", defaultValue="1", required=false) int page, 
+									   @RequestParam(value="limit", defaultValue="10", required=false) int limit,
+									   @RequestParam(value="BOARD_EMPNO") int empno){
+		
+		int listcount = boardService.getFavListCount();
+		
+		int maxpage = (listcount + limit - 1) / limit;
+		
+		
+		int startpage = ((page-1) /10) *10 +1;
+		
+		int endpage = startpage +10 -1;
+			
+		if(endpage > maxpage)
+			endpage = maxpage;
+		
+		List<Board> boardlist = boardService.getFavBoardList(page, limit,empno);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		
+		map.put("page",page);
+		map.put("maxpage",maxpage);
+		map.put("startpage",startpage);
+		map.put("endpage",endpage); 
+		map.put("listcount",listcount);
+		map.put("boardlist",boardlist);
+		map.put("limit",limit);
+		
+		
+		return map;
+	}
 	
 	
 	

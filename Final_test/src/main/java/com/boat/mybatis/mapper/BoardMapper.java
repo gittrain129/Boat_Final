@@ -32,4 +32,10 @@ public interface BoardMapper {
 	public List<String> getDeleteFileList();
 	
 	public void deleteFileList(String filename);
+
+	public void insertFav(int bOARD_NUM, int bOARD_EMPNO);
+
+	public int getFavListCount();
+
+	public List<Board> getFavBoardList(HashMap<String, Integer> map);
 }

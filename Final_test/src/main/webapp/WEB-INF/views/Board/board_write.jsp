@@ -5,7 +5,7 @@
 <head>
 
 <title>업무 게시판 - write</title>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/jkKim/css/all.css" />
+
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
 
 <!-- 임시 css링크 -->
