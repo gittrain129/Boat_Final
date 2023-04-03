@@ -312,7 +312,7 @@
   			<div class="d-flex align-items-center justify-content-end" style="height:70.4px !important;">
                 <div class="flex-shrink-0 btn-lg-square border rounded-circle" style="background-color:white !important">
                     <img class="bi img-circle" 
-                    	 src="${pageContext.request.contextPath}/${PROFILE_FILE}">
+                    	 src="${pageContext.request.contextPath}/resources/${PROFILE_FILE}">
                 </div>
                 <div class="text-white ms-3"></div>
             

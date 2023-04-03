@@ -11,7 +11,16 @@
     <meta content="" name="description">
 
 	<jsp:include page="header.jsp"/>
-	
+	<script>
+		var result="${message}";
+		if(result == 'updateSuccess'){
+			toastr.options.escapeHtml = true;
+		    toastr.options.closeButton = true;
+		    toastr.options.newestOnTop = false;
+		    toastr.options.progressBar = true;
+		    toastr.info('회원 정보가 수정되었습니다.', '내 정보', {timeOut: 5000});
+		}
+	</script>
 	 
 </head>
 

@@ -65,22 +65,21 @@
 			box-shadow: none;
 		}
 		
-		.password .fa-eye, .password .fa-eye-slash{
+		.body {
+		    position: relative;
+		}
+		
+		.row-container .fa-eye, .row-container .fa-eye-slash{
 		    position: absolute;
-		    left: 79%;
+		    left: 87%;
 		    cursor: pointer;
 		    color: rgb(184, 184, 184);
-		    top: 996px;
+		    top: 20px;
 		    font-size: 20px;
 		}
 
-		.password_ck .fa-eye, .password_ck .fa-eye-slash{
-		    position: absolute;
-		    left: 79%;
-		    cursor: pointer;
-		    color: rgb(184, 184, 184);
-		    top: 1061px;
-		    font-size: 20px;
+		.invalid-feedback {
+			padding-left: 169px;
 		}
  	</style>
  	<script>
@@ -106,6 +105,8 @@
  			}
  			$('#dept-select option:nth-child('+part+')').prop('selected',true)
  		})
+ 		
+ 		
  	</script>
  </head>
  <body>
@@ -128,6 +129,7 @@
     <!-- Page Header End -->
     
     <div class="container">
+      
       <div class="row">
         <div class="col">
          
@@ -162,6 +164,11 @@
   
   	<!-- 내용 -->
     <div class="container">
+      <form action="updateProcess" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="EMPNO" value="${memberinfo.EMPNO}">
+      <input type="hidden" name="PROFILE_FILE" value="${memberinfo.PROFILE_FILE}">
+      <input type="hidden" name="PROFILE_IMG" value="${memberinfo.PROFILE_IMG}">
+      
 	  <div class="row" style="margin-top: 30px;">
 	  
 	    <!-- 왼쪽 -->
@@ -253,7 +260,8 @@
 			</div> 
 		  </div>
 	    </div>
-	    
+	   
+	  
 	    <div class="col">
 	      <div class="right" style="padding-left: 60px;">
 	      	<div class="mt-5">
@@ -265,7 +273,7 @@
 				<!-- 사진 -->
 	            <div class="profile d-flex justify-content-center">
 	            	<label for="upfile" class="profileimg text-center" style="background-size: cover; cursor:pointer;">
-	            		<img alt="profile" class="profileimg2" style="cursor:pointer;" src="${pageContext.request.contextPath}/${PROFILE_FILE}">	
+	            		<img alt="profile" class="profileimg2" style="cursor:pointer;" src="${pageContext.request.contextPath}/resources/${memberinfo.PROFILE_FILE}">	
 			 	  	</label>
 		            <input type="file" name="uploadfile" id="upfile" accept="image/.jpg, .jpeg, .png, .gif" hidden="">
 	            </div>
@@ -292,7 +300,7 @@
 	            <div class="row row-container align-items-center">
 	                <div class="head col-sm-12 col-md-3 fw-bold">비밀번호
 	                </div>
-	                <div class="body col-sm-12 col-md-8 password">
+	                <div class="body col-sm-12 col-md-8 ">
 	                    <input type="password" name="PASSWORD" class="_input" autocomplete="off" 
 	                    	placeholder="6~16자 / 문자, 숫자, 특수 문자 모두 혼용 가능" id="_label-pwd" maxlength="16"
 	                    	value="${memberinfo.PASSWORD_OG}">
@@ -306,11 +314,14 @@
 	            <!-- 비번확인 -->
 	            <div class="row row-container align-items-center">
 	                <div class="head col-sm-12 col-md-3 fw-bold">비밀번호 확인</div>
-	                <div class="body col-sm-12 col-md-8 password_ck">
+	                <div class="body col-sm-12 col-md-8 ">
 	                    <input type="password" name="user_pwd2" autocomplete="off" 
 	                    	placeholder="비밀번호를 다시 입력해 주세요" id="_label-pwd-ck" class="_input" maxlength="16">
 	                	<i class= "fa fa-solid fa-eye-slash" ></i>
 	                </div>
+	                <div id="validationServerUsernameFeedback4" class="invalid-feedback fw-bold">
+				        비밀번호와 동일하게 입력해 주세요
+				    </div>
 	            </div>
 	            
 	            <!-- 이름 -->
@@ -331,13 +342,15 @@
 	    
 	    <div id="form-controls" class="d-flex justify-content-center" style="margin: 70px 0 50px 0;">
 	      <div class="text-center">
-        	<button type="submit" class="submit btn-primary btn py-2 px-3 fw-bold text" style="width:100px;">변경하기</button>
-        	<button type="button" class="submit btn-light btn py-2 px-3 fw-bold text ms-1" style="width:100px;">취소</button>
+        	<button type="submit" class="submit btn-primary btn py-2 px-3 fw-bold text" style="width:100px;" disabled>변경하기</button>
+        	<button type="button" class="btn-light btn py-2 px-3 fw-bold text ms-1" style="width:100px;" onclick="history.back()">취소</button>
           </div>
         </div>
-	    
-	    
+	   
 	  </div>
+	  
+	  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+	  </form>
 	</div>
 
 </div>
