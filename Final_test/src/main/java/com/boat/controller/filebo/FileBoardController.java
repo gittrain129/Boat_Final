@@ -186,7 +186,7 @@ import com.boat.domain.MySaveFolder;
 		return fileDBName; 
 	  }	 
   
-  @RequestMapping(value="/reply",method=RequestMethod.GET) 
+  @RequestMapping(value="/replyView",method=RequestMethod.GET) 
 	public ModelAndView FileboReplyView(int num, ModelAndView mv,
 			HttpServletRequest request) {
 		
@@ -253,9 +253,8 @@ import com.boat.domain.MySaveFolder;
 			RedirectAttributes rattr)throws Exception {
 		boolean usercheck = 
 				boardService.isBoardWriter(boarddata.getFILE_NUM(), boarddata.getFILE_PASS());
-		logger.info("이러면 나와야지요?"+String.valueOf(boarddata.getFILE_NUM()));
 		String url = "";
-		
+	System.out.println("ddd"+check+"55555"+check2+"ccccccccccccccccccchhhhhhhhhhhh");
 		//비밀번호가 다른 경우
 		if(usercheck == false) {
 			rattr.addFlashAttribute("result","passFail");
@@ -304,7 +303,7 @@ import com.boat.domain.MySaveFolder;
 		
 		if(check2 != null&& !check2.equals("")) {//기존 파일 그대로 사용하는 경우입니다.
 			logger.info("기존파일 그대로 사용합니다.");
-			boarddata.setFILE_ORIGINAL(check2);
+			boarddata.setFILE_ORIGINAL2(check2);
 			
 		}else {
 			if(uploadfile2!=null &&!uploadfile2.isEmpty()) {

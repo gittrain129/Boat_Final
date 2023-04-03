@@ -7,13 +7,17 @@
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script> --%>
     
-    <script src="jhLee/js/fileview.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/jhLee/js/fileview.js"></script>
     <title>자료실 게시판</title>
 
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/jhLee/css/fileview.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/jhLee/css/fileview2.css"><%--댓글 --%>
   
-  
+  <style>   
+ #board_pass{ 
+  margin: 10px auto;
+ } 
+  </style>
 </head>
 <body>
 <input type="hidden" id ="loginid" value ="${empno }" name="loginid"><%--view.js에서 사용하기 위해 추가합니다. --%>
@@ -116,9 +120,9 @@
             <a href="list" class="on">목록</a>
             
 			  
-<%--             <a href ="replyView?num=${boarddata.FILE_NUM}">답변</a>--%>
-            <a href ="reply">답변</a>
-             
+<%--           <a href ="reply">답변</a> --%>
+            
+<a href ="replyView?num=${boarddata.FILE_NUM}">답변</a>
 		<c:if test="${boarddata.FILE_EMPNO ==empno||empno=='ADMIN'}">
 		<div class = "personal">
 			 <a href="modifyView?num=${boarddata.FILE_NUM}" class = "update">
@@ -160,19 +164,18 @@
 		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		</div>
 		<div class="modal-body" style="color:black;">
-			  <form name="deleteForm" action="FileBoardDeleteAction.filebo" method="post">
-			  <%-- http://localhost:8088/Board/boardDetailACtion.bo?num=22
-			  	주소를 보면 num 을 파라미터로 너미고 있습니다.
-			  	이 값을 가져와서 ${param.num}를 사용 또는 ${boarddata.board_num} --%>
+			  <form name="deleteForm" action="delete" method="post">
 			  	
-	      <input type="hidden" name ="num"value="${param.num}" id="comment_board_num">
+	      <input type="hidden" name ="num"value="${param.num}" id="comment_board_num" style="margin:10px auto;">
 	  
 	    <div class="form-group">
 	      <label for="pwd">비밀번호</label>
-	      <input class="form-control" type="password" id="board_pass" placeholder="Enter password" name="board_pass" >    </div>
+	      <input class="form-control" type="password" id="board_pass" placeholder="Enter password" name="FILE_PASS" >    </div>
 		
 		<button type="submit" class="btn btn-primary">전송</button>
 		<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+		
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	    </form>
 		  </div>
 	  </div>
