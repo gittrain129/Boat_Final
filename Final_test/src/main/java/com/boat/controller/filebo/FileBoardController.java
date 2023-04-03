@@ -1,6 +1,7 @@
   package com.boat.controller.filebo;
   
   import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
@@ -70,6 +71,12 @@ import com.boat.domain.MySaveFolder;
 		if(endpage>maxpage)
 		endpage=maxpage;
 		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+	    Calendar cal = Calendar.getInstance();
+	    String today = format.format(cal.getTime());
+	    cal.add(Calendar.DAY_OF_MONTH, -3); //3일간 보이도록 하기위해서.
+	    String nowday = format.format(cal.getTime());
+	       
 		List<Filebo> boardlist = boardService.getBoardList(page,limit);//리스트를 받아옴
 		logger.info(boardlist.toString());
 		mv.setViewName("Filebo/Newfilelist");
@@ -80,6 +87,8 @@ import com.boat.domain.MySaveFolder;
 		mv.addObject("listcount",listcount);
 		mv.addObject("boardlist",boardlist);
 		mv.addObject("limit",limit);
+		mv.addObject("nowday",nowday);
+		mv.addObject("today",today);
 		
 		
 		return mv;
@@ -219,8 +228,8 @@ import com.boat.domain.MySaveFolder;
 	}	
   
   
- // @GetMapping(value="/modifyView")
-   @GetMapping(value="/modify")
+  @GetMapping(value="/modifyView")
+ //  @GetMapping(value="/modify")
 	public ModelAndView Filebomodify(
 			int num, ModelAndView mv,
 			HttpServletRequest request
@@ -389,7 +398,7 @@ import com.boat.domain.MySaveFolder;
 			logger.info(board.toString());
 			logger.info("상세보기 성공");
 			//int count = commentService.getListCount(num);
-			mv.setViewName("Filebo/File_bo_view2");
+			mv.setViewName("Filebo/File_bo_view");
 			//mv.addObject("count",count);
 			mv.addObject("boarddata",board);
 		}
@@ -418,6 +427,27 @@ import com.boat.domain.MySaveFolder;
 			byte[] bytes = FileCopyUtils.copyToByteArray(file);
 			
 			String sEndcoding = new String(original.getBytes("utf-8"),"ISO-8859-1");
+			
+			response.setHeader("Content-Disposition","attachment;filename="+sEndcoding);
+			
+			response.setContentLength(bytes.length);
+			return bytes;
+		}
+		//파일다운
+		@ResponseBody
+		@PostMapping("/down2")
+		public byte[] fileDown2(String filename2,
+				String original2,
+				HttpServletRequest request,
+				HttpServletResponse response) throws Exception {
+			
+			String saveFolder= mysavefolder.getSavefolder();
+			String sFilePath = saveFolder + filename2;
+			
+			File file = new File(sFilePath);
+			byte[] bytes = FileCopyUtils.copyToByteArray(file);
+			
+			String sEndcoding = new String(original2.getBytes("utf-8"),"ISO-8859-1");
 			
 			response.setHeader("Content-Disposition","attachment;filename="+sEndcoding);
 			

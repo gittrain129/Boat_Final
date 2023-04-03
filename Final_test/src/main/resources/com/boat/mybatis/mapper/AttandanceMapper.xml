@@ -5,10 +5,10 @@
   <mapper namespace="com.boat.mybatis.mapper.AttandanceMapper">
   
 		<select id="getAttList" resultType = 'Attandance'>
-		select * from BOAT_ATTENDANCE
+		select * from BOAT_ATTENDANCE where empno = #{empno}
 		<!--
+		select * from BOAT_ATTENDANCE
 		개인 회원 전용
-		select * from attandance where empno = #{empno}
 		
 		admin 전용
 		select * from attandance where dept = #{dept}

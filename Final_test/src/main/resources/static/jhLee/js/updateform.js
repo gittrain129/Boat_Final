@@ -8,7 +8,7 @@ $(document).ready(function(){
 	      });
 	      
 	   var loginDept = $('#loginDept').text();
-	   $('#dropdownMenuLink').text(loginDept);
+	  // $('#dropdownMenuLink').text(loginDept);
 	      
 
 //dept dropdown 입력칸

@@ -23,7 +23,7 @@
         <input name="FILE_SUBJECT" id="FILE_SUBJECT" type="text" maxlength="100"
         class="form-control" placeholder="제목을 입력하세요">
     </div>
-    <input type ="hidden" name ="empno" value="${member.empno}">
+    <input type ="hidden" name ="FIlE_EMPNO" value="${EMPNO}">
  	
 
  	<div class="form-group">
@@ -35,9 +35,9 @@
   <div class=" form-group">
            <label>글쓴이</label><br>
              <div class="form-control deptwriter">
-            <div class="dropdown id="deptdrop" >
+            <div class="dropdown" id="deptdrop" >
     		  <a class="btn btn-secondary dropdown-toggle deptsel" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-    	    부서${member.dept}
+    	    부서
    			   </a>
 		      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 		        <li><a class="dropdown-item" href="#">홍보팀</a></li>
@@ -48,8 +48,8 @@
 		      </ul>
   		  </div>
   		  <input name="FILE_NAME" id="FILE_NAME" type="text"  class=" writer form-control"
-       			placeholder="이름을 입력하세요" value ="${member.name}">
-            <input type="hidden" name = "DEPT" id = "dept" value = "${member.dept}">
+       			placeholder="이름을 입력하세요" value ='${NAME}'>
+            <input type="hidden" name = "DEPT" id = "dept" value = "${DEPT}">
  		 </div>
          </div>
           

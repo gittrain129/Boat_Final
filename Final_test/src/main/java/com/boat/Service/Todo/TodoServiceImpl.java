@@ -1,6 +1,8 @@
 package com.boat.Service.Todo;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -42,8 +44,12 @@ public class TodoServiceImpl implements TodoService {
 
 	//내 팀원 리스트 가져오기
 	@Override
-	public List<Todo> deptList(String dept) {
-		return dao.myDeptTodo(dept);
+	public List<Todo> deptList(String dept,String empno ) {
+		Map<String,String> map=	new HashMap<String,String>();
+		map.put("DEPT", dept);
+		map.put("EMPNO", empno);
+		
+		return dao.myDeptTodo(map);
 		
 	}
 	

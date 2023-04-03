@@ -13,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import com.boat.domain.Attandance;
 import com.boat.domain.Member;
+import com.boat.mybatis.mapper.AttandanceMapper;
 import com.boat.mybatis.mapper.MemberMapper;
 
 //AuthenticationSuccessHandler : 사용자 인증이 성공 후 처리할 작업을 직접 작성할 때 사용하는 인터페이스입니다.
@@ -23,6 +25,10 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 	
 	@Autowired
 	private MemberMapper dao;
+
+	@Autowired
+	private AttandanceMapper attdao;
+	
 	
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -31,6 +37,11 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		
 		HttpSession session = request.getSession();
 		
+		Attandance attendance = attdao.getTodayMyatt(EMPNO);
+		if(attendance !=null) {
+			session.setAttribute("TodayOntime",attendance.getON_TIME());
+			
+		}
 		Member member = dao.isId(EMPNO);
 		session.setAttribute("EMPNO", EMPNO);
 		session.setAttribute("NAME", member.getNAME());

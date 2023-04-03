@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
  
 <!DOCTYPE html>
 <html lang="en">
@@ -34,6 +35,10 @@
 		if (username != null) {
 			$('.username').hide();
 		}
+        var attTime = $('#attTime').text();
+        if(attTime!=''){
+            $('#attColor').css('background','#55a94b')
+        }
 	})
 </script>
 
@@ -163,14 +168,14 @@
                             <sec:authentication property="principal" var="pinfo"/>
 								<!-- <button class='inout_button'> -->
                                     <div id="attColor" class="flex-shrink-0 btn-lg-square border rounded-circle" 
-                                    style="display:inline-flex !important; background-color : green;">
+                                    style="display:inline-flex !important;">
 		                                <i class="far fa-clock text-primary" style="font-family: Font Awesome 5 Free !important"></i>
 		                            </div>
                                    	<!-- </button> -->
                                   <div class="ps-3">
                                 <sec:authentication property="principal" var="pinfo"/>
-                                <p class="mb-2"><span id="attText">하이염</span></p>
-                                <h6 class="mb-0"><span id="attTime">출근시간나올예정</span></h6>
+                                <p class="mb-2"><span id="attText">출근시간</span></p>
+                                <h6 class="mb-0"><span id="attTime">${TodayOntime}</span></h6>
                             </sec:authorize>
                             <!-- 비로그인 -->
                             <sec:authorize access="isAnonymous()">
@@ -182,8 +187,8 @@
                                         </div>
                                     <!-- </button> -->
                                       <div class="ps-3">
-                                    <p class="mb-2"><span id="attText">로그인하세여</span></p>
-                                    <h6 class="mb-0"><span id="attTime">비로그인</span></h6>
+                                    <p class="mb-2"><span id="attText">로그인해주세요</span></p>
+                                    <h6 class="mb-0"><span id="attTime"></span></h6>
                                 </sec:authorize>
 
 

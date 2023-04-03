@@ -1,12 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
- <jsp:include page="../Main/header.jsp" />
+ <%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<jsp:include page="../Main/header.jsp" />
+	
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <%--
+  
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script> --%>
-    
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="jhLee/js/fileview.js"></script>
     <title>자료실 게시판</title>
 
@@ -18,9 +24,10 @@
 <body>
 <input type="hidden" id ="loginid" value ="${empno }" name="loginid"><%--view.js에서 사용하기 위해 추가합니다. --%>
 <%-- <input type="hidden" id ="loginid" value ="${id}" name="loginid"><%--view.js에서 사용하기 위해 추가합니다. --%>
+<hr class = "boardviewhr">
     <div class="board_wrap">
         <div class="board_title">
-            <strong><a href="${pageContext.request.contextPath}/Filebo/list" target="_self">자료실 게시판</a></strong>
+            <strong><a href="${pageContext.request.contextPath}/FileBoardList.filebo" target="_self">자료실 게시판</a></strong>
             <p>자료실 게시판 입니다.</p>
 
 
@@ -44,7 +51,7 @@
             </dl>
             <dl>
                 <dt>작성일</dt>
-                <dt>${boarddata.FILE_DATE.substring(0,10)}</dt>
+                <dt>${boarddata.FILE_DATE}</dt>
 
             </dl>
             <dl>
@@ -103,16 +110,14 @@
         <div class="bt_wrap">
         
            
-            <a href="list" class="on">목록</a>
+            <a href="FileBoardList.filebo" class="on">목록</a>
             
 			  
-<%--             <a href ="replyView?num=${boarddata.FILE_NUM}">답변</a>--%>
-            <a href ="reply">답변</a>
+            <a href ="FileBoardReplyView.filebo?num=${boarddata.FILE_NUM}">답변</a>
              
 		<c:if test="${boarddata.FIlE_EMPNO ==empno||empno=='ADMIN'}">
 		<div class = "personal">
-<%--			 <a href="modifyView?num=${boarddata.FILE_NUM}" class = "update"> --%>
-			 <a href="modifyView" class = "update">
+			 <a href="FileBoardModifyView.filebo?num=${boarddata.FILE_NUM}" class = "update">
 		         수정
 			  </a>
 			  <a id ='delete'>
@@ -214,7 +219,4 @@
 
 
         </div>
-        
-      <jsp:include page="../Main/footer.jsp" />
-</body>
-</html>
+     <jsp:include page="../Main/footer.jsp" />

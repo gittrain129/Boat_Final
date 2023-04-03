@@ -389,6 +389,7 @@
 						
 					}
                 })
+				
 		</script>
 		
         <select class="form-control" id ="color" style="margin-top:25px;">

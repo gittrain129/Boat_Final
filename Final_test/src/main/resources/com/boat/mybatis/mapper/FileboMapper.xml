@@ -31,45 +31,7 @@
 	<select id="getListCount" resultType="int">
 		select count(*) from file_board
 		
-		<!-- 
-								
-	SELECT * FROM (select rownum rnum, j.* from ( 
-							 select file_board.*, nvl(CNT ,0) CNT 
-							from file_board left outer join
-								 (select F_BO_NUM,count(*) CNT  
-											from filecomm 
-											group by F_C_NUM)b
-									on file_board.FILE_NUM = b.F_BO_NUM 
-									order by FILE_RE_REF desc, 
-									FILE_RE_SEQ asc)j 
-					where rownum<=10 ) 
-	WHERE rnum>=0 and rnum<=10;
 	
-		
-		
-  SELECT * FROM (select rownum rnum, j.* from (
-				 			select board3.*, nvl(CNT ,0) CNT 
-							from board3 left outer join 
-								(select board_num,count(*) CNT  
-										from comments3 
-										group by board_num)b 
-							on board3.board_num = b.board_num  
-							order by board_re_ref desc,  
-							board_re_seq asc)j
- 				where rownum&lt;=  #{end}   ) 
-	WHERE rnum&gt;= #{start}  and rnum&lt;= #{end}  
-  
-  
-   SELECT * FROM (select rownum rnum, j.* from 
-   (select board_num, board_subject, nvl(CNT ,0)
-			from board left outer join (select comment_board_num,count(*) CNT 
-										from comm 
-										group by comment_board_num)
-			on board_num = comment_board_num
-			order by board_re_ref desc,
-			board_re_seq asc) j 
-where rownum<=?) WHERE rnum>=? and rnum<=?;
-		 -->
 	</select>
 	
   <select id = "getBoardList" resultType="Filebo" parameterType="java.util.Map">
@@ -97,13 +59,13 @@ where rownum<=?) WHERE rnum>=? and rnum<=?;
 	 	 insert into file_board 
   (FILE_NUM ,FILE_NAME ,FILE_PASS ,FILE_SUBJECT ,
   FILE_CONTENT ,FILE_FILE ,FILE_FILE2,FILE_ORIGINAL,FILE_ORIGINAL2,FILE_RE_REF ,
-  FILE_RE_LEV ,FILE_RE_SEQ ,FILE_READCOUNT ,FILE_DATE )
+  FILE_RE_LEV ,FILE_RE_SEQ ,FILE_READCOUNT ,FILE_DATE, DEPT,FILE_EMPNO)
   values
   (
   #{FILE_NUM},#{FILE_NAME},#{FILE_PASS},#{FILE_SUBJECT},#{FILE_CONTENT},
   #{FILE_FILE,jdbcType=VARCHAR},#{FILE_FILE2,jdbcType=VARCHAR},
    #{FILE_ORIGINAL,jdbcType=VARCHAR},  #{FILE_ORIGINAL2,jdbcType=VARCHAR},
-  #{FILE_NUM},#{FILE_RE_LEV},#{FILE_RE_SEQ},#{FILE_READCOUNT},SYSDATE)
+  #{FILE_NUM},#{FILE_RE_LEV},#{FILE_RE_SEQ},#{FILE_READCOUNT},SYSDATE,#{DEPT},#{FILE_EMPNO})
   </insert>
   
   <select id ="getDetail" parameterType ="Filebo" resultType = "Filebo">

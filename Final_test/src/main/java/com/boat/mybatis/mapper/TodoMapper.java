@@ -1,6 +1,7 @@
 package com.boat.mybatis.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -15,6 +16,6 @@ public interface TodoMapper {
 
 	String getDept(String empno);
 
-	List<Todo> myDeptTodo(String dept);
+	List<Todo> myDeptTodo(Map<String, String> map);
 
 }
