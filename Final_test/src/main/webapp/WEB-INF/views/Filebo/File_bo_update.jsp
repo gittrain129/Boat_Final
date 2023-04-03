@@ -23,16 +23,18 @@
 <div class="container">
 <form action="update" method="post" enctype = "multipart/form-data" name ="fileboardform">
  <input type="hidden" name="FILE_NUM" value="${boarddata.FILE_NUM}">
-			<input type="hidden" name="FILE_FILE"
-				value="${boarddata.FILE_FILE}">
-			<input type="hidden" name="FILE_FILE2"
+			
+ 	<input type="hidden" name="FILE_FILE"
+			value="${boarddata.FILE_FILE}">
+	<input type="hidden" name="FILE_FILE2"
 				value="${boarddata.FILE_FILE2}">
+
  	<h1>boat_ 자료실 글수정</h1>
      
 	 <div class="form-group">
         <label for="FILE_SUBJECT">제목</label>
         <input name="FILE_SUBJECT" id="FILE_SUBJECT" type="text" maxlength="100"
-        class="form-control" placeholder="제목을 입력하세요"value="${boarddata.FILE_NAME}">
+        class="form-control" placeholder="제목을 입력하세요"value="${boarddata.FILE_SUBJECT}">
     </div>
     <input type ="hidden" name ="EMPNO" value="${EMPNO}">
  	
@@ -62,7 +64,7 @@
 
 
 			  <input name="FILE_NAME" id="FILE_NAME" type="text"  class=" writer form-control"
-			  placeholder="이름을 입력하세요" value ='${NAME}' value="${boarddata.FILE_NAME}">
+			  placeholder="이름을 입력하세요"  value="${boarddata.FILE_NAME}">
             <input type="hidden" name = "dept" id = "dept">
   	  </div>
         </div>
@@ -85,7 +87,7 @@
 		 </label>
 	 	
  		<span id ="filevalue">${boarddata.FILE_ORIGINAL}</span>
-		 <img alt="파일삭제" src="${pageContext.request.contextPath}/resources/jhLee/img/remove.png" width ="10px" class="remove1">
+		 <img alt="파일삭제" src="${pageContext.request.contextPath}/resources/jhLee/img/remove.png" style="width:10px;" class="remove1">
 	</div>
  	
 	
@@ -97,7 +99,7 @@
 		 </label>
 	 	
  		<span id ="filevalue2">${boarddata.FILE_ORIGINAL2}</span>
-		 <img alt="파일삭제" src="${pageContext.request.contextPath}/resources/jhLee/img/remove.png" width ="10px" class="remove2">
+		 <img alt="파일삭제" src="${pageContext.request.contextPath}/resources/jhLee/img/remove.png" style="width:10px;" class="remove2">
 	</div>
  	
  	<div class="form-group btn-group2">

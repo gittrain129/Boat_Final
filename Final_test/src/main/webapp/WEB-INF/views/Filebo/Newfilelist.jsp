@@ -100,10 +100,10 @@
 
 						
 						<c:if test="${FILIBO.FILE_DATE > nowday}">
-	 		      	  		<img src="${pageContext.request.contextPath}/jhLee/img/new.jpg" id="new" style="width:20px">
+	 		      	  		<img src="${pageContext.request.contextPath}/jhLee/img/new.png" id="new" style="width:20px">
 	 		      	  	</c:if>
 
-							<span class="badge badge-pill badge-primary float-right">${FILIBO.DEPT}</span>
+							<span class="badge badge-pill badge-warning float-right"style="background-color: #89a5ea;">${FILIBO.DEPT}</span>
 							
 						</td>
 
