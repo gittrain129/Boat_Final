@@ -109,4 +109,5 @@ import com.boat.mybatis.mapper.BoardMapper;
 		@Override
 		public void deleteFileList(String filename){
 			dao.deleteFileList(filename);
+		}
 }
