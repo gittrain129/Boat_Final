@@ -41,6 +41,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.boat.Service.MemberService;
 import com.boat.Task.SendMail;
+import com.boat.domain.ConferenceReservation;
 import com.boat.domain.MailVO;
 import com.boat.domain.Member;
 import com.boat.sns.NaverLoginBO;
@@ -700,25 +701,7 @@ public class MemberController {
 	
 	
 	
-	//내 정보
-	@GetMapping("/myinfo")
-	public ModelAndView hello4(Principal principal, ModelAndView mv) {
-
-		String id = principal.getName();
-		System.out.println("id="+id);
-		
-		if(id==null) {
-			mv.setViewName("redirect:sign_in");
-			Logger.info("id is null");
-			
-		}else {
-			Member m = memberservice.member_info(id);
-			mv.setViewName("/Member/myinfo");
-			mv.addObject("memberinfo", m);
-		}
-		
-		return mv;
-	}
+	
 	
 	//내 정보 수정
 	@RequestMapping(value = "/updateProcess", method = RequestMethod.POST)
@@ -760,11 +743,12 @@ public class MemberController {
 		int result = memberservice.update(member);
 		
 		if(result==1) {
-			rattr.addFlashAttribute("message","updateSuccess");
 			
+			session.setAttribute("PROFILE_FILE", member.getPROFILE_FILE());
 			session.setAttribute("NAME", member.getNAME());
 			session.setAttribute("DEPT", member.getDEPT());
-			session.setAttribute("PROFILE_FILE", member.getPROFILE_FILE());
+			
+			rattr.addFlashAttribute("message","updateSuccess");
 			
 			return "redirect:/index";
 		}else {
@@ -774,6 +758,57 @@ public class MemberController {
 		}
 	}
 	
+	//내 정보
+	@GetMapping("/myinfo")
+	public ModelAndView hello4(Principal principal, ModelAndView mv) {
+
+		String id = principal.getName();
+		System.out.println("id="+id);
+		
+		if(id==null) {
+			mv.setViewName("redirect:sign_in");
+			Logger.info("id is null");
+				
+		}else {
+			Member m = memberservice.member_info(id);
+			mv.setViewName("/Member/myinfo");
+			mv.addObject("memberinfo", m);
+		}
+			
+		return mv;
+	}
+	
+	//탭 선택
+	@ResponseBody
+	@PostMapping(value="/view_ajax")
+	public Map<String, Object> ListAjax(@RequestParam String tab, Principal principal){
+		System.out.println("tab"+tab);
+        
+		String id = principal.getName();
+		System.out.println("id="+id);
+		
+		Member m = memberservice.member_info(id);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberinfo", m);
+		map.put("tab", tab);
+		map.put("tab", tab);
+		
+		return map;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//채팅
 	@GetMapping("/chat")
 	public String hello5() {
 		return "/Chat/chat_room";
