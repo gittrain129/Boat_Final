@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -79,6 +80,14 @@ public class TodoContoroller {
 		
 		//저장 성공하면 Todo/list
 		  return  "redirect:list"; 
+		
+	}
+	@GetMapping(value="/update")
+	public Todo todoupdate(String num,String T_CONTENT,String END_DATE) {
+		todoService.Todoupdate(num,T_CONTENT,END_DATE);
+		
+		
+		return null;
 		
 	}
 	

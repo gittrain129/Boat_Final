@@ -1,3 +1,5 @@
+drop table work_board CASCADE CONSTRAINTS;
+
 create table work_board{
 	empno			 varchar2(12) primary key,
 	dept			 varchar2(10) check(dept in ('홍보팀', '개발팀', '인사팀', '기획팀', '영업팀')),
