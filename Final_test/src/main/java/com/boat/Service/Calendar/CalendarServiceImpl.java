@@ -45,10 +45,6 @@ public class CalendarServiceImpl implements CalendarService {
 //		
 //	}
 
-	public List<Calendar> getEvents(String dEPT) {
-		
-		return dao.getEvents(dEPT);
-	}
 
 	
 	@Override

@@ -37,7 +37,7 @@
 		}
         var attTime = $('#attTime').text();
         if(attTime!=''){
-            $('#attColor').css('background','#55a94b')
+            $('#attColor').css('background','#40cf2f')
         }
 	})
 </script>
@@ -320,7 +320,7 @@
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle me-0" data-bs-toggle="dropdown">${NAME} 님</a>
                     <div class="dropdown-menu border-0 rounded-0 rounded-bottom m-0 shadow">
-                        <a href="${pageContext.request.contextPath}/member/myinfo" class="dropdown-item">MY BOAT</a>
+                        <a href="${pageContext.request.contextPath}/member/myinfo" class="dropdown-item">내 정보</a>
                     </div>
                 </div>
             </div>    
