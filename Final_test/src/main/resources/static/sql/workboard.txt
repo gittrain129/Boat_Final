@@ -24,9 +24,7 @@ create table workboard(
 	dept		 varchar2(10) check(dept in ('홍보팀', '개발팀', '인사팀', '기획팀', '영업팀')),
 	name		 varchar2(15),
 	content 	 varchar2(500),
-	reg_date 	 date,
-	board_num 	 number references board(board_num)
-			 	 on delete cascade
+	reg_date 	 date
 );
 
 drop sequence com_seq;

@@ -34,17 +34,7 @@ public class WorkboardServiceImpl implements WorkboardService{
 	
 	
 
-	@Override
-	public List<Workboard> getCommentList(int board_num, int page) {
-		int startrow = 1;
-		int endrow = page * 3;
-		
-		Map<String,Integer> map = new HashMap<String,Integer>();
-		map.put("board_num", board_num);
-		map.put("start", startrow);
-		map.put("end", endrow);
-		return dao.getCommentList(map);
-	}
+	
 
 	
 	

@@ -9,8 +9,7 @@ public interface WorkboardService{
 		//글의 갯수 구하기
 		public int getListCount(int board_num);
 		
-		//댓글 목록 가져오기
-		public List<Workboard> getCommentList(int board_num, int page);
+
 		
 		//댓글 등록하기
 		public int commentsInsert(Workboard c);
