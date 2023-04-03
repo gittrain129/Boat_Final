@@ -37,37 +37,37 @@
 		<h2 class="text-center mb-5">업무 게시판</h2>
 		 
 			<div class="form-group">
-				<label for="subject">제목</label>
-				 <input	name="subject" id="subject"  maxlength="50" class="form-control"  placeholder="제목">
+				<label for="board_subject">제목</label>
+				 <input	name="BOARD_SUBJECT" id="board_subject"  maxlength="50" class="form-control"  placeholder="제목">
 			</div>
 			
 			<div class="form-group">
-				<label for="password">비밀번호</label>
-				 <input	type="password" class="form-control" id="password" name="password">
+				<label for="board_password">비밀번호</label>
+				 <input	type="password" class="form-control" id="board_password" name="BOARD_PASS">
 			</div>
 
 			
 			<div class="form-group">
-				<label for="team" class="col-sm-2 col-form-label">Team
-				<input type="text" class="form-control" id="team" name="team"/>
+				<label for="board_dept" class="col-sm-2 col-form-label">DEPT
+				<input type="text" class="form-control" id="board_dept" name="BOARD_DEPT"/>
 				</label> 
 			
 			
 			
-				<label for="manager" class="col-sm-2 col-form-label">직책 
-				<input type="text" class="form-control" id="manager" name="manager">
+				<label for="board_job" class="col-sm-2 col-form-label">직책 
+				<input type="text" class="form-control" id="board_job" name="BOARD_JOB">
 				</label>
 			
 			
 			
-				 <label for="team" class="col-sm-2 col-form-label">이름
-				 <input	type="text" class="form-control" id="name" name="name">
+				 <label for="board_name" class="col-sm-2 col-form-label">이름
+				 <input	type="text" class="form-control" id="board_name" name="BOARD_NAME">
 				 </label>
 			
 			
 			
-				 <label for="team" class="col-sm-2 col-form-label">게시물 유형
-				 <input	type="hidden" class="form-control" id="notice" name="notice">
+				 <label for="notice" class="col-sm-2 col-form-label">게시물 유형
+				 <input	type="hidden" class="form-control" id="board_notice" name="BOARD_NOTICE">
   				 	<div class="dropdown">
 						<button class="btn btn-secondary dropdown-toggle" type="button"  id="dropdownMenuButton" data-bs-toggle="dropdown" 	aria-expanded="false">일반게시물</button>
 							<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -81,14 +81,15 @@
 			
 			
 			<div class="form-group">
-			<label for="content" class="form-label">내용</label>
-			<textarea class="form-control" id="content" name="content" rows="5"></textarea>
+			<label for="board_content" class="form-label">내용</label>
+			<textarea class="form-control" id="board_content" name="BOARD_CONTENT" rows="5"></textarea>
 			</div>
 			
 			<div class="form-group">
 			<button type="submit" class="btn btn-primary">등록</button>
 			<button type="reset" class="btn btn-secondary">취소</button>
 			</div>
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 		</form>
 	</div>
 

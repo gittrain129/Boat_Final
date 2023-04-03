@@ -110,4 +110,6 @@ import com.boat.mybatis.mapper.BoardMapper;
 		public void deleteFileList(String filename){
 			dao.deleteFileList(filename);
 }
+
 }
+
