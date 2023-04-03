@@ -77,7 +77,32 @@
 	]]>
 	</delete>
 	
-		
+		<insert id = "insertFav" parameterType = "Board">
+		insert into board_fav(BOARD_NUM, BOARD_EMPNO)
+		values(#{bOARD_NUM},#{bOARD_EMPNO})
+	</insert>
 	
+	<select id="getFavListCount" resultType="int">
+		select count(*) from board_fav
+	</select>
+
+	<select id="getFavBoardList" resultType="Board">
+	select * from
+		(select rownum rnum, b.*
+		 from (
+		 	select board.*, nvl(cnt, 0) cnt
+		 	 from board 
+		 	 	left outer join
+		 	 		(select board_num, count(*) cnt from comments group by board_num)
+		 	 		 c on board.board_num = c.board_num 
+		 	 		 where board.board_num in (
+        				select board_num from board_fav where board_empno = #{BOARD_EMPNO}
+      					)
+		 	 		 order by BOARD_RE_REF desc,
+					BOARD_RE_SEQ asc) b
+			where rownum &lt;= #{end}
+		)
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
 
 </mapper>

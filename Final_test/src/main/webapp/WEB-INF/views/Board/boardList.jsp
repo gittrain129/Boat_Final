@@ -47,7 +47,7 @@
       			<input type="text" name="search" id="search" class="form-control" placeholder="Search...">
       			<button class="btn ml-2" type="button"><i class="bi bi-search"></i></button>
     		</div>
-    			<a href="boardWrite" class="btn btn-success btn-sm ml-3"><i class="fas fa-plus"></i> 글쓰기</a>
+    			<a href="${pageContext.request.contextPath}/board/Write" class="btn btn-success btn-sm ml-3"><i class="fas fa-plus"></i> 글쓰기</a>
   			</div>
 		</div>
 
@@ -56,7 +56,7 @@
 					<table class="table table-bordered table-hover mx-auto">
 						<thead>
 							<tr class="bg-light">
-								<th title="like" style="text-align: center; vertical-align: middle">즐겨<br>찾기</th>
+								<th title="like" style="text-align: center; vertical-align: middle" onclick=favorite(${b.BOARD_EMPNO})>즐겨<br>찾기</th>
 								<th title="Discussion List" style="text-align: center; vertical-align: middle">제목</th>
 								<th class="bg-light" title="Created By" style="text-align: center; vertical-align: middle">작성자</th>
 								<th title="Total Replies" style="text-align: center; vertical-align: middle">조회수</th>
@@ -68,7 +68,7 @@
 							 <c:forEach var="b" items="${boardlist }">
 							<tr>
 								<!-- 즐겨찾기 여부 -->
-								<td title="like" class="text-center"><i class="bi bi-star" id="star1" onclick="toggle(${b.BOARD_NUM},${b.BOARD_EMPNO })"></i></td>
+								<td title="like" class="text-center"><i class="bi bi-star" id="star${b.BOARD_NUM }" onclick="toggle(${b.BOARD_NUM},${b.BOARD_EMPNO })"></i></td>
 								
 								<!-- 제목 new뱃지 dept뱃지/공지 -->
 								<td style="display: flex; align-items: center;">
@@ -83,11 +83,11 @@
          						</c:if>
 								<a href="detail?num=${b.BOARD_NUM }" style="flex: 1; font-size:90%">
 								<c:out value="${b.BOARD_SUBJECT}" escapeXml="true"/> 
-						<!-- 		<span class="gray small">[<c:out value="${b.CNT}"/>]</span>  -->
+								<span class="gray small">[<c:out value="${b.CNT}"/>]</span>
 								</a>
 								
 								<div><span	class="badge badge-pill badge-warning" style="background-color: #89a5ea;">new</span></div>
-								<div><span	class="badge badge-pill badge-warning float-right" style="background-color: #89a5ea;">기획팀</span></div>
+								<div class="ml-auto"><span	class="badge badge-pill badge-warning float-right" style="background-color: #89a5ea;">기획팀</span></div>
 								</td>
 								
 								
@@ -114,8 +114,6 @@
 								<td><div style="display: flex; justify-content: center; align-items: center;">256</div></td>
 								<td><div style="display: flex; justify-content: center; align-items: center;">1 week ago</div></td>
 							</tr>
-							
-							
 							
 						</tbody>
 						<tfoot>
@@ -179,17 +177,111 @@
 
 <script src = "${pageContext.request.contextPath}/jkKim/js/list.js"></script>
 <script>
+var token = $("meta[name='_csrf']").attr("content");
+var header = $("meta[name='_csrf_header']").attr("content");
+
 function toggle(BOARD_NUM,BOARD_EMPNO) {
-	const star1 = document.getElementById('star1');
+	
+	
+	var star = document.getElementById('star+BOARD_NUM');
 	star1.classList.remove('bi-star');
 	star1.classList.add('bi-star-fill');
-
- 
-		
 	
-
+	var board_num = BOARD_NUM;
+	//var board_empno = BOARD_EMPNO;
+	var board_empno = 2310009;
+	console.log(board_num);
+	console.log(board_empno);
 	
-	}
+	$.ajax({
+        url: "${pageContext.request.contextPath}/board/Fav_add",
+        type: 'POST',
+        data: {
+            "BOARD_NUM": board_num,
+            "BOARD_EMPNO": board_empno
+        },
+        beforeSend : function(xhr)
+        {   //데이터를 전송하기 전에 헤더에 csrf값을 설정합니다.
+          xhr.setRequestHeader(header, token);         
+       },
+        success: function(response) {
+          // 성공시 테이블바디 재구성
+        },
+        error: function(request,error) {
+            
+            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+        }
+	});//add_ajax 끝
+}//toggle 끝
+
+function favorite(BOARD_EMPNO) {
+	//var board_empno= BOARD_EMPNO
+	var board_empno= 2310009;
+	
+	$.ajax({
+        url: "${pageContext.request.contextPath}/board/Fav_list",
+        type: 'POST',
+        data: {
+               "BOARD_EMPNO": board_empno
+        },
+        beforeSend : function(xhr)
+        {   //데이터를 전송하기 전에 헤더에 csrf값을 설정합니다.
+          xhr.setRequestHeader(header, token);         
+       },
+        success: function(data) {
+        	$("tbody").remove();
+        	$("tfoot").remove();
+        	
+        	let output = "<tbody>";
+			
+			$(data.boardlist).each(
+				
+				function(index, item){
+					
+					output += "<tr>"
+					output += "<td title='like' class='text-center'><i class='bi bi-star-fill' id='star" + item.board_NUM +"'onclick='toggle("+ item.board_NUM + "," + item.board_EMPNO+ "})'></i></td>"
+					
+					const blank_count = item.board_RE_LEV * 2 + 1;
+					
+					let blank = '&nbsp;'; //답글일 때 들여쓰기
+					
+					for (let i = 0; i<blank_count; i++){
+						blank += '&nbsp;&nbsp';
+					}
+					
+					let img="";
+					if (item.board_RE_LEV > 0){
+						img="<img src='${pageContext.request.contextPath}/resources/image/line.gif'>";
+					}
+					
+					let subject=item.board_SUBJECT.replace(/</g,'&lt')
+					subject = subject.replace(/</g,'&gt')
+					
+					
+					output += "<td style='display: flex; align-items: center;'>" + blank + img;
+					output += "<a href='detail?num="+item.board_NUM + "' style='flex: 1; font-size:90%''>";
+					
+					output += subject + '<span class="gray small">['+item.cnt+']</span></a>';
+					output += "<div><span	class='badge badge-pill badge-warning' style='background-color: #89a5ea;'>new</span></div>";
+					output += "<div class='ml-auto'><span	class='badge badge-pill badge-warning float-right' style='background-color: #89a5ea;'>기획팀</span></div></td>";
+					output += "<td><div style='display: flex; justify-content: center; align-items: center;'><small>" +item.board_NAME+" </small></div></td>";
+					output += "<td><div style='display: flex; justify-content: center; align-items: center;'>"+item.board_READCOUNT+"</div></td>";
+					output += "<td><div style='display: flex; justify-content: center; align-items: center;'>"+item.board_DATE +"</div></td>"
+				})
+				output += "</tbody>"
+				
+				console.log(output);
+				$('table').append(output); 
+				
+				
+        },
+        error: function(request,error) {
+            
+            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+        }
+	});//add_ajax 끝
+}
+	
 
 </script>
 </body>
