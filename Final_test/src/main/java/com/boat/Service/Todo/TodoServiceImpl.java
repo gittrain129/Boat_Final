@@ -52,6 +52,15 @@ public class TodoServiceImpl implements TodoService {
 		return dao.myDeptTodo(map);
 		
 	}
+
+	@Override
+	public void Todoupdate(String num, String t_CONTENT, String eND_DATE) {
+		Map<String,Object> map=	new HashMap<String,Object>();
+		map.put("T_CONTENT", t_CONTENT);
+		map.put("END_DATE", eND_DATE);
+		map.put("NUM", num);
+		dao.myTodoupdate(map);
+	}
 	
 	
 

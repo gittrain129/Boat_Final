@@ -9,31 +9,91 @@
 <meta charset="UTF-8">
 <title>일별근무시간</title>
 <jsp:include page="../Main/header.jsp" />
-<%-- <link rel="stylesheet" href="<c:url value='/resources/css/attendance/attendanceBoard.css'/>" /> --%>
 <!-- <script src="${path}/resources/js/attendance/board.js" defer ></script> -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/jhLee/css/Todonew.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/jhLee/css/Todonew2.css">
   
-  
   <%--tab 전환에 필요 bootstrap4 --%>
-  
+  a
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-  
-  
-</head>
-
-<style>
-
-</style>
-<style>
+  <style>
 .page-header{margin : 0!important}
 </style>
+</head>
+
+
 <%--
 
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
  
   5.0 번들에서 모달 작동안함... --%>
   
+  
+  <!-- 내 할일 TODO 수정 Modal -->
+   
+  <div class="modal fade" id="updateTodo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"> 할 일 수정</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" style="color:black;">
+        일정<br>
+        
+        <form action="update"	method = 'post'>
+          <input type="text" name="T_CONTENT" class = "form-control" id = 'title'>
+       
+          
+          <div class="cal_time" style="margin-top:15px" >
+           <label>일정 시작 날짜: </label><br>
+                      <div class="form-group"style="margin-top:15px">
+                        <input
+                          type="DATE"
+                          name="START_DATE"
+                          class="form-control time"
+                        />
+                      </div>
+                      
+             <label style="margin-top:15px" >일정 종료 날짜: </label><br>
+                      <div class="form-group" style="margin-top:15px" >
+                        <input
+                          type="DATE"
+                          name="END_DATE"
+                          class="form-control time"
+                        />
+                      </div>
+              </div><!-- cal_time-->
+                  
+                  <script>
+                  $(document).ready(function(){
+                    //  let empno =$('#loginid').text();
+                   //   let dept = $('#loginDept').text();
+                   //   $('#Todoempno').val(dept);
+                   //   $('#Tododept').val(empno);
+  
+                      if($('#allday').is(':checked')){
+                          console.log($('#allday').is(':checked'))
+                          $('.time').attr('readonly',true);
+                          
+                      }
+                  })
+                  </script>
+        
+               <input type="hidden" name ="EMPNO" value="${EMPNO}" id="Todoempno">
+               <input type="hidden" name ="DEPT" value="${DEPT}" id="Tododept">
+               <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+               <div class="modal-footer">
+                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id ="undo">돌아가기</button>
+                 <button type="submit" class="btn btn-primary" id ="saveBtn">&nbsp;&nbsp;일정 저장&nbsp;&nbsp;</button>
+              </div>
+           </form>
+          </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 내 할일 TODO 추가 Modal end-->
 <body>
 
 <!-- 내 할일 TODO 추가 Modal -->
@@ -193,7 +253,12 @@
                                             <th>${mt.t_CONTENT}</th>
                                             <th><div class='progress'></div></th>
                                             <th>
-
+                                                <a href="#" class="btn btn-warning btn" data-bs-toggle="modal" data-bs-target="#updateTodo">
+                                                    <i class="fas fa-plus"></i> 수정
+                                                </a>
+                                                <a href="/boat/Todo/done" class="btn btn-success btn">
+                                                    <i class="fas  fa-check-circle"></i> 완료
+                                                 </a>
                                                 
                                             </th>
                                             <th></th>
@@ -224,15 +289,7 @@
                      <div id="${'collapse'}${num}" class="accordion-collapse collapse" aria-labelledby="${'heading'}${num}" data-bs-parent="#accordionExample">
                         <c:set var = "num" value ="${num+1}"/>
 
-                        <!--   아래에서 할일!
-                            <c:forEach items="${list.emp}" var="e">
-            <tr>
-               <td>${e.ename}</td>
-               <td>${e.job}</td>
-               <td>${e.hiredate}</td>
-            </tr>
-         </c:forEach>
- -->
+                    
  <div class="accordion-body">
             <div class="ibox-content forum-container">
         <div class="forum-title">
