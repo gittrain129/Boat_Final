@@ -62,7 +62,7 @@ $("#upfile2").change(function(){
 	console.log($(this).val())
 	const inputfile2 = $(this).val().split('\\');//c:\facepath\upload.png
 	$('#filevalue2').text(inputfile2[inputfile2.length -1]);
-	$('.remove2').css('display','block');
+	$('.remove2').css('display','inline-block');
 	});
 
 $(".remove1").click(function(){

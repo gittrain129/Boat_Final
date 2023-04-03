@@ -20,38 +20,37 @@
  	<h1>boat_ 자료실 답변쓰기</h1>
      
     <div class="form-group">
-        <label for="board_subject">제목</label>
-        <input name="board_subject" id="board_subject" type="text" maxlength="100"
+        <label for="FILE_SUBJECT">제목</label>
+        <input name="FILE_SUBJECT" id="FILE_SUBJECT" type="text" maxlength="100"
         class="form-control" placeholder="제목을 입력하세요">
     </div>
-    <input type ="hidden" name ="empno" value="${member.empno}">
+    <input type ="hidden" name ="EMPNO" value="${EMPNO}">
  	
 
  	<div class="form-group">
-         <label for="board_pass">비밀번호</label>
- 		<input name="board_pass" id="fileboard_pass" type="password" maxlength="30"
+         <label for="FILE_PASS">비밀번호</label>
+ 		<input name="FILE_PASS" id="FILE_PASS" type="password" maxlength="30"
  		class="form-control" placeholder="비밀번호를 입력하세요">
     </div>
 
-    <div class="form-group">
+	<div class="form-group">
         <label>글쓴이</label><br>
         <div class="form-control deptwriter">
-        <div class="btn-group " id = "">
-            <button type="button" class="btn btn-secondary" id ="deptsel" >${member.dept}</button>
-            <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" id = "deptbutton">
-            </button>
-            
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">홍보팀</a>
-                <a class="dropdown-item" href="#">개발팀</a>
-                <a class="dropdown-item" href="#">인사팀</a>
-                <a class="dropdown-item" href="#">기획팀</a>
-                <a class="dropdown-item" href="#">영업팀</a>
-              </div>
-            </div>
-       		<input name="board_name" id="board_name" type="text"  class=" writer form-control"
-       			placeholder="이름을 입력하세요" value ="${member.name}">
-            <input type="hidden" name = "dept" id = "dept" value = "${member.dept}">
+			<div class="dropdown" id="deptdrop" >
+				<a class="btn btn-secondary dropdown-toggle deptsel" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+					${DEPT}
+					</a>
+				<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+				  <li><a class="dropdown-item" href="#">홍보팀</a></li>
+				  <li><a class="dropdown-item" href="#">개발팀</a></li>
+				  <li><a class="dropdown-item" href="#">인사팀</a></li>
+				  <li><a class="dropdown-item" href="#">기획팀</a></li>
+				  <li><a class="dropdown-item" href="#">영업팀</a></li>
+				</ul>
+			  </div>
+       		<input name="FILE_NAME" id="FILE_NAME" type="text"  class=" writer form-control"
+       			placeholder="이름을 입력하세요" value ="${NAME}">
+            <input type="hidden" name = "dept" id = "dept" value = "${DEPT}">
   	  </div>
         </div>
     
