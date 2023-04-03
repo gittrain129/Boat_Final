@@ -71,6 +71,8 @@ public class AttendanceContoroller {
 		Attandance TodayMyatt = attandanceService.getTodayMyatt(EMPNO);
 		session.setAttribute("TodayOntime",TodayMyatt.getON_TIME());
 		
+		
+		
 		Map<String,String> map =new HashMap<String,String>();
 		map.put("ON_TIME", ON_TIME);
 		return map;
@@ -78,14 +80,18 @@ public class AttendanceContoroller {
 	@ResponseBody
 	@PostMapping(value="/off")
 	public Map<String,String> off(String EMPNO,String OFF_TIME
-			, ModelAndView mv) {
+			, ModelAndView mv
+			,HttpServletRequest request) {
 		logger.info("att접속중......퇴근할 empno = "+EMPNO);
 		logger.info("att접속중......퇴근할 OFF_TIME = "+OFF_TIME);
-		
+		HttpSession session = request.getSession();
+		session.removeAttribute("TodayOntime");
+
 		attandanceService.AttOff(OFF_TIME,EMPNO);
 		mv.addObject("OFF_TIME", OFF_TIME);
 		Map<String,String> map =new HashMap<String,String>();
 		map.put("OFF_TIME", OFF_TIME);
+		
 		return map;
 	}
 	

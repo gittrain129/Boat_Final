@@ -34,43 +34,38 @@
 		 
  	$(document).ready(function(){
 
-		function cancelEventSelection() {
-  			calendar.unselect();
-			}
-
-
-	
 
 		var calendarEl = document.getElementById('calendar');
 		let selDept = $("#calDept").val();
-		console.log(selDept)
  		
 		const Empno =$('#loginid').text()
  		$('#calEmpno').val(Empno); 						
 	    
 	  	//부서 선택시 새로운 캘린더페이지 
-	   var Events= $('#calDept').change(function(){
+	   $('#calDept').change(function(){
 			selDept = $(this).val();
-			console.log('selDept'+selDept)
-	  	//	console.log(selDept)
-	      //	location.href="${pageContext.request.contextPath}cal/deptlist?DEPT="+selDept;
-			return  showEvents(selDept);
+			 showEvents(selDept);
 		})
-	  		 console.log(Events)
-	function showEvents(dept) {
+	  		 
+	Events = [];		 
 
-    // DB에서 이벤트 가져오기
+	// DB에서 이벤트 가져오기
+	function showEvents(dept) {
     $.ajax({
         type: 'GET',
         url: 'cal/getEvents',
         data: { DEPT: dept },
         success: function(events) {
-		//	calendar.getEvents().forEach(event => event.remove())
-		   calendar.getEventSources().forEach(function(source) {
+        	Events= events;
+        	console.log('받은 값'+Events);
+
+		 	//바뀔때마다 이벤트 렌더 다시함.
+			calendar.getEvents().forEach(event => event.remove())
+		    calendar.getEventSources().forEach(function(source) {
       	                source.remove();
       	              });
-      	              calendar.addEventSource(events);
-      	              calendar.refetchEvents();
+      	   calendar.addEventSource(events);
+      	   calendar.refetchEvents(); 
         },
         error: function(xhr, status, error) {
             console.error(xhr.responseText);
@@ -217,12 +212,12 @@
 				console.log('찐막color............'+color);
 				console.log('찐막dept............'+dept);
 				console.log('찐막empno............'+Empno);
+				console.log('typeofallDay'+typeof(allDay))
 				if(allDay){
 					alldayText='true'
 				}else{
 					alldayText='false'
 				}
-				console.log(';;;;;;;;;;;'+alldayText)
 				console.log(typeof(alldayText))
 
 				console.log(';;;;;;;;;;;'+title)
@@ -239,10 +234,11 @@
 					"START_DATE": startmoment,
 					"END_DATE": endmoment,
 					"COLOR": color,
-					"AllDAY": alldayText,
+					"ALLDAY": alldayText,
 					"EMPNO":Empno,
 					"DEPT":dept
 				}
+				console.log(';;;;;;;;;;;'+alldayText)
 				//
 				$.ajax({
 					type: 'POST',

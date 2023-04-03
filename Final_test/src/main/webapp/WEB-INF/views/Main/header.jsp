@@ -37,7 +37,7 @@
 		}
         var attTime = $('#attTime').text();
         if(attTime!=''){
-            $('#attColor').css('background','#55a94b')
+            $('#attColor').css('background','#40cf2f')
         }
 	})
 </script>

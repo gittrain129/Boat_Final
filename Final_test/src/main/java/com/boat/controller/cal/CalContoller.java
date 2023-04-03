@@ -1,12 +1,12 @@
 package com.boat.controller.cal;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +41,12 @@ public class CalContoller {
 	public int CalAdd(
 			Calendar cal,
 			HttpServletRequest request) throws Exception{
-		
+		logger.info("너는 왜 널이니?"+cal.getALLDAY());
+		logger.info("너는 왜 널이니?"+cal.getCOLOR());
+		logger.info("너는 왜 널이니?"+cal.getDEPT());
+		logger.info("너는 왜 널이니?"+cal.getEMPNO());
+		logger.info("너는 왜 널이니?"+cal.getEVENT_NAME());
+		logger.info("너는 왜 널이니----------------------------------------");
 		
 		logger.info("...."+cal.toString());
 		
@@ -53,12 +58,9 @@ public class CalContoller {
 	//@SuppressWarnings("unchecked")
 	@RequestMapping("/getEvents")
 	    @ResponseBody
-	    public  Map<String,Object> getEvents(
-	    		//@RequestParam("eventName") String eventName
+	    public  List<Map <String,Object>> getEvents(
 	    		@RequestParam(value = "DEPT", required = false)String DEPT) {
 		 
-		 JSONObject jsonObj = new JSONObject();
-		// JSONArray jsonArr = new JSONArray();
 	        
 		  List<Calendar> events;
 	        if (DEPT != null && !DEPT.isEmpty()) {
@@ -66,13 +68,13 @@ public class CalContoller {
 	        } else {
 	            events = calendarService.getAllEvents();
 	        }
-	        //Map<String,Object>map = new HashMap<String,Object>();
-	        //map.put("events", events);
-	        JSONArray jsonArr = new JSONArray();
 	        logger.info("dddddd"+events.toString());
+	        logger.info("ddddddddddd"+events.size());
+	        List<Map <String,Object>> result = new ArrayList<Map <String,Object>>();
 	        
-	        Map <String,Object> event = new HashMap<String,Object>();
 	        for(Calendar cal: events) {
+	        	Map <String,Object> event = new HashMap<String,Object>();
+	        	
 	        	 event.put("id",cal.getSCHEDULE_CODE());
 	             event.put("start", cal.getSTART_DATE());
 	             event.put("end", cal.getEND_DATE());
@@ -80,11 +82,10 @@ public class CalContoller {
 	             event.put("color",cal.getCOLOR());
 	             event.put("allDay", cal.getALLDAY());
 	             event.put("DEPT", cal.getDEPT());
-	            
-	           //  jsonArr.add(cal);
+	             result.add(event);
 	        }
-	       // logger.info(event);
-	        return event;
+	        logger.info("얍"+result.toString());
+	        return result;
 		 
 	    }
 		

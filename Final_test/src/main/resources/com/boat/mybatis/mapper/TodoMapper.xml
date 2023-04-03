@@ -72,6 +72,13 @@
  			 </association>
 		 </resultMap> -->
 		 
+		 <update id="myTodoupdate">
+		 update todolist set END_DATE=#{END_DATE}
+		 <if test="T_CONTENT !=null and T_CONTENT =''">
+		 and T_CONTENT=#{T_CONTENT}
+		 </if>
+		 where num= #{num}
+		 </update>
 		 
 		 
   </mapper>

@@ -9,11 +9,10 @@ import com.boat.domain.Calendar;
 @Mapper
 public interface CalendarMapper {
 
+	//삭제예정
 	List<Calendar> getCalList(String dept);
 
 	int calInsert(Calendar cal);
-
-	List<Calendar> getEvents(String dEPT);
 
 	List<Calendar> getEventsByDept(String DEPT);
 

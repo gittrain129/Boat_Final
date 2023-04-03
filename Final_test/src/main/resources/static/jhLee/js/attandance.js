@@ -65,12 +65,9 @@ if(starttimeeeeeee&&endtimeeeeeee){
 //출근버튼 클릭
 $('#start-btn').click(function(){
 
-       // console.log($('#start-btn').attr('disabled')==true);
-       // console.log("보낼 empno ......"+empno);
-       // console.log("보낼 dept ......"+dept);
-
         //버튼클릭시 1. 알럿창 2. 값전송 db 저장
-        if($('#start-btn').hasClass('c-btn')){
+        if($(this).prop('class') == 'c-btn'){
+                console.log('c-btn')
                 toastr.options.escapeHtml = true;
                 toastr.options.closeButton = true;
                 toastr.options.newestOnTop = false;
@@ -84,6 +81,7 @@ $('#start-btn').click(function(){
                 'ON_TIME':currenttime
                 ,'DEPT':dept},
         type :'post',
+        async:false,
         beforeSend: function (jqXHR, settings) {
                  jqXHR.setRequestHeader(header, token);
               	},
@@ -92,8 +90,9 @@ $('#start-btn').click(function(){
                 console.log("출근 success");
                 if($('#start-btn').hasClass('btn')){
                         $('#start-btn').removeClass('btn')
-                                .addClass('c-btn')
-                                .css('pointer-events','none');  }
+                                .addClass('c-btn');
+                               // .css('','none');
+                          }
                                 //하얗게
                 if($('#end-btn').hasClass('c-btn')){  
                       $('#end-btn').removeClass('c-btn')
@@ -105,9 +104,9 @@ $('#start-btn').click(function(){
                 //출근시간 표시.substr(0,10)
                 console.log(rdata.ON_TIME);
                 let attTiemeee=rdata.ON_TIME;
-             //  $('#onTimeText').text(rdata.ON_TIME);
-             //  $('#attTime').text(attTiemeee);
-             //  $('#attColor').css('background','#55a94b')
+               $('#onTimeText').text(rdata.ON_TIME);
+               $('#attTime').text(attTiemeee);
+               $('#attColor').css('background','#55a94b')
 
         }, error: function(error){
                 console.log("hi")
