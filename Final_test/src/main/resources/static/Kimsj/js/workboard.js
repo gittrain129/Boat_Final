@@ -21,7 +21,6 @@ $(function(){
 				type: "post",
 				url : "../comment/list",
 				data: {
-						"board_num" : $("#board_num").val(),
 						"page" : currentPage
 				},
 				beforeSend : function(xhr)
@@ -113,8 +112,7 @@ $(function(){
 			url = "../comment/add";
 			data = {
 				"content" : content,
-				"id" : $("#loginid").text(),
-				"board_num" : $("#board_num").val()
+				"id" : $("#loginid").text()
 			};
 		} else { // 댓글을 수정하는 경우
 			url = "../comment/update";
