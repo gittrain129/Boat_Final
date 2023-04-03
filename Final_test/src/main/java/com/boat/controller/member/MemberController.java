@@ -2,6 +2,7 @@ package com.boat.controller.member;
 
 
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.Principal;
 import java.sql.SQLException;
@@ -699,7 +700,7 @@ public class MemberController {
 	
 	
 	
-	//MY BOAT
+	//내 정보
 	@GetMapping("/myinfo")
 	public ModelAndView hello4(Principal principal, ModelAndView mv) {
 
@@ -717,6 +718,60 @@ public class MemberController {
 		}
 		
 		return mv;
+	}
+	
+	//내 정보 수정
+	@RequestMapping(value = "/updateProcess", method = RequestMethod.POST)
+	public String member_updateProcess(RedirectAttributes rattr, Model model, HttpServletRequest request,
+			Member member, HttpSession session) throws Exception {
+		
+		member.setPASSWORD_OG(member.getPASSWORD());
+		
+		//비밀번호 암호화 추가
+		String encPassword = passwordEncoder.encode(member.getPASSWORD());
+		Logger.info(encPassword);
+		member.setPASSWORD(encPassword);
+		
+		//프로필
+		MultipartFile uploadfile = member.getUploadfile();
+		
+		if(!uploadfile.isEmpty()) {
+			String fileName = uploadfile.getOriginalFilename();//원래 파일명
+			
+			String saveFolder = new File("src/main/resources/static/profile").getAbsolutePath();
+			List<String> fileDBName = fileDBName(fileName, saveFolder, member.getEMPNO());
+			Logger.info("fileDBName : " + fileDBName);
+			
+			String fileDBNames = fileDBName.get(0);
+			String refileName = fileDBName.get(1);
+			
+			//transferTo(file path) : 업로드된 파일을 매개변수의 경로에 저장합니다.
+			uploadfile.transferTo(new File(saveFolder + fileDBNames));
+			Logger.info("transferTo path : " + saveFolder + fileDBNames);
+			//바뀐 파일명으로 저장
+			member.setPROFILE_IMG(refileName);
+			Logger.info("fileDBNames : " + fileDBNames);
+			
+			System.out.println("absolutePathss " +saveFolder);
+			//파일 경로 이름
+			member.setPROFILE_FILE("profile" + fileDBNames);
+		}
+		
+		int result = memberservice.update(member);
+		
+		if(result==1) {
+			rattr.addFlashAttribute("message","updateSuccess");
+			
+			session.setAttribute("NAME", member.getNAME());
+			session.setAttribute("DEPT", member.getDEPT());
+			session.setAttribute("PROFILE_FILE", member.getPROFILE_FILE());
+			
+			return "redirect:/index";
+		}else {
+			model.addAttribute("url", request.getRequestURL());
+			model.addAttribute("message", "정보 수정 실패");
+			return "error/error";
+		}
 	}
 	
 	@GetMapping("/chat")

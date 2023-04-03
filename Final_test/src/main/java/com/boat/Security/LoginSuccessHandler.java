@@ -47,7 +47,6 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		session.setAttribute("NAME", member.getNAME());
 		session.setAttribute("DEPT", member.getDEPT());
 		session.setAttribute("PROFILE_FILE", member.getPROFILE_FILE());
-		session.setAttribute("JOB", member.getJOB());
 		
 		
 		Logger.info("로그인 성공 : LoginSuccessHandler"); 

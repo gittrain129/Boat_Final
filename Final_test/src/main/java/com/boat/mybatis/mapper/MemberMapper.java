@@ -45,4 +45,7 @@ public interface MemberMapper {
 	
 	//비번 재설정
 	public int pwdupdate(String empno, String password, String encPassword);
+
+	//회원 수정
+	public int update(Member m);
 }

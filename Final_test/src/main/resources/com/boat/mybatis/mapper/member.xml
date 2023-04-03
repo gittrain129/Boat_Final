@@ -82,4 +82,11 @@
 		where EMPNO = #{empno}
 	</update>
 	
+	<update id="update">
+		update MEMBER
+		set DEPT = #{DEPT}, PASSWORD = #{PASSWORD}, PASSWORD_OG = #{PASSWORD_OG}, NAME = #{NAME}, 
+			PROFILE_FILE = #{PROFILE_FILE}, PROFILE_IMG = #{PROFILE_IMG}
+		where EMPNO = #{EMPNO}
+	</update>
+	
 </mapper>

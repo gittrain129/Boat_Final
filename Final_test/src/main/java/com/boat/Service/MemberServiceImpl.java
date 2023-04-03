@@ -106,6 +106,12 @@ public class MemberServiceImpl implements MemberService {
 		return dao.pwdupdate(empno, password, encPassword);
 	}
 
+	//회원 수정
+	@Override
+	public int update(Member m) {
+		return dao.update(m);
+	}
+
 
 	
 	
