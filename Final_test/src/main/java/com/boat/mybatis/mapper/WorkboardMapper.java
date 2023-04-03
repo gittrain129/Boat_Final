@@ -13,8 +13,7 @@ public interface  WorkboardMapper {
 			//글의 갯수 구하기
 			public int getListCount(int board_num);
 			
-			//댓글 목록 가져오기
-			public List<Workboard> getCommentList(Map<String, Integer> map);
+
 			
 			//댓글 등록하기
 			public int commentsInsert(Workboard c);

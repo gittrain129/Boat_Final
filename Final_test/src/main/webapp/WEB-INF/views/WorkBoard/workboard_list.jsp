@@ -7,7 +7,7 @@
 <title>워크보드 게시판</title>
 
 	<jsp:include page="../Main/header.jsp"/>
-	<script src="${pageContext.request.contextPath}/resources/Kimsj/js/view.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/Kimsj/js/workboard.js"></script>
 	 
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/Kimsj/workboard_lib/fa-5/css/all.css" />  	
 	<!-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/Kimsj/workboard_lib/bootstrap-4/css/bootstrap.min.css" />  -->
