@@ -41,7 +41,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 //		String attoff=attendance.getOFF_TIME();
 //		if(attendance != null&& attoff==null) {
 //			session.setAttribute("TodayOntime",attendance.getON_TIME());
-//			
+//			출근안한사람은 로그인안됨 
 //		}
 		Member member = dao.isId(EMPNO);
 		session.setAttribute("EMPNO", EMPNO);
