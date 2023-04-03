@@ -309,7 +309,17 @@
                     <img class="bi img-circle" 
                     	 src="${pageContext.request.contextPath}/${PROFILE_FILE}">
                 </div>
-                <div class="text-white ms-3">${NAME} 님</div>
+                <div class="text-white ms-3"></div>
+            
+            <div class="navbar-nav me-auto p-3 p-lg-0">
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle me-0" data-bs-toggle="dropdown">${NAME} 님</a>
+                    <div class="dropdown-menu border-0 rounded-0 rounded-bottom m-0 shadow">
+                        <a href="${pageContext.request.contextPath}/member/myinfo" class="dropdown-item">MY BOAT</a>
+                    </div>
+                </div>
+            </div>    
+                
                 <div class="ps-3">
                     <div class="btn btn-sm btn-light rounded-pill py-2 px-4 d-none d-lg-block">
                     	<form action="${pageContext.request.contextPath}/member/logout" method="post" name="logout">

@@ -14,21 +14,32 @@
         <!-- Sign up form -->
         <div id="sign-up-container">
           <h3>비밀번호 재설정</h3>
-          <p class="brick-idpw_2022__desc">아이디 <span class="w-blue-text">admin</span>의 새 비밀번호를 등록해 주세요</p>
-          <form>
+          <p class="brick-idpw_2022__desc">사번 <span class="w-blue-text">${empno}</span> 의 새 비밀번호를 등록해 주세요</p>
+          <form action="pwdmodify" method="post">
+          	<input type="hidden" name="empno" value="${empno}">
+          
             <label for="name">새 비밀번호</label>
-            <input type="password" class="_input" name="password" placeholder="8~16자 / 문자, 숫자, 특수 문자 모두 혼용" id="name">
+            <input type="password" class="_input" name="password" placeholder="6~16자 / 문자, 숫자, 특수 문자 모두 혼용 가능" 
+            	id="_label-pwd">
             <div class="first_icon"><i class= "fa fa-solid fa-eye-slash" ></i></div>
+			<div id="validationServerUsernameFeedback" class="invalid-feedback fw-bold">
+				영문, 숫자, 특수 문자 6~16자리로 입력해 주세요
+			</div>
 
-            <label for="empno">새 비밀번호 확인</label>
-			<input type="password" name="password" placeholder="새 비밀번호 확인" class="input-id _input error_border" id="empno">
+            <label for="empno" class="mt-4">새 비밀번호 확인</label>
+			<input type="password" name="password_ck" placeholder="새 비밀번호 확인" class="input-id _input error_border" 
+				id="_label-pwd-ck">
 			<div class="second_icon"><i class= "fa fa-solid fa-eye-slash" ></i></div>
+			<div id="validationServerUsernameFeedback2" class="invalid-feedback fw-bold">
+				비밀번호와 동일하게 입력해 주세요
+			</div>
 	
             <div id="form-controls">
-              <button type="submit"  class="btn-primary">변경하기</button>
+              <button type="submit"  class="btn btn-primary py-3 px-5 mt-4 w-100" disabled>변경하기</button>
             </div>
 
 
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
           </form>
         </div>
 

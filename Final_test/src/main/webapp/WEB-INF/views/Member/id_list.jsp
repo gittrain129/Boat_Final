@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
  <head>
@@ -6,6 +7,31 @@
  	<link href="${pageContext.request.contextPath}/resources/ejyang/css/idlist.css" type="text/css" rel="stylesheet">
  	<script src="http://code.jquery.com/jquery-latest.js"></script>
  	<jsp:include page="../Main/header.jsp" />
+ 	<script>
+ 		$(document).ready(function() {
+ 			var smallestInput = $('.find-userinfo__list input[type="checkbox"]').sort(function(a, b) {
+ 	            return a.id - b.id;
+ 	        }).first();
+
+ 	        smallestInput.prop('checked', true);
+
+ 	        $('.find-userinfo__list input[type="checkbox"]').change(function() {
+ 	            if ($(this).is(':checked')) {
+ 	                $('.find-userinfo__list input[type="checkbox"]').not(this).prop('checked', false);
+ 	            } else {
+ 	                // Prevent unchecking of currently checked input
+ 	                if ($('.find-userinfo__list input[type="checkbox"]:checked').length === 0) {
+ 	                    $(this).prop('checked', true);
+ 	                }
+ 	            }
+ 	        });
+ 	        
+ 		});
+ 		
+ 		function onClicklogin() {
+ 			$("#idlogin").submit();
+ 		}
+ 	</script>
  </head>
  <body>
    <div id="form-container">
@@ -13,38 +39,38 @@
         <!-- Sign up form -->
         <div id="sign-up-container">
           <h3>아이디 받기</h3>
-          <form>
+          <form action="id_login" method="get" id="idlogin">
             <div class="idpw_userinfo">
 
             	<!-- <span class="sub_title"></span> -->
             	<div class="find-userinfo">
-                	<div class="find-userinfo__item id_list">
-                        <div class="find-userinfo__list id_list">
-		                    <input id="7" class="btn_radio" type="radio" name="user_id" checked="">
-	                        <label for="7">admin</label>
-	                        <input type="hidden" name="search_type_7" value="email">
-	                        <input type="hidden" name="user_name_7" value="">
-	                        <input type="hidden" name="param_7" value="">
-                    	</div>
-                	
-                        <div class="find-userinfo__list id_list">
-	                        <input id="10" class="btn_radio" type="radio" name="user_id">
-	                        <label for="10">admin2</label>
-	                        <input type="hidden" name="search_type_10" value="email">
-	                        <input type="hidden" name="user_name_10" value="">
-	                        <input type="hidden" name="param_10" value="">
-                    	</div>
-                    </div>
+            	
+            	  <c:set var="num" value="1"/>
+            	  <c:forEach var="b" items="${idlist}">
+	            	<c:if test="${b.NAVERLOGIN == null && b.GOOGLELOGIN == null}">
+	            	  
+	                	<div class="find-userinfo__item id_list">
+	                        <div class="find-userinfo__list id_list position-relative">
+			                    <input id="${num}" class="terms position-absolute" type="checkbox" 
+			                    		name="userid" value="${b.EMPNO}">
+		                        <label for="${num}" class="fw-bold">${b.EMPNO}</label>
+	                    	</div>
+	                    </div>
+	                    
+	              	</c:if>    
+                  <c:set var="num" value="${num+1}"/> 
+                  </c:forEach>
+                  
                 </div>
                 
 
 	            <div class="brick-idpw_2022__findinfo">
-	                <a href="sign_in">로그인하기</a>
+	                <a href="#" onClick="onClicklogin()">로그인하기</a>
 	                <a href="pwd_check">비밀번호를 찾으시나요?</a>
 	            </div>
             </div>
 
-
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
           </form>
         </div>
 

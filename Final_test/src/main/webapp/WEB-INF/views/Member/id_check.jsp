@@ -14,7 +14,7 @@
  		    toastr.options.closeButton = true;
  		    toastr.options.newestOnTop = false;
  		    toastr.options.progressBar = true;
- 		    toastr.info('일치하는 아이디가 없습니다.', '아이디 찾기', {timeOut: 5000});
+ 		    toastr.info('일치하는 회원정보가 없습니다.', '아이디 찾기', {timeOut: 5000});
  		}
  	</script>
  </head>

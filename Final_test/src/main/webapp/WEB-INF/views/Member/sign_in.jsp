@@ -12,13 +12,39 @@
  	<script>
  		var result="${result}";
  		if(result == 'joinSuccess'){
- 			alert("회원가입을 축하합니다.")
+ 			toastr.options.escapeHtml = true;
+ 		    toastr.options.closeButton = true;
+ 		    toastr.options.newestOnTop = false;
+ 		    toastr.options.progressBar = true;
+ 		    toastr.info('회원가입을 축하합니다.', '로그인', {timeOut: 5000});
+ 		    
+ 		}else if(result == "googleSuccess"){
+ 			toastr.options.escapeHtml = true;
+ 		    toastr.options.closeButton = true;
+ 		    toastr.options.newestOnTop = false;
+ 		    toastr.options.progressBar = true;
+ 		    toastr.info('구글 계정 회원가입을 축하합니다.', '로그인', {timeOut: 5000});
+ 		    
  		}else if("${loginfail}" == "loginFailMsg"){
- 			alert("아이디나 비밀번호 오류 입니다.")
- 		}else if("${JavaData}" == "YES"){
- 			alert("네이버 회원가입을 축하합니다.")
- 		}else if("${JavaData}" == "NO"){
- 			alert("네이버 회원가입에 실패했습니다.")
+ 			toastr.options.escapeHtml = true;
+ 		    toastr.options.closeButton = true;
+ 		    toastr.options.newestOnTop = false;
+ 		    toastr.options.progressBar = true;
+ 		    toastr.info('아이디나 비밀번호 오류 입니다.', '로그인', {timeOut: 5000});
+ 		    
+ 		}else if(result == "naverSuccess"){
+ 			toastr.options.escapeHtml = true;
+ 		    toastr.options.closeButton = true;
+ 		    toastr.options.newestOnTop = false;
+ 		    toastr.options.progressBar = true;
+ 		    toastr.info('네이버 계정 회원가입을 축하합니다.', '로그인', {timeOut: 5000});
+ 		    
+ 		}else if(result == 'passSuccess'){
+ 			toastr.options.escapeHtml = true;
+ 		    toastr.options.closeButton = true;
+ 		    toastr.options.newestOnTop = false;
+ 		    toastr.options.progressBar = true;
+ 		    toastr.info('비밀번호가 수정되었습니다.', '로그인', {timeOut: 5000});
  		}
  		
  		
@@ -43,8 +69,10 @@
 	            <input type="password" name="password" id="password" class="form-control" placeholder="비밀번호를 입력해주세요" 
 	            		value="${PASSWORD_OG}">
             </c:if>
+            
             <c:if test="${empty EMPNO}">
-	            <input type="text" name="id" id="name" class="form-control" placeholder="사번을 입력해주세요">
+	            <input type="text" name="id" id="name" class="form-control" placeholder="사번을 입력해주세요"
+	            		<c:if test="${userid != null}"> value="${userid}" </c:if> >
 	
 	            <label for="password">비밀번호</label>
 	            <i class= "fas fa-lock"></i>
@@ -199,7 +227,7 @@
     
     window.onload = function () {
       google.accounts.id.initialize({
-        client_id: "",
+        client_id: "197091871700-c8bvdtnt6l0ms7nq0bjgb87rrii413up.apps.googleusercontent.com",
         callback: handleCredentialResponse,
         context: "signup"
       });

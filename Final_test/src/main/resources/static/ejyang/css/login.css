@@ -101,11 +101,6 @@ button[type="submit"] {
     height: 57px;
 }
 
-button[type="button"] {
-    background-color: transparent;
-    color: #ED4B5E;
-}
-
 #terms {
     width: 1.6rem;
     height: 1.6rem;
