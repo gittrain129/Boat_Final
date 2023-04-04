@@ -37,15 +37,8 @@ function getList(tab){
 	      		$('.myinfo').append(output)
       			
       		}else {
-      			var baseUrl = window.location.origin;
-				var templateUrl = baseUrl + "../Member/template.html";
-				
-				$.get(templateUrl, function(data) {
-				    $('.myinfo').load(data);
-					//$('.myinfo').append(data)
-				});
-				
-      			//$('.container').load(templateUrl);
+				$('.myinfo > div').remove();
+      			$('.myinfo').load('myinfo.jsp');
       		}
       		
       	            	
@@ -66,20 +59,6 @@ $(document).ready(function(){
 	var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
 
-
-	var tab_info='회원 정보';
-
-	$('.nav-tabs a').on('click', function (e) {
-		e.preventDefault();
-		$('.nav-tabs a').removeClass('active');
-		$(this).addClass('active'); 
-		
-		tab_info = $('.nav-tabs .active').text();
-		console.log("tab_info"+tab_info)
-		getList(tab_info);
-	});
-	
-	
 
 	var valid_password = true;
 	var valid_password_ck = false;
