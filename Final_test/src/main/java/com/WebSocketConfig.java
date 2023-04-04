@@ -5,5 +5,12 @@ import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBr
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 
-public class WebSocketConfig  {
+public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
+
+	// connection을 맺을때 CORS 허용
+	@Override
+	public void registerStompEndpoints(StompEndpointRegistry registry) {
+		registry.addEndpoint("/").setAllowedOrigins("*").withSockJS();
+	}
+	
 }
