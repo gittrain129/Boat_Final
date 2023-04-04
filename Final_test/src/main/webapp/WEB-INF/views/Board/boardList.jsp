@@ -86,8 +86,17 @@
 								<span class="gray small">[<c:out value="${b.CNT}"/>]</span>
 								</a>
 								
-								<div><span	class="badge badge-pill badge-warning" style="background-color: #89a5ea;">new</span></div>
-								<div class="ml-auto"><span	class="badge badge-pill badge-warning float-right" style="background-color: #89a5ea;">기획팀</span></div>
+								<c:set var="ntime" value="<%= new java.util.Date() %>" />
+								<c:set var="dateFormat" value="yyyy-MM-dd HH:mm:ss" />
+								<c:set var="boardDate" value="<%= new java.text.SimpleDateFormat("+ dateFormat+" ).format(+"${b.BOARD_DATE}+") %>" />
+
+<c:if test="${boardDate ge dateFormat}">
+
+
+
+	 		      	  			<img src="${pageContext.request.contextPath}/resources/jkKim/image/new.jpg" id="new">
+	 		      	  			</c:if>
+								<div class="ml-auto"><span	class="badge badge-pill badge-warning float-right" style="background-color: #89a5ea;">${b.BOARD_DEPT }</span></div>
 								</td>
 								
 								
