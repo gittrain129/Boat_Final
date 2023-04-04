@@ -2,7 +2,6 @@ package com.boat.controller.member;
 
 
 import java.io.File;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.Principal;
 import java.sql.SQLException;
@@ -25,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,7 +41,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.boat.Service.MemberService;
 import com.boat.Task.SendMail;
-import com.boat.domain.ConferenceReservation;
 import com.boat.domain.MailVO;
 import com.boat.domain.Member;
 import com.boat.sns.NaverLoginBO;
@@ -784,7 +783,28 @@ public class MemberController {
 		return mv;
 	}
 	
-	
+	//회원정보 삭제
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public String member_delete(@RequestParam String empno, ModelAndView mv, HttpServletRequest request,
+			RedirectAttributes rattr, HttpSession session) {
+		System.out.println("empno="+empno);
+		
+		int result = memberservice.delete(empno);
+		System.out.println("deleteresult="+result);
+		
+		if(result == 1) {
+			rattr.addFlashAttribute("message","deleteSuccess");
+			session.invalidate();
+			SecurityContextHolder.clearContext();
+			
+			return "redirect:/index";
+		}else {
+			mv.addObject("url", request.getRequestURL());
+			mv.addObject("message", "계정 삭제에 실패했습니다.");
+			
+			return "error/error";
+		}
+	}
 	
 	
 	

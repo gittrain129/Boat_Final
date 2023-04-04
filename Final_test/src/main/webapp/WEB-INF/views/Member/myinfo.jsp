@@ -259,6 +259,25 @@
 			  }
 			
 			
+		    var key = '${memberinfo.PASSWORD_OG}';
+		    console.log('key='+key)
+		    
+		    $('.passwordtext button').on('click', function() {
+			    var pwdinput = $.trim($('.passwordinput').val());
+			    console.log('pwdinput='+pwdinput)
+		    	if(pwdinput == key){
+			        $('#exampleModal').modal('show'); 
+			    } else {
+			        $('#exampleModal').modal('hide'); 
+		    		toastr.options.escapeHtml = true;
+				    toastr.options.closeButton = true;
+				    toastr.options.newestOnTop = false;
+				    toastr.options.progressBar = true;
+				    toastr.info('비밀번호를 잘못 입력하였습니다.', '내 정보', {timeOut: 5000});
+			    }
+		    	
+		    });
+		    
  		})
  		
  		function onClickUpload() {
@@ -516,9 +535,11 @@
 					    <div class="col-sm-12 col-md-8">
 						    <p class="fs-3 text-dark">비밀번호 재확인</p> 
 						    <p class="fs-5 fw-normal text-dark">정보를 안전하게 보호하기 위해 비밀번호를 다시 한 번 확인합니다.</p> 
-						    <div class="mt-4 row row-container ps-2">
-						    	<input type="password" autocomplete="off" class="form-control w-50"  style="height: 50px;"> 
-							    <button type="button" class="col-2 ms-3 btn btn-outline-primary">
+						    <div class="mt-4 row row-container ps-2 passwordtext">
+						    	<input type="password" autocomplete="off" class="passwordinput form-control w-50"  
+						    			style="height: 50px;"> 
+							    <button type="button" class="col-2 ms-3 btn btn-outline-primary" data-bs-toggle="modal"
+							    		>
 							    	확인
 							    </button>
 						    </div> 
@@ -529,7 +550,29 @@
 					</div>
 				</div>
 				
-				
+				<!-- Modal -->
+				<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLabel">계정 삭제</h5>
+				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				      </div>
+				      <div class="modal-body">
+				        계정을 삭제하면 되돌릴 수 없으며, 삭제한 데이터를 복구할 수 없음을 이해했습니다.
+				      </div>
+				      
+				        <form action="delete" method="get">
+				          <input type="hidden" value="${memberinfo.EMPNO}" name="empno">
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>
+					        <button type="submit" class="btn btn-outline-primary">회원 탈퇴</button>
+					      </div>
+					    </form>
+					    
+				    </div>
+				  </div>
+				</div>
 			  	
 			  	
               </div>
