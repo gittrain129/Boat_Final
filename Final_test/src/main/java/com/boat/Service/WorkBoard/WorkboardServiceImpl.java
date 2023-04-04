@@ -24,17 +24,20 @@ public class WorkboardServiceImpl implements WorkboardService{
 	}
 
 	
-		
-	@Override
-	public int getListCount(int board_num) {
-		log.beforeLog();
-		return dao.getListCount(board_num);
-	}
 	
 	
 	
 
-	
+	@Override
+	public List<Workboard> getCommentList(int page) {
+		int startrow = 1;
+		int endrow = page * 3;
+		
+		Map<String,Integer> map = new HashMap<String,Integer>();
+		map.put("start", startrow);
+		map.put("end", endrow);
+		return dao.getCommentList(map);
+	}
 
 	
 	
