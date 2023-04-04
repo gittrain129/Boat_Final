@@ -49,3 +49,39 @@ drop table file_board cascade constraints purge;
 						where rownum<=10 ) 
 	WHERE rnum>=0 and rnum<=10;
 	
+
+	
+	
+	
+	
+	
+	  select * from "
+						(select b.*, rownum rnum from 
+							(select file_board.* , nvl(CNT ,0) CNT 
+							from file_board left outer join  
+							 				 (select F_COMMENT_NUM,count(*) CNT 
+																from FILE_COMMENT 
+																group by F_COMMENT_NUM
+																order by CNT desc) //댓글순
+							on FILE_NUM = F_COMMENT_NUM 
+							<where>
+							//FILE_NAME //FILE_SUBJECT
+							search + " like ? " 
+								dept = ""
+						"+order+" )b 
+						조회수
+						where rownum<= ? ) 
+						 order by  FILE_RE_REF desc , FILE_RE_SEQ asc정렬
+						 order by FILE_DATE desc최신순
+						 order by FILE_READCOUNT desc조회순
+						 order by CNT desc댓글순
+						//endrow//최신순
+						where rnum>= ? and rnum<= ? 
+					
+					//startrow,endrow
+		
+	
+	
+	
+	
+	

@@ -21,6 +21,9 @@
  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   
   <link href ="${pageContext.request.contextPath}/jhLee/css/fullcalendar.css"  rel ="stylesheet">
+  <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
+
+  <script src="https://unpkg.com/tippy.js@6"></script>
   <style>
 	.page-header {
 		margin: 0!important;
@@ -46,21 +49,51 @@
 			selDept = $(this).val();
 			 showEvents(selDept);
 		})
-	  		 
+		//시작시 전체 이벤트 가져옴
+	showEvents()
 	Events = [];		 
 
 	// DB에서 이벤트 가져오기
 	function showEvents(dept) {
+	
+		// let param = {
+		// 	startDate: startDate,
+		// 	endDate: endDate
+		// };
+		
     $.ajax({
         type: 'GET',
         url: 'cal/getEvents',
         data: { DEPT: dept },
         success: function(events) {
-        	Events= events;
-        	console.log('받은 값'+Events);
+        	
+			for(i=0; i<events.length; i++){
+				startDate = moment(events.start).format("YYYY-MM-DD hh:mm");
+				//if(i==17)
+				//console.log(startDate)
+
+				endDate = moment(events.end).format("YYYY-MM-DD hh:mm");
+				let allDay = events.allDay
+				if(allDay=='0')
+				events.allDay =0;	
+				else 
+				events.allDay =0;
+
+			}
+			Events= events;
+        	
+			//var test = new Date(Events[17].start);
+			//console.log(test+'dddddddddd')
+			//Events[17].start = test;
+        	console.log('받은 값1'+events.start);//2023-04-13 01:37
+        	console.log('받은 값2'+events.end);
+        	console.log('받은 값3'+  Events.allDay);
+			console.log('받은 값4'+  ( Events.allDay  ==  'false'));
+			//events[18].allDay=0
+	//console.log(events[18].title)
 
 		 	//바뀔때마다 이벤트 렌더 다시함.
-			calendar.getEvents().forEach(event => event.remove())
+			//calendar.getEvents().forEach(event => event.remove())
 		    calendar.getEventSources().forEach(function(source) {
       	                source.remove();
       	              });
@@ -76,10 +109,25 @@
 	      
 	      // full-calendar 생성하기
 	      calendar = new FullCalendar.Calendar(calendarEl, {
-			themeSystem: 'bootstrap5'
-			,unselectAuto:true
+			unselectAuto:true
 	    	,events :Events
         	,height: '600px', // calendar 높이 설정
+			dayPopoverFormat: { year: 'numeric', month: 'long', day: 'numeric' },
+			eventDidMount: function(info) {
+				const start = moment(info.event.start).format('YYYY-MM-DD HH:mm:ss');
+				//const tool = start.slice(0,16)
+				const too2 = info.event.start;
+				//const tool33 = too2.slice(0,16)
+				console.log('info.event.start'+info.event.start)
+				console.log('tootip start'+start)
+				//console.log('tool start'+tool)
+
+				tippy(info.el,{
+					content : info.event.title+info.event.start
+					
+				});
+			},
+
       		 expandRows: true, // 화면에 맞게 높이 재설정
       		 headerToolbar:
 			   {
@@ -214,21 +262,14 @@
 				console.log('찐막empno............'+Empno);
 				console.log('typeofallDay'+typeof(allDay))
 				if(allDay){
-					alldayText='true'
+					alldayText='1'
 				}else{
-					alldayText='false'
+					alldayText='0'
 				}
 				console.log(typeof(alldayText))
 
 				console.log(';;;;;;;;;;;'+title)
-					//받을때 이렇게 받읍시다
-				// var eventData1 = {
-				// 	title: title,
-				// 	start: startmoment,
-				// 	end: endmoment,
-				// 	color: color,
-				// 	allDay: allDay,
-				// }
+					
 				var eventData = {
 					"EVENT_NAME": title,
 					"START_DATE": startmoment,
@@ -272,9 +313,6 @@
 						location.reload();
 							
 					})
-					//이벤트 다시 읽어와서 랜더링,,,,?
-					//calendar.refetchEvents();
-					//Calendar.('renderEvent', eventData, true);
 
 				} //complete 끝
 				})//ajax끝
@@ -284,6 +322,7 @@
 			},
 		    eventClick: 
    		        function deleteEvent(event) {
+					console.log(event)
    		            if (confirm("일정을 삭제하시겠습니까?")) {
    		                $.ajax({
    		                    type: 'POST',

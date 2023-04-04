@@ -6,6 +6,7 @@
 <jsp:include page="../Main/header.jsp" />
 	
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/jhLee/css/filenew.css">
+<script src="${pageContext.request.contextPath}/resources/jhLee/js/filelist.js"></script>
 <style>
 
 
@@ -41,9 +42,8 @@
 
         <div class="btn-group search form-group">
         
-           <input type="hidden" name = "searchsel" id = "searcselhval" value =" ${searchsel}">
             <div class="dropdown" >
-    		  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+    		  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="searchsel" data-bs-toggle="dropdown" aria-expanded="false">
     	    검색옵션
    			   </a>
 		      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -151,21 +151,21 @@
 								
 			<div class="btn-group search form-group">
         
-           <input type="hidden" name = "searchsel" id = "searcselhval" value =" ${searchsel}">
+           <input type="hidden" name = "deptval" id = "deptvall" value =" ${deptval}">
             <div class="dropdown" >
-    		  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+    		  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="deptval" data-bs-toggle="dropdown" aria-expanded="false">
     	    부서별
    			   </a>
 		      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-		        <li><a class="dropdown-item" href="#">홍보팀</a></li>
-		        <li><a class="dropdown-item" href="#">개발팀</a></li>
-		        <li><a class="dropdown-item" href="#">인사팀</a></li>
-		        <li><a class="dropdown-item" href="#">기획팀</a></li>
-		        <li><a class="dropdown-item" href="#">영업팀</a></li>
+		        <li><a class="dropdown-item" >홍보팀</a></li>
+		        <li><a class="dropdown-item" >개발팀</a></li>
+		        <li><a class="dropdown-item" >인사팀</a></li>
+		        <li><a class="dropdown-item" >기획팀</a></li>
+		        <li><a class="dropdown-item" >영업팀</a></li>
 		      </ul>
   		  </div>
  
-   <input type="hidden" name = "searchsel" id = "searcselhval" value =" ${searchsel}">
+   <input type="hidden" name = "searchsel" id = "orderval" value =" ${orderval}">
             <div class="dropdown" >
     		  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
     	    정렬
