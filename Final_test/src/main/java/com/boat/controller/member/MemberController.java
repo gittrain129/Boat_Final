@@ -750,6 +750,12 @@ public class MemberController {
 			
 			rattr.addFlashAttribute("message","updateSuccess");
 			
+			try {
+		        Thread.sleep(3000);
+		    } catch (InterruptedException e) {
+		        e.printStackTrace();
+		    }
+			
 			return "redirect:/index";
 		}else {
 			model.addAttribute("url", request.getRequestURL());
@@ -776,25 +782,6 @@ public class MemberController {
 		}
 			
 		return mv;
-	}
-	
-	//탭 선택
-	@ResponseBody
-	@PostMapping(value="/view_ajax")
-	public Map<String, Object> ListAjax(@RequestParam String tab, Principal principal){
-		System.out.println("tab"+tab);
-        
-		String id = principal.getName();
-		System.out.println("id="+id);
-		
-		Member m = memberservice.member_info(id);
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("memberinfo", m);
-		map.put("tab", tab);
-		map.put("tab", tab);
-		
-		return map;
 	}
 	
 	
