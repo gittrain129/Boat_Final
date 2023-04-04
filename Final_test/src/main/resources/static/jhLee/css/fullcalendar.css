@@ -1,38 +1,6 @@
 
 @charset "utf-8";
- /* body 스타일
- option{
- font-weight: 700}
- .ad{
- color : pink;
- }
- .devel{
- color : orange;
- }
- .hire{
- color : lightgreen;
- }
- .plan{
- color : purple;
- }
- .sales{
- color : blue;
- }
- .personal{
- color : gray;
- }
- .red{color : red;}
- #mobtn{
- display:none;
- }
- 
- #title.form-control{
- margin-bottom: 10px;}
-  body {
-    
-    font-size: 14px;
-  } */
-  /* 드래그 박스의 스타일 */
+
   #drag_wrap {
   float : left;
   margin-right : 20px;
@@ -110,3 +78,20 @@ color :rgb(86 78 78 / 81%);
 a
 {text-decoration: none;
 color : none}
+
+.popover {
+  max-width: 500px;
+  width: auto;
+}
+
+.popover-header {
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #343a40;
+  color: #fff;
+  padding: 10px;
+}
+
+.popover-body {
+  padding: 10px;
+}

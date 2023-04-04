@@ -1,5 +1,8 @@
 package com.boat.domain;
 
+import lombok.Data;
+
+@Data
 public class Calendar {
 
 	private int SCHEDULE_CODE;
@@ -10,6 +13,11 @@ public class Calendar {
 	private String EMPNO;
 	private String COLOR;
 	private String DEPT;
+	private String STARTT;
+	private String ENDD;
+	
+	
+	
 	public int getSCHEDULE_CODE() {
 		return SCHEDULE_CODE;
 	}

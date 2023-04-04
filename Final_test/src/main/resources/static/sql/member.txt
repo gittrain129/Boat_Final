@@ -23,6 +23,7 @@ CREATE TABLE MEMBER(
 	PWCHECK VARCHAR2(60),--비밀번호 확인 테이블 제외
 	--ROLE_MEMBER , ROLE_MGR , ROLE_ADMIN
 
+alter table member add PASSWORD_OG VARCHAR2(60);
 alter table member add GOOGLELOGIN VARCHAR2(50);
 
 
