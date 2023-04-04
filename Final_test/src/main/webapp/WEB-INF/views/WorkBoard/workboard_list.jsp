@@ -214,7 +214,10 @@
 		</div>
 		
 		
+		
 		<hr class="border-danger mb-4 mt-4" />
+		
+		
 				
 		<div class="card">
 		  <div class="card-header">
@@ -238,7 +241,11 @@
 		  	2일 전
 		  </div>
 		</div>
+		
+		
+		
 		<hr class="border-danger mb-4 mt-4" />
+		
 				
 		<div class="card">
 		  <div class="card-header">
@@ -262,7 +269,12 @@
 		  	2일 전
 		  </div>
 		</div>
+		
+		
+		
 		<hr class="border-danger mb-4 mt-4" />
+			
+			
 				
 		<div class="card">
 		  <div class="card-header">
@@ -286,7 +298,12 @@
 		  	2일 전
 		  </div>
 		</div>
+		
+		
+		
 		<hr class="border-danger mb-4 mt-4" />
+		
+		
 				
 		<div class="card">
 		  <div class="card-header">
