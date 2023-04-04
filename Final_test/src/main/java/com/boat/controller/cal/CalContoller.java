@@ -3,17 +3,17 @@ package com.boat.controller.cal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,19 +35,32 @@ public class CalContoller {
 	}
 	
 	
-	
-	
+	@ResponseBody
+	@PostMapping("/delete")
+	public void deleteCal(String EMPNO,@RequestBody Calendar cal ) {
+		logger.info(cal.toString());
+		//calendarService.deletecal(EMPNO,cal.getEVENT_NAME());
+	}
 	
 	
 	@ResponseBody
 	@RequestMapping(value="/save",method=RequestMethod.POST)
-	public int CalAdd(
+	public Map<String,Object> CalAdd(
 			Calendar cal,
 			HttpServletRequest request) throws Exception{
 		
 		logger.info("...."+cal.toString());
+		calendarService.insertcal(cal);
+		Map<String,Object> map =new  HashMap<String,Object>();
 		
-		return calendarService.insertcal(cal);
+		map.put("title", cal.getEVENT_NAME());
+		map.put("start", cal.getSTART_DATE());
+		map.put("end", cal.getEND_DATE());
+		map.put("title", cal.getEVENT_NAME());
+		map.put("color",cal.getCOLOR());
+		map.put("allDay", cal.getALLDAY());
+		
+		return map;
 		
 		
 	}

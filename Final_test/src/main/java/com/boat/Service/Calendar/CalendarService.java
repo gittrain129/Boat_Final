@@ -10,13 +10,9 @@ public interface CalendarService {
 	//이벤트 갯수 
 	public int getListcount();
 
-	public int insertcal(Calendar cal);
-	//이벤트 불러오기
-	//public List<Calendar> getList(String dept);
-
-
-	//이벤트 불러
-	//public List<Calendar> getEvents(String dEPT);
+	//이벤트 삽입후 렌더 이벤트 가져옴
+	public Calendar insertcal(Calendar cal);
+	
 
 	//dept있을때
 	public List<Calendar> getEventsByDept(String DEPT);

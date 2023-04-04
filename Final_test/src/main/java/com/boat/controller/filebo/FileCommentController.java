@@ -24,6 +24,7 @@ public class FileCommentController {
 		this.commentService = commentService;
 	}
 	private static final Logger logger=LoggerFactory.getLogger(FileCommentController.class);
+	
 	@PostMapping(value = "/list")
 	public Map<String,Object>CommentList(int board_num, int page){
 		List<Filecomm> list = commentService.getCommentList(board_num,page);
