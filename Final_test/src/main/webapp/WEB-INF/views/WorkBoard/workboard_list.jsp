@@ -188,6 +188,46 @@
 		
 		<hr class="border-danger mb-4 mt-4" />
 		
+	
+	<tbody>
+	    <c:set var="num" value="${listcount-(page-1)*limit}"/>
+	    <c:forEach var="b" items="${boardlist}">
+	    	
+			<div class="card">
+			  <div class="card-header">
+			    <td><%-- 제목 --%>
+		         	<div>
+		         		<c:if test="${b.BOARD_RE_LEV == 0}"> <%-- 원문인 경우 --%>
+		         			&nbsp;
+		         		</c:if>
+		         		
+		         		<a href="detail?num=${b.BOARD_NUM}">
+		         			  <c:out value="${b.BOARD_SUBJECT}" escapeXml="true"/><%-- escapeXml="true" : HTML 태그를 화면에 그 --%>
+		         			  <span class="gray small">[<c:out value="${b.CNT}"/>]</span> <%-- excapeXml="ture" : HTML 태그를 화 --%>
+		         		</a>
+		         	</div>
+		         </td>
+			  </div>
+			  <div class="card-body">
+			    <div class="row">
+					<div class="col-sm-2">
+					  	<a href="#">
+					  		<img class="mr-3 rounded img-thumbnail" src="public/imgs/user.jpg" alt="Generic placeholder image">
+					  	</a>
+					  	<h6 class="mt-2"><a href="#"><td><div>${b.BOARD_NAME}</div></td></a></h6>
+					  	<small class="text-muted">122309</small>
+					 </div>
+					  <div class="col-sm-9 border-left border-secondary">
+					    <p>내용</p>
+					  </div>
+				</div>
+			  </div>
+			  <div class="card-footer text-muted">
+			  	2일 전
+			  </div>
+			</div>
+		</c:forEach>
+	</tbody>
 			
 				
 		<div class="card">
@@ -304,41 +344,18 @@
 		<hr class="border-danger mb-4 mt-4" />
 		
 		
-				
-		<div class="card">
-		  <div class="card-header">
-		    제목
-		  </div>
-		  <div class="card-body">
-		    <div class="row">
-				<div class="col-sm-2">
-				  	<a href="#">
-				  		<img class="mr-3 rounded img-thumbnail" src="public/imgs/user.jpg" alt="Generic placeholder image">
-				  	</a>
-				  	<h6 class="mt-2"><a href="#">아이디</a></h6>
-				  	<small class="text-muted">122309</small>
-				 </div>
-				  <div class="col-sm-9 border-left border-secondary">
-				    <p>내용</p>
-				  </div>
-			</div>
-		  </div>
-		  <div class="card-footer text-muted">
-		  	2일 전
-		  </div>
-		</div>
-		<hr class="border-danger mb-4 mt-4" />	
+	
 	</div>
 
 	<div class="col-lg-3 col-12" >
 	<div class="list-group mb-4 shadow" style="margin-top:550px !important;">
 		<li class="list-group-item list-group-item-info" style="background-color:#90d5ff; color: #000000; font-size: smaller;"><strong>카테고리</strong></li>
-		<a href="discussion-detail.html" class="list-group-item list-group-item-action">홍보팀<span class="float-right badge badge-primary">123</span></a>
-		<a href="discussion-detail.html" class="list-group-item list-group-item-action">개발팀<span class="float-right badge badge-primary">123</span></a>
-		<a href="discussion-detail.html" class="list-group-item list-group-item-action">인사팀<span class="float-right badge badge-primary">123</span></a>
-		<a href="discussion-detail.html" class="list-group-item list-group-item-action">기획팀<span class="float-right badge badge-primary">123</span></a>
-		<a href="discussion-detail.html" class="list-group-item list-group-item-action">영업팀<span class="float-right badge badge-primary">123</span></a>
-		<a href="discussion-detail.html" class="list-group-item list-group-item-action">동호회<span class="float-right badge badge-primary">123</span></a>
+		<a href="discussion-detail.html" class="list-group-item list-group-item-action">홍보팀</a>
+		<a href="discussion-detail.html" class="list-group-item list-group-item-action">개발팀</a>
+		<a href="discussion-detail.html" class="list-group-item list-group-item-action">인사팀</a>
+		<a href="discussion-detail.html" class="list-group-item list-group-item-action">기획팀</a>
+		<a href="discussion-detail.html" class="list-group-item list-group-item-action">영업팀</a>
+		<a href="discussion-detail.html" class="list-group-item list-group-item-action">동호회</a>
 	</div>
 	
 	
@@ -349,15 +366,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/Kimsj/workboard_lib/sceditor/minified/themes/default.min.css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/Kimsj/workboard_lib/sceditor/minified/sceditor.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/Kimsj/workboard_lib/sceditor/minified/formats/bbcode.js"></script>
-<script>
-// Replace the textarea #example with SCEditor
-var textarea = document.getElementById('editor');
-sceditor.create(textarea, {
-	format: 'bbcode',
-	style: 'workboard_lib/sceditor/minified/themes/content/default.min.css'
-});
 
-</script>
 
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/Kimsj/workboard_lib/jquery-3.3.1.min.js"></script>
 	
