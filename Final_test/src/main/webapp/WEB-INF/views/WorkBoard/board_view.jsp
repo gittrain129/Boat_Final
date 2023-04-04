@@ -4,6 +4,7 @@
 <html>
 <head>
 <title>MVC 게시판 - view</title>
+
 <script src="../resources/js/view.js" charset="UTF-8"></script>
 <script>
 	let result="${result}";
