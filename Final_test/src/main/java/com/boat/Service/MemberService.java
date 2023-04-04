@@ -49,6 +49,9 @@ public interface MemberService {
 	//회원 수정
 	public int update(Member m);
 
+	//회원 탈퇴
+	public int delete(String empno);
+
 
 
 }

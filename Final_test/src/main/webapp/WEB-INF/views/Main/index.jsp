@@ -19,6 +19,12 @@
 		    toastr.options.newestOnTop = false;
 		    toastr.options.progressBar = true;
 		    toastr.info('회원 정보가 수정되었습니다.', '내 정보', {timeOut: 5000});
+		}else if(result == 'deleteSuccess') {
+			toastr.options.escapeHtml = true;
+		    toastr.options.closeButton = true;
+		    toastr.options.newestOnTop = false;
+		    toastr.options.progressBar = true;
+		    toastr.info('계정 삭제에 성공했습니다.', '내 정보', {timeOut: 5000});
 		}
 	</script>
 	 

@@ -112,6 +112,12 @@ public class MemberServiceImpl implements MemberService {
 		return dao.update(m);
 	}
 
+	//회원 탈퇴
+	@Override
+	public int delete(String empno) {
+		return dao.delete(empno);
+	}
+
 
 	
 	
