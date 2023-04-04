@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
 
 <title>업무 게시판 - write</title>
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/jkKim/css/writeform.css">
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+
 
 <!-- 임시 css링크 -->
 
@@ -31,14 +33,20 @@
 	<!-- Page Header End -->
 
 
+
+<sec:authorize access="isAuthenticated()">
+<sec:authentication property="principal" var="pinfo"/>
+
+
 	<div class="container mt-5">
-		<form action = "${pageContext.request.contextPath}/board/add" method="post" enctype="multipart/form-data" name="boardform">
+		<form action = "${pageContext.request.contextPath}/board/add" method="post" enctype="multipart/form-data" name="boardform" id="boardform">
 		<h2 class="text-center mb-5">업무 게시판</h2>
 		 
 			<div class="form-group">
 				<label for="board_subject">제목</label>
 				 <input	name="BOARD_SUBJECT" id="board_subject"  maxlength="50" class="form-control"  placeholder="제목">
 			</div>
+			<input type ="hidden" name ="BOARD_EMPNO" value="${EMPNO}">
 			
 			<div class="form-group">
 				<label for="board_password">비밀번호</label>
@@ -48,50 +56,42 @@
 			
 			<div class="form-group">
 				<label for="board_dept" class="col-sm-2 col-form-label">DEPT
-				<input type="text" class="form-control" id="board_dept" name="BOARD_DEPT"/>
+				<input type="text" class="form-control" id="board_dept" name="BOARD_DEPT" value="${DEPT}" readonly/>
 				</label> 
 			
 			
 			
 				<label for="board_job" class="col-sm-2 col-form-label">직책 
-				<input type="text" class="form-control" id="board_job" name="BOARD_JOB">
+				<input type="text" class="form-control" id="board_job" name="BOARD_JOB" value="${JOB}" readonly>
 				</label>
 			
 			
 			
 				 <label for="board_name" class="col-sm-2 col-form-label">이름
-				 <input	type="text" class="form-control" id="board_name" name="BOARD_NAME">
+				 <input	type="text" class="form-control" id="board_name" name="BOARD_NAME" value="${NAME}" readonly>
 				 </label>
 			
-			
-			
-				 <label for="notice" class="col-sm-2 col-form-label">게시물 유형
-				 <input	type="hidden" class="form-control" id="board_notice" name="BOARD_NOTICE">
-  				 	
-						<button class="btn btn-secondary dropdown-toggle" type="button"  id="dropdownMenuButton" data-bs-toggle="dropdown" 	aria-expanded="false">일반게시물</button>
-							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" onclick="select('일반게시물')">일반게시물</a></li>
-								<li><a class="dropdown-item" onclick="select('공지사항')">공지사항</a></li>
-							</ul>
-					
-				</label>
 			</div>
-			
-			
 			
 			<div class="form-group">
 			<label for="board_content" class="form-label">내용</label>
 			<textarea class="form-control" id="board_content" name="BOARD_CONTENT" rows="5"></textarea>
 			</div>
 			
-			<div class="form-group">
+			
+			
+			
+			<div class="form-group btn-group2">
 			<button type="submit" class="btn btn-primary">등록</button>
-			<button type="reset" class="btn btn-secondary">취소</button>
+			<button type="reset" class="btn btn-secondary" onclick="history.go(-1)">취소</button>
+			<input class="form-check-input" type="checkbox" id="board_notice" name="BOARD_NOTICE" onchange="changeValue(this)">
+    		<label class="form-check-label" for="board_notice">공지사항</label>
+    		
 			</div>
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 		</form>
 	</div>
-
+ </sec:authorize>
 	<!-- Bootstrap JavaScript -->
 	
 <script src = "${pageContext.request.contextPath}/jkKim/js/writeform.js"></script>
@@ -102,5 +102,7 @@ function select(con) {
 		hidden.value = val;
 }
 </script>
+
+ <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 </body>
 </html>

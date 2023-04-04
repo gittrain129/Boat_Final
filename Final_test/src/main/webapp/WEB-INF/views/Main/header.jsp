@@ -215,12 +215,6 @@
                                 <span id="">로그인해요</span></h6>
                        </sec:authorize>
                        
-                                <sec:authorize access="isAuthenticated()">
-                                    <sec:authentication property="principal" var="pinfo"/>
-                                <p class="mb-2"><span id="loginDept"></span></p>
-                                <h6 class="mb-0">
-                                    <span id="loginid"></span></h6>
-                                </sec:authorize>
                             </div>
                         </div>
                     </div>

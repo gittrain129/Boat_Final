@@ -70,7 +70,8 @@
 								<!-- 즐겨찾기 여부 -->
 								<td title="like" class="text-center"><i class="bi bi-star" id="star${b.BOARD_NUM }" onclick="toggle(${b.BOARD_NUM},${b.BOARD_EMPNO })"></i></td>
 								
-								<!-- 제목 new뱃지 dept뱃지/공지 -->
+								
+								<!-- 제목 -->
 								<td style="display: flex; align-items: center;">
 								 <c:if test="${b.BOARD_RE_LEV !=0 }"><%--답글인경우 --%>
             						<c:forEach var="a" begin="0" end="${b.BOARD_RE_LEV*2 }" step="1">
@@ -84,19 +85,12 @@
 								<a href="detail?num=${b.BOARD_NUM }" style="flex: 1; font-size:90%">
 								<c:out value="${b.BOARD_SUBJECT}" escapeXml="true"/> 
 								<span class="gray small">[<c:out value="${b.CNT}"/>]</span>
+								<c:if test="${b.BOARD_DATE > nowday}">
+								<span	class="badge badge-pill badge-warning ml-auto" style="background-color: #89a5ea;">new</span>
+								</c:if>
 								</a>
 								
-								<c:set var="ntime" value="<%= new java.util.Date() %>" />
-								<c:set var="dateFormat" value="yyyy-MM-dd HH:mm:ss" />
-								<c:set var="boardDate" value="<%= new java.text.SimpleDateFormat("+ dateFormat+" ).format(+"${b.BOARD_DATE}+") %>" />
-
-<c:if test="${boardDate ge dateFormat}">
-
-
-
-	 		      	  			<img src="${pageContext.request.contextPath}/resources/jkKim/image/new.jpg" id="new">
-	 		      	  			</c:if>
-								<div class="ml-auto"><span	class="badge badge-pill badge-warning float-right" style="background-color: #89a5ea;">${b.BOARD_DEPT }</span></div>
+								<span	class="badge badge-pill badge-warning float-right" style="background-color: #89a5ea;">${b.BOARD_DEPT }</span>
 								</td>
 								
 								
@@ -107,7 +101,16 @@
 								<td><div style="display: flex; justify-content: center; align-items: center;">${b.BOARD_READCOUNT }</div></td>
 								
 								<!-- 올린날짜 -->
-								<td><div style="display: flex; justify-content: center; align-items: center;">${b.BOARD_DATE }</div></td>
+								<td><div style="display: flex; justify-content: center; align-items: center;">
+									<c:if test="${b.BOARD_DATE!=today}">
+											${b.BOARD_DATE.substring(5,10)}
+									</c:if>
+									<c:if test="${b.BOARD_DATE.substring(0,10)==today}">
+											${b.BOARD_DATE.substring(11,16)}
+									</c:if>
+								
+								
+								</div></td>
 							</tr>
 							</c:forEach>
 							
@@ -192,9 +195,17 @@ var header = $("meta[name='_csrf_header']").attr("content");
 function toggle(BOARD_NUM,BOARD_EMPNO) {
 	
 	
-	var star = document.getElementById('star+BOARD_NUM');
-	star1.classList.remove('bi-star');
-	star1.classList.add('bi-star-fill');
+	var star = document.getElementById('star'+BOARD_NUM);
+	
+	if (star.classList.contains('bi-star-fill')) {
+		  star.classList.remove('bi-star-fill');
+		  star.classList.add('bi-star');
+		  star.style.color = '';
+		} else {
+		  star.classList.remove('bi-star');
+		  star.classList.add('bi-star-fill');
+		  star.style.color = '#ffd699';
+		}
 	
 	var board_num = BOARD_NUM;
 	//var board_empno = BOARD_EMPNO;
@@ -248,34 +259,27 @@ function favorite(BOARD_EMPNO) {
 				function(index, item){
 					
 					output += "<tr>"
-					output += "<td title='like' class='text-center'><i class='bi bi-star-fill' id='star" + item.board_NUM +"'onclick='toggle("+ item.board_NUM + "," + item.board_EMPNO+ "})'></i></td>"
-					
-					const blank_count = item.board_RE_LEV * 2 + 1;
-					
-					let blank = '&nbsp;'; //답글일 때 들여쓰기
-					
-					for (let i = 0; i<blank_count; i++){
-						blank += '&nbsp;&nbsp';
-					}
-					
-					let img="";
-					if (item.board_RE_LEV > 0){
-						img="<img src='${pageContext.request.contextPath}/resources/image/line.gif'>";
-					}
-					
-					let subject=item.board_SUBJECT.replace(/</g,'&lt')
-					subject = subject.replace(/</g,'&gt')
-					
-					
-					output += "<td style='display: flex; align-items: center;'>" + blank + img;
-					output += "<a href='detail?num="+item.board_NUM + "' style='flex: 1; font-size:90%''>";
-					
-					output += subject + '<span class="gray small">['+item.cnt+']</span></a>';
-					output += "<div><span	class='badge badge-pill badge-warning' style='background-color: #89a5ea;'>new</span></div>";
-					output += "<div class='ml-auto'><span	class='badge badge-pill badge-warning float-right' style='background-color: #89a5ea;'>기획팀</span></div></td>";
-					output += "<td><div style='display: flex; justify-content: center; align-items: center;'><small>" +item.board_NAME+" </small></div></td>";
-					output += "<td><div style='display: flex; justify-content: center; align-items: center;'>"+item.board_READCOUNT+"</div></td>";
-					output += "<td><div style='display: flex; justify-content: center; align-items: center;'>"+item.board_DATE +"</div></td>"
+			            output += "<td title='like' class='text-center'><i class='bi bi-star-fill' style='color:#ffd699' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + "," + item.board_EMPNO+ "})'></i></td>"
+			            const blank_count = item.board_RE_LEV * 2 + 1;
+			            let blank = '&nbsp;'; //답글일 때 들여쓰기
+			            for (let i = 0; i<blank_count; i++){
+			                blank += '&nbsp;&nbsp';
+			            }
+			            let img="";
+			            if (item.board_RE_LEV > 0){
+			                img="<img src='${pageContext.request.contextPath}/resources/image/line.gif'>";
+			            }
+			            let subject=item.board_SUBJECT.replace(/</g,'&lt');
+			            subject = subject.replace(/>/g,'&gt');
+			            output += "<td style='display: flex; align-items: center;'>" + blank + img;
+			            output += "<a href='detail?num="+item.board_NUM + "' style='flex: 1; font-size:90%''>";
+			            output += subject + '<span class="gray small">['+item.cnt+']</span></a>';
+			            output += "<div><span class='badge badge-pill badge-warning' style='background-color: #89a5ea;'>new</span></div>";
+			            output += "<div class='ml-auto'><span class='badge badge-pill badge-warning float-right' style='background-color: #89a5ea;'>기획팀</span></div></td>";
+			            output += "<td><div style='display: flex; justify-content: center; align-items: center;'><small>" +item.board_NAME+" </small></div></td>";
+			            output += "<td><div style='display: flex; justify-content: center; align-items: center;'>"+item.board_READCOUNT+"</div></td>";
+			            output += "<td><div style='display: flex; justify-content: center; align-items: center;'>"+item.board_DATE +"</div></td>"
+			            output += "</tr>";
 				})
 				output += "</tbody>"
 				

@@ -1,6 +1,8 @@
 package com.boat.controller.board;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,6 +55,13 @@ public class boardController {
 		if(endpage>maxpage)
 			endpage=maxpage;
 		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+	    Calendar cal = Calendar.getInstance();
+	    String today = format.format(cal.getTime());
+	    cal.add(Calendar.DAY_OF_MONTH, -3); //3일간 보이도록 하기위해서.
+	    String nowday = format.format(cal.getTime());
+		
+		
 	  List<Board> boardlist = boardService.getBoardList(page,limit);
 		
 		mv.setViewName("Board/boardList");
@@ -63,6 +72,8 @@ public class boardController {
 		mv.addObject("listcount",listcount);
 		mv.addObject("boardlist",boardlist);
 		mv.addObject("limit",limit);
+		mv.addObject("nowday",nowday);
+		mv.addObject("today",today);
 		return mv;
 	}
 	
