@@ -4,15 +4,6 @@ let header = $("meta[name='_csrf_header']").attr("content");
 $(document).ready(function(){
 
 
-
-	$("#board_name").val($("#loginid").text());
-	
-	$("#upfile").change(function(){
-		console.log($(this).val()) //c:\fakepath\upload.png
-		const inputfile = $(this).val().split('\\');
-		$('#filevalue').text(inputfile[inputfile.length -1 ]);
-	});
-	
 	//submit할때 이벤트 부분
 	$("form[action=add]").submit(function(){
 		
