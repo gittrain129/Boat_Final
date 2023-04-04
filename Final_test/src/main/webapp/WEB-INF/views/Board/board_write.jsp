@@ -7,7 +7,9 @@
 
 <title>업무 게시판 - write</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/jkKim/css/writeform.css">
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+
 
 
 <!-- 임시 css링크 -->
@@ -40,7 +42,7 @@
 
 	<div class="container mt-5">
 		<form action = "${pageContext.request.contextPath}/board/add" method="post" enctype="multipart/form-data" name="boardform" id="boardform">
-		<h2 class="text-center mb-5">업무 게시판</h2>
+		<h2 class="text-center">업무 게시판</h2>
 		 
 			<div class="form-group">
 				<label for="board_subject">제목</label>
@@ -48,13 +50,8 @@
 			</div>
 			<input type ="hidden" name ="BOARD_EMPNO" value="${EMPNO}">
 			
-			<div class="form-group">
-				<label for="board_password">비밀번호</label>
-				 <input	type="password" class="form-control" id="board_pass" name="BOARD_PASS">
-			</div>
-
 			
-			<div class="form-group">
+			<div class="form-group row">
 				<label for="board_dept" class="col-sm-2 col-form-label">DEPT
 				<input type="text" class="form-control" id="board_dept" name="BOARD_DEPT" value="${DEPT}" readonly/>
 				</label> 
@@ -71,11 +68,21 @@
 				 <input	type="text" class="form-control" id="board_name" name="BOARD_NAME" value="${NAME}" readonly>
 				 </label>
 			
+				<label for="board_password" class="col-sm-5 col-form-label">비밀번호
+				 <input	type="password" class="form-control" id="board_pass" name="BOARD_PASS">
+				 </label>
+				 
+				<label for="board_notice" class="col-sm-1 col-form-label text-center"><small>
+				공지사항</small>    			
+      			<input type="checkbox" id="board_notice" name="BOARD_NOTICE">
+    			
+  				</label>
+				 
 			</div>
 			
-			<div class="form-group">
+			<div class="form-group content">
 			<label for="board_content" class="form-label">내용</label>
-			<textarea class="form-control" id="board_content" name="BOARD_CONTENT" rows="5"></textarea>
+			<textarea class="form-control board_content" id="summernote" name="BOARD_CONTENT" ></textarea>
 			</div>
 			
 			
@@ -83,9 +90,8 @@
 			
 			<div class="form-group btn-group2">
 			<button type="submit" class="btn btn-primary">등록</button>
-			<button type="reset" class="btn btn-secondary" onclick="history.go(-1)">취소</button>
-			<input class="form-check-input" type="checkbox" id="board_notice" name="BOARD_NOTICE" onchange="changeValue(this)">
-    		<label class="form-check-label" for="board_notice">공지사항</label>
+			<button type="reset" class="btn btn-danger" onclick="history.go(-1)">취소</button>
+			    		
     		
 			</div>
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
@@ -94,15 +100,11 @@
  </sec:authorize>
 	<!-- Bootstrap JavaScript -->
 	
-<script src = "${pageContext.request.contextPath}/jkKim/js/writeform.js"></script>
-<script>
-function select(con) {
-		var val = con.innerText;
-		var hidden = document.querySelector('#board_notice');
-		hidden.value = val;
-}
-</script>
+	<jsp:include page="../Main/footer.jsp" />	
 
- <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
+
+<script src = "${pageContext.request.contextPath}/jkKim/js/writeform.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 </body>
 </html>
