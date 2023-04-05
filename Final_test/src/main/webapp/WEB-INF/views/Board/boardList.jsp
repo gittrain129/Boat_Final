@@ -8,6 +8,10 @@
 <title>업무 게시판</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/jkKim/css/all.css" />
 
+<style>
+
+</style>
+
 </head>
 <body>
 	<jsp:include page="../Main/header.jsp" />
@@ -54,15 +58,15 @@
 		</div>
 
 
-				<div class="table-responsive">
-					<table class="table table-bordered table-hover mx-auto">
+				<div class="table-responsive" id="maintable">
+					<table class="table table-bordered table-hover mx-auto" style="table-layout: fixed">
 						<thead>
 							<tr class="bg-light">
-								<th title="like" style="text-align: center; vertical-align: middle" onclick=favorite(${EMPNO})>즐겨<br>찾기</th>
-								<th title="Discussion List" style="text-align: center; vertical-align: middle">제목</th>
-								<th class="bg-light" title="Created By" style="text-align: center; vertical-align: middle">작성자</th>
-								<th title="Total Replies" style="text-align: center; vertical-align: middle">조회수</th>
-								<th title="Last Updated" style="text-align: center; vertical-align: middle">작성일</th>
+								<th title="like" style="text-align: center; vertical-align: middle" width="5%"onclick=favorite(${EMPNO})>즐겨<br>찾기</th>
+								<th title="Discussion List" style="text-align: center; vertical-align: middle" width="50%">제목</th>
+								<th class="bg-light" title="Created By" style="text-align: center; vertical-align: middle" width="15%">작성자</th>
+								<th title="Total Replies" style="text-align: center; vertical-align: middle" width="10%">조회수</th>
+								<th title="Last Updated" style="text-align: center; vertical-align: middle" width="20%">작성일</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -70,7 +74,7 @@
 							 <c:forEach var="b" items="${boardlist }">
 							<tr>
 								<!-- 즐겨찾기 여부 -->
-								<td title="like" class="text-center"><i class="bi bi-star" id="star${b.BOARD_NUM }" onclick="toggle(${b.BOARD_NUM},${b.BOARD_EMPNO })"></i></td>
+								<td title="like" class="text-center"><i class="bi bi-star" id="star${b.BOARD_NUM }" onclick="toggle(${b.BOARD_NUM},${EMPNO})"></i></td>
 								
 								
 								<!-- 제목 -->
@@ -200,10 +204,10 @@
 var token = $("meta[name='_csrf']").attr("content");
 var header = $("meta[name='_csrf_header']").attr("content");
 
+
+//즐겨찾기 별모양 function (fav테이블에 insert)
 function toggle(BOARD_NUM,BOARD_EMPNO) {
-	
-	
-	var star = document.getElementById('star'+BOARD_NUM);
+		var star = document.getElementById('star'+BOARD_NUM);
 	
 	if (star.classList.contains('bi-star-fill')) {
 		  star.classList.remove('bi-star-fill');
@@ -216,11 +220,9 @@ function toggle(BOARD_NUM,BOARD_EMPNO) {
 		}
 	
 	var board_num = BOARD_NUM;
-	//var board_empno = BOARD_EMPNO;
-	var board_empno = 2310009;
-	console.log(board_num);
-	console.log(board_empno);
+	var board_empno = BOARD_EMPNO;
 	
+
 	$.ajax({
         url: "${pageContext.request.contextPath}/board/Fav_add",
         type: 'POST',
@@ -243,9 +245,9 @@ function toggle(BOARD_NUM,BOARD_EMPNO) {
 }//toggle 끝
 
 function favorite(BOARD_EMPNO) {
-	//var board_empno= BOARD_EMPNO
-	console.log(BOARD_EMPNO);
-	var board_empno= 2310009;
+	var board_empno= BOARD_EMPNO
+	
+	if(BOARD_EMPNO == 'main'){}
 	
 	$.ajax({
         url: "${pageContext.request.contextPath}/board/Fav_list",
@@ -258,20 +260,33 @@ function favorite(BOARD_EMPNO) {
           xhr.setRequestHeader(header, token);         
        },
         success: function(data) {
-        	$("tbody").remove();
+        	$("table").remove();
         	$("tfoot").remove();
         	
-        	let output = "<tbody>";
+        	let output = "<table class='table table-bordered table-hover mx-auto' style='table-layout: fixed'>";
+        				
+        	output += "<thead>";
+			output += "<tr class='bg-light'>";
+			output += "<th title='like' style='text-align: center; vertical-align: middle' width='5%'onclick=favorite('main')>즐겨<br>찾기</th>";
+			output += "<th title='Discussion List' style='text-align: center; vertical-align: middle' width='50%'>제목</th>";
+			output += "<th class='bg-light' title='Created By' style='text-align: center; vertical-align: middle' width='15%''>작성자</th>";
+			output += "<th title='Total Replies' style='text-align: center; vertical-align: middle' width='10%'>조회수</th>";
+			output += "<th title='Last Updated' style='text-align: center; vertical-align: middle' width='20%'>작성일</th>";
+			output += "</tr>";
+			output += "</thead>";
+									
+			output += "<tbody>";
 			
 			$(data.boardlist).each(
 				
 				function(index, item){
 					
+					
 					output += "<tr>"
-			            output += "<td title='like' class='text-center'><i class='bi bi-star-fill' style='color:#ffd699' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + "," + item.board_EMPNO+ "})'></i></td>"
+			            output += "<td title='like' class='text-center'><i class='bi bi-star-fill' style='color:#ffd699' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ", ${EMPNO})'></i></td>"
 			            const blank_count = item.board_RE_LEV * 2 + 1;
 			            let blank = '&nbsp;'; //답글일 때 들여쓰기
-			            for (let i = 0; i<blank_count; i++){
+			            for (let i = 1; i<blank_count; i++){
 			                blank += '&nbsp;&nbsp';
 			            }
 			            let img="";
@@ -282,18 +297,35 @@ function favorite(BOARD_EMPNO) {
 			            subject = subject.replace(/>/g,'&gt');
 			            output += "<td style='display: flex; align-items: center;'>" + blank + img;
 			            output += "<a href='detail?num="+item.board_NUM + "' style='flex: 1; font-size:90%''>";
-			            output += subject + '<span class="gray small">['+item.cnt+']</span></a>';
-			            output += "<div><span class='badge badge-pill badge-warning' style='background-color: #89a5ea;'>new</span></div>";
-			            output += "<div class='ml-auto'><span class='badge badge-pill badge-warning float-right' style='background-color: #89a5ea;'>기획팀</span></div></td>";
+			            output += subject + '<span class="gray small " style="margin-left:5px">['+item.cnt+']</span>';
+			            //콘트롤러에서 nowday 보내줘야함********************
+			            if(item.board_DATE > data.nowday){
+			            	output += "<span class='badge badge-pill badge-warning' style='background-color: #89a5ea; margin-left:3px;'>new</span>";
+			            }
+			            output += "</a>";
+			            if(item.board_NOTICE == 1){
+			           		 output += "<span class='badge badge-pill badge-warning float-right' style='background-color: #ffcb6b;'>공지</span></td>";
+			            }else if (item.board_NOTICE ==0){
+				            output += "<span class='badge badge-pill badge-warning float-right' style='background-color: #89a5ea;'>"+item.board_DEPT+"</span></td>";
+
+			            }
 			            output += "<td><div style='display: flex; justify-content: center; align-items: center;'><small>" +item.board_NAME+" </small></div></td>";
 			            output += "<td><div style='display: flex; justify-content: center; align-items: center;'>"+item.board_READCOUNT+"</div></td>";
-			            output += "<td><div style='display: flex; justify-content: center; align-items: center;'>"+item.board_DATE +"</div></td>"
+			            output += "<td><div style='display: flex; justify-content: center; align-items: center;'>"
+			            if(item.board_DATE != data.today){
+			            	output += item.board_DATE.substring(5,10);
+			            }
+			            if( item.board_DATE.substring(0,10) == data.today ){
+			            	output += " " + item.board_DATE.substring(11,16);
+			            }
+			            
+			            "</div></td>"
 			            output += "</tr>";
 				})
 				output += "</tbody>"
 				
 				console.log(output);
-				$('table').append(output); 
+				$('#maintable').append(output); 
 				
 				
         },
