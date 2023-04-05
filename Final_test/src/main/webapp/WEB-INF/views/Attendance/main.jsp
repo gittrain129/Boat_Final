@@ -154,7 +154,7 @@
                                 <p>${fn:substring(x.ON_TIME,11,16)}</p>
                                 <p>${fn:substring(x.OFF_TIME,11,16)}</p>
                                 <p></p>
-                                <p></p>
+                                <p>${x.WORK_TIME}</p>
                             </div>
                         </c:forEach>
                 </div>

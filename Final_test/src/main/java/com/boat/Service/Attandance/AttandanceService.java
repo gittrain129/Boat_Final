@@ -1,5 +1,6 @@
 package com.boat.Service.Attandance;
 
+import java.text.ParseException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +21,7 @@ public interface AttandanceService {
 	public List<Attandance> getAttList(String eMPNO);
 
 
-	public void AttOff(String OFF_TIME, String EMPNO);
+	public void AttOff(String OFF_TIME, String EMPNO) throws ParseException;
 
 	//오늘 출근기록_EMPNO받아서 넣기!!
 	public Attandance getTodayMyatt(String empno);

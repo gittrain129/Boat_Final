@@ -48,11 +48,11 @@ h1{
 #search-box .mgr{
     text-align: right;
     justify-content: right!important;
-    color: #0b0b6a;
+    color:#0e6d62;
     font-weight: 800!important;
 }
 #search-box .name{
-    color: #0b0b6a;
+    color: #0e6d62;
     font-weight: 800!important;
 }
 #notice-box{
@@ -81,6 +81,8 @@ h1{
     font-weight: 200;
     display: flex;
     justify-content: center;
+    padding: 10px;
+
 }
 #time-box{
     color: var(--main-color-dark);

@@ -1,5 +1,6 @@
 package com.boat.Service.Attandance;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -56,31 +57,51 @@ public class AttandanceServiceImpl implements AttandanceService {
 
 	@Override//(당일)
 	public Attandance getTodayMyatt(String EMPNO) {
-		//HashMap<String,String>map = new HashMap<String,String>();
-		//map.put("EMPNO", EMPNO);
 		
 		return dao.getTodayMyatt(EMPNO);
 	}
 
 	@Override
 	public void AttOn(String on, String EMPNO,String DEPT,String NAME) {
-		//HashMap<String,String>map = new HashMap<String,String>();
-		//map.put("on",on);
-		//map.put("EMPNO", EMPNO);
-		//map.put("DEPT", DEPT);
 		dao.AttOn(on,EMPNO,DEPT,NAME);
 		
 	}
 
 
 	@Override
-	public void AttOff(String OFF_TIME, String EMPNO) {
-		//HashMap<String,String>map = new HashMap<String,String>();
-		//map.put("off",off);
-		//map.put("empno", empno);
-		//System.out.println("offupdate param"+off);
-		//log.info("offupdate param"+off);
-		dao.AttOff(OFF_TIME,EMPNO);
+	public void AttOff(String OFF_TIME, String EMPNO) throws ParseException {
+		
+		Attandance att =new Attandance();
+		att.setOFF_TIME(OFF_TIME);
+		att.setEMPNO(EMPNO);
+		//퇴근시간 업데이트
+		 dao.AttOff(att);
+		String ON_TIME = att.getON_TIME();
+		
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd H:m");
+		Date stt = sdf.parse(ON_TIME);
+		Date ett = sdf.parse(OFF_TIME);
+		long sttseconds = stt.getTime()/1000;
+		long ettseconds = ett.getTime()/1000;
+		long todaywork = ettseconds-sttseconds;
+		
+		// 초를 시간과 분으로 변환
+		long hours = todaywork / 3600;
+		long minutes = (todaywork % 3600) / 60;
+
+		// 시간과 분을 HH:mm 형식의 문자열로 변환
+		String WORK_TIME = String.format("%02d:%02d", hours, minutes);
+		
+		logger.info("시작시간 stt..............."+stt);
+		logger.info("종료시간 ett..............."+ett);
+		logger.info("시작시간 초로변환............."+sttseconds);
+		logger.info("종료시간 초로변환................"+ettseconds);
+		
+		logger.info("초단위 todaywork"+todaywork);
+		
+		logger.info("오늘 일한시간"+WORK_TIME); 
+		dao.Todayworktime(WORK_TIME,EMPNO);
 	}
 
 	private CellStyle getHeaderCellStyle(Workbook workbook) {
@@ -121,12 +142,12 @@ public class AttandanceServiceImpl implements AttandanceService {
 		SXSSFWorkbook wb = new SXSSFWorkbook();
 		  Sheet sheet = wb.createSheet();
 		  sheet.setColumnWidth((short) 0, (short) 2000);
-		  sheet.setColumnWidth((short) 1, (short) 8000);
+		  sheet.setColumnWidth((short) 1, (short) 5000);
 		  sheet.setColumnWidth((short) 2, (short) 3000);
-		  sheet.setColumnWidth((short) 3, (short) 3000);
+		  sheet.setColumnWidth((short) 3, (short) 8000);
 		  sheet.setColumnWidth((short) 4, (short) 8000);
 		  sheet.setColumnWidth((short) 5, (short) 5000);
-		  sheet.setColumnWidth((short) 6, (short) 3000);
+		  sheet.setColumnWidth((short) 6, (short) 5000);
 		  
 		  Row row = sheet.createRow(0);
 		  Cell cell = null;
@@ -169,6 +190,11 @@ public class AttandanceServiceImpl implements AttandanceService {
 		  getHeaderCellStyle(wb);
 		  
 		  
+		  cell = row.createCell(6);
+		  cell.setCellValue("근무시간");
+		  getHeaderCellStyle(wb);
+		  
+		  
 		 
 		  int i = 2;
 		  int ii = list.size();
@@ -193,7 +219,7 @@ public class AttandanceServiceImpl implements AttandanceService {
 		  cell.setCellValue(ii);
 		  
 		  cell = row.createCell(1);
-		  cell.setCellValue(attlist.getREG_DATE());
+		  cell.setCellValue(attlist.getREG_DATE().substring(0, 11));
 		  
 		  cell = row.createCell(2);
 		  cell.setCellValue(attlist.getNAME());
@@ -209,6 +235,9 @@ public class AttandanceServiceImpl implements AttandanceService {
 		 
 		  cell = row.createCell(5);
 		  cell.setCellValue(attlist.getDEPT());
+		  
+		  cell = row.createCell(6);
+		  cell.setCellValue(attlist.getWORK_TIME());
 		  
 		  
 		  i++;

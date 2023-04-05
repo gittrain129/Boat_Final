@@ -4,19 +4,15 @@
   
   <mapper namespace="com.boat.mybatis.mapper.AttandanceMapper">
   
+  
 		<select id="getAttList" resultType = 'Attandance'>
-		select * from BOAT_ATTENDANCE where empno = #{empno}
-		order by reg_date desc
-		<!--
 		select * from BOAT_ATTENDANCE
-		개인 회원 전용
-		
-		admin 전용
-		select * from attandance where dept = #{dept}
-		  -->
+		 where empno = #{empno}
+		<!--   and REG_DATE <![CDATA[<>  ]]> TO_CHAR(SYSDATE, 'YYYYMMDD')-->
+		order by reg_date desc
 		</select>
 		
-		<select id="getTodayMyatt" resultType = 'Attandance' parameterType ="String">
+		<select id="getTodayMyatt" resultType = 'Attandance' >
 		select * from BOAT_ATTENDANCE 
 		where REG_DATE =  TO_CHAR(SYSDATE, 'YYYYMMDD')
 		and EMPNO = #{EMPNO}
@@ -33,8 +29,20 @@
 		SET off_time = #{OFF_TIME}
 		WHERE REG_DATE = TO_CHAR(SYSDATE, 'YYYYMMDD')
 		and empno = #{EMPNO}
+		<selectKey resultType="String" keyProperty="ON_TIME" order="AFTER">
+		SELECT ON_TIME FROM BOAT_ATTENDANCE 
+		where reg_date = TO_CHAR(SYSDATE, 'YYYYMMDD')
+		and empno = #{EMPNO} 
+		</selectKey>
+
 		</update>
 		  
+		  <update id="Todayworktime">
+		  UPDATE BOAT_ATTENDANCE
+		SET WORK_TIME = #{WORK_TIME}
+		WHERE REG_DATE = TO_CHAR(SYSDATE, 'YYYYMMDD')
+		and empno = #{EMPNO}
+		  </update>
 		  
 		  
   </mapper>
