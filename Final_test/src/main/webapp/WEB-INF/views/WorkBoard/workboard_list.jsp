@@ -59,63 +59,97 @@
 	
 </head>
 <body>
-<input type="hidden" id="loginid" value="${id}" name="loginid"> <%-- view.js에서 사용하기 위해 추가합니다. --%>
+<input type="hidden" id="loginid" value="${empno}" name="loginid"> <%-- view.js에서 사용하기 위해 추가합니다. --%>
 	<div class="container" style="margin-top:150px !important;">
 
 		<div class="row">
 
 			<div class="col-lg-9 col-12"> <!-- 왼쪽 row -->
-			   <div id="comment">
-				<h3>워크보드 게시판</h3>
 				
-				<hr class="border-secondary mb-4" />
-									
-				<div class="table-responsive  mt-4">
-					<table class="table">
-						<tbody>
-							<tr>					
-								<th style="width:120px;">카테고리</th>
-								<td>
-									<select name="likeLanguage" id="" class="pl">
-							            <option value="0" selected>선택해주세요</option>
-							            <option value="list">홍보팀</option>
-							            <option value="list">개발팀</option>
-							            <option value="list">인사팀</option>
-							            <option value="list">기획팀</option>
-							            <option value="list">동호회</option>
-							        </select>
-								</td>
-							</tr>
-							<tr>
-								<th>제목</th>
-								<td>
-									<input name="BOARD_SUBJECT" id="board_subject" type="text" maxlength="100"
-			    	   					class="form-control" placeholder="제목을 입력해주세요">			
-								</td>
-							</tr>
-							<tr>
-								<th>내용</th>
-								<td>
-									<textarea name="BOARD_CONTENT" id="content" 
-			    		 				cols="67" rows="5" class="form-control" placeholder="내용을 입력해주세요"></textarea>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2">
-									<button id="write" type=submit class="btn btn-info float-right" style="background-color:#1ca7ff; border-color:#1ca7ff; color:white;">등록</button>
-			  						<button type=reset class="btn btn-danger">취소</button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-	
+				<div id="workboard_view">
+
+					<h3>워크보드 게시판</h3>
+					
+
+										
+					<div class="table-responsive  mt-4">
+						<table class="table">
+							<tbody>
+								<tr>					
+									<th style="width:120px;">카테고리</th>
+									<td>
+										<select name="likeLanguage" id="" class="pl">
+								            <option value="0" selected>선택해주세요</option>
+								            <option value="list">홍보팀</option>
+								            <option value="list">개발팀</option>
+								            <option value="list">인사팀</option>
+								            <option value="list">기획팀</option>
+								            <option value="list">동호회</option>
+								        </select>
+									</td>
+								</tr>
+								<tr>
+									<th>제목</th>
+									<td>
+										<input name="BOARD_SUBJECT" id="board_subject" type="text" maxlength="100"
+				    	   					class="form-control" placeholder="제목을 입력해주세요">			
+									</td>
+								</tr>
+								<tr>
+									<th>내용</th>
+									<td>
+										<textarea name="BOARD_CONTENT" id="content" 
+				    		 				cols="67" rows="5" class="form-control" placeholder="내용을 입력해주세요"></textarea>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<button id="write" type=submit class="btn btn-info float-right" style="background-color:#1ca7ff; border-color:#1ca7ff; color:white;">등록</button>
+				  						<button type=reset class="btn btn-danger">취소</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 		
-					<hr class="border-danger mb-4 mt-4" />
-		
-		
+			
+						<hr class="border-danger mb-4 mt-4" />
+			
+			
 					<div id="workboard_card">
-						<table class="table table-striped">		
+						<table class="table table-striped">	
+							<tbody>	
+							<div class="card">
+							  <div class="card-header">
+							    제목
+							  </div>
+							  <div class="card-body">
+							    <div class="row">
+									<div class="col-sm-2">
+									  	<a href="#">
+									  		<img class="mr-3 rounded img-thumbnail" src="public/imgs/user.jpg" alt="Generic placeholder image">
+									  	</a>
+									  	<h6 class="mt-2"><a href="#">this.empno</a></h6>
+									  	<small class="text-muted">this.name</small>
+									 </div>
+									  <div class="col-sm-9 border-left border-secondary">
+									    <p>this.content</p>
+									  </div>
+								</div>
+							  </div>
+							  <div class="card-footer text-muted">
+							  	this.reg_date + img
+							  </div>
+							</div>
+							</tbody>
+						</table>
+					</div>
+							
+			
+			
+						<hr class="border-danger mb-4 mt-4" />
+			
+					
 						<div class="card">
 						  <div class="card-header">
 						    제목
@@ -126,7 +160,7 @@
 								  	<a href="#">
 								  		<img class="mr-3 rounded img-thumbnail" src="public/imgs/user.jpg" alt="Generic placeholder image">
 								  	</a>
-								  	<h6 class="mt-2"><a href="#">아이디</a></h6>
+								  	<h6 class="mt-2"><a href="#"></a></h6>
 								  	<small class="text-muted">122309</small>
 								 </div>
 								  <div class="col-sm-9 border-left border-secondary">
@@ -134,43 +168,15 @@
 								  </div>
 							</div>
 						  </div>
-						  <div class="card-footer text-muted">
-						  	2일 전
-						  </div>
 						</div>
-						</table>
-					</div>	
-		
-		
-					<hr class="border-danger mb-4 mt-4" />
-		
-				
-					<div class="card">
-					  <div class="card-header">
-					    제목
-					  </div>
-					  <div class="card-body">
-					    <div class="row">
-							<div class="col-sm-2">
-							  	<a href="#">
-							  		<img class="mr-3 rounded img-thumbnail" src="public/imgs/user.jpg" alt="Generic placeholder image">
-							  	</a>
-							  	<h6 class="mt-2"><a href="#">아이디</a></h6>
-							  	<small class="text-muted">122309</small>
-							 </div>
-							  <div class="col-sm-9 border-left border-secondary">
-							    <p>내용</p>
-							  </div>
-						</div>
-					  </div>
-					  <div class="card-footer text-muted">
-					  	2일 전
-					  </div>
-					</div>
-				</div>
+
+			
+				</div> <%-- workboard_card end --%>			
+			
 			</div> <%-- 왼쪽 row end --%>
 
 			<div class="col-lg-3 col-12" >  <%-- 오른쪽 row --%>
+
 			
 					<div class="list-group mb-4 shadow" style="margin-top:550px !important;">
 						<li class="list-group-item list-group-item-info" style="background-color:#90d5ff; color: #000000; font-size: smaller;"><strong>카테고리</strong></li>
@@ -181,6 +187,7 @@
 						<a href="discussion-detail.html" class="list-group-item list-group-item-action">영업팀</a>
 						<a href="discussion-detail.html" class="list-group-item list-group-item-action">동호회</a>
 					</div>	
+			
 						
 			</div>  <%-- 오른쪽 row end --%>	
 
