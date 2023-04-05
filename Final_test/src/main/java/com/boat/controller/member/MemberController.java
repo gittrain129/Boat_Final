@@ -816,9 +816,11 @@ public class MemberController {
 	
 	
 	//채팅
-	@GetMapping("/chat")
-	public String hello5() {
-		return "/Chat/chat_room";
+	@RequestMapping("/chat")
+	public ModelAndView chat() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("/Chat/chat_room");
+		return mv;
 	}
 	
 	@GetMapping("/myboardList")

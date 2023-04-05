@@ -193,3 +193,7 @@ a:hover, a:active, a:focus {
   text-decoration: none;
   outline: 0;
 }
+
+.yourMsg{
+	display: none;
+}

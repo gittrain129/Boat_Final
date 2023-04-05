@@ -141,39 +141,23 @@
 		</dependency>
 		
 		<!-- websocket -->
-		  <dependency>
-		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-mustache</artifactId>
-		  </dependency>
-		  <dependency>
-		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-websocket</artifactId>
-		  </dependency>
-		  <dependency>
-		    <groupId>org.webjars.bower</groupId>
-		    <artifactId>jquery</artifactId>
-		    <version>3.3.1</version>
-		  </dependency>
-		  <dependency>
-		    <groupId>org.webjars</groupId>
-		    <artifactId>sockjs-client</artifactId>
-		    <version>1.1.2</version>
-		  </dependency>
-		  <dependency>
-		    <groupId>org.webjars</groupId>
-		    <artifactId>webjars-locator</artifactId>
-		    <version>0.30</version>
-		  </dependency>
-		
-        <dependency>
-            <groupId>javax.websocket</groupId>
-            <artifactId>javax.websocket-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <!-- spring-websocket -->
-        <dependency>
-		    <groupId>org.springframework</groupId>
-		    <artifactId>spring-websocket</artifactId>
+		<dependency>
+		  <groupId>org.springframework.boot</groupId>
+		  <artifactId>spring-boot-starter-websocket</artifactId>
+		</dependency>
+		<dependency>
+		  <groupId>org.webjars</groupId>
+		  <artifactId>webjars-locator-core</artifactId>
+		</dependency>
+		<dependency>
+		  <groupId>org.webjars</groupId>
+		  <artifactId>sockjs-client</artifactId>
+		  <version>1.0.2</version>
+		</dependency>
+		<dependency>
+		  <groupId>org.webjars</groupId>
+		  <artifactId>stomp-websocket</artifactId>
+		  <version>2.3.3</version>
 		</dependency>	
 
 		<!-- 롬복 사용을 위해  -->
