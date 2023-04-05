@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
 
@@ -25,7 +26,8 @@
         </div>
     </div>
     <!-- Page Header End -->
-
+<sec:authorize access="isAuthenticated()">
+<sec:authentication property="principal" var="pinfo"/>
 	<section class="container">
 		<div class="row">
 		
@@ -56,7 +58,7 @@
 					<table class="table table-bordered table-hover mx-auto">
 						<thead>
 							<tr class="bg-light">
-								<th title="like" style="text-align: center; vertical-align: middle" onclick=favorite(${b.BOARD_EMPNO})>즐겨<br>찾기</th>
+								<th title="like" style="text-align: center; vertical-align: middle" onclick=favorite(${EMPNO})>즐겨<br>찾기</th>
 								<th title="Discussion List" style="text-align: center; vertical-align: middle">제목</th>
 								<th class="bg-light" title="Created By" style="text-align: center; vertical-align: middle">작성자</th>
 								<th title="Total Replies" style="text-align: center; vertical-align: middle">조회수</th>
@@ -89,8 +91,12 @@
 								<span	class="badge badge-pill badge-warning ml-auto" style="background-color: #89a5ea;">new</span>
 								</c:if>
 								</a>
-								
+								<c:if test="${b.BOARD_NOTICE == 1}">
+								<span class="badge badge-pill badge-primary float-right" style="background-color: #ffcb6b;">공지</span>
+								</c:if>
+								<c:if test="${b.BOARD_NOTICE == 0}">
 								<span	class="badge badge-pill badge-warning float-right" style="background-color: #89a5ea;">${b.BOARD_DEPT }</span>
+								</c:if>
 								</td>
 								
 								
@@ -180,6 +186,8 @@
 
 		
 	</section>
+	</sec:authorize>
+	
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"></script>
 	<script>
 		feather.replace({
@@ -236,6 +244,7 @@ function toggle(BOARD_NUM,BOARD_EMPNO) {
 
 function favorite(BOARD_EMPNO) {
 	//var board_empno= BOARD_EMPNO
+	console.log(BOARD_EMPNO);
 	var board_empno= 2310009;
 	
 	$.ajax({

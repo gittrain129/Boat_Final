@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>mvc 게시판 - view</title>
+<title>업무 게시판 - view</title>
 <jsp:include page="../Main/header.jsp" />
 
 
@@ -30,6 +30,15 @@
 
 
 <style>
+
+#viewform{
+	padding : 20px;
+	background-color: white;
+	border : 2px solid gray;
+	margin: 100px auto 50px auto;
+	max-width :1000px;
+}
+
 body > div > table > tbody >tr:nth-child(1) {
 	text-align: center
 }
@@ -82,7 +91,7 @@ form[action=down] > input[type=submit]{
 
 	<input type="hidden" id="loginid" value="${id}" name="loginid">
 	<!--view.js에서 사용하기 위해 추가 -->
-	<div class="container">
+	<div class="container" id="viewform">
 		<table class="table">
 			<tr>
 				<th colspan="2">MVC 게시판- VIEW페이지</th>

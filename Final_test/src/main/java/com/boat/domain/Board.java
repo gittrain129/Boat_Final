@@ -8,7 +8,7 @@ private String BOARD_SUBJECT;
 private String BOARD_CONTENT;
 private String BOARD_DEPT;
 private String BOARD_JOB;
-private String BOARD_NOTICE;
+private int BOARD_NOTICE;
 private int BOARD_RE_REF;
 private int BOARD_RE_LEV;
 private int BOARD_RE_SEQ;
@@ -23,10 +23,10 @@ public int getCNT() {
 public void setCNT(int cNT) {
 	CNT = cNT;
 }
-public String getBOARD_NOTICE() {
+public int getBOARD_NOTICE() {
 	return BOARD_NOTICE;
 }
-public void setBOARD_NOTICE(String bOARD_NOTICE) {
+public void setBOARD_NOTICE(int bOARD_NOTICE) {
 	BOARD_NOTICE = bOARD_NOTICE;
 }
 public String getBOARD_JOB() {
