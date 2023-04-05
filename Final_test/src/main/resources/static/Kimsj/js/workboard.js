@@ -19,7 +19,7 @@ $(function(){
 	function getList(currentPage) {
 		$.ajax({
 				type: "post",
-				url : "../comment/list",
+				url : "../workboard/workboard_list",
 				data: {
 						"page" : currentPage
 				},
