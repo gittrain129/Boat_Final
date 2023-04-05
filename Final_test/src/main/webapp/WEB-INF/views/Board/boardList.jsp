@@ -9,7 +9,14 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/jkKim/css/all.css" />
 
 <style>
-
+ 
+  th:nth-child(1):hover {
+    color: #009CFF;
+    cursor: pointer;
+  }
+  tr > td:first-child {
+  cursor: pointer;
+}
 </style>
 
 </head>
@@ -62,11 +69,11 @@
 					<table class="table table-bordered table-hover mx-auto" style="table-layout: fixed">
 						<thead>
 							<tr class="bg-light">
-								<th title="like" style="text-align: center; vertical-align: middle" width="5%"onclick=favorite(${EMPNO})>즐겨<br>찾기</th>
-								<th title="Discussion List" style="text-align: center; vertical-align: middle" width="50%">제목</th>
-								<th class="bg-light" title="Created By" style="text-align: center; vertical-align: middle" width="15%">작성자</th>
-								<th title="Total Replies" style="text-align: center; vertical-align: middle" width="10%">조회수</th>
-								<th title="Last Updated" style="text-align: center; vertical-align: middle" width="20%">작성일</th>
+								<th title="즐겨찾기" style="text-align: center; vertical-align: middle" width="5%"onclick=favorite(${EMPNO})>즐겨<br>찾기</th>
+								<th title="제목" style="text-align: center; vertical-align: middle" width="50%">제목</th>
+								<th class="bg-light" title="작성자" style="text-align: center; vertical-align: middle" width="15%">작성자</th>
+								<th title="조회수" style="text-align: center; vertical-align: middle" width="10%">조회수</th>
+								<th title="작성일" style="text-align: center; vertical-align: middle" width="20%">작성일</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -74,8 +81,20 @@
 							 <c:forEach var="b" items="${boardlist }">
 							<tr>
 								<!-- 즐겨찾기 여부 -->
-								<td title="like" class="text-center"><i class="bi bi-star" id="star${b.BOARD_NUM }" onclick="toggle(${b.BOARD_NUM},${EMPNO})"></i></td>
+								<c:choose>
+								<c:when test="${b.abc.contains(EMPNO)}">
+  								<td title="즐겨찾기" class="text-center">
+    							<i class="bi bi-star-fill" style="color:#ffd699"id="star${b.BOARD_NUM}" onclick="toggle(${b.BOARD_NUM}, ${EMPNO})"></i>
+  								</td>
+								</c:when>
+								<c:otherwise>
+								<td title="즐겨찾기" class="text-center">
+    							<i class="bi bi-star" id="star${b.BOARD_NUM}" onclick="toggle(${b.BOARD_NUM}, ${EMPNO})"></i>
+  								</td>
+  								</c:otherwise>
+  								</c:choose>
 								
+
 								
 								<!-- 제목 -->
 								<td style="display: flex; align-items: center;">
@@ -124,19 +143,6 @@
 							</tr>
 							</c:forEach>
 							
-							
-							<tr>
-								<td title="like" class="text-center"><i class="bi bi-star" ></i></td>
-								<td style="display: flex; align-items: center;">
-								<a href="discussion-detail.html" style="flex: 1; font-size:90%">90% 가나다라마바사 한국어로 적어보기</a>
-								<div><span	class="badge badge-pill badge-warning" style="background-color: #89a5ea;">new</span></div>
-								<div class="ml-auto"><span class="badge badge-pill badge-primary float-right" style="background-color: #ffcb6b;">공지</span></div>
-								</td>
-								<td><div style="display: flex; justify-content: center; align-items: center;"><small>Mr. Felton Paucek II</small></div></td>
-								<td><div style="display: flex; justify-content: center; align-items: center;">256</div></td>
-								<td><div style="display: flex; justify-content: center; align-items: center;">1 week ago</div></td>
-							</tr>
-							
 						</tbody>
 						<tfoot>
 							<tr>
@@ -150,7 +156,7 @@
 				</c:if>
 				<c:if test="${page>1}">
 					<li class="page-item">
-						<a href="list?page=${page-1}" class="page-link">이전&nbsp;</a>
+						<a href="List?page=${page-1}" class="page-link">이전&nbsp;</a>
 					</li>
 				</c:if>
 				
@@ -162,7 +168,7 @@
 					</c:if>
 					<c:if test="${a!=page }">
 						<li class="page-item">
-							<a href="list?page=${a}" class="page-link">${a}</a>
+							<a href="List?page=${a}" class="page-link">${a}</a>
 						</li>
 					</c:if>
 				</c:forEach>
@@ -174,7 +180,7 @@
 				</c:if>
 				<c:if test="${page < maxpage }">
 						<li class="page-item">
-							<a href="list?page=${page+1}" class="page-link">&nbsp;다음</a>
+							<a href="List?page=${page+1}" class="page-link">&nbsp;다음</a>
 						</li>
 				</c:if>
 		
@@ -205,49 +211,79 @@ var token = $("meta[name='_csrf']").attr("content");
 var header = $("meta[name='_csrf_header']").attr("content");
 
 
+
 //즐겨찾기 별모양 function (fav테이블에 insert)
 function toggle(BOARD_NUM,BOARD_EMPNO) {
 		var star = document.getElementById('star'+BOARD_NUM);
-	
+		var board_num = BOARD_NUM;
+		var board_empno = BOARD_EMPNO;
+		//var board_empno = 2310005;
+		
+		
 	if (star.classList.contains('bi-star-fill')) {
 		  star.classList.remove('bi-star-fill');
 		  star.classList.add('bi-star');
 		  star.style.color = '';
+		  $.ajax({
+		        url: "${pageContext.request.contextPath}/board/Fav_delete",
+		        type: 'POST',
+		        data: {
+		            "BOARD_NUM": board_num,
+		            "BOARD_EMPNO": board_empno
+		        },
+		        beforeSend : function(xhr)
+		        {   //데이터를 전송하기 전에 헤더에 csrf값을 설정합니다.
+		          xhr.setRequestHeader(header, token);         
+		       },
+		        success: function(response) {
+		          // 성공시 테이블바디 재구성
+		        },
+		        error: function(request,error) {
+		            
+		            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		        }
+			});//delete_ajax 끝
+			
 		} else {
 		  star.classList.remove('bi-star');
 		  star.classList.add('bi-star-fill');
 		  star.style.color = '#ffd699';
+		  
+		  $.ajax({
+		        url: "${pageContext.request.contextPath}/board/Fav_add",
+		        type: 'POST',
+		        data: {
+		            "BOARD_NUM": board_num,
+		            "BOARD_EMPNO": board_empno
+		        },
+		        beforeSend : function(xhr)
+		        {   //데이터를 전송하기 전에 헤더에 csrf값을 설정합니다.
+		          xhr.setRequestHeader(header, token);         
+		       },
+		        success: function(response) {
+		          // 성공시 테이블바디 재구성
+		        },
+		        error: function(request,error) {
+		            
+		            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		        }
+			});//add_ajax 끝
+		  
+		  
 		}
 	
-	var board_num = BOARD_NUM;
-	var board_empno = BOARD_EMPNO;
+
 	
 
-	$.ajax({
-        url: "${pageContext.request.contextPath}/board/Fav_add",
-        type: 'POST',
-        data: {
-            "BOARD_NUM": board_num,
-            "BOARD_EMPNO": board_empno
-        },
-        beforeSend : function(xhr)
-        {   //데이터를 전송하기 전에 헤더에 csrf값을 설정합니다.
-          xhr.setRequestHeader(header, token);         
-       },
-        success: function(response) {
-          // 성공시 테이블바디 재구성
-        },
-        error: function(request,error) {
-            
-            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-        }
-	});//add_ajax 끝
+	
 }//toggle 끝
 
 function favorite(BOARD_EMPNO) {
 	var board_empno= BOARD_EMPNO
 	
-	if(BOARD_EMPNO == 'main'){}
+	if(BOARD_EMPNO == 'main'){
+		window.location.href = '${pageContext.request.contextPath}/board/List';
+	}else{
 	
 	$.ajax({
         url: "${pageContext.request.contextPath}/board/Fav_list",
@@ -267,11 +303,11 @@ function favorite(BOARD_EMPNO) {
         				
         	output += "<thead>";
 			output += "<tr class='bg-light'>";
-			output += "<th title='like' style='text-align: center; vertical-align: middle' width='5%'onclick=favorite('main')>즐겨<br>찾기</th>";
-			output += "<th title='Discussion List' style='text-align: center; vertical-align: middle' width='50%'>제목</th>";
-			output += "<th class='bg-light' title='Created By' style='text-align: center; vertical-align: middle' width='15%''>작성자</th>";
-			output += "<th title='Total Replies' style='text-align: center; vertical-align: middle' width='10%'>조회수</th>";
-			output += "<th title='Last Updated' style='text-align: center; vertical-align: middle' width='20%'>작성일</th>";
+			output += "<th title='즐겨찾기' style='text-align: center; vertical-align: middle' width='5%'onclick=favorite('main')>즐겨<br>찾기</th>";
+			output += "<th title='제목' style='text-align: center; vertical-align: middle' width='50%'>제목</th>";
+			output += "<th class='bg-light' title='작성자' style='text-align: center; vertical-align: middle' width='15%''>작성자</th>";
+			output += "<th title='조회수' style='text-align: center; vertical-align: middle' width='10%'>조회수</th>";
+			output += "<th title='작성일' style='text-align: center; vertical-align: middle' width='20%'>작성일</th>";
 			output += "</tr>";
 			output += "</thead>";
 									
@@ -283,7 +319,7 @@ function favorite(BOARD_EMPNO) {
 					
 					
 					output += "<tr>"
-			            output += "<td title='like' class='text-center'><i class='bi bi-star-fill' style='color:#ffd699' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ", ${EMPNO})'></i></td>"
+			            output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star-fill' style='color:#ffd699' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ", ${EMPNO})'></i></td>"
 			            const blank_count = item.board_RE_LEV * 2 + 1;
 			            let blank = '&nbsp;'; //답글일 때 들여쓰기
 			            for (let i = 1; i<blank_count; i++){
@@ -334,6 +370,7 @@ function favorite(BOARD_EMPNO) {
             alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
         }
 	});//add_ajax 끝
+	}//else 끝
 }
 	
 

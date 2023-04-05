@@ -119,7 +119,7 @@ form[action=down] > input[type=submit]{
 				<sec:authorize access="isAuthenticated()">
     			<sec:authentication property="principal" var="pinfo"/>
 					
-					<c:if test="${boarddata.BOARD_NAME == pinfo.username || pinfo.username =='admin' }">
+					<c:if test="${boarddata.BOARD_EMPNO == pinfo.username || pinfo.username =='admin' }">
 						<a href="modifyView?num=${boarddata.BOARD_NUM}">
 							<button class="btn btn-warning">수정</button>
 						</a>
@@ -134,7 +134,7 @@ form[action=down] > input[type=submit]{
 				<a href="replyView?num=${boarddata.BOARD_NUM }">
 					<button class="btn btn-info">답변</button>
 				</a>
-				<a href="list">
+				<a href="List">
 					<button class="btn btn-success">목록</button>
 				</a> 
 		</table>

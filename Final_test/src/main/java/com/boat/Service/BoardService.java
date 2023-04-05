@@ -39,6 +39,10 @@ public interface BoardService {
 
 	public List<Board> getFavBoardList(int page, int limit, int empno);
 
+	public void deleteFav(int bOARD_NUM, int bOARD_EMPNO);
+
+	public int checkFav(int boardNum, int empno);
+
 	
 
 	
