@@ -151,10 +151,14 @@ public class boardController {
 		if(endpage > maxpage)
 			endpage = maxpage;
 		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+	    Calendar cal = Calendar.getInstance();
+	    String today = format.format(cal.getTime());
+	    cal.add(Calendar.DAY_OF_MONTH, -3); //3일간 보이도록 하기위해서.
+	    String nowday = format.format(cal.getTime());
+		
 		List<Board> boardlist = boardService.getFavBoardList(page, limit,empno);
-		
 		Map<String, Object> map = new HashMap<String, Object>();
-		
 		
 		map.put("page",page);
 		map.put("maxpage",maxpage);
@@ -163,7 +167,8 @@ public class boardController {
 		map.put("listcount",listcount);
 		map.put("boardlist",boardlist);
 		map.put("limit",limit);
-		
+		map.put("nowday",nowday);
+		map.put("today",today);
 		
 		return map;
 	}
