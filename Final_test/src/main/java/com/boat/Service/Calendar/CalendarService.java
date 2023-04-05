@@ -20,6 +20,9 @@ public interface CalendarService {
 	//	dept없을때
 	public List<Calendar> getAllEvents();
 
+
+	public int checkevent(String EMPNO, String EVENT_NAME);
+
 	
 	
 	

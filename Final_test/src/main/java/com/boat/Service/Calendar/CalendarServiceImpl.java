@@ -35,19 +35,6 @@ public class CalendarServiceImpl implements CalendarService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
-
-//	@Override
-//	public List<Calendar> getList(String dept) {
-//	Map<String,String>map = new HashMap<String,String>();
-//
-//		map.put("dept",dept);
-//		
-//		return dao.getCalList(dept);
-//		
-//	}
-
-
 	
 	@Override
 	public List<Calendar> getEventsByDept(String DEPT) {
@@ -58,6 +45,22 @@ public class CalendarServiceImpl implements CalendarService {
 	public List<Calendar> getAllEvents() {
 		return dao.getAllEvents();
     }
+
+	@Override
+	public int checkevent(String EMPNO, String EVENT_NAME) {
+		int result =0;
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("EVENT_NAME", EVENT_NAME);
+		map.put("EMPNO", EMPNO);
+		Calendar resultcal = dao.getcheckEvent(map);
+		
+		if(resultcal!=null ) {
+			result = 1;
+			dao.caldelete(map);
+		}
+		return result;
+
+	}
 
 
 
