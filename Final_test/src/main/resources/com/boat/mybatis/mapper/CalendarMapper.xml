@@ -4,15 +4,9 @@
   
   <mapper namespace="com.boat.mybatis.mapper.CalendarMapper">
   
-  <select id="getEvents" resultType="Calendar">
+  <select id="getEvent" resultType="Calendar">
   	select * 	from BOAT_CALENDAR 
-  <!--  -->
-		  <where>
-		    <if test="dept != null">
-			  dept = #{DEPT}
-		    </if>
-		  </where>
-		  
+		where SCHEDULE_CODE = #{SCHEDULE_CODE}
   </select>
   
   <insert id="calInsert">
@@ -23,6 +17,10 @@
 	   values
 	    (cal_seq.nextval,#{EVENT_NAME},
 		 #{START_DATE},#{END_DATE},#{ALLDAY},#{DEPT},#{COLOR}) 
+		<selectKey resultType="integer" keyProperty="SCHEDULE_CODE" order="AFTER">
+		SELECT max(TO_NUMBER(SCHEDULE_CODE)) FROM BOAT_CALENDAR
+		</selectKey>
+
   </insert>
   
   <select id="getEventsByDept" resultType="Calendar">

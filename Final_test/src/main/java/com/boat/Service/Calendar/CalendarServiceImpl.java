@@ -23,8 +23,10 @@ public class CalendarServiceImpl implements CalendarService {
 
 	//캘린더 일정삽입
 	@Override
-	public int insertcal(Calendar cal) {
-		return dao.calInsert(cal);
+	public Calendar insertcal(Calendar cal) {
+		dao.calInsert(cal);
+		return dao.getEvent(cal.getSCHEDULE_CODE());
+				
 		
 	}
 

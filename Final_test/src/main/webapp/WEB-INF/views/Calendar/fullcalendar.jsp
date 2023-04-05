@@ -17,45 +17,42 @@
 
 <!-- the moment-to-fullcalendar connector. must go AFTER the moment lib -->
  
- 
  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   
   <link href ="${pageContext.request.contextPath}/jhLee/css/fullcalendar.css"  rel ="stylesheet">
-  <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-  <script src="https://unpkg.com/tippy.js@6"></script>
+  <!-- <script src="https://unpkg.com/tippy.js@6"></script> -->
   <style>
 	.page-header {
 		margin: 0!important;
 	}
 	</style>
- <script>
- 	var calendar =null;
- 	// calendar element 취득
-	let token = $("meta[name='_csrf']").attr("content");
-	let header = $("meta[name='_csrf_header']").attr("content");
-		 
- 	$(document).ready(function(){
+<script>
+	 
+$(document).ready(function(){
+let token = $("meta[name='_csrf']").attr("content");
+let header = $("meta[name='_csrf_header']").attr("content");
+	var empno = $('#loginid').text();
+	var selectedEvent = null;
+	var calendarEl = document.getElementById('calendar');
+	let selDept = $("#calDept").val();
+	
+	const Empno =$('#loginid').text()
+	$('#calEmpno').val(Empno); 						
 
-
-		var calendarEl = document.getElementById('calendar');
-		let selDept = $("#calDept").val();
- 		
-		const Empno =$('#loginid').text()
- 		$('#calEmpno').val(Empno); 						
-	    
-	  	//부서 선택시 새로운 캘린더페이지 
-	   $('#calDept').change(function(){
-			selDept = $(this).val();
-			 showEvents(selDept);
-		})
-		//시작시 전체 이벤트 가져옴
+	//부서 선택시 새로운 캘린더페이지 
+	$('#calDept').change(function(){
+	selDept = $(this).val();
+	showEvents(selDept);
+	})
+	//시작시 전체 이벤트 가져옴
 	showEvents()
+	
 	Events = [];		 
 
 	// DB에서 이벤트 가져오기
 	function showEvents(dept) {
-	
 		// let param = {
 		// 	startDate: startDate,
 		// 	endDate: endDate
@@ -66,209 +63,211 @@
         url: 'cal/getEvents',
         data: { DEPT: dept },
         success: function(events) {
-        	
 			for(i=0; i<events.length; i++){
-				startDate = moment(events.start).format("YYYY-MM-DD hh:mm");
+				//startDate = moment.tz(events.start,'Asia/Seoul').format();
 				//if(i==17)
 				//console.log(startDate)
 
 				endDate = moment(events.end).format("YYYY-MM-DD hh:mm");
 				let allDay = events.allDay
-				if(allDay=='0')
-				events.allDay =0;	
-				else 
-				events.allDay =0;
-
+				console.log(allDay)
+				if(allDay){
+				events.allDay =1;	
+				console.log(i+'events.allDay'+events.allDay)}
+				else {
+				events.allDay =0;}
 			}
+			//console.log(startDate)
 			Events= events;
-        	
 			//var test = new Date(Events[17].start);
 			//console.log(test+'dddddddddd')
 			//Events[17].start = test;
-        	console.log('받은 값1'+events.start);//2023-04-13 01:37
-        	console.log('받은 값2'+events.end);
-        	console.log('받은 값3'+  Events.allDay);
-			console.log('받은 값4'+  ( Events.allDay  ==  'false'));
-			//events[18].allDay=0
-	//console.log(events[18].title)
+			console.log('받은 값1'+events.start);//2023-04-13 01:37
+			console.log('받은 값2'+events.end);
+			console.log('받은 값3'+  Events.allDay);
+			console.log('받은 값4'+  ( Events.allDay  ==  false));
+			events[0].allDay=0
+			//console.log(events[18].title)
 
 		 	//바뀔때마다 이벤트 렌더 다시함.
 			//calendar.getEvents().forEach(event => event.remove())
-		    calendar.getEventSources().forEach(function(source) {
-      	                source.remove();
-      	              });
-      	   calendar.addEventSource(events);
-      	   calendar.refetchEvents(); 
-        },
+			calendar.getEventSources().forEach(function(source) {
+			source.remove();
+			});	
+			calendar.addEventSource(events);
+			calendar.refetchEvents(); 
+			},
         error: function(xhr, status, error) {
             console.error(xhr.responseText);
-        	}
-    	});
-	}
-	  
-	      
+			}
+		});
+	}//show event() end
+	$('#undo').click(function(){
+					$('#title').val("");
+					$('#START_DATE').val('');
+					$('#END_DATE').val('');
+					$('#START_TIME').val('');
+					$('#END_TIME').val('');
+						location.reload();
+							
+					})//$('#undo').click end
 	      // full-calendar 생성하기
-	      calendar = new FullCalendar.Calendar(calendarEl, {
-			unselectAuto:true
-	    	,events :Events
-        	,height: '600px', // calendar 높이 설정
-			dayPopoverFormat: { year: 'numeric', month: 'long', day: 'numeric' },
-			eventDidMount: function(info) {
-				const start = moment(info.event.start).format('YYYY-MM-DD HH:mm:ss');
-				//const tool = start.slice(0,16)
-				const too2 = info.event.start;
-				//const tool33 = too2.slice(0,16)
-				console.log('info.event.start'+info.event.start)
-				console.log('tootip start'+start)
-				//console.log('tool start'+tool)
+var calendar = new FullCalendar.Calendar(calendarEl, {
+			events :Events
+        	,height: '600px' // calendar 높이 설정
+			,dayPopoverFormat: { year: 'numeric', month: 'long', day: 'numeric' }
+			// ,eventDidMount: function(info) {
+			// 	const start = moment(info.event.start).format('YYYY-MM-DD HH:mm:ss');
+			// 	const too2 = info.event.start;
+			// 	console.log('info.event.start'+info.event.start)
+			// 	console.log('tootip start'+start)
 
-				tippy(info.el,{
-					content : info.event.title+info.event.start
-					
-				});
+			// 	tippy(info.el,{
+			// 		content : info.event.title+info.event.start
+			// 	});
+			// }
+			,expandRows: true, // 화면에 맞게 높이 재설정	
+			headerToolbar:
+			{
+				prev: 'chevron-left',
+				next: 'chevron-right',
+				prevYear: 'chevrons-left', // double chevron
+				nextYear: 'chevrons-right' // double chevron
+				,left:'title'
 			},
-
-      		 expandRows: true, // 화면에 맞게 높이 재설정
-      		 headerToolbar:
-			   {
-					prev: 'chevron-left',
-					next: 'chevron-right',
-					prevYear: 'chevrons-left', // double chevron
-					nextYear: 'chevrons-right' // double chevron
-					,left:'title'
-	           		 ,center: ''
-					},
-   		   editable: true, //재수정여부 가능
+   		  	editable: true, //재수정여부 가능
 		     //월간 달력으로 시작합니다.
-			 initialView: 'dayGridMonth',
-	          selectable: true, // 달력 일자 드래그 설정가능
-	          nowIndicator: true, // 현재 시간 마크
-	          dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
+			initialView: 'dayGridMonth',
+	        selectable: true, // 달력 일자 드래그 설정가능
 	          locale: 'ko', // 한국어 설정
    		   //이벤트 수정
-  			eventDrop:function(event){
-	     		var startmoment =moment(event.event.start).format('YYYY-MM-DD HH:mm:ss');
-	  	        var endmoment = moment(event.event.end).format('YYYY-MM-DD HH:mm:ss');	  
-			
-					
-	  	      	$.ajax({
-    	   			type:'POST',
-    	   			url:'${pageContext.request.contextPath}/project_calupdate.cal',
-    	   			data:{EMPNO:Empno,
-						
-
+			eventDrop:function(event){
+				console.log('update event'+event)
+				console.log(event)
+			var startmoment =moment(event.event.start).format('YYYY-MM-DD HH:mm:ss');
+			var endmoment = moment(event.event.end).format('YYYY-MM-DD HH:mm:ss');	  	
+				$.ajax({
+				type:'POST',
+				url:'${pageContext.request.contextPath}/cal/update',
+				data:{EMPNO:empno,
+						title:title,
+						start:start,
+						end:end
+						}
+				,async:true,
+				success:function(response){
+					console.log('success'+response)	
+					if(response==-1){
+					alert('본인이 작성한 일정만 수정 가능합니다.');
+					setTimeout(function(){
+					location.reload();},1500);
+					}else{
+					swal("Good job!", "성공적으로 수정되었습니다.", "success");
 					}
-    	   			,async:true,
-    	   			success:function(response){
-    	   				console.log('success'+response
-    	   				)	
-    	   				if(response==-1){
-        	   				alert('본인이 작성한 일정만 수정 가능합니다.');
-        	   				setTimeout(function(){
-        	   				location.reload();},1500);
-        	   				}else{
-        	   				swal("Good job!", "성공적으로 수정되었습니다.", "success");
-        	   				}
-    	   			},
-    	   			error:function(request,status,error){
-    	   				console.log('updateerror')
-    	   			},
-    	   			complete:function(){}
-    	   		})
-	  	    },  
-	        
-	          eventAdd: function(arg) { // 이벤트가 추가되면 발생하는 이벤트
-	              console.log(arg);
-	          	console.log('이벤트 변경 및 추가');
-	            },
+				},
+				error:function(request,status,error){
+				console.log('updateerror')
+				},
+				complete:function(){}
+				})
+			},  
+	        eventAdd: function(arg) { // 이벤트가 추가되면 발생하는 이벤트
+				console.log(arg);
+				console.log('이벤트 변경 및 추가');	
+			},
             eventRemove: function(obj){ // 이벤트가 삭제되면 발생하는 이벤트
-           	   console.log(obj);
-          		console.log('이벤트 삭제함');
-	            },
-	            //ok
-				//==========================================================
-            select:   function createEvent(date) {// 캘린더에서 드래그로 이벤트를 생성할 수 있다.
-				console.log(date)
+				console.log(obj);
+				console.log('이벤트 삭제함');
+			},
+			unselectAuto: true,
+	        //ok
+			//==========================================================
+            select:function (addevent) {// 캘린더에서 드래그로 이벤트를 생성할 수 있다.
+				console.log(addevent)
+				
 				$('#addevent').modal('toggle');
 				
-           	 	var color =null;
-				var start = date.start;
-	           	var startdate =moment(start).format('YYYY-MM-DD hh:mm');
-	           	var end = date.end;
-	           	var enddate = moment(end).format('YYYY-MM-DD hh:mm');
+				var color =null;
+				var start = addevent.start;
+				var startdate =moment(start).format('YYYY-MM-DD hh:mm');
+				var end = addevent.end;
+				var enddate = moment(end).format('YYYY-MM-DD hh:mm');
 				
-				
+				//모달 안의 값
 				$('#START_DATE').val(startdate.substr(0,10))
 				$('#END_DATE').val(enddate.substr(0,10))
 				
-           	 	$('#saveBtn').click(function(){
-					var allDay =false
-					var title =$('#title').val();
-					let dept = $('#color option:checked').text();
-					var color = $('#color').val();
+				$('#saveBtn').click(function(){
+					//calendar.unbind();
+				if($('#title').val()==""){
+					alert('일정을 입력해주세요');
+					return false;
+					$('#title').focus();
+				}
 
-	           	if($('#title').val()==""){
-	           	alert('일정을 입력해주세요');
-	           	return false;
-	           	$('#title').focus();
-	           	}
+				var allDay =false
+				var title =$('#title').val();
+				let dept = $('#color option:checked').text();
+				var color = $('#color').val();
 				
 				let chk = $('#allday').is(":checked");//.attr('checked'); 
 				
-				if(!chk) {
-					//allDay false
-					//시간체크 유효성 검사
-					if($('#START_TIME').val()==""){
-					alert('시작시간 을 입력해주세요');
-					return false;
-					$('#START_TIME').focus();
-					}
-				
-					if($('#END_TIME').val()==""){
-					alert('종료시간 을 입력해주세요');
-					return false;
-					$('#END_TIME').focus();
-					}
+					if(!chk) {
+						//allDay false
+						//시간체크 유효성 검사
+						if($('#START_TIME').val()==""){
+						alert('시작시간 을 입력해주세요');
+						return false;
+						$('#START_TIME').focus();
+						}
+					
+						if($('#END_TIME').val()==""){
+						alert('종료시간 을 입력해주세요');
+						return false;
+						$('#END_TIME').focus();
+						}
 
-					if($('#color').val()==""){
-	           		alert('부서명 을 입력해주세요');
-	         	  	return false;
-	         	  	$('#color').focus();
-	          	 	}
+						if($('#color').val()==""){
+						alert('부서명 을 입력해주세요');
+						return false;
+						$('#color').focus();
+						}
 
-					//시간선택시 값
-				starttime=$('#START_TIME').val()
-				endtime=$('#END_TIME').val()
+						//시간선택시 값
+					starttime=$('#START_TIME').val()
+					console.log(starttime)
+					endtime=$('#END_TIME').val()
+					console.log(endtime)
 
-				starttimee =(startdate.substr(0,10))+' ' +starttime
-				endtimee =(enddate.substr(0,10))+' ' +endtime
-				var startmoment = starttimee
-				var endmoment = endtimee
-				
-				}else{
-					//allDaytrue
-				var startmoment = (startdate.substr(0,10))+' 00:00'
-				var endmoment = (enddate.substr(0,10))+' 00:00'
+					starttimee =(startdate.substr(0,10))+' ' +starttime
+					endtimee =(enddate.substr(0,10))+' ' +endtime
+					var startmoment = starttimee
+					var endmoment = endtimee
+					
+					}else{
+						//allDaytrue
+					var startmoment = (startdate.substr(0,10))+' 00:00'
+					var endmoment = (enddate.substr(0,10))+' 00:00'
 					var allDay =true
-					console.log('allDay...........'+allDay)
-					console.log('startmoment............'+startmoment);
-					console.log('endmoment............'+endmoment);
-				}
+					console.log('allDaytrue...........'+allDay)
+					console.log('startmomenttrue............'+startmoment);
+					console.log('endmomenttrue............'+endmoment);
+					}
 				console.log('찐막allDay...........'+allDay)
 				console.log('찐막startmoment............'+startmoment);
 				console.log('찐막endmoment............'+endmoment);
 				console.log('찐막color............'+color);
 				console.log('찐막dept............'+dept);
 				console.log('찐막empno............'+Empno);
-				console.log('typeofallDay'+typeof(allDay))
+				console.log('찐막title............'+title);
+				console.log('typeofallDay......'+typeof(allDay))
+				
 				if(allDay){
-					alldayText='1'
+					alldayText='true'
 				}else{
-					alldayText='0'
+					alldayText='false'
 				}
-				console.log(typeof(alldayText))
-
-				console.log(';;;;;;;;;;;'+title)
+				console.log('typeofalldayText......'+typeof(alldayText))
 					
 				var eventData = {
 					"EVENT_NAME": title,
@@ -279,24 +278,18 @@
 					"EMPNO":Empno,
 					"DEPT":dept
 				}
-				console.log(';;;;;;;;;;;'+alldayText)
-				//
 				$.ajax({
 					type: 'POST',
 					url: '../boat/cal/save',
 					data: eventData,
 					dataType:'json',
-					//contentType: 'application/json',
 					beforeSend: function (jqXHR, settings) {
-                         	jqXHR.setRequestHeader(header, token);
-                     },
+                    jqXHR.setRequestHeader(header, token);
+                    },
 					success: function(response) {
-						console.log(response);
-					//	calendar.addEvent(eventData1);
-					
-						//calendar.refetchEvents();
-
-						//Calendar.('renderEvent', eventData, true);
+						//console.log(response);
+						//calendar.addevent(response)
+						//showEvents()
 					},
 					error: function(xhr, status, error) {
 						console.log('error')
@@ -304,61 +297,65 @@
 						},
 				complete:function(){
 				$("#addevent").modal('hide')
-				$('#undo').click(function(){
-					$('#title').val("");
-					$('#START_DATE').val('');
-					$('#END_DATE').val('');
-					$('#START_TIME').val('');
-					$('#END_TIME').val('');
-						location.reload();
-							
-					})
+				
+				setTimeout(function(){
+        	   							location.reload();},1000);
 
 				} //complete 끝
 				})//ajax끝
    		          //  }// if 끝
-   		      	  })//savebtnclick
+					
+   		      	  });//savebtnclick
+					   calendar.unselect();
 				  //=================================================================
-			},
+				},
+				
 		    eventClick: 
-   		        function deleteEvent(event) {
-					console.log(event)
-   		            if (confirm("일정을 삭제하시겠습니까?")) {
-   		                $.ajax({
-   		                    type: 'POST',
-   		                    url: 'delete',
-   		                    data: [JSON.stringify(event),
-							{EMPNO:Empno}],
-   		                    contentType: 'application/json',
-   		                    success: function(response) {
-								if(result=='false'){
-	 	            		alert('등록한 글만 삭제 가능합니다.')
-	 	            		setTimeout(function(){
-	    							location.reload();},1500);	
-								}else{
-									console.log(response);
-									$('#calendar').fullCalendar('removeEvents', event.id);
-								}
-   		                    },
-   		                    error: function(xhr, status, error) {
-   		                        console.error(xhr.responseText);
-   		                    }
-   		                });
-   		            }
-   		        }
+			function deleteEvent(event) {
+				console.log(event)
+				let title = event._instance.title
+				if (confirm("일정을 삭제하시겠습니까?")) {
+					$.ajax({
+						type: 'POST',
+						url: '/boat/cal/delete',
+						data:{"EMPNO":empno}
+					,
+				beforeSend: function (jqXHR, settings) {
+				jqXHR.setRequestHeader(header, token);
+				},
+						contentType: 'application/json',
+						success: function(response) {
+							if(result=='false'){
+						alert('등록한 글만 삭제 가능합니다.')
+						setTimeout(function(){
+								location.reload();},1500);	
+							}else{
+								console.log(response);
+								$('#calendar').fullCalendar('removeEvents', event.id);
+							}
+						},
+						error: function(xhr, status, error) {
+							console.error(xhr.responseText);
+						}
+					});//if
+				}
+			}
 
 		
 			});//캘린더 객체 선언 끝
 			calendar.render();
 //=============================================================
-
-
+$('#saveBtn').on('click', function() {
+  var myEventSource = calendar.getEventSourceById('myEventSource');
+  if (myEventSource) {
+    myEventSource.remove();
+  }
+})
 
 //모달 창 안에 allday 클릭시 
 $("#allday").click(function(){ 
 	let chk = $('#allday').is(":checked");//.attr('checked'); 
-	console.log('allday..............'+chk)
-	console.log('hohohohoho')
+	console.log('alldayinmodal..............'+chk)
         if(chk) {
 		$("input[name='START_TIME']").prop('readonly', true);
 		$("input[name='END_TIME']").prop('readonly', true);
@@ -371,25 +368,21 @@ $("#allday").click(function(){
 
 
 		})
-   		        function updateEvent(event) {
-   		            $.ajax({
-   		                type: 'POST',
-   		                url: 'update',
-   		                data: JSON.stringify(event),
-   		                contentType: 'application/json',
-   		                success: function(response) {
-   		                    console.log(response);
-   		                },
-   		                error: function(xhr, status, error) {
-   		                    console.error(xhr.responseText);
-   		                }
-   		            });
-   		        }
-
-   		     
-   		    
-
- </script>
+		function updateEvent(event) {
+			$.ajax({
+				type: 'POST',
+				url: 'update',
+				data: JSON.stringify(event),
+				contentType: 'application/json',
+				success: function(response) {
+					console.log(response);
+				},
+				error: function(xhr, status, error) {
+					console.error(xhr.responseText);
+				}
+			});
+		}
+</script>
 
 
 </head>

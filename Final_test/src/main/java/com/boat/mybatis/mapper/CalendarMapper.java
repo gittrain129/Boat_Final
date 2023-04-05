@@ -12,11 +12,13 @@ public interface CalendarMapper {
 	//삭제예정
 	List<Calendar> getCalList(String dept);
 
-	int calInsert(Calendar cal);
+	Calendar calInsert(Calendar cal);
 
 	List<Calendar> getEventsByDept(String DEPT);
 
 	List<Calendar> getAllEvents();
+
+	Calendar getEvent(int sCHEDULE_CODE);
 
 
 
