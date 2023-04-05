@@ -312,7 +312,7 @@
             
             <div class="navbar-nav me-auto p-3 p-lg-0">
                 <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle me-0" data-bs-toggle="dropdown">${NAME} 님</a>
+                    <a href="#" class="nav-link dropdown-toggle me-0" data-bs-toggle="dropdown" id="loginname">${NAME} 님</a>
                     <div class="dropdown-menu border-0 rounded-0 rounded-bottom m-0 shadow">
                         <a href="${pageContext.request.contextPath}/member/myinfo" class="dropdown-item">내 정보</a>
                     </div>

@@ -6,6 +6,7 @@
   
 		<select id="getAttList" resultType = 'Attandance'>
 		select * from BOAT_ATTENDANCE where empno = #{empno}
+		order by reg_date desc
 		<!--
 		select * from BOAT_ATTENDANCE
 		개인 회원 전용
@@ -23,8 +24,8 @@
 		</select>
 		
 		<insert id="AttOn">
-		insert into BOAT_ATTENDANCE (empno, on_time,dept, REG_DATE)
-		 values(#{EMPNO},#{on},#{DEPT},TO_CHAR(SYSDATE, 'YYYYMMDD'))
+		insert into BOAT_ATTENDANCE (empno, on_time,dept, REG_DATE,name)
+		 values(#{EMPNO},#{on},#{DEPT},TO_CHAR(SYSDATE, 'YYYYMMDD'),#{NAME})
 		</insert>
 		
 		<update id="AttOff">

@@ -10,7 +10,7 @@ import com.boat.domain.Attandance;
 public interface AttandanceMapper {
 
 	//출근버튼
-	public void AttOn(String on, String EMPNO, String DEPT);
+	public void AttOn(String on, String EMPNO, String DEPT, String NAME);
 
 	//퇴근버튼
 	public void AttOff(String OFF_TIME, String EMPNO);

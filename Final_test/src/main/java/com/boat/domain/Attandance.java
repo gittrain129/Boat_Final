@@ -8,8 +8,28 @@ public class Attandance {
 	private String CONTENT;
 	private String ON_TIME;
 	private String OFF_TIME;
-	
+	private String REG_DATE;
+	private String OUT_TIME;
+	private String NAME;
 
+	public String getREG_DATE() {
+		return REG_DATE;
+	}
+	public void setREG_DATE(String rEG_DATE) {
+		REG_DATE = rEG_DATE;
+	}
+	public String getOUT_TIME() {
+		return OUT_TIME;
+	}
+	public void setOUT_TIME(String oUT_TIME) {
+		OUT_TIME = oUT_TIME;
+	}
+	public String getNAME() {
+		return NAME;
+	}
+	public void setNAME(String nAME) {
+		NAME = nAME;
+	}
 	public String getEMPNO() {
 		return EMPNO;
 	}

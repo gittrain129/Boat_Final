@@ -8,11 +8,13 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -56,7 +58,7 @@ public class AttendanceContoroller {
 	
 	@ResponseBody
 	@PostMapping(value="/on")
-	public Map<String,String> on(String ON_TIME,String EMPNO,String DEPT,
+	public Map<String,String> on(String ON_TIME,String EMPNO,String DEPT,String NAME,
 			 				ModelAndView mv
 			 				,HttpServletRequest request)throws IOException
 	{
@@ -65,7 +67,8 @@ public class AttendanceContoroller {
 		
 		logger.info("att접속중......출근한 empno = "+EMPNO);
 		logger.info("att접속중......출근한 ON_TIME = "+ON_TIME);
-		attandanceService.AttOn(ON_TIME,EMPNO,DEPT);
+		logger.info("att접속중......출근한 NAME = "+NAME);
+		attandanceService.AttOn(ON_TIME,EMPNO,DEPT,NAME);
 	
 		HttpSession session = request.getSession();
 		Attandance TodayMyatt = attandanceService.getTodayMyatt(EMPNO);
@@ -96,5 +99,14 @@ public class AttendanceContoroller {
 	}
 	
 	
-	
+	@RequestMapping(value="/Exceldown")
+	public void attListdown(String EMPNO,HttpServletRequest request, 
+			HttpServletResponse response, ModelMap model)
+			throws Exception {
+		Attandance att = new Attandance();
+		att.setEMPNO(EMPNO);
+		attandanceService.getExceldata(att,request,response);
+		
+		
+	}
 }//클래스 end
