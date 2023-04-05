@@ -115,7 +115,10 @@
             
             
              <div id="search-box" class="box">
-              <h1>근태관리</h1>
+              <div class=""></div>
+                <h1>근태관리</h1>
+                 <div class="mgr">${JOB}</div>
+                 <div class="name">${NAME}</div>
               </div>
               
             </form> 
@@ -123,6 +126,7 @@
         </div>
         <div>
             <div id="notice-box" class="box">
+                <button class = 'Excel'>Excel로 다운받기</button>
                 <div class="list-box">
                     <div class="first-item">
                         <p>날짜</p>

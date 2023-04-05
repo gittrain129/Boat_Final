@@ -37,9 +37,13 @@ public class CalContoller {
 	
 	@ResponseBody
 	@PostMapping("/delete")
-	public void deleteCal(String EMPNO,@RequestBody Calendar cal ) {
-		logger.info(cal.toString());
-		//calendarService.deletecal(EMPNO,cal.getEVENT_NAME());
+	public int deleteCal(@RequestParam String EMPNO,	
+			@RequestParam String  EVENT_NAME) {
+		logger.info("delete empno ///"+EMPNO);
+		logger.info("delete EVENT_NAME ///"+EVENT_NAME);
+		int result = calendarService.checkevent(EMPNO,EVENT_NAME);
+			
+		return result;
 	}
 	
 	
@@ -51,6 +55,7 @@ public class CalContoller {
 		
 		logger.info("...."+cal.toString());
 		calendarService.insertcal(cal);
+		//이하 사실상 필요없는코드...(새로고침으로 해결)
 		Map<String,Object> map =new  HashMap<String,Object>();
 		
 		map.put("title", cal.getEVENT_NAME());
@@ -59,7 +64,6 @@ public class CalContoller {
 		map.put("title", cal.getEVENT_NAME());
 		map.put("color",cal.getCOLOR());
 		map.put("allDay", cal.getALLDAY());
-		
 		return map;
 		
 		
@@ -78,24 +82,26 @@ public class CalContoller {
 	            events = calendarService.getAllEvents();
 	        }
 	        List<Map <String,Object>> result = new ArrayList<Map <String,Object>>();
-	        
+	        int a=1;
+	        int b = 0;
 	        for(Calendar cal: events) {
 	        	Map <String,Object> event = new HashMap<String,Object>();
-	        	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mmz");
-	        	//Date date = format.parse(cal.getSTART_DATE());
-	        	//Date date2 = format.parse(cal.getEND_DATE());
-	    	    //java.util.Calendar ca =  java.util.Calendar.getInstance();
-	    	    //format.format(cal.getSTART_DATE());
+	        	//SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mmz");++
+	    	    if(cal.getALLDAY().equals("false")) {
+	    	    	a = 0;
+	    	    	event.put("end", cal.getEND_DATE());
+	    	    	b++;
+	    	    	logger.info(b+"번째 이벤트"+a);
+	    	    	}else {
+	    	    		a=1;    	    		
+	    	    	}
 	    	    
 	        	 event.put("id",cal.getSCHEDULE_CODE());
-	             //event.put("start", date);
-	             //event.put("end", date2);
 	             event.put("start", cal.getSTART_DATE());
-	             event.put("end", cal.getEND_DATE());
 	             event.put("title", cal.getEVENT_NAME());
 	             event.put("color",cal.getCOLOR());
-	             event.put("allDay", cal.getALLDAY());
-
+	             event.put("allDay",a);
+	             
 	             event.put("DEPT", cal.getDEPT());
 	             result.add(event);
 	        }

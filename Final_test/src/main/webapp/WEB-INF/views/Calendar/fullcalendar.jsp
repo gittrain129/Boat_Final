@@ -21,12 +21,15 @@
   
   <link href ="${pageContext.request.contextPath}/jhLee/css/fullcalendar.css"  rel ="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-  <!-- <script src="https://unpkg.com/tippy.js@6"></script> -->
+  <script src="https://unpkg.com/tippy.js@6"></script>
   <style>
 	.page-header {
 		margin: 0!important;
 	}
+	.tippy-box[data-theme~='tomato'] {
+  background-color: tomato;
+  color: yellow;
+}
 	</style>
 <script>
 	 
@@ -46,6 +49,9 @@ let header = $("meta[name='_csrf_header']").attr("content");
 	selDept = $(this).val();
 	showEvents(selDept);
 	})
+	$('#everyevent').click(function(){
+		showEvents()
+	})
 	//시작시 전체 이벤트 가져옴
 	showEvents()
 	
@@ -53,10 +59,6 @@ let header = $("meta[name='_csrf_header']").attr("content");
 
 	// DB에서 이벤트 가져오기
 	function showEvents(dept) {
-		// let param = {
-		// 	startDate: startDate,
-		// 	endDate: endDate
-		// };
 		
     $.ajax({
         type: 'GET',
@@ -64,33 +66,12 @@ let header = $("meta[name='_csrf_header']").attr("content");
         data: { DEPT: dept },
         success: function(events) {
 			for(i=0; i<events.length; i++){
-				//startDate = moment.tz(events.start,'Asia/Seoul').format();
-				//if(i==17)
-				//console.log(startDate)
-
-				endDate = moment(events.end).format("YYYY-MM-DD hh:mm");
-				let allDay = events.allDay
-				console.log(allDay)
-				if(allDay){
-				events.allDay =1;	
-				console.log(i+'events.allDay'+events.allDay)}
-				else {
-				events.allDay =0;}
+				//endDate = moment(events[i].end).add(9, 'h').format("YYYY-MM-DD hh:mm");
+				//endDate = moment(events[i].end).subtract(9, 'hours').format("YYYY-MM-DD hh:mm");
+				//events[i].end = endDate
 			}
-			//console.log(startDate)
 			Events= events;
-			//var test = new Date(Events[17].start);
-			//console.log(test+'dddddddddd')
-			//Events[17].start = test;
-			console.log('받은 값1'+events.start);//2023-04-13 01:37
-			console.log('받은 값2'+events.end);
-			console.log('받은 값3'+  Events.allDay);
-			console.log('받은 값4'+  ( Events.allDay  ==  false));
-			events[0].allDay=0
-			//console.log(events[18].title)
-
-		 	//바뀔때마다 이벤트 렌더 다시함.
-			//calendar.getEvents().forEach(event => event.remove())
+	
 			calendar.getEventSources().forEach(function(source) {
 			source.remove();
 			});	
@@ -102,6 +83,7 @@ let header = $("meta[name='_csrf_header']").attr("content");
 			}
 		});
 	}//show event() end
+
 	$('#undo').click(function(){
 					$('#title').val("");
 					$('#START_DATE').val('');
@@ -111,21 +93,28 @@ let header = $("meta[name='_csrf_header']").attr("content");
 						location.reload();
 							
 					})//$('#undo').click end
+					
 	      // full-calendar 생성하기
 var calendar = new FullCalendar.Calendar(calendarEl, {
 			events :Events
         	,height: '600px' // calendar 높이 설정
 			,dayPopoverFormat: { year: 'numeric', month: 'long', day: 'numeric' }
-			// ,eventDidMount: function(info) {
-			// 	const start = moment(info.event.start).format('YYYY-MM-DD HH:mm:ss');
-			// 	const too2 = info.event.start;
-			// 	console.log('info.event.start'+info.event.start)
-			// 	console.log('tootip start'+start)
+			 ,eventDidMount: function(info) {
+				let endDate = moment(info.event.end).format("MM-DD HH:mm");
+			 	let start = moment(info.event.start).format('MM-DD HH:mm');
+				let popallDay = info.event._def.allDay
 
-			// 	tippy(info.el,{
-			// 		content : info.event.title+info.event.start
-			// 	});
-			// }
+				if(popallDay){
+					endDate = '종일일정';
+				}
+				tippy(info.el,{
+				allowHTML: true,
+				theme: 'tomato',
+	 			content : info.event.title+'<br>'+start+'<br>'+endDate+''
+		 		});
+				// let start = moment(info.event.start).format('YY-MM-DD:m:s')
+		 	
+			 }
 			,expandRows: true, // 화면에 맞게 높이 재설정	
 			headerToolbar:
 			{
@@ -133,44 +122,45 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
 				next: 'chevron-right',
 				prevYear: 'chevrons-left', // double chevron
 				nextYear: 'chevrons-right' // double chevron
-				,left:'title'
+				,left:'title,dayGridMonth'
 			},
-   		  	editable: true, //재수정여부 가능
+			
+   		  	editable: false, //재수정여부 가능
 		     //월간 달력으로 시작합니다.
 			initialView: 'dayGridMonth',
 	        selectable: true, // 달력 일자 드래그 설정가능
 	          locale: 'ko', // 한국어 설정
    		   //이벤트 수정
-			eventDrop:function(event){
-				console.log('update event'+event)
-				console.log(event)
-			var startmoment =moment(event.event.start).format('YYYY-MM-DD HH:mm:ss');
-			var endmoment = moment(event.event.end).format('YYYY-MM-DD HH:mm:ss');	  	
-				$.ajax({
-				type:'POST',
-				url:'${pageContext.request.contextPath}/cal/update',
-				data:{EMPNO:empno,
-						title:title,
-						start:start,
-						end:end
-						}
-				,async:true,
-				success:function(response){
-					console.log('success'+response)	
-					if(response==-1){
-					alert('본인이 작성한 일정만 수정 가능합니다.');
-					setTimeout(function(){
-					location.reload();},1500);
-					}else{
-					swal("Good job!", "성공적으로 수정되었습니다.", "success");
-					}
-				},
-				error:function(request,status,error){
-				console.log('updateerror')
-				},
-				complete:function(){}
-				})
-			},  
+			// eventDrop:function(event){
+			// 	console.log('update event'+event)
+			// 	console.log(event)
+			// var startmoment =moment(event.event.start).format('YYYY-MM-DD HH:mm:ss');
+			// var endmoment = moment(event.event.end).format('YYYY-MM-DD HH:mm:ss');	
+			// var updateevnet = {EMPNO:empno,
+			// 			title:title,
+			// 			start:start,
+			// 			end:end
+			// 			}
+			// 	$.ajax({
+			// 	type:'POST',
+			// 	url:'${pageContext.request.contextPath}/cal/update',
+			// 	data:updateevnet,
+			// 	success:function(response){
+			// 		console.log('success'+response)	
+			// 		if(response==-1){
+			// 		alert('본인이 작성한 일정만 수정 가능합니다.');
+			// 		setTimeout(function(){
+			// 		location.reload();},1500);
+			// 		}else{
+			// 		swal("Good job!", "성공적으로 수정되었습니다.", "success");
+			// 		}
+			// 	},
+			// 	error:function(request,status,error){
+			// 	console.log('updateerror')
+			// 	},
+			// 	complete:function(){}
+			// 	})
+			// },  
 	        eventAdd: function(arg) { // 이벤트가 추가되면 발생하는 이벤트
 				console.log(arg);
 				console.log('이벤트 변경 및 추가');	
@@ -190,12 +180,12 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
 				var color =null;
 				var start = addevent.start;
 				var startdate =moment(start).format('YYYY-MM-DD hh:mm');
-				var end = addevent.end;
+				var end = moment(addevent.end).subtract(1,'days');
 				var enddate = moment(end).format('YYYY-MM-DD hh:mm');
 				
 				//모달 안의 값
 				$('#START_DATE').val(startdate.substr(0,10))
-				$('#END_DATE').val(enddate.substr(0,10))
+				$('#END_DATE').val(enddate.substr(0,10),-1)
 				
 				$('#saveBtn').click(function(){
 					//calendar.unbind();
@@ -275,7 +265,7 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
 					"END_DATE": endmoment,
 					"COLOR": color,
 					"ALLDAY": alldayText,
-					"EMPNO":Empno,
+					"EMPNO":empno,
 					"DEPT":dept
 				}
 				$.ajax({
@@ -287,9 +277,12 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
                     jqXHR.setRequestHeader(header, token);
                     },
 					success: function(response) {
-						//console.log(response);
-						//calendar.addevent(response)
-						//showEvents()
+						console.log(response);
+								toastr.options.escapeHtml = true;
+								toastr.options.closeButton = true;
+								toastr.options.newestOnTop = false;
+								toastr.options.progressBar = true;
+								toastr.info('일정이 추가되었습니다.', '캘린더', {timeOut: 1500});
 					},
 					error: function(xhr, status, error) {
 						console.log('error')
@@ -299,7 +292,7 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
 				$("#addevent").modal('hide')
 				
 				setTimeout(function(){
-        	   							location.reload();},1000);
+        	   							location.reload();},1500);
 
 				} //complete 끝
 				})//ajax끝
@@ -313,30 +306,44 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
 		    eventClick: 
 			function deleteEvent(event) {
 				console.log(event)
-				let title = event._instance.title
+				let title = event.event._def.title
+				let eventnum = event.event._def.defId
+				var deleteevent ={"EMPNO":empno
+							,"EVENT_NAME":title}
+				console.log(title+'ddddddddddddddddddd')
+				console.log(empno+'ddddddddddddddddddd')
 				if (confirm("일정을 삭제하시겠습니까?")) {
 					$.ajax({
 						type: 'POST',
 						url: '/boat/cal/delete',
-						data:{"EMPNO":empno}
+						data:deleteevent
 					,
 				beforeSend: function (jqXHR, settings) {
 				jqXHR.setRequestHeader(header, token);
 				},
-						contentType: 'application/json',
+					//	contentType: 'application/json',
 						success: function(response) {
-							if(result=='false'){
+							if(response==0){
 						alert('등록한 글만 삭제 가능합니다.')
 						setTimeout(function(){
 								location.reload();},1500);	
 							}else{
 								console.log(response);
-								$('#calendar').fullCalendar('removeEvents', event.id);
+								toastr.options.escapeHtml = true;
+								toastr.options.closeButton = true;
+								toastr.options.newestOnTop = false;
+								toastr.options.progressBar = true;
+								toastr.info('일정이 삭제되었습니다.', '캘린더', {timeOut: 1500});
 							}
 						},
 						error: function(xhr, status, error) {
 							console.error(xhr.responseText);
 						}
+						,complete:function(){
+						setTimeout(function(){
+						location.reload();},1500);
+
+				} //complete 끝
 					});//if
 				}
 			}
@@ -345,12 +352,7 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
 			});//캘린더 객체 선언 끝
 			calendar.render();
 //=============================================================
-$('#saveBtn').on('click', function() {
-  var myEventSource = calendar.getEventSourceById('myEventSource');
-  if (myEventSource) {
-    myEventSource.remove();
-  }
-})
+
 
 //모달 창 안에 allday 클릭시 
 $("#allday").click(function(){ 
