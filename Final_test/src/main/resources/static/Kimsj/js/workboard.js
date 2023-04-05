@@ -3,7 +3,7 @@ $(function(){
 //	let token = $("meta[name='_csrf']").attr("content");
 //	let header = $("meta[name='_csrf_header']").attr("content");
 	
-	$("#comment table").hide(); //1
+	$("#workboard_card table").hide(); //1
 	let page=1; //더 보기 에서 보여줄 페이지를 기억할 변수
 	const count = parseInt($("#count").text());
 	if (count != 0){ //댓글 갯수가 0이 아니면
