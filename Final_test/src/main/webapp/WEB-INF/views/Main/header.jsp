@@ -218,16 +218,27 @@
                             </div>
                         </div>
                     </div>
+                    
                     <div class="col-4">
                         <div class="d-flex align-items-center justify-content-end"">
-                            <div class="flex-shrink-0 btn-lg-square border rounded-circle"
-                            	 style=" cursor: pointer;" onclick="location.href='${pageContext.servletContext.contextPath}/member/chat'">
-                                <i class="bi bi-chat-fill text-primary"></i>
-                            </div>
-                            <div class="ps-3"
-                            	 style=" cursor: pointer;" onclick="location.href='${pageContext.servletContext.contextPath}/member/chat'">
-                                <p class="mb-2">채팅</p>
-                            </div>
+                        	<sec:authorize access="isAnonymous()">
+	                        	<div class="flex-shrink-0 btn-lg-square border rounded-circle">
+	                                <i class="bi bi-chat-fill text-primary"></i>
+	                            </div>
+	                            <div class="ps-3">
+	                                <p class="mb-2">채팅</p>
+	                            </div>
+                        	</sec:authorize>
+                        	<sec:authorize access="isAuthenticated()">
+	                            <div class="flex-shrink-0 btn-lg-square border rounded-circle"
+	                            	 style=" cursor: pointer;" onclick="location.href='${pageContext.servletContext.contextPath}/member/chat'">
+	                                <i class="bi bi-chat-fill text-primary"></i>
+	                            </div>
+	                            <div class="ps-3"
+	                            	 style=" cursor: pointer;" onclick="location.href='${pageContext.servletContext.contextPath}/member/chat'">
+	                                <p class="mb-2">채팅</p>
+	                            </div>
+                            </sec:authorize>
                         </div>
                         </a>
                     </div>

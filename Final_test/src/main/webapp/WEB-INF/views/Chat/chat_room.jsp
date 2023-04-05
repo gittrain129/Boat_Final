@@ -9,6 +9,10 @@
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 	<jsp:include page="../Main/header.jsp" />
 	<script>
+		$(function(){
+			wsOpen()
+		});
+	
 		var ws;
 		
 		function wsOpen(){
@@ -24,18 +28,57 @@
 			ws.onmessage = function(data) {
 				//메시지를 받으면 동작
 				var msg = data.data;
+				console.log('msg='+msg)
+				
+				//채팅 말풍성
+				var input = '';//나
+				var output = '';//상대방
+				
 				if(msg != null && msg.trim() != ''){
 					var d = JSON.parse(msg);
+					console.log('d='+d)
+					console.log('d.type='+d.type)
+					console.log('memberinfo.EMPNO='+${memberinfo.EMPNO})
+					
 					if(d.type == "getId"){
 						var si = d.sessionId != null ? d.sessionId : "";
 						if(si != ''){
 							$("#sessionId").val(si); 
 						}
 					}else if(d.type == "message"){
+							
 						if(d.sessionId == $("#sessionId").val()){
-							$(".chat-body").append("<p class='me'>나 :" + d.msg + "</p>");	
+							
+							input += '<li class="left clearfix">';
+							input += '<span class="chat-img pull-left">';
+							input += '<img src="https://bootdey.com/img/Content/user_3.jpg" alt="User Avatar">';
+							input += '</span>';
+							input += '<div class="chat-body clearfix">';
+							input += '<div class="header">';
+							input += '<strong class="primary-font fs-6">나</strong>';
+							input += '<small class="pull-right text-muted"><i class="fa fa-clock-o"></i> 12 mins ago</small>';
+							input += '</div>';
+							input += '<p class="me fs-6">' + d.msg + '</p>';
+							input += '</div>';
+							input += '</li>';
+							
+							$(".chat").append(input);	
 						}else{
-							$(".chat-body").append("<p class='others'>" + d.userName + " :" + d.msg + "</p>");
+							
+							output += '<li class="right clearfix">';
+							output += '<span class="chat-img pull-right">';
+							output += '<img src="https://bootdey.com/img/Content/user_1.jpg" alt="User Avatar">';
+							output += '</span>';
+							output += '<div class="chat-body clearfix">';
+							output += '<div class="header">';
+							output += '<strong class="primary-font fs-6">'+d.userName+'</strong>';
+							output += '<small class="pull-right text-muted"><i class="fa fa-clock-o"></i> 13 mins ago</small>';
+							output += '</div>';
+							output += '<p class="others fs-6">' + d.msg + '</p>';
+							output += '</div>';
+							output += '</li>';
+							
+							$(".chat").append(output);
 						}
 							
 					}else{
@@ -51,6 +94,7 @@
 			});
 		}
 		
+		<!-- 
 		function chatName(){
 			var userName = $("#userName").val();
 			if(userName == null || userName.trim() == ""){
@@ -62,6 +106,7 @@
 				$(".yourMsg").show();
 			}
 		}
+		-->
 		
 		function send() {
 			var option ={
@@ -193,116 +238,18 @@
 		</div>
 
 		<!-- 채팅 상세 -->
+		<input type="hidden" id="sessionId" value="">
 		<div class="col-md-8 bg-white ">
 		<div class="chat-message">
 			<ul class="chat">
-			<li class="left clearfix">
-				<span class="chat-img pull-left">
-					<img src="https://bootdey.com/img/Content/user_3.jpg" alt="User Avatar">
-				</span>
-				<div class="chat-body clearfix">
-					<div class="header">
-						<strong class="primary-font">John Doe</strong>
-						<small class="pull-right text-muted"><i class="fa fa-clock-o"></i> 12 mins ago</small>
-					</div>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-				</div>
-			</li>
-			<li class="right clearfix">
-				<span class="chat-img pull-right">
-					<img src="https://bootdey.com/img/Content/user_1.jpg" alt="User Avatar">
-				</span>
-				<div class="chat-body clearfix">
-					<div class="header">
-						<strong class="primary-font">Sarah</strong>
-						<small class="pull-right text-muted"><i class="fa fa-clock-o"></i> 13 mins ago</small>
-					</div>
-					<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales at.
-					</p>
-				</div>
-			</li>
-			<li class="left clearfix">
-				<span class="chat-img pull-left">
-					<img src="https://bootdey.com/img/Content/user_3.jpg" alt="User Avatar">
-				</span>
-				<div class="chat-body clearfix">
-					<div class="header">
-						<strong class="primary-font">John Doe</strong>
-						<small class="pull-right text-muted"><i class="fa fa-clock-o"></i> 12 mins ago</small>
-					</div>
-					<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					</p>
-				</div>
-			</li>
-			<li class="right clearfix">
-				<span class="chat-img pull-right">
-					<img src="https://bootdey.com/img/Content/user_1.jpg" alt="User Avatar">
-				</span>
-				<div class="chat-body clearfix">
-					<div class="header">
-						<strong class="primary-font">Sarah</strong>
-						<small class="pull-right text-muted"><i class="fa fa-clock-o"></i> 13 mins ago</small>
-					</div>
-					<p>
-					 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales at.
-					</p>
-				</div>
-			</li>
-			<li class="left clearfix">
-				<span class="chat-img pull-left">
-					<img src="https://bootdey.com/img/Content/user_3.jpg" alt="User Avatar">
-				</span>
-				<div class="chat-body clearfix">
-					<div class="header">
-						<strong class="primary-font">John Doe</strong>
-						<small class="pull-right text-muted"><i class="fa fa-clock-o"></i> 12 mins ago</small>
-					</div>
-					<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					</p>
-				</div>
-			</li>
-			<li class="right clearfix">
-				<span class="chat-img pull-right">
-					<img src="https://bootdey.com/img/Content/user_1.jpg" alt="User Avatar">
-				</span>
-				<div class="chat-body clearfix">
-					<div class="header">
-						<strong class="primary-font">Sarah</strong>
-						<small class="pull-right text-muted"><i class="fa fa-clock-o"></i> 13 mins ago</small>
-					</div>
-					<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales at.
-					</p>
-				</div>
-			</li>
-			<li class="right clearfix">
-				<span class="chat-img pull-right">
-					<img src="https://bootdey.com/img/Content/user_1.jpg" alt="User Avatar">
-				</span>
-				<div class="chat-body clearfix">
-					<div class="header">
-						<strong class="primary-font">Sarah</strong>
-						<small class="pull-right text-muted"><i class="fa fa-clock-o"></i> 13 mins ago</small>
-					</div>
-					<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales at.
-					</p>
-				</div>
-			</li>
-		</ul>
+			<!-- 채팅 말풍선 -->
+			</ul>
 		</div>
 		<!-- 메세지 작성 -->
 		<div class="chat-box bg-white">
 			<div class="yourName">
 				<span>사용자명</span>
-				<input type="text" class="form-control border no-shadow no-rounded" placeholder="Type your message here"
-						name="userName" id="userName">
-				<span class="input-group-btn">
-					<button onclick="chatName()" class="btn btn-success no-rounded" type="button" id="startBtn">Send</button>
-				</span>
+				<input id="userName" value="${memberinfo.EMPNO}&nbsp;${memberinfo.NAME}">
 			</div>
 			<div class="yourMsg">
 				<span>메시지</span>
