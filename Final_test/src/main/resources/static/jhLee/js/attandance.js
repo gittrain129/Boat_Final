@@ -18,6 +18,7 @@ let header = $("meta[name='_csrf_header']").attr("content");
  //로그인한 아이디  폼에 입력
  let empno =$("#loginid").text();
  let dept = $('#loginDept').text();
+ let name = $('#loginname').text();
 
  
 //실시간 시계
@@ -33,6 +34,12 @@ $('#date-box').text(today.toLocaleString());
 
 
 $(function(){
+ $('#Exceldown').click(function(){
+
+        location.href='/boat/Attendance/Exceldown?EMPNO='+empno
+
+        //location.href='/boat/Attendance/list'
+         })
      //   console.log($('#start-btn').prop('disabled')==false);
         //true
  let endtimeeeeeee=$('#offTimeText').text()
@@ -79,7 +86,8 @@ $('#start-btn').click(function(){
         url : 'on',
         data : {'EMPNO':empno,
                 'ON_TIME':currenttime
-                ,'DEPT':dept},
+                ,'DEPT':dept
+                ,'NAME':name},
         type :'post',
         async:false,
         beforeSend: function (jqXHR, settings) {
@@ -169,11 +177,16 @@ $('#end-btn').click(function(){
 	}
 })
 
-//오늘날짜 이후는 선택못하게 제한설정
-var now_utc = Date.now()
-var timeOff = new Date().getTimezoneOffset()*60000;
-var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
-document.getElementById("end-day").setAttribute("max", today);
-document.getElementById("start-day").setAttribute("max", today);
+$('input[name="daterange"]').daterangepicker({
+        opens: 'left'
+      }, function(start, end, label) {
+        console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+      });
+// //오늘날짜 이후는 선택못하게 제한설정
+// var now_utc = Date.now()
+// var timeOff = new Date().getTimezoneOffset()*60000;
+// var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+// document.getElementById("end-day").setAttribute("max", today);
+// document.getElementById("start-day").setAttribute("max", today);
 
-})
+})//ready 끝
