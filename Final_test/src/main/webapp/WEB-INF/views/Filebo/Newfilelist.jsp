@@ -47,8 +47,8 @@
     	    검색옵션
    			   </a>
 		      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-		        <li><a class="dropdown-item" href="#">작성자</a></li>
-		        <li><a class="dropdown-item" href="#">제목</a></li>
+		        <li><a class="dropdown-item" >작성자</a></li>
+		        <li><a class="dropdown-item" >제목</a></li>
 		      </ul>
   		  </div>
  
@@ -67,7 +67,7 @@
 			<table class="table table-bordered table-hover">
 				<thead>
 					<tr class="bg-light">
-					<th>즐겨칮기</th>
+					<th>즐겨찾기</th>
 						<th title="Discussion List">제목</th>
 						<th class="bg-light" title="Created By">작성자</th>
 						<th title="Total Replies">조회수</th>
@@ -109,7 +109,7 @@
 
 						<td><small>${FILIBO.FILE_NAME} </small></a></td>
 						<td>${FILIBO.FILE_READCOUNT}</td>
-						<td>
+						<td><div class="date">
 							
 							<c:if test="${FILIBO.FILE_DATE!=today}">
 								${FILIBO.FILE_DATE.substring(5,10)}
@@ -117,7 +117,7 @@
 							<c:if test="${FILIBO.FILE_DATE.substring(0,10)==today}">
 								${FILIBO.FILE_DATE.substring(11,16)}
 							</c:if>
-				</td>
+						</div>	</td>
 						<td><div class = "file1">
 							<c:if test="${!empty FILIBO.FILE_FILE}">
 							<img alt="파일다운2" src="${pageContext.request.contextPath}/jhLee/img/download.png" class = 'file'style="width:20px">
@@ -141,19 +141,48 @@
 
 							<nav class="pt-3" aria-label="Page navigation example">
 							  <ul class="pagination">
-							    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-							    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-							    <li class="page-item"><a class="page-link" href="#">2</a></li>
-							    <li class="page-item"><a class="page-link" href="#">3</a></li>
-							    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+								<c:if test="${page<=1}">
+					<li class="page-item">
+						<a class="page-link gray">이전&nbsp;</a>
+					</li>
+				</c:if>
+				<c:if test="${page>1}">
+					<li class="page-item">
+						<a href="list?page=${page-1}" class="page-link">이전&nbsp;</a>
+					</li>
+				</c:if>
+				
+				<c:forEach var="a" begin="${startpage}" end="${endpage}">
+					<c:if test="${a==page }">
+						<li class="page-item active">
+							<a class="page-link">${a}</a>
+						</li>
+					</c:if>
+					<c:if test="${a!=page }">
+						<li class="page-item">
+							<a href="list?page=${a}" class="page-link">${a}</a>
+						</li>
+					</c:if>
+				</c:forEach>
+				
+				<c:if test="${page >= maxpage }">
+						<li class="page-item">
+							<a class="page-link gray">&nbsp;다음</a>
+						</li>
+				</c:if>
+				<c:if test="${page < maxpage }">
+						<li class="page-item">
+							<a href="list?page=${page+1}" class="page-link">&nbsp;다음</a>
+						</li>
+				</c:if>
 							</ul>
 						</nav>
 								
 			<div class="btn-group search form-group">
         
-           <input type="hidden" name = "deptval" id = "deptvall" value =" ${deptval}">
+           <input type="hidden" name = "DEPT" id = "deptval" value =" ${deptval}">
             <div class="dropdown" >
-    		  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="deptval" data-bs-toggle="dropdown" aria-expanded="false">
+    		  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="DEPT" data-bs-toggle="dropdown" aria-expanded="false">
     	    부서별
    			   </a>
 		      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -167,13 +196,13 @@
  
    <input type="hidden" name = "searchsel" id = "orderval" value =" ${orderval}">
             <div class="dropdown" >
-    		  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+    		  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="ORDER" data-bs-toggle="dropdown" aria-expanded="false">
     	    정렬
    			   </a>
 		      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-		        <li><a class="dropdown-item" href="#">최신순</a></li>
-		        <li><a class="dropdown-item" href="#">조회순</a></li>
-		        <li><a class="dropdown-item" href="#">댓글순</a></li>
+		        <li><a class="dropdown-item" >최신순</a></li>
+		        <li><a class="dropdown-item" >조회순</a></li>
+		        <li><a class="dropdown-item" >댓글순</a></li>
 		      </ul>
   		  </div>
 		

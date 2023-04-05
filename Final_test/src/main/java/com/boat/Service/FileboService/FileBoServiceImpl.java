@@ -114,6 +114,21 @@ public class FileBoServiceImpl implements FileBoService {
 		dao.deleteFileList(filename);
 	}
 
+	@Override
+	public List<Filebo> getSearchList(String dept, String searchsel, String searchinput, String order, int page,
+			int limit) {
+		HashMap<String, Object>map = new HashMap<String,Object>();
+		map.put("dept", dept);
+		map.put("searchsel", searchsel);
+		map.put("searchinput",'%'+searchinput+'%');
+		map.put("order", order);
+		map.put("page", page);
+		map.put("limit", limit);
+		
+		
+		return dao.getSearchList(map);
+	}
+
 
 
 }
