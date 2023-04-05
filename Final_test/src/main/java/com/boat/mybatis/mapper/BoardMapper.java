@@ -38,4 +38,8 @@ public interface BoardMapper {
 	public int getFavListCount();
 
 	public List<Board> getFavBoardList(HashMap<String, Integer> map);
+
+	public void deleteFav(int bOARD_NUM, int bOARD_EMPNO);
+
+	public int checkFav(int boardnum, int empno);
 }

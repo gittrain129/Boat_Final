@@ -116,9 +116,24 @@ import com.boat.mybatis.mapper.BoardMapper;
 			dao.insertFav(bOARD_NUM,bOARD_EMPNO);
 		}
 
+		
+		@Override
+		public void deleteFav(int bOARD_NUM, int bOARD_EMPNO) {
+			dao.deleteFav(bOARD_NUM,bOARD_EMPNO);
+			
+		}
+
 		@Override
 		public int getFavListCount() {
 			return dao.getFavListCount();
+		}
+
+		
+		
+		@Override
+		public int checkFav(int boardNum, int empno) {
+			
+			return dao.checkFav(boardNum,empno);
 		}
 
 		@Override

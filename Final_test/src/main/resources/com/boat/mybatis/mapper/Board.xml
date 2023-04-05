@@ -9,26 +9,29 @@
 	</select>
 	
 
-	<select id="getBoardList" resultType="Board">
-  select * from
-  (
-    select rownum rnum, b.*
-    from
-    (
-      select board.*, nvl(cnt, 0) cnt
-      from board
-      left outer join
-      (
-        select board_num, count(*) cnt
-        from comments
-        group by board_num
-      ) c on board.board_num = c.board_num
-      order by BOARD_NOTICE desc, BOARD_RE_REF desc, BOARD_RE_SEQ asc
-    ) b
-    where rownum &lt;= #{end}
-  )
-  where rnum &gt;= #{start} and rnum &lt;= #{end}
+<select id="getBoardList" resultType="Board">
+  SELECT * FROM (
+    SELECT A.*, ROWNUM RN FROM (
+      SELECT board.*, 
+             NVL(cnt, 0) AS cnt, 
+             LISTAGG(bf.board_empno, ',') WITHIN GROUP (ORDER BY bf.board_empno) AS abc 
+      FROM board 
+      LEFT OUTER JOIN (
+        SELECT board_num, COUNT(*) AS cnt 
+        FROM comments 
+        GROUP BY board_num
+      ) c ON board.board_num = c.board_num 
+      LEFT OUTER JOIN board_fav bf ON board.board_num = bf.board_num 
+      GROUP BY board.board_num, board.board_name, board.board_pass, board.board_subject, board.board_content, board.board_dept, board.board_re_ref, board.board_re_lev, board.board_re_seq, board.board_readcount, board.board_date, board.board_empno, board.board_notice, board.board_job, cnt 
+      ORDER BY board.BOARD_NOTICE DESC, board.BOARD_RE_REF DESC, board.BOARD_RE_SEQ ASC
+    ) A
+    WHERE ROWNUM &lt;= #{end}
+  ) 
+  WHERE RN &gt;= #{start}
 </select>
+
+
+
 	
 	
 	<insert id = "insertBoard">
@@ -55,9 +58,8 @@
 	<update id="boardModify">
       update board
       set BOARD_SUBJECT = #{BOARD_SUBJECT},
-         BOARD_CONTENT = #{BOARD_CONTENT},
-         BOARD_FILE = #{BOARD_FILE},
-         BOARD_ORIGINAL = #{BOARD_ORIGINAL}
+         BOARD_CONTENT = #{BOARD_CONTENT}
+        
          
       where BOARD_NUM=#{BOARD_NUM}
    </update>
@@ -94,6 +96,19 @@
 		values(#{bOARD_NUM},#{bOARD_EMPNO})
 	</insert>
 	
+	<delete id="deleteFav">
+		delete from board_fav
+		where BOARD_NUM = #{bOARD_NUM}
+		and  BOARD_EMPNO = #{bOARD_EMPNO}
+		
+	</delete>
+	
+	<select id="checkFav" resultType="int">
+    SELECT COUNT(*) FROM favorite_board
+    WHERE BOARD_NUM = #{boardnum}
+    AND EMPNO = #{empno}
+	</select>
+	
 	<select id="getFavListCount" resultType="int">
 		select count(*) from board_fav
 	</select>
@@ -113,6 +128,7 @@
 		 	 		 order by BOARD_RE_REF desc,
 					BOARD_RE_SEQ asc) b
 			where rownum &lt;= #{end}
+			order by BOARD_NOTICE desc
 		)
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>

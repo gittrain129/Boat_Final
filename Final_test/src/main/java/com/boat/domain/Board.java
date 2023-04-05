@@ -16,7 +16,14 @@ private int BOARD_READCOUNT;
 private String BOARD_DATE;
 private int BOARD_EMPNO;
 private int CNT;
+private String abc; //join해서 empno담아옴
 
+public String getAbc() {
+	return abc;
+}
+public void setAbc(String abc) {
+	this.abc = abc;
+}
 public int getCNT() {
 	return CNT;
 }
