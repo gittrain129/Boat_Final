@@ -2,6 +2,7 @@ package com.boat.mybatis.mapper;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -51,6 +52,10 @@ public interface FileboMapper {
 
 		//검색정렬 ajax 글갯수
 		public int getSearchListCount(HashMap<String, Object> map);
+
+		public int myFavListCount(String EMPNO);
+
+		public List<Filebo> myFavList(HashMap<String, Object> map);
 	
 
 

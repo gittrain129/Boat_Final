@@ -81,14 +81,29 @@
 							</where> 
 		</select>
   
-	 <select id="heartcount">
-	 	select count(FLIKE_NO) from filebo_like 
-	 	where empno = #{EMPNO}
+	 <select id="myFavListCount" resultType="int">
+	 	select count(*) from FILEBO_FAV 
+	 	where FIlE_EMPNO = #{EMPNO}
 	 </select>
  
-	  <select id="getheartlist" resultType="Filelike">
-	  	select count(*) from filebo_like where File_num = #{file_num} and empno = #{empno}
+	  <select id="myFavList" resultType="Filebo">
+	  		 <![CDATA[
+	 SELECT * FROM (select rownum rnum, j.* from (
+							 select file_board.*, nvl(CNT ,0) CNT 
+							from file_board left outer join (select F_COMMENT_NUM ,count(*) CNT  
+														from FILE_COMMENT  
+														group by  F_COMMENT_NUM )b 
+												on file_board.FILE_NUM  = b.F_COMMENT_NUM
+												where file_board.file_num in
+												(select file_num from file_fav where file_empno = #{EMPNO})   
+							order by FILE_RE_REF  desc,  
+							FILE_RE_SEQ  asc)j
+							 				where rownum<= #{end}  ) 
+							WHERE rnum>=#{start}  and rnum<= #{end}  
+							 ]]>
 	  </select>
+  
+  
   
 	  <insert id = "hearUp">
 		  <selectKey  keyProperty="FLIKE_NO" order="BEFORE">

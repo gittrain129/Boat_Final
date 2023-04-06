@@ -2,6 +2,7 @@ package com.boat.Service.FileboService;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -148,6 +149,29 @@ public class FileBoServiceImpl implements FileBoService {
 		
 		
 		return dao.getSearchListCount(map);
+	}
+
+	@Override
+	public int myFavListCount(String EMPNO) {
+		//HashMap<String, Object>map = new HashMap<String,Object>();
+		//map.put("EMPNO", map);
+		//map.put("page", page);
+		//map.put("limit", limit);
+		int a =1;
+		System.out.println(a++);
+		return dao.myFavListCount(EMPNO);
+	}
+
+	@Override
+	public List<Filebo> myFavList(String eMPNO, int page, int limit) {
+		int startrow = (page-1)*limit+1;
+		int endrow = startrow+limit-1;
+		HashMap<String, Object>map = new HashMap<String,Object>();
+		
+		map.put("EMPNO", map);
+		map.put("start", startrow);
+		map.put("end", endrow);
+		return dao.myFavList(map);
 	}
 
 
