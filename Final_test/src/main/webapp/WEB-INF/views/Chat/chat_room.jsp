@@ -85,6 +85,12 @@
 						console.warn("unknown type!")
 					}
 				}
+				
+				const chatContainer = document.querySelector(".chat-message");
+				setTimeout(() => {
+					  chatContainer.scrollTop = chatContainer.scrollHeight;
+					}, 100);
+				
 			}
 
 			document.addEventListener("keypress", function(e){
@@ -109,15 +115,28 @@
 		-->
 		
 		function send() {
+			var message = $("#chatting").val().trim();
+			if (!message) {
+				toastr.options.escapeHtml = true;
+	 		    toastr.options.closeButton = true;
+	 		    toastr.options.newestOnTop = false;
+	 		    toastr.options.progressBar = true;
+	 		    toastr.info('내용을 입력해 주세요.', '채팅', {timeOut: 3000});
+				return; 
+			}
+			
 			var option ={
 				type: "message",
 				sessionId : $("#sessionId").val(),
 				userName : $("#userName").val(),
 				msg : $("#chatting").val()
 			}
+			
 			ws.send(JSON.stringify(option))
-			$('#chatting').val("");
+			$('#chatting').val("").focus();
+			
 		}
+		
 	</script>
 </head>
 <body>
@@ -249,14 +268,13 @@
 		<div class="chat-box bg-white">
 			<div class="yourName">
 				<span>사용자명</span>
-				<input id="userName" value="${memberinfo.EMPNO}&nbsp;${memberinfo.NAME}">
+				<input id="userName" value="${memberinfo.DEPT}&nbsp;${memberinfo.NAME}">
 			</div>
-			<div class="yourMsg">
-				<span>메시지</span>
+			<div class="yourMsg input-group">
 				<input type="text" class="form-control border no-shadow no-rounded" placeholder="보내실 메시지를 입력하세요."
 						id="chatting">
 				<span class="input-group-btn">
-					<button onclick="send()" class="btn btn-success no-rounded" type="button" id="sendBtn">Send</button>
+					<button onclick="send()" class="btn btn-outline-primary no-rounded" type="button" id="sendBtn">전송</button>
 				</span>
 			</div>
 		</div>
