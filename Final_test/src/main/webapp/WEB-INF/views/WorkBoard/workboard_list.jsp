@@ -73,7 +73,7 @@
 
 										
 					<div class="table-responsive  mt-4">
-						<table class="table">
+						<table class="table">	
 							<tbody>
 								<tr>					
 									<th style="width:120px;">카테고리</th>
@@ -104,7 +104,7 @@
 								</tr>
 								<tr>
 									<td colspan="2">
-										<button id="write" type=submit class="btn btn-info float-right" style="background-color:#1ca7ff; border-color:#1ca7ff; color:white;">등록</button>
+										<button id="write"  class="btn btn-info float-right" style="background-color:#1ca7ff; border-color:#1ca7ff; color:white;">등록</button>
 				  						<button type=reset class="btn btn-danger">취소</button>
 									</td>
 								</tr>
@@ -124,7 +124,7 @@
 						</table>
 					</div>
 					
-					<hr class="border-danger mb-4 mt-4" />
+				<!--	<hr class="border-danger mb-4 mt-4" />
 					
 					
 					<div id="workboard_card">
@@ -180,7 +180,7 @@
 							</div>
 						  </div>
 						</div>
-
+				 -->
 			
 				</div> <%-- workboard_card end --%>			
 			

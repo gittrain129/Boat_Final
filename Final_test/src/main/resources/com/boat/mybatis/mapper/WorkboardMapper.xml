@@ -10,13 +10,25 @@
 		from workboard
 	</select>
 	
-	
+	<select id="getCommentList" resultType="workboard" parameterType="map">
+		select *
+		from(select rownum rnum, num, id, content, reg_date
+			from(
+				select num, id, content, reg_date
+				from workboard
+				
+				order by reg_date desc
+				)
+			where rownum &lt; = #{end}
+			)
+		where rnum between #{start} and #{end}
+	</select>
 
 	
 	
 	<insert id="commentsInsert" parameterType="workboard">
 		insert into workboard
-		values(com_seq.nextval, #{id}, #{content}, sysdate)
+		values(seq_workboard.nextval, #{EMPNO}, #{DEPT}, #{NAME}, #{content}, sysdate)
 	</insert>
 	
 	

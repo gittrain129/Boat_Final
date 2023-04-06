@@ -1,7 +1,7 @@
 $(function(){
 
-//	let token = $("meta[name='_csrf']").attr("content");
-//	let header = $("meta[name='_csrf_header']").attr("content");
+	let token = $("meta[name='_csrf']").attr("content");
+	let header = $("meta[name='_csrf_header']").attr("content");
 	
 	$("#workboard_card table").hide(); //1
 	let page=1; //더 보기 에서 보여줄 페이지를 기억할 변수
@@ -52,11 +52,11 @@ $(function(){
 					                '<a href="#">' +
 					                '<img class="mr-3 rounded img-thumbnail" src="' + this.imgSrc + '" alt="Generic placeholder image">' +
 					                '</a>' +
-					                '<h6 class="mt-2"><a href="#">' + item.empno + '</a></h6>' +
-					                '<small class="text-muted">' + item.name + '</small>' +
+					                '<h6 class="mt-2"><a href="#">' + this.empno + '</a></h6>' +
+					                '<small class="text-muted">' + this.name + '</small>' +
 					                '</div>' +
 					                '<div class="col-sm-9 border-left border-secondary">' +
-					                '<p>' + item.content + '</p>' +
+					                '<p>' + this.content + '</p>' +
 					                '</div>' +
 					                '</div>' +
 					                '</div>' +
@@ -113,28 +113,30 @@ $(function(){
 	//버튼의 라벨이 '수정완료'인 경우는 댓글을 수정하는 경우
 	$("#write").click(function() {
 		const content = $("#workboard_view").val().trim();
-		if(!content){
-			alert('내용을 입력하세요')
-			return false;
-		}
-		const buttonText = $("#write").text(); // 버튼의 라벨로 add할지 update할지 결정
+	//	if(!content){
+	//		alert('내용을 입력하세요')
+	//		return false;
+	//	}
+		const buttonText = $("#write").text().trim(); // 버튼의 라벨로 add할지 update할지 결정
 		
 		$(".float-left").text('총 50자까지 가능합니다.');
 		
 		if (buttonText == "등록") {  // 댓글을 추가하는 경우
-			url = "../comment/add";
+		console.log('확인')
+		
+			url = "../workboard/add";
 			data = {
 				"content" : content,
-				"id" : $("#loginid").text()
+				"EMPNO" : $("#loginid").text()
 			};
 		} else { // 댓글을 수정하는 경우
-			url = "../comment/update";
+			url = "../workboard/update";
 			data = {
 					"num" : num,
 					"content" : content
 			};
 			$("#write").text("등록"); // 다시 등록으로 변경
-			$("#workboard_card .cancel").remove(); //취소 버튼 삭제
+			$("#workboard_view .cancel").remove(); //취소 버튼 삭제
 		
 		}
 		
@@ -147,12 +149,14 @@ $(function(){
 	        	xhr.setRequestHeader(header, token);			
 	        },
 			success : function(result){
+			console.log(result)
 				$("#workboard_view").val('');
 				if (result == 1) {
 					//page=1
 					getList(page); //등록, 수정완료 후 해당 페이지 보여줍니다.
 				}//if
 			}//success
+			,error:function(error){console.log(error)}
 		})	//ajax end
 	}) //$("#write") end
 	

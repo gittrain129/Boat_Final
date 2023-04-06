@@ -1,31 +1,13 @@
-drop table work_board CASCADE CONSTRAINTS;
-
-create table work_board{
-	empno			 varchar2(12) primary key,
-	dept			 varchar2(10) check(dept in ('홍보팀', '개발팀', '인사팀', '기획팀', '영업팀')),
-	name			 varchar2(15),
-	profile_img		 varchar2(50),
-	subject			 varchar2(50),
-	content			 varchar2(500),
-	creat_date		 varchar2(15),
-	category		 varchar2(20),
-	file_re_ref		 number(5) not null,
-	file_re_lev		 number(5) not null,
-	file_re_seq		 number(5) not null
-	
-}
-
-
 drop table workboard CASCADE CONSTRAINTS;
 
 create table workboard(
-	num			 number 		,
-	empno		 varchar2(12) 	primary key,
+	num			 number 	primary key,
+	empno		 varchar2(12) 	,
 	dept		 varchar2(10) check(dept in ('홍보팀', '개발팀', '인사팀', '기획팀', '영업팀')),
 	name		 varchar2(15),
 	content 	 varchar2(500),
 	reg_date 	 date
 );
 
-drop sequence com_seq;
-create sequence com_seq;
+drop sequence seq_workboard;
+create sequence seq_workboard;

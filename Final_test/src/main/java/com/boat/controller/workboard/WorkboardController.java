@@ -36,8 +36,15 @@ public class  WorkboardController {
 
 	
 	@PostMapping(value="/add")
-	public int CommentAdd(Workboard co) {
-		return WorkboardService.commentsInsert(co);				
+	public int CommentAdd(String EMPNO, String NAME, String DEPT, String content, String reg_date) {
+		Workboard co = new Workboard();
+		System.out.println(EMPNO);
+		co.setEMPNO(EMPNO);
+		co.setContent(content);
+		co.setDEPT(DEPT);
+		co.setNAME(NAME);
+		co.setReg_date(reg_date);
+		return WorkboardService.commentsInsert(co);		
 	}
 	
 	@PostMapping(value="/update")
