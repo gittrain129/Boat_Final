@@ -40,4 +40,15 @@ public class  WorkboardController {
 		return WorkboardService.commentsInsert(co);				
 	}
 	
+	@PostMapping(value="/update")
+	public int CommentUpdate(Workboard co) {
+		return WorkboardService.commentsUpdate(co);				
+	}
+	
+	
+	
+	@PostMapping(value="/delete")
+	public int CommentDelete(int num) {
+		return WorkboardService.commentsDelete(num);				
+	}
 }
