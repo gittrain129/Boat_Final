@@ -72,7 +72,23 @@ small, .small {
 }
 
 .chat-message {
-  padding: 60px 20px 115px;
+  padding: 40px 20px 40px;
+  height: 800px;
+  overflow-y: scroll;
+}
+
+.chat-message::-webkit-scrollbar {
+  width: 8px;  /* 스크롤바의 너비 */
+}
+
+.chat-message::-webkit-scrollbar-thumb {
+  height: 30%; /* 스크롤바의 길이 */
+  background: #006fc7; /* 스크롤바의 색상 */
+  border-radius: 10px;
+}
+
+.chat-message::-webkit-scrollbar-track {
+  background: #84848447;  /*스크롤바 뒷 배경 색상*/
 }
 
 .chat {
