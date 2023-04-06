@@ -3,6 +3,7 @@ package com.boat.Service;
 import java.util.List;
 import java.util.Map;
 
+import com.boat.domain.Board;
 import com.boat.domain.Member;
 
 public interface MemberService {
@@ -51,6 +52,12 @@ public interface MemberService {
 
 	//회원 탈퇴
 	public int delete(String empno);
+
+	//내 글 갯수
+	public int getMyListCount(String empno);
+
+	//내 글 목록
+	public List<Board> getMyBoardList(int page, int limit, String empno);
 
 
 
