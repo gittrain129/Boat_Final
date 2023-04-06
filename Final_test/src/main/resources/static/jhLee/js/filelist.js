@@ -5,7 +5,7 @@ let empno = $('#login').text();
 function fav( ){
     var data ={EMPNO:empno
                 ,FILE_NUM:file_num}
-    const data = `state=ajax&page=${page}&searchsel=${searchsel}&searchinput=${searchinput}&dept=${dept}&order=${order}`;
+  //  const data = `state=ajax&page=${page}&searchsel=${searchsel}&searchinput=${searchinput}&dept=${dept}&order=${order}`;
     ajax(data);
 }
 
