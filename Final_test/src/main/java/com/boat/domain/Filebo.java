@@ -12,7 +12,30 @@ public class Filebo {
 	private String FILE_CONTENT;
 	private String FILE_FILE;
 	private String FILE_FILE2;
+	private int FILE_RE_REF;
+	private int FILE_RE_LEV;
+	private int FILE_RE_SEQ;
+	private int FILE_READCOUNT;
+	private String FILE_DATE;
+	private int CNT;
+	private String DEPT;
+	private String FILE_EMPNO;
 	
+	private MultipartFile uploadfile;
+	private MultipartFile uploadfile2;
+	
+	private String FILE_ORIGINAL;//첨부될파일의이름
+	private String FILE_ORIGINAL2;//첨부될파일의이름
+	
+	
+	private String star;
+	
+	public String getStar() {
+		return star;
+	}
+	public void setStar(String star) {
+		this.star = star;
+	}
 	public int getFILE_NUM() {
 		return FILE_NUM;
 	}
@@ -127,22 +150,7 @@ public class Filebo {
 	public void setFILE_ORIGINAL2(String fILE_ORIGINAL2) {
 		FILE_ORIGINAL2 = fILE_ORIGINAL2;
 	}
-	private int FILE_RE_REF;
-	private int FILE_RE_LEV;
-	private int FILE_RE_SEQ;
-	private int FILE_READCOUNT;
-	private String FILE_DATE;
-	private int CNT;
-	private String DEPT;
-	private String FILE_EMPNO;
-	
-	private MultipartFile uploadfile;
-	private MultipartFile uploadfile2;
-	
-	private String FILE_ORIGINAL;//첨부될파일의이름
-	private String FILE_ORIGINAL2;//첨부될파일의이름
-	
-	
+
 	
 
 	

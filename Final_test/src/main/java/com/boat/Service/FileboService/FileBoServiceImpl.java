@@ -174,6 +174,31 @@ public class FileBoServiceImpl implements FileBoService {
 		return dao.myFavList(map);
 	}
 
+	@Override
+	public int insertfav(String fILE_EMPNO, String fILE_NUM) {
+HashMap<String, Object>map = new HashMap<String,Object>();
+		
+		map.put("FILE_EMPNO", fILE_EMPNO);
+		map.put("FILE_NUM", fILE_NUM);
+		return dao.InsertFav(map);
+		
+	}
+
+	@Override
+	public int deletefav(String fILE_EMPNO, String fILE_NUM) {
+HashMap<String, Object>map = new HashMap<String,Object>();
+		
+		map.put("FILE_EMPNO", fILE_EMPNO);
+		map.put("FILE_NUM", fILE_NUM);
+		return dao.deleteFav(map);
+	}
+
+	@Override
+	public Filebo getstar(String eMPNO) {
+		return dao.getstar(eMPNO);
+		
+	}
+
 
 
 }

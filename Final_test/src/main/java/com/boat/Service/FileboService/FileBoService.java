@@ -50,4 +50,10 @@ public interface FileBoService {
 	public List<Filebo> myFavList(String eMPNO, int page, int limit);
 
 	int myFavListCount(String EMPNO);
+
+	public int insertfav(String fILE_EMPNO, String fILE_NUM);
+
+	public int deletefav(String fILE_EMPNO, String fILE_NUM);
+
+	public Filebo getstar(String eMPNO);
 }
