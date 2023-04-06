@@ -80,7 +80,7 @@
 					<c:set var = "num" value ="${listcount-(page-1)*limit }"/>
 					<c:forEach var="FILIBO" items="${boardlist}">
 					<tr>
-					<td><i class="bi bi-star"></i></td>
+					<td><i class="bi bi-star"><span class = "file_num">${FILIBO.FILE_NUM}</span></i></td>
 						<td>
 						
 							<c:if test="${FILIBO.FILE_SUBJECT.length()>=20}">
@@ -120,6 +120,7 @@
 						</div>	</td>
 						<td><div class = "file1">
 							<c:if test="${!empty FILIBO.FILE_FILE}">
+								<span class ="invis">${FILIBO.FILE_ORIGINAL}</span>
 							<img alt="파일다운2" src="${pageContext.request.contextPath}/jhLee/img/download.png" class = 'file'style="width:20px">
 							</c:if>
 							</div>
@@ -127,6 +128,7 @@
 						<td>
 							<div class = "file2">
 							<c:if test="${!empty FILIBO.FILE_FILE2}">
+								<span class ="invis">${FILIBO.FILE_ORIGINAL2}</span>
 								<img alt="파일다운2" src="${pageContext.request.contextPath}/jhLee/img/download.png" class = 'file'style="width:20px">
 							</c:if>
 							</div>
@@ -140,42 +142,44 @@
 					<div class="filebofooter">
 
 							<nav class="pt-3" aria-label="Page navigation example">
-							  <ul class="pagination">
-								<c:if test="${page<=1}">
-					<li class="page-item">
-						<a class="page-link gray">이전&nbsp;</a>
-					</li>
-				</c:if>
-				<c:if test="${page>1}">
-					<li class="page-item">
-						<a href="list?page=${page-1}" class="page-link">이전&nbsp;</a>
-					</li>
-				</c:if>
-				
-				<c:forEach var="a" begin="${startpage}" end="${endpage}">
-					<c:if test="${a==page }">
-						<li class="page-item active">
-							<a class="page-link">${a}</a>
-						</li>
-					</c:if>
-					<c:if test="${a!=page }">
-						<li class="page-item">
-							<a href="list?page=${a}" class="page-link">${a}</a>
-						</li>
-					</c:if>
-				</c:forEach>
-				
-				<c:if test="${page >= maxpage }">
-						<li class="page-item">
-							<a class="page-link gray">&nbsp;다음</a>
-						</li>
-				</c:if>
-				<c:if test="${page < maxpage }">
-						<li class="page-item">
-							<a href="list?page=${page+1}" class="page-link">&nbsp;다음</a>
-						</li>
-				</c:if>
-							</ul>
+								<ul class = "pagination justify-content-center">
+									<c:if test="${page<=1}">
+									<li class="page-item">
+										<a class="page-link gray">이전&nbsp;</a>
+									</li>
+									</c:if>
+									<c:if test="${page>1}">
+										<li class="page-item">
+											<a href ="list?page=${page-1}"
+											class="page-link">이전&nbsp;</a>
+										</li>
+									</c:if>
+									
+									<c:forEach var="a" begin="${startpage}" end="${endpage}">
+										<c:if test="${a==page}">
+											<li class="page-item active">
+											<a class="page-link">${a}</a>
+											</li>
+										</c:if>
+										<c:if test="${a !=page}">
+											<li class="page-item">
+											<a href ="list?page=${a}" class="page-link">${a}</a>
+											</li>
+										</c:if>
+									</c:forEach>
+									
+									<c:if test="${page>=maxpage}">
+											<li class="page-item">
+											<a class="page-link gray">&nbsp;다음</a>
+											</li>
+										</c:if>
+										<c:if test="${page<maxpage}">
+											<li class="page-item">
+											<a href ="list?page=${page+1}"
+											 class="page-link">&nbsp;다음</a>
+											</li>
+										</c:if>
+								</ul>
 						</nav>
 								
 			<div class="btn-group search form-group">
@@ -186,6 +190,7 @@
     	    부서별
    			   </a>
 		      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+		        <li><a class="dropdown-item" >전체</a></li>
 		        <li><a class="dropdown-item" >홍보팀</a></li>
 		        <li><a class="dropdown-item" >개발팀</a></li>
 		        <li><a class="dropdown-item" >인사팀</a></li>

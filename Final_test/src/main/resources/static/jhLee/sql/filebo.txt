@@ -2,7 +2,16 @@ select * from file_board;
 
 delete from file_board
 
+drop table FILEBO_FAV cascade constraints purge;
 
+230406
+CREATE TABLE FILEBO_FAV (
+FILE_NUM NUMBER(5) NOT NULL,
+FIlE_EMPNO NUMBER(12) NOT NULL
+);
+
+230406
+alter table file_board modify file_empno varchar2(12);
 drop table file_board cascade constraints purge;
 
 	create table file_board (
@@ -21,10 +30,29 @@ drop table file_board cascade constraints purge;
 	FILE_ORIGINAL2 VARCHAR2(100),	
 	FILE_DATE DATE ,
 	DEPT VARCHAR2(30) check (dept in ('홍보팀', '개발팀', '인사팀', '기획팀', '영업팀')),
-	FIlE_EMPNO varchar2(50)
+	FIlE_EMPNO varchar2(12)
 	);
-	
-	
+	 select * from 
+				(select b.*, rownum rnum from 
+					(select file_board.* , nvl(CNT ,0)  CNT
+					from file_board left outer join  
+					 				(select F_COMMENT_NUM ,count(*) CNT from FILE_COMMENT group by F_COMMENT_NUM 
+									order by  CNT desc) 
+					on FILE_NUM = F_COMMENT_NUM 
+					where dept = '홍보팀'
+					and FILE_NAME = '홍길동' 
+				order by FILE_RE_REF desc 
+				, FILE_READCOUNT desc )b 
+				where rownum<=10 )
+				where rnum>=1 and rnum<=10;
+				
+				
+				select count(*) 
+								from file_board 
+								where 
+				 					FILE_NAME like %홍길동%  
+									and dept = '홍보팀';
+	===================================================================
 	  SELECT * FROM (select rownum rnum, j.* from (
 							 select file_board.*, nvl(CNT ,0) CNT 
 							from board3 left outer join (select board_num,count(*) CNT  

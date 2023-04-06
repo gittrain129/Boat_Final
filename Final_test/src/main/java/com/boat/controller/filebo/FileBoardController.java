@@ -113,7 +113,10 @@ import com.boat.domain.MySaveFolder;
 	    cal.add(Calendar.DAY_OF_MONTH, -3); //3일간 보이도록 하기위해서.
 	    String nowday = format.format(cal.getTime());
 	    
-		int listcount = boardService.getListCount();//총 리스트 수를 받아옴
+	    //총 리스트 수를 받아옴
+		int listcount = boardService.getSearchListCount(dept,searchsel,searchinput,order,page,limit);
+		logger.info("검색을 해서 받아온 리스트카운트"+listcount);
+		
 		//총 페이지 수   
 		int maxpage = (listcount +limit-1)/limit;
 		

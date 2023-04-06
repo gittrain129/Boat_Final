@@ -14,10 +14,11 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/jhLee/css/Todonew2.css">
   
   <%--tab 전환에 필요 bootstrap4 --%>
-  a
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
   <style>
 .page-header{margin : 0!important}
+body > div.container-fluid.bg-dark.text-body.footer.mt-5.pt-5.wow.fadeIn{
+  margin : 0!important}
 </style>
 </head>
 

@@ -46,7 +46,11 @@ public interface FileboMapper {
 		
 		public void deleteFileList(String filename);
 
+		//검색정렬 ajax 글목록
 		public List<Filebo> getSearchList(HashMap<String, Object> map);
+
+		//검색정렬 ajax 글갯수
+		public int getSearchListCount(HashMap<String, Object> map);
 	
 
 
