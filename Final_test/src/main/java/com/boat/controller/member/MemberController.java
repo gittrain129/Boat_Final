@@ -902,8 +902,9 @@ public class MemberController {
 	
 	
 	//내 글 보기
+	//워크보드 추가
 	@GetMapping("/myboardList")
-	public ModelAndView myboardList(Principal principal, ModelAndView mv) {
+	public ModelAndView myboardList(@RequestParam(value="page",defaultValue="1",required=false) int page, Principal principal, ModelAndView mv) {
 		
 		String id = principal.getName();
 		System.out.println("id="+id);
@@ -921,7 +922,6 @@ public class MemberController {
 		}
 		System.out.println("empno="+empno);
 		
-		int page = 1;
 		int limit = 10; 
 		int listcount = memberservice.getMyListCount(empno);
 		System.out.println("listcount="+listcount);
@@ -937,6 +937,7 @@ public class MemberController {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 	    Calendar cal = Calendar.getInstance();
 	    String today = format.format(cal.getTime());
+	    System.out.println("today="+today);
 	    cal.add(Calendar.DAY_OF_MONTH, -3); //3일간 보이도록 하기위해서.
 	    String nowday = format.format(cal.getTime());
 		
