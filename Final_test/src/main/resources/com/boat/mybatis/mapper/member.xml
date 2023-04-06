@@ -100,4 +100,29 @@
 		where EMPNO = #{empno}
 	</delete>
 	
+	<select id="getMyListCount" resultType="int">
+		select count(*) from BOARD
+		WHERE BOARD_EMPNO = #{empno}
+	</select>
+	
+	<select id="getMyBoardList" resultType="java.util.Map">
+		SELECT * FROM (
+			SELECT rownum rnum, J.* FROM(
+				SELECT b.BOARD_NUM, b.BOARD_SUBJECT, b.BOARD_DEPT, b.BOARD_NAME, b.BOARD_READCOUNT, b.BOARD_DATE, b.BOARD_NOTICE, NVL(CNT, 0) AS CNT  
+				FROM BOARD b LEFT OUTER JOIN  (SELECT board_num, COUNT(*) AS cnt FROM comments
+										GROUP BY board_num) c
+				ON b.BOARD_NUM = c.board_num
+				where BOARD_EMPNO = #{empno}
+					UNION ALL
+				SELECT FILE_NUM, FILE_SUBJECT, DEPT, FILE_NAME, FILE_READCOUNT, FILE_DATE, FILE_FILE, NVL(CNT, 0) AS CNT
+				FROM file_board LEFT OUTER JOIN (SELECT F_BO_NUM, COUNT(*) CNT FROM Filecomm
+				GROUP BY F_BO_NUM)
+				ON FILE_NUM = F_BO_NUM
+				where DEPT = #{empno}
+				) J
+			where rownum &lt;= #{end}
+			ORDER BY BOARD_DATE DESC) 
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
+	
 </mapper>

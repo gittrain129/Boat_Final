@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.boat.domain.Board;
 import com.boat.domain.Member;
 
 @Mapper
@@ -51,4 +52,10 @@ public interface MemberMapper {
 
 	//회원 탈퇴
 	public int delete(String empno);
+	
+	//내 글 갯수
+	public int getMyListCount(String empno);
+
+	//내 글 목록
+	public List<Board> getMyBoardList(HashMap<String, Object> map);
 }

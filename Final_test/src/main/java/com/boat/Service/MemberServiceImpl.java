@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.boat.domain.Board;
 import com.boat.domain.Member;
 import com.boat.mybatis.mapper.MemberMapper;
 
@@ -116,6 +117,32 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int delete(String empno) {
 		return dao.delete(empno);
+	}
+
+	//내 글 갯수
+	@Override
+	public int getMyListCount(String empno) {
+		return dao.getMyListCount(empno);
+	}
+
+	//내 글 목록
+	@Override
+	public List<Board> getMyBoardList(int page, int limit, String empno) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		int startrow = (page-1) * limit + 1;
+		int endrow = startrow + limit - 1;
+		
+		map.put("start", startrow);
+		map.put("end", endrow);
+		map.put("empno", empno);
+		
+		System.out.println("start"+startrow);
+		System.out.println("end"+endrow);
+		System.out.println("empno"+empno);
+		
+		return dao.getMyBoardList(map);
 	}
 
 

@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.security.Principal;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -43,6 +44,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.boat.Service.MemberService;
 import com.boat.Task.SendMail;
 import com.boat.chat.Room;
+import com.boat.domain.Board;
 import com.boat.domain.MailVO;
 import com.boat.domain.Member;
 import com.boat.sns.NaverLoginBO;
@@ -767,7 +769,7 @@ public class MemberController {
 	
 	//내 정보
 	@GetMapping("/myinfo")
-	public ModelAndView hello4(Principal principal, ModelAndView mv) {
+	public ModelAndView myinfo(Principal principal, ModelAndView mv) {
 
 		String id = principal.getName();
 		System.out.println("id="+id);
@@ -893,9 +895,67 @@ public class MemberController {
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	//내 글 보기
 	@GetMapping("/myboardList")
-	public String hello6() {
-		return "/Member/myboardList";
+	public ModelAndView myboardList(Principal principal, ModelAndView mv) {
+		
+		String id = principal.getName();
+		System.out.println("id="+id);
+		String empno = "";
+		
+		if(id==null) {
+			mv.setViewName("redirect:sign_in");
+			Logger.info("id is null");
+				
+		}else {
+			Member m = memberservice.member_info(id);
+			mv.addObject("memberinfo", m);
+			
+			empno = m.getEMPNO();
+		}
+		System.out.println("empno="+empno);
+		
+		int page = 1;
+		int limit = 10; 
+		int listcount = memberservice.getMyListCount(empno);
+		System.out.println("listcount="+listcount);
+		
+		int maxpage = (listcount + limit - 1) / limit;
+		
+		int startpage = ((page-1) /10) *10 +1;
+		int endpage = startpage +10 -1;
+		
+		if(endpage>maxpage)
+			endpage=maxpage;
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+	    Calendar cal = Calendar.getInstance();
+	    String today = format.format(cal.getTime());
+	    cal.add(Calendar.DAY_OF_MONTH, -3); //3일간 보이도록 하기위해서.
+	    String nowday = format.format(cal.getTime());
+		
+		
+	  List<Board> boardlist = memberservice.getMyBoardList(page,limit,empno);
+		
+		mv.setViewName("/Member/myboardList");
+		mv.addObject("page",page);
+		mv.addObject("maxpage",maxpage);
+		mv.addObject("startpage",startpage);
+		mv.addObject("endpage",endpage);
+		mv.addObject("listcount",listcount);
+		mv.addObject("boardlist",boardlist);
+		mv.addObject("limit",limit);
+		mv.addObject("nowday",nowday);
+		mv.addObject("today",today);
+			
+		return mv;
+		
 	}
 	
 	
