@@ -42,4 +42,8 @@ public interface BoardMapper {
 	public void deleteFav(int bOARD_NUM, int bOARD_EMPNO);
 
 	public int checkFav(int boardnum, int empno);
+
+	public int getSearchListCount(String search1, String option1);
+
+	public List<Board> getSearchBoardList(HashMap<String, Object> map);
 }

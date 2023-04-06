@@ -132,5 +132,32 @@
 		)
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
+	
+	<select id="getSearchListCount" resultType="int">
+		select count(*) from board where ${option1} like #{search1}
+	</select>
+
+	<select id="getSearchBoardList" resultType="Board">
+  	SELECT * FROM (
+    SELECT A.*, ROWNUM RN FROM (
+      SELECT board.*, 
+             NVL(cnt, 0) AS cnt, 
+             LISTAGG(bf.board_empno, ',') WITHIN GROUP (ORDER BY bf.board_empno) AS abc 
+      FROM board 
+      LEFT OUTER JOIN (
+        SELECT board_num, COUNT(*) AS cnt 
+        FROM comments 
+        GROUP BY board_num
+      ) c ON board.board_num = c.board_num 
+      LEFT OUTER JOIN board_fav bf ON board.board_num = bf.board_num 
+      where ${option1} like #{search1}
+      GROUP BY board.board_num, board.board_name, board.board_pass, board.board_subject, board.board_content, board.board_dept, board.board_re_ref, board.board_re_lev, board.board_re_seq, board.board_readcount, board.board_date, board.board_empno, board.board_notice, board.board_job, cnt 
+      ORDER BY board.BOARD_NOTICE DESC, board.BOARD_RE_REF DESC, board.BOARD_RE_SEQ ASC
+    ) A
+    WHERE ROWNUM &lt;= #{end}
+  ) 
+  WHERE RN &gt;= #{start}
+</select>
+
 
 </mapper>

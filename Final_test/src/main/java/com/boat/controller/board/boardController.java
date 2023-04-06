@@ -336,12 +336,49 @@ public class boardController {
 		return "redirect:list";
 	}
 	
-	
-	
-	
-	
-	//수정
-	//답글 보기 달기
-	//삭제
+	@ResponseBody
+	@PostMapping(value="/search")
+	public Map<String, Object> SearchAjax(@RequestParam(value="page", defaultValue="1", required=false) int page, 
+									   @RequestParam(value="limit", defaultValue="10", required=false) int limit,
+									   @RequestParam(value="search1") String search1,
+									   @RequestParam(value="option1") String option1
+			){
+		if(option1.equals("제목")){
+			option1 = "board.board_subject";
+		}
+		if(option1.equals("작성자")){
+			option1 = "board.board_name";
+		}
+		String search2 = "%"+ search1 +"%";
+		search1 = search2;
+		
+		int listcount = boardService.getSearchListCount(search1,option1);
+		int maxpage = (listcount + limit - 1) / limit;
+		int startpage = ((page-1) /10) *10 +1;
+		int endpage = startpage +10 -1;
+		if(endpage > maxpage)
+			endpage = maxpage;
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+	    Calendar cal = Calendar.getInstance();
+	    String today = format.format(cal.getTime());
+	    cal.add(Calendar.DAY_OF_MONTH, -3); //3일간 보이도록 하기위해서.
+	    String nowday = format.format(cal.getTime());
+		
+		List<Board> boardlist = boardService.getSearchBoardList(page, limit,search1,option1);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("page",page);
+		map.put("maxpage",maxpage);
+		map.put("startpage",startpage);
+		map.put("endpage",endpage); 
+		map.put("listcount",listcount);
+		map.put("boardlist",boardlist);
+		map.put("limit",limit);
+		map.put("nowday",nowday);
+		map.put("today",today);
+		
+		return map;
+	}
 
 }
