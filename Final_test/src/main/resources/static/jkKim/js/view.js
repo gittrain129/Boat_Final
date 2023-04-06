@@ -26,7 +26,7 @@ $(function()
    
       $.ajax({
          type: "post",
-         url: "../comment/list",
+         url: "../bcomment/list",
          data:{
             "board_num" : $("#board_num").val(),
             "page" : currentPage
@@ -134,7 +134,7 @@ $(function()
       
       if(buttonText =="등록"){
       
-         url = "../comment/add";
+         url = "../bcomment/add";
          data={
             "content": content,
             "id" : $("#loginid").text(),
@@ -143,7 +143,7 @@ $(function()
          
       }else{
       
-         url = "../comment/update";
+         url = "../bcomment/update";
          data={
             "content": content,
             "num" : num
@@ -216,7 +216,7 @@ $(function()
    		
    		$.ajax({
    			type: "post",
-   			url: "../comment/delete",
+   			url: "../bcomment/delete",
    			data: {
    				"num" : deleteNum
    			},
