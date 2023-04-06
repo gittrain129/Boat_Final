@@ -80,7 +80,7 @@
 					<c:set var = "num" value ="${listcount-(page-1)*limit }"/>
 					<c:forEach var="FILIBO" items="${boardlist}">
 					<tr>
-					<td><i class="bi bi-star"><span class = "file_num">${FILIBO.FILE_NUM}</span></i></td>
+					<td><i class="bi bi-star" id="star${FILIBO.FILE_NUM}"><span class = "file_num">${FILIBO.FILE_NUM}</span></i></td>
 						<td>
 						
 							<c:if test="${FILIBO.FILE_SUBJECT.length()>=20}">

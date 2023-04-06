@@ -1,12 +1,12 @@
 let token = $("meta[name='_csrf']").attr("content");
 let header = $("meta[name='_csrf_header']").attr("content");
-let empno = $('#login').text();
+let empno = $('#loginid').text();
 
-function fav( ){
-    var data ={EMPNO:empno
-                ,FILE_NUM:file_num}
+function GOfav(page){
+    const favdata ={"EMPNO":empno
+                    ,"page":page}
   //  const data = `state=ajax&page=${page}&searchsel=${searchsel}&searchinput=${searchinput}&dept=${dept}&order=${order}`;
-    ajax(data);
+    ajax(favdata,"/boat/Filebo/FAV_list");
 }
 
 
@@ -39,7 +39,7 @@ function go(page){
     console.log(order)
 
     const data = `state=ajax&page=${page}&searchsel=${searchsel}&searchinput=${searchinput}&dept=${dept}&order=${order}`;
-    ajax(data);
+    ajax(data,"/boat/Filebo/list_ajax");
 };
 
 
@@ -62,13 +62,13 @@ function setPaging(href,digit){
 
 }//setpaging끝
 
-function ajax(sdata){
+function ajax(sdata,URL){
 console.log("ajax함수안"+sdata);
 // sdata = `state=ajax&page=${page}&searchsel=${searchsel}&searchinput=${searchinput}&dept=${dept}&order=${order}`;
 $.ajax({
     type : "GET",
     data: sdata,
-    url : "/boat/Filebo/list_ajax",
+    url : URL,
     dataType : "json",
    // beforeSend: function (jqXHR, settings) {
     //    jqXHR.setRequestHeader(header, token);
@@ -88,7 +88,7 @@ $.ajax({
             $(data.boardlist).each(
                 function(index,item){
                 //	console.log("부서명이 뭐니'+item.DEPT);
-                    output+='<tr><td><i class="bi bi-star"><span class = "file_num">'+item.file_NUM+'</span></i></td><td>'
+                    output+='<tr><td><i class="bi bi-star" id="star' + item.file_NUM+'><span class = "file_num">'+item.file_NUM+'</span></i></td><td>'
                     let img="";
                     if(item.file_RE_LEV>0){
                         img='<img alt="파일다운2" src="${pageContext.request.contextPath}/jhLee/img/download.png"class="file"style="width:20px">'
@@ -188,6 +188,12 @@ var dept;
 var order;
 
 $(function() {
+    $('body > section > div > table > thead > tr > th:nth-child(1)').click(function()
+    {
+   GOfav(1)
+   
+   })
+
 
 if($('#empno').val()===""){
 alert('로그인 후 사용 가능한 게시판입니다.')	

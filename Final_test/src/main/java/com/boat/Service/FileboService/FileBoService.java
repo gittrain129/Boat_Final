@@ -44,4 +44,10 @@ public interface FileBoService {
 			int limit);
 
 	public int getSearchListCount(String dept, String searchsel, String searchinput, String order, int page, int limit);
+
+//	public int myFavListCount(String eMPNO, int page, int limit);
+
+	public List<Filebo> myFavList(String eMPNO, int page, int limit);
+
+	int myFavListCount(String EMPNO);
 }
