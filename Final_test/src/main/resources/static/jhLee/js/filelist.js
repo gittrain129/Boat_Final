@@ -186,14 +186,22 @@ var searchsel;
 var searchval;
 var dept;
 var order;
-
+///////////////////////ready()
 $(function() {
     $('body > section > div > table > thead > tr > th:nth-child(1)').click(function()
     {
    GOfav(1)
-   
    })
 
+   //star누르면 색깔 변하고 insert delete
+$('body').on('click','body > section > div > table > tbody > tr> td:nth-child(1)>i',function(){
+console.log('확인')
+    $(this).css('color','yellow');
+
+
+
+
+})
 
 if($('#empno').val()===""){
 alert('로그인 후 사용 가능한 게시판입니다.')	

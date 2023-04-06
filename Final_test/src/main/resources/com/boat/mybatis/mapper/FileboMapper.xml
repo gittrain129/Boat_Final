@@ -95,7 +95,7 @@
 														group by  F_COMMENT_NUM )b 
 												on file_board.FILE_NUM  = b.F_COMMENT_NUM
 												where file_board.file_num in
-												(select file_num from file_fav where file_empno = #{EMPNO})   
+												(select file_num from FILEBO_FAV where file_empno = #{EMPNO})   
 							order by FILE_RE_REF  desc,  
 							FILE_RE_SEQ  asc)j
 							 				where rownum<= #{end}  ) 

@@ -168,7 +168,7 @@ public class FileBoServiceImpl implements FileBoService {
 		int endrow = startrow+limit-1;
 		HashMap<String, Object>map = new HashMap<String,Object>();
 		
-		map.put("EMPNO", map);
+		map.put("EMPNO", eMPNO);
 		map.put("start", startrow);
 		map.put("end", endrow);
 		return dao.myFavList(map);
