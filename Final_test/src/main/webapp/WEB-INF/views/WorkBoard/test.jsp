@@ -43,6 +43,9 @@
 		  </div>
 		</div>
 		<hr class="border-danger mb-4 mt-4" />
+			
+			
+			
 				
 		<div class="card">
 		  <div class="card-header">
@@ -67,6 +70,10 @@
 		  </div>
 		</div>
 		<hr class="border-danger mb-4 mt-4" />
+			
+			
+			
+			
 				
 		<div class="card">
 		  <div class="card-header">
