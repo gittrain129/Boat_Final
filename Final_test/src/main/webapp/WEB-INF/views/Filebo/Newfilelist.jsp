@@ -9,7 +9,6 @@
 <script src="${pageContext.request.contextPath}/resources/jhLee/js/filelist.js"></script>
 <style>
 
-
 </style>
 
   <!-- Page Header Start -->
@@ -67,7 +66,7 @@
 			<table class="table table-bordered table-hover">
 				<thead>
 					<tr class="bg-light">
-					<th>즐겨찾기</th>
+					<th><span class="invis favorite">즐겨찾기</span>즐겨찾기</th>
 						<th title="Discussion List">제목</th>
 						<th class="bg-light" title="Created By">작성자</th>
 						<th title="Total Replies">조회수</th>
@@ -80,7 +79,7 @@
 					<c:set var = "num" value ="${listcount-(page-1)*limit }"/>
 					<c:forEach var="FILIBO" items="${boardlist}">
 					<tr>
-					<td><i class="bi bi-star" id="star${FILIBO.FILE_NUM}"><span class = "file_num">${FILIBO.FILE_NUM}</span></i></td>
+					<td><i class="bi bi-star star" ></i></td>
 						<td>
 						
 							<c:if test="${FILIBO.FILE_SUBJECT.length()>=20}">

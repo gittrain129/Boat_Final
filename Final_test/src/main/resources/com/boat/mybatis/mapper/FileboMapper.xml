@@ -95,7 +95,7 @@
 														group by  F_COMMENT_NUM )b 
 												on file_board.FILE_NUM  = b.F_COMMENT_NUM
 												where file_board.file_num in
-												(select file_num from file_fav where file_empno = #{EMPNO})   
+												(select file_num from FILEBO_FAV where file_empno = #{EMPNO})   
 							order by FILE_RE_REF  desc,  
 							FILE_RE_SEQ  asc)j
 							 				where rownum<= #{end}  ) 
@@ -105,16 +105,15 @@
   
   
   
-	  <insert id = "hearUp">
-		  <selectKey  keyProperty="FLIKE_NO" order="BEFORE">
-		  select max(FILEBO_LIKE)+1 from filebo_like
-		  </selectKey>
-			  insert into filebo_like (FLIKE_NO,FILE_NUM,EMPNO,FILEBO_LIKE)
-			  values (#{"FLIKE_NO"},#{FILE_NUM},#{EMPNO},1))
+	  <insert id = "InsertFav">
+		
+			  insert into FILEBO_FAV (FILE_NUM,FIlE_EMPNO,status)
+			  values (#{"FILE_NUM"},#{FIlE_EMPNO})
 	  </insert>
   
-	    <delete id="hearDown">
-		  	delete from filebo_like where board_no = #{FILE_NUM} and user_no = #{EMPNO} 
+	    <delete id="deleteFav">
+		  	delete from FILEBO_FAV 
+		  	where FILE_NUM = #{FILE_NUM} and FIlE_EMPNO = #{FIlE_EMPNO} 
 		</delete>
   
   
@@ -125,7 +124,16 @@
 	
 	</select>
 	
+	
+  	
   <select id = "getBoardList" resultType="Filebo" parameterType="java.util.Map">
+  	
+  <!-- 	<selectkey  keyProperty ="star" resultType = 'Filebo' order ="after">
+  	SELECT LISTAGG(FILE_NUM, ',') WITHIN GROUP (ORDER BY FILE_NUM) AS star 
+FROM filebo_fav 
+WHERE FILE_EMPNO = #{FILE_EMPNO} 
+  	</selectkey> -->
+  	
 	 <![CDATA[
 	 SELECT * FROM (select rownum rnum, j.* from (
 							 select file_board.*, nvl(CNT ,0) CNT 

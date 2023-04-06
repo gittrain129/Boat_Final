@@ -1,6 +1,7 @@
   package com.boat.controller.filebo;
   
   import java.io.File;
+import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -59,7 +60,7 @@ import com.boat.domain.MySaveFolder;
   
   //게시판 초기화면
   @RequestMapping(value="/list",method=RequestMethod.GET)
-  public ModelAndView fileboardlist(
+  public ModelAndView fileboardlist(Principal pal,
 			@RequestParam(value="page",defaultValue="1",required=false)int page,
 			ModelAndView mv) {
 		int limit = 10;
@@ -72,6 +73,10 @@ import com.boat.domain.MySaveFolder;
 		
 		if(endpage>maxpage)
 		endpage=maxpage;
+		String EMPNO =pal.getName();
+		
+		
+		
 		
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 	    Calendar cal = Calendar.getInstance();
@@ -80,6 +85,7 @@ import com.boat.domain.MySaveFolder;
 	    String nowday = format.format(cal.getTime());
 	       
 		List<Filebo> boardlist = boardService.getBoardList(page,limit);//리스트를 받아옴
+		//Filebo.setStar(boardService.getstar(EMPNO));
 		logger.info(boardlist.toString());
 		mv.setViewName("Filebo/Newfilelist");
 		mv.addObject("page",page);
@@ -113,7 +119,6 @@ import com.boat.domain.MySaveFolder;
 	    
 	    //총 리스트 수를 받아옴
 		int listcount = boardService.myFavListCount(EMPNO);
-		logger.info("검색을 해서 받아온 리스트카운트"+listcount);
 		
 		//총 페이지 수   
 		int maxpage = (listcount +limit-1)/limit;
@@ -149,7 +154,22 @@ import com.boat.domain.MySaveFolder;
 	  
 		
 	} 
+	
+	@PostMapping(value="/Fav_add") 
+	  public int favadd( String FILE_EMPNO,
+			  				String FILE_NUM) {
+		
+		return boardService.insertfav(FILE_EMPNO,FILE_NUM);
+		 
+	}
   
+	@PostMapping(value="/Fav_delete") 
+	public int favdel( String FILE_EMPNO,
+			String FILE_NUM) {
+		
+		return boardService.deletefav(FILE_EMPNO,FILE_NUM);
+	}
+	
 	@ResponseBody
   @RequestMapping(value="/list_ajax",method=RequestMethod.GET)
 	public Map<String,Object> fileboardlist_ajax(
@@ -212,7 +232,7 @@ import com.boat.domain.MySaveFolder;
 	  
   }
   //글쓴화면
-  @RequestMapping(value="/writeee",method=RequestMethod.GET) 
+  @RequestMapping(value="/write",method=RequestMethod.GET) 
   public String  write() {
   
   return "Filebo/File_bo_Write"; 
@@ -579,6 +599,10 @@ import com.boat.domain.MySaveFolder;
 			response.setContentLength(bytes.length);
 			return bytes;
 		}
+		
+		
+		
+		
 		
 							 
 							 }//클래스 end

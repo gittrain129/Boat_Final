@@ -56,6 +56,12 @@ public interface FileboMapper {
 		public int myFavListCount(String EMPNO);
 
 		public List<Filebo> myFavList(HashMap<String, Object> map);
+
+		public int InsertFav(HashMap<String, Object> map);
+
+		public int deleteFav(HashMap<String, Object> map);
+
+		public Filebo getstar(String eMPNO);
 	
 
 
