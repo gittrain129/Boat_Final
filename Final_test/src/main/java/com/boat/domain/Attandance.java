@@ -11,7 +11,14 @@ public class Attandance {
 	private String REG_DATE;
 	private String OUT_TIME;
 	private String NAME;
+	private String WORK_TIME;
 
+	public String getWORK_TIME() {
+		return WORK_TIME;
+	}
+	public void setWORK_TIME(String wORK_TIME) {
+		WORK_TIME = wORK_TIME;
+	}
 	public String getREG_DATE() {
 		return REG_DATE;
 	}

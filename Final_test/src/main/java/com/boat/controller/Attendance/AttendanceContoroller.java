@@ -3,6 +3,7 @@ package com.boat.controller.Attendance;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,9 +47,10 @@ public class AttendanceContoroller {
 		
 		//On_time _ EMPNO 받아서 넣기!
 		Attandance TodayMyatt = attandanceService.getTodayMyatt(EMPNO);
+		//if(TodayMyatt!=null||TodayMyatt.equals("")) {
+			mv.addObject("TodayMyatt",TodayMyatt);
+		//}
 		
-		
-		mv.addObject("TodayMyatt",TodayMyatt);
 		//전체리스트....? admin 사용...?
 		mv.addObject("attlist",attlist);
 		mv.setViewName("Attendance/main");
@@ -84,7 +86,7 @@ public class AttendanceContoroller {
 	@PostMapping(value="/off")
 	public Map<String,String> off(String EMPNO,String OFF_TIME
 			, ModelAndView mv
-			,HttpServletRequest request) {
+			,HttpServletRequest request) throws ParseException {
 		logger.info("att접속중......퇴근할 empno = "+EMPNO);
 		logger.info("att접속중......퇴근할 OFF_TIME = "+OFF_TIME);
 		HttpSession session = request.getSession();

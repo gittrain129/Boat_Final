@@ -45,6 +45,8 @@ public interface FileboMapper {
 		public List<String> getDeleteFileList();
 		
 		public void deleteFileList(String filename);
+
+		public List<Filebo> getSearchList(HashMap<String, Object> map);
 	
 
 

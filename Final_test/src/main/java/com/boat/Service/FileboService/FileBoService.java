@@ -39,4 +39,7 @@ public interface FileBoService {
 	public List<String> getDeleteFileList();
 
 	public void deleteFileList(String filename);
+
+	public List<Filebo> getSearchList(String dept, String searchsel, String searchinput, String order, int page,
+			int limit);
 }

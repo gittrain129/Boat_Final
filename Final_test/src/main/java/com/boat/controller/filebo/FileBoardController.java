@@ -3,7 +3,9 @@
   import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -93,7 +95,65 @@ import com.boat.domain.MySaveFolder;
 		
 		return mv;
 		}
-		  
+  
+	@ResponseBody
+  @RequestMapping(value="/list_ajax",method=RequestMethod.GET)
+	public Map<String,Object> fileboardlist_ajax(
+			@RequestParam(value="page",defaultValue="1",required=false)int page,
+			@RequestParam(value="limit",defaultValue="10",required=false)int limit,
+			@RequestParam(value="searchsel",required=false)String searchsel,
+			@RequestParam(value="searchinput",required=false)String searchinput,
+			@RequestParam(value="dept",required=false)String dept,
+			@RequestParam(value="order",required=false)String order
+			) {
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+	    Calendar cal = Calendar.getInstance();
+	    String today = format.format(cal.getTime());
+	    cal.add(Calendar.DAY_OF_MONTH, -3); //3일간 보이도록 하기위해서.
+	    String nowday = format.format(cal.getTime());
+	    
+		int listcount = boardService.getListCount();//총 리스트 수를 받아옴
+		//총 페이지 수   
+		int maxpage = (listcount +limit-1)/limit;
+		
+		//현재 페이지에 보여줄 시작 페이지 수 (1,11,21 등...)
+		int startpage = ((page-1)/10)*10+1;
+		
+		//현재 페이지에 보여줄 마지막 페이지 수 (10,20,30 등...)
+		int endpage = startpage +10 -1;
+		
+		if(endpage>maxpage)
+			endpage=maxpage;
+
+		List<Filebo> boardlist = boardService.getSearchList(dept,searchsel,searchinput,order,page,limit);
+		
+		Map<String,Object> map= new HashMap<String,Object>();
+		 map.put("page",page);
+		map.put("maxpage",maxpage);
+		map.put("startpage",startpage);
+		map.put("endpage",endpage);
+		map.put("listcount",listcount);
+		map.put("boardlist",boardlist);
+		map.put("limit",limit);
+		
+		map.put("nowday",nowday);
+		map.put("today",today);
+		
+		map.put("dept",dept);
+		map.put("searchsel",searchsel);
+		map.put("searchinput",searchinput);
+		map.put("order",order);
+		
+
+		
+		return map;
+	  
+	  
+	  
+	  
+	  
+  }
   //글쓴화면
   @RequestMapping(value="/writeee",method=RequestMethod.GET) 
   public String  write() {

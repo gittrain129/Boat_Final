@@ -13,7 +13,10 @@ public interface AttandanceMapper {
 	public void AttOn(String on, String EMPNO, String DEPT, String NAME);
 
 	//퇴근버튼
-	public void AttOff(String OFF_TIME, String EMPNO);
+	//public void AttOff(String OFF_TIME, String EMPNO);
+	
+	public void AttOff(Attandance att);
+	
 
 	//출퇴근 리스트 가져오기 
 	public List<Attandance> getAttList();
@@ -25,6 +28,11 @@ public interface AttandanceMapper {
 
 	//개인 출퇴근 리스트
 	public List<Attandance> getAttList(String eMPNO);
+
+	//오늘인한시간
+	public void Todayworktime(String WORK_TIME, String EMPNO);
+
+	
 
 
 }

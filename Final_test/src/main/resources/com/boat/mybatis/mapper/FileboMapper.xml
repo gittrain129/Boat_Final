@@ -3,7 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.boat.mybatis.mapper.FileboMapper">
-  <select id ="getsearchList">
+  <select id ="getSearchList" resultType="Filebo">
   	
 	  select * from 
 						(select b.*, rownum rnum from 
@@ -20,19 +20,19 @@
 							//FILE_NAME //FILE_SUBJECT
 							 -->
 							 <choose>
-								  <when test = "search = NAME">
+								  <when test = "searchsel = NAME">
 								  
 								FILE_NAME like #{NAME}  
 								  </when>
 								  
-								  <when test="search = TITLE">
+								  <when test="searchsel = TITLE">
 								  
-								  FILE_SUBJECT like #{SUBJECT}
+								  FILE_SUBJECT like #{searchinput}
 								  </when>
 							 </choose>
 									
 							<if test = "dept !=null and dept !=''">
-								dept = "#{DEPT}"
+								dept = "#{dept}"
 							</if>
 							</where>
 							
