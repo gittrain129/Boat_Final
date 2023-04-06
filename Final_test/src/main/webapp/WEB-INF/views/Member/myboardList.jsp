@@ -30,114 +30,85 @@
 <input type="hidden" id="hidden-empno" value="${EMPNO}">
 <input type="hidden" id="hidden-state" value="main">
 <section class="container">
-	<!--<div class="row">  -->
-		<!-- <div class="col-lg-9 col-12 mb-4"> -->
-		<h3 class="border-bottom pb-1 mb-4">자료실 게시판
+		<h3 class="pb-1 mb-4">내 글 보기
 		 
 		 <!--검색 및 글쓰기  -->
-   			<div class = 'search '>
-     		
-     <a href="${pageContext.request.contextPath}/Filebo/write" class="btn btn-success btn">
-			<i class="fas fa-plus"></i> 글쓰기
-			</a>
-      
-        
-
-        <div class="btn-group search form-group">
-        
-            <div class="dropdown" >
-    		  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="searchsel" data-bs-toggle="dropdown" aria-expanded="false">
-    	    검색옵션
-   			   </a>
-		      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-		        <li><a class="dropdown-item" >작성자</a></li>
-		        <li><a class="dropdown-item" >제목</a></li>
-		      </ul>
-  		  </div>
- 
-          <input class ="search form-control" type="text" name="searchinput" id = "searchinput" value="${searchinput}" >
-          		
-          <button type="submit" class = "searchbutton search" id="searhcbtn2">
-        	<img src="${pageContext.request.contextPath}/resources/jhLee/img/2.png"  class ="searchimg">
-          </button>
-          </div>
-        </label>
-        
-			
-		</div>
 		</h3>
 		<div class="table-responsive">
 			<table class="table table-bordered table-hover">
 				<thead>
 					<tr class="bg-light">
-					<th>즐겨찾기</th>
+						<th title="category">카테<br>고리</th>
 						<th title="Discussion List">제목</th>
 						<th class="bg-light" title="Created By">작성자</th>
 						<th title="Total Replies">조회수</th>
 						<th title="Last Updated">작성일</th>
-						<th title="Last Updated">파일1</th>
-						<th title="Last Updated">파일2</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:set var = "num" value ="${listcount-(page-1)*limit }"/>
-					<c:forEach var="FILIBO" items="${boardlist}">
+					<c:forEach var="b" items="${boardlist}">
 					<tr>
-					<td><i class="bi bi-star"><span class = "file_num">${FILIBO.FILE_NUM}</span></i></td>
+						<!-- 카테고리 -->
+						<td class="text-center">
+		                    <c:choose>
+	                    		<c:when test="${b.BOARD_NOTICE == 0}">
+	                    			<c:out value="업무"/>
+	                    		</c:when>
+	                    		<c:when test="${b.BOARD_NOTICE == 1}">
+	                    			<c:out value="업무"/>
+	                    		</c:when>
+	                    		<c:otherwise>	
+	                    			<c:out value="자료실"/>
+						 	    </c:otherwise>
+	                    	</c:choose>
+	                    </td>
+	                    <!-- 제목 -->
+								<td style="display: flex; align-items: center;">
+								 <c:if test="${b.BOARD_RE_LEV !=0 }"><%--답글인경우 --%>
+            						<c:forEach var="a" begin="0" end="${b.BOARD_RE_LEV*2 }" step="1">
+            						&nbsp;	
+            						</c:forEach>
+         						</c:if>
+         						<c:if test="${b.BOARD_RE_LEV ==0 }"><!--  원문 인경우 -->
+         	 						&nbsp;
+         						</c:if>
+								<a href="${pageContext.request.contextPath}/board/detail?num=${b.BOARD_NUM }" style="flex: 1; font-size:90%">
+								<c:out value="${b.BOARD_SUBJECT}" escapeXml="true"/> 
+								<span class="gray small">[<c:out value="${b.CNT}"/>]</span>
+								<c:if test="${b.BOARD_DATE > nowday}">
+								<span	class="badge badge-pill badge-warning ml-auto" style="background-color: #89a5ea;">new</span>
+								</c:if>
+								</a>
+								<c:if test="${b.BOARD_NOTICE == 1}">
+								<span class="badge badge-pill badge-primary float-right" style="background-color: #ffcb6b;">공지</span>
+								</c:if>
+								<c:if test="${b.BOARD_NOTICE == 0}">
+								<span	class="badge badge-pill badge-warning float-right" style="background-color: #89a5ea;">${b.BOARD_DEPT }</span>
+								</c:if>
+								</td>
+								
+						<!-- 글쓴이 -->
+						<td><div style="display: flex; justify-content: center; align-items: center;"><small>${b.BOARD_NAME }</small></div></td>
+						
+						<!-- 조회수 -->
+						<td><div style="display: flex; justify-content: center; align-items: center;">${b.BOARD_READCOUNT }</div></td>
+					
+						<!-- 올린날짜 -->
+						<c:set var="boardDate" value="${b.BOARD_DATE.toString()}"/>
 						<td>
-						
-							<c:if test="${FILIBO.FILE_SUBJECT.length()>=20}">
-								&nbsp;	&nbsp;	&nbsp;
-								<a href="detail?num=${FILIBO.FILE_NUM}">
-									<c:out value="${FILIBO.FILE_SUBJECT.substring(0,20)}..."/>
-								</a>
-							</c:if>
-							
-							<c:if test="${FILIBO.FILE_SUBJECT.length()< 20}">
-								<a href="detail?num=${FILIBO.FILE_NUM}">
-								&nbsp;	&nbsp;	&nbsp;	<c:out value="${FILIBO.FILE_SUBJECT}"/>
-								</a>
-							</c:if>
-						</a>
-						[${FILIBO.CNT}]
-
-						
-						<c:if test="${FILIBO.FILE_DATE > nowday}">
-	 		      	  		<img src="${pageContext.request.contextPath}/jhLee/img/new.png" id="new" style="width:20px">
-	 		      	  	</c:if>
-
-							<span class="badge badge-pill badge-warning float-right"style="background-color: #89a5ea;">${FILIBO.DEPT}</span>
-							
-						</td>
-
-						<td><small>${FILIBO.FILE_NAME} </small></a></td>
-						<td>${FILIBO.FILE_READCOUNT}</td>
-						<td><div class="date">
-							
-							<c:if test="${FILIBO.FILE_DATE!=today}">
-								${FILIBO.FILE_DATE.substring(5,10)}
-							</c:if>
-							<c:if test="${FILIBO.FILE_DATE.substring(0,10)==today}">
-								${FILIBO.FILE_DATE.substring(11,16)}
-							</c:if>
-						</div>	</td>
-						<td><div class = "file1">
-							<c:if test="${!empty FILIBO.FILE_FILE}">
-								<span class ="invis">${FILIBO.FILE_ORIGINAL}</span>
-							<img alt="파일다운2" src="${pageContext.request.contextPath}/jhLee/img/download.png" class = 'file'style="width:20px">
-							</c:if>
+							<div style="display: flex; justify-content: center; align-items: center;">
+								<c:if test="${boardDate!=today}">
+									${boardDate.substring(5,10)}
+								</c:if>
+								<c:if test="${boardDate.substring(0,10)==today}">
+									${boardDate.substring(11,16)}
+								</c:if>	
 							</div>
 						</td>
-						<td>
-							<div class = "file2">
-							<c:if test="${!empty FILIBO.FILE_FILE2}">
-								<span class ="invis">${FILIBO.FILE_ORIGINAL2}</span>
-								<img alt="파일다운2" src="${pageContext.request.contextPath}/jhLee/img/download.png" class = 'file'style="width:20px">
-							</c:if>
-							</div>
-						</td>
+						
 					</tr>
-				</c:forEach>
+					</c:forEach>
 				</tbody>
 				<tfoot>
 				</tfoot>
@@ -153,7 +124,7 @@
 									</c:if>
 									<c:if test="${page>1}">
 										<li class="page-item">
-											<a href ="list?page=${page-1}"
+											<a href ="myboardList?page=${page-1}"
 											class="page-link">이전&nbsp;</a>
 										</li>
 									</c:if>
@@ -166,7 +137,7 @@
 										</c:if>
 										<c:if test="${a !=page}">
 											<li class="page-item">
-											<a href ="list?page=${a}" class="page-link">${a}</a>
+											<a href ="myboardList?page=${a}" class="page-link">${a}</a>
 											</li>
 										</c:if>
 									</c:forEach>
@@ -178,51 +149,15 @@
 										</c:if>
 										<c:if test="${page<maxpage}">
 											<li class="page-item">
-											<a href ="list?page=${page+1}"
+											<a href ="myboardList?page=${page+1}"
 											 class="page-link">&nbsp;다음</a>
 											</li>
 										</c:if>
 								</ul>
-						</nav>
-								
-			<div class="btn-group search form-group">
-        
-           <input type="hidden" name = "DEPT" id = "deptval" value =" ${deptval}">
-            <div class="dropdown" >
-    		  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="DEPT" data-bs-toggle="dropdown" aria-expanded="false">
-    	    부서별
-   			   </a>
-		      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-		        <li><a class="dropdown-item" >전체</a></li>
-		        <li><a class="dropdown-item" >홍보팀</a></li>
-		        <li><a class="dropdown-item" >개발팀</a></li>
-		        <li><a class="dropdown-item" >인사팀</a></li>
-		        <li><a class="dropdown-item" >기획팀</a></li>
-		        <li><a class="dropdown-item" >영업팀</a></li>
-		      </ul>
-  		  </div>
- 
-   <input type="hidden" name = "searchsel" id = "orderval" value =" ${orderval}">
-            <div class="dropdown" >
-    		  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="ORDER" data-bs-toggle="dropdown" aria-expanded="false">
-    	    정렬
-   			   </a>
-		      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-		        <li><a class="dropdown-item" >최신순</a></li>
-		        <li><a class="dropdown-item" >조회순</a></li>
-		        <li><a class="dropdown-item" >댓글순</a></li>
-		      </ul>
-  		  </div>
-		
-		</div>
-	<!-- .filebofooter end -->
-	</div>
+							</nav>
+					</div>
 				
 		</div>
-	</div>
-	
-	
-	</div>
 </section>
 </sec:authorize>
 <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
