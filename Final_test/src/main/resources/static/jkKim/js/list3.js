@@ -1,22 +1,12 @@
+var token = $("meta[name='_csrf']").attr("content");
+var header = $("meta[name='_csrf_header']").attr("content");
+
 function go(page) {
 	const limit = $("#viewcount").val();
 	const data = `limit=${limit}&state=ajax&page=${page}`; //el이 아닌 백틱 (js에서만 사용추천)
 	ajax(data);
 }
 
-//총 2페이지 페이징 처리된 경우
-//이전 1 2 다음
-//현재 페이지가 1페이지인 경우 아래와 같은 페이징 코드가 필요
-//<li class="page-item"><a class="page-link gray">이전&nbsp;</a></li>
-//<li class="page-item active"><a class="page-link">1</a></li>
-//<li class="page-item"><a class="page-link" href="javascript:go(2)">2</a></li>
-//<li class="page-item"><a class="page-link" href="javascript:go(2)">다음&nbsp;</a></li>
-
-//현재 페이지가 2페이지인 경우 아래와 같은 페이징 코드가 필요
-//<li class="page-item"><a class="page-link" href="javascript:go(1)">이전&nbsp;</a></li>
-//<li class="page-item"><a class="page-link" href="javascript:go(1)">1</a></li>
-//<li class="page-item active"><a class="page-link">2</a></li>
-//<li class="page-item"><a class="page-link gray">다음&nbsp;</a></li>
 
 function setPaging(href,digit){
 	let active="";
@@ -149,13 +139,64 @@ function ajax(sdata){
 }//function ajax end
 
 
-$(function(){
-   $('button').click(function(){
-      location.href="write";
-   });
-   
    $('#viewcount').change(function(){
       go(1); //보여줄 페이지를 1페이지로 설정
    });
+
+
+//검색용
+$(function() {
+  
+  $('form').submit(function(event) {
+    event.preventDefault();
+	var search1 = $('input[name="search"]').val();
+    var option1 = $('ul.dropdown-menu li a.active').text();
+
+    
+    $.ajax({
+      url: '../board/search',
+      type: 'POST',
+      data: {
+        "search1": search1,
+        "option1": option1
+      },
+      beforeSend : function(xhr)
+		        {   //데이터를 전송하기 전에 헤더에 csrf값을 설정합니다.
+		          xhr.setRequestHeader(header, token);         
+		       },
+      success: function(result) {
+        
+        console.log(result);
+      },
+      error: function(error) {
+        
+        console.error(error);
+      }
+    });
+  });
+
+  
+  $('ul.dropdown-menu li a').click(function(event) {
+     var option = $(this).text();
+    $('#dropdownMenuButton1').text(option);
+    $(this).addClass('active');
+    $(this).parent().siblings().find('a').removeClass('active');
+  });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -17,6 +17,10 @@
   tr > td:first-child {
   cursor: pointer;
 }
+#dropdownMenuButton1{
+background-color: white;
+  border: none;
+}
 </style>
 
 </head>
@@ -42,27 +46,34 @@
 	<section class="container">
 		<div class="row">
 		
-		
-	<div class="col-lg-12 col-12 mb-2 d-flex align-items-center justify-content-between">
-  		<h3 class="pb-1 mb-2 flex-grow-1 align-self-start justify-content-start"> 업무용 게시판 </h3>
-  			<div class="d-flex align-items-center ml-auto">
-    		<div class="dropdown" style="margin-right: 20px;">
-      		<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-        	Dropdown link
-      		</a>
-      			<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        			<li><a class="dropdown-item" href="#">Action</a></li>
-        			<li><a class="dropdown-item" href="#">Another action</a></li>
-        			<li><a class="dropdown-item" href="#">Something else here</a></li>
-      			</ul>
-    		</div>
-    		<div class="d-flex align-items-center ml-3">
-      			<input type="text" name="search" id="search" class="form-control" placeholder="Search...">
-      			<button class="btn ml-2" type="button"><i class="bi bi-search"></i></button>
-    		</div>
-    			<a href="${pageContext.request.contextPath}/board/Write" class="btn btn-success btn-sm ml-3"><i class="fas fa-plus"></i> 글쓰기</a>
-  			</div>
-		</div>
+<div class="col-lg-12 col-12 mb-2 d-flex align-items-center justify-content-between">
+  <h3 class="pb-1 mb-2 flex-grow-1 align-self-start justify-content-start"> 업무용 게시판 </h3>
+  <div class="d-flex align-items-center ml-auto">
+  
+<form class="d-flex align-items-center">
+<div class="input-group mr-2" style="border: 1px solid #ced4da; min-width: 400px;">
+   <div class="dropdown" style="border-right: 2px solid #ced4da;">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        검색옵션
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li><a class="dropdown-item">제목</a></li>
+        <li><a class="dropdown-item">작성자</a></li>
+      </ul>
+    </div>
+       <input class="form-control border-0" type="search" name="search" placeholder="검색어 입력" aria-label="Search">
+      
+  </div>
+  <button class="btn" type="submit"><i class="bi bi-search"></i></button>
+</form>
+
+
+
+    <a href="${pageContext.request.contextPath}/board/Write" class="btn btn-success  ml-3 mb-2 px-3">글쓰기</a>
+  </div>
+</div>
+
+
 
 
 				<div class="table-responsive" id="maintable">
@@ -205,7 +216,7 @@
 		})
 	</script>
 
-<script src = "${pageContext.request.contextPath}/jkKim/js/list.js"></script>
+<script src = "${pageContext.request.contextPath}/jkKim/js/list3.js"></script>
 <script>
 var token = $("meta[name='_csrf']").attr("content");
 var header = $("meta[name='_csrf_header']").attr("content");

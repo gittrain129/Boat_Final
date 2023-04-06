@@ -43,6 +43,12 @@ public interface BoardService {
 
 	public int checkFav(int boardNum, int empno);
 
+	public int getSearchListCount(String search1, String option1);
+
+	public List<Board> getSearchBoardList(int page, int limit, String search1, String option1);
+
+	
+
 	
 
 	
