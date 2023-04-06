@@ -29,33 +29,33 @@ public class WorkboardServiceImpl implements WorkboardService{
 	
 
 	@Override
-	public List<Workboard> getCommentList(int page) {
+	public List<Workboard> getWorkboardList(int page) {
 		int startrow = 1;
 		int endrow = page * 3;
 		
 		Map<String,Integer> map = new HashMap<String,Integer>();
 		map.put("start", startrow);
 		map.put("end", endrow);
-		return dao.getCommentList(map);
+		return dao.getWorkboardList(map);
 	}
 
 	
 	
 	@Override
-	public int commentsInsert(Workboard c) {
-		return dao.commentsInsert(c);
+	public int workboardInsert(Workboard c) {
+		return dao.workboardInsert(c);
 	}
 
 	
 	@Override
-	public int commentsDelete(int num) {
-		return dao.commentsDelete(num);
+	public int workboardDelete(int num) {
+		return dao.workboardDelete(num);
 	}
 
 	
 	@Override
-	public int commentsUpdate(Workboard co) {
-		return dao.commentsUpdate(co);
+	public int workboardUpdate(Workboard co) {
+		return dao.workboardUpdate(co);
 	}
 
 }
