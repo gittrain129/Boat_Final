@@ -114,8 +114,19 @@
 		
 			
 						<hr class="border-danger mb-4 mt-4" />
-			
-			
+						
+						
+					<div id="workboard_card">
+						<table class="table table-striped">	
+							<tbody>	
+							
+							</tbody>
+						</table>
+					</div>
+					
+					<hr class="border-danger mb-4 mt-4" />
+					
+					
 					<div id="workboard_card">
 						<table class="table table-striped">	
 							<tbody>	
