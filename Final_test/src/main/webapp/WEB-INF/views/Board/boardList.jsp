@@ -21,6 +21,14 @@
 background-color: white;
   border: none;
 }
+#dropdownMenuButton2{
+background-color: white;
+  border: none;
+}
+#dropdownMenuButton3{
+background-color: white;
+  border: none;
+}
 </style>
 
 </head>
@@ -43,11 +51,16 @@ background-color: white;
     <!-- Page Header End -->
 <sec:authorize access="isAuthenticated()">
 <sec:authentication property="principal" var="pinfo"/>
+<input type="hidden" id="hidden-empno" value="${EMPNO}">
+<input type="hidden" id="hidden-state" value="main">
+
 	<section class="container">
 		<div class="row">
 		
 <div class="col-lg-12 col-12 mb-2 d-flex align-items-center justify-content-between">
-  <h3 class="pb-1 mb-2 flex-grow-1 align-self-start justify-content-start"> 업무용 게시판 </h3>
+  <h3 class="pb-1 mb-2 flex-grow-1 align-self-start justify-content-start"> 업무용 게시판
+  <a href="${pageContext.request.contextPath}/board/Write" class="btn btn-success  ml-4 mb-2 px-3">글쓰기</a>
+   </h3>
   <div class="d-flex align-items-center ml-auto">
   
 <form class="d-flex align-items-center">
@@ -67,9 +80,7 @@ background-color: white;
   <button class="btn" type="submit"><i class="bi bi-search"></i></button>
 </form>
 
-
-
-    <a href="${pageContext.request.contextPath}/board/Write" class="btn btn-success  ml-3 mb-2 px-3">글쓰기</a>
+    
   </div>
 </div>
 
@@ -156,55 +167,89 @@ background-color: white;
 							
 						</tbody>
 						<tfoot>
-							<tr>
-								<td colspan="5">
-									<nav class="pt-3" aria-label="Page navigation example">
-										<ul class="pagination">
-				<c:if test="${page<=1}">
-					<li class="page-item">
-						<a class="page-link gray">이전&nbsp;</a>
-					</li>
-				</c:if>
-				<c:if test="${page>1}">
-					<li class="page-item">
-						<a href="List?page=${page-1}" class="page-link">이전&nbsp;</a>
-					</li>
-				</c:if>
-				
-				<c:forEach var="a" begin="${startpage}" end="${endpage}">
-					<c:if test="${a==page }">
-						<li class="page-item active">
-							<a class="page-link">${a}</a>
-						</li>
-					</c:if>
-					<c:if test="${a!=page }">
-						<li class="page-item">
-							<a href="List?page=${a}" class="page-link">${a}</a>
-						</li>
-					</c:if>
-				</c:forEach>
-				
-				<c:if test="${page >= maxpage }">
-						<li class="page-item">
-							<a class="page-link gray">&nbsp;다음</a>
-						</li>
-				</c:if>
-				<c:if test="${page < maxpage }">
-						<li class="page-item">
-							<a href="List?page=${page+1}" class="page-link">&nbsp;다음</a>
-						</li>
-				</c:if>
-		
-			</ul>	
-									</nav>
-								</td>
-							</tr>
-						</tfoot>
+  <tr>
+    <td colspan="5">
+      <nav class="pt-3 d-flex justify-content-between align-items-center" aria-label="Page navigation example">
+        <ul class="pagination mb-0">
+          <c:if test="${page<=1}">
+            <li class="page-item">
+              <a class="page-link gray">이전&nbsp;</a>
+            </li>
+          </c:if>
+          <c:if test="${page>1}">
+            <li class="page-item">
+              <a href="List?page=${page-1}" class="page-link">이전&nbsp;</a>
+            </li>
+          </c:if>
+
+          <c:forEach var="a" begin="${startpage}" end="${endpage}">
+            <c:if test="${a==page }">
+              <li class="page-item active">
+                <a class="page-link">${a}</a>
+              </li>
+            </c:if>
+            <c:if test="${a!=page }">
+              <li class="page-item">
+                <a href="List?page=${a}" class="page-link">${a}</a>
+              </li>
+            </c:if>
+          </c:forEach>
+
+          <c:if test="${page >= maxpage }">
+            <li class="page-item">
+              <a class="page-link gray">&nbsp;다음</a>
+            </li>
+          </c:if>
+          <c:if test="${page < maxpage }">
+            <li class="page-item">
+              <a href="List?page=${page+1}" class="page-link">&nbsp;다음</a>
+            </li>
+          </c:if>
+        </ul>
+		<div class="d-flex align-items-center ml-auto">
+        <div class="dropdown mb-2" style="border: 1px solid #ced4da; min-width: 100px;">
+        	<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+  			  부서별보기
+  			</button>
+  				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+    				<li><a class="dropdown-item">홍보팀</a></li>
+    				<li><a class="dropdown-item">개발팀</a></li>
+    				<li><a class="dropdown-item">인사팀</a></li>
+    				<li><a class="dropdown-item">기획팀</a></li>
+    				<li><a class="dropdown-item">영업팀</a></li>
+  				</ul>
+  		</div>
+  
+         <div class="dropdown mb-2" style="border: 1px solid #ced4da; min-width: 100px;">
+  	        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
+    			정렬옵션
+  			</button>
+  				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
+    				<li><a class="dropdown-item">최신순</a></li>
+    				<li><a class="dropdown-item">조회순</a></li>
+    				<li><a class="dropdown-item">댓글순</a></li>
+  				</ul>
+  		</div>
+  		</div>      
+
+
+
+
+
+
+
+
+
+      </nav>
+    </td>
+  </tr>
+</tfoot>
+
 					</table>
 				</div>
 			</div>
 
-
+	
 		
 	</section>
 	</sec:authorize>
@@ -291,8 +336,9 @@ function toggle(BOARD_NUM,BOARD_EMPNO) {
 
 function favorite(BOARD_EMPNO) {
 	var board_empno= BOARD_EMPNO
+	var state = $("#hidden-state").val()
 	
-	if(BOARD_EMPNO == 'main'){
+	if(state == '즐겨찾기'){
 		window.location.href = '${pageContext.request.contextPath}/board/List';
 	}else{
 	
@@ -307,22 +353,9 @@ function favorite(BOARD_EMPNO) {
           xhr.setRequestHeader(header, token);         
        },
         success: function(data) {
-        	$("table").remove();
-        	$("tfoot").remove();
+        	$("tbody").remove();
         	
-        	let output = "<table class='table table-bordered table-hover mx-auto' style='table-layout: fixed'>";
-        				
-        	output += "<thead>";
-			output += "<tr class='bg-light'>";
-			output += "<th title='즐겨찾기' style='text-align: center; vertical-align: middle' width='5%'onclick=favorite('main')>즐겨<br>찾기</th>";
-			output += "<th title='제목' style='text-align: center; vertical-align: middle' width='50%'>제목</th>";
-			output += "<th class='bg-light' title='작성자' style='text-align: center; vertical-align: middle' width='15%''>작성자</th>";
-			output += "<th title='조회수' style='text-align: center; vertical-align: middle' width='10%'>조회수</th>";
-			output += "<th title='작성일' style='text-align: center; vertical-align: middle' width='20%'>작성일</th>";
-			output += "</tr>";
-			output += "</thead>";
-									
-			output += "<tbody>";
+			let output = "<tbody>";
 			
 			$(data.boardlist).each(
 				
@@ -371,10 +404,37 @@ function favorite(BOARD_EMPNO) {
 				})
 				output += "</tbody>"
 				
-				console.log(output);
-				$('#maintable').append(output); 
+				$(output).insertAfter($("thead"));
 				
+			$(".pagination").empty();
+			output = "";
+			
+			let digit = '이전&nbsp;'
+			let href="";
+			if(data.page > 1){
+				href = 'href=javascript:go(' + (data.page-1) + ')';
+			}
+			output += setPaging(href, digit);
+			
+			for (let i = data.startpage; i <= data.endpage; i++){
+				digit = i;
+				href ="";
+				if ( i != data.page){
+					href = 'href=javascript:go(' + i + ')';
+				}
+				output += setPaging(href, digit);
+			}
+			
+			digit = '다음&nbsp;';
+			href="";
+			if (data.page < data.maxpage) {
+				href = 'href=javascript:go(' + (data.page + 1) + ')';
+			}
+			output += setPaging(href,digit);
 				
+			$('.pagination').append(output);
+				
+			$("#hidden-state").val('즐겨찾기');
         },
         error: function(request,error) {
             

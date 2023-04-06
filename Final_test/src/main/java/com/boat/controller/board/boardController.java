@@ -155,7 +155,7 @@ public class boardController {
 	@RequestMapping(value="/Fav_list")
 	public Map<String, Object> FavAjax(@RequestParam(value="page", defaultValue="1", required=false) int page, 
 									   @RequestParam(value="limit", defaultValue="10", required=false) int limit,
-									   @RequestParam(value="BOARD_EMPNO") int empno){
+									   @RequestParam(value="BOARD_EMPNO") String empno){
 		
 		int listcount = boardService.getFavListCount();
 		
@@ -175,7 +175,10 @@ public class boardController {
 	    cal.add(Calendar.DAY_OF_MONTH, -3); //3일간 보이도록 하기위해서.
 	    String nowday = format.format(cal.getTime());
 		
-		List<Board> boardlist = boardService.getFavBoardList(page, limit,empno);
+	    int empno2 = Integer.parseInt(empno);
+	    
+	    
+		List<Board> boardlist = boardService.getFavBoardList(page, limit,empno2);
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("page",page);
