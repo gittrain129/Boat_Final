@@ -127,7 +127,9 @@ $(function(){
 			url = "../workboard/add";
 			data = {
 				"content" : content,
-				"EMPNO" : $("#loginid").text()
+				"EMPNO" : $("#loginid").text(),
+				"NAME" : $("#loginname").text(),
+				"DEPT" : $("#logindept").text()
 			};
 		} else { // 댓글을 수정하는 경우
 			url = "../workboard/update";
@@ -204,7 +206,7 @@ $(function(){
 		const deleteNum = $(this).next().val(); //댓글번호
 		$.ajax({
 			type : "post",
-			url : "../comment/delete",
+			url : "../workboard/delete",
 			data : {
 				"num" : deleteNum
 			},

@@ -10,7 +10,7 @@
 		from workboard
 	</select>
 	
-	<select id="getCommentList" resultType="workboard" parameterType="map">
+	<select id="getWorkboardList" resultType="workboard" parameterType="map">
 		select *
 		from(select rownum rnum, num, id, content, reg_date
 			from(
@@ -26,19 +26,19 @@
 
 	
 	
-	<insert id="commentsInsert" parameterType="workboard">
+	<insert id="workboardInsert" parameterType="workboard">
 		insert into workboard
 		values(seq_workboard.nextval, #{EMPNO}, #{DEPT}, #{NAME}, #{content}, sysdate)
 	</insert>
 	
 	
-	<update id="commentsUpdate" parameterType="workboard">
+	<update id="workboardUpdate" parameterType="workboard">
 		update workboard
 		set	   content = #{content}
 		where  num = #{num}
 	</update>
 	
-	<delete id="commentsDelete" parameterType="int">
+	<delete id="workboardDelete" parameterType="int">
 		delete workboard
 		where num = #{num}	
 	</delete>
