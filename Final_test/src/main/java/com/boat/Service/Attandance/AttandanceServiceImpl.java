@@ -186,14 +186,12 @@ public class AttandanceServiceImpl implements AttandanceService {
 
 		  
 		  cell = row.createCell(5);
-		  cell.setCellValue("부서명");
+		  cell.setCellValue("당일 총 근무시간");
 		  getHeaderCellStyle(wb);
-		  
 		  
 		  cell = row.createCell(6);
-		  cell.setCellValue("근무시간");
+		  cell.setCellValue("부서명");
 		  getHeaderCellStyle(wb);
-		  
 		  
 		 
 		  int i = 2;
@@ -204,7 +202,7 @@ public class AttandanceServiceImpl implements AttandanceService {
 		String st = attlist.getON_TIME();
 		Date stt = sdf.parse(st);
 		String et = attlist.getOFF_TIME();
-		Date ett = sdf.parse(st);
+		Date ett = sdf.parse(et);
 		logger.info(stt.toLocaleString());
 		
 		//String startTime = sdf.format();
@@ -232,13 +230,11 @@ public class AttandanceServiceImpl implements AttandanceService {
 		  cell.setCellValue(ett.toLocaleString());
 		  
 		
-		 
 		  cell = row.createCell(5);
-		  cell.setCellValue(attlist.getDEPT());
-		  
-		  cell = row.createCell(6);
 		  cell.setCellValue(attlist.getWORK_TIME());
 		  
+		  cell = row.createCell(6);
+		  cell.setCellValue(attlist.getDEPT());
 		  
 		  i++;
 		  ii--;

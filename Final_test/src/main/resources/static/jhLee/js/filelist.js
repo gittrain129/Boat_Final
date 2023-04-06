@@ -1,5 +1,19 @@
 let token = $("meta[name='_csrf']").attr("content");
 let header = $("meta[name='_csrf_header']").attr("content");
+let empno = $('#login').text();
+
+function fav( ){
+    var data ={EMPNO:empno
+                ,FILE_NUM:file_num}
+    const data = `state=ajax&page=${page}&searchsel=${searchsel}&searchinput=${searchinput}&dept=${dept}&order=${order}`;
+    ajax(data);
+}
+
+
+
+
+
+
 
 function go(page){
     searchsel = $("#searchsel").text();
@@ -10,18 +24,18 @@ function go(page){
     else
     searchsel ="";
 
-    console.log(searchsel+'000000000000000searchsel')
-
-    searchinput = $("#searchinput").val();
+    searchinput = $("#searchinput").val().trim();
 
     dept = $("#DEPT").text();
-    if(dept.trim() =="부서별"||dept=="전체")
-    dept = "";
-    
+    if(dept.trim() =="부서별"||dept=="전체")dept = "";
+
     order = $("#ORDER").text();
     
-    if(order.trim() =="정렬")
-    order ="";
+    if(order.trim() =="정렬")order ="";
+    else if(order.trim() =="최신순")order ="RECENT";
+    else if(order.trim() =="조회순")order ="READCOUNT";
+    else if(order.trim() =="댓글순")order ="COMMCOUNT";
+    
     console.log(order)
 
     const data = `state=ajax&page=${page}&searchsel=${searchsel}&searchinput=${searchinput}&dept=${dept}&order=${order}`;
@@ -39,7 +53,7 @@ function setPaging(href,digit){
 			active="active";
 		}
 	}
-	let output = '<li class="page-item ${active}">';
+	let output = '<li class="page-item '+active+'">';
 	//let anchor = "<a class='page-link " + gray + "'" + href + ">" + digit + "</a></li>";
 	
 	let anchor = `<a class='page-link ${gray}' ${href}>${digit}</a></li>`;
@@ -74,52 +88,51 @@ $.ajax({
             $(data.boardlist).each(
                 function(index,item){
                 //	console.log("부서명이 뭐니'+item.DEPT);
-                    output+='<tr><td><i class="bi bi-star"></i></td><td>'
+                    output+='<tr><td><i class="bi bi-star"><span class = "file_num">'+item.file_NUM+'</span></i></td><td>'
                     let img="";
-                    if(item.FILE_RE_LEV>0){
+                    if(item.file_RE_LEV>0){
                         img='<img alt="파일다운2" src="${pageContext.request.contextPath}/jhLee/img/download.png"class="file"style="width:20px">'
                     }
-                    let subject = item.FILE_SUBJECT;
+                    let subject = item.file_SUBJECT;
                     if(subject.length>=20){
                         subject = subject.substr(0,20)+"...";
                     }
-                            let today = new Date(item.FILE_DATE);
+                            let today = new Date(item.file_DATE);
                             
                             moment(today).format();
                             
                             console.log("nowday"+nowday)
-                            console.log(item.FILE_DATE > nowday)
+                            console.log(item.file_DATE > nowday)
                             let imgnew ="";
-                            if(new Date(item.FILE_DATE) > nowday){
-                                "<img src='${pageContext.request.contextPath}/jhLee/img/new.png' id='new' style='width:20px'>";
-                                imgnew='<img src="/Boat/jhLee/image/new.jpg" id="new">'
+                            if(new Date(item.file_DATE) > nowday){
+                                imgnew="<img src='../../jhLee/img/new.png' id='new' style='width:20px'>";
                             }
-                
-                    output +="<td>&nbsp;nbsp;nbsp;<a href='detail?num="+item.FILE_NUM+"'>nbsp;"
+                            let blank = "  ";
+                    output +=blank+blank+blank+"<a href='detail?num="+item.file_NUM+"'>"+blank+blank+blank
                     output += subject.replace(/</g,'&lt;').replace(/>/g,'&gt;')
-                            +'</a>['+item.CNT+']'+imgnew+'</div>'
+                            +'</a>['+item.cnt+']'+imgnew+'</div>'
                     
-                    output +='<span class="badge badge-pill badge-warning float-right"style="background-color: #89a5ea;">'+item.DEPT+'</span></td>'
-                    
-                    
+                    output +='<span class="badge badge-pill badge-warning float-right"style="background-color: #89a5ea;">'+item.dept+'</span></td>'
                     
                     
                     
-                    output +='<td><small>'+item.FILE_NAME+'</small></a></td>'
-                    output +='<td>'+item.FILE_READCOUNT+'</td>'
+                    
+                    
+                    output +='<td><small>'+item.file_NAME+'</small></a></td>'
+                    output +='<td>'+item.file_READCOUNT+'</td>'
                     if(today ==new Date())
-                    filedateTime= item.FILE_DATE.substr(11,16)
+                    filedateTime= item.file_DATE.substr(11,16)
                     else 
-                    filedateTime = item.FILE_DATE.substr(5,10)
+                    filedateTime = item.file_DATE.substr(5,10)
                     
                     output +='<td><div class="date">'+filedateTime+'</div></td>'
 
                     let fileimg =""
                     let fileimg2 =""
-                    if(item.FILE_FILE!=null)
-                    fileimg ='<img alt="파일다운2" src="${pageContext.request.contextPath}/jhLee/img/download.png" class = "file"style="width:20px">';
-                    if(item.FILE_FILE2!=null)
-                    fileimg2 ='<img alt="파일다운2" src="${pageContext.request.contextPath}/jhLee/img/download.png" class = "file"style="width:20px">';
+                    if(item.file_FILE!=null)
+                    fileimg ='<img alt="파일다운2" src="../../boat/jhLee/img/download.png" class = "file"style="width:20px">';
+                    if(item.file_FILE2!=null)
+                    fileimg2 ='<img alt="파일다운2" src="../../boat/jhLee/img/download.png" class = "file"style="width:20px">';
                     
                     output+='<td><div class = "file1">'+fileimg+'</div></td>'
                     output+='<td><div class = "file2">'+fileimg2+'</div></td>'

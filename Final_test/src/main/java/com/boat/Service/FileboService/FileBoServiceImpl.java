@@ -117,6 +117,27 @@ public class FileBoServiceImpl implements FileBoService {
 	@Override
 	public List<Filebo> getSearchList(String dept, String searchsel, String searchinput, String order, int page,
 			int limit) {
+		
+		
+		HashMap<String, Object>map = new HashMap<String,Object>();
+		int startrow = (page-1)*limit+1;
+		int endrow = startrow+limit-1;
+		System.out.println("................................searchsel"+searchsel);
+		map.put("dept", dept);
+		map.put("searchsel", searchsel);
+		map.put("searchinput",'%'+searchinput+'%');
+		map.put("order", order);
+		
+		map.put("start",startrow);
+		map.put("end", endrow);
+		
+		
+		return dao.getSearchList(map);
+	}
+
+	@Override
+	public int getSearchListCount(String dept, String searchsel, String searchinput, String order, int page,
+			int limit) {
 		HashMap<String, Object>map = new HashMap<String,Object>();
 		map.put("dept", dept);
 		map.put("searchsel", searchsel);
@@ -126,7 +147,7 @@ public class FileBoServiceImpl implements FileBoService {
 		map.put("limit", limit);
 		
 		
-		return dao.getSearchList(map);
+		return dao.getSearchListCount(map);
 	}
 
 

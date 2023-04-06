@@ -114,7 +114,7 @@ $('#start-btn').click(function(){
                 let attTiemeee=rdata.ON_TIME;
                $('#onTimeText').text(rdata.ON_TIME);
                $('#attTime').text(attTiemeee);
-               $('#attColor').css('background','#55a94b')
+               //$('#attColor').css('background','#55a94b')
 
         }, error: function(error){
                 console.log("hi")
@@ -162,7 +162,7 @@ $('#end-btn').click(function(){
 
                         //퇴근시간 표시
                         $('#offTimeText').text(rdata.OFF_TIME);
-                        $('#attColor').css('background','white');
+                       // $('#attColor').css('background','white');
                         $('#attTime').text('');
 
 

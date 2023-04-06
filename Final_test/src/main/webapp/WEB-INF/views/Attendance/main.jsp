@@ -58,7 +58,11 @@
 <main class="main-box">
   <div id="right-content">
         <div id="clock" class="box">
-            <div id="date-box"></div>
+            <div id="date-box">
+                <span id="TDate"></span>
+                <br>
+                <span id="TTime"></span>
+            </div>
             
             <div id="btn-box">
             
@@ -144,7 +148,7 @@
                         <p>성명</p>
                         <p>시작시간</p>
                         <p>종료시간</p>
-                        <p>추가근무시간</p>
+                        <p></p>
                         <p>총 근무시간</p>
                     </div>
                         <c:forEach items="${attlist}" var="x">

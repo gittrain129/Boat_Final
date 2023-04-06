@@ -42,4 +42,6 @@ public interface FileBoService {
 
 	public List<Filebo> getSearchList(String dept, String searchsel, String searchinput, String order, int page,
 			int limit);
+
+	public int getSearchListCount(String dept, String searchsel, String searchinput, String order, int page, int limit);
 }

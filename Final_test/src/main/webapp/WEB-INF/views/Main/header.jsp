@@ -38,6 +38,8 @@
         var attTime = $('#attTime').text();
         if(attTime!=''){
             $('#attColor').css('background','#40cf2f')
+        }else{
+            $('#attColor').css('background','white');
         }
 	})
 </script>

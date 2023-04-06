@@ -3,8 +3,8 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.boat.mybatis.mapper.FileboMapper">
+  
   <select id ="getSearchList" resultType="Filebo">
-  	
 	  select * from 
 						(select b.*, rownum rnum from 
 							(select file_board.* , nvl(CNT ,0) CNT 
@@ -15,27 +15,21 @@
 																order by CNT desc) 
 																<!-- 댓글순 -->
 							on FILE_NUM = F_COMMENT_NUM  
-							<where>
-							<!-- 
-							//FILE_NAME //FILE_SUBJECT
-							 -->
+						<where>
+						<if test = "searchsel !=null">
 							 <choose>
-								  <when test = "searchsel = NAME">
-								  
-								FILE_NAME like #{NAME}  
+								  <when test = "searchsel=='NAME'">
+									FILE_NAME like #{searchinput}  
 								  </when>
-								  
-								  <when test="searchsel = TITLE">
-								  
+								  <when test="searchsel=='TITLE'">
 								  FILE_SUBJECT like #{searchinput}
 								  </when>
 							 </choose>
-									
+							 </if>
 							<if test = "dept !=null and dept !=''">
-								dept = "#{dept}"
+								and dept =#{dept}
 							</if>
-							</where>
-							
+							</where> 
 								<!-- 댓글순
 						 order by  FILE_RE_REF desc , FILE_RE_SEQ asc정렬
 						 order by FILE_DATE desc최신순
@@ -43,30 +37,49 @@
 						 order by CNT desc댓글순
 						 -->
 						  <choose>
-								  <when test = "ORDER = RECENT">
+							  <when test = "ORDER == 'RECENT'">
 								  order by FILE_DATE desc
 								   </when>
-								  <when test = "ORDER = READCOUNT">
+								  <when test = "ORDER == 'READCOUNT'">
 								 order by FILE_READCOUNT desc
 								   </when>
-								  <when test = "ORDER = COMMCOUNT">
+								  <when test = "ORDER == 'COMMCOUNT'">
 								 order by CNT desc
 								   </when>
 							 </choose>
-					  	<![CDATA[	 )b 
-						where rownum<= #{START} ) 
-						
 							<!-- //endrow//최신순 -->
-						where rnum>=#{START}  and rnum<= #{END}  ]]>
+					  	<![CDATA[	 )b 
+						where rownum<= #{end} ) 
+						
+						where rnum>=#{start}  and rnum<= #{end}  ]]>
 						
 						<!-- //startrow,endrow -->
-					
-		
-	
-	
-  
-  
-  </select>
+				  </select>
+				  
+				  
+		<select id="getSearchListCount" resultType = "int">
+		select count(*) 
+			from file_board 
+			<!-- 		where FILE_NAME like '%홍길동%'  
+			and dept = '홍보팀'
+							//FILE_NAME //FILE_SUBJECT
+	-->
+		<where>
+		<if test = "searchsel !=null">
+							 <choose>
+								  <when test = "searchsel=='NAME'">
+									FILE_NAME like #{searchinput}  
+								  </when>
+								  <when test="searchsel=='TITLE'">
+								  FILE_SUBJECT like #{searchinput}
+								  </when>
+							 </choose>
+							 </if>
+							<if test = "dept !=null and dept !=''">
+								and dept =#{dept}
+							</if>
+							</where> 
+		</select>
   
 	 <select id="heartcount">
 	 	select count(FLIKE_NO) from filebo_like 
@@ -107,8 +120,8 @@
 												on file_board.FILE_NUM  = b.F_COMMENT_NUM   
 							order by FILE_RE_REF  desc,  
 							FILE_RE_SEQ  asc)j
-							 				where rownum<= 10  ) 
-							WHERE rnum>=1  and rnum<= 10  
+							 				where rownum<= #{end}  ) 
+							WHERE rnum>=#{start}  and rnum<= #{end}  
 							 ]]>
   
   </select>
