@@ -48,9 +48,10 @@ public class  WorkboardController {
 
 	
 	@PostMapping(value="/add")
-	public int CommentAdd(String EMPNO, String NAME, String DEPT, String content, String reg_date) {
+	public int CommentAdd(String EMPNO, String category, String NAME, String DEPT, String content, String reg_date) {
 		Workboard co = new Workboard();
 		System.out.println(EMPNO);
+		co.setCategory(category);
 		co.setEMPNO(EMPNO);
 		co.setContent(content);
 		co.setDEPT(DEPT);

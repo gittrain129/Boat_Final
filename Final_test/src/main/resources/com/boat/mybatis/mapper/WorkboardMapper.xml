@@ -28,7 +28,7 @@
 	
 	<insert id="workboardInsert" parameterType="workboard">
 		insert into workboard
-		values(seq_workboard.nextval, #{EMPNO}, #{DEPT}, #{NAME}, #{content}, sysdate)
+		values(seq_workboard.nextval, #{category}, #{EMPNO}, #{DEPT}, #{NAME}, #{content}, sysdate)
 	</insert>
 	
 	

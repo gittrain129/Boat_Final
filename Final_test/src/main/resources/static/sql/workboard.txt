@@ -2,6 +2,7 @@ drop table workboard CASCADE CONSTRAINTS;
 
 create table workboard(
 	num			 number 	primary key,
+	category	 varchar2(20),
 	empno		 varchar2(12) 	,
 	dept		 varchar2(10) check(dept in ('홍보팀', '개발팀', '인사팀', '기획팀', '영업팀')),
 	name		 varchar2(15),
@@ -9,11 +10,6 @@ create table workboard(
 	reg_date 	 date
 );
 
-insert into category
-select * from workboard
-where condition;
-
-insert into category
 
 drop sequence seq_workboard;
 create sequence seq_workboard;

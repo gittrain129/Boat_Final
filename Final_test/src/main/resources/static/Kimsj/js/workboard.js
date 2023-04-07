@@ -126,6 +126,7 @@ $(function(){
 		
 			url = "../workboard/add";
 			data = {
+				"category" : $("#category option:checked").text(),
 				"content" : content,
 				"EMPNO" : $("#loginid").text(),
 				"NAME" : $("#loginname").text(),
