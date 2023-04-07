@@ -16,7 +16,7 @@
 		var ws;
 		
 		function wsOpen(){
-			ws = new WebSocket("ws://" + location.host + "/boat/chating"+$("#roomNumber").val());
+			ws = new WebSocket("ws://" + location.host + "/boat/chating");
 			wsEvt();
 		}
 		
@@ -127,7 +127,6 @@
 			
 			var option ={
 				type: "message",
-				roomNumber: $("#roomNumber").val(),
 				sessionId : $("#sessionId").val(),
 				userName : $("#userName").val(),
 				msg : $("#chatting").val()
@@ -259,7 +258,6 @@
 
 		<!-- 채팅 상세 -->
 		<input type="hidden" id="sessionId" value="">
-		<input type="hidden" id="roomNumber" value="${roomNumber}">
 		<div class="col-md-8 bg-white ">
 		<div class="chat-message">
 			<ul class="chat">
