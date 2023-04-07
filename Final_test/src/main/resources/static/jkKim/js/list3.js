@@ -149,13 +149,17 @@ function ajax(sdata){
    });
 
 
+
+
+
 //검색용
-$(function() {
-  
+$(document).ready(function() {
+    
   $('form').submit(function(event) {
     event.preventDefault();
 	var search1 = $('input[name="search"]').val();
     var option1 = $('ul.dropdown-menu li a.active').text();
+    $('#hidden-state').val('search');
 
     
     $.ajax({
@@ -163,7 +167,9 @@ $(function() {
       type: 'POST',
       data: {
         "search1": search1,
-        "option1": option1
+        "option1": option1,
+        "dept": '부서별보기',
+        "order": '정렬옵션'
       },
       beforeSend : function(xhr)
 		        {   //데이터를 전송하기 전에 헤더에 csrf값을 설정합니다.
@@ -211,7 +217,7 @@ $(function() {
 			            output += "<td><div style='display: flex; justify-content: center; align-items: center;'>"+item.board_READCOUNT+"</div></td>";
 			            output += "<td><div style='display: flex; justify-content: center; align-items: center;'>"
 			            if(item.board_DATE != data.today){
-			            	output += item.board_DATE.substring(5,10);
+						  	output += item.board_DATE.substring(5,10);
 			            }
 			            if( item.board_DATE.substring(0,10) == data.today ){
 			            	output += " " + item.board_DATE.substring(11,16);
@@ -273,23 +279,40 @@ $(function() {
   
   $('ul.dropdown-menu li a').click(function(event) {
      var option = $(this).text();
-    $('#dropdownMenuButton1').text(option);
+    $(this).parents('.dropdown').find('.dropdown-toggle').text(option);
     $(this).addClass('active');
     $(this).parent().siblings().find('a').removeClass('active');
   });
+
+
+
+  $('#drop-dept li a').click(function(event) {
+  	var dept = $(this).text();
+  	var order = $('#drop-order li a').text();
+  	var state = $('#hidden-state').val();
+  	var empno = $('#hidden-empno').val();
+  	if(state == 'main'){
+  	url= list_ajax
+  	
+  	} else if(state == 'fav') {
+  	
+  	} else if(state == 'search'){
+  	
+  	}
+     
+  });
+  
+   $('#drop-order li a').click(function(event) {
+   var order = $(this).text();
+   var dept = $('#drop-dept li a').text();
+   var state = $('#hidden-state').val();
+     
+  });
+  
+
+  
+  
 });
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

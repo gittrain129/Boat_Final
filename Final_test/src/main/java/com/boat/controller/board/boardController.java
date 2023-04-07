@@ -155,7 +155,17 @@ public class boardController {
 	@RequestMapping(value="/Fav_list")
 	public Map<String, Object> FavAjax(@RequestParam(value="page", defaultValue="1", required=false) int page, 
 									   @RequestParam(value="limit", defaultValue="10", required=false) int limit,
-									   @RequestParam(value="BOARD_EMPNO") String empno){
+									   @RequestParam(value="BOARD_EMPNO") String empno,
+									   @RequestParam(value="dept", required=false) String dept,
+									   @RequestParam(value="order", required=false) String order
+									   
+			){
+		if(dept.equals("부서별보기")) {
+			dept = "";
+		}
+		if(order.equals("정렬옵션")) {
+			order = "";
+		}
 		
 		int listcount = boardService.getFavListCount();
 		
@@ -344,8 +354,17 @@ public class boardController {
 	public Map<String, Object> SearchAjax(@RequestParam(value="page", defaultValue="1", required=false) int page, 
 									   @RequestParam(value="limit", defaultValue="10", required=false) int limit,
 									   @RequestParam(value="search1") String search1,
-									   @RequestParam(value="option1") String option1
+									   @RequestParam(value="option1") String option1,
+									   @RequestParam(value="dept", required=false) String dept,
+									   @RequestParam(value="order", required=false) String order
+									   
 			){
+		if(dept.equals("부서별보기")) {
+			dept = "";
+		}
+		if(order.equals("정렬옵션")) {
+			order = "";
+		}
 		if(option1.equals("제목")){
 			option1 = "board.board_subject";
 		}
@@ -384,4 +403,56 @@ public class boardController {
 		return map;
 	}
 
+	@ResponseBody
+	@PostMapping(value="/list_ajax")
+	public Map<String, Object> listAjax(@RequestParam(value="page", defaultValue="1", required=false) int page, 
+									   @RequestParam(value="limit", defaultValue="10", required=false) int limit,
+									   @RequestParam(value="dept") String dept,
+									   @RequestParam(value="order") String order
+									   
+			){
+		if(dept.equals("부서별보기")) {
+			dept = "";
+		}
+		if(order.equals("정렬옵션")) {
+			order = "";
+		}
+		int listcount = boardService.getOptionListCount(dept,order);
+		int maxpage = (listcount + limit - 1) / limit;
+		int startpage = ((page-1) /10) *10 +1;
+		int endpage = startpage +10 -1;
+		if(endpage > maxpage)
+			endpage = maxpage;
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+	    Calendar cal = Calendar.getInstance();
+	    String today = format.format(cal.getTime());
+	    cal.add(Calendar.DAY_OF_MONTH, -3); //3일간 보이도록 하기위해서.
+	    String nowday = format.format(cal.getTime());
+		
+		List<Board> boardlist = boardService.getOptionBoardList(page, limit,dept,order);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("page",page);
+		map.put("maxpage",maxpage);
+		map.put("startpage",startpage);
+		map.put("endpage",endpage); 
+		map.put("listcount",listcount);
+		map.put("boardlist",boardlist);
+		map.put("limit",limit);
+		map.put("nowday",nowday);
+		map.put("today",today);
+		
+		return map;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

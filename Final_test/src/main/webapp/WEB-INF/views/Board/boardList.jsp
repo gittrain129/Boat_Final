@@ -53,6 +53,7 @@ background-color: white;
 <sec:authentication property="principal" var="pinfo"/>
 <input type="hidden" id="hidden-empno" value="${EMPNO}">
 <input type="hidden" id="hidden-state" value="main">
+<!-- main=초기화면 / fav=즐겨찾기화면 / search=검색화면 -->
 
 	<section class="container">
 		<div class="row">
@@ -66,7 +67,7 @@ background-color: white;
 <form class="d-flex align-items-center">
 <div class="input-group mr-2" style="border: 1px solid #ced4da; min-width: 400px;">
    <div class="dropdown" style="border-right: 2px solid #ced4da;">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+      <button class="btn btn-secondary dropdown-toggle" style="min-width:100px;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
         검색옵션
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -215,10 +216,10 @@ background-color: white;
         </ul>
 		<div class="d-flex align-items-center ml-auto">
         <div class="dropdown mb-2" style="border: 1px solid #ced4da; min-width: 100px;">
-        	<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+        	<button class="btn btn-secondary dropdown-toggle" type="button" style="min-width:115px;" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
   			  부서별보기
   			</button>
-  				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+  				<ul class="dropdown-menu" id="drop-dept" aria-labelledby="dropdownMenuButton2">
     				<li><a class="dropdown-item">홍보팀</a></li>
     				<li><a class="dropdown-item">개발팀</a></li>
     				<li><a class="dropdown-item">인사팀</a></li>
@@ -228,10 +229,10 @@ background-color: white;
   		</div>
   
          <div class="dropdown mb-2" style="border: 1px solid #ced4da; min-width: 100px;">
-  	        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
+  	        <button class="btn btn-secondary dropdown-toggle" type="button" style="min-width:115px;" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
     			정렬옵션
   			</button>
-  				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
+  				<ul class="dropdown-menu" id="drop-order" aria-labelledby="dropdownMenuButton3">
     				<li><a class="dropdown-item">최신순</a></li>
     				<li><a class="dropdown-item">조회순</a></li>
     				<li><a class="dropdown-item">댓글순</a></li>
@@ -332,12 +333,7 @@ function toggle(BOARD_NUM,BOARD_EMPNO) {
 		        }
 			});//add_ajax 끝
 		  
-		  
 		}
-	
-
-	
-
 	
 }//toggle 끝
 
@@ -353,7 +349,9 @@ function favorite(BOARD_EMPNO) {
         url: "${pageContext.request.contextPath}/board/Fav_list",
         type: 'POST',
         data: {
-               "BOARD_EMPNO": board_empno
+               "BOARD_EMPNO": board_empno,
+               "dept": '부서별보기',
+               "order": '정렬옵션'
         },
         beforeSend : function(xhr)
         {   //데이터를 전송하기 전에 헤더에 csrf값을 설정합니다.
@@ -403,7 +401,6 @@ function favorite(BOARD_EMPNO) {
 			           		 output += "<span class='badge badge-pill badge-warning float-right' style='background-color: #ffcb6b;'>공지</span></td>";
 			            }else if (item.board_NOTICE ==0){
 				            output += "<span class='badge badge-pill badge-warning float-right' style='background-color: #89a5ea;'>"+item.board_DEPT+"</span></td>";
-
 			            }
 			            output += "<td><div style='display: flex; justify-content: center; align-items: center;'><small>" +item.board_NAME+" </small></div></td>";
 			            output += "<td><div style='display: flex; justify-content: center; align-items: center;'>"+item.board_READCOUNT+"</div></td>";
@@ -459,6 +456,7 @@ function favorite(BOARD_EMPNO) {
 	});//add_ajax 끝
 	}//else 끝
 }
+
 	
 
 </script>
