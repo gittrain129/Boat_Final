@@ -817,6 +817,7 @@ public class MemberController {
 	
 	
 	
+	
 	List<Room> roomList = new ArrayList<Room>();
 	static int roomNumber = 0;
 	
@@ -901,8 +902,9 @@ public class MemberController {
 	
 	
 	
+	
 	//내 글 보기
-	//워크보드 추가
+	//자료실, 워크보드 추가
 	@GetMapping("/myboardList")
 	public ModelAndView myboardList(@RequestParam(value="page",defaultValue="1",required=false) int page, Principal principal, ModelAndView mv) {
 		
