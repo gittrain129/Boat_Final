@@ -9,5 +9,11 @@ create table workboard(
 	reg_date 	 date
 );
 
+insert into category
+select * from workboard
+where condition;
+
+insert into category
+
 drop sequence seq_workboard;
 create sequence seq_workboard;
