@@ -158,7 +158,6 @@ textarea.comment-write-area-text {
 	overflow-y: auto;
 	display: block;
 	width: 100%;
-	min-height: 17px;
 	padding-right: 1px;
 	border: 0;
 	font-size: 13px;
@@ -171,8 +170,8 @@ textarea.comment-write-area-text {
 }
 
 button, textarea {
-	font-family: Apple SD Gothic Neo, 맑은 고딕, Malgun Gothic, 돋움, dotum,
-		sans-serif;
+	/* font-family: Apple SD Gothic Neo, 맑은 고딕, Malgun Gothic, 돋움, dotum, 
+		sans-serif;*/
 }
 
 textarea {

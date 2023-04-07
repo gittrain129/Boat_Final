@@ -120,22 +120,21 @@
             <a href="list" class="on">목록</a>
             
 			  
-<%--           <a href ="reply">답변</a> --%>
+<%--           <a href ="reply">답변</a> 
             
-<a href ="replyView?num=${boarddata.FILE_NUM}">답변</a>
+<a href ="replyView?num=${boarddata.FILE_NUM}">답변</a>--%>
 		<c:if test="${boarddata.FILE_EMPNO ==empno||empno=='ADMIN'}">
 		<div class = "personal">
 			 <a href="modifyView?num=${boarddata.FILE_NUM}" class = "update">
 		         수정
 			  </a>
 			  <a id ='delete'>
-				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+				<button id="deletebtn" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal">
 				삭제
-			</button>
-				</a>
+				</button>
+			</a>
 		  
 
-			</a>
 			</div>
 		</c:if>
 		
@@ -185,9 +184,7 @@
 
 	      
 	    
-		</div>
-		</div>
-		</div> 
+	
 <%--id="myModal"end --%>
        <div class="commcard">
     
@@ -227,7 +224,7 @@
 <%-- class="card bg-light">end --%>
 <%-- class="comment end --%>
 
-
+</div>
 
 
 

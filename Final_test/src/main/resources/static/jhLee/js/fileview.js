@@ -1,3 +1,6 @@
+let token = $("meta[name='_csrf']").attr("content");
+	let header = $("meta[name='_csrf_header']").attr("content");
+	
 let option=1;  //선택한 등록순과 최신순을 수정, 삭제, 추가 후에도 유지되도록 하기위한 변수로 사용됩니다.
 
 
@@ -9,7 +12,7 @@ function del(num){//num : 댓글 번호
 	return;
 }
 	$.ajax({
-			url : 'FileCommentDelete.filebo',
+			url : 'delete',
 			data : {num:num},
 			success : function(rdata){
 				if(rdata==1){
@@ -28,12 +31,16 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 	    console.log($("#comment_board_num").val());
 		$.ajax({
 			type:"post",
-			url:"FileCommentList.filebo",
-			data : {"F_COMMENT_NUM" : $("#comment_board_num").val(), state:state}
+			url:"../Filebocom/list",
+			data : {"F_COMMENT_NUM" : $("#comment_board_num").val(), 
+			state:state}
 			,
 			dataType:"json",
+			beforeSend: function (jqXHR, settings) {
+				jqXHR.setRequestHeader(header, token);
+		 },
 			success:function(rdata){
-				console.log(rdata.boardlist.length+"1313");
+				//console.log(rdata.boardlist.length+"1313");
 				$('#count').text(rdata.listcount).css('font-family','arial,sans-serif')
 				let red1 = 'red';
 				let red2 ='red';
@@ -43,7 +50,7 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 					red1='gray';
 				}
 				let output="";
-				if(rdata.boardlist.length>0){
+				if(rdata.list.length>0){
 					console.log('success')
 					output +='<li class = "comment-order-item '+ red1+'">'
 							+'	<a href="javascript:getList(1)" class ="comment-order-button">등록순</a>'
@@ -93,7 +100,7 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 				}
 				output+='</div>'//comment-info-box;
 				
-				if($("#loginid").val()==this.id){
+				if($("#loginid").text()==this.id){
 					output+='<div class="comment-tool">'
 						+'	<div title="더보기" class="comment-tool-button">'
 						+'			<div>&#46;&#46;&#46;</div>'
@@ -226,16 +233,20 @@ $(function() {
 			return;
 		}
 		$.ajax({
-			url : 'FileCommentAdd.filebo',//원문 등록
+			url : '../Filebocom/add',//원문 등록
 			data : {
-				id:$("#loginid").val(),
-				content : content,
-				comment_board_num : $("#comment_board_num").val(),
-				comment_re_lev : 0,//원문인 경우 comment_re_seq는 0,
+				F_C_ID:$("#loginid").text(),
+				F_CONTENT : content,
+				F_BO_NUM : $("#comment_board_num").val(),
+				F_COMMENT_RE_LEV : 0,//원문인 경우 comment_re_seq는 0,
 									//comment_re_ref는 댓글의 원문 글번호
-				comment_re_seq:0
+				F_COMMENT_RE_SEQ:0
 				
-			},type :'post',
+			},
+			beforeSend: function (jqXHR, settings) {
+				jqXHR.setRequestHeader(header, token);
+		 	},
+		 	type :'post',
 			success : function(rdata){
 				if(rdata==1){
 					getList(option);

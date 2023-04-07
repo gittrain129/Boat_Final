@@ -1,6 +1,6 @@
 set serveroutput on
 set sqlprompt '_user>'
-set linesize 500
+set linesize 2000
 set pagesize 50
 
  COL Null?  FORMAT A20  
@@ -16,6 +16,7 @@ COL FILE_ORIGINAL FORMAT A20
 COL FILE_ORIGINAL2 FORMAT A20
 COL FILE_EMPNO FORMAT A20
 COL DEPT FORMAT A20
+col star format A20
 
 --member
 COL EMPNO FORMAT A10
