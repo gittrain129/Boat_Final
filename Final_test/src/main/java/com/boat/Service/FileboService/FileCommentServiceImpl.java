@@ -12,33 +12,29 @@ import com.boat.domain.Filecomm;
 import com.boat.mybatis.mapper.FileComMapper;
 
 @Service
-public class CommentServiceImpl implements FileCommentService {
+public class FileCommentServiceImpl implements FileCommentService {
 	
 	private FileComMapper dao;
 	private LogAdvice log;
 	
 	@Autowired
-	public CommentServiceImpl(FileComMapper dao,LogAdvice log) {
+	public FileCommentServiceImpl(FileComMapper dao,LogAdvice log) {
 		this.dao = dao;
 		this.log = log;
 	}
 
 	@Override
-	public int getListCount(int board_num) {
+	public int getListCount(int F_COMMENT_NUM) {
 		log.beforeLog();
-		return dao.getListCount(board_num);
+		return dao.getListCount(F_COMMENT_NUM);
 	}
 
 	@Override
-	public List<Filecomm> getCommentList(int board_num, int page) {
-		log.beforeLog();
-		int startrow = 1;
-		int endrow = page*3;
+	public List<Filecomm> getCommentList(int F_COMMENT_NUM, int state) {
 		
 		Map<String,Integer>map = new HashMap<String,Integer>();
-		map.put("board_num", board_num);
-		map.put("start", startrow);
-		map.put("end", endrow);
+		map.put("F_COMMENT_NUM", F_COMMENT_NUM);
+		map.put("state", state);
 		
 		return dao.getCommentList(map);
 	}

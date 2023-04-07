@@ -25,10 +25,14 @@ public class FileCommentController {
 	}
 	private static final Logger logger=LoggerFactory.getLogger(FileCommentController.class);
 	
+	
 	@PostMapping(value = "/list")
-	public Map<String,Object>CommentList(int board_num, int page){
-		List<Filecomm> list = commentService.getCommentList(board_num,page);
-		int listcount = commentService.getListCount(board_num);
+	public Map<String,Object>CommentList(int F_COMMENT_NUM, int state){
+		System.out.println("state,,,,,,,,,,,,,,,,"+state);
+		
+		List<Filecomm> list = commentService.getCommentList(F_COMMENT_NUM,state);
+		int listcount = commentService.getListCount(F_COMMENT_NUM);
+		
 		Map<String,Object>map = new HashMap<String,Object>();
 		map.put("list", list);
 		map.put("listcount",listcount);
@@ -39,7 +43,7 @@ public class FileCommentController {
 	//@ResponseBody
 	@RequestMapping(value="/add")
 	public int commentAdd(Filecomm co){
-		
+		System.out.println(co.toString());
 		return  commentService.commentInsert(co);
 		
 		

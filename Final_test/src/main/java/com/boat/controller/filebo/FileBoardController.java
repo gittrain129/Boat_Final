@@ -154,20 +154,24 @@ import com.boat.domain.MySaveFolder;
 	  
 		
 	} 
-	
+	@ResponseBody
 	@PostMapping(value="/Fav_add") 
 	  public int favadd( String FILE_EMPNO,
 			  				String FILE_NUM) {
-		
-		return boardService.insertfav(FILE_EMPNO,FILE_NUM);
+	//	System.out.println(FILE_EMPNO+FILE_NUM+"+++++++++++++++++++++++");
+		int result = boardService.insertfav(FILE_EMPNO,FILE_NUM);
+		System.out.println("result : "+result);
+		return result;
 		 
 	}
-  
+	@ResponseBody
 	@PostMapping(value="/Fav_delete") 
 	public int favdel( String FILE_EMPNO,
 			String FILE_NUM) {
-		
-		return boardService.deletefav(FILE_EMPNO,FILE_NUM);
+		System.out.println(FILE_EMPNO+FILE_NUM+"+++++++++++++++++++++++");
+		int result = boardService.deletefav(FILE_EMPNO,FILE_NUM);
+		System.out.println("result : "+result);
+		return result;
 	}
 	
 	@ResponseBody
