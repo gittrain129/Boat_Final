@@ -2,7 +2,7 @@ let token = $("meta[name='_csrf']").attr("content");
 	let header = $("meta[name='_csrf_header']").attr("content");
 	
 let option=1;  //선택한 등록순과 최신순을 수정, 삭제, 추가 후에도 유지되도록 하기위한 변수로 사용됩니다.
-
+let empno = $('#loginid').text();
 
 function del(num){//num : 댓글 번호
   	
@@ -12,7 +12,7 @@ function del(num){//num : 댓글 번호
 	return;
 }
 	$.ajax({
-			url : 'delete',
+			url : '../Filebocom/delete',
 			data : {num:num},
 			success : function(rdata){
 				if(rdata==1){
@@ -30,9 +30,9 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 	    option=state;
 	    console.log($("#comment_board_num").val());
 		$.ajax({
-			type:"post",
+			type:"get",
 			url:"../Filebocom/list",
-			data : {"F_COMMENT_NUM" : $("#comment_board_num").val(), 
+			data : {"FILE_BO_NUM" : $("#comment_board_num").val(), 
 			state:state}
 			,
 			dataType:"json",
@@ -40,7 +40,7 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 				jqXHR.setRequestHeader(header, token);
 		 },
 			success:function(rdata){
-				//console.log(rdata.boardlist.length+"1313");
+				console.log(rdata.list+"1313");
 				$('#count').text(rdata.listcount).css('font-family','arial,sans-serif')
 				let red1 = 'red';
 				let red2 ='red';
@@ -60,8 +60,8 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 							+'</li>';
 			$('.comment-order-list').html(output);
 			output='';
-			$(rdata.boardlist).each(function(){
-				const lev = this.comment_re_lev;
+			$(rdata.list).each(function(){
+				const lev = this.file_COMMENT_RE_LEV;
 				console.log(lev);
 				let comment_reply ='';
 				if(lev==1){
@@ -70,47 +70,47 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 					comment_reply =' comment-list-item--reply lev2';
 					
 				}
-				const profile = this.memberfile;
+				const profile = this.profile;
 				let src ='image/profile.png';
 				if(profile){
-					src='memberupload/'+profile;
+					src='/boat/resources/'+profile;
 				}
-				output +='<li id ="'+this.num+'"class="comment-list-item '+comment_reply + '">'
+				output +='<li id ="'+this.file_C_NUM+'"class="comment-list-item '+comment_reply + '">'
 						+'	<div class ="comment-nick-area">'
 						+'	<img src="'+src+'" alt ="프로필사진" width="36" height="36">'
 						+'	<div class ="comment-box">'
 						+'		<div class ="comment-nick-box">'
 						+'			<div class="comment-nick-info">'
-						+'				<div class="comment-nickname">'+ this.id + '</div>'
+						+'				<div class="comment-nickname">'+ this.file_C_ID + '</div>'
 						+'			</div>'//comment-nick-info
 						+'		</div>'//comment-nick-box
 						+'	</div>'//comment-box
 						+'	<div class ="comment-text-box">'
 						+'		<p class-"comment-text-view">'
-						+'			<span class="text-comment">'+ this.content + '</span>'
+						+'			<span class="text-comment">'+ this.file_CONTENT + '</span>'
 						+'		</p>'
 						+'	</div>'//comment-text-box
 						+'	<div class="comment-info-box">'
-						+'		<span class="comment-info-data">'+this.reg_date + '</span>';	
+						+'		<span class="comment-info-data">'+this.file_COMMENT_DATE + '</span>';	
 						+'	</div>'//comment-text-box
 				if(lev<2){
-					output +='	<a href="javascript:replyform('+this.num +','
-							+ lev +','+this.comment_re_seq+','
-							+ this.comment_re_ref +')" class="comment-info-button">답글쓰기</a>'
+					output +='	<a href="javascript:replyform('+this.file_C_NUM +','
+							+ lev +','+this.file_RE_SEQ+','
+							+ this.file_RE_SEQ +')" class="comment-info-button">답글쓰기</a>'
 				}
 				output+='</div>'//comment-info-box;
 				
-				if($("#loginid").text()==this.id){
+				if(empno==this.file_C_ID){
 					output+='<div class="comment-tool">'
 						+'	<div title="더보기" class="comment-tool-button">'
 						+'			<div>&#46;&#46;&#46;</div>'
 						+'		</div>'
-						+'		<div id = "comment-list-item-layer'+this.num+'" class="LayerMore">'//스타일에서 display:none
+						+'		<div id = "comment-list-item-layer'+this.file_C_NUM+'" class="LayerMore">'//스타일에서 display:none
 						+'		<ul class="layer-list">'
 						+'			<li class="layer-item">'
-						+'			<a href="javascript:updateForm('+this.num+')"'
+						+'			<a href="javascript:updateForm('+this.file_C_NUM+')"'
 						+'			class="layer-button">수정</a>&nbsp;&nbsp;'
-						+'			<a href="javascript:del('+this.num+')"'
+						+'			<a href="javascript:del('+this.file_C_NUM+')"'
 						+'			class="layer-button">삭제</a></li></ul>'
 						+'		</div>'
 						+'		</div>'
@@ -206,7 +206,7 @@ $(function() {
 	
 	
 	})*/
-	console.log($('#empno').val()+"empno있나요");
+	console.log(empno+"empno있나요");
 	
 	getList(option);  //처음 로드 될때는 등록순 정렬
 	
@@ -232,15 +232,16 @@ $(function() {
 			alert("댓글을 입력하세요");
 			return;
 		}
+		console.log('등록합니다 '+empno)
 		$.ajax({
 			url : '../Filebocom/add',//원문 등록
 			data : {
-				F_C_ID:$("#loginid").text(),
-				F_CONTENT : content,
-				F_BO_NUM : $("#comment_board_num").val(),
-				F_COMMENT_RE_LEV : 0,//원문인 경우 comment_re_seq는 0,
+				FILE_C_ID:empno,
+				FILE_CONTENT : content,
+				FILE_BO_NUM : $("#comment_board_num").val(),
+				FILE_COMMENT_RE_LEV : 0,//원문인 경우 comment_re_seq는 0,
 									//comment_re_ref는 댓글의 원문 글번호
-				F_COMMENT_RE_SEQ:0
+				FILE_COMMENT_RE_SEQ:0
 				
 			},
 			beforeSend: function (jqXHR, settings) {
@@ -281,8 +282,8 @@ $(function() {
 		}
 		const num=$(this).attr('data-id');
 		$.ajax({
-				url :'FileCommentUpdate.filebo',
-				data:{num:num,content:content},
+				url :'../Filebocom/update',
+				data:{FILE_C_NUM:num,FILE_CONTENT:content},
 				success:function(rdata){
 					if(rdata==1){
 						getList(option)
@@ -325,12 +326,12 @@ $(function() {
 		$.ajax({
 				url :'FileCommentReply.filebo',
 				data:{
-						id : $("#loginid").val(),
-						content : content,
-						comment_board_num : $("#comment_board_num").val(),
-						comment_re_lev :lev,
-						comment_re_ref :comment_re_ref,
-						comment_re_seq :seq
+					FILE_C_ID : empno,
+						FILE_CONTENT : content,
+						FILE_BO_NUM : $("#comment_board_num").val(),
+						FILE_COMMENT_RE_LEV :lev,
+						FILE_COMMENT_RE_REF :comment_re_ref,
+						FILE_COMMENT_RE_SEQ :seq
 						
 					},
 					type : 'post',

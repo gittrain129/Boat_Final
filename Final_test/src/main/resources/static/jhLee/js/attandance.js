@@ -114,7 +114,7 @@ $('#start-btn').click(function(){
                 let attTiemeee=rdata.ON_TIME;
                $('#onTimeText').text(rdata.ON_TIME);
                $('#attTime').text(attTiemeee);
-               //$('#attColor').css('background','#55a94b')
+               $('#attColor').css('background','#40cf2f')
 
         }, error: function(error){
                 console.log("hi")
