@@ -43,7 +43,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.boat.Service.MemberService;
 import com.boat.Task.SendMail;
-import com.boat.chat.Room;
 import com.boat.domain.Board;
 import com.boat.domain.MailVO;
 import com.boat.domain.Member;
@@ -818,8 +817,6 @@ public class MemberController {
 	
 	
 	
-	List<Room> roomList = new ArrayList<Room>();
-	static int roomNumber = 0;
 	
 	//채팅
 	@RequestMapping("/chat")
@@ -834,65 +831,6 @@ public class MemberController {
 		return mv;
 	}
 	
-	/**
-	 * 방 페이지
-	 * @return
-	 */
-	@RequestMapping("/room")
-	public ModelAndView room() {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("/Chat/room");
-		return mv;
-	}
-	
-	/**
-	 * 방 생성하기
-	 * @param params
-	 * @return
-	 */
-	@RequestMapping("/createRoom")
-	public @ResponseBody List<Room> createRoom(@RequestParam HashMap<Object, Object> params){
-		String roomName = (String) params.get("roomName");
-		if(roomName != null && !roomName.trim().equals("")) {
-			Room room = new Room();
-			room.setRoomNumber(++roomNumber);
-			room.setRoomName(roomName);
-			roomList.add(room);
-		}
-		Logger.info("roomList="+roomList);
-		
-		return roomList;
-	}
-	
-	/**
-	 * 방 정보가져오기
-	 * @param params
-	 * @return
-	 */
-	@RequestMapping("/getRoom")
-	public @ResponseBody List<Room> getRoom(@RequestParam HashMap<Object, Object> params){
-		return roomList;
-	}
-	
-	/**
-	 * 채팅방
-	 * @return
-	 */
-	@RequestMapping("/moveChating")
-	public ModelAndView chating(@RequestParam HashMap<Object, Object> params) {
-		ModelAndView mv = new ModelAndView();
-		int roomNumber = Integer.parseInt((String) params.get("roomNumber"));
-		
-		List<Room> new_list = roomList.stream().filter(o->o.getRoomNumber()==roomNumber).collect(Collectors.toList());
-		if(new_list != null && new_list.size() > 0) {
-			mv.addObject("roomName", params.get("roomName"));
-			mv.addObject("roomNumber", params.get("roomNumber"));
-			mv.setViewName("chat");
-		}else {
-			mv.setViewName("room");
-		}
-		return mv;
-	}
 	
 	
 	
