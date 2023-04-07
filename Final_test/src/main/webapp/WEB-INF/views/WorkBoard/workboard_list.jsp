@@ -7,8 +7,11 @@
 <title>워크보드 게시판</title>
 
 	<jsp:include page="../Main/header.jsp"/>
-	<script src="${pageContext.request.contextPath}/resources/Kimsj/js/workboard.js"></script>
-	 
+	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.3.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+	
+	<script src="${pageContext.request.contextPath}/resources/Kimsj/js/workboard.js"></script>	
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/Kimsj/workboard_lib/fa-5/css/all.css" />  	
 	<!-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/Kimsj/workboard_lib/bootstrap-4/css/bootstrap.min.css" />  -->
 	<link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -80,7 +83,7 @@
 								<tr>					
 									<th style="width:120px;">카테고리</th>
 									<td>
-										<select name="likeLanguage" id="" class="pl">
+										<select name="category" id="category" class="pl">
 								            <option value="0" selected>선택해주세요</option>
 								            <option value="list">홍보팀</option>
 								            <option value="list">개발팀</option>
@@ -207,19 +210,7 @@
 		</div>  <%-- low end --%>
 	</div>  <%-- container end --%>
 
-
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/Kimsj/workboard_lib/sceditor/minified/themes/default.min.css" />
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/Kimsj/workboard_lib/sceditor/minified/sceditor.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/Kimsj/workboard_lib/sceditor/minified/formats/bbcode.js"></script>
-
-
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/Kimsj/workboard_lib/jquery-3.3.1.min.js"></script>
-	
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/Kimsj/workboard_lib/bootstrap-4/js/bootstrap.min.js"></script>
-	
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/Kimsj/workboard_lib/bootstrap-4/js/popper.min.js"></script>
-	
-	<jsp:include page="../Main/footer.jsp"/>
+<jsp:include page="../Main/footer.jsp"/>
 	
 </body>
 </html>
