@@ -8,8 +8,6 @@
 <html>
 <head>
     <!-- 데이트 피커 -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/jhLee/css/datepicker.css">
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/jhLee/js/datetimepicker.js"></script>
 
 
 <title>일별근무시간</title>

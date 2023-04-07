@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,12 +27,18 @@ public class FileCommentController {
 	private static final Logger logger=LoggerFactory.getLogger(FileCommentController.class);
 	
 	
-	@PostMapping(value = "/list")
-	public Map<String,Object>CommentList(int F_COMMENT_NUM, int state){
+	//@PostMapping(value = "/list")
+	@GetMapping(value = "/list")
+	public Map<String,Object>CommentList(int FILE_BO_NUM, int state){
 		System.out.println("state,,,,,,,,,,,,,,,,"+state);
 		
-		List<Filecomm> list = commentService.getCommentList(F_COMMENT_NUM,state);
-		int listcount = commentService.getListCount(F_COMMENT_NUM);
+		List<Filecomm> list = commentService.getCommentList(FILE_BO_NUM,state);
+		
+		System.out.println("list사이즈를 봅시다"+list.size());
+		logger.info(list.toString());// [null, null]
+		
+		
+		int listcount = commentService.getListCount(FILE_BO_NUM);
 		
 		Map<String,Object>map = new HashMap<String,Object>();
 		map.put("list", list);
@@ -49,7 +56,6 @@ public class FileCommentController {
 		
 	}
 	
-//	@ResponseBody
 	@RequestMapping(value="/update")
 	public int commentUpdate(Filecomm co){
 		
@@ -57,7 +63,6 @@ public class FileCommentController {
 		
 		
 }
-	//@ResponseBody
 	@RequestMapping(value="/delete")
 	public int commentUpdate(int num){
 		

@@ -24,23 +24,26 @@ public class FileCommentServiceImpl implements FileCommentService {
 	}
 
 	@Override
-	public int getListCount(int F_COMMENT_NUM) {
+	public int getListCount(int FILE_BO_NUM) {
 		log.beforeLog();
-		return dao.getListCount(F_COMMENT_NUM);
+		return dao.getListCount(FILE_BO_NUM);
 	}
 
 	@Override
-	public List<Filecomm> getCommentList(int F_COMMENT_NUM, int state) {
+	public List<Filecomm> getCommentList(int FILE_BO_NUM, int state) {
 		
 		Map<String,Integer>map = new HashMap<String,Integer>();
-		map.put("F_COMMENT_NUM", F_COMMENT_NUM);
+		map.put("FILE_BO_NUM", FILE_BO_NUM);
 		map.put("state", state);
+		List<Filecomm> co =dao.getCommentList(map);
+		//System.out.println(co.size()+"sjjjjsjjjjjjj");
 		
-		return dao.getCommentList(map);
+		return co;
 	}
 
 	@Override
 	public int commentInsert(Filecomm c) {
+		System.out.println(c.toString()+"sjjjjsjjjjjjj");
 		return dao.commentInsert(c);
 	}
 
