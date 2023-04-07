@@ -4,9 +4,24 @@
 <html>
  <head> 
   <title>BOAT - 내 글 보기</title>
-  <link href="${pageContext.request.contextPath}/ejYang/css/mylist.css" type="text/css" rel="stylesheet">
   <script src="http://code.jquery.com/jquery-latest.js"></script>
   <jsp:include page="../Main/header.jsp" />
+  <style>
+  	body  div  table  thead  tr  th:nth-child(1){width:8%}
+   	body  div  table  thead  tr  th:nth-child(2){width:47%}
+   	body  div  table  thead  tr  th:nth-child(3){width:15%}
+   	body  div  table  thead  tr  th:nth-child(4){width:10%}
+   	body  div  table  thead  tr  th:nth-child(5){width:20%}
+   	
+   	thead th {
+		text-align: center;
+		vertical-align: middle;
+	}
+	
+	form[name=logout] {
+		margin-bottom: 0px;
+	}
+  </style>
  </head>
  <body>
  <!-- Page Header Start -->
@@ -38,7 +53,7 @@
 			<table class="table table-bordered table-hover">
 				<thead>
 					<tr class="bg-light">
-						<th title="category">카테<br>고리</th>
+						<th title="category">카테고리</th>
 						<th title="Discussion List">제목</th>
 						<th class="bg-light" title="Created By">작성자</th>
 						<th title="Total Replies">조회수</th>
@@ -52,10 +67,7 @@
 						<!-- 카테고리 -->
 						<td class="text-center">
 		                    <c:choose>
-	                    		<c:when test="${b.BOARD_NOTICE == 0}">
-	                    			<c:out value="업무"/>
-	                    		</c:when>
-	                    		<c:when test="${b.BOARD_NOTICE == 1}">
+	                    		<c:when test="${b.BOARD_NOTICE eq '0' or b.BOARD_NOTICE eq '1'}">
 	                    			<c:out value="업무"/>
 	                    		</c:when>
 	                    		<c:otherwise>	
@@ -64,6 +76,8 @@
 	                    	</c:choose>
 	                    </td>
 	                    <!-- 제목 -->
+	                    	<!-- 업무 제목 -->
+	                    	<c:if test="${b.BOARD_NOTICE eq '0' or b.BOARD_NOTICE eq '1'}">
 								<td style="display: flex; align-items: center;">
 								 <c:if test="${b.BOARD_RE_LEV !=0 }"><%--답글인경우 --%>
             						<c:forEach var="a" begin="0" end="${b.BOARD_RE_LEV*2 }" step="1">
@@ -80,13 +94,35 @@
 								<span	class="badge badge-pill badge-warning ml-auto" style="background-color: #89a5ea;">new</span>
 								</c:if>
 								</a>
-								<c:if test="${b.BOARD_NOTICE == 1}">
+								<c:if test="${b.BOARD_NOTICE eq '1'}">
 								<span class="badge badge-pill badge-primary float-right" style="background-color: #ffcb6b;">공지</span>
 								</c:if>
-								<c:if test="${b.BOARD_NOTICE == 0}">
+								<c:if test="${b.BOARD_NOTICE eq '0'}">
 								<span	class="badge badge-pill badge-warning float-right" style="background-color: #89a5ea;">${b.BOARD_DEPT }</span>
 								</c:if>
 								</td>
+							</c:if>
+							<!-- 자료실 제목 -->
+	                    	<c:if test="${not (b.BOARD_NOTICE eq '0' or b.BOARD_NOTICE eq '1')}">
+								<td style="display: flex; align-items: center;">
+								 <c:if test="${b.BOARD_RE_LEV !=0 }"><%--답글인경우 --%>
+            						<c:forEach var="a" begin="0" end="${b.BOARD_RE_LEV*2 }" step="1">
+            						&nbsp;	
+            						</c:forEach>
+         						</c:if>
+         						<c:if test="${b.BOARD_RE_LEV ==0 }"><!--  원문 인경우 -->
+         	 						&nbsp;
+         						</c:if>
+								<a href="${pageContext.request.contextPath}/Filebo/detail?num=${b.BOARD_NUM }" style="flex: 1; font-size:90%">
+								<c:out value="${b.BOARD_SUBJECT}" escapeXml="true"/> 
+								<span class="gray small">[<c:out value="${b.CNT}"/>]</span>
+								<c:if test="${b.BOARD_DATE > nowday}">
+								<span	class="badge badge-pill badge-warning ml-auto" style="background-color: #89a5ea;">new</span>
+								</c:if>
+								</a>
+								<span	class="badge badge-pill badge-warning float-right" style="background-color: #89a5ea;">${b.BOARD_DEPT}</span>
+								</td>
+							</c:if>
 								
 						<!-- 글쓴이 -->
 						<td><div style="display: flex; justify-content: center; align-items: center;"><small>${b.BOARD_NAME }</small></div></td>
