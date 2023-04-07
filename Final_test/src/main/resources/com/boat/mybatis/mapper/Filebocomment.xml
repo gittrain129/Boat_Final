@@ -2,21 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="com.boat.mybatis.mapper.FileboMapper2">
+  <mapper namespace="com.boat.mybatis.mapper.FileComMapper">
   
   <!-- 
-   BOARD_NUM                                 NOT NULL NUMBER
- BOARD_NAME                                         VARCHAR2(30)
- BOARD_PASS                                         VARCHAR2(30)
- BOARD_SUBJECT                                      VARCHAR2(300)
- BOARD_CONTENT                                      VARCHAR2(4000)
- BOARD_FILE                                         VARCHAR2(50)
- BOARD_ORIGINAL                                     VARCHAR2(50)
- BOARD_RE_REF                                       NUMBER(5)
- BOARD_RE_LEV                                       NUMBER(5)
- BOARD_RE_SEQ                                       NUMBER(5)
- BOARD_READCOUNT                                    NUMBER(5)
- BOARD_DATE                                         DATE
+   	private String F_C_NUM;
+	private String F_C_ID;
+	private String F_CONTENT;
+	private String F_COMMENT_DATE;//2020-12-24 16:08:35
+	private int F_BO_NUM;
+	private int F_COMMENT_RE_LEV;                         DATE
  
  create table file_board (
 	FILE_NUM NUMBER(5) primary key,
@@ -39,23 +33,25 @@
   
   
 	<select id="getListCount" resultType="int">
-		select count(*) from file_board
+		select count(*) from FILE_COMMENT
+		where F_COMMENT_NUM =#{F_COMMENT_NUM}
 	</select>
 	
-  <select id = "getBoardList" resultType="Filebo" parameterType="java.util.Map">
+  <select id = "getCommentList" resultType="Filebo" parameterType="java.util.Map">
 	
-	
-  
-   SELECT * FROM (select rownum rnum, j.* from (
-							 select file_board.*, nvl(CNT ,0) CNT 
-							from file_board left outer join (select FILE_NUM ,count(*) CNT  
-														from FILE_COMMENT  
-														group by FILE_NUM )b 
-												on board3.FILE_NUM  = b.FILE_NUM   
-							order by FILE_RE_REF  desc,  
-							FILE_RE_SEQ  asc)j
-							 				where rownum&lt;=  #{end}   ) 
-							WHERE rnum&gt;= #{start}  and rnum&lt;= #{end}  
+	select F_C_NUM, FILE_COMMENT.F_C_ID, F_CONTENT, F_COMMENT_DATE, F_COMMENT_RE_LEV, 
+				   F_COMMENT_RE_SEQ, F_COMMENT_RE_REF 
+				   from FILE_COMMENT join member 
+				   on FILE_COMMENT.F_C_ID = member.empno 
+				   where F_COMMENT_NUM = #{F_COMMENT_NUM} 
+				   order by F_COMMENT_RE_REF 
+                   <if test='state=="1"'>
+                   asc,
+                   </if>
+                   <if test='state=="0"'>
+                   desc,
+                   </if>  
+                    F_COMMENT_RE_SEQ asc
   
   </select>
   

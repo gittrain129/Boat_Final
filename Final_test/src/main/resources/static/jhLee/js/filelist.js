@@ -87,7 +87,7 @@ $.ajax({
             let output ="<tbody>";
             $(data.boardlist).each(
                 function(index,item){
-                    output+='<tr><td><i class="bi bi-star star"></i></td><td>'
+                    output+="<tr><td><i class='bi bi-star-fill' style='color:#ffd699' id='star" + item.board_NUM +"' onclick='toggle("+ item.file_NUM + ","+empno+")'></i></td><td>"
                     let img="";
                     if(item.file_RE_LEV>0){
                         img='<img alt="파일다운2" src="${pageContext.request.contextPath}/jhLee/img/download.png"class="file"style="width:20px">'
@@ -185,6 +185,7 @@ var searchsel;
 var searchval;
 var dept;
 var order;
+
 ///////////////////////ready()
 $(function() {
     //즐겨찾기 클릭
@@ -224,78 +225,6 @@ $(function() {
     //$(this).css('background','yellow');
 
 
-    function toggle(BOARD_NUM,BOARD_EMPNO) {
-		var star = document.getElementById('star'+BOARD_NUM);
-		var board_num = BOARD_NUM;
-		var board_empno = BOARD_EMPNO;
-        
-    if (star.classList.contains('bi-star-fill')) {
-        star.classList.remove('bi-star-fill');
-        star.classList.add('bi-star');
-        star.style.color = '';
-        $.ajax({
-              url: "${pageContext.request.contextPath}/Filebo/Fav_delete",
-              type: 'POST',
-              data: {
-                  "FILE_NUM": file_num,
-                  "FILE_EMPNO": file_empno
-              },
-              beforeSend : function(xhr)
-              {   //데이터를 전송하기 전에 헤더에 csrf값을 설정합니다.
-                xhr.setRequestHeader(header, token);         
-             },
-              success: function(response) {
-                if(response ==1){
-                toastr.options.escapeHtml = true;
-                toastr.options.closeButton = true;
-                toastr.options.newestOnTop = false;
-                toastr.options.progressBar = true;
-                toastr.info('즐겨찾기 추가되었습니다.', '자료실게시판', {timeOut: 3000});
-            }
-              },
-              error: function(request,error) {
-                  
-              }
-          });//delete_ajax 끝
-      } else {
-        star.classList.remove('bi-star');
-        star.classList.add('bi-star-fill');
-        star.style.color = '#ffd699';
-        
-        $.ajax({
-              url: "${pageContext.request.contextPath}/Filebo/Fav_add",
-              type: 'POST',
-              data: {
-                  "FILE_NUM": file_num,
-                  "FILE_EMPNO": file_empno
-              },
-              beforeSend : function(xhr)
-              {   //데이터를 전송하기 전에 헤더에 csrf값을 설정합니다.
-                xhr.setRequestHeader(header, token);         
-             },
-              success: function(response) {
-                if(response ==1){
-                    toastr.options.escapeHtml = true;
-                    toastr.options.closeButton = true;
-                    toastr.options.newestOnTop = false;
-                    toastr.options.progressBar = true;
-                    toastr.info('즐겨찾기 삭제되었습니다.', '자료실게시판', {timeOut: 3000});
-                }
-
-              },
-              error: function(request,error) {
-                  
-                  alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-              }
-          });//add_ajax 끝
-        
-        
-      }
-  
-
-
-
-})
 
 if($('#empno').val()===""){
 alert('로그인 후 사용 가능한 게시판입니다.')	
