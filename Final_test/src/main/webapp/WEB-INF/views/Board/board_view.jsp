@@ -88,9 +88,12 @@ form[action=down] > input[type=submit]{
 </style>
 </head>
 <body>
+<sec:authorize access="isAuthenticated()">
+<sec:authentication property="principal" var="pinfo"/>
 
-	<input type="hidden" id="loginid" value="${id}" name="loginid">
+	<input type="hidden" id="loginid" value="${EMPNO}" name="loginid">
 	<!--view.js에서 사용하기 위해 추가 -->
+	
 	<div class="container" id="viewform">
 		<table class="table">
 			<tr>
@@ -186,5 +189,7 @@ form[action=down] > input[type=submit]{
 	</div>
 	
 	<script src = "${pageContext.request.contextPath}/jkKim/js/view.js"></script>
+	</sec:authorize>
+	
 </body>
 </html>

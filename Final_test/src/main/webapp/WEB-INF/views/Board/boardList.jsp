@@ -130,7 +130,14 @@ background-color: white;
          	 						&nbsp;
          						</c:if>
 								<a href="detail?num=${b.BOARD_NUM }" style="flex: 1; font-size:90%">
+								<c:if test="${b.BOARD_SUBJECT.length()>=20}">
+								<c:out value="${b.BOARD_SUBJECT.substring(0,20)}..." escapeXml="true"/> 
+								</c:if>
+								<c:if test="${b.BOARD_SUBJECT.length()<20}">
 								<c:out value="${b.BOARD_SUBJECT}" escapeXml="true"/> 
+								</c:if>
+								
+								
 								<span class="gray small">[<c:out value="${b.CNT}"/>]</span>
 								<c:if test="${b.BOARD_DATE > nowday}">
 								<span	class="badge badge-pill badge-warning ml-auto" style="background-color: #89a5ea;">new</span>
@@ -377,7 +384,16 @@ function favorite(BOARD_EMPNO) {
 			            subject = subject.replace(/>/g,'&gt');
 			            output += "<td style='display: flex; align-items: center;'>" + blank + img;
 			            output += "<a href='detail?num="+item.board_NUM + "' style='flex: 1; font-size:90%''>";
-			            output += subject + '<span class="gray small " style="margin-left:5px">['+item.cnt+']</span>';
+			            
+			            if(subject.length >=20){
+			            	output += subject.substring(0,20) + "...";
+			            }
+			            else if(subject.length <20){
+			            	output += subject;
+			            }
+			            
+			            
+			            output += '<span class="gray small " style="margin-left:5px">['+item.cnt+']</span>';
 			            //콘트롤러에서 nowday 보내줘야함********************
 			            if(item.board_DATE > data.nowday){
 			            	output += "<span class='badge badge-pill badge-warning' style='background-color: #89a5ea; margin-left:3px;'>new</span>";

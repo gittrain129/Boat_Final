@@ -55,14 +55,14 @@ $(function()
                   let output ='';
                   let img ='';
                   
-                  if($("#loginid").text() == this.id)
+                  if($("#loginid").text() == this.empno)
                   {
                      img = "<img src='../resources/image/pencil2.png' width='15px' class='update'>"
                         +" <img src='../resources/image/delete.png' width='15px' class='remove'>"
                         +" <input type='hidden' value='" + this.num + "'>";
                   }
                   
-                  output += "<tr><td>" + this.id + "</td>";
+                  output += "<tr><td>" + this.empno + "</td>";
                   
                   //xss 권한이 없는 사용자가 웹 사이트에 스크립트 삽입하는 공격기법
                   //이것을 방지하기 위해 2번처럼 <td></td> 여역을 만든뒤 3번에서 text()안에
@@ -72,7 +72,7 @@ $(function()
                   
                   //2번과 3번을 이용하지 않고 4번을 이용하면 스크립트가 있는 경우 스크립트가 실행
                   
-                  //output +="<td>" + this.reg_date + img + "</td></tr>";
+                 
                   output +="<td>" + this.reg_date + img + "</td></tr>";
                   $("#comment tbody").append(output);
                   
@@ -133,11 +133,11 @@ $(function()
       console.log(buttonText);
       
       if(buttonText =="등록"){
-      
+    
          url = "../bcomment/add";
          data={
             "content": content,
-            "id" : $("#loginid").text(),
+            "empno" : $("#loginid").text(),
             "board_num" : $("#board_num").val()
          };
          
