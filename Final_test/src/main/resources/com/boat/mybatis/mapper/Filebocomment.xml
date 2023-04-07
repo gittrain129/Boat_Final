@@ -4,6 +4,21 @@
   
   <mapper namespace="com.boat.mybatis.mapper.FileComMapper">
   
+<insert id = "">
+<!-- <selectKey>
+ <![CDATA[
+update FILE_COMMENT
+set FILE_COMMENT_RE_SEQ = FILE_COMMENT_RE_SEQ+1
+where FILE_COMMENT_RE_SEQ = #{}
+and FILE_COMMENT_RE_SEQ > #{}  ]]>
+</selectKey> -->
+
+
+ insert into FILE_COMMENT (FILE_C_NUM,FILE_C_ID,FILE_CONTENT,FILE_COMMENT_DATE,FILE_BO_NUM,
+	FILE_COMMENT_RE_LEV,FILE_COMMENT_RE_SEQ,FILE_COMMENT_RE_REF)
+					values(filecom.nextval,#{FILE_C_ID},#{FILE_CONTENT},sysdate,#{FILE_BO_NUM},
+					#{FILE_COMMENT_RE_LEV},#{FILE_COMMENT_RE_SEQ},filecom.nextval)
+</insert>
 
   
   

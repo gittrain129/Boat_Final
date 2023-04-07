@@ -324,7 +324,7 @@ $(function() {
 		const lev = $(this).attr('data-lev');
 		const seq = $(this).attr('data-seq');
 		$.ajax({
-				url :'FileCommentReply.filebo',
+				url :'../Filebocom/reply',
 				data:{
 					FILE_C_ID : empno,
 						FILE_CONTENT : content,
