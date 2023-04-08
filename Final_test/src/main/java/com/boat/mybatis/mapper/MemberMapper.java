@@ -58,4 +58,8 @@ public interface MemberMapper {
 
 	//내 글 목록
 	public List<Board> getMyBoardList(HashMap<String, Object> map);
+
+	//채팅 회원 목록
+	public List<Member> getMemberList(HashMap<String, Object> map);
+	
 }

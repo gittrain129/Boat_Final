@@ -6,17 +6,17 @@ import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
-import com.boat.chat.SocketHandler;
+import com.boat.chat.WebSocketHandler;
 
 @Configuration
 @EnableWebSocket
 public class WebSocketConfig implements WebSocketConfigurer {
 
 	@Autowired
-	SocketHandler socketHandler;
+	WebSocketHandler websocketHandler;
 	
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-		registry.addHandler(socketHandler, "/chating/{roomNumber}");
+		registry.addHandler(websocketHandler, "/chating/{roomNumber}");
 	}
 }

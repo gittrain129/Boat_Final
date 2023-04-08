@@ -233,11 +233,11 @@
                         	</sec:authorize>
                         	<sec:authorize access="isAuthenticated()">
 	                            <div class="flex-shrink-0 btn-lg-square border rounded-circle"
-	                            	 style=" cursor: pointer;" onclick="location.href='${pageContext.servletContext.contextPath}/member/chat'">
+	                            	 style=" cursor: pointer;" onclick="location.href='${pageContext.servletContext.contextPath}/member/room'">
 	                                <i class="bi bi-chat-fill text-primary"></i>
 	                            </div>
 	                            <div class="ps-3"
-	                            	 style=" cursor: pointer;" onclick="location.href='${pageContext.servletContext.contextPath}/member/chat'">
+	                            	 style=" cursor: pointer;" onclick="location.href='${pageContext.servletContext.contextPath}/member/room'">
 	                                <p class="mb-2">채팅</p>
 	                            </div>
                             </sec:authorize>

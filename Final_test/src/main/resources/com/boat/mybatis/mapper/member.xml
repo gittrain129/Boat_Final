@@ -128,4 +128,9 @@
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
 	
+	<select id="getMemberList" resultType="java.util.Map">
+		select * from MEMBER
+		WHERE EMPNO != #{empno}
+	</select>
+	
 </mapper>
