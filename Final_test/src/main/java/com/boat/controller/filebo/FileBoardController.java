@@ -184,7 +184,7 @@ import com.boat.domain.MySaveFolder;
 			@RequestParam(value="dept",required=false)String dept,
 			@RequestParam(value="order",required=false)String order
 			) {
-		
+		System.out.println(order+"++++++++++++++++++++++++++++++++++++++++++");
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 	    Calendar cal = Calendar.getInstance();
 	    String today = format.format(cal.getTime());

@@ -43,7 +43,6 @@ public class FileCommentServiceImpl implements FileCommentService {
 
 	@Override
 	public int commentInsert(Filecomm c) {
-		System.out.println(c.toString()+"sjjjjsjjjjjjj");
 		return dao.commentInsert(c);
 	}
 
@@ -55,6 +54,20 @@ public class FileCommentServiceImpl implements FileCommentService {
 	@Override
 	public int commentsUpdate(Filecomm co) {
 		return dao.commentsUpdate(co);
+	}
+
+	@Override
+	public int commentreply(Filecomm co) {
+		commentReplyupdate(co);
+		co.setFILE_COMMENT_RE_LEV(co.getFILE_COMMENT_RE_LEV()+1);
+		co.setFILE_COMMENT_RE_SEQ(co.getFILE_COMMENT_RE_SEQ()+1);
+		//co.setFILE_COMMENT_RE_REF(co.getFILE_COMMENT_RE_REF()+1);
+		return dao.commentsreply(co);
+	}
+
+	private int commentReplyupdate(Filecomm co) {
+		return dao.commentreplyUpdate(co);
+		
 	}
 
 }

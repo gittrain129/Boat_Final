@@ -17,6 +17,8 @@
             <h1 class="display-4 text-white animated slideInDown mb-3">자료실 게시판</h1>
             <nav aria-label="breadcrumb animated slideInDown">
                 <ol class="breadcrumb justify-content-center mb-0">
+                    <!-- <li class="breadcrumb-item"><a class="text-white" href="#"></a></li> -->
+                    <!-- <li class="breadcrumb-item"><a class="text-white" href="#"></a></li> -->
                     <li class="breadcrumb-item text-primary active" aria-current="page"></li>
                 </ol>
             </nav>
@@ -230,87 +232,6 @@
 	
 	</div>
 </section>
-<script>
 
-    function toggle(FILE_NUM,FILE_EMPNO) {
-		var star = document.getElementById('star'+FILE_NUM);
-		var file_num = FILE_NUM;
-		var file_empno = FILE_EMPNO;
-        
-    if (star.classList.contains('bi-star-fill')) {
-        star.classList.remove('bi-star-fill');
-        star.classList.add('bi-star');
-        star.style.color = '';
-        $.ajax({
-              url: "${pageContext.request.contextPath}/Filebo/Fav_delete",
-              type: 'POST',
-              data: {
-                  "FILE_NUM": file_num,
-                  "FILE_EMPNO": file_empno
-              },
-              beforeSend : function(xhr)
-              {   //데이터를 전송하기 전에 헤더에 csrf값을 설정합니다.
-                xhr.setRequestHeader(header, token);         
-             },
-              success: function(response) {
-				console.log(response)
-                if(response ==1){
-                toastr.options.escapeHtml = true;
-                toastr.options.closeButton = true;
-                toastr.options.newestOnTop = false;
-                toastr.options.progressBar = true;
-                toastr.info('즐겨찾기 삭제되었습니다.', '자료실게시판', {timeOut: 3000});
-            }
-              },
-              error: function(request,error) {
-                  
-              }
-          });//delete_ajax 끝
-      } else {
-        star.classList.remove('bi-star');
-        star.classList.add('bi-star-fill');
-        star.style.color = '#ffd699';
-        
-        $.ajax({
-              url: "${pageContext.request.contextPath}/Filebo/Fav_add",
-              type: 'POST',
-              data: {
-                  "FILE_NUM": file_num,
-                  "FILE_EMPNO": file_empno
-              },
-			  
-              beforeSend : function(xhr)
-              {   //데이터를 전송하기 전에 헤더에 csrf값을 설정합니다.
-                xhr.setRequestHeader(header, token);         
-             },
-              success: function(response) {
-				console.log(response)
-                if(response ==1){
-                    toastr.options.escapeHtml = true;
-                    toastr.options.closeButton = true;
-                    toastr.options.newestOnTop = false;
-                    toastr.options.progressBar = true;
-                    toastr.info('즐겨찾기 추가되었습니다.', '자료실게시판', {timeOut: 3000});
-                }
-
-              },
-              error: function(request,error) {
-                  
-                  alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-              }
-          });//add_ajax 끝
-        
-        
-      }
-  
-
-
-
-}
-
-
-
-
-</script>
 	
 	<jsp:include page="../Main/footer.jsp" />

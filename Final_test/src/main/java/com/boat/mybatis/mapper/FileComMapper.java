@@ -25,4 +25,8 @@ public interface FileComMapper {
 	
 	//댓글 수정
 	public int commentsUpdate(Filecomm co);
+
+	public int commentsreply(Filecomm co);
+
+	public int commentreplyUpdate(Filecomm co);
 }

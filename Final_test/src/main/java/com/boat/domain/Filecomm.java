@@ -1,10 +1,73 @@
 package com.boat.domain;
 
-import lombok.Data;
-
-@Data
 public class Filecomm {
 
+	public String getFILE_C_NUM() {
+		return FILE_C_NUM;
+	}
+	public void setFILE_C_NUM(String fILE_C_NUM) {
+		FILE_C_NUM = fILE_C_NUM;
+	}
+	public String getFILE_C_ID() {
+		return FILE_C_ID;
+	}
+	public void setFILE_C_ID(String fILE_C_ID) {
+		FILE_C_ID = fILE_C_ID;
+	}
+	public String getFILE_CONTENT() {
+		return FILE_CONTENT;
+	}
+	public void setFILE_CONTENT(String fILE_CONTENT) {
+		FILE_CONTENT = fILE_CONTENT;
+	}
+	public String getFILE_COMMENT_DATE() {
+		return FILE_COMMENT_DATE;
+	}
+	public void setFILE_COMMENT_DATE(String fILE_COMMENT_DATE) {
+		FILE_COMMENT_DATE = fILE_COMMENT_DATE;
+	}
+	public int getFILE_BO_NUM() {
+		return FILE_BO_NUM;
+	}
+	public void setFILE_BO_NUM(int fILE_BO_NUM) {
+		FILE_BO_NUM = fILE_BO_NUM;
+	}
+	public int getFILE_COMMENT_RE_LEV() {
+		return FILE_COMMENT_RE_LEV;
+	}
+	public void setFILE_COMMENT_RE_LEV(int fILE_COMMENT_RE_LEV) {
+		FILE_COMMENT_RE_LEV = fILE_COMMENT_RE_LEV;
+	}
+	public int getFILE_COMMENT_RE_SEQ() {
+		return FILE_COMMENT_RE_SEQ;
+	}
+	public void setFILE_COMMENT_RE_SEQ(int fILE_COMMENT_RE_SEQ) {
+		FILE_COMMENT_RE_SEQ = fILE_COMMENT_RE_SEQ;
+	}
+	public int getFILE_COMMENT_RE_REF() {
+		return FILE_COMMENT_RE_REF;
+	}
+	public void setFILE_COMMENT_RE_REF(int fILE_COMMENT_RE_REF) {
+		FILE_COMMENT_RE_REF = fILE_COMMENT_RE_REF;
+	}
+	public String getPROFILE() {
+		return PROFILE;
+	}
+	public void setPROFILE(String pROFILE) {
+		PROFILE = pROFILE;
+	}
+	public String getFILE_C_NAME() {
+		return FILE_C_NAME;
+	}
+	public void setFILE_C_NAME(String fILE_C_NAME) {
+		FILE_C_NAME = fILE_C_NAME;
+	}
+	public String getFILE_C_DEPT() {
+		return FILE_C_DEPT;
+	}
+	public void setFILE_C_DEPT(String fILE_C_DEPT) {
+		FILE_C_DEPT = fILE_C_DEPT;
+	}
 	private String FILE_C_NUM;//시퀀스
 	private String FILE_C_ID;//empno
 	private String FILE_CONTENT;
@@ -14,6 +77,8 @@ public class Filecomm {
 	private int FILE_COMMENT_RE_SEQ;
 	private int FILE_COMMENT_RE_REF;
 	private String PROFILE;
+	private String FILE_C_NAME;
+	private String FILE_C_DEPT; 
 	
 //	FILE_COMMENT
 //	 FILE_C_NUM     NOT NULL NUMBER

@@ -3,7 +3,8 @@ let token = $("meta[name='_csrf']").attr("content");
 	
 let option=1;  //선택한 등록순과 최신순을 수정, 삭제, 추가 후에도 유지되도록 하기위한 변수로 사용됩니다.
 let empno = $('#loginid').text();
-
+let name = $('#loginname').text();
+let dept = $('#loginDept').text();
 function del(num){//num : 댓글 번호
   	
   	if(!confirm('정말 삭제하시겠습니까?')){
@@ -81,7 +82,7 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 						+'	<div class ="comment-box">'
 						+'		<div class ="comment-nick-box">'
 						+'			<div class="comment-nick-info">'
-						+'				<div class="comment-nickname">'+ this.file_C_ID + '</div>'
+						+'				<div class="comment-nickname">'+ this.file_C_NAME+' ' +this.file_C_DEPT+ '</div>'
 						+'			</div>'//comment-nick-info
 						+'		</div>'//comment-nick-box
 						+'	</div>'//comment-box
@@ -95,8 +96,8 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 						+'	</div>'//comment-text-box
 				if(lev<2){
 					output +='	<a href="javascript:replyform('+this.file_C_NUM +','
-							+ lev +','+this.file_RE_SEQ+','
-							+ this.file_RE_SEQ +')" class="comment-info-button">답글쓰기</a>'
+							+ lev +','+this.file_COMMENT_RE_SEQ+','
+							+ this.file_COMMENT_RE_REF +')" class="comment-info-button">답글쓰기</a>'
 				}
 				output+='</div>'//comment-info-box;
 				
@@ -237,12 +238,14 @@ $(function() {
 			url : '../Filebocom/add',//원문 등록
 			data : {
 				FILE_C_ID:empno,
+
 				FILE_CONTENT : content,
 				FILE_BO_NUM : $("#comment_board_num").val(),
 				FILE_COMMENT_RE_LEV : 0,//원문인 경우 comment_re_seq는 0,
 									//comment_re_ref는 댓글의 원문 글번호
-				FILE_COMMENT_RE_SEQ:0
-				
+				FILE_COMMENT_RE_SEQ:0,
+				FILE_C_NAME :name,
+				FILE_C_DEPT :dept
 			},
 			beforeSend: function (jqXHR, settings) {
 				jqXHR.setRequestHeader(header, token);
@@ -316,6 +319,7 @@ $(function() {
 	//답글완료 클릭한 경우
 	$('.comment-area').on('click','.reply',function(){
 		const content = $(this).parent().parent().find('.comment-write-area-text').val();
+		console.log('답글완료')
 		if(!content){//내용없이 답글완료 클릭한 경우
 			alert("답글을 입력하세요")
 			 return;
@@ -331,9 +335,15 @@ $(function() {
 						FILE_BO_NUM : $("#comment_board_num").val(),
 						FILE_COMMENT_RE_LEV :lev,
 						FILE_COMMENT_RE_REF :comment_re_ref,
-						FILE_COMMENT_RE_SEQ :seq
+						FILE_COMMENT_RE_SEQ :seq,
+						FILE_C_NAME :name,
+						FILE_C_DEPT :dept
 						
 					},
+					dataType:"json",
+			beforeSend: function (jqXHR, settings) {
+				jqXHR.setRequestHeader(header, token);
+		 	},
 					type : 'post',
 					
 					success:function(rdata){
