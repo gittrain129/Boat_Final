@@ -47,6 +47,10 @@ public interface BoardService {
 
 	public List<Board> getSearchBoardList(int page, int limit, String search1, String option1);
 
+	public int getOptionListCount(String dept);
+
+	public List<Board> getOptionBoardList(int page, int limit, String dept, String order);
+
 	
 
 	

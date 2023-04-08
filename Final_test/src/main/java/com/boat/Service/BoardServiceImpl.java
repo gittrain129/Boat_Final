@@ -172,6 +172,26 @@ import com.boat.mybatis.mapper.BoardMapper;
 			return dao.getSearchBoardList(map);
 		}
 
+		@Override
+		public int getOptionListCount(String dept) {
+			return dao.getOptionListCount(dept);
+		}
+
+		@Override
+		public List<Board> getOptionBoardList(int page, int limit, String dept, String order) {
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			
+			int startrow = (page-1) * limit + 1;
+			int endrow = startrow + limit - 1;
+			
+			map.put("start", startrow);
+			map.put("end", endrow);
+			map.put("dept", dept);
+			map.put("order", order);
+			
+			return dao.getOptionBoardList(map);
+		}
+
 		
 }
 

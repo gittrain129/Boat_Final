@@ -70,7 +70,7 @@ background-color: white;
       <button class="btn btn-secondary dropdown-toggle" style="min-width:100px;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
         검색옵션
       </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <ul class="dropdown-menu drop1" aria-labelledby="dropdownMenuButton1" id="drop1">
         <li><a class="dropdown-item">제목</a></li>
         <li><a class="dropdown-item">작성자</a></li>
       </ul>
@@ -341,7 +341,7 @@ function favorite(BOARD_EMPNO) {
 	var board_empno= BOARD_EMPNO
 	var state = $("#hidden-state").val()
 	
-	if(state == '즐겨찾기'){
+	if(state == 'fav'){
 		window.location.href = '${pageContext.request.contextPath}/board/List';
 	}else{
 	
@@ -447,7 +447,7 @@ function favorite(BOARD_EMPNO) {
 				
 			$('.pagination').append(output);
 				
-			$("#hidden-state").val('즐겨찾기');
+			$("#hidden-state").val('fav');
         },
         error: function(request,error) {
             

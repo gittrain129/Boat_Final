@@ -46,4 +46,8 @@ public interface BoardMapper {
 	public int getSearchListCount(String search1, String option1);
 
 	public List<Board> getSearchBoardList(HashMap<String, Object> map);
+
+	public int getOptionListCount(String dept);
+
+	public List<Board> getOptionBoardList(HashMap<String, Object> map);
 }
