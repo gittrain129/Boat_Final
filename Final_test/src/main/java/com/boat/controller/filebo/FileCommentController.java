@@ -63,6 +63,13 @@ public class FileCommentController {
 		
 		
 }
+	@RequestMapping(value="/reply")
+	public int commentReply(Filecomm co){
+		
+		return  commentService.commentsUpdate(co);
+		
+		
+	}
 	@RequestMapping(value="/delete")
 	public int commentUpdate(int num){
 		
