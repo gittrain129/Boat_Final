@@ -75,7 +75,7 @@ public class FileCommentController {
 		
 		return  commentService.commentsDelete(num);}
 	
-	@RequestMapping(value="/reply")
+	@RequestMapping(value="/replyupdate")
 	public int commentreply(Filecomm co){
 		
 		return  commentService.commentreply(co);}
