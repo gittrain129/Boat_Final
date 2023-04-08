@@ -416,8 +416,14 @@ public class boardController {
 		}
 		if(order.equals("정렬옵션")) {
 			order = "";
+		} else if (order.equals("최신순")) {
+			order = "board_date";
+		} else if( order.equals("조회순")) {
+			order = "board_readcount";
+		} else if (order.equals("댓글순")) {
+			order = "cnt";
 		}
-		int listcount = boardService.getOptionListCount(dept,order);
+		int listcount = boardService.getOptionListCount(dept);
 		int maxpage = (listcount + limit - 1) / limit;
 		int startpage = ((page-1) /10) *10 +1;
 		int endpage = startpage +10 -1;
