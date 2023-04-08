@@ -12,7 +12,9 @@ FILE_COMMENT_DATE date,
 FILE_BO_NUM NUMBER references file_board(FILE_NUM) on delete cascade,
 FILE_COMMENT_RE_LEV number(5),
 FILE_COMMENT_RE_SEQ number(5),
-FILE_COMMENT_RE_REF number(5)
+FILE_COMMENT_RE_REF number(5),
+FILE_C_NAME VARCHAR2(15),
+FILE_C_DEPT VARCHAR2(10)
 );
 
 create sequence filecom nocache;

@@ -7,8 +7,7 @@ drop table FILEBO_FAV cascade constraints purge;
 230406
 CREATE TABLE FILEBO_FAV (
 FILE_NUM NUMBER(5) NOT NULL,
-FIlE_EMPNO NUMBER(12) NOT NULL,
-status varchar2(5)
+FIlE_EMPNO NUMBER(12) NOT NULL
 );
  insert into filebo_fav values (1,'2330002',1);
   select FILE_EMPNO from filebo_fav where FILE_NUM =1;

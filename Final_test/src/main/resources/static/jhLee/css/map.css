@@ -1,6 +1,10 @@
 @charset "utf-8";
+body > div.container-fluid.bg-dark.text-body.footer.mt-5.pt-5.wow.fadeIn{
+	margin:0!important;
+}
 .main-box {
     display: grid;
+    text-align : center;
     grid-template-columns: 1fr 1fr;
     gap: 40px;
 }
@@ -17,25 +21,26 @@
 	 background-color: rgba(0, 0, 0, 0);
 	margin-top : 30px;
 	margin-left : 200px;
-	margin-bottom : 200px;
+	/* margin-bottom : 200px; */
 
 }
-body {
+/* body {
     --main-color: #009CFF;
     --main-color-dark: #0e6d62;
     --bo-20: rgba(0, 0, 0, 0.2);
     --bo-40: rgba(0, 0, 0, 0.4);
     --bo-60: rgba(0, 0, 0, 0.6);
     --bo-80: rgba(0, 0, 0, 0.8);
-    /* font-family: Pretendard; */
+    font-family: Pretendard;
     accent-color: #12887a;
 }
-
+ */
 
 
 
 .boat{color :  rgb(0, 173, 238);
-font-size : 3rem;}
+font-size : 3rem;
+	 font-family:'BMJUA';}
 a{text-decoration : none;}
 
 @media screen and (min-width: 900px) {
@@ -47,7 +52,7 @@ a{text-decoration : none;}
 }
 #map{
 	top :50px;
-	float : left;
+	margin: auto;
 }
 .mapdetail{
 	display: grid;
@@ -56,6 +61,5 @@ a{text-decoration : none;}
 		float : left;
 		left : 30px;
 		margin : 20px;
-		margin-bottom : 200px;
 	
 }

@@ -37,13 +37,13 @@
 						 order by CNT desc댓글순
 						 -->
 						  <choose>
-							  <when test = "ORDER == 'RECENT'">
+							  <when test = "order == 'RECENT'">
 								  order by FILE_DATE desc
 								   </when>
-								  <when test = "ORDER == 'READCOUNT'">
+								  <when test = "order == 'READCOUNT'">
 								 order by FILE_READCOUNT desc
 								   </when>
-								  <when test = "ORDER == 'COMMCOUNT'">
+								  <when test = "order == 'COMMCOUNT'">
 								 order by CNT desc
 								   </when>
 							 </choose>

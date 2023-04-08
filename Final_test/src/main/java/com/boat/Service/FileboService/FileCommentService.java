@@ -21,4 +21,7 @@ public interface FileCommentService {
 	
 	//댓글 수정
 	public int commentsUpdate(Filecomm co);
+
+	//댓글 답글
+	public int commentreply(Filecomm co);
 }
