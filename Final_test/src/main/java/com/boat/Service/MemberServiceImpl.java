@@ -145,6 +145,15 @@ public class MemberServiceImpl implements MemberService {
 		return dao.getMyBoardList(map);
 	}
 
+	//채팅 회원 목록
+	@Override
+	public List<Member> getMemberList(String id) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("empno", id);
+		return dao.getMemberList(map);
+	}
 
 	
 	

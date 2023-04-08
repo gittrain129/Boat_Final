@@ -15,7 +15,7 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 @Component
-public class SocketHandler extends TextWebSocketHandler {
+public class WebSocketHandler extends TextWebSocketHandler {
 	
 	//HashMap<String, WebSocketSession> sessionMap = new HashMap<>(); //웹소켓 세션을 담아둘 맵
 		List<HashMap<String, Object>> rls = new ArrayList<>(); //웹소켓 세션을 담아둘 리스트 ---roomListSessions
@@ -23,6 +23,7 @@ public class SocketHandler extends TextWebSocketHandler {
 		@Override
 		public void handleTextMessage(WebSocketSession session, TextMessage message) {
 			//메시지 발송
+			//전달받은 메세지
 			String msg = message.getPayload();
 			JSONObject obj = jsonToObjectParser(msg);
 			

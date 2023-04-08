@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -113,7 +114,7 @@
 								"<td class='go'><button type='button' onclick='goRoom(\""+roomNumber+"\", \""+rn+"\")'>참여</button></td>" +
 							"</tr>";	
 				});
-				$("#roomList").empty().append(tag);
+				$("#roomList").append(tag);
 			}
 		}
 	
@@ -145,7 +146,17 @@
 	<div class="container">
 		<h1>채팅방</h1>
 		<div id="roomContainer" class="roomContainer">
-			<table id="roomList" class="roomList"></table>
+			<table id="roomList" class="roomList">
+				<c:set var = "num" value ="1"/>
+				<c:forEach var="b" items="${memberlist}">
+					<tr>
+						<td class='num'>${num}</td>
+						<c:set var = "num" value ="${num+1}"/>
+						<td class='room'>${b.DEPT}&nbsp;${b.NAME}</td>
+						<td class='go'><button type='button' onclick='goRoom("${num}", "${b.DEPT}&nbsp;${b.NAME}")'>참여</button></td>
+					</tr>
+				</c:forEach>
+			</table>
 		</div>
 		<div>
 			<table class="inputTable">

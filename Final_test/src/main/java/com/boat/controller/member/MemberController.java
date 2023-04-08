@@ -827,6 +827,10 @@ public class MemberController {
 		String id = principal.getName();
 		Member m = memberservice.member_info(id);
 		
+		List<Member> memberlist = memberservice.getMemberList(id);
+		
+		mv.addObject("memberlist", memberlist);
+		
 		mv.addObject("memberinfo", m);
 		mv.addObject("memberimg", m.getPROFILE_FILE());
 		mv.setViewName("/Chat/chat_room");
@@ -838,9 +842,13 @@ public class MemberController {
 	 * @return
 	 */
 	@RequestMapping("/room")
-	public ModelAndView room() {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("/Chat/room");
+	public ModelAndView room(Principal principal, ModelAndView mv) {
+		String id = principal.getName();
+		List<Member> memberlist = memberservice.getMemberList(id);
+		
+		mv.addObject("memberlist", memberlist);
+		System.out.println("memberlist="+memberlist);
+		mv.setViewName("/Chat/chat_room");
 		return mv;
 	}
 	
@@ -876,25 +884,32 @@ public class MemberController {
 	 * @return
 	 */
 	@RequestMapping("/moveChating")
-	public ModelAndView chating(@RequestParam HashMap<Object, Object> params, Principal principal, ModelAndView mv) {
+	@ResponseBody
+	public Map<String, Object> chating(@RequestParam HashMap<Object, Object> params, Principal principal, ModelAndView mv) {
+		System.out.println("moveChating");
+		System.out.println("params="+params);
+		
 		String id = principal.getName();
 		Member m = memberservice.member_info(id);
+		Map<String, Object> map = new HashMap<String, Object>();
 		
-		mv.addObject("memberinfo", m);
-		mv.addObject("memberimg", m.getPROFILE_FILE());
+		map.put("memberinfo", m);
 		
 		int roomNumber = Integer.parseInt((String) params.get("roomNumber"));
+		System.out.println("roomNumber="+roomNumber);
 		
 		List<Room> new_list = roomList.stream().filter(o->o.getRoomNumber()==roomNumber).collect(Collectors.toList());
 		if(new_list != null && new_list.size() > 0) {
-			mv.addObject("roomName", params.get("roomName"));
-			mv.addObject("roomNumber", params.get("roomNumber"));
-			mv.setViewName("/Chat/chat_room");
-		}else {
-			mv.setViewName("/Chat/room");
+			map.put("roomName", params.get("roomName"));
+			map.put("roomNumber", params.get("roomNumber"));
 		}
-		return mv;
+		System.out.println("roomName="+params.get("roomName"));
+		System.out.println("roomNumber="+params.get("roomNumber"));
+		
+		return map;
 	}
+	
+	
 	
 	
 	
