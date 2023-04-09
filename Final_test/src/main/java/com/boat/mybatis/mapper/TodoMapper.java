@@ -19,5 +19,11 @@ public interface TodoMapper {
 	List<Todo> myDeptTodo(Map<String, String> map);
 
 	void myTodoupdate(Map<String, Object> map);
+	
+	Todo getTodo(int num);
+	
+	int todoDone(int num);
+
+	int updateTodo(Todo todo);
 
 }

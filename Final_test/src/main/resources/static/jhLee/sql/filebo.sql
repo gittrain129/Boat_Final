@@ -1,4 +1,49 @@
 
+	SELECT * FROM (
+			SELECT rownum rnum, J.* FROM(
+				SELECT * FROM(
+					SELECT b.BOARD_NUM, b.BOARD_SUBJECT, b.BOARD_DEPT, b.BOARD_NAME, b.BOARD_READCOUNT, b.BOARD_DATE, b.BOARD_NOTICE, NVL(CNT, 0) AS CNT  
+					FROM BOARD b LEFT OUTER JOIN  (SELECT board_num, COUNT(*) AS cnt FROM comments
+											GROUP BY board_num) c
+					ON b.BOARD_NUM = c.board_num
+					where BOARD_EMPNO =  #{empno}
+						UNION ALL
+					SELECT FILE_NUM, FILE_SUBJECT, DEPT, FILE_NAME, FILE_READCOUNT, FILE_DATE, FILE_FILE, NVL(CNT, 0) AS CNT
+					FROM file_board  LEFT OUTER JOIN (SELECT FILE_BO_NUM, COUNT(*) CNT  from FILE_COMMENT
+					GROUP BY FILE_BO_NUM)
+					ON FILE_NUM = FILE_BO_NUM
+					where FIlE_EMPNO = #{empno}
+				)
+				ORDER BY BOARD_DATE DESC
+			) J
+			where rownum <= #{end}
+		)
+		where rnum >= #{start} and rnum <= #{end}
+
+SELECT * FROM (
+			SELECT rownum rnum, J.* FROM(
+				SELECT * FROM(
+					SELECT b.BOARD_NUM, b.BOARD_SUBJECT, b.BOARD_DEPT, b.BOARD_NAME, b.BOARD_READCOUNT, b.BOARD_DATE, b.BOARD_NOTICE, NVL(CNT, 0) AS CNT  
+					FROM BOARD b LEFT OUTER JOIN  (SELECT board_num, COUNT(*) AS cnt FROM comments
+											GROUP BY board_num) c
+					ON b.BOARD_NUM = c.board_num
+					where BOARD_EMPNO = #{empno}
+						UNION ALL
+					SELECT FILE_NUM, FILE_SUBJECT, DEPT, FILE_NAME, FILE_READCOUNT, FILE_DATE, FILE_FILE, NVL(CNT, 0) AS CNT
+					FROM file_board  LEFT OUTER JOIN (SELECT F_BO_NUM, COUNT(*) CNT FROM Filecomm
+					GROUP BY F_BO_NUM)
+					ON FILE_NUM = F_BO_NUM
+					where FIlE_EMPNO = 
+				)
+				ORDER BY BOARD_DATE DESC
+			) J
+			where rownum &lt;= 
+		where rnum &gt;= and rnum &lt;= 
+
+
+
+
+
 
 SELECT * FROM (
     SELECT A.*, ROWNUM RN FROM (

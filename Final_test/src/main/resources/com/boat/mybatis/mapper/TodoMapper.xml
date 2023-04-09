@@ -4,7 +4,9 @@
   
   <mapper namespace="com.boat.mybatis.mapper.TodoMapper">
   
-		
+		<select id="getTodo" resultType = "Todo">
+		select * from TODOLIST where num = #{num}
+		</select>
 		
 		<insert id="Todoinsert">
 		insert into TODOLIST (NUM,EMPNO, T_CONTENT,START_DATE,END_DATE,DEPT) 
@@ -78,6 +80,16 @@
 		 and T_CONTENT=#{T_CONTENT}
 		 </if>
 		 where num= #{num}
+		 </update>
+		 
+		 <update id="todoDone">
+		 update todolist set state = 1
+		 where num = #{num}
+		 </update>
+		 
+		 <update id="updateTodo">
+		 update todolist set END_DATE = #{END_DATE}
+		 where num = #{NUM}
 		 </update>
 		 
 		 

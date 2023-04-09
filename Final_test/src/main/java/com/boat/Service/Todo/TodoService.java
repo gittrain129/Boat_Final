@@ -15,7 +15,13 @@ public interface TodoService {
 
 	List<Todo> deptList(String dept,String empno);
 
-	void Todoupdate(String num, String t_CONTENT, String eND_DATE); 
+	void Todoupdate(String num, String t_CONTENT, String eND_DATE);
+
+	Todo getTodo(int num);
+
+	int todoDone(int num);
+
+	int updateTodo(Todo todo); 
 	
 	
 	

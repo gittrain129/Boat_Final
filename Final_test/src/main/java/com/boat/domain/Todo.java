@@ -8,7 +8,17 @@ public class Todo {
 	private String END_DATE;
 	private String REG_DATE;  	
 	private String DEPT;
-	private String NUM;
+	private int NUM;
+	private int state;
+	
+	
+	public int getState() {
+		return state;
+	}
+	public void setState(int state) {
+		this.state = state;
+	}
+	
 	//private Member member;
 	//private List<Member> member;
 	
@@ -49,12 +59,13 @@ public class Todo {
 	public void setDEPT(String dEPT) {
 		DEPT = dEPT;
 	}
-	public String getNUM() {
+	public int getNUM() {
 		return NUM;
 	}
-	public void setNUM(String nUM) {
+	public void setNUM(int nUM) {
 		NUM = nUM;
 	}
+	
 	
 	
 }

@@ -2,7 +2,10 @@ drop table TODOLIST cascade constraints purge;
 
 ALTER TABLE TODOLIST
 MODIFY EMPNO VARCHAR2(12);
-
+230408 수정
+ alter table todolist add state number(5);
+ 
+ 
 create sequence todo_seq nocache;
 
 --현재 진행중 테이블입니다.230329
@@ -13,7 +16,8 @@ create table TODOLIST (
 	START_DATE VARCHAR2(15),
 	END_DATE VARCHAR2(15),
 	REG_DATE  DATE DEFAULT SYSDATE,	
-	DEPT VARCHAR2(15)
+	DEPT VARCHAR2(15),
+	state number(5)
 );
 
 CREATE TABLE MEMBER(

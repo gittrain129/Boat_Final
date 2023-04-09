@@ -61,6 +61,23 @@ public class TodoServiceImpl implements TodoService {
 		map.put("NUM", num);
 		dao.myTodoupdate(map);
 	}
+
+	@Override
+	public Todo getTodo(int num) {
+		return 	dao.getTodo(num);
+	}
+
+	@Override
+	public int todoDone(int num) {
+		
+		
+		return dao.todoDone(num);
+	}
+	
+	@Override
+	public int updateTodo(Todo todo) {
+		return dao.updateTodo(todo);
+	}
 	
 	
 

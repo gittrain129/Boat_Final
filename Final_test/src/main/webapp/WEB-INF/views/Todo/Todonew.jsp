@@ -12,7 +12,7 @@
 <!-- <script src="${path}/resources/js/attendance/board.js" defer ></script> -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/jhLee/css/Todonew.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/jhLee/css/Todonew2.css">
-  
+  <script src="${pageContext.request.contextPath}/resources/jhLee/js/Todonew.js"></script>
   <%--tab 전환에 필요 bootstrap4 --%>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
   <style>
@@ -42,51 +42,41 @@ body > div.container-fluid.bg-dark.text-body.footer.mt-5.pt-5.wow.fadeIn{
         <div class="modal-body" style="color:black;">
         일정<br>
         
-        <form action="update"	method = 'post'>
-          <input type="text" name="T_CONTENT" class = "form-control" id = 'title'>
+        <form action="updateTodo"	method = 'post'>
+          <input type="hidden" id="todonum" name="NUM"></input>
+          <input type="text" name="T_CONTENT" class = "form-control" id = 'updatetitle'>
        
           
           <div class="cal_time" style="margin-top:15px" >
            <label>일정 시작 날짜: </label><br>
                       <div class="form-group"style="margin-top:15px">
                         <input
+                        id="updatestart"
                           type="DATE"
                           name="START_DATE"
                           class="form-control time"
+                          value=""
                         />
                       </div>
                       
              <label style="margin-top:15px" >일정 종료 날짜: </label><br>
                       <div class="form-group" style="margin-top:15px" >
                         <input
+                        id="updateend"
                           type="DATE"
                           name="END_DATE"
                           class="form-control time"
                         />
                       </div>
-              </div><!-- cal_time-->
-                  
-                  <script>
-                  $(document).ready(function(){
-                    //  let empno =$('#loginid').text();
-                   //   let dept = $('#loginDept').text();
-                   //   $('#Todoempno').val(dept);
-                   //   $('#Tododept').val(empno);
-  
-                      if($('#allday').is(':checked')){
-                          console.log($('#allday').is(':checked'))
-                          $('.time').attr('readonly',true);
-                          
-                      }
-                  })
-                  </script>
+              </div>
+          
         
                <input type="hidden" name ="EMPNO" value="${EMPNO}" id="Todoempno">
                <input type="hidden" name ="DEPT" value="${DEPT}" id="Tododept">
                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                <div class="modal-footer">
                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id ="undo">돌아가기</button>
-                 <button type="submit" class="btn btn-primary" id ="saveBtn">&nbsp;&nbsp;일정 저장&nbsp;&nbsp;</button>
+                 <button type="submit" class="btn btn-primary" id ="saveUpdate">&nbsp;&nbsp;일정 저장&nbsp;&nbsp;</button>
               </div>
            </form>
           </div>
@@ -226,10 +216,7 @@ body > div.container-fluid.bg-dark.text-body.footer.mt-5.pt-5.wow.fadeIn{
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <!-- 위치이상해서 바꿔야함 새로 회원가입해서 ㅇㅇ -->
-                                        <c:if test="${fn:length(MyTodo)==0}">
-                                            <h3 style="text-align: center">등록된 할일이 없습니다.</h3>
-                                        </c:if>
+                                       
                                         <!-- 내 할일보기 -->
                                         <c:forEach var="mt" items="${MyTodo}">
                                         <tr>
@@ -244,32 +231,78 @@ body > div.container-fluid.bg-dark.text-body.footer.mt-5.pt-5.wow.fadeIn{
                               
                                     </tbody>
                                 </table>
+                                <c:if test="${fn:length(MyTodo)==0}">
+                                  <h3 style="text-align: center">등록된 할일이 없습니다.</h3>
+                              </c:if>
                             </div>
+
+
+                            <!-- 진행정도 -->
                             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                                 <table class="table" cellspacing="0">
                                     <!-- 내 할일보기 그래프 -->
+                                      <c:set var="ptotage" value="0"/>
                                  <c:forEach var="mt" items="${MyTodo}">
+                                  <!-- 개인 todo 갯수 그래프 작성예정 -->
+                                
                                     <thead>
                                         <tr>
                                             <th>${mt.t_CONTENT}</th>
-                                            <th><div class='progress'></div></th>
-                                            <th>
-                                                <a href="#" class="btn btn-warning btn" data-bs-toggle="modal" data-bs-target="#updateTodo">
-                                                    <i class="fas fa-plus"></i> 수정
-                                                </a>
-                                                <a href="/boat/Todo/done" class="btn btn-success btn">
-                                                    <i class="fas  fa-check-circle"></i> 완료
-                                                 </a>
+                                         
+                                            <c:if test="${mt.state==1}">
+                                              <c:set var="protagemath" value = "${fn:length(mt.state==1)}"/>
+                                              <th>
+                                                <div class='progress todoprogress'>
+                                                <div class="todoprogress-bar progress-bar bg-info" role="progressbar" style="width: 100%" 
+                                                aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                              </div>
+
+                                            </th>
+
+
+                                             <th>
+                                              
                                                 
                                             </th>
-                                            <th></th>
-                                        </tr> 
-                                        </tr> 
+                                          </tr> 
+                                          <c:set var="ptotage" value="${ptotage+1}"/>
+                                      </c:if>
+                                      <c:if test="${mt.state!=1}">
+                                        <th><div class='todoprogress progress'></div></th>
+                                        <th>
+                                          <div class="btn_wrap">
+                                            <a  class="btn btn-warning btn updateTodo"   data-id="${mt.NUM}">
+                                              <i class="fas fa-plus"></i> 수정
+                                            </a>
+                                            <a  class="done btn btn-success btn" data-id="${mt.NUM}">
+                                              <i class="fas  fa-check-circle"></i> 완료
+                                            </a>
+                                          </div>
+                                        </th>
+                                          </tr> 
+                                      </c:if>
+                                     
                                       
                                     </thead>
+                                
                                </c:forEach>
                                 </table>
-                            </div>
+                                <c:set var="protageall" value = "${fn:length(MyTodo)}"/>
+                                
+
+                                <div class='myallprogress progress'>
+                                  <div class=" myallprogress-bar progress-bar bg-info" role="progressbar" 
+                                  style="width: 100%" 
+                                  aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                  <c:out value="${protageall}">
+
+                                </div>
+                                </div>
+
+
+
+
+
                             <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                                 
                   <%--아코디언 시작 --%>

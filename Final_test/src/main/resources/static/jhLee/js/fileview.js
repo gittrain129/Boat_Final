@@ -82,7 +82,7 @@ function getList(state){//현재 선택한 댓글 정렬방식을 저장합니�
 						+'	<div class ="comment-box">'
 						+'		<div class ="comment-nick-box">'
 						+'			<div class="comment-nick-info">'
-						+'				<div class="comment-nickname">'+ this.file_C_NAME+' ' +this.file_C_DEPT+ '</div>'
+						+'				<div class="comment-nickname">'+this.file_C_DEPT+' '+ this.file_C_NAME + '</div>'
 						+'			</div>'//comment-nick-info
 						+'		</div>'//comment-nick-box
 						+'	</div>'//comment-box

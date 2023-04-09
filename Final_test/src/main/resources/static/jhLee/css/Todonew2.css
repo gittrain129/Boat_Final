@@ -318,7 +318,9 @@ h1{
     border: none;
 }
 
-.progress {
+
+
+.todoprogress {
     margin-left: 25px;
     background-color: #D3D3D3;
     border-radius: 15px;
@@ -326,21 +328,33 @@ h1{
     width: 130px;
 }
 
-.progress-bar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-image: repeating-linear-gradient(
-    to left,
-    #12887A,
-    #2fa597,
-    #59c0b4);
-    box-shadow: 0 5px 5px -6px #12887A, 0 3px 7px #2fa597;
-    border-radius: 15px;
-    color: #fff;
-    height: 100%;
-    width: 0;
-    transition: 1s ease 0.3s;
+.todoprogress-bar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: repeating-linear-gradient(
+  to left,
+  #12887A,
+  #2fa597,
+  #59c0b4);
+  box-shadow: 0 5px 5px -6px #12887A, 0 3px 7px #2fa597;
+  border-radius: 15px;
+  color: #fff;
+  height: 100%;
+  transition: 1s ease 0.3s;
+}
+
+
+
+.myallprogress {
+    margin-left: 25px;
+    background-color: #D3D3D3;
+    height: 30px;
+}
+
+.myallprogress-bar{
+
+
 }
 
 .project-tab {
