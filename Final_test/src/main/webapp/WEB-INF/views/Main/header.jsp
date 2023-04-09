@@ -41,7 +41,33 @@
         }else{
             $('#attColor').css('background','white');
         }
+        
+        
+		if(!!$("#headerempno").val()){
+	       	console.log("webSocket")
+	       	connect();
+	    }else{
+	      	console.log("!webSocket")
+	      	webSocket.close();
+	    }
 	})
+	let webSocket; 		// 웹소켓 전역변수
+	
+	<!-- webSocket 연결 -->
+	function connect(){
+			
+		// webSocket 연결되지 않았을 때만 연결
+		if(webSocket == undefined){
+			// webSocket URL
+			let wsUri = "ws://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/chating";
+			console.log("wsUri="+wsUri)
+			// 연결
+			webSocket = new WebSocket(wsUri);
+			console.log("connectwebSocket="+webSocket)
+		}else{
+			console.log("이미 연결되어 있습니다!!");
+		}
+	}
 </script>
 
 <style>
@@ -120,6 +146,8 @@
 			//location.href = "${pageContext.request.contextPath}/member/sign_in";
 		</script>
 	</sec:authorize>
+	
+	<input type="hidden" value="${EMPNO}" id="headerempno">
 	
 
 	

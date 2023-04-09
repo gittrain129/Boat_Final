@@ -8,11 +8,12 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Cookie;
@@ -33,6 +34,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,12 +43,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.boat.Service.ChatService;
 import com.boat.Service.MemberService;
 import com.boat.Task.SendMail;
 import com.boat.domain.Board;
 import com.boat.domain.MailVO;
 import com.boat.domain.Member;
-import com.boat.domain.Room;
 import com.boat.sns.NaverLoginBO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.scribejava.core.model.OAuth2AccessToken;
@@ -61,17 +63,21 @@ public class MemberController {
 	private SendMail sendMail;
 	private PasswordEncoder passwordEncoder;
 	
+	private ChatService cService;
+	
 	@Autowired
 	private JavaMailSenderImpl mailSender; 
 	
 	
 	@Autowired
 	public MemberController(MemberService memberservice, NaverLoginBO naverloginbo, 
-			SendMail sendMail, PasswordEncoder passwordEncoder, JavaMailSender javaMailSender) {
+			SendMail sendMail, PasswordEncoder passwordEncoder, JavaMailSender javaMailSender,
+			ChatService cService) {
 		this.memberservice = memberservice;
 		this.naverloginbo = naverloginbo;
 		this.sendMail = sendMail;
 		this.passwordEncoder = passwordEncoder;
+		this.cService = cService;
 	}
 
 	
@@ -816,103 +822,200 @@ public class MemberController {
 	
 	
 	
-	List<Room> roomList = new ArrayList<Room>();
-	static int roomNumber = 0;
-
-	
-	//채팅
-	@RequestMapping("/chat")
-	public ModelAndView chat(Principal principal, ModelAndView mv) {
-		
-		String id = principal.getName();
-		Member m = memberservice.member_info(id);
-		
-		List<Member> memberlist = memberservice.getMemberList(id);
-		
-		mv.addObject("memberlist", memberlist);
-		
-		mv.addObject("memberinfo", m);
-		mv.addObject("memberimg", m.getPROFILE_FILE());
-		mv.setViewName("/Chat/chat_room");
-		return mv;
-	}
+//	List<Room> roomList = new ArrayList<Room>();
+//	static int roomNumber = 0;
+//
+//	
+//	//채팅
+//	@RequestMapping("/chat")
+//	public ModelAndView chat(Principal principal, ModelAndView mv) {
+//		
+//		String id = principal.getName();
+//		Member m = memberservice.member_info(id);
+//		
+//		List<Member> memberlist = memberservice.getMemberList(id);
+//		
+//		mv.addObject("memberlist", memberlist);
+//		
+//		mv.addObject("memberinfo", m);
+//		mv.addObject("memberimg", m.getPROFILE_FILE());
+//		mv.setViewName("/Chat/chat_room");
+//		return mv;
+//	}
+//	
+//	/**
+//	 * 방 페이지
+//	 * @return
+//	 */
+//	@RequestMapping("/room")
+//	public ModelAndView room(Principal principal, ModelAndView mv) {
+//		String id = principal.getName();
+//		List<Member> memberlist = memberservice.getMemberList(id);
+//		
+//		mv.addObject("memberlist", memberlist);
+//		System.out.println("memberlist="+memberlist);
+//		mv.setViewName("/Chat/chat_room");
+//		return mv;
+//	}
+//	
+//	/**
+//	 * 방 생성하기
+//	 * @param params
+//	 * @return
+//	 */
+//	@RequestMapping("/createRoom")
+//	public @ResponseBody List<Room> createRoom(@RequestParam HashMap<Object, Object> params){
+//		String roomName = (String) params.get("roomName");
+//		if(roomName != null && !roomName.trim().equals("")) {
+//			Room room = new Room();
+//			room.setRoomNumber(++roomNumber);
+//			room.setRoomName(roomName);
+//			roomList.add(room);
+//		}
+//		return roomList;
+//	}
+//	
+//	/**
+//	 * 방 정보가져오기
+//	 * @param params
+//	 * @return
+//	 */
+//	@RequestMapping("/getRoom")
+//	public @ResponseBody List<Room> getRoom(@RequestParam HashMap<Object, Object> params){
+//		return roomList;
+//	}
+//	
+//	/**
+//	 * 채팅방
+//	 * @return
+//	 */
+//	@RequestMapping("/moveChating")
+//	@ResponseBody
+//	public Map<String, Object> chating(@RequestParam HashMap<Object, Object> params, Principal principal, ModelAndView mv) {
+//		System.out.println("moveChating");
+//		System.out.println("params="+params);
+//		
+//		String id = principal.getName();
+//		Member m = memberservice.member_info(id);
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		
+//		map.put("memberinfo", m);
+//		
+//		int roomNumber = Integer.parseInt((String) params.get("roomNumber"));
+//		System.out.println("roomNumber="+roomNumber);
+//		
+//		List<Room> new_list = roomList.stream().filter(o->o.getRoomNumber()==roomNumber).collect(Collectors.toList());
+//		if(new_list != null && new_list.size() > 0) {
+//			map.put("roomName", params.get("roomName"));
+//			map.put("roomNumber", params.get("roomNumber"));
+//		}
+//		System.out.println("roomName="+params.get("roomName"));
+//		System.out.println("roomNumber="+params.get("roomNumber"));
+//		
+//		return map;
+//	}
 	
 	/**
 	 * 방 페이지
 	 * @return
 	 */
 	@RequestMapping("/room")
-	public ModelAndView room(Principal principal, ModelAndView mv) {
-		String id = principal.getName();
-		List<Member> memberlist = memberservice.getMemberList(id);
-		
-		mv.addObject("memberlist", memberlist);
-		System.out.println("memberlist="+memberlist);
-		mv.setViewName("/Chat/chat_room");
-		return mv;
+	public String room() {
+		return "/Chat/chat_room";
 	}
 	
 	/**
-	 * 방 생성하기
-	 * @param params
+	 * 3. 유저 목록
+	 * @param session
 	 * @return
 	 */
-	@RequestMapping("/createRoom")
-	public @ResponseBody List<Room> createRoom(@RequestParam HashMap<Object, Object> params){
-		String roomName = (String) params.get("roomName");
-		if(roomName != null && !roomName.trim().equals("")) {
-			Room room = new Room();
-			room.setRoomNumber(++roomNumber);
-			room.setRoomName(roomName);
-			roomList.add(room);
+	@GetMapping(value = "/userList")
+	public ModelAndView userList(HttpSession session) {
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("h:mm a | MMM d", new Locale("en", "US"));
+		
+		ModelAndView mav = null;
+		
+		ArrayList<Member> userList = memberservice.selectUserList();
+		System.out.println("userList="+userList);
+		
+		mav = new ModelAndView("/Chat/users");
+		
+		mav.addObject("userList", userList);
+		
+		mav.addObject("date", sdf.format(new Date()));
+		
+		return mav;
+	}
+	
+	/**
+	 * 3. 메세지 HTML 전송
+	 * JSON 타입의 파라미터를 받기 위해서는 @RequestBody 어노테이션을 붙여줘야 한다.
+	 * 
+	 * @param session
+	 * @param map
+	 * @return
+	 */
+	@GetMapping(value = "/message")
+	public ModelAndView message(HttpSession session, @RequestBody HashMap<String, String> map) { 
+		System.out.println("message");
+		System.out.println("map="+map);
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("h:mm a | MMM d", new Locale("en", "US"));
+		
+		ModelAndView mav = null;
+		
+		mav = new ModelAndView("message"); 
+		
+		Member user = (Member)session.getAttribute("loginUser");
+		String sender = map.get("sender");
+		System.out.println("sender="+map.get("sender"));
+		
+		if(!user.getNAME().equals(sender)) {
+			mav.addObject("sender", sender);
 		}
-		return roomList;
+		
+		System.out.println("map.get="+map.get("content"));
+		mav.addObject("content", map.get("content"));
+		mav.addObject("date", sdf.format(new Date()));
+		return mav;
 	}
 	
 	/**
-	 * 방 정보가져오기
-	 * @param params
+	 * 4. 채팅룸 HTML 전송
+	 * JSON 타입의 파라미터를 받기 위해서는 @RequestBody 어노테이션을 붙여줘야 한다.
+	 * @param session
+	 * @param map
 	 * @return
 	 */
-	@RequestMapping("/getRoom")
-	public @ResponseBody List<Room> getRoom(@RequestParam HashMap<Object, Object> params){
-		return roomList;
-	}
-	
-	/**
-	 * 채팅방
-	 * @return
-	 */
-	@RequestMapping("/moveChating")
-	@ResponseBody
-	public Map<String, Object> chating(@RequestParam HashMap<Object, Object> params, Principal principal, ModelAndView mv) {
-		System.out.println("moveChating");
-		System.out.println("params="+params);
+	@PostMapping(value = "/room")
+	public ModelAndView room(HttpSession session, @RequestBody HashMap<String, String> map) {
 		
-		String id = principal.getName();
-		Member m = memberservice.member_info(id);
-		Map<String, Object> map = new HashMap<String, Object>();
+		SimpleDateFormat sdf = new SimpleDateFormat("h:mm a | MMM d", new Locale("en", "US"));
 		
-		map.put("memberinfo", m);
+		ModelAndView mav = null;
 		
-		int roomNumber = Integer.parseInt((String) params.get("roomNumber"));
-		System.out.println("roomNumber="+roomNumber);
+		mav = new ModelAndView("room"); 
 		
-		List<Room> new_list = roomList.stream().filter(o->o.getRoomNumber()==roomNumber).collect(Collectors.toList());
-		if(new_list != null && new_list.size() > 0) {
-			map.put("roomName", params.get("roomName"));
-			map.put("roomNumber", params.get("roomNumber"));
+		// 날짜 추가         
+		mav.addObject("date", sdf.format(new Date()));
+		
+		if(map.get("handle").equals("roomList")) {     
+			map.remove("handle");
+			mav.addObject("map", map);
+			return mav;
 		}
-		System.out.println("roomName="+params.get("roomName"));
-		System.out.println("roomNumber="+params.get("roomNumber"));
+
+		// uuid 추가
+		mav.addObject("uuid", map.get("uuid"));
 		
-		return map;
-	}
+		String sender = map.get("sender");
+		
+		mav.addObject("sender", sender);
+		return mav;
+	}	
 	
-	
-	
-	
-	
+
 	
 	
 	

@@ -116,9 +116,9 @@
 					where BOARD_EMPNO = #{empno}
 						UNION ALL
 					SELECT FILE_NUM, FILE_SUBJECT, DEPT, FILE_NAME, FILE_READCOUNT, FILE_DATE, FILE_FILE, NVL(CNT, 0) AS CNT
-					FROM file_board  LEFT OUTER JOIN (SELECT F_BO_NUM, COUNT(*) CNT FROM Filecomm
-					GROUP BY F_BO_NUM)
-					ON FILE_NUM = F_BO_NUM
+					FROM file_board  LEFT OUTER JOIN (SELECT FILE_BO_NUM, COUNT(*) CNT FROM FILE_COMMENT
+					GROUP BY FILE_BO_NUM)
+					ON FILE_NUM = FILE_BO_NUM
 					where FIlE_EMPNO = #{empno}
 				)
 				ORDER BY BOARD_DATE DESC
@@ -131,6 +131,11 @@
 	<select id="getMemberList" resultType="java.util.Map">
 		select * from MEMBER
 		WHERE EMPNO != #{empno}
+	</select>
+	
+	<select id="selectUserList" resultType="member">
+		SELECT * FROM MEMBER 
+		ORDER BY EMPNO
 	</select>
 	
 </mapper>
