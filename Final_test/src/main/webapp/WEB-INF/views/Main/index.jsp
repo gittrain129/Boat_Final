@@ -11,6 +11,7 @@
     <meta content="" name="description">
 
 	<jsp:include page="header.jsp"/>
+	<jsp:include page="popup.jsp"/>
 	<script>
 		var result="${message}";
 		if(result == 'updateSuccess'){
