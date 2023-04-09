@@ -29,7 +29,7 @@ and FILE_COMMENT_RE_SEQ > #{}  ]]>
 	
   <select id = "getCommentList" resultType="Filecomm" parameterType="java.util.Map">
 	
-	select FILE_C_NUM, FILE_COMMENT.FILE_C_ID, FILE_CONTENT,FILE_C_NAME,FILE_C_DEPT
+	select FILE_C_NUM, FILE_COMMENT.FILE_C_ID, FILE_CONTENT,FILE_C_NAME,FILE_C_DEPT,
 	FILE_COMMENT_DATE, FILE_COMMENT_RE_LEV,member.PROFILE_FILE PROFILE, 
 				   FILE_COMMENT_RE_SEQ, FILE_COMMENT_RE_REF 
 				   from FILE_COMMENT join member 

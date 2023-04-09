@@ -64,7 +64,7 @@ h1{
     gap: 15px;
 }
 .Excel{
-    border : none;
+    border : none;    line-height: 300%;
     background-color : lightblue;
 }
 #clock{
@@ -78,7 +78,7 @@ h1{
 #date-box{
     grid-template-rows: 1fr 1fr  ;
     color: var(--main-color-dark);
-    font-size: 2.6em;
+    font-size: 2em;
     font-weight: 200;
     display: flex;
     justify-content: center;
