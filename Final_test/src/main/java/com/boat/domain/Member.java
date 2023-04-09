@@ -1,5 +1,7 @@
 package com.boat.domain;
 
+import java.util.Objects;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class Member {
@@ -23,6 +25,28 @@ public class Member {
 	private String GOOGLELOGIN;
 	
 	
+	@Override
+	public int hashCode() {
+		return Objects.hash(AUTH, DEPT, EMAIL, EMPNO, GOOGLELOGIN, JOB, NAME, NAVERLOGIN, PASSWORD, PASSWORD_OG,
+				PROFILE_FILE, PROFILE_IMG, REGISTER_DATE, uploadfile);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Member other = (Member) obj;
+		return Objects.equals(AUTH, other.AUTH) && Objects.equals(DEPT, other.DEPT)
+				&& Objects.equals(EMAIL, other.EMAIL) && Objects.equals(EMPNO, other.EMPNO)
+				&& Objects.equals(GOOGLELOGIN, other.GOOGLELOGIN) && Objects.equals(JOB, other.JOB)
+				&& Objects.equals(NAME, other.NAME) && Objects.equals(NAVERLOGIN, other.NAVERLOGIN)
+				&& Objects.equals(PASSWORD, other.PASSWORD) && Objects.equals(PASSWORD_OG, other.PASSWORD_OG)
+				&& Objects.equals(PROFILE_FILE, other.PROFILE_FILE) && Objects.equals(PROFILE_IMG, other.PROFILE_IMG)
+				&& Objects.equals(REGISTER_DATE, other.REGISTER_DATE) && Objects.equals(uploadfile, other.uploadfile);
+	}
 	public String getGOOGLELOGIN() {
 		return GOOGLELOGIN;
 	}
