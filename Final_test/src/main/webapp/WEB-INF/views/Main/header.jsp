@@ -64,10 +64,17 @@
 			// 연결
 			webSocket = new WebSocket(wsUri);
 			console.log("connectwebSocket="+webSocket)
+			
+			if(webSocket){
+				webSocket.onopen = onOpen;
+				webSocket.onmessage = onMessage;
+				/* webSocket.onclose = onClose; */
+			}
 		}else{
 			console.log("이미 연결되어 있습니다!!");
 		}
 	}
+	
 </script>
 
 <style>
@@ -260,12 +267,13 @@
 	                            </div>
                         	</sec:authorize>
                         	<sec:authorize access="isAuthenticated()">
-	                            <div class="flex-shrink-0 btn-lg-square border rounded-circle"
-	                            	 style=" cursor: pointer;" onclick="location.href='${pageContext.servletContext.contextPath}/member/room'">
+	                            <div class="flex-shrink-0 btn-lg-square border rounded-circle position-relative"
+	                            	 style=" cursor: pointer;" onclick="location.href='${pageContext.servletContext.contextPath}/member/chat'">
 	                                <i class="bi bi-chat-fill text-primary"></i>
 	                            </div>
+	                            <div class="headerred position-absolute border border-light rounded-circle bg-danger p-2 badge" style="top: 64px;right: 92px;"></div>
 	                            <div class="ps-3"
-	                            	 style=" cursor: pointer;" onclick="location.href='${pageContext.servletContext.contextPath}/member/room'">
+	                            	 style=" cursor: pointer;" onclick="location.href='${pageContext.servletContext.contextPath}/member/chat'">
 	                                <p class="mb-2">채팅</p>
 	                            </div>
                             </sec:authorize>

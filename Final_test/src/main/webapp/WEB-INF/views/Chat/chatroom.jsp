@@ -30,46 +30,35 @@
     </div>
     <!-- Page Header End -->
 
-		<!-- 채팅 컨테이너 -->
-		<div class="row rounded-lg overflow-hidden shadow">
-			<!-- 채팅방 목록 -->
-			<div class="col-5 px-0">
-				<div class="bg-white">
-				
-				    <div class="bg-gray px-4 py-2 bg-light">
-				      	<p class="h5 mb-0 py-1">User List</p>
-				    </div>
-
-					<div class="messages-box">
-			      		<div class="list-group rounded-0" id="userList">
-			      		<%-- 채팅방 동적 생성 --%>
-		      			</div>
-			    	</div>
-		  		</div>
-			</div>
-			<!-- 채팅방 목록 -->
-			
-			<!-- 채팅창 -->
-			<div class="col-7 px-0">
-			
-				<div class="px-4 pt-5 chat-box bg-white" id="message">
-				<%-- 메세지 동적 생성 --%>
-				</div>
-				
-				<!-- 메세지 입력 창 -->
-	        	<div class="input-group">
-		          	<input type="text" id="chat" placeholder="메세지를 입력하세요." class="form-control rounded-0 border-0 py-4 bg-light">
-		          	<div class="input-group-append">
-		            	<button type="button" class="btn btn-link bg-white" id="sendBtn" onclick="send('message');">
-		            		<i class="fa fa-paper-plane"></i>
-		            	</button>
-		          	</div>
-	        	</div>
-				<!-- 메세지 입력 창 -->
-	    	</div>
+<!-- 회원 목록 -->
+<div class="container bootstrap snippets bootdey">
+	<div class="row">
+		<div class="col-md-4 bg-white ">
+			<div class=" row border-bottom padding-sm fs-5" style="height: 40px;">회원 목록</div>
+			<ul class="friend-list" id="userList">
+			</ul>
 		</div>
-		<!-- 채팅창 -->
 
+		<!-- 채팅 상세 -->
+		<div class="col-md-8 bg-white ">
+		<div class="chat-message">
+			<ul class="chat" id="message">
+			<!-- 채팅 말풍선 -->
+			</ul>
+		</div>
+		<!-- 메세지 작성 -->
+		<div class="chat-box bg-white">
+			<div class="input-group">
+				<input type="text" class="form-control border no-shadow no-rounded" placeholder="보내실 메시지를 입력하세요."
+						id="chat">
+				<span class="input-group-btn">
+					<button onclick="send('message');" class="btn btn-outline-primary no-rounded" type="button" id="sendBtn">전송</button>
+				</span>
+			</div>
+		</div>
+		</div>
+	</div>
+</div>
 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 
 <script>
@@ -110,10 +99,10 @@ function ajaxForHTML(url, data, contentType, type){
 }
 
 $(function(){
-	$("#userList").html(ajaxForHTML("userList", "GET"));
+	$("#userList").html(ajaxForHTML("userLists", "GET"));
 })
 
-<!-- webSocket 연결
+<!-- webSocket 연결 -->
 function connect(){
 			
 	// webSocket 연결되지 않았을 때만 연결
@@ -132,7 +121,7 @@ function connect(){
 		document.getElementById("message").innerHTML+="<br/>" + "<b>이미 연결되어 있습니다!!</b>";
 	}
 }
--->
+
 
 <!-- webSocket 연결 성공 시 -->
 function onOpen(){
@@ -151,6 +140,11 @@ function send(handle, secret){
 	
 	let data = null;
 	let chatMessage = document.getElementById("chat");
+	let messageBox = "";
+	
+	const now = new Date();
+	const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+	const date = now.toLocaleDateString([], { month: 'short', day: 'numeric' });
 	
 	if(handle === "message"){
 		if(!chatMessage.value){
@@ -169,6 +163,12 @@ function send(handle, secret){
 		
 		// 채팅 메세지 초기화
 		chatMessage.value = "";
+		
+		messageBox = (ajaxForHTML("send", data, "GET"));
+		
+		// 채팅방에 메세지 추가
+    	document.getElementById("message").innerHTML += messageBox;
+		 
 	}else if(handle === "login"){
 		data = {
 			"handle" : "login"
@@ -186,8 +186,8 @@ function send(handle, secret){
 	
 	let jsonData = JSON.stringify(data);
 	console.log("jsonData="+jsonData)
-	console.log("webSocket="+webSocket)
 	webSocket.send(jsonData);
+	
 }
 
 //엔터로 채팅 전송
@@ -200,7 +200,7 @@ $(document).on('keydown', '#chat', function(e){
 
 <!-- webSocket 메세지 수신 시 -->
 function onMessage(evt){			
-	
+	console.log("onMessage 시작")
 	// 수신한 메세지 (,)로 자르기
 	let receive = evt.data.split(",");
 	console.log("receive="+receive)
@@ -232,20 +232,24 @@ function onMessage(evt){
 		}
 	}
 	
-    console.log("receivedata="+data[0])
+    console.log("data.handle="+data.handle)
+    console.log("data.sender="+data.sender)
+    console.log("data.content="+data.content)
+    console.log("data.uuid="+data.uuid)
     writeResponse(data);
 }
 
 <!-- webSocket 메세지 화면에 표시해주기 -->
 function writeResponse(data){
-	console.log("data="+data[0])
+	let token = $("meta[name='_csrf']").attr("content");
+    let header = $("meta[name='_csrf_header']").attr("content");
 	// JSON.stringify() : JavaScript 객체 → JSON 객체 변환
 	
 	if(data.handle == "message"){
     	// HTML 데이터 받기
     	let messageData = ajaxForHTML("message", 
 				        			  JSON.stringify(data), 
-				        			  "application/json", "GET");
+				        			  "application/json", "POST");
     	console.log("messageData="+messageData)
     	
     	// 채팅방에 메세지 추가
@@ -256,6 +260,8 @@ function writeResponse(data){
     	
     	// 스크롤 하단 고정
     	$('#message').scrollTop($('#message').prop('scrollHeight'));
+    	
+    	$('.headerred').removeClass('badge');
     	
 	}else if(data.handle === "login"){
     	// [상대방 → 나] 로그인 표시
@@ -304,6 +310,8 @@ function roomEnter(room){
 	
 	// 4. 메세지 보내기 onClick 이벤트 변경
 	$("#sendBtn").attr("onClick", "send('message', true)");
+	
+	$('.headerred').addClass('badge');
 }
 
 </script>

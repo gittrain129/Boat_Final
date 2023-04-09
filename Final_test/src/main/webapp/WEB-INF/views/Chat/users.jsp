@@ -3,19 +3,17 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:forEach var="user" items="${requestScope.userList}">
 	<c:if test="${user != sessionScope.loginUser}">
-		<a class="list-group-item list-group-item-action list-group-item-light rounded-0 aop" data-uuid="${user.EMPNO}" onclick="roomEnter(this);">
-		  	<div class="media">
-		  		<!-- 
-		  		<img src="resources/pic/sample.png" alt="user" width="50" class="rounded-circle">
-		  		 -->
-		    	<div class="media-body ml-4">
-		      		<div class="d-flex align-items-center justify-content-between mb-1">
-		         	<h6 class="mb-0">${user.NAME}</h6>
-		         	<small class="small font-weight-bold" id="${user.EMPNO}"></small>
-		      		</div>
-		    	 	<p class="font-italic mb-0 text-small">${user.EMPNO}</p>
-		    	</div>
-			</div>
-		</a>
+		<li class="bounceInDown fs-6" data-uuid="${user.EMPNO}" onclick="roomEnter(this);">
+			<a class="clearfix">
+				<img src="${pageContext.request.contextPath}/resources/${user.PROFILE_FILE}" alt="" class="img-circle">
+				<div class="friend-name">
+					<strong>${user.NAME}</strong>
+					<small class="small text-primary fs-6" id="${user.EMPNO}"></small>
+				</div>
+				<div class="last-message text-muted">${user.EMPNO}</div>
+				<small class="time text-muted"></small>
+				<small class="chat-alert label label-danger"></small>
+			</a>
+		</li>
 	</c:if>
 </c:forEach>

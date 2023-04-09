@@ -13,13 +13,16 @@
 </c:if>
 <%-- 상대방이 보낸 메세지 --%>
 <c:if test="${!empty requestScope.sender}">
-	<div class="media w-50 mb-3">
-		<img src="resources/pic/sample.png" alt="user" width="50" class="rounded-circle">
-  		<div class="media-body ml-3">
-		    <div class="bg-light rounded py-2 px-3 mb-2">
-		    	<p class="text-small mb-0 text-muted">${requestScope.content}</p>
-		    </div>
-    		<p class="small text-muted">${requestScope.date}</p>
-  		</div>
-	</div>
+	<li class="left clearfix">
+		<span class="chat-img pull-left">
+			<img src="${pageContext.request.contextPath}/resources/${requestScope.profile}" alt="User Avatar">
+		</span>
+		<div class="chat-body clearfix">
+			<div class="header">
+				<strong class="primary-font" style="font-size: 0.9rem;">${requestScope.sender}</strong>
+				<small class="pull-right text-muted" style="font-size: 0.8rem;"><i class="fa fa-clock-o" ></i>${requestScope.date}</small>
+			</div>
+			<p class="fs-6">${requestScope.content}</p>
+		</div>
+	</li>
 </c:if>

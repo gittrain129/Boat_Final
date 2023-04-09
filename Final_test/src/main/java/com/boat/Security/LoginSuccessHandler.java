@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-import com.boat.chat.ChatSession;
 import com.boat.domain.Attandance;
 import com.boat.domain.Member;
 import com.boat.mybatis.mapper.AttandanceMapper;
