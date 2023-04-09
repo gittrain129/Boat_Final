@@ -88,7 +88,7 @@ background-color: white;
 
 
 
-				<div class="table-responsive" id="maintable">
+				<div class="table-responsive" id="maintable" style="min-height:350px">
 					<table class="table table-bordered table-hover mx-auto" style="table-layout: fixed">
 						<thead>
 							<tr class="bg-light">
@@ -107,12 +107,12 @@ background-color: white;
 								<c:choose>
 								<c:when test="${b.abc.contains(EMPNO)}">
   								<td title="즐겨찾기" class="text-center">
-    							<i class="bi bi-star-fill" style="color:#ffd699"id="star${b.BOARD_NUM}" onclick="toggle(${b.BOARD_NUM}, ${EMPNO})"></i>
+    							<i class="bi bi-star-fill" style="color:#ffd699"id="star${b.BOARD_NUM}" onclick="toggle(${b.BOARD_NUM}, ${EMPNO},'${b.BOARD_DEPT}')"></i>
   								</td>
 								</c:when>
 								<c:otherwise>
 								<td title="즐겨찾기" class="text-center">
-    							<i class="bi bi-star" id="star${b.BOARD_NUM}" onclick="toggle(${b.BOARD_NUM}, ${EMPNO})"></i>
+    							<i class="bi bi-star" id="star${b.BOARD_NUM}" onclick="toggle(${b.BOARD_NUM}, ${EMPNO},'${b.BOARD_DEPT}')"></i>
   								</td>
   								</c:otherwise>
   								</c:choose>
@@ -219,7 +219,8 @@ background-color: white;
         	<button class="btn btn-secondary dropdown-toggle" type="button" style="min-width:115px;" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
   			  부서별보기
   			</button>
-  				<ul class="dropdown-menu" id="drop-dept" aria-labelledby="dropdownMenuButton2">
+  				<ul class="dropdown-menu drop-dept" id="drop-dept" aria-labelledby="dropdownMenuButton2">
+  					<li><a class="dropdown-item active" >부서별보기</a></li>
     				<li><a class="dropdown-item">홍보팀</a></li>
     				<li><a class="dropdown-item">개발팀</a></li>
     				<li><a class="dropdown-item">인사팀</a></li>
@@ -232,7 +233,8 @@ background-color: white;
   	        <button class="btn btn-secondary dropdown-toggle" type="button" style="min-width:115px;" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
     			정렬옵션
   			</button>
-  				<ul class="dropdown-menu" id="drop-order" aria-labelledby="dropdownMenuButton3">
+  				<ul class="dropdown-menu drop-order" id="drop-order" aria-labelledby="dropdownMenuButton3">
+  					<li><a class="dropdown-item active">정렬옵션</a></li>
     				<li><a class="dropdown-item">최신순</a></li>
     				<li><a class="dropdown-item">조회순</a></li>
     				<li><a class="dropdown-item">댓글순</a></li>
@@ -277,10 +279,11 @@ var header = $("meta[name='_csrf_header']").attr("content");
 
 
 //즐겨찾기 별모양 function (fav테이블에 insert)
-function toggle(BOARD_NUM,BOARD_EMPNO) {
+function toggle(BOARD_NUM,BOARD_EMPNO,BOARD_DEPT) {
 		var star = document.getElementById('star'+BOARD_NUM);
 		var board_num = BOARD_NUM;
 		var board_empno = BOARD_EMPNO;
+		var board_dept = BOARD_DEPT
 		//var board_empno = 2310005;
 		
 		
@@ -294,6 +297,7 @@ function toggle(BOARD_NUM,BOARD_EMPNO) {
 		        data: {
 		            "BOARD_NUM": board_num,
 		            "BOARD_EMPNO": board_empno
+		            
 		        },
 		        beforeSend : function(xhr)
 		        {   //데이터를 전송하기 전에 헤더에 csrf값을 설정합니다.
@@ -318,7 +322,8 @@ function toggle(BOARD_NUM,BOARD_EMPNO) {
 		        type: 'POST',
 		        data: {
 		            "BOARD_NUM": board_num,
-		            "BOARD_EMPNO": board_empno
+		            "BOARD_EMPNO": board_empno,
+		            "BOARD_DEPT" : board_dept
 		        },
 		        beforeSend : function(xhr)
 		        {   //데이터를 전송하기 전에 헤더에 csrf값을 설정합니다.
@@ -346,7 +351,7 @@ function favorite(BOARD_EMPNO) {
 	}else{
 	
 	$.ajax({
-        url: "${pageContext.request.contextPath}/board/Fav_list",
+        url: "${pageContext.request.contextPath}/board/Fav_List",
         type: 'POST',
         data: {
                "BOARD_EMPNO": board_empno,
@@ -460,5 +465,6 @@ function favorite(BOARD_EMPNO) {
 	
 
 </script>
+<jsp:include page="../Main/footer.jsp" />
 </body>
 </html>

@@ -112,8 +112,8 @@ import com.boat.mybatis.mapper.BoardMapper;
 		}
 
 		@Override
-		public void insertFav(int bOARD_NUM, int bOARD_EMPNO) {
-			dao.insertFav(bOARD_NUM,bOARD_EMPNO);
+		public void insertFav(int bOARD_NUM, int bOARD_EMPNO,String bOARD_DEPT) {
+			dao.insertFav(bOARD_NUM,bOARD_EMPNO,bOARD_DEPT);
 		}
 
 		
@@ -124,8 +124,8 @@ import com.boat.mybatis.mapper.BoardMapper;
 		}
 
 		@Override
-		public int getFavListCount() {
-			return dao.getFavListCount();
+		public int getFavListCount(String dept) {
+			return dao.getFavListCount(dept);
 		}
 
 		
@@ -137,8 +137,8 @@ import com.boat.mybatis.mapper.BoardMapper;
 		}
 
 		@Override
-		public List<Board> getFavBoardList(int page, int limit, int empno) {
-			HashMap<String, Integer> map = new HashMap<String, Integer>();
+		public List<Board> getFavBoardList(int page, int limit, int empno, String dept, String order) {
+			HashMap<String, Object> map = new HashMap<String, Object>();
 			
 			int startrow = (page-1) * limit + 1;
 			int endrow = startrow + limit - 1;
@@ -146,18 +146,20 @@ import com.boat.mybatis.mapper.BoardMapper;
 			map.put("start", startrow);
 			map.put("end", endrow);
 			map.put("BOARD_EMPNO",empno);
+			map.put("dept", dept);
+			map.put("order", order);
 			
 			
 			return dao.getFavBoardList(map);
 		}
 
 		@Override
-		public int getSearchListCount(String search1, String option1) {
-			return dao.getSearchListCount(search1,option1);
+		public int getSearchListCount(String search1, String option1, String dept) {
+			return dao.getSearchListCount(search1,option1,dept);
 		}
 
 		@Override
-		public List<Board> getSearchBoardList(int page, int limit, String search1, String option1) {
+		public List<Board> getSearchBoardList(int page, int limit, String search1, String option1,String dept, String order) {
 			
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			
@@ -168,6 +170,8 @@ import com.boat.mybatis.mapper.BoardMapper;
 			map.put("end", endrow);
 			map.put("option1", option1);
 			map.put("search1", search1);
+			map.put("dept", dept);
+			map.put("order", order);
 			
 			return dao.getSearchBoardList(map);
 		}
