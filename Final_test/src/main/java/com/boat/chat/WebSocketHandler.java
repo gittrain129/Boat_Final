@@ -1,118 +1,130 @@
 package com.boat.chat;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.boat.domain.Member;
+
 @Component
 public class WebSocketHandler extends TextWebSocketHandler {
+	private static final Logger Logger = LoggerFactory.getLogger(WebSocketHandler.class);
 	
-	//HashMap<String, WebSocketSession> sessionMap = new HashMap<>(); //웹소켓 세션을 담아둘 맵
-		List<HashMap<String, Object>> rls = new ArrayList<>(); //웹소켓 세션을 담아둘 리스트 ---roomListSessions
+	// 로그인 유저 목록 : <User, WebSocketSession>
+	private Map<Member, WebSocketSession> sessionMap = new HashMap<Member, WebSocketSession>();
+	
+	// 채팅방 목록 : <String, WebSocketSession>
+		private Map<String, Member> userMap = new HashMap<String, Member>();
 		
-		@Override
-		public void handleTextMessage(WebSocketSession session, TextMessage message) {
-			//메시지 발송
-			//전달받은 메세지
-			String msg = message.getPayload();
-			JSONObject obj = jsonToObjectParser(msg);
-			
-			String rN = (String) obj.get("roomNumber");
-			HashMap<String, Object> temp = new HashMap<String, Object>();
-			if(rls.size() > 0) {
-				for(int i=0; i<rls.size(); i++) {
-					String roomNumber = (String) rls.get(i).get("roomNumber"); //세션리스트의 저장된 방번호를 가져와서
-					if(roomNumber.equals(rN)) { //같은값의 방이 존재한다면
-						temp = rls.get(i); //해당 방번호의 세션리스트의 존재하는 모든 object값을 가져온다.
-						break;
-					}
-				}
-				
-				//해당 방의 세션들만 찾아서 메시지를 발송해준다.
-				for(String k : temp.keySet()) { 
-					if(k.equals("roomNumber")) { //다만 방번호일 경우에는 건너뛴다.
-						continue;
-					}
-					
-					WebSocketSession wss = (WebSocketSession) temp.get(k);
-					if(wss != null) {
-						try {
-							wss.sendMessage(new TextMessage(obj.toJSONString()));
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					}
-				}
-			}
-		}
-		
-		@SuppressWarnings("unchecked")
 		@Override
 		public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-			//소켓 연결
-			super.afterConnectionEstablished(session);
-			boolean flag = false;
-			String url = session.getUri().toString();
-			System.out.println(url);
-			String roomNumber = url.split("/chating/")[1];
-			int idx = rls.size(); //방의 사이즈를 조사한다.
-			if(rls.size() > 0) {
-				for(int i=0; i<rls.size(); i++) {
-					String rN = (String) rls.get(i).get("roomNumber");
-					if(rN.equals(roomNumber)) {
-						flag = true;
-						idx = i;
-						break;
-					}
+			
+			Member user = (Member)session.getAttributes().get("loginUser");
+			Logger.info("user="+user);
+			
+			Logger.info("\n아이디 : " + session.getAttributes().get("loginUser") + 
+						 "\n웹소켓 세션 : " + session.getId() + 
+						 "\n연결 성공");
+			
+			// 유저 - 세션 목록에 추가
+			sessionMap.put(user, session);
+			// uuid - 유저 목록에 추가
+			userMap.put(user.getEMPNO(), user);
+			System.out.println("userMap="+userMap);
+			
+			Logger.info("총 로그인 유저 : " + sessionMap.size());
+		}
+
+		@Override  
+		public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
+			// 메세지(JSON) 파싱
+			JSONParser jParser = new JSONParser();
+			JSONObject jObject = (JSONObject) jParser.parse((String)message.getPayload());
+			System.out.println("jObject="+jObject);
+			
+			// 보낸 사람 (나)
+			Member sender = (Member)session.getAttributes().get("loginUser");
+			String senderName = sender.getNAME();
+			String senderUuid = sender.getEMPNO();
+					
+			if(jObject.get("handle").toString().equals("message")) {
+				
+				// 채팅 메세지
+				message = new TextMessage("message" + "," + sender.getNAME() + "," + jObject.get("content").toString() + "," + sender.getEMPNO());
+				System.out.println("message="+message);
+				// 메세지 전송
+				Logger.info("1");
+				System.out.println("sessionMap="+sessionMap);
+				sessionMap.get(userMap.get(jObject.get("uuid"))).sendMessage(message);
+				
+			}else if(jObject.get("handle").toString().equals("login")) {
+				
+				// [나 → 상대방] 로그인 알림 메세지
+				message = new TextMessage("login" + "," + senderUuid);
+				// [로그인목록 → 나]
+				String loginedUsers = "onLineList";
+				
+				// 로그인 되어 있는 유저들의 채팅방 화면에 전송하여 로그인 알림
+				for (Member users : sessionMap.keySet()) {
+					// 자기 자신은 제외
+					if(users.getEMPNO().equals(senderUuid)) continue;
+					sessionMap.get(users).sendMessage(message); 
+					loginedUsers += "," + users.getEMPNO();
 				}
+				
+				message = new TextMessage(loginedUsers);
+				sessionMap.get(sender).sendMessage(message);  
+				
+			}else if(jObject.get("handle").toString().equals("logout")) {
+				
+				// [나 → 상대방] 로그아웃 알림 메세지
+				message = new TextMessage("logout" + "," + senderUuid);                 
+				                      
+				// 로그인 되어 있는 유저들의 채팅방 화면에 전송하여 로그아웃 알림
+				for (Member users : sessionMap.keySet()) {
+					// 자기 자신은 제외 (아직 로그인 session 종료 X)
+					if(users.getNAME().equals(senderName)) continue;
+					sessionMap.get(users).sendMessage(message);
+				}
+				
+			}else if(jObject.get("handle").toString().equals("onLineList")) {	
+				
+				String loginedUsers = "onLineList";
+				// 로그인 되어 있는 유저 불러오기
+				for (Member users : sessionMap.keySet()) {
+					// 자기 자신은 제외
+					if(users.getNAME().equals(senderName)) continue;
+					loginedUsers += "," + users.getEMPNO();
+				}
+				message = new TextMessage(loginedUsers);
+				sessionMap.get(sender).sendMessage(message);
 			}
-			
-			if(flag) { //존재하는 방이라면 세션만 추가한다.
-				HashMap<String, Object> map = rls.get(idx);
-				map.put(session.getId(), session);
-			}else { //최초 생성하는 방이라면 방번호와 세션을 추가한다.
-				HashMap<String, Object> map = new HashMap<String, Object>();
-				map.put("roomNumber", roomNumber);
-				map.put(session.getId(), session);
-				rls.add(map);
-			}
-			
-			//세션등록이 끝나면 발급받은 세션ID값의 메시지를 발송한다.
-			JSONObject obj = new JSONObject();
-			obj.put("type", "getId");
-			obj.put("sessionId", session.getId());
-			session.sendMessage(new TextMessage(obj.toJSONString()));
 		}
 		
 		@Override
-		public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-			//소켓 종료
-			if(rls.size() > 0) { //소켓이 종료되면 해당 세션값들을 찾아서 지운다.
-				for(int i=0; i<rls.size(); i++) {
-					rls.get(i).remove(session.getId());
-				}
-			}
-			super.afterConnectionClosed(session, status);
+		public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
 		}
-		
-		private static JSONObject jsonToObjectParser(String jsonStr) {
-			JSONParser parser = new JSONParser();
-			JSONObject obj = null;
-			try {
-				obj = (JSONObject) parser.parse(jsonStr);
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-			return obj;
+
+		@Override
+		public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
+			
+			Member u = (Member)session.getAttributes().get("loginUser");
+			
+			sessionMap.remove(u);
+			userMap.remove(u.getEMPNO());
+			
+			Logger.info((Member)session.getAttributes().get("loginUser") + "님의 웹소켓 연결 해제");
 		}
 }

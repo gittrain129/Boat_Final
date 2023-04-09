@@ -1,5 +1,6 @@
 package com.boat.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -59,8 +60,8 @@ public interface MemberService {
 	//내 글 목록
 	public List<Board> getMyBoardList(int page, int limit, String empno);
 
-	//채팅 회원 목록
-	public List<Member> getMemberList(String id);
+	//채팅 회원 목록?
+	public ArrayList<Member> selectUserList();
 
 
 

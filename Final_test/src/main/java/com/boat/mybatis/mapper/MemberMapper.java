@@ -1,5 +1,6 @@
 package com.boat.mybatis.mapper;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,7 +60,7 @@ public interface MemberMapper {
 	//내 글 목록
 	public List<Board> getMyBoardList(HashMap<String, Object> map);
 
-	//채팅 회원 목록
-	public List<Member> getMemberList(HashMap<String, Object> map);
+	//채팅 회원 목록?
+	public ArrayList<Member> selectUserList();
 	
 }

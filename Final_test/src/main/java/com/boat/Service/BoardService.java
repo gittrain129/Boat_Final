@@ -33,19 +33,19 @@ public interface BoardService {
 	
 	public List<String> getDeleteFileList();
 
-	public void insertFav(int bOARD_NUM, int bOARD_EMPNO);
+	public void insertFav(int bOARD_NUM, int bOARD_EMPNO, String bOARD_DEPT);
 
-	public int getFavListCount();
+	public int getFavListCount(String dept);
 
-	public List<Board> getFavBoardList(int page, int limit, int empno);
+	public List<Board> getFavBoardList(int page, int limit, int empno, String dept, String order);
 
 	public void deleteFav(int bOARD_NUM, int bOARD_EMPNO);
 
 	public int checkFav(int boardNum, int empno);
 
-	public int getSearchListCount(String search1, String option1);
+	public int getSearchListCount(String search1, String option1, String dept);
 
-	public List<Board> getSearchBoardList(int page, int limit, String search1, String option1);
+	public List<Board> getSearchBoardList(int page, int limit, String search1, String option1, String dept, String order);
 
 	public int getOptionListCount(String dept);
 

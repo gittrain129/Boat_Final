@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import com.boat.chat.ChatSession;
 import com.boat.domain.Attandance;
 import com.boat.domain.Member;
 import com.boat.mybatis.mapper.AttandanceMapper;
@@ -28,7 +29,6 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
 	@Autowired
 	private AttandanceMapper attdao;
-	
 	
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -51,6 +51,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		session.setAttribute("JOB", member.getJOB());
 		session.setAttribute("PROFILE_FILE", member.getPROFILE_FILE());
 		
+		session.setAttribute("loginUser", member);
 		
 		Logger.info("로그인 성공 : LoginSuccessHandler"); 
 		String url = request.getContextPath() + "/index";
