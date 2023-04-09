@@ -106,7 +106,7 @@ public class boardController {
 	            @RequestHeader(value="referer", required=false) String beforeURL){
 
 		
-		if(beforeURL!=null && beforeURL.endsWith("List")) {
+		if(beforeURL!=null && beforeURL.contains("List")) {
 			boardService.setReadCountUpdate(num);
 		}
 		
@@ -130,9 +130,10 @@ public class boardController {
 	
 	@PostMapping("/Fav_add")
 	public String fav_add(@RequestParam(value="BOARD_NUM") int bOARD_NUM,
-						  @RequestParam(value="BOARD_EMPNO") int bOARD_EMPNO){
+						  @RequestParam(value="BOARD_EMPNO") int bOARD_EMPNO,
+						  @RequestParam(value="BOARD_DEPT") String bOARD_DEPT){
 				//뷰페이지에 empno를 구해오는 쿼리문도 넣어야함
-		boardService.insertFav(bOARD_NUM,bOARD_EMPNO);
+		boardService.insertFav(bOARD_NUM,bOARD_EMPNO,bOARD_DEPT);
 		
 		
 		return"redirect:List";
@@ -152,7 +153,7 @@ public class boardController {
 	
 	
 	@ResponseBody
-	@RequestMapping(value="/Fav_list")
+	@RequestMapping(value="/Fav_List")
 	public Map<String, Object> FavAjax(@RequestParam(value="page", defaultValue="1", required=false) int page, 
 									   @RequestParam(value="limit", defaultValue="10", required=false) int limit,
 									   @RequestParam(value="BOARD_EMPNO") String empno,
@@ -165,9 +166,15 @@ public class boardController {
 		}
 		if(order.equals("정렬옵션")) {
 			order = "";
+		} else if (order.equals("최신순")) {
+			order = "board_date";
+		} else if( order.equals("조회순")) {
+			order = "board_readcount";
+		} else if (order.equals("댓글순")) {
+			order = "cnt";
 		}
-		
-		int listcount = boardService.getFavListCount();
+	
+		int listcount = boardService.getFavListCount(dept);
 		
 		int maxpage = (listcount + limit - 1) / limit;
 		
@@ -188,7 +195,7 @@ public class boardController {
 	    int empno2 = Integer.parseInt(empno);
 	    
 	    
-		List<Board> boardlist = boardService.getFavBoardList(page, limit,empno2);
+		List<Board> boardlist = boardService.getFavBoardList(page, limit,empno2,dept,order);
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("page",page);
@@ -364,6 +371,12 @@ public class boardController {
 		}
 		if(order.equals("정렬옵션")) {
 			order = "";
+		} else if (order.equals("최신순")) {
+			order = "board_date";
+		} else if( order.equals("조회순")) {
+			order = "board_readcount";
+		} else if (order.equals("댓글순")) {
+			order = "cnt";
 		}
 		if(option1.equals("제목")){
 			option1 = "board.board_subject";
@@ -374,7 +387,8 @@ public class boardController {
 		String search2 = "%"+ search1 +"%";
 		search1 = search2;
 		
-		int listcount = boardService.getSearchListCount(search1,option1);
+	
+		int listcount = boardService.getSearchListCount(search1,option1,dept);
 		int maxpage = (listcount + limit - 1) / limit;
 		int startpage = ((page-1) /10) *10 +1;
 		int endpage = startpage +10 -1;
@@ -387,7 +401,7 @@ public class boardController {
 	    cal.add(Calendar.DAY_OF_MONTH, -3); //3일간 보이도록 하기위해서.
 	    String nowday = format.format(cal.getTime());
 		
-		List<Board> boardlist = boardService.getSearchBoardList(page, limit,search1,option1);
+		List<Board> boardlist = boardService.getSearchBoardList(page, limit,search1,option1,dept,order);
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("page",page);

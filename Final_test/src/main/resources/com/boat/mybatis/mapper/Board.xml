@@ -92,8 +92,8 @@
 	</delete>
 	
 		<insert id = "insertFav" parameterType = "Board">
-		insert into board_fav(BOARD_NUM, BOARD_EMPNO)
-		values(#{bOARD_NUM},#{bOARD_EMPNO})
+		insert into board_fav(BOARD_NUM, BOARD_EMPNO,BOARD_DEPT)
+		values(#{bOARD_NUM},#{bOARD_EMPNO},#{bOARD_DEPT})
 	</insert>
 	
 	<delete id="deleteFav">
@@ -111,9 +111,14 @@
 	
 	<select id="getFavListCount" resultType="int">
 		select count(*) from board_fav
+		<where>
+    	<if test="dept != null and dept != ''">
+      	and board_dept = #{dept}
+    	</if>
+  		</where>
 	</select>
 
-	<select id="getFavBoardList" resultType="Board">
+<select id="getFavBoardList" resultType="Board">
 	select * from
 		(select rownum rnum, b.*
 		 from (
@@ -125,16 +130,29 @@
 		 	 		 where board.board_num in (
         				select board_num from board_fav where board_empno = #{BOARD_EMPNO}
       					)
-		 	 		 order by BOARD_RE_REF desc,
-					BOARD_RE_SEQ asc) b
+		 	 		 <if test="dept != null and dept != ''">
+		 	 		 and board_dept = #{dept}
+		 	 		 </if>
+		 	 		 <if test="order != null and order != ''">
+		 	 		 order by BOARD_NOTICE desc, ${order} desc, BOARD_RE_REF desc, BOARD_RE_SEQ asc
+		 	 		 </if>
+		 			<if test="order == null or order == ''">
+						order by BOARD_NOTICE desc,  BOARD_RE_REF desc, BOARD_RE_SEQ asc
+					</if>
+			) b
 			where rownum &lt;= #{end}
-			order by BOARD_NOTICE desc
 		)
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
-	</select>
+</select>
+
+
 	
 	<select id="getSearchListCount" resultType="int">
 		select count(*) from board where ${option1} like #{search1}
+		<if test="dept != null and dept != ''">
+      	and board_dept = #{dept}
+    	</if>
+  		
 	</select>
 
 	<select id="getSearchBoardList" resultType="Board">
@@ -152,8 +170,13 @@
       LEFT OUTER JOIN board_fav bf ON board.board_num = bf.board_num 
       where ${option1} like #{search1}
       GROUP BY board.board_num, board.board_name, board.board_pass, board.board_subject, board.board_content, board.board_dept, board.board_re_ref, board.board_re_lev, board.board_re_seq, board.board_readcount, board.board_date, board.board_empno, board.board_notice, board.board_job, cnt 
-      ORDER BY board.BOARD_NOTICE DESC, board.BOARD_RE_REF DESC, board.BOARD_RE_SEQ ASC
-    ) A
+      <if test="order != null and order != ''">
+		 order by BOARD_NOTICE desc, ${order} desc, BOARD_RE_REF desc, BOARD_RE_SEQ asc
+	  </if>
+	  <if test="order == null or order == ''">
+		order by BOARD_NOTICE desc,  BOARD_RE_REF desc, BOARD_RE_SEQ asc
+	  </if>
+          ) A
     WHERE ROWNUM &lt;= #{end}
   ) 
   WHERE RN &gt;= #{start}
@@ -188,16 +211,18 @@
       </where>
       GROUP BY board.board_num, board.board_name, board.board_pass, board.board_subject, board.board_content, board.board_dept, board.board_re_ref, board.board_re_lev, board.board_re_seq, board.board_readcount, board.board_date, board.board_empno, board.board_notice, board.board_job, cnt 
       <if test="order != null and order != ''">
-        ORDER BY ${order} ASC, board.BOARD_NOTICE DESC, board.BOARD_RE_REF DESC, board.BOARD_RE_SEQ ASC
+        ORDER BY board.BOARD_NOTICE DESC, ${order} DESC, board.BOARD_RE_REF DESC, board.BOARD_RE_SEQ ASC
       </if>
       <if test="order == null or order == ''">
-        ORDER BY board.BOARD_NOTICE DESC, board.BOARD_RE_REF DESC, board.BOARD_RE_SEQ ASC
+        ORDER BY board.BOARD_NOTICE DESC,board.BOARD_RE_REF DESC, board.BOARD_RE_SEQ ASC
       </if>
     ) A
     WHERE ROWNUM &lt;= #{end}
-  ) 
+        ) 
   WHERE RN &gt;= #{start}
+
 </select>
+
 
 
 

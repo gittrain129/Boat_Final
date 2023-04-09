@@ -33,17 +33,17 @@ public interface BoardMapper {
 	
 	public void deleteFileList(String filename);
 
-	public void insertFav(int bOARD_NUM, int bOARD_EMPNO);
+	public void insertFav(int bOARD_NUM, int bOARD_EMPNO, String bOARD_DEPT);
 
-	public int getFavListCount();
+	public int getFavListCount(String dept);
 
-	public List<Board> getFavBoardList(HashMap<String, Integer> map);
+	public List<Board> getFavBoardList(HashMap<String, Object> map);
 
 	public void deleteFav(int bOARD_NUM, int bOARD_EMPNO);
 
 	public int checkFav(int boardnum, int empno);
 
-	public int getSearchListCount(String search1, String option1);
+	public int getSearchListCount(String search1, String option1, String dept);
 
 	public List<Board> getSearchBoardList(HashMap<String, Object> map);
 
