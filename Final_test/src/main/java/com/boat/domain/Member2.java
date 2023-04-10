@@ -20,8 +20,16 @@ public class Member2 {
 	private String REGISTER_DATE;
 	private String AUTH="ROLE_MEMBER";
 	private String NAVERLOGIN;
-	private List<Todo> Todo;
 	
+	private List<Todo> Todo;
+
+	private int count;
+	public  int getCount() {
+		return count;
+	}
+	public  void setCount(int count) {
+		this.count = count;
+	}
 	
 	public String getEMPNO() {
 		return EMPNO;

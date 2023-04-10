@@ -66,7 +66,7 @@ public class FileCommentController {
 	@RequestMapping(value="/reply")
 	public int commentReply(Filecomm co){
 		
-		return  commentService.commentsUpdate(co);
+		return  commentService.commentreply(co);
 		
 		
 	}

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.boat.domain.Member2;
 import com.boat.domain.Todo;
 
 @Mapper
@@ -16,7 +17,7 @@ public interface TodoMapper {
 
 	String getDept(String empno);
 
-	List<Todo> myDeptTodo(Map<String, String> map);
+	List<Member2> myDeptTodo(Map<String, String> map);
 
 	void myTodoupdate(Map<String, Object> map);
 	

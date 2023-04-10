@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.boat.aop.LogAdvice;
+import com.boat.domain.Member2;
 import com.boat.domain.Todo;
 import com.boat.mybatis.mapper.TodoMapper;
 
@@ -44,7 +45,7 @@ public class TodoServiceImpl implements TodoService {
 
 	//내 팀원 리스트 가져오기
 	@Override
-	public List<Todo> deptList(String dept,String empno ) {
+	public List<Member2> deptList(String dept,String empno ) {
 		Map<String,String> map=	new HashMap<String,String>();
 		map.put("DEPT", dept);
 		map.put("EMPNO", empno);

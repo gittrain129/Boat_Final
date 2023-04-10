@@ -92,6 +92,16 @@ h1{
     display: flex;
     justify-content: center;
 }
+#TTime{
+	
+    color: var(--main-color-dark);
+    font-size: 2em;
+    font-weight: 200;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+
+}
 #btn-box{
     display: flex;
     justify-content: center;

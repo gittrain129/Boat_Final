@@ -1,6 +1,7 @@
 package com.boat.controller.Todo;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.boat.Service.Todo.TodoService;
+import com.boat.domain.Member2;
 import com.boat.domain.Todo;
 
 @Controller
@@ -73,16 +75,47 @@ public class TodoContoroller {
 		List<Todo> Mytodolist = todoService.mytodolist(empno);
 		int mytotolistcount = Mytodolist.size();
 		
+		int done = 0;
+		for(Todo a:Mytodolist) {
+			if(a.getState()==1) {
+				done++;
+			}
+		}
+		System.out.println(done+"done,,,,,,,,,,,,,,,,,");
+		System.out.println(mytotolistcount+"mytotolistcount,,,,,,,,,,,,,,,,,");
+
+		float doneper =(float)done/mytotolistcount*100;
+		int mydoneper = Math.round(doneper);
+		System.out.println(doneper+"doneper,,,,,,,,,,,,,,,,,");
+		System.out.println(mydoneper+"mydoneper,,,,,,,,,,,,,,,,,");
+		
+		
 		logger.info("todo :	"+ Mytodolist );
 		
 		
 		//select * from TODOLIST where dept = #{dept}
 		// order by empno
-		List<Todo> mydeptTodolist = todoService.deptList(dept,empno);
 		
-		//3.
-		//select key
-		//select * from TODOLIST where empno = #{empno}
+		
+		List<Member2> mydeptTodolist = todoService.deptList(dept,empno);
+		
+		int number =mydeptTodolist.size();
+		System.out.println(number+"numberddddddddddddddddd");
+		
+		for(Member2 a :mydeptTodolist) {
+			int deptdone = 0;
+			for(Todo b :a.getTodo()) {
+				if(b.getState()==1)
+				deptdone++;
+				System.out.println(deptdone+"확인");
+			}
+			int deptall = a.getTodo().size();
+			float ck = (float)deptdone/deptall*100;
+			int result = Math.round(ck);
+			a.setCount(result);
+		}
+
+		
 		
 		
 		
@@ -90,8 +123,11 @@ public class TodoContoroller {
 		
 		//Mytodolist
 		mv.addObject("MyTodo",Mytodolist);
+		//mydoneper
+		mv.addObject("mydoneper",mydoneper);
 		//deptList
 		mv.addObject("MydeptList",mydeptTodolist);
+		
 		mv.addObject("mytotolistcount",mytotolistcount);
 		
 	return mv;
@@ -104,13 +140,13 @@ public class TodoContoroller {
 				
 		
 		
-		logger.info("왜또 널이뜨니"+todo.toString());//select ket dept?
 		todoService.insertTodo(todo);
 		
 		//저장 성공하면 Todo/list
 		  return  "redirect:list"; 
 		
 	}
+	
 	@GetMapping(value="/update")
 	public Todo todoupdate(String num,String T_CONTENT,String END_DATE) {
 		todoService.Todoupdate(num,T_CONTENT,END_DATE);
