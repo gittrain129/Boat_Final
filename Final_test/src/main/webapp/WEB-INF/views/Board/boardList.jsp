@@ -315,7 +315,7 @@ function toggle(BOARD_NUM,BOARD_EMPNO,BOARD_DEPT) {
 		        },
 		        error: function(request,error) {
 		            
-		            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		            alert('즐겨찾기 등록은 즐겨찾기탭에서 불가능합니다');
 		        }
 			});//delete_ajax 끝
 			
@@ -341,8 +341,7 @@ function toggle(BOARD_NUM,BOARD_EMPNO,BOARD_DEPT) {
 		        },
 		        error: function(request,error) {
 		            
-		            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		        }
+		        	 alert('즐겨찾기 등록은 즐겨찾기탭에서 불가능합니다');		        }
 			});//add_ajax 끝
 		  
 		}

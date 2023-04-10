@@ -169,7 +169,7 @@ function ajax3(sdata){
 				$('.pagination').append(output);
       },
       error: function(error) {
-        
+        alert('검색옵션을 선택해주세요')
         console.error(error);
       }
      }) //ajax끝
@@ -298,7 +298,7 @@ function ajax2(sdata){
 				$('.pagination').append(output);
       },
       error: function(error) {
-        
+        alert('검색옵션을 선택해주세요')
         console.error(error);
       }
     });
@@ -419,6 +419,7 @@ function ajax(sdata){
 
 			}, //success end
 			error : function() {
+			alert('검색옵션을 선택해주세요')
 				console.log('에러');
 			}
 	})//ajax end
@@ -561,7 +562,7 @@ $(document).ready(function() {
 				$('.pagination').append(output);
       },
       error: function(error) {
-        
+        alert('검색옵션을 선택해주세요')
         console.error(error);
       }
     });
@@ -700,7 +701,7 @@ $.ajax({
 				$('.pagination').append(output);
       },
       error: function(error) {
-        
+        alert('검색옵션을 선택해주세요')
         console.error(error);
       }
      }) //ajax끝
@@ -837,7 +838,7 @@ $.ajax({
 				$('.pagination').append(output);
       },
       error: function(error) {
-        
+        alert('검색옵션을 선택해주세요')
         console.error(error);
       }
      }) //ajax끝
