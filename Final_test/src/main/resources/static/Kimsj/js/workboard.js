@@ -19,7 +19,7 @@ $(function(){
 	function getList(currentPage) {
 		$.ajax({
 				type: "post",
-				url : "../workboard/workboard_list",
+				url : "../workboard/list",
 				data: {
 						"page" : currentPage
 				},
@@ -30,14 +30,14 @@ $(function(){
 				dataType :  "json",
 				success : function(rdata) {
 
-					if(rdata.listcount > 0) {
+					if(rdata.list.length > 0) {
 						$("#workboard_card table").show();  //문서가 로딩될 때 hide() 했던 부분을 보이게 합니다.(1)
 						$("#workboard_card tbody").empty();
 						
 						$(rdata.list).each(function() {
 							let output = '';
 							let img = '';
-							if($("#loginid").text() == this.empno) {
+							if($("#login_id").text() == this.empno) {
 								img = "<img src='../resources/Kimsj/image/pencil2.png' width='15px' class='update'>"
 									+ "<img src='../resources/Kimsj/image/delete.png' width='15px' class='remove'>"
 									+ "<input type='hidden' value='" + this.num + "'>";
@@ -45,7 +45,7 @@ $(function(){
 							
 							
 						output +=	'<div class="card">' +
-					                '<div class="card-header">' + this.title + '</div>' +
+					                '<div class="card-header">' + this.content + '</div>' +
 					                '<div class="card-body">' +
 					                '<div class="row">' +
 					                '<div class="col-sm-2">' +
@@ -112,7 +112,7 @@ $(function(){
 	//버튼의 라벨이 '등록'인 경우는 댓글을 추가하는 경우
 	//버튼의 라벨이 '수정완료'인 경우는 댓글을 수정하는 경우
 	$("#write").click(function() {
-		const content = $("#workboard_view").val().trim();
+		const content = $("#content").val().trim();
 	//	if(!content){
 	//		alert('내용을 입력하세요')
 	//		return false;
@@ -128,9 +128,9 @@ $(function(){
 			data = {
 				"category" : $("#category option:checked").text(),
 				"content" : content,
-				"EMPNO" : $("#loginid").text(),
-				"NAME" : $("#loginname").text(),
-				"DEPT" : $("#logindept").text()
+				"EMPNO" : $("#login_id").val(),
+				"NAME" : $("#login_name").val(),
+				"DEPT" : $("#logindept").val()
 			};
 		} else { // 댓글을 수정하는 경우
 			url = "../workboard/update";
