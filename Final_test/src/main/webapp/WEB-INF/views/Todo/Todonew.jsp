@@ -100,6 +100,7 @@ body > div.container-fluid.bg-dark.text-body.footer.mt-5.pt-5.wow.fadeIn{
       일정<br>
       
       <form action="add"	method = 'post'>
+      <input type="hidden" name="state" value ="0">
         <input type="text" name="T_CONTENT" class = "form-control" id = 'title'>
      
 		
@@ -159,8 +160,6 @@ body > div.container-fluid.bg-dark.text-body.footer.mt-5.pt-5.wow.fadeIn{
             <h1 class="display-4 text-white animated slideInDown mb-3">내 할 일 보기</h1>
             <nav aria-label="breadcrumb animated slideInDown">
                 <ol class="breadcrumb justify-content-center mb-0">
-                    <li class="breadcrumb-item"><a class="text-white" href="#"></a></li>
-                    <li class="breadcrumb-item"><a class="text-white" href="#"></a></li>
                     <li class="breadcrumb-item text-primary active" aria-current="page"></li>
                 </ol>
             </nav>
@@ -248,27 +247,31 @@ body > div.container-fluid.bg-dark.text-body.footer.mt-5.pt-5.wow.fadeIn{
                                     <thead>
                                         <tr>
                                             <th>${mt.t_CONTENT}</th>
-                                         
-                                            <c:if test="${mt.state==1}">
-                                              <c:set var="protagemath" value = "${fn:length(mt.state==1)}"/>
+                                         <%-- --%>
+                                            <c:if test="${mt.state==1}">   
                                               <th>
-                                                <div class='progress todoprogress'>
-                                                <div class="todoprogress-bar progress-bar bg-info" role="progressbar" style="width: 100%" 
+                                                <div>                                                        </div>
+                                                <div class="ddddone">완료</div>
+                                                <!-- <div class='progress todoprogress'>
+                                                <div class="todoprogress-bar progress-bar bg-info" role="progressbar" style="width:${mydoneper}%" 
                                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                              </div>
+                                              </div> -->
 
                                             </th>
-
 
                                              <th>
-                                              
                                                 
                                             </th>
+
                                           </tr> 
+
+                                        </c:if>
                                           <c:set var="ptotage" value="${ptotage+1}"/>
-                                      </c:if>
+                                
                                       <c:if test="${mt.state!=1}">
-                                        <th><div class='todoprogress progress'></div></th>
+                                        <th>
+                                          <!-- <div class='todoprogress progress'></div> -->
+                                        </th>
                                         <th>
                                           <div class="btn_wrap">
                                             <a  class="btn btn-warning btn updateTodo"   data-id="${mt.NUM}">
@@ -289,14 +292,15 @@ body > div.container-fluid.bg-dark.text-body.footer.mt-5.pt-5.wow.fadeIn{
                                 </table>
                                 <c:set var="protageall" value = "${fn:length(MyTodo)}"/>
                                 
-
+                              <c:if test="${!empty MyTodo}">
                                 <div class='myallprogress progress'>
                                   <div class=" myallprogress-bar progress-bar bg-info" role="progressbar" 
-                                  style="width: 100%" 
+                                  style="width:${mydoneper}%" 
                                   aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                  <c:out value="${protageall}">
+                                <%--<c:out value="${protageall}"> --%>
 
                                 </div>
+                              </c:if>
                                 </div>
 
 
@@ -310,6 +314,7 @@ body > div.container-fluid.bg-dark.text-body.footer.mt-5.pt-5.wow.fadeIn{
                                   
                         <div class="accordion-item">
                         <c:set var = "num" value ="0"/>
+                       
                         <c:forEach var="MDT" items="${MydeptList}"> 
                           <h2 class="accordion-header" id="${'heading'}${num}">
                             <button class="accordion-button collapsed"
@@ -317,9 +322,18 @@ body > div.container-fluid.bg-dark.text-body.footer.mt-5.pt-5.wow.fadeIn{
                             aria-expanded="false" aria-controls="${'collapse'}${num}">
                             ${MDT.NAME} <div class="progress"></div>	
                              </button>
+                             <div class='deptprogress todoprogress progress'>
+
+                              <div class=" myallprogress-bar progress-bar bg-info" role="progressbar" 
+                              style="width:${MDT.count}%" 
+                              aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+
+                             </div>
                           </h2>
                                      
-                                     
+<c:set var="count" value="0"/>
+ <c:set var="countzero" value="0"/>
+                       	 
                      <div id="${'collapse'}${num}" class="accordion-collapse collapse" aria-labelledby="${'heading'}${num}" data-bs-parent="#accordionExample">
                         <c:set var = "num" value ="${num+1}"/>
 
@@ -365,7 +379,23 @@ body > div.container-fluid.bg-dark.text-body.footer.mt-5.pt-5.wow.fadeIn{
                            </div>
                        </div>
                    </div> 
+                   
+                   
+                   
                    <c:forEach items="${MDT.todo}" var="e">
+                   <%-- 
+                        <c:if test="${e.state==1}">
+                       	 <c:set var="count" value="${count+1}"/>
+                        </c:if>
+                        <c:if test="${e.state==0}">
+                       	 <c:set var="countzero" value="${countzero+1}"/>
+                        </c:if>
+                        
+                        <c:out value="${e.state}"/>
+                        <c:out value="${count}"/>
+                        <c:out value="${countzero}"/>
+                         --%>
+                        
                    <div class="forum-item">
                        <div class="row">
                            <div class="col-md-6">

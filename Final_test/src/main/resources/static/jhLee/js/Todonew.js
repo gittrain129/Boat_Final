@@ -34,6 +34,7 @@ $(document).on("click", ".updateTodo", function () {
 
 $(document).on("click", ".done", function () {
     var num = $(this).data('id');
+    let done = $(this)
     $.ajax({
         url :'../Todo/done',
         data:{num:num
@@ -45,31 +46,34 @@ $(document).on("click", ".done", function () {
             toastr.options.newestOnTop = false;
             toastr.options.progressBar = true;
             toastr.info('일정을 완료하였습니다.', '내 할일', {timeOut: 1500});
-            $(this).prev().parent().attr('display','none');
+            done.prev().parent().attr('display','none');
+            
         }
         })
     })
 
 
-// $('#saveUpdate').click(function(){
-//     let num = $(this).data('id');
-//     let enddate = $('#updateend').val();
-//     $.ajax({
-//         url :'../Todo/updateTodo',
-//         data:{num:num,
-//             END_DATE:enddate },
-//         success:function(rdata){
-//             console.log(rdata);
-//             toastr.options.escapeHtml = true;
-//             toastr.options.closeButton = true;
-//             toastr.options.newestOnTop = false;
-//             toastr.options.progressBar = true;
-//             toastr.info('일정을 완료하였습니다.', '내 할일', {timeOut: 1500});
+ $('#saveUpdate').click(function(){
+     let num = $(this).data('id');
+     let enddate = $('#updateend').val();
+     
+     $.ajax({
+         url :'../Todo/updateTodo',
+         data:{num:num,
+             END_DATE:enddate },
+         success:function(rdata){
+             console.log(rdata);
+             toastr.options.escapeHtml = true;
+             toastr.options.closeButton = true;
+             toastr.options.newestOnTop = false;
+             toastr.options.progressBar = true;
+             toastr.info('일정을 완료하였습니다.', '내 할일', {timeOut: 1500});
+         },
+        	complete:function(){
+        	 $('#updateTodo').modal('hide')}
+         })
 
-//         }
-//         })
-
-//})
+})
 
 
 

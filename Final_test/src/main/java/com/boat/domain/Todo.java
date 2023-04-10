@@ -1,6 +1,10 @@
 package com.boat.domain;
 
 public class Todo {
+	//private Member member;
+		//private List<Member> member;
+	
+	
 
 	private String EMPNO;
 	private String T_CONTENT;
@@ -16,13 +20,15 @@ public class Todo {
 		return state;
 	}
 	public void setState(int state) {
+		
 		this.state = state;
 	}
 	
-	//private Member member;
-	//private List<Member> member;
 	
-
+	
+	
+	
+	
 	public String getEMPNO() {
 		return EMPNO;
 	}

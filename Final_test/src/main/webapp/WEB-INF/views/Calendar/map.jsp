@@ -11,10 +11,12 @@
 <div class = "mapdetail">
 <h2> <b class="boat">Boat</b>&nbsp;&nbsp;&nbsp;를 만나는곳 </h2>
 
-<p><b>주소</b> </p><div class = "mapsub"> 서울 특별시 종로구 율곡로 10길 105 디아망 4층(봉익동 10-1)</div>
-                         <b class="">전화</b> <div class = "mapsub"> 070-8240-3211~3</div>
+<div class = "mapsub"><b style="color:black">주소 :  </b> 서울 특별시 종로구 율곡로 10길 105 디아망 4층(봉익동 10-1)</div>
+  <div class = "mapsub">  <b style="color:black">전화 :  </b>070-8240-3211~3</div>
 
-<b class ="boat">Boat</b><b>&nbsp;&nbsp;&nbsp;구성원</b> <div class = "mapsub">김정근 김소중 양은정 이지현 </div>
+<h2><b class ="boat">Boat</b>&nbsp;&nbsp;&nbsp;구성원 </h2>
+
+<div class = "mapsub">김정근 김소중 양은정 이지현 </div>
 <p><b><a href ="https://github.com/gittrain129/Boat">Github</a></b> 
 </div>
 </div>

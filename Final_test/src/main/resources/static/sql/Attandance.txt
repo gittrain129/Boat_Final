@@ -1,4 +1,3 @@
-
 create table BOAT_ATTENDANCE (
 	EMPNO VARCHAR2(12),
 	CONTENT VARCHAR2(200),
@@ -7,4 +6,5 @@ create table BOAT_ATTENDANCE (
 	OUT_time varchar2(20),
 	dept varchar2(10),
 	reg_date DATE DEFAULT SYSDATE
+	NAME VARCHAR2(15),
 );

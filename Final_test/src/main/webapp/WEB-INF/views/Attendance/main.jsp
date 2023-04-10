@@ -57,11 +57,9 @@
   <div id="right-content">
         <div id="clock" class="box">
             <div id="date-box">
-                <span id="TDate"></span>
-                <br>
-                <span id="TTime"></span>
+          
             </div>
-            
+              <div id="TTime"></div>
             <div id="btn-box">
             
             <!--출근버튼  -->

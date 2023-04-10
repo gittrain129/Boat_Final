@@ -9,8 +9,8 @@
 		</select>
 		
 		<insert id="Todoinsert">
-		insert into TODOLIST (NUM,EMPNO, T_CONTENT,START_DATE,END_DATE,DEPT) 
-		values(todo_seq.nextval, #{EMPNO},#{T_CONTENT},#{START_DATE},#{END_DATE},#{DEPT})
+		insert into TODOLIST (NUM,EMPNO, T_CONTENT,START_DATE,END_DATE,DEPT,state) 
+		values(todo_seq.nextval, #{EMPNO},#{T_CONTENT},#{START_DATE},#{END_DATE},#{DEPT},0)
 		</insert>
 		  
 		 <select id ="myTodolist" resultType="Todo">
@@ -48,6 +48,7 @@
 			    <result property="PROFILE_IMG" column="PROFILE_IMG"/>
 		 	
 			<collection property="Todo" ofType ="Todo"> 
+				<result property="state" column="state"/>
 				<result property="T_CONTENT" column="T_CONTENT"/>
 			 	<result property="START_DATE" column="START_DATE"/>
 			 	<result property="END_DATE" column="END_DATE"/>

@@ -28,7 +28,9 @@ setInterval(time,1000);
 function time()
 {        
 var today = new Date();
-$('#date-box').text(today.toLocaleString());
+$('#date-box').text(today.toLocaleString().substr(0,11));
+$('#TTime').text(today.toLocaleString().substr(12))
+
 }
 
 
@@ -158,11 +160,12 @@ $('#end-btn').click(function(){
                            //                    .attr('disabled', true);
                                         //파랗게
                         }
-                        console.log(rdata.OFF_TIME);
+                        //console.log(rdata.OFF_TIME).substr(0,10);
 
                         //퇴근시간 표시
                         $('#offTimeText').text(rdata.OFF_TIME);
-                       // $('#attColor').css('background','white');
+                       
+                        $('#attColor').css('background','white');
                         $('#attTime').text('');
 
 
