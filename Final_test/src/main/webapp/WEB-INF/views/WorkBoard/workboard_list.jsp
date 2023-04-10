@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,21 +44,7 @@
 
 	</style>
 	
-	<script>
-	let result="${result}";
-	if(result == 'passFail') {
-		alert("비밀번호가 일치하지 않습니다.")
-	}
-	$(function(){
-		$("form[action=delete]").submit(function() {
-			if($("#board_pass").val() == '') {
-				alert("비밀번호를 입력하세요");
-				$("#board_pass").focus();
-				return false;
-			}
-		})
-	})
-	</script>
+
 	
 	
 </head>
@@ -65,14 +52,32 @@
 <input type="hidden" id="login_id" value="${EMPNO}" name="loginid"> <%-- view.js에서 사용하기 위해 추가합니다. --%>
 <input type="hidden" id="login_name" value="${NAME}" name="loginname">
 <input type="hidden" id="login_dept" value="${DEPT}" name="logindept">
-<input type="hidden" id="login_img" value="${PROFILE_FILE}" name="loginimg">
+<input type="hidden" id="login_img" value="${pageContext.request.contextPath}/resources/${PROFILE_FILE}" name="loginimg">
+	
+	<div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container text-center py-5">
+            <h1 class="display-4 text-white animated slideInDown mb-3">워크보드</h1>
+            <nav aria-label="breadcrumb animated slideInDown">
+                <ol class="breadcrumb justify-content-center mb-0">
+                	<li class="breadcrumb-item active"><a href="javascript:go(1,'전체보기')">전체보기</a></li>
+                	<li class="breadcrumb-item"><a class="text-white" href="javascript:go(1,'자유')">자유</a></li>
+                	<li class="breadcrumb-item"><a class="text-white" href="javascript:go(1,'홍보팀')">홍보팀</a></li>
+                    <li class="breadcrumb-item"><a class="text-white" href="javascript:go(1,'개발팀')">개발팀</a></li>
+                    <li class="breadcrumb-item"><a class="text-white" href="javascript:go(1,'인사팀')">인사팀</a></li>
+                    <li class="breadcrumb-item"><a class="text-white" href="javascript:go(1,'기획팀')">기획팀</a></li>
+                    <li class="breadcrumb-item"><a class="text-white" href="javascript:go(1,'영업팀')">영업팀</a></li>
+                	<li class="breadcrumb-item"><a class="text-white" href="javascript:go(1,'동호회')">동호회</a></li>
+                	<li class="breadcrumb-item"><a class="text-white" href="javascript:go(1,'취미')">취미</a></li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+	
 	<div class="container" style="margin-top:150px !important;">
 
-		<div class="row">
 
-			<div class="col-lg-9 col-12"> <!-- 왼쪽 row -->
 				
-				<div id="workboard_view">
+				<div id="workboard_view" style="width: 1000px; margin: auto;">
 
 					<h3>워크보드 게시판</h3>
 					
@@ -86,11 +91,14 @@
 									<td>
 										<select name="category" id="category" class="pl">
 								            <option value="0" selected>선택해주세요</option>
+								            <option value="list">자유</option>
 								            <option value="list">홍보팀</option>
 								            <option value="list">개발팀</option>
 								            <option value="list">인사팀</option>
 								            <option value="list">기획팀</option>
-								            <option value="list">동호회</option>
+								            <option value="list">영업팀</option>
+								            <option value="list">동호회</option>								            
+								            <option value="list">취미</option>
 								        </select>
 									</td>
 								</tr>
@@ -119,7 +127,6 @@
 					</div>
 		
 			
-						<hr class="border-danger mb-4 mt-4" />
 						
 						
 					<div id="workboard_card">
@@ -190,25 +197,7 @@
 			
 				</div> <%-- workboard_card end --%>			
 			
-			</div> <%-- 왼쪽 row end --%>
 
-			<div class="col-lg-3 col-12" >  <%-- 오른쪽 row --%>
-
-			
-					<div class="list-group mb-4 shadow" style="margin-top:550px !important;">
-						<li class="list-group-item list-group-item-info" style="background-color:#90d5ff; color: #000000; font-size: smaller;"><strong>카테고리</strong></li>
-						<a href="discussion-detail.html" class="list-group-item list-group-item-action">홍보팀</a>
-						<a href="discussion-detail.html" class="list-group-item list-group-item-action">개발팀</a>
-						<a href="discussion-detail.html" class="list-group-item list-group-item-action">인사팀</a>
-						<a href="discussion-detail.html" class="list-group-item list-group-item-action">기획팀</a>
-						<a href="discussion-detail.html" class="list-group-item list-group-item-action">영업팀</a>
-						<a href="discussion-detail.html" class="list-group-item list-group-item-action">동호회</a>
-					</div>	
-			
-						
-			</div>  <%-- 오른쪽 row end --%>	
-
-		</div>  <%-- low end --%>
 	</div>  <%-- container end --%>
 
 <jsp:include page="../Main/footer.jsp"/>
