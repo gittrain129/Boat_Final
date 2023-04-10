@@ -48,7 +48,7 @@
 	       	connect();
 	    }else{
 	      	console.log("!webSocket")
-	      	webSocket.close();
+	      	webSocket.close;
 	    }
 	})
 	let webSocket; 		// 웹소켓 전역변수
@@ -363,7 +363,7 @@
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle me-0" data-bs-toggle="dropdown" ><span id="loginname">${NAME}</span> 님</a>
                     <div class="dropdown-menu border-0 rounded-0 rounded-bottom m-0 shadow">
-                        <a href="${pageContext.request.contextPath}/member/myinfo" class="dropdown-item">내 정보</a>
+                        <a href="${pageContext.request.contextPath}/member/myinfo" class="dropdown-item">내 정보 관리</a>
                     </div>
                 </div>
             </div>    

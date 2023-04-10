@@ -99,6 +99,7 @@ function ajaxForHTML(url, data, contentType, type){
 }
 
 $(function(){
+	connect()
 	$("#userList").html(ajaxForHTML("userLists", "GET"));
 })
 
@@ -118,15 +119,16 @@ function connect(){
 			/* webSocket.onclose = onClose; */
 		}
 	}else{
-		document.getElementById("message").innerHTML+="<br/>" + "<b>이미 연결되어 있습니다!!</b>";
+		/*document.getElementById("message").innerHTML+="<br/>" + "<b>이미 연결되어 있습니다!!</b>";*/
 	}
 }
 
-
 <!-- webSocket 연결 성공 시 -->
 function onOpen(){
+	let loginUser = "${sessionScope.loginUser}";
+	console.log("loginUser="+loginUser)
 	// 첫 로그인 시
-	if("${sessionScope.loginUser}" === ""){
+	if(loginUser === ""){
    		send('login');
 	}
 	// 새로고침 시
@@ -137,6 +139,7 @@ function onOpen(){
 
 <!-- webSocket 메세지 발송 -->
 function send(handle, secret){
+	
 	
 	let data = null;
 	let chatMessage = document.getElementById("chat");
@@ -230,6 +233,8 @@ function onMessage(evt){
 		for(let i = 1; i < receive.length; i++){
 			data[count++] = receive[i];
 		}
+	}else{
+		
 	}
 	
     console.log("data.handle="+data.handle)
@@ -261,7 +266,6 @@ function writeResponse(data){
     	// 스크롤 하단 고정
     	$('#message').scrollTop($('#message').prop('scrollHeight'));
     	
-    	$('.headerred').removeClass('badge');
     	
 	}else if(data.handle === "login"){
     	// [상대방 → 나] 로그인 표시
@@ -272,7 +276,7 @@ function writeResponse(data){
 	}else if(data.handle === "onLineList"){
 		// [유저 목록 → 나] 로그인 표시
 		for(let i = 0; i < Object.keys(data).length - 1; i++){
-			document.getElementById(data[i]).innerHTML = "로그인";
+			document.getElementById(data[i]).innerHTML = "온라인";
 		}
 	}
 }
@@ -311,7 +315,6 @@ function roomEnter(room){
 	// 4. 메세지 보내기 onClick 이벤트 변경
 	$("#sendBtn").attr("onClick", "send('message', true)");
 	
-	$('.headerred').addClass('badge');
 }
 
 </script>
