@@ -81,7 +81,12 @@ function ajax3(sdata){
 					
 					
 					output += "<tr>"
-			            output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star-fill' style='color:#ffd699' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ","+item.board_EMPNO+ ")'></i></td>"
+					if(item.board_EMPNO != null && item.abc != null && item.abc.includes(item.board_EMPNO)){
+    					output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star-fill' style='color:#ffd699' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ","+item.board_EMPNO+ ")'></i></td>";
+						}
+						else{
+			            output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ","+item.board_EMPNO+ ")'></i></td>"
+			            }
 			            const blank_count = item.board_RE_LEV * 2 + 1;
 			            let blank = '&nbsp;'; //답글일 때 들여쓰기
 			            for (let i = 1; i<blank_count; i++){
@@ -206,8 +211,12 @@ function ajax2(sdata){
 					
 					
 					output += "<tr>"
-			            output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star-fill' style='color:#ffd699' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ","+item.board_EMPNO+ ")'></i></td>"
-			            const blank_count = item.board_RE_LEV * 2 + 1;
+						if(item.board_EMPNO != null && item.abc != null && item.abc.includes(item.board_EMPNO)){
+    					output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star-fill' style='color:#ffd699' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ","+item.board_EMPNO+ ")'></i></td>";
+						}
+						else{
+			            output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ","+item.board_EMPNO+ ")'></i></td>"
+			            }			            const blank_count = item.board_RE_LEV * 2 + 1;
 			            let blank = '&nbsp;'; //답글일 때 들여쓰기
 			            for (let i = 1; i<blank_count; i++){
 			                blank += '&nbsp;&nbsp';
@@ -322,8 +331,12 @@ function ajax(sdata){
 					
 					
 					output += "<tr>"
-			  			output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star-fill' style='color:#ffd699' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ","+item.board_EMPNO+ ")'></i></td>"
-			            const blank_count = item.board_RE_LEV * 2 + 1;
+						if(item.board_EMPNO != null && item.abc != null && item.abc.includes(item.board_EMPNO)){
+    					output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star-fill' style='color:#ffd699' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ","+item.board_EMPNO+ ")'></i></td>";
+						}
+						else{
+			            output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ","+item.board_EMPNO+ ")'></i></td>"
+			            }			            const blank_count = item.board_RE_LEV * 2 + 1;
 			            let blank = '&nbsp;'; //답글일 때 들여쓰기
 			            for (let i = 1; i<blank_count; i++){
 			                blank += '&nbsp;&nbsp';
@@ -455,10 +468,17 @@ $(document).ready(function() {
 			$(data.boardlist).each(
 				
 				function(index, item){
-					
+					console.log(item.abc)
+					console.log(item.board_EMPNO)
 					
 					output += "<tr>"
-			            output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star-fill' style='color:#ffd699' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ","+item.board_EMPNO+ ")'></i></td>"
+					if(item.board_EMPNO != null && item.abc != null && item.abc.includes(item.board_EMPNO)){
+    					output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star-fill' style='color:#ffd699' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ","+item.board_EMPNO+ ")'></i></td>";
+						}
+						else{
+			            output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ","+item.board_EMPNO+ ")'></i></td>"
+			            }
+			            
 			            const blank_count = item.board_RE_LEV * 2 + 1;
 			            let blank = '&nbsp;'; //답글일 때 들여쓰기
 			            for (let i = 1; i<blank_count; i++){
@@ -592,7 +612,12 @@ $.ajax({
 					
 					
 					output += "<tr>"
-			            output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star-fill' style='color:#ffd699' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ","+item.board_EMPNO+ ")'></i></td>"
+					if(item.board_EMPNO != null && item.abc != null && item.abc.includes(item.board_EMPNO)){
+    					output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star-fill' style='color:#ffd699' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ","+item.board_EMPNO+ ")'></i></td>";
+						}
+						else{
+			            output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ","+item.board_EMPNO+ ")'></i></td>"
+			            }
 			            const blank_count = item.board_RE_LEV * 2 + 1;
 			            let blank = '&nbsp;'; //답글일 때 들여쓰기
 			            for (let i = 1; i<blank_count; i++){
@@ -725,8 +750,12 @@ $.ajax({
 					
 					
 					output += "<tr>"
-			            output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star-fill' style='color:#ffd699' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ","+item.board_EMPNO+ ")'></i></td>"
-			            const blank_count = item.board_RE_LEV * 2 + 1;
+						if(item.board_EMPNO != null && item.abc != null && item.abc.includes(item.board_EMPNO)){
+    					output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star-fill' style='color:#ffd699' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ","+item.board_EMPNO+ ")'></i></td>";
+						}
+						else{
+			            output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ","+item.board_EMPNO+ ")'></i></td>"
+			            }			            const blank_count = item.board_RE_LEV * 2 + 1;
 			            let blank = '&nbsp;'; //답글일 때 들여쓰기
 			            for (let i = 1; i<blank_count; i++){
 			                blank += '&nbsp;&nbsp';
