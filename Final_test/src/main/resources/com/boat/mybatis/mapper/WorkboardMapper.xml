@@ -12,7 +12,7 @@
 	
 	<select id="getWorkboardList" resultType="workboard" parameterType="map">
 		select *
-		from(select rownum rnum, num, name, category, dept, empno, content, reg_date
+		from(select rownum rnum, num, category, name, dept, empno, subject, content, profile_file, reg_date
 			from(
 				select *
 				from workboard
@@ -28,7 +28,7 @@
 	
 	<insert id="workboardInsert" parameterType="workboard">
 		insert into workboard
-		values(seq_workboard.nextval, #{category}, #{EMPNO}, #{DEPT}, #{NAME}, #{content}, sysdate)
+		values(seq_workboard.nextval, #{category}, #{EMPNO}, #{DEPT}, #{NAME}, #{subject}, #{content}, #{PROFILE_FILE}, sysdate)
 	</insert>
 	
 	

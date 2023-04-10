@@ -15,7 +15,7 @@ $(function(){
 	let num=0;
 	let url ='';
 	let data = {};
-	
+
 	function getList(currentPage) {
 		$.ajax({
 				type: "post",
@@ -45,12 +45,12 @@ $(function(){
 							
 							
 						output +=	'<div class="card">' +
-					                '<div class="card-header">' + this.content + '</div>' +
+					                '<div class="card-header">' + this.subject + '</div>' +
 					                '<div class="card-body">' +
 					                '<div class="row">' +
 					                '<div class="col-sm-2">' +
 					                '<a href="#">' +
-					                '<img class="mr-3 rounded img-thumbnail" src="' + this.imgSrc + '" alt="Generic placeholder image">' +
+					                '<img class="mr-3 rounded img-thumbnail" src="' + contextPath + '/resources/' + profileFile + '" alt="프로필 사진">' +
 					                '</a>' +
 					                '<h6 class="mt-2"><a href="#">' + this.empno + '</a></h6>' +
 					                '<small class="text-muted">' + this.name + '</small>' +
@@ -116,7 +116,10 @@ $(function(){
 	//	if(!content){
 	//		alert('내용을 입력하세요')
 	//		return false;
-	//	}
+	//	}else if(!subject){
+	//		alert('제목을 입력하세요')
+	//		return false;
+	
 		const buttonText = $("#write").text().trim(); // 버튼의 라벨로 add할지 update할지 결정
 		
 		$(".float-left").text('총 50자까지 가능합니다.');
@@ -130,7 +133,9 @@ $(function(){
 				"content" : content,
 				"EMPNO" : $("#login_id").val(),
 				"NAME" : $("#login_name").val(),
-				"DEPT" : $("#logindept").val()
+				"DEPT" : $("#login_dept").val(),
+				"subject" : $("#subject").val(),
+				"PROFILE_FILE" : $("#PROFILE_FILE").val()
 			};
 		} else { // 댓글을 수정하는 경우
 			url = "../workboard/update";

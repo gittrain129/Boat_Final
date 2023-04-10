@@ -7,6 +7,8 @@ public class Workboard {
 	private String DEPT;
 	private String NAME;
 	private String content;
+	private String subject;
+	private String PROFILE_FILE;
 	private String reg_date; //2020-12-24 16:08:35
 	
 	
@@ -51,6 +53,18 @@ public class Workboard {
 	}
 	public void setReg_date(String reg_date) {
 		this.reg_date = reg_date;
+	}
+	public String getSubject() {
+		return subject;
+	}
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+	public String getPROFILE_FILE() {
+		return PROFILE_FILE;
+	}
+	public void setPROFILE_FILE(String pROFILE_FILE) {
+		PROFILE_FILE = pROFILE_FILE;
 	}
 
 	
