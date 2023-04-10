@@ -125,6 +125,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
 			sessionMap.remove(u);
 			userMap.remove(u.getEMPNO());
 			
+			Logger.info(u.getEMPNO() + "님의 웹소켓 연결 해제");
 			Logger.info((Member)session.getAttributes().get("loginUser") + "님의 웹소켓 연결 해제");
 		}
 }

@@ -914,14 +914,51 @@ public class MemberController {
 //		
 //		return map;
 //	}
+//	
+//	/**
+//	 * 방 페이지
+//	 * @return
+//	 */
+//	@RequestMapping("/room")
+//	public String room() {
+//		return "/Chat/chat_room";
+//	}
+//	
+//	/**
+//	 * 3. 유저 목록
+//	 * @param session
+//	 * @return
+//	 */
+//	@GetMapping(value = "/userList")
+//	public ModelAndView userList(HttpSession session) {
+//		
+//		SimpleDateFormat sdf = new SimpleDateFormat("h:mm a | MMM d", new Locale("en", "US"));
+//		
+//		ModelAndView mav = null;
+//		
+//		ArrayList<Member> userList = memberservice.selectUserList();
+//		System.out.println("userList="+userList);
+//		
+//		mav = new ModelAndView("/Chat/users");
+//		
+//		mav.addObject("userList", userList);
+//		
+//		mav.addObject("date", sdf.format(new Date()));
+//		
+//		return mav;
+//	}
 	
+	
+	
+	
+
 	/**
 	 * 방 페이지
 	 * @return
 	 */
-	@RequestMapping("/room")
-	public String room() {
-		return "/Chat/chat_room";
+	@RequestMapping("/chat")
+	public String chatroom(Principal principal) {
+		return "/Chat/chatroom";
 	}
 	
 	/**
@@ -929,8 +966,8 @@ public class MemberController {
 	 * @param session
 	 * @return
 	 */
-	@GetMapping(value = "/userList")
-	public ModelAndView userList(HttpSession session) {
+	@GetMapping(value = "/userLists")
+	public ModelAndView userLists(HttpSession session) {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("h:mm a | MMM d", new Locale("en", "US"));
 		
@@ -956,21 +993,26 @@ public class MemberController {
 	 * @param map
 	 * @return
 	 */
-	@GetMapping(value = "/message")
+	@PostMapping(value = "/message")
+	@ResponseBody
 	public ModelAndView message(HttpSession session, @RequestBody HashMap<String, String> map) { 
 		System.out.println("message");
 		System.out.println("map="+map);
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("h:mm a | MMM d", new Locale("en", "US"));
+		SimpleDateFormat sdf = new SimpleDateFormat("h:mm a | MMM d일", Locale.KOREAN);
 		
 		ModelAndView mav = null;
 		
-		mav = new ModelAndView("message"); 
+		Member m = memberservice.member_info(map.get("uuid"));
+		
+		mav = new ModelAndView("/Chat/message"); 
 		
 		Member user = (Member)session.getAttribute("loginUser");
 		String sender = map.get("sender");
 		System.out.println("sender="+map.get("sender"));
 		
+		mav.addObject("profile", m.getPROFILE_FILE());
+		System.out.println("user.getNAME()="+user.getNAME());
 		if(!user.getNAME().equals(sender)) {
 			mav.addObject("sender", sender);
 		}
@@ -981,41 +1023,29 @@ public class MemberController {
 		return mav;
 	}
 	
-	/**
-	 * 4. 채팅룸 HTML 전송
-	 * JSON 타입의 파라미터를 받기 위해서는 @RequestBody 어노테이션을 붙여줘야 한다.
-	 * @param session
-	 * @param map
-	 * @return
-	 */
-	@PostMapping(value = "/room")
-	public ModelAndView room(HttpSession session, @RequestBody HashMap<String, String> map) {
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("h:mm a | MMM d", new Locale("en", "US"));
-		
-		ModelAndView mav = null;
-		
-		mav = new ModelAndView("room"); 
-		
-		// 날짜 추가         
-		mav.addObject("date", sdf.format(new Date()));
-		
-		if(map.get("handle").equals("roomList")) {     
-			map.remove("handle");
-			mav.addObject("map", map);
-			return mav;
-		}
-
-		// uuid 추가
-		mav.addObject("uuid", map.get("uuid"));
-		
-		String sender = map.get("sender");
-		
-		mav.addObject("sender", sender);
-		return mav;
-	}	
 	
-
+	@GetMapping(value = "/send")
+	public ModelAndView send(@RequestParam HashMap<String, String> map, ModelAndView mav, Principal principal) {
+		System.out.println("sendmap="+map);
+		
+		String id = principal.getName();
+		Member m = memberservice.member_info(id);
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("h:mm a | MMM d일", Locale.KOREAN);
+		
+		mav.setViewName("/Chat/send");
+		
+		mav.addObject("profile", m.getPROFILE_FILE());
+		mav.addObject("content", map.get("content"));
+		mav.addObject("date", sdf.format(new Date()));
+		return mav;
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	
