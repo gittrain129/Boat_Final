@@ -79,26 +79,20 @@ public class AttendanceContoroller {
 	        Calendar currentCalendar = Calendar.getInstance();
 
 	        
-	      //이번달
-	        String month  = df.format(currentCalendar.get(Calendar.MONTH) + 1);
 
 
-	      //이전 날짜
-	        currentCalendar.add(currentCalendar.DATE, -1);
-	        String pastDay = df.format(currentCalendar.get(Calendar.DATE));
-		      //이번달 마지막 날짜  
-		        String lastDay =  df.format(currentCalendar.getActualMaximum(Calendar.DAY_OF_MONTH ));
 				
 
 	      //이번주 첫째 날짜  
-	        currentCalendar.add(Calendar.DATE, 1 - currentCalendar.get(Calendar.DAY_OF_WEEK)); 
-	        String firstWeekDay = df.format(currentCalendar.get(Calendar.DATE));    
+	        currentCalendar.set(Calendar.DAY_OF_WEEK,Calendar.MONDAY); 
+	        
+	        String firstWeekDay = df.format(currentCalendar.getTime());    
 	      
 
 	      //이번주 마지막 날짜  
-
-	        currentCalendar.add(Calendar.DATE, 7 - currentCalendar.get(Calendar.DAY_OF_WEEK)); 
-	        String lastWeekDay = df.format(currentCalendar.get(Calendar.DATE)); 
+	        currentCalendar.set(Calendar.DAY_OF_WEEK,Calendar.FRIDAY); 
+	        
+	        String lastWeekDay = df.format(currentCalendar.getTime()); 
 
 	        System.out.println(firstWeekDay+"============================="+lastWeekDay);
 
@@ -106,7 +100,7 @@ public class AttendanceContoroller {
 			
 			
 			
-			
+			// select sum(work_time) from boat_attendance where reg_date>'2023-04-10' and reg_date <'2023-04-14';
 			
 			
 			

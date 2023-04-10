@@ -13,13 +13,6 @@
 <title>일별근무시간</title>
 <jsp:include page="../Main/header.jsp" />
 
-<%-- <sec:authorize access="isAnonymous()">
-		<sec:authentication property="principal" var="pinfo"/>
-		
-		<c:if test="${pinfo.username=='admin'}">
-		 </c:if>
-      </sec:authorize>
-		--%>
 
 <%-- <script src="${path}/resources/js/attendance/board.js" defer ></script>--%>
 
@@ -92,9 +85,9 @@
         </div>
         <div id="work-week" class="box">
         
-            <div id="week-header">주별 근로시간</div>
+            <div id="week-header">이번주 근로시간</div>
             
-           	 <div id="week">
+           <!-- 	 <div id="week">
               <span class ="week">첫째 주 :</span><span class="firstweek"></span>   </div>
               <div id="week">
               <span class ="week">둘째 주 :</span><span class="secondweek"></span> </div>
@@ -103,12 +96,15 @@
               <div id="week">
               <span class ="week">넷째 주 :</span><span class="fourthweek"></span> </div>
               <div id="week">
-              <span class ="week">다섯째 주  :</span><span class="fifthweek"></span> </div>
+              <span class ="week">다섯째 주  :</span><span class="fifthweek"></span> </div> -->
               
               
+          <div></div>
           
             <div id="work-time">
-                총 근무시간 &nbsp&nbsp 
+               <!--  총 근무시간 &nbsp&nbsp --> 
+               &nbsp&nbsp
+               
                 <div class="progress">
                     <div class="progress-bar" style="width:80%;">80%</div>
                 </div>
@@ -118,11 +114,20 @@
               
             </div>
         </div>
+        
+        
+<sec:authorize access="isAnonymous()">
+		<sec:authentication property="principal" var="pinfo"/>
+		
+		<c:if test="${pinfo.username=='admin'}">
+	
         <div id="rest-information" class="box">
 
             </div>
-        </div>
-
+     
+	 </c:if>
+      </sec:authorize>
+         </div>
     <div id="main-content">
         <div>
         <%-- 검색창 form--%>
