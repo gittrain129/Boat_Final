@@ -247,9 +247,9 @@
                        </sec:authorize>
 
                         <sec:authorize access="isAnonymous()">
-                            <p class="mb-2"><span id="">방가방가</span></p>
+                            <p class="mb-2"><span id=""></span></p>
                             <h6 class="mb-0">
-                                <span id="">로그인해요</span></h6>
+                                <span id=""></span></h6>
                        </sec:authorize>
                        
                             </div>
@@ -365,6 +365,14 @@
                     <div class="dropdown-menu border-0 rounded-0 rounded-bottom m-0 shadow">
                         <a href="${pageContext.request.contextPath}/member/myinfo" class="dropdown-item">내 정보 관리</a>
                     </div>
+             <c:if test="${pinfo.username=='admin'}">
+            <!-- Dropdown -->
+              <div class="dropdown-menu border-0 rounded-0 rounded-bottom m-0 shadow">
+                        <a href="${pageContext.request.contextPath}/admin/list" class="dropdown-item">관리자페이지</a>
+                    </div>
+         </c:if>
+         
+         
                 </div>
             </div>    
                 
