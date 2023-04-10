@@ -126,10 +126,14 @@ h1{
 #work-week{
     padding: 20px;
     display: grid;
-    grid-template-rows: 1fr 1fr 1.5fr 1.5fr;
+    grid-template-rows: 1.5fr 1fr 1fr 1fr 1fr 1fr 1fr;
     width: 100%;
     height: 100%;
     gap: 15px
+}
+.week{
+	color : black;
+	
 }
 #rest-information{
     padding: 20px;

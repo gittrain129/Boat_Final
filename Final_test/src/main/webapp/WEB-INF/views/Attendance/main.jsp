@@ -91,16 +91,22 @@
             </div>
         </div>
         <div id="work-week" class="box">
-            <div id="week-header">이번주 근로시간</div>
-            <div id="select-week">
-                <form>
-                <input id="startWork" type="date" style="width: 100px;" name="start" value="2022-01-08">
-                        ~
-                <input id="endWork" type="date" style="width: 100px;" name="end" value="2023-01-14">
-
-
-            </form>
-            </div>
+        
+            <div id="week-header">주별 근로시간</div>
+            
+           	 <div id="week">
+              <span class ="week">첫째 주 :</span><span class="firstweek"></span>   </div>
+              <div id="week">
+              <span class ="week">둘째 주 :</span><span class="secondweek"></span> </div>
+              <div id="week">
+              <span class ="week">셋째 주 :</span><span class="thirdweek"></span> </div>
+              <div id="week">
+              <span class ="week">넷째 주 :</span><span class="fourthweek"></span> </div>
+              <div id="week">
+              <span class ="week">다섯째 주  :</span><span class="fifthweek"></span> </div>
+              
+              
+          
             <div id="work-time">
                 총 근무시간 &nbsp&nbsp 
                 <div class="progress">
@@ -113,8 +119,6 @@
             </div>
         </div>
         <div id="rest-information" class="box">
-        <div id="information-header">부서별 근무시간</div>
-        <input type="text" name="daterange" value="01/01/2018 - 01/15/2018" />
 
             </div>
         </div>

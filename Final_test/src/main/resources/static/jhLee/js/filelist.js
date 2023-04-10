@@ -87,7 +87,15 @@ $.ajax({
             let output ="<tbody>";
             $(data.boardlist).each(
                 function(index,item){
-                    output+="<tr><td title='즐겨찾기' class='text-center'><i class='bi bi-star-fill' style='color:#ffd699' id='star" + item.file_NUM +"' onclick='toggle("+ item.file_NUM + ","+empno+")'></i></td><td>"
+                
+                if(item.file_EMPNO != null && item.star != null &&item.star.includes(item.file_EMPNO)){
+						output+="<tr>사람살려<td title='즐겨찾기' class='text-center'><i class='bi bi-star' id='star" + item.file_NUM +"' onclick='toggle("+ item.file_NUM + ","+empno+")'></i></td><td>"
+						}
+						else{
+    					 output+="<tr><td title='즐겨찾기' class='text-center'><i class='bi bi-star-fill' style='color:#ffd699' id='star'" + item.file_NUM +"' onclick='toggle("+ item.file_NUM + ","+empno+")'></i></td><td>"
+			            }
+			            
+			            
                     let img="";
                     if(item.file_RE_LEV>0){
                         img='<img alt="파일다운2" src="${pageContext.request.contextPath}/jhLee/img/download.png"class="file"style="width:20px">'

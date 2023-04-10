@@ -23,7 +23,7 @@
         <input name="FILE_SUBJECT" id="FILE_SUBJECT" type="text" maxlength="100"
         class="form-control" placeholder="제목을 입력하세요">
     </div>
-    <input type ="hidden" name ="FIlE_EMPNO" value="${EMPNO}">
+    <input type ="hidden" name ="FILE_EMPNO" value="${EMPNO}">
  	
 
  	<div class="form-group">

@@ -114,7 +114,7 @@ $('#start-btn').click(function(){
                 //출근시간 표시.substr(0,10)
                 console.log(rdata.ON_TIME);
                 let attTiemeee=rdata.ON_TIME;
-               $('#onTimeText').text(rdata.ON_TIME);
+               $('#onTimeText').text(rdata.ON_TIME.substr(11,15));
                $('#attTime').text(attTiemeee);
                $('#attColor').css('background','#40cf2f')
 
@@ -163,7 +163,7 @@ $('#end-btn').click(function(){
                         //console.log(rdata.OFF_TIME).substr(0,10);
 
                         //퇴근시간 표시
-                        $('#offTimeText').text(rdata.OFF_TIME);
+                        $('#offTimeText').text(rdata.OFF_TIME.substr(11,15));
                        
                         $('#attColor').css('background','white');
                         $('#attTime').text('');
