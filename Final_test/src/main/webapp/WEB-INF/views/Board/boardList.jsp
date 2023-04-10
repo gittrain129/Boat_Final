@@ -29,6 +29,10 @@ background-color: white;
 background-color: white;
   border: none;
 }
+h3.pb-1.mb-2.align-self-start.justify-content-start {
+  margin-right: 10px;
+}
+
 </style>
 
 </head>
@@ -59,9 +63,12 @@ background-color: white;
 		<div class="row">
 		
 <div class="col-lg-12 col-12 mb-2 d-flex align-items-center justify-content-between">
-  <h3 class="pb-1 mb-2 flex-grow-1 align-self-start justify-content-start"> 업무용 게시판
-  <a href="${pageContext.request.contextPath}/board/Write" class="btn btn-success  ml-4 mb-2 px-3">글쓰기</a>
-   </h3>
+  <h3 class="pb-1 mb-2  align-self-start justify-content-start">
+   <a href="${pageContext.request.contextPath}/board/List" >업무용 게시판</a>
+  	   </h3>
+ <div class="flex-grow-1 ml-auto">
+ <a href="${pageContext.request.contextPath}/board/Write" class="btn btn-success  ml-4 mb-2 px-3">글쓰기</a>
+ </div>  
   <div class="d-flex align-items-center ml-auto">
   
 <form class="d-flex align-items-center">
@@ -308,7 +315,7 @@ function toggle(BOARD_NUM,BOARD_EMPNO,BOARD_DEPT) {
 		        },
 		        error: function(request,error) {
 		            
-		            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		            alert('즐겨찾기 등록은 즐겨찾기탭에서 불가능합니다');
 		        }
 			});//delete_ajax 끝
 			
@@ -334,8 +341,7 @@ function toggle(BOARD_NUM,BOARD_EMPNO,BOARD_DEPT) {
 		        },
 		        error: function(request,error) {
 		            
-		            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		        }
+		        	 alert('즐겨찾기 등록은 즐겨찾기탭에서 불가능합니다');		        }
 			});//add_ajax 끝
 		  
 		}
@@ -347,10 +353,18 @@ function favorite(BOARD_EMPNO) {
 	var state = $("#hidden-state").val()
 	
 	if(state == 'fav'){
+		$("#maintable > table > thead > tr > th:nth-child(1)").css({
+			  "text-decoration": "none",
+			  "color": "#777777"
+			});
 		window.location.href = '${pageContext.request.contextPath}/board/List';
 	}else{
-	
+		$("#maintable > table > thead > tr > th:nth-child(1)").css({
+			  "text-decoration": "underline",
+			  "color": "#009CFF"
+			});
 	$.ajax({
+		
         url: "${pageContext.request.contextPath}/board/Fav_List",
         type: 'POST',
         data: {

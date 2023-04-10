@@ -73,6 +73,30 @@ VALUES('2320002', '개발팀', '부서장','123456','123456', '천개발','admin
 INSERT INTO MEMBER 
 VALUES('2320001', '개발팀', '부서장','123456','123456', '천개발','admin2@boat.com',
 'adminImage2.png', 'adminImage2.png',SYSDATE, 'ROLE_MEMBER', null,null);
+
+INSERT INTO MEMBER 
+VALUES('2320113', '개발팀', '부서장','123456', '123456','신개발','admin@boat.com',
+'adminImage.png','adminImage.png', SYSDATE, 'ROLE_MEMBER', null,null);
+
+INSERT INTO MEMBER 
+VALUES('2320112', '개발팀', '부서장','123456','123456', '천개발','admin2@boat.com',
+'adminImage2.png', 'adminImage2.png',SYSDATE, 'ROLE_MEMBER', null,null);
+
+INSERT INTO MEMBER 
+VALUES('2320111', '인사팀', '부서장','123456','123456', '천개발','admin2@boat.com',
+'adminImage2.png', 'adminImage2.png',SYSDATE, 'ROLE_MEMBER', null,null);
+
+INSERT INTO MEMBER 
+VALUES('2320203', '개발팀', '부서장','123456', '123456','신개발','admin@boat.com',
+'adminImage.png','adminImage.png', SYSDATE, 'ROLE_MEMBER', null,null);
+
+INSERT INTO MEMBER 
+VALUES('2320202', '개발팀', '부서장','123456','123456', '천개발','admin2@boat.com',
+'adminImage2.png', 'adminImage2.png',SYSDATE, 'ROLE_MEMBER', null,null);
+
+INSERT INTO MEMBER 
+VALUES('2320201', '홍보팀', '부서장','123456','123456', '천개발','admin2@boat.com',
+'adminImage2.png', 'adminImage2.png',SYSDATE, 'ROLE_MEMBER', null,null);
 -------------------------------------
 
 

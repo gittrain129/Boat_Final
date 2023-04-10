@@ -62,6 +62,18 @@ public interface MemberService {
 
 	//채팅 회원 목록?
 	public ArrayList<Member> selectUserList();
+	
+	//주소록 페이지네이션용 카운트
+	public int getAddressLcount();
+	
+	//주소록 메인페이지용 getlist
+	public List<Member> getAddressList(int page, int limit);
+	
+	//주소록 부서설정ajax용 리스트카운트
+	public int getOptionListCount(String dept);
+	
+	//주소록 부서설정용 getlist
+	public List<Member> getOptionAddressList(int page, int limit, String dept);
 
 
 

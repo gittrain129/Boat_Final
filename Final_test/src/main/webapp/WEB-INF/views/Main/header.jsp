@@ -324,7 +324,7 @@
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">공유업무</a>
                     <div class="dropdown-menu border-0 rounded-0 rounded-bottom m-0 shadow">
                         <a href="${pageContext.request.contextPath}/cal" class="dropdown-item">캘린더</a>
-                        <a href="${pageContext.request.contextPath}/address" class="dropdown-item">주소록</a>
+                        <a href="${pageContext.request.contextPath}/address/list" class="dropdown-item">주소록</a>
                     </div>
                 </div>
                               

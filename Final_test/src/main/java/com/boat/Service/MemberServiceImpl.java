@@ -153,5 +153,48 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	
+	//주소록 페이지네이션용 카운트
+	@Override
+	public int getAddressLcount() {
+		return dao.getAddressLcount();
+	}
+	
+	//주소록 메인페이지용 getlist
+	@Override
+	public List<Member> getAddressList(int page, int limit) {
+			HashMap<String, Integer> map = new HashMap<String, Integer>();
+			
+			int start = (page-1) * limit + 1;
+			int end = start + limit - 1;
+			
+			map.put("start", start);
+			map.put("end", end);
+			
+			return dao.getAddressList(map);
+	}
+	
+	
+	
+	//주소록 부서설정ajax용 리스트카운트
+	@Override
+	public int getOptionListCount(String dept) {
+		return dao.getOptionListCount(dept);
+	}
+	
+	//주소록 부서설정용 getlist
+	@Override
+	public List<Member> getOptionAddressList(int page, int limit, String dept) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int start = (page-1) * limit + 1;
+		int end = start + limit - 1;
+		
+		map.put("start", start);
+		map.put("end", end);
+		map.put("dept", dept);
+		
+		return dao.getOptionAddressList(map);
+	}
+
+	
 	
 }

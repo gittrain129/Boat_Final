@@ -139,4 +139,44 @@
 		ORDER BY EMPNO
 	</select>
 	
+	<select id="getAddressLcount" resultType="int">
+		select count(*) from member
+	</select>
+	
+	<select id="getAddressList" resultType="member">
+	select * from
+		(select rownum rnum, b.* from
+		 (select * from
+		  member) b
+			where rownum &lt;= #{end}
+		)
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
+	
+	
+	<select id="getOptionListCount" resultType="int">
+		select count(*) from member
+		<where>
+    	<if test="dept != null and dept != ''">
+      	and dept = #{dept}
+    	</if>
+  		</where>
+	</select>
+	
+	<select id="getOptionAddressList" resultType="member">
+	select * from
+		(select rownum rnum, b.* from
+		 (select * from
+		  member
+		 <where>
+        <if test="dept != null and dept != ''">
+          AND dept = #{dept}
+        </if>
+      </where>
+		  ) b
+			where rownum &lt;= #{end}
+		)
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
+	
 </mapper>

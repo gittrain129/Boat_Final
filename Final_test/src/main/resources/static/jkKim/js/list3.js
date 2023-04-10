@@ -81,7 +81,12 @@ function ajax3(sdata){
 					
 					
 					output += "<tr>"
-			            output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star-fill' style='color:#ffd699' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ","+item.board_EMPNO+ ")'></i></td>"
+					if(item.board_EMPNO != null && item.abc != null && item.abc.includes(item.board_EMPNO)){
+    					output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star-fill' style='color:#ffd699' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ","+item.board_EMPNO+ ")'></i></td>";
+						}
+						else{
+			            output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ","+item.board_EMPNO+ ")'></i></td>"
+			            }
 			            const blank_count = item.board_RE_LEV * 2 + 1;
 			            let blank = '&nbsp;'; //답글일 때 들여쓰기
 			            for (let i = 1; i<blank_count; i++){
@@ -164,7 +169,7 @@ function ajax3(sdata){
 				$('.pagination').append(output);
       },
       error: function(error) {
-        
+        alert('검색옵션을 선택해주세요')
         console.error(error);
       }
      }) //ajax끝
@@ -206,8 +211,12 @@ function ajax2(sdata){
 					
 					
 					output += "<tr>"
-			            output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star-fill' style='color:#ffd699' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ","+item.board_EMPNO+ ")'></i></td>"
-			            const blank_count = item.board_RE_LEV * 2 + 1;
+						if(item.board_EMPNO != null && item.abc != null && item.abc.includes(item.board_EMPNO)){
+    					output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star-fill' style='color:#ffd699' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ","+item.board_EMPNO+ ")'></i></td>";
+						}
+						else{
+			            output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ","+item.board_EMPNO+ ")'></i></td>"
+			            }			            const blank_count = item.board_RE_LEV * 2 + 1;
 			            let blank = '&nbsp;'; //답글일 때 들여쓰기
 			            for (let i = 1; i<blank_count; i++){
 			                blank += '&nbsp;&nbsp';
@@ -289,7 +298,7 @@ function ajax2(sdata){
 				$('.pagination').append(output);
       },
       error: function(error) {
-        
+        alert('검색옵션을 선택해주세요')
         console.error(error);
       }
     });
@@ -322,8 +331,12 @@ function ajax(sdata){
 					
 					
 					output += "<tr>"
-			  			output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star-fill' style='color:#ffd699' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ","+item.board_EMPNO+ ")'></i></td>"
-			            const blank_count = item.board_RE_LEV * 2 + 1;
+						if(item.board_EMPNO != null && item.abc != null && item.abc.includes(item.board_EMPNO)){
+    					output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star-fill' style='color:#ffd699' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ","+item.board_EMPNO+ ")'></i></td>";
+						}
+						else{
+			            output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ","+item.board_EMPNO+ ")'></i></td>"
+			            }			            const blank_count = item.board_RE_LEV * 2 + 1;
 			            let blank = '&nbsp;'; //답글일 때 들여쓰기
 			            for (let i = 1; i<blank_count; i++){
 			                blank += '&nbsp;&nbsp';
@@ -406,6 +419,7 @@ function ajax(sdata){
 
 			}, //success end
 			error : function() {
+			alert('검색옵션을 선택해주세요')
 				console.log('에러');
 			}
 	})//ajax end
@@ -455,10 +469,17 @@ $(document).ready(function() {
 			$(data.boardlist).each(
 				
 				function(index, item){
-					
+					console.log(item.abc)
+					console.log(item.board_EMPNO)
 					
 					output += "<tr>"
-			            output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star-fill' style='color:#ffd699' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ","+item.board_EMPNO+ ")'></i></td>"
+					if(item.board_EMPNO != null && item.abc != null && item.abc.includes(item.board_EMPNO)){
+    					output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star-fill' style='color:#ffd699' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ","+item.board_EMPNO+ ")'></i></td>";
+						}
+						else{
+			            output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ","+item.board_EMPNO+ ")'></i></td>"
+			            }
+			            
 			            const blank_count = item.board_RE_LEV * 2 + 1;
 			            let blank = '&nbsp;'; //답글일 때 들여쓰기
 			            for (let i = 1; i<blank_count; i++){
@@ -541,7 +562,7 @@ $(document).ready(function() {
 				$('.pagination').append(output);
       },
       error: function(error) {
-        
+        alert('검색옵션을 선택해주세요')
         console.error(error);
       }
     });
@@ -592,7 +613,12 @@ $.ajax({
 					
 					
 					output += "<tr>"
-			            output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star-fill' style='color:#ffd699' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ","+item.board_EMPNO+ ")'></i></td>"
+					if(item.board_EMPNO != null && item.abc != null && item.abc.includes(item.board_EMPNO)){
+    					output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star-fill' style='color:#ffd699' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ","+item.board_EMPNO+ ")'></i></td>";
+						}
+						else{
+			            output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ","+item.board_EMPNO+ ")'></i></td>"
+			            }
 			            const blank_count = item.board_RE_LEV * 2 + 1;
 			            let blank = '&nbsp;'; //답글일 때 들여쓰기
 			            for (let i = 1; i<blank_count; i++){
@@ -675,7 +701,7 @@ $.ajax({
 				$('.pagination').append(output);
       },
       error: function(error) {
-        
+        alert('검색옵션을 선택해주세요')
         console.error(error);
       }
      }) //ajax끝
@@ -725,8 +751,12 @@ $.ajax({
 					
 					
 					output += "<tr>"
-			            output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star-fill' style='color:#ffd699' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ","+item.board_EMPNO+ ")'></i></td>"
-			            const blank_count = item.board_RE_LEV * 2 + 1;
+						if(item.board_EMPNO != null && item.abc != null && item.abc.includes(item.board_EMPNO)){
+    					output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star-fill' style='color:#ffd699' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ","+item.board_EMPNO+ ")'></i></td>";
+						}
+						else{
+			            output += "<td title='즐겨찾기' class='text-center'><i class='bi bi-star' id='star" + item.board_NUM +"' onclick='toggle("+ item.board_NUM + ","+item.board_EMPNO+ ")'></i></td>"
+			            }			            const blank_count = item.board_RE_LEV * 2 + 1;
 			            let blank = '&nbsp;'; //답글일 때 들여쓰기
 			            for (let i = 1; i<blank_count; i++){
 			                blank += '&nbsp;&nbsp';
@@ -808,7 +838,7 @@ $.ajax({
 				$('.pagination').append(output);
       },
       error: function(error) {
-        
+        alert('검색옵션을 선택해주세요')
         console.error(error);
       }
      }) //ajax끝
