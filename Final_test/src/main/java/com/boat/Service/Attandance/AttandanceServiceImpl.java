@@ -247,6 +247,17 @@ public class AttandanceServiceImpl implements AttandanceService {
 		
 	}
 
+
+	@Override
+	public void thisweekwork(String firstWeekDay, String lastWeekDay) {
+		System.out.println("==========================================");
+		System.out.println(firstWeekDay);
+		System.out.println(lastWeekDay);
+		//dao.thisweekwork(firstWeekDay,lastWeekDay);
+		
+		
+	}
+
 	
 
 }

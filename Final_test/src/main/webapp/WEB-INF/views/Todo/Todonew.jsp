@@ -296,11 +296,22 @@ body > div.container-fluid.bg-dark.text-body.footer.mt-5.pt-5.wow.fadeIn{
                                 <div class='myallprogress progress'>
                                   <div class=" myallprogress-bar progress-bar bg-info" role="progressbar" 
                                   style="width:${mydoneper}%" 
-                                  aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                  aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                                  <c:if test="${mydonper!=100}">
+											${mydoneper}%
+										</c:if>
+										<c:if test="${mydonper==100}">
+										백이야
+									
+										</c:if>
+                                  
+                                  </div>
                                 <%--<c:out value="${protageall}"> --%>
-
+                         
+										
+										
                                 </div>
-                              </c:if>
+                                     </c:if>
                                 </div>
 
 
@@ -322,12 +333,20 @@ body > div.container-fluid.bg-dark.text-body.footer.mt-5.pt-5.wow.fadeIn{
                             aria-expanded="false" aria-controls="${'collapse'}${num}">
                             ${MDT.NAME} <div class="progress"></div>	
                              </button>
+                             <div>
                              <div class='deptprogress todoprogress progress'>
 
                               <div class=" myallprogress-bar progress-bar bg-info" role="progressbar" 
                               style="width:${MDT.count}%" 
-                              aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                              aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                              
+                              <c:if test="${MDT.count!=100}">
+                              ${MDT.count}%
+                              </c:if>
+                              
+                              </div>
 
+                             </div>
                              </div>
                           </h2>
                                      
@@ -356,37 +375,22 @@ body > div.container-fluid.bg-dark.text-body.footer.mt-5.pt-5.wow.fadeIn{
                                    <i class="fa fa-shield"></i>
                                </div>
                               <!-- 부서명 사원명 end /// -->
-                             <a href="forum_post.html" class="forum-item-title"> 진행중</a> 
+                             <a  class="forum-item-title"> 진행중</a> 
                               <div class="forum-sub-title">
                                </div>
                            </div>
                         
-                           <div class="col-md-1 forum-info">
-                               <span class="views-number">
-                                   
-                               </span>
-                               <div>
-                                   <small></small>
-                               </div>
-                           </div>
-                           <div class="col-md-1 forum-info">
-                               <span class="views-number">
-                                  
-                               </span>
-                               <div>
-                                   <small>${e.START_DATE}</small>
-                               </div>
-                           </div>
+                          
                        </div>
                    </div> 
                    
                    
                    
                    <c:forEach items="${MDT.todo}" var="e">
-                   <%-- 
-                        <c:if test="${e.state==1}">
-                       	 <c:set var="count" value="${count+1}"/>
-                        </c:if>
+               
+                        <c:if test="${e.state==0}">
+                       	    <%--  <c:set var="count" value="${count+1}"/>
+                       
                         <c:if test="${e.state==0}">
                        	 <c:set var="countzero" value="${countzero+1}"/>
                         </c:if>
@@ -426,7 +430,182 @@ body > div.container-fluid.bg-dark.text-body.footer.mt-5.pt-5.wow.fadeIn{
 
                        </div>
                     </div>
+                     </c:if>
+                        <c:if test="${e.state==0}">
+                       	    <%--  <c:set var="count" value="${count+1}"/>
+                       
+                        <c:if test="${e.state==0}">
+                       	 <c:set var="countzero" value="${countzero+1}"/>
+                        </c:if>
+                        
+                        <c:out value="${e.state}"/>
+                        <c:out value="${count}"/>
+                        <c:out value="${countzero}"/>
+                         --%>
+                        
+                   <div class="forum-item">
+                       <div class="row">
+                           <div class="col-md-6">
+<div class="forum-icon">
+<i class="fa fa-bolt"></i>
+</div>
+<a href="forum_post.html" class="forum-item-title">${e.t_CONTENT}</a>
+<div class="forum-sub-title">
+할일상세보기
+</div>
+                           </div>
+<div class="col-md-2 forum-info">
+<span class="views-number">
+</span>
+<div>
+<small>${e.START_DATE}</small>
+</div>
+</div>
+
+<div class="col-md-2 forum-info">
+<span class="views-number">
+
+</span>
+<div>
+<small>${e.END_DATE}</small>
+</div>
+</div>
+
+                       </div>
+                    </div>
+                     </c:if>
+                    
                 </c:forEach>
+                
+                
+                 <div class="forum-item active">
+                       <div class="row">
+                             <div class="col-md-9">
+                              <div class="forum-icon">
+                                   <i class="fa fa-shield"></i>
+                               </div>
+                              <!-- 부서명 사원명 end /// -->
+                             <a  class="forum-item-title">완료</a> 
+                              <div class="forum-sub-title">
+                               </div>
+                           </div>
+                        
+                          
+                       </div>
+                   </div> 
+                   
+                   
+                   
+                   <c:forEach items="${MDT.todo}" var="e">
+               
+                        <c:if test="${e.state==1}">
+                       	    <%--  <c:set var="count" value="${count+1}"/>
+                       
+                        <c:if test="${e.state==0}">
+                       	 <c:set var="countzero" value="${countzero+1}"/>
+                        </c:if>
+                        
+                        <c:out value="${e.state}"/>
+                        <c:out value="${count}"/>
+                        <c:out value="${countzero}"/>
+                         --%>
+                        
+                   <div class="forum-item">
+                       <div class="row">
+                           <div class="col-md-6">
+<div class="forum-icon">
+<i class="fa fa-bolt"></i>
+</div>
+<a href="forum_post.html" class="forum-item-title">${e.t_CONTENT}</a>
+<div class="forum-sub-title">
+할일상세보기
+</div>
+                           </div>
+<div class="col-md-2 forum-info">
+<span class="views-number">
+</span>
+<div>
+<small>${e.START_DATE}</small>
+</div>
+</div>
+
+<div class="col-md-2 forum-info">
+<span class="views-number">
+
+</span>
+<div>
+<small>${e.END_DATE}</small>
+</div>
+</div>
+
+                       </div>
+                    </div>
+                     </c:if>
+                        <c:if test="${e.state==0}">
+                       	    <%--  <c:set var="count" value="${count+1}"/>
+                       
+                        <c:if test="${e.state==0}">
+                       	 <c:set var="countzero" value="${countzero+1}"/>
+                        </c:if>
+                        
+                        <c:out value="${e.state}"/>
+                        <c:out value="${count}"/>
+                        <c:out value="${countzero}"/>
+                         --%>
+                        
+                   <div class="forum-item">
+                       <div class="row">
+                           <div class="col-md-6">
+<div class="forum-icon">
+<i class="fa fa-bolt"></i>
+</div>
+<a href="forum_post.html" class="forum-item-title">${e.t_CONTENT}</a>
+<div class="forum-sub-title">
+할일상세보기
+</div>
+                           </div>
+<div class="col-md-2 forum-info">
+<span class="views-number">
+</span>
+<div>
+<small>${e.START_DATE}</small>
+</div>
+</div>
+
+<div class="col-md-2 forum-info">
+<span class="views-number">
+
+</span>
+<div>
+<small>${e.END_DATE}</small>
+</div>
+</div>
+
+                       </div>
+                    </div>
+                     </c:if>
+                </c:forEach>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
                 </div>
                 <!--  <div class="ibox-content forum-container"> -->
          

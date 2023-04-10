@@ -4,6 +4,8 @@ package com.boat.controller.Attendance;
 import java.io.IOException;
 import java.security.Principal;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,12 +53,84 @@ public class AttendanceContoroller {
 			mv.addObject("TodayMyatt",TodayMyatt);
 		//}
 		
+
+		/*
+		 * //오늘 Calendar currentCalendar = Calendar.getInstance();
+		 * 
+		 * //이번달
+		 * int month = currentCalendar.get(Calendar.MONTH) + 1;
+		 * 
+		 * SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);//오늘
+		 * 
+		 * Date mon = currentCalendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+		 * currentCalendar.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY); //String today
+		 * =sdf.format(currentCalendar);
+		 * 
+		 * //System.out.println("오늘날짜 "+today);
+		 * 
+		 * // int thisWeek = getWeekOfYear(sdf.format(new Date()));
+		 * 
+		 * 
+		 * // System.out.println("이번주 확인"+thisWeek);
+		 * 
+		 */
+
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+	        Calendar currentCalendar = Calendar.getInstance();
+
+	        
+	      //이번달
+	        String month  = df.format(currentCalendar.get(Calendar.MONTH) + 1);
+
+
+	      //이전 날짜
+	        currentCalendar.add(currentCalendar.DATE, -1);
+	        String pastDay = df.format(currentCalendar.get(Calendar.DATE));
+		      //이번달 마지막 날짜  
+		        String lastDay =  df.format(currentCalendar.getActualMaximum(Calendar.DAY_OF_MONTH ));
+				
+
+	      //이번주 첫째 날짜  
+	        currentCalendar.add(Calendar.DATE, 1 - currentCalendar.get(Calendar.DAY_OF_WEEK)); 
+	        String firstWeekDay = df.format(currentCalendar.get(Calendar.DATE));    
+	      
+
+	      //이번주 마지막 날짜  
+
+	        currentCalendar.add(Calendar.DATE, 7 - currentCalendar.get(Calendar.DAY_OF_WEEK)); 
+	        String lastWeekDay = df.format(currentCalendar.get(Calendar.DATE)); 
+
+	        System.out.println(firstWeekDay+"============================="+lastWeekDay);
+
+	        attandanceService.thisweekwork(firstWeekDay,lastWeekDay);
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		//전체리스트....? admin 사용...?
 		mv.addObject("attlist",attlist);
 		mv.setViewName("Attendance/main");
 	return mv;
 	
 	}
+	
+	private int getWeekOfYear(String date) {
+	    Calendar calendar = Calendar.getInstance();
+	    String[] dates = date.split("-");
+	    int year = Integer.parseInt(dates[0]);
+	    int month = Integer.parseInt(dates[1]);
+	    int day = Integer.parseInt(dates[2]);
+	    calendar.set(year, month - 1, day);
+	    return calendar.get(Calendar.WEEK_OF_YEAR);//16주차
+	    //return calendar.get(Calendar.WEEK_OF_MONTH);//3주차
+	}
+	
 	
 	@ResponseBody
 	@PostMapping(value="/on")

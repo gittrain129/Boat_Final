@@ -28,7 +28,7 @@
 <section class="container">
 	<!--<div class="row">  -->
 		<!-- <div class="col-lg-9 col-12 mb-4"> -->
-		<h3 class="border-bottom pb-1 mb-4">자료실 게시판
+		<h3 class="border-bottom pb-1 mb-4"><a class = "filebo" href="${pageContext.request.contextPath}/Filebo/list" target="_self">자료실 게시판</a>
 		 
 		 <!--검색 및 글쓰기  -->
    			<div class = 'search '>
