@@ -8,7 +8,7 @@
 				<img src="${pageContext.request.contextPath}/resources/${user.PROFILE_FILE}" alt="" class="img-circle">
 				<div class="friend-name">
 					<strong>${user.NAME}</strong>
-					<small class="small text-primary fs-6" id="${user.EMPNO}"></small>
+					<small class="small text-primary fs-6 text-danger" id="${user.EMPNO}">오프라인</small>
 				</div>
 				<div class="last-message text-muted">${user.EMPNO}</div>
 				<small class="time text-muted"></small>

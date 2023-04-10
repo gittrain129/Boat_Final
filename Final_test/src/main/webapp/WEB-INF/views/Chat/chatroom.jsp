@@ -128,7 +128,7 @@ function onOpen(){
 	let loginUser = "${sessionScope.loginUser}";
 	console.log("loginUser="+loginUser)
 	// 첫 로그인 시
-	if(loginUser === ""){
+	if(loginUser == ""){
    		send('login');
 	}
 	// 새로고침 시
@@ -191,6 +191,10 @@ function send(handle, secret){
 	console.log("jsonData="+jsonData)
 	webSocket.send(jsonData);
 	
+	const chatContainer = document.querySelector(".chat-message");
+	setTimeout(() => {
+		  chatContainer.scrollTop = chatContainer.scrollHeight;
+		}, 100);
 }
 
 //엔터로 채팅 전송
@@ -264,8 +268,11 @@ function writeResponse(data){
     	$("#" + data.uuid).addClass('temp');
     	
     	// 스크롤 하단 고정
-    	$('#message').scrollTop($('#message').prop('scrollHeight'));
-    	
+    	//$('#message').scrollTop($('#message').prop('scrollHeight'));
+    	const chatContainer = document.querySelector(".chat-message");
+		setTimeout(() => {
+			  chatContainer.scrollTop = chatContainer.scrollHeight;
+			}, 100);
     	
 	}else if(data.handle === "login"){
     	// [상대방 → 나] 로그인 표시
@@ -276,7 +283,9 @@ function writeResponse(data){
 	}else if(data.handle === "onLineList"){
 		// [유저 목록 → 나] 로그인 표시
 		for(let i = 0; i < Object.keys(data).length - 1; i++){
-			document.getElementById(data[i]).innerHTML = "온라인";
+			let element = document.getElementById(data[i]);
+			  element.innerHTML = "온라인";
+			  element.classList.remove("text-danger");
 		}
 	}
 }
@@ -288,35 +297,44 @@ function chatClear(){
 
 //채팅방 입장
 function roomEnter(room){ 
-	
-	let bb = document.getElementsByClassName('active')[0];
-	
-	// 1. 채팅방 목록 리스트 CSS 변경
-	// 활성화 되어 있는 방 클릭 시 [효과 X]
-	if($(room).hasClass("active")){
-		return;
-	}
-	if(bb !== undefined){
-    	bb.classList.add('list-group-item-light');
-    	bb.classList.remove('active', 'text-white');
-	}
-	
-	room.classList.add('active', 'text-white');
-	room.classList.remove('list-group-item-light');
-	
-	// 2. 현재 열려있는 채팅방 초기화
 
-	// 3. secret true값으로 메세지 보내기
-	// send('message', true);
+	if ($(room).find(".small").text() === "오프라인") {
+		toastr.options.escapeHtml = true;
+		toastr.options.closeButton = true;
+		toastr.options.newestOnTop = false;
+		toastr.options.progressBar = true;
+		toastr.info('로그아웃 회원입니다.', '채팅', {timeOut: 3000});
+		
+	}else{
+		
+		let bb = document.getElementsByClassName('active')[0];
+		
+		// 1. 채팅방 목록 리스트 CSS 변경
+		// 활성화 되어 있는 방 클릭 시 [효과 X]
+		if($(room).hasClass("active")){
+			return;
+		}
+		if(bb !== undefined){
+	    	bb.classList.add('list-group-item-light');
+	    	bb.classList.remove('active', 'text-white');
+		}
+		
+		room.classList.add('active', 'text-white');
+		room.classList.remove('list-group-item-light');
+		
+		// 2. 현재 열려있는 채팅방 초기화
 	
-	// 3. 상대방 UUID로 session 찾기 (1. 입장과 동시에 채팅방 집어넣기 or 첫 메세지 보낼 때 연결하기)
-	uuid = room.dataset.uuid;
-	
-	// 4. 메세지 보내기 onClick 이벤트 변경
-	$("#sendBtn").attr("onClick", "send('message', true)");
+		// 3. secret true값으로 메세지 보내기
+		// send('message', true);
+		
+		// 3. 상대방 UUID로 session 찾기 (1. 입장과 동시에 채팅방 집어넣기 or 첫 메세지 보낼 때 연결하기)
+		uuid = room.dataset.uuid;
+		
+		// 4. 메세지 보내기 onClick 이벤트 변경
+		$("#sendBtn").attr("onClick", "send('message', true)");
+	}
 	
 }
-
 </script>
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <jsp:include page="../Main/footer.jsp" />
