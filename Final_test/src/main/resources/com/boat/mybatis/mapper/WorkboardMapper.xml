@@ -12,9 +12,9 @@
 	
 	<select id="getWorkboardList" resultType="workboard" parameterType="map">
 		select *
-		from(select rownum rnum, num, id, content, reg_date
+		from(select rownum rnum, num, name, category, dept, empno, content, reg_date
 			from(
-				select num, id, content, reg_date
+				select *
 				from workboard
 				
 				order by reg_date desc

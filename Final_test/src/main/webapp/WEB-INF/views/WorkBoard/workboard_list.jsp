@@ -62,8 +62,8 @@
 	
 </head>
 <body>
-<input type="hidden" id="loginid" value="${EMPNO}" name="loginid"> <%-- view.js에서 사용하기 위해 추가합니다. --%>
-<input type="hidden" id="loginname" value="${NAME}" name="loginname">
+<input type="hidden" id="login_id" value="${EMPNO}" name="loginid"> <%-- view.js에서 사용하기 위해 추가합니다. --%>
+<input type="hidden" id="login_name" value="${NAME}" name="loginname">
 <input type="hidden" id="logindept" value="${DEPT}" name="logindept">
 	<div class="container" style="margin-top:150px !important;">
 
