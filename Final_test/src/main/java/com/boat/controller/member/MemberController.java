@@ -43,7 +43,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.boat.Service.ChatService;
 import com.boat.Service.MemberService;
 import com.boat.Task.SendMail;
 import com.boat.domain.Board;
@@ -63,21 +62,17 @@ public class MemberController {
 	private SendMail sendMail;
 	private PasswordEncoder passwordEncoder;
 	
-	private ChatService cService;
-	
 	@Autowired
 	private JavaMailSenderImpl mailSender; 
 	
 	
 	@Autowired
 	public MemberController(MemberService memberservice, NaverLoginBO naverloginbo, 
-			SendMail sendMail, PasswordEncoder passwordEncoder, JavaMailSender javaMailSender,
-			ChatService cService) {
+			SendMail sendMail, PasswordEncoder passwordEncoder, JavaMailSender javaMailSender) {
 		this.memberservice = memberservice;
 		this.naverloginbo = naverloginbo;
 		this.sendMail = sendMail;
 		this.passwordEncoder = passwordEncoder;
-		this.cService = cService;
 	}
 
 	
@@ -822,131 +817,6 @@ public class MemberController {
 	
 	
 	
-//	List<Room> roomList = new ArrayList<Room>();
-//	static int roomNumber = 0;
-//
-//	
-//	//채팅
-//	@RequestMapping("/chat")
-//	public ModelAndView chat(Principal principal, ModelAndView mv) {
-//		
-//		String id = principal.getName();
-//		Member m = memberservice.member_info(id);
-//		
-//		List<Member> memberlist = memberservice.getMemberList(id);
-//		
-//		mv.addObject("memberlist", memberlist);
-//		
-//		mv.addObject("memberinfo", m);
-//		mv.addObject("memberimg", m.getPROFILE_FILE());
-//		mv.setViewName("/Chat/chat_room");
-//		return mv;
-//	}
-//	
-//	/**
-//	 * 방 페이지
-//	 * @return
-//	 */
-//	@RequestMapping("/room")
-//	public ModelAndView room(Principal principal, ModelAndView mv) {
-//		String id = principal.getName();
-//		List<Member> memberlist = memberservice.getMemberList(id);
-//		
-//		mv.addObject("memberlist", memberlist);
-//		System.out.println("memberlist="+memberlist);
-//		mv.setViewName("/Chat/chat_room");
-//		return mv;
-//	}
-//	
-//	/**
-//	 * 방 생성하기
-//	 * @param params
-//	 * @return
-//	 */
-//	@RequestMapping("/createRoom")
-//	public @ResponseBody List<Room> createRoom(@RequestParam HashMap<Object, Object> params){
-//		String roomName = (String) params.get("roomName");
-//		if(roomName != null && !roomName.trim().equals("")) {
-//			Room room = new Room();
-//			room.setRoomNumber(++roomNumber);
-//			room.setRoomName(roomName);
-//			roomList.add(room);
-//		}
-//		return roomList;
-//	}
-//	
-//	/**
-//	 * 방 정보가져오기
-//	 * @param params
-//	 * @return
-//	 */
-//	@RequestMapping("/getRoom")
-//	public @ResponseBody List<Room> getRoom(@RequestParam HashMap<Object, Object> params){
-//		return roomList;
-//	}
-//	
-//	/**
-//	 * 채팅방
-//	 * @return
-//	 */
-//	@RequestMapping("/moveChating")
-//	@ResponseBody
-//	public Map<String, Object> chating(@RequestParam HashMap<Object, Object> params, Principal principal, ModelAndView mv) {
-//		System.out.println("moveChating");
-//		System.out.println("params="+params);
-//		
-//		String id = principal.getName();
-//		Member m = memberservice.member_info(id);
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		
-//		map.put("memberinfo", m);
-//		
-//		int roomNumber = Integer.parseInt((String) params.get("roomNumber"));
-//		System.out.println("roomNumber="+roomNumber);
-//		
-//		List<Room> new_list = roomList.stream().filter(o->o.getRoomNumber()==roomNumber).collect(Collectors.toList());
-//		if(new_list != null && new_list.size() > 0) {
-//			map.put("roomName", params.get("roomName"));
-//			map.put("roomNumber", params.get("roomNumber"));
-//		}
-//		System.out.println("roomName="+params.get("roomName"));
-//		System.out.println("roomNumber="+params.get("roomNumber"));
-//		
-//		return map;
-//	}
-//	
-//	/**
-//	 * 방 페이지
-//	 * @return
-//	 */
-//	@RequestMapping("/room")
-//	public String room() {
-//		return "/Chat/chat_room";
-//	}
-//	
-//	/**
-//	 * 3. 유저 목록
-//	 * @param session
-//	 * @return
-//	 */
-//	@GetMapping(value = "/userList")
-//	public ModelAndView userList(HttpSession session) {
-//		
-//		SimpleDateFormat sdf = new SimpleDateFormat("h:mm a | MMM d", new Locale("en", "US"));
-//		
-//		ModelAndView mav = null;
-//		
-//		ArrayList<Member> userList = memberservice.selectUserList();
-//		System.out.println("userList="+userList);
-//		
-//		mav = new ModelAndView("/Chat/users");
-//		
-//		mav.addObject("userList", userList);
-//		
-//		mav.addObject("date", sdf.format(new Date()));
-//		
-//		return mav;
-//	}
 	
 	
 	
@@ -1032,6 +902,11 @@ public class MemberController {
 		Member m = memberservice.member_info(id);
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("h:mm a | MMM d일", Locale.KOREAN);
+		String formattedDate = new SimpleDateFormat("h:mm a | MMM d일", Locale.KOREAN).format(new Date());
+		
+		String content = map.get("content");
+		String uuid = map.get("uuid");
+		memberservice.messageinsert(content, uuid, id, formattedDate);
 		
 		mav.setViewName("/Chat/send");
 		
@@ -1040,6 +915,8 @@ public class MemberController {
 		mav.addObject("date", sdf.format(new Date()));
 		return mav;
 	}
+	
+	
 	
 	
 	

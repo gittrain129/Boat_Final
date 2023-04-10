@@ -195,6 +195,10 @@ public class MemberServiceImpl implements MemberService {
 		return dao.getOptionAddressList(map);
 	}
 
-	
+	//메세지 전송 저장
+	@Override
+	public void messageinsert(String content, String uuid, String id, String formattedDate) {
+		dao.messageinsert(content, uuid, id, formattedDate);
+	}
 	
 }

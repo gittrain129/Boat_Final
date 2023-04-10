@@ -179,4 +179,10 @@
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
 	
+	<insert id="messageinsert">
+		INSERT INTO CHAT_MESSAGE 
+		(SENDER, RECEIVER, CONTENT, CHAT_TIME, CHAT_DATE)
+		VALUES (#{id}, #{uuid}, #{content}, #{formattedDate}, SYSDATE)
+	</insert>
+	
 </mapper>

@@ -1,6 +1,8 @@
 package com.boat.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -75,6 +77,8 @@ public interface MemberService {
 	//주소록 부서설정용 getlist
 	public List<Member> getOptionAddressList(int page, int limit, String dept);
 
+	//메세지 전송 저장
+	public void messageinsert(String content, String uuid, String id, String formattedDate);
 
 
 }
