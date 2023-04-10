@@ -67,7 +67,7 @@ public class addressController {
 		
 		List<Member> boardlist = memberservice.getOptionAddressList(page, limit,dept);
 		
-		mv.setViewName("Address/newaddress");
+		mv.setViewName("Address/newaddress3");
 		mv.addObject("page",page);
 		mv.addObject("maxpage",maxpage);
 		mv.addObject("startpage",startpage);
