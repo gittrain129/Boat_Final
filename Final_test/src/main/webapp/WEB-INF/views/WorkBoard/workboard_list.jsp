@@ -64,7 +64,8 @@
 <body>
 <input type="hidden" id="login_id" value="${EMPNO}" name="loginid"> <%-- view.js에서 사용하기 위해 추가합니다. --%>
 <input type="hidden" id="login_name" value="${NAME}" name="loginname">
-<input type="hidden" id="logindept" value="${DEPT}" name="logindept">
+<input type="hidden" id="login_dept" value="${DEPT}" name="logindept">
+<input type="hidden" id="login_img" value="${PROFILE_FILE}" name="loginimg">
 	<div class="container" style="margin-top:150px !important;">
 
 		<div class="row">
@@ -96,14 +97,14 @@
 								<tr>
 									<th>제목</th>
 									<td>
-										<input name="BOARD_SUBJECT" id="board_subject" type="text" maxlength="100"
+										<input name="SUBJECT" id="subject" type="text" maxlength="100"
 				    	   					class="form-control" placeholder="제목을 입력해주세요">			
 									</td>
 								</tr>
 								<tr>
 									<th>내용</th>
 									<td>
-										<textarea name="BOARD_CONTENT" id="content" 
+										<textarea name="CONTENT" id="content" 
 				    		 				cols="67" rows="5" class="form-control" placeholder="내용을 입력해주세요"></textarea>
 									</td>
 								</tr>
