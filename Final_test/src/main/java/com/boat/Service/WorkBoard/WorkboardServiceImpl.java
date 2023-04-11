@@ -31,7 +31,7 @@ public class WorkboardServiceImpl implements WorkboardService{
 	@Override
 	public List<Workboard> getWorkboardList(int page) {
 		int startrow = 1;
-		int endrow = page * 3;
+		int endrow = page * 5;
 		
 		Map<String,Integer> map = new HashMap<String,Integer>();
 		map.put("start", startrow);

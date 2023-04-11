@@ -1,3 +1,16 @@
+	function go(page,category) {
+		
+		$('.breadcrumb-item').removeClass('active'); 
+		$('.breadcrumb-item a').addClass('text-white'); 
+		$('a[href="javascript:go(1,\''+category+'\')"]').removeClass('text-white');
+		$('a[href="javascript:go(1,\''+category+'\')"]').parent('li').addClass('active'); 
+		
+		
+		const data = `category=${category}&page=${page}`;
+		
+		ajax(data); 
+	}
+	
 $(function(){
 
 	let token = $("meta[name='_csrf']").attr("content");
@@ -5,7 +18,7 @@ $(function(){
 	
 	$("#workboard_card table").hide(); //1
 	let page=1; //더 보기 에서 보여줄 페이지를 기억할 변수
-	const count = parseInt($("#count").text());
+	const count = parseInt($("#runm").text());
 	if (count != 0){ //댓글 갯수가 0이 아니면
 		getList(1); //첫 페이지의 댓글을 구해 옵니다. (한 페이지에 3개씩 가져 옵니다.)
 	} else { //댓그링 없는 경우
@@ -15,6 +28,11 @@ $(function(){
 	let num=0;
 	let url ='';
 	let data = {};
+	let profileFile = $("#login_img").val();
+	
+	
+	
+
 
 	function getList(currentPage) {
 		$.ajax({
@@ -37,42 +55,52 @@ $(function(){
 						$(rdata.list).each(function() {
 							let output = '';
 							let img = '';
-							if($("#login_id").text() == this.empno) {
-								img = "<img src='../resources/Kimsj/image/pencil2.png' width='15px' class='update'>"
-									+ "<img src='../resources/Kimsj/image/delete.png' width='15px' class='remove'>"
+							
+							
+							if($("#login_id").val() == this.empno) {
+								img = "<img src='../resources/Kimsj/image/pencil2.png' class='update' style='width: 20px; margin-right: 10px;'>"
+									+ "<img src='../resources/Kimsj/image/delete.png' class='remove' style='width: 20px;'>"
 									+ "<input type='hidden' value='" + this.num + "'>";
 							}
 							
 							
-						output +=	'<div class="card">' +
-					                '<div class="card-header">' + this.subject + '</div>' +
-					                '<div class="card-body">' +
+						output +=	'<hr class="border-danger mb-4 mt-4" />' +
+									'<br>' +
+									'<div class="card" style="boarder-top:15px;">' +
+					                '<div class="card-header" style="background-color:#1ca7ff; color:white;">' + this.category + '</div>' +
+					                '<div class="card-body" style="height: 250px;">' +
 					                '<div class="row">' +
-					                '<div class="col-sm-2">' +
-					                '<a href="#">' +
-					                '<img class="mr-3 rounded img-thumbnail" src="' + contextPath + '/resources/' + profileFile + '" alt="프로필 사진">' +
-					                '</a>' +
-					                '<h6 class="mt-2"><a href="#">' + this.empno + '</a></h6>' +
+					                '<div class="col-sm-2" style="text-align:center;margin-top: 30px;font-size: 20px;">' +
+					                
+					                '<img class="mr-3 rounded img-thumbnail" src="' + profileFile + '" alt="프로필 사진" style="border-radius: 50% !important; width: 110px">' +
+					                
+					                '<h6 class="mt-2" style="top: 5px;position: relative;font-size: 20px;color: #6c757d !important;">' + this.empno + '</h6>' +
 					                '<small class="text-muted">' + this.name + '</small>' +
 					                '</div>' +
-					                '<div class="col-sm-9 border-left border-secondary">' +
-					                '<p>' + this.content + '</p>' +
+					                '<div class="col-sm-9 border-left border-secondary" style="border: 1px solid #dfdfdf !important;width:  800px !important;height: 230px !important;border-radius: 6px;">' +
+					                '<p style="margin-top: 1rem; font-size:20px;">' + this.subject + '</p>' +
+					                '<hr>' +
+					                '<p style="font-size: 17px">' + this.content + '</p>' +
 					                '</div>' +
 					                '</div>' +
 					                '</div>' +
-					                '<div class="card-footer text-muted">' + this.reg_date + img + '</div>' +
-					                '</div>'
+					                '<div class="card-footer text-muted">' + 
+					                '<div style="float: left;">' + this.reg_date + '</div>' +
+					            	'<div style="width: 80px; float: right;">' + img + '</div>' +
+					                '</div>' +
+					                '</div>' +
+					                '<br>'
 							
 						
 							
 							$("#workboard_card tbody").append(output);
 											
 							//append한 마지막 tr의 2번재 자식 td를 찾아 text()메서드로 content를 넣습니다.
-							$("#workboard_card tbody tr:last").find("td:nth-child(2)").text(this.content); //3
+							$("#workboard_card tbody tr:last").find("td:nth-child(2)").text(this.workboard_card); //3
 							
 						}); //each end
 						
-						if(rdata.listcount > rdata.list.length){ //전체 댓글 갯수 -> 현재까지 보여준 댓글 갯수
+						if(3 < rdata.list.length){ //전체 댓글 갯수 -> 현재까지 보여준 댓글 갯수
 							$("#message").text("더보기")
 						} else {
 							$("#message").text("")
@@ -87,6 +115,8 @@ $(function(){
 				}
 		}); //ajax end
 	}//function end
+	
+
 	
 	
 	//글자수 50개 제한하는 이벤트
@@ -113,13 +143,15 @@ $(function(){
 	//버튼의 라벨이 '수정완료'인 경우는 댓글을 수정하는 경우
 	$("#write").click(function() {
 		const content = $("#content").val().trim();
-	//	if(!content){
-	//		alert('내용을 입력하세요')
-	//		return false;
-	//	}else if(!subject){
-	//		alert('제목을 입력하세요')
-	//		return false;
-	
+		const subject = $("#subject").val().trim();
+		if(!subject){
+			alert('제목을 입력하세요')
+			return false;
+		}else if(!content){
+			alert('내용을 입력하세요')
+			return false;
+		}
+		
 		const buttonText = $("#write").text().trim(); // 버튼의 라벨로 add할지 update할지 결정
 		
 		$(".float-left").text('총 50자까지 가능합니다.');
@@ -135,7 +167,7 @@ $(function(){
 				"NAME" : $("#login_name").val(),
 				"DEPT" : $("#login_dept").val(),
 				"subject" : $("#subject").val(),
-				"PROFILE_FILE" : $("#PROFILE_FILE").val()
+				"PROFILE_FILE" : profileFile
 			};
 		} else { // 댓글을 수정하는 경우
 			url = "../workboard/update";
