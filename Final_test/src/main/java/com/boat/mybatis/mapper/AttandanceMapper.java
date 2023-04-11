@@ -32,6 +32,8 @@ public interface AttandanceMapper {
 	//오늘인한시간
 	public void Todayworktime(String WORK_TIME, String EMPNO);
 
+	public void thisweekwork(String firstWeekDay, String lastWeekDay);
+
 	
 
 

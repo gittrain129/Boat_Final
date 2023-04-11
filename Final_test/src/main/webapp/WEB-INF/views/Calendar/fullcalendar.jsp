@@ -194,6 +194,7 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
 					return false;
 					$('#title').focus();
 				}
+				
 
 				var allDay =false
 				var title =$('#title').val();
@@ -228,12 +229,26 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
 					console.log(starttime)
 					endtime=$('#END_TIME').val()
 					console.log(endtime)
-
+					
+ 			
+						
+						
+						
 					starttimee =(startdate.substr(0,10))+' ' +starttime
 					endtimee =(enddate.substr(0,10))+' ' +endtime
 					var startmoment = starttimee
 					var endmoment = endtimee
 					
+					if (new Date(endtimee)
+	                - new Date(starttimee) < 0) { // date 타입으로 변경 후 확인
+						toastr.options.escapeHtml = true;
+						toastr.options.closeButton = true;
+						toastr.options.newestOnTop = false;
+						toastr.options.progressBar = true;
+						toastr.info('종료시간을 확인해주세요', '캘린더', {timeOut: 1500});
+					return false}
+						
+						
 					}else{
 						//allDaytrue
 					var startmoment = (startdate.substr(0,10))+' 00:00'
