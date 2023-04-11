@@ -94,7 +94,7 @@ function ajax3(sdata){
 			            }
 			            let img="";
 			            if (item.board_RE_LEV > 0){
-			                img="<img src='${pageContext.request.contextPath}/resources/image/line.gif'>";
+			                img="<img src='../resources/img/line.gif'>";
 			            }
 			            let subject=item.board_SUBJECT.replace(/</g,'&lt');
 			            subject = subject.replace(/>/g,'&gt');
@@ -169,7 +169,11 @@ function ajax3(sdata){
 				$('.pagination').append(output);
       },
       error: function(error) {
-        alert('검색옵션을 선택해주세요')
+         toastr.options.escapeHtml = true;
+       toastr.options.closeButton = true;
+       toastr.options.newestOnTop = false;
+       toastr.options.progressBar = true;
+       toastr.info('검색옵션을 선택해주세요.', {timeOut: 3000});
         console.error(error);
       }
      }) //ajax끝
@@ -223,7 +227,7 @@ function ajax2(sdata){
 			            }
 			            let img="";
 			            if (item.board_RE_LEV > 0){
-			                img="<img src='${pageContext.request.contextPath}/resources/image/line.gif'>";
+			                img="<img src='../resources/img/line.gif'>";
 			            }
 			            let subject=item.board_SUBJECT.replace(/</g,'&lt');
 			            subject = subject.replace(/>/g,'&gt');
@@ -298,7 +302,11 @@ function ajax2(sdata){
 				$('.pagination').append(output);
       },
       error: function(error) {
-        alert('검색옵션을 선택해주세요')
+           toastr.options.escapeHtml = true;
+       toastr.options.closeButton = true;
+       toastr.options.newestOnTop = false;
+       toastr.options.progressBar = true;
+       toastr.info('검색옵션을 선택해주세요.', {timeOut: 3000});
         console.error(error);
       }
     });
@@ -343,7 +351,7 @@ function ajax(sdata){
 			            }
 			            let img="";
 			            if (item.board_RE_LEV > 0){
-			                img="<img src='${pageContext.request.contextPath}/resources/image/line.gif'>";
+			               img="<img src='../resources/img/line.gif'>";
 			            }
 			            let subject=item.board_SUBJECT.replace(/</g,'&lt');
 			            subject = subject.replace(/>/g,'&gt');
@@ -419,7 +427,11 @@ function ajax(sdata){
 
 			}, //success end
 			error : function() {
-			alert('검색옵션을 선택해주세요')
+			   toastr.options.escapeHtml = true;
+       toastr.options.closeButton = true;
+       toastr.options.newestOnTop = false;
+       toastr.options.progressBar = true;
+       toastr.info('검색옵션을 선택해주세요.', {timeOut: 3000});
 				console.log('에러');
 			}
 	})//ajax end
@@ -438,7 +450,7 @@ function ajax(sdata){
 //검색용
 $(document).ready(function() {
     
-  $('form').submit(function(event) {
+  $('#searchboard').submit(function(event) {
     event.preventDefault();
 	var search1 = $('input[name="search"]').val();
     var option1 = $('ul.drop1 li a.active').text();
@@ -487,7 +499,7 @@ $(document).ready(function() {
 			            }
 			            let img="";
 			            if (item.board_RE_LEV > 0){
-			                img="<img src='${pageContext.request.contextPath}/resources/image/line.gif'>";
+			                img="<img src='../resources/img/line.gif'>";
 			            }
 			            let subject=item.board_SUBJECT.replace(/</g,'&lt');
 			            subject = subject.replace(/>/g,'&gt');
@@ -562,7 +574,11 @@ $(document).ready(function() {
 				$('.pagination').append(output);
       },
       error: function(error) {
-        alert('검색옵션을 선택해주세요')
+           toastr.options.escapeHtml = true;
+       toastr.options.closeButton = true;
+       toastr.options.newestOnTop = false;
+       toastr.options.progressBar = true;
+       toastr.info('검색옵션을 선택해주세요.', {timeOut: 3000});
         console.error(error);
       }
     });
@@ -626,7 +642,7 @@ $.ajax({
 			            }
 			            let img="";
 			            if (item.board_RE_LEV > 0){
-			                img="<img src='${pageContext.request.contextPath}/resources/image/line.gif'>";
+			                img="<img src='../resources/img/line.gif'>";
 			            }
 			            let subject=item.board_SUBJECT.replace(/</g,'&lt');
 			            subject = subject.replace(/>/g,'&gt');
@@ -701,7 +717,11 @@ $.ajax({
 				$('.pagination').append(output);
       },
       error: function(error) {
-        alert('검색옵션을 선택해주세요')
+          toastr.options.escapeHtml = true;
+       toastr.options.closeButton = true;
+       toastr.options.newestOnTop = false;
+       toastr.options.progressBar = true;
+       toastr.info('검색옵션을 선택해주세요.', {timeOut: 3000});
         console.error(error);
       }
      }) //ajax끝
@@ -763,7 +783,7 @@ $.ajax({
 			            }
 			            let img="";
 			            if (item.board_RE_LEV > 0){
-			                img="<img src='${pageContext.request.contextPath}/resources/image/line.gif'>";
+			                img="<img src='../resources/img/line.gif'>";
 			            }
 			            let subject=item.board_SUBJECT.replace(/</g,'&lt');
 			            subject = subject.replace(/>/g,'&gt');
@@ -838,7 +858,11 @@ $.ajax({
 				$('.pagination').append(output);
       },
       error: function(error) {
-        alert('검색옵션을 선택해주세요')
+           toastr.options.escapeHtml = true;
+       toastr.options.closeButton = true;
+       toastr.options.newestOnTop = false;
+       toastr.options.progressBar = true;
+       toastr.info('검색옵션을 선택해주세요.', {timeOut: 3000});
         console.error(error);
       }
      }) //ajax끝

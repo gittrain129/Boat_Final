@@ -280,7 +280,11 @@ function confirm() {
            success: function(response) {
                $('#res_Modal').modal('hide');
                if(response === "overlap") {
-                   alert("겹치는 시간이 존재합니다.");
+            	   toastr.options.escapeHtml = true;
+		  	       toastr.options.closeButton = true;
+		  	       toastr.options.newestOnTop = false;
+		  	       toastr.options.progressBar = true;
+		  	       toastr.info('겹치는 시간이 존재합니다.', {timeOut: 3000});
                } else {
                    document.location.reload(); 
                }

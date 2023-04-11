@@ -24,10 +24,7 @@
 			<h1 class="display-4 text-white animated slideInDown mb-3">업무게시판</h1>
 			<nav aria-label="breadcrumb animated slideInDown">
 				<ol class="breadcrumb justify-content-center mb-0">
-					<li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
-					<li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
-					<li class="breadcrumb-item text-primary active" aria-current="page">Our
-						Team</li>
+					
 				</ol>
 			</nav>
 		</div>
@@ -41,8 +38,11 @@
 
 
 	<div class="container mt-5">
-		<form action = "${pageContext.request.contextPath}/board/add" method="post" enctype="multipart/form-data" name="boardform" id="boardform">
-		<h2 class="text-center">업무 게시판 -글쓰기</h2>
+		<form action = "${pageContext.request.contextPath}/board/replyAction" method="post" enctype="multipart/form-data" name="boardform" id="boardform">
+		<input type="hidden" name="BOARD_RE_REF" value="${boarddata.BOARD_RE_REF }">
+   		<input type="hidden" name="BOARD_RE_LEV" value="${boarddata.BOARD_RE_LEV }">	
+   		<input type="hidden" name="BOARD_RE_SEQ" value="${boarddata.BOARD_RE_SEQ }">
+		<h2 class="text-center">업무 게시판</h2>
 		 
 			<div class="form-group">
 				<label for="board_subject">제목</label>
@@ -72,13 +72,7 @@
 				 <input	type="password" class="form-control" id="board_pass" name="BOARD_PASS">
 				 </label>
 				 
-				<c:if test="${AUTH == 'ROLE_ADMIN' || AUTH == 'ROLE_MGR'}">
-    			<label for="board_notice" class="col-sm-1 col-form-label text-center">
-        		<small>공지<br>사항</small>
-        		<input type="checkbox" id="board_notice" name="BOARD_NOTICE">
-    			</label>
-				</c:if>
-
+				
 				 
 			</div>
 			

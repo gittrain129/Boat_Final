@@ -131,7 +131,7 @@
 	
 	<select id="getMemberList" resultType="java.util.Map">
 		select * from MEMBER
-		WHERE EMPNO != #{empno}
+		WHERE EMPNO = #{empno}
 	</select>
 	
 	<select id="selectUserList" resultType="member">
@@ -178,5 +178,20 @@
 		)
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
+	
+	<update id="update_admin">
+    UPDATE MEMBER
+    <set>
+        <if test="DEPT != null"> DEPT = #{DEPT}, </if>
+        <if test="PASSWORD != null"> PASSWORD = #{PASSWORD}, </if>
+        <if test="PASSWORD_OG != null"> PASSWORD_OG = #{PASSWORD_OG}, </if>
+        <if test="NAME != null"> NAME = #{NAME}, </if>
+        <if test="PROFILE_FILE != null and PROFILE_FILE != ''"> PROFILE_FILE = #{PROFILE_FILE}, </if>
+        <if test="PROFILE_IMG != null and PROFILE_IMG != ''"> PROFILE_IMG = #{PROFILE_IMG}, </if>
+        <if test="AUTH != null and AUTH !=''"> AUTH = #{AUTH},</if>
+    </set>
+    WHERE EMPNO = #{EMPNO}
+</update>
+
 	
 </mapper>

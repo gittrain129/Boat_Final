@@ -75,4 +75,10 @@ public interface MemberMapper {
 	//주소록 부서설정용 getlist
 	public List<Member> getOptionAddressList(HashMap<String, Object> map);
 	
+	//관리자
+	public List<Member> getMemberList(HashMap<String, Object> map);
+	
+	//관리자 업데이
+	public int update_admin(Member member);
+	
 }

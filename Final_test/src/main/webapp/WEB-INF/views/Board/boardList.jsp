@@ -32,7 +32,9 @@ background-color: white;
 h3.pb-1.mb-2.align-self-start.justify-content-start {
   margin-right: 10px;
 }
-
+#navbarCollapse > div.d-flex.align-items-center.justify-content-end > div.ps-3 > div > form {
+  margin-bottom: 0;
+}
 </style>
 
 </head>
@@ -71,7 +73,7 @@ h3.pb-1.mb-2.align-self-start.justify-content-start {
  </div>  
   <div class="d-flex align-items-center ml-auto">
   
-<form class="d-flex align-items-center">
+<form class="d-flex align-items-center" id="searchboard">
 <div class="input-group mr-2" style="border: 1px solid #ced4da; min-width: 400px;">
    <div class="dropdown" style="border-right: 2px solid #ced4da;">
       <button class="btn btn-secondary dropdown-toggle" style="min-width:100px;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -132,7 +134,7 @@ h3.pb-1.mb-2.align-self-start.justify-content-start {
             						<c:forEach var="a" begin="0" end="${b.BOARD_RE_LEV*2 }" step="1">
             						&nbsp;	
             						</c:forEach>
-            						<img src='${pageContext.request.contextPath}/resources/image/line.gif'>
+            						<img src='${pageContext.request.contextPath}/resources/img/line.gif'>
          						</c:if>
          						<c:if test="${b.BOARD_RE_LEV ==0 }"><!--  원문 인경우 -->
          	 						&nbsp;
@@ -315,7 +317,11 @@ function toggle(BOARD_NUM,BOARD_EMPNO,BOARD_DEPT) {
 		        },
 		        error: function(request,error) {
 		            
-		            alert('즐겨찾기 등록은 즐겨찾기탭에서 불가능합니다');
+		        	 toastr.options.escapeHtml = true;
+		  	       toastr.options.closeButton = true;
+		  	       toastr.options.newestOnTop = false;
+		  	       toastr.options.progressBar = true;
+		  	       toastr.info('즐겨찾기 등록은 즐겨찾기탭에서 불가능합니다.', {timeOut: 3000});
 		        }
 			});//delete_ajax 끝
 			
@@ -341,7 +347,11 @@ function toggle(BOARD_NUM,BOARD_EMPNO,BOARD_DEPT) {
 		        },
 		        error: function(request,error) {
 		            
-		        	 alert('즐겨찾기 등록은 즐겨찾기탭에서 불가능합니다');		        }
+		        	 toastr.options.escapeHtml = true;
+			  	       toastr.options.closeButton = true;
+			  	       toastr.options.newestOnTop = false;
+			  	       toastr.options.progressBar = true;
+			  	       toastr.info('즐겨찾기 등록은 즐겨찾기탭에서 불가능합니다.', {timeOut: 3000});	        }
 			});//add_ajax 끝
 		  
 		}
@@ -395,7 +405,7 @@ function favorite(BOARD_EMPNO) {
 			            }
 			            let img="";
 			            if (item.board_RE_LEV > 0){
-			                img="<img src='${pageContext.request.contextPath}/resources/image/line.gif'>";
+			                img="<img src='${pageContext.request.contextPath}/resources/img/line.gif'>";
 			            }
 			            let subject=item.board_SUBJECT.replace(/</g,'&lt');
 			            subject = subject.replace(/>/g,'&gt');

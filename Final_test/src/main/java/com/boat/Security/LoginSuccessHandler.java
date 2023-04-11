@@ -49,6 +49,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		session.setAttribute("DEPT", member.getDEPT());
 		session.setAttribute("JOB", member.getJOB());
 		session.setAttribute("PROFILE_FILE", member.getPROFILE_FILE());
+		session.setAttribute("AUTH", member.getAUTH());
 		
 		session.setAttribute("loginUser", member);
 		

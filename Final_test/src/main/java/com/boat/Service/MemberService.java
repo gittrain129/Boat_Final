@@ -74,6 +74,12 @@ public interface MemberService {
 	
 	//주소록 부서설정용 getlist
 	public List<Member> getOptionAddressList(int page, int limit, String dept);
+	
+	//관리자페이지 정보불러오기
+	public List<Member> getMemberList(String empno);
+	
+	//관리자페이지 업데이트
+	public int update_admin(Member member);
 
 
 

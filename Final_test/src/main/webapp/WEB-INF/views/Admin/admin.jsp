@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
-    <title>BOAT - 주소록 </title>
+    <title>BOAT - 권한/정보수정 </title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -22,12 +23,12 @@
 <body>
 
  <jsp:include page="../Main/header.jsp"/>
- <script src = "${pageContext.request.contextPath}/jkKim/js/addresslist.js"></script>
+
 
  <!-- Page Header Start -->
     <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
         <div class="container text-center py-5">
-            <h1 class="display-4 text-white animated slideInDown mb-3">Our Team</h1>
+            <h1 class="display-4 text-white animated slideInDown mb-3">권한/정보수정</h1>
             <nav aria-label="breadcrumb animated slideInDown">
                 <ol class="breadcrumb justify-content-center mb-0">
                 	<li class="breadcrumb-item active"><a href="javascript:go(1,'전체부서')">전체부서</a></li>
@@ -43,6 +44,11 @@
     <!-- Page Header End -->
 
   <!-- Team Start -->
+  <sec:authorize access="isAuthenticated()">
+<sec:authentication property="principal" var="pinfo"/>
+	
+  <input type="hidden" id="hidden_auth" name="hidden_auth" value="${AUTH}" />
+	
     <div class="container-xxl pb-5" id="address-container">
     <div>
         <div class="container" id="addressbody">
@@ -67,14 +73,14 @@
                         <div class="team-text">
                             <div class="team-title">
                                 <h5>${b.DEPT} / ${b.NAME }</h5>
-                                <span>${b.JOB }</span>
+                                <span>${b.JOB } / ${b.EMPNO }</span>
                                 
                             </div>
                             <div class="team-social">
                             
                             	<span class="emails">${b.EMAIL}</span>
-                                <c:if test="${b.AUTH == 'ROLE_ADMIN' || b.AUTH =='ROLE_MGR' }">
-                                <a class="btn btn-square btn-primary rounded-circle"><i class="bi bi-pencil-square"></i></a>
+                                <c:if test="${AUTH == 'ROLE_ADMIN' || AUTH =='ROLE_MGR' }"> 
+                                <a class="btn btn-square btn-primary rounded-circle" href="${pageContext.request.contextPath}/admin/modify?empno=${b.EMPNO}"><i class="bi bi-pencil-square"></i></a>
                                 </c:if>
                                 <a class="btn btn-square btn-primary rounded-circle" id="copy-email" ><i class="bi bi-envelope"></i></a>   
                             </div>
@@ -129,6 +135,7 @@
             
        
     </div>
+    
     <!-- Team End -->
     
 
@@ -138,7 +145,7 @@
 //클립보드에 이메일 주소를 복사
 $(document).on('click', '#copy-email', function(){
 	  
-	  var email = $(this).prev('.emails').text();
+	  var email = $(this).prev().prev('.emails').text();
 	  
 	 
 	  var temp = $('<input>');
@@ -157,6 +164,7 @@ $(document).on('click', '#copy-email', function(){
 	});
 
 </script>
-     
+ <script src = "${pageContext.request.contextPath}/jkKim/js/adminlist.js"></script>
+     </sec:authorize>
 </body>
 </html>
