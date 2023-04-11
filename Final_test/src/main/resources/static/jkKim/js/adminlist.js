@@ -79,8 +79,8 @@ function ajax(sdata){
     
     		output += "<div class='team-text'>";
     		output += "<div class='team-title'>";
-    		output += "<h5>" +item.dept +"/"+item.name +"</h5>";
-    		output += "<span>"+ item.job+ "</span>";    
+    		output += "<h5>" +item.dept +" / "+item.name +"</h5>";
+    		output += "<span>"+ item.job+" / " +item.empno+"</span>";    
         
 		    output += "</div>";
     		output += "<div class='team-social'>";
@@ -89,7 +89,7 @@ function ajax(sdata){
         	
         	console.log(auth2);
     		if(auth2 =="ROLE_ADMIN" || auth2 == "ROLE_MGR"){
-    		output += "<a class='btn btn-square btn-primary rounded-circle' href=' request.getContextPath()/admin/modify?empno=" + item.EMPNO + "'><i class='bi bi-pencil-square'></i></a>";
+    		output += "<a class='btn btn-square btn-primary rounded-circle' href='../admin/modify?empno=" + item.empno + "'><i class='bi bi-pencil-square'></i></a>";
 			}
 
 	    

@@ -78,18 +78,14 @@ function ajax(sdata){
     
     		output += "<div class='team-text'>";
     		output += "<div class='team-title'>";
-    		output += "<h5>" +item.dept +"/"+item.name +"</h5>";
-    		output += "<span>"+ item.job+ "</span>";    
+    		output += "<h5>" +item.dept +" / "+item.name +"</h5>";
+    		output += "<span>"+ item.job+ " / " +item.empno +"</span>";    
         
 		    output += "</div>";
     		output += "<div class='team-social'>";
     		output += "<span class='emails'>"+ item.email +"</span>";
         
-    		if(item.auth =='ROLE_ADMIN' || item.auth =='ROLE_MGR'){    
-        		output += "<a class='btn btn-square btn-primary rounded-circle' href=''><i class='bi bi-pencil-square'></i></a>";
-    		}
-	    
-    		output += "<a class='btn btn-square btn-primary rounded-circle' href=''><i class='bi bi-envelope'></i></a>";
+    		output += "<a class='btn btn-square btn-primary rounded-circle' id='copy-email'><i class='bi bi-envelope'></i></a>";
     		output += "</div>";
     		output += "</div>";
     		output += "</div>";    
