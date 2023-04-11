@@ -8,6 +8,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.boat.domain.Board;
+import com.boat.domain.ChatMessage;
 import com.boat.domain.Member;
 
 @Mapper
@@ -81,9 +82,5 @@ public interface MemberMapper {
 	
 	//관리자 업데이
 	public int update_admin(Member member);
-	
-
-	//메세지 전송 저장
-	public void messageinsert(String content, String uuid, String id, String formattedDate);
 
 }

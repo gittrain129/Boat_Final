@@ -43,9 +43,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.boat.Service.ChatMessageService;
 import com.boat.Service.MemberService;
 import com.boat.Task.SendMail;
 import com.boat.domain.Board;
+import com.boat.domain.ChatMessage;
 import com.boat.domain.MailVO;
 import com.boat.domain.Member;
 import com.boat.sns.NaverLoginBO;
@@ -61,6 +63,7 @@ public class MemberController {
 	private NaverLoginBO naverloginbo;//네이버 api
 	private SendMail sendMail;
 	private PasswordEncoder passwordEncoder;
+	private ChatMessageService chatmessageservice;
 	
 	@Autowired
 	private JavaMailSenderImpl mailSender; 
@@ -68,11 +71,13 @@ public class MemberController {
 	
 	@Autowired
 	public MemberController(MemberService memberservice, NaverLoginBO naverloginbo, 
-			SendMail sendMail, PasswordEncoder passwordEncoder, JavaMailSender javaMailSender) {
+			SendMail sendMail, PasswordEncoder passwordEncoder, JavaMailSender javaMailSender,
+			ChatMessageService chatmessageservice) {
 		this.memberservice = memberservice;
 		this.naverloginbo = naverloginbo;
 		this.sendMail = sendMail;
 		this.passwordEncoder = passwordEncoder;
+		this.chatmessageservice = chatmessageservice;
 	}
 
 	
@@ -893,7 +898,6 @@ public class MemberController {
 		return mav;
 	}
 	
-	
 	@GetMapping(value = "/send")
 	public ModelAndView send(@RequestParam HashMap<String, String> map, ModelAndView mav, Principal principal) {
 		System.out.println("sendmap="+map);
@@ -906,13 +910,36 @@ public class MemberController {
 		
 		String content = map.get("content");
 		String uuid = map.get("uuid");
-		memberservice.messageinsert(content, uuid, id, formattedDate);
+		chatmessageservice.messageinsert(content, uuid, id, formattedDate);
 		
 		mav.setViewName("/Chat/send");
 		
 		mav.addObject("profile", m.getPROFILE_FILE());
 		mav.addObject("content", map.get("content"));
 		mav.addObject("date", sdf.format(new Date()));
+		return mav;
+	}
+	
+	@GetMapping(value = "/loadm")
+	public ModelAndView loadm(@RequestParam String uuid, ModelAndView mav, Principal principal, ChatMessage chatMessage) {
+		System.out.println("uuid="+uuid);
+		String id = principal.getName();
+		
+		List<ChatMessage> chatHistory = chatmessageservice.getChatHistory(id, uuid);
+		
+		mav.setViewName("/Chat/loadm");
+		
+		Member m = memberservice.member_info(id);
+		Member m2 = memberservice.member_info(uuid);
+		
+		mav.addObject("sendprofile", m.getPROFILE_FILE());
+		mav.addObject("sendid", m.getEMPNO());
+		
+		mav.addObject("receiverprofile", m2.getPROFILE_FILE());
+		mav.addObject("receiverid", m2.getEMPNO());
+		mav.addObject("sender", m2.getNAME());
+		mav.addObject("chatHistory", chatHistory);
+		
 		return mav;
 	}
 	

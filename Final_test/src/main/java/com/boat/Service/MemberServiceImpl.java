@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.boat.domain.Board;
+import com.boat.domain.ChatMessage;
 import com.boat.domain.Member;
 import com.boat.mybatis.mapper.MemberMapper;
 
@@ -208,13 +209,6 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int update_admin(Member member) {
 		return dao.update_admin(member);
-	}
-	
-
-	//메세지 전송 저장
-	@Override
-	public void messageinsert(String content, String uuid, String id, String formattedDate) {
-		dao.messageinsert(content, uuid, id, formattedDate);
 	}
 
 	
