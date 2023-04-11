@@ -142,11 +142,11 @@ h1{
     font-size: 1.5em;
     font-weight: 500;
 }
-#work-time, #work-time2{
+#work-time{
     display: flex;
-    align-items: center;
     font-size: 1em;
     font-weight: 530;
+    padding-left : 30px;
 }
 #restinfo1, #restinfo2, #restinfo3,#restinfo4,#restinfo5{
     display: grid;
@@ -347,7 +347,7 @@ h1{
 
 
 .myallprogress {
-    margin-left: 25px;
+    margin:15px auto;
     background-color: #D3D3D3;
     height: 30px;
 }

@@ -113,28 +113,31 @@ body>div.container-fluid.bg-dark.text-body.footer.mt-5.pt-5.wow.fadeIn {
 						<div class="cal_time" style="margin-top: 15px">
 							<label>일정 시작 날짜: </label><br>
 							<div class="form-group" style="margin-top: 15px">
-								<input type="DATE" name="START_DATE" class="form-control time" />
+								<input type="DATE" id="addstartdate" name="START_DATE" class="form-control time" />
 							</div>
 
 							<label style="margin-top: 15px">일정 종료 날짜: </label><br>
 							<div class="form-group" style="margin-top: 15px">
-								<input type="DATE" name="END_DATE" class="form-control time" />
+								<input type="DATE" id="addenddate"  name="END_DATE" class="form-control time" />
 							</div>
 						</div>
 						<!-- cal_time-->
 
 						<script>
 							$(document).ready(function() {
-								//  let empno =$('#loginid').text();
-								//   let dept = $('#loginDept').text();
-								//   $('#Todoempno').val(dept);
-								//   $('#Tododept').val(empno);
-
-								if ($('#allday').is(':checked')) {
-									console.log($('#allday').is(':checked'))
-									$('.time').attr('readonly', true);
-
-								}
+								let addstartdate = $('#addstartdate').val();
+								let addenddate = $('#addenddate').val();
+								
+								if (new Date(addenddate)
+				                - new Date(addstartdate) < 0) { // date 타입으로 변경 후 확인
+									toastr.options.escapeHtml = true;
+									toastr.options.closeButton = true;
+									toastr.options.newestOnTop = false;
+									toastr.options.progressBar = true;
+									toastr.info('종료날짜를
+											확인해주세요', '내 할일 ', {timeOut: 1500});
+								return false}
+			
 							})
 						</script>
 
@@ -249,6 +252,29 @@ body>div.container-fluid.bg-dark.text-body.footer.mt-5.pt-5.wow.fadeIn {
 											<!-- 진행정도 -->
 											<div class="tab-pane fade" id="nav-profile" role="tabpanel"
 												aria-labelledby="nav-profile-tab">
+
+												<c:set var="protageall" value="${fn:length(MyTodo)}" />
+
+												<c:if test="${!empty MyTodo}">
+													<div class='myallprogress progress'>
+														<div class=" myallprogress-bar progress-bar bg-info"
+															role="progressbar" style="width:${mydoneper}%"
+															aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+															<c:if test="${mydonper!=100}">
+											${mydoneper}%
+										</c:if>
+															<c:if test="${mydonper==100}">
+										백이야
+									
+										</c:if>
+
+														</div>
+														<%--<c:out value="${protageall}"> --%>
+
+
+
+													</div>
+												</c:if>
 												<table class="table" cellspacing="0">
 													<!-- 내 할일보기 그래프 -->
 													<c:set var="ptotage" value="0" />
@@ -298,28 +324,7 @@ body>div.container-fluid.bg-dark.text-body.footer.mt-5.pt-5.wow.fadeIn {
 
 													</c:forEach>
 												</table>
-												<c:set var="protageall" value="${fn:length(MyTodo)}" />
 
-												<c:if test="${!empty MyTodo}">
-													<div class='myallprogress progress'>
-														<div class=" myallprogress-bar progress-bar bg-info"
-															role="progressbar" style="width:${mydoneper}%"
-															aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-															<c:if test="${mydonper!=100}">
-											${mydoneper}%
-										</c:if>
-															<c:if test="${mydonper==100}">
-										백이야
-									
-										</c:if>
-
-														</div>
-														<%--<c:out value="${protageall}"> --%>
-
-
-
-													</div>
-												</c:if>
 											</div>
 
 
@@ -398,7 +403,7 @@ body>div.container-fluid.bg-dark.text-body.footer.mt-5.pt-5.wow.fadeIn {
 
 																			</div>
 																		</div>
-		<c:forEach items="${MDT.todo}" var="e">
+																		<c:forEach items="${MDT.todo}" var="e">
 
 																			<c:if test="${e.state==0}">
 																				<%--  <c:set var="count" value="${count+1}"/>
@@ -459,7 +464,7 @@ body>div.container-fluid.bg-dark.text-body.footer.mt-5.pt-5.wow.fadeIn {
 																			</div>
 																		</div>
 
-		<c:forEach items="${MDT.todo}" var="e">
+																		<c:forEach items="${MDT.todo}" var="e">
 
 																			<c:if test="${e.state==1}">
 																				<%--  <c:set var="count" value="${count+1}"/>
@@ -504,7 +509,7 @@ body>div.container-fluid.bg-dark.text-body.footer.mt-5.pt-5.wow.fadeIn {
 																		</c:forEach>
 
 
-																
+
 
 
 

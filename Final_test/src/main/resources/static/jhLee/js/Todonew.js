@@ -2,8 +2,15 @@
 
 
 $(document).ready(function(){
-
-
+/*if (new Date(endtimee)
+	                - new Date(starttimee) < 0) { // date 타입으로 변경 후 확인
+						toastr.options.escapeHtml = true;
+						toastr.options.closeButton = true;
+						toastr.options.newestOnTop = false;
+						toastr.options.progressBar = true;
+						toastr.info('종료시간을 확인해주세요', '캘린더', {timeOut: 1500});
+					return false}
+*/
 
 $(document).on("click", ".updateTodo", function () {
     let num = $(this).data('id');
@@ -46,8 +53,8 @@ $(document).on("click", ".done", function () {
             toastr.options.newestOnTop = false;
             toastr.options.progressBar = true;
             toastr.info('일정을 완료하였습니다.', '내 할일', {timeOut: 1500});
-            done.prev().parent().attr('display','none');
-            
+            setTimeout(function(){
+			 		location.reload();},1500);
         }
         })
     })

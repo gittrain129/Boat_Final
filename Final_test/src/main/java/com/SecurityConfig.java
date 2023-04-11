@@ -36,7 +36,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/resources/**/**").permitAll()
 			.antMatchers("/member/list").access("hasRole('ROLE_ADMIN')")
 			.antMatchers("/member/info").access("hasRole('ROLE_ADMIN')")
-			.antMatchers("/**").permitAll();
+			.antMatchers("/index").permitAll()
+			.antMatchers("/map").permitAll()
+			.antMatchers("/member/sign_in").permitAll()
+			.antMatchers("/member/sign_up").permitAll()
+			.antMatchers("/member/join").permitAll()
+			.antMatchers("/member/idcheck").permitAll()
+			.antMatchers("/member/id_list").permitAll()
+			.antMatchers("/member/id_login").permitAll()
+			.antMatchers("/member/joinProcess").permitAll()
+			.antMatchers("/member/emailAuth").permitAll()
+			.antMatchers("/member/naverlogin").permitAll()
+			.antMatchers("/member/userNaverRegisterPro").permitAll()
+			.antMatchers("/member/loginGoogle").permitAll()
+			.antMatchers("/member/setSnsInfo").permitAll()
+			.antMatchers("/member/userGoogleRegisterPro").permitAll()
+			.antMatchers("/member/GoogleLogin").permitAll()
+			.antMatchers("/**").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')");
+
+//			.antMatchers("/**").permitAll();
 		
 //		http.authorizeRequests()
 //			.antMatchers("/resources/**/**").permitAll()
