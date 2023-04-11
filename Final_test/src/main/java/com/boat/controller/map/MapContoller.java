@@ -8,22 +8,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class MapContoller {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(MapContoller.class);
-	
-	
-	@RequestMapping(value="/map",method=RequestMethod.GET)
+
+	@RequestMapping(value = "/map", method = RequestMethod.GET)
 	public String mapPage() {
-		
-		
-	return "Calendar/map";
+
+		return "Calendar/map";
 	}
 
-	
-	@RequestMapping(value="/cal",method=RequestMethod.GET)
+	@RequestMapping(value = "/cal", method = RequestMethod.GET)
 	public String fullcalPage() {
-		
-		
+
 		return "Calendar/fullcalendar";
 	}
-}//클래스 end
+}// 클래스 end

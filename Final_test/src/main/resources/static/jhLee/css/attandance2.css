@@ -133,6 +133,7 @@ h1{
     cursor: not-allowed;
 }
 #work-week{
+	text-align:center;
     padding: 20px;
     display: grid;
     grid-template-rows: 1.5fr 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -164,11 +165,17 @@ h1{
     font-weight: 530;
 }
 #week-header{
+	color : #0e6d62;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.5em;
     font-weight: 500;
+}
+.attext{
+	color : #0e6d62;
+	
+	
 }
 #select-week{
     display: flex;
@@ -182,7 +189,8 @@ h1{
     font-size: 1.5em;
     font-weight: 500;
 }
-#work-time, #work-time2{
+#work-time{
+	padding-left:30px;
     display: flex;
     align-items: center;
     font-size: 1em;

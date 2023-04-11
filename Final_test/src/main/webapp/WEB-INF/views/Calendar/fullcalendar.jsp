@@ -336,7 +336,6 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
 				beforeSend: function (jqXHR, settings) {
 				jqXHR.setRequestHeader(header, token);
 				},
-					//	contentType: 'application/json',
 						success: function(response) {
 							if(response==0){
 						alert('등록한 글만 삭제 가능합니다.')

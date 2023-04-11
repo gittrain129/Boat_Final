@@ -13,9 +13,16 @@ public class Attandance {
 	private String NAME;
 	private String WORK_TIME;
 	private String total_work_time;
+	private String workper;
 	
 	
 	
+	public String getWorkper() {
+		return workper;
+	}
+	public void setWorkper(String workper) {
+		this.workper = workper;
+	}
 	public String getTotal_work_time() {
 		return total_work_time;
 	}

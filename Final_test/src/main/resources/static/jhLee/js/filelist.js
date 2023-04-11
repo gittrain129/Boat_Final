@@ -107,7 +107,7 @@ $.ajax({
                             console.log(item.file_DATE > nowday)
                             let imgnew ="";
                             if(new Date(item.file_DATE) > nowday){
-                                imgnew="<img src='../../jhLee/img/new.png' id='new' style='width:20px'>";
+                                imgnew="<img src='../../boat/jhLee/img/new.png' id='new' style='width:20px'>";
                             }
                             let blank = "  ";
                     output +=blank+blank+blank+"<a href='detail?num="+item.file_NUM+"'>"+blank+blank+blank

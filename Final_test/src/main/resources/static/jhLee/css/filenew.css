@@ -1,6 +1,18 @@
 .float-right{float:right!important}
 
 
+body > section > div > table > thead > tr > th:nth-child(1) 
+{width: 6%;
+text-align : center;	}
+body > section > div > table > thead > tr > th:nth-child(2) {width: 20%}
+body > section > div > table > thead > tr > th:nth-child(3) {width: 8%}
+body > section > div > table > thead > tr > th:nth-child(4) {width: 6%}
+body > section > div > table > thead > tr > th:nth-child(5) {width: 8%}
+body > section > div > table > thead > tr > th:nth-child(6) {width: 6%}
+body > section > div > table > thead > tr > th:nth-child(7) {width: 6%}
+
+
+
 input[class='sharch']:focus{
  outline: none;
   width: 300px;
