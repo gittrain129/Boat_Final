@@ -250,9 +250,14 @@ public class AttandanceServiceImpl implements AttandanceService {
 		String total_work_time = att.getTotal_work_time();
 
 		System.out.println(total_work_time);
-		String time = "00:00";
+		String time = "";
+		
+		if(total_work_time.equals(":")) {
+			time = "00:00";}
+		
 		float timeper = 0;
-		if (total_work_time != null || total_work_time != ":") {
+		
+		if (total_work_time != null && !total_work_time.equals(":")) {
 			int minutes = Integer.parseInt(total_work_time.split(":")[0]); // 분 단위로 파싱
 			int hours = minutes / 60; // 시간으로 변환
 			timeper = Math.round(((float)minutes/2100)*100);
