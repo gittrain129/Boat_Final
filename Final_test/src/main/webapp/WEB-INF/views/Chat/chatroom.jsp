@@ -98,6 +98,35 @@ function ajaxForHTML(url, data, contentType, type){
 	return htmlData;
 }
 
+// 메세지 저장
+function ajaxForDB(data){
+	let token = $("meta[name='_csrf']").attr("content");
+	let header = $("meta[name='_csrf_header']").attr("content");
+	
+	$.ajax({
+	    url : "sendm",
+	    data: data,
+	    contentType: contentType,
+	    type:type,
+	 	// html(jsp)로 받기
+	    dataType: "html",
+	    async: false,
+	    beforeSend : function(xhr)
+		{   
+			xhr.setRequestHeader(header, token);			
+		},
+	    // 성공 시
+	    success:function(data){
+	    	htmlData = data;
+	    },
+	    error:function(jqxhr, textStatus, errorThrown){
+	       alert("ajax 처리 실패");
+	    }
+	});
+	
+	return htmlData;
+}
+
 $(function(){
 	connect()
 	$("#userList").html(ajaxForHTML("userLists", "GET"));
@@ -140,14 +169,9 @@ function onOpen(){
 <!-- webSocket 메세지 발송 -->
 function send(handle, secret){
 	
-	
 	let data = null;
 	let chatMessage = document.getElementById("chat");
 	let messageBox = "";
-	
-	const now = new Date();
-	const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-	const date = now.toLocaleDateString([], { month: 'short', day: 'numeric' });
 	
 	if(handle === "message"){
 		if(!chatMessage.value){
@@ -246,12 +270,12 @@ function onMessage(evt){
     console.log("data.content="+data.content)
     console.log("data.uuid="+data.uuid)
     writeResponse(data);
+    
+    
 }
 
 <!-- webSocket 메세지 화면에 표시해주기 -->
 function writeResponse(data){
-	let token = $("meta[name='_csrf']").attr("content");
-    let header = $("meta[name='_csrf_header']").attr("content");
 	// JSON.stringify() : JavaScript 객체 → JSON 객체 변환
 	
 	if(data.handle == "message"){
@@ -297,7 +321,7 @@ function chatClear(){
 
 //채팅방 입장
 function roomEnter(room){ 
-
+	
 	if ($(room).find(".small").text() === "오프라인") {
 		toastr.options.escapeHtml = true;
 		toastr.options.closeButton = true;

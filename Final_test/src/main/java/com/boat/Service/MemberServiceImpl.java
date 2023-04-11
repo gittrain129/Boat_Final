@@ -195,6 +195,7 @@ public class MemberServiceImpl implements MemberService {
 		return dao.getOptionAddressList(map);
 	}
 
+
 	@Override
 	public List<Member> getMemberList(String empno) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -209,5 +210,12 @@ public class MemberServiceImpl implements MemberService {
 		return dao.update_admin(member);
 	}
 	
+
+	//메세지 전송 저장
+	@Override
+	public void messageinsert(String content, String uuid, String id, String formattedDate) {
+		dao.messageinsert(content, uuid, id, formattedDate);
+	}
+
 	
 }

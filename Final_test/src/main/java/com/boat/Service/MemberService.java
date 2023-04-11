@@ -1,6 +1,8 @@
 package com.boat.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -81,6 +83,8 @@ public interface MemberService {
 	//관리자페이지 업데이트
 	public int update_admin(Member member);
 
+	//메세지 전송 저장
+	public void messageinsert(String content, String uuid, String id, String formattedDate);
 
 
 }

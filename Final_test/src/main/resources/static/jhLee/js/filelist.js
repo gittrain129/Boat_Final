@@ -88,12 +88,7 @@ $.ajax({
             $(data.boardlist).each(
                 function(index,item){
                 
-                if(item.file_EMPNO != null && item.star != null &&item.star.includes(item.file_EMPNO)){
-						output+="<tr>사람살려<td title='즐겨찾기' class='text-center'><i class='bi bi-star' id='star" + item.file_NUM +"' onclick='toggle("+ item.file_NUM + ","+empno+")'></i></td><td>"
-						}
-						else{
-    					 output+="<tr><td title='즐겨찾기' class='text-center'><i class='bi bi-star-fill' style='color:#ffd699' id='star'" + item.file_NUM +"' onclick='toggle("+ item.file_NUM + ","+empno+")'></i></td><td>"
-			            }
+    					 output+="<tr><td title='즐겨찾기' class='text-center'></td><td>"
 			            
 			            
                     let img="";

@@ -23,5 +23,7 @@ public interface  WorkboardMapper {
 			
 			//댓글 수정
 			public int workboardUpdate(Workboard co);
+			
+			
 
 }

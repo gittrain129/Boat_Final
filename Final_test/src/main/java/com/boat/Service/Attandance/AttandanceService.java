@@ -28,6 +28,8 @@ public interface AttandanceService {
 
 	public void getExceldata(Attandance att, HttpServletRequest request, HttpServletResponse response) throws Exception;
 
+	public void thisweekwork(String firstWeekDay, String lastWeekDay);
+
 	
 
 	
