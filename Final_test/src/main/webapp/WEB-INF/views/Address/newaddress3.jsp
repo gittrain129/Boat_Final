@@ -67,15 +67,13 @@
                         <div class="team-text">
                             <div class="team-title">
                                 <h5>${b.DEPT} / ${b.NAME }</h5>
-                                <span>${b.JOB }</span>
+                                <span>${b.JOB } / ${b.EMPNO }</span>
                                 
                             </div>
                             <div class="team-social">
                             
                             	<span class="emails">${b.EMAIL}</span>
-                                <c:if test="${b.AUTH == 'ROLE_ADMIN' || b.AUTH =='ROLE_MGR' }">
-                                <a class="btn btn-square btn-primary rounded-circle"><i class="bi bi-pencil-square"></i></a>
-                                </c:if>
+                             
                                 <a class="btn btn-square btn-primary rounded-circle" id="copy-email" ><i class="bi bi-envelope"></i></a>   
                             </div>
                         </div>

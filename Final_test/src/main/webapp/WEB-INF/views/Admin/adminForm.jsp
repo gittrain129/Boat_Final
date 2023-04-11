@@ -178,7 +178,7 @@
        
 
         <div id="form-controls">
-        	<button type="submit"  class="submit btn-primary btn py-3 px-5 w-100 fw-bold fs-5 text" disabled>가입하기</button>
+        	<button type="submit"  class="submit btn-primary btn py-3 px-5 w-100 fw-bold fs-5 text" disabled>수정하기</button>
         </div>
         
         </div>

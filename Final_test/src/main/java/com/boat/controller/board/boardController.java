@@ -121,7 +121,7 @@ public class boardController {
 		else {
 			
 			//int count = commentService.getListCount(num);
-			mv.setViewName("Board/board_view");
+			mv.setViewName("Board/board_view2");
 			//mv.addObject("count", count);
 			mv.addObject("boarddata", board);
 		}
