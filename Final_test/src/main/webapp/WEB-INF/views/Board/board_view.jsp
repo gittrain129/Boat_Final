@@ -11,12 +11,20 @@
 <script>
 	let result = "${result}";
 	if(result == 'passFail'){
-		alert('비밀번호가 일치하지 않습니다.');
+		   toastr.options.escapeHtml = true;
+	       toastr.options.closeButton = true;
+	       toastr.options.newestOnTop = false;
+	       toastr.options.progressBar = true;
+	       toastr.info('비밀번호가 일치하지 않습니다.', {timeOut: 3000});
 	}
 	$(function(){
 		$("form[action=delete]").submit(function(){
 			if($("#board_pass").val() == ''){
-				alert('비밀번호가 일치하지 않습니다.');
+				 toastr.options.escapeHtml = true;
+			       toastr.options.closeButton = true;
+			       toastr.options.newestOnTop = false;
+			       toastr.options.progressBar = true;
+			       toastr.info('비밀번호가 일치하지 않습니다.', {timeOut: 3000});
 				$("#board_pass").focus();
 				return false;
 			}
@@ -24,6 +32,11 @@
 		})
 		
 	})
+	
+	function showModal() {
+    $('#myModal').modal('show');
+}
+
 </script>
 
 
@@ -119,20 +132,19 @@ form[action=down] > input[type=submit]{
 					<button class="btn btn-primary">댓글</button>
 					<span id="count">${count }</span>
 					
-				<sec:authorize access="isAuthenticated()">
-    			<sec:authentication property="principal" var="pinfo"/>
+				
 					
 					<c:if test="${boarddata.BOARD_EMPNO == pinfo.username || pinfo.username =='admin' }">
 						<a href="modifyView?num=${boarddata.BOARD_NUM}">
 							<button class="btn btn-warning">수정</button>
 						</a>
 						<%-- href 주소를 #으로 설정합니다 --%>
-						<a href="#">
-							<button class="btn btn-danger" data-toggle="modal" data-target="#myModal">삭제</button>
+						<a href="#" >
+						<button class="btn btn-danger" onclick="showModal()" data-toggle="modal" data-target="#myModal">삭제</button>
 						</a>
 						
 				</c:if>
-				</sec:authorize>
+				
 
 				<a href="replyView?num=${boarddata.BOARD_NUM }">
 					<button class="btn btn-info">답변</button>
@@ -148,12 +160,7 @@ form[action=down] > input[type=submit]{
 			<div class="modal-content">
 				<div class="modal-body">
 					<form name = "deleteForm" action = "delete" method="post">
-					
-						<%-- http://localhost:8088/Board/BoardDetailAction.bo?num=22
-								주소를 보면 num을 파라미터로 넘기고있습니다.
-								이 값을 가져와서 ${param.num} 를 사용 또는 ${boarddata.board_num}
-						 --%>
-						 
+					 
 						 <input type="hidden" name="num" value="${param.num }" id="board_num">
 						 	<div class="form-group">
 						 		<label for="pwd">비밀번호</label>
@@ -189,6 +196,7 @@ form[action=down] > input[type=submit]{
 	</div>
 	
 	<script src = "${pageContext.request.contextPath}/jkKim/js/view.js"></script>
+	
 	</sec:authorize>
 	
 </body>

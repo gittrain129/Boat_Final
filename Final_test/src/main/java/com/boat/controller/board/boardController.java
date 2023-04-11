@@ -291,7 +291,7 @@ public class boardController {
 	
 			mv.addObject("message","답글 가져오기 성공.");
 			mv.addObject("boarddata", board);
-			mv.setViewName("board/board_reply");
+			mv.setViewName("Board/board_reply");
 			
 		}
 	
@@ -313,8 +313,7 @@ public class boardController {
 			mv.addObject("message","게시판 답변 처리 실패");
 		} else {
 			
-			//mv.setViewName("redirect:list");
-			//mv.setViewName("redirect:detail>num="+board.getBOARD_NUM());
+			
 			mv.addObject("message","답글 생성 성공.");
 			rattr.addAttribute("num", board.getBOARD_NUM());
 			mv.setViewName("redirect:detail");
@@ -353,7 +352,7 @@ public class boardController {
 		
 		rattr.addFlashAttribute("result", "deleteSuccess");
 		
-		return "redirect:list";
+		return "redirect:List";
 	}
 	
 	@ResponseBody

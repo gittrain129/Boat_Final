@@ -75,11 +75,12 @@ if('${result}' =='passFail'){
 				 <input	type="password" class="form-control" id="board_pass" name="BOARD_PASS">
 				 </label>
 				 
-				<label for="board_notice" class="col-sm-1 col-form-label text-center"><small>
-				공지사항</small>    			
-      			<input type="checkbox" id="board_notice" name="BOARD_NOTICE">
-    			
-  				</label>
+					<c:if test="${AUTH == 'ROLE_ADMIN' || AUTH == 'ROLE_MGR'}">
+    			<label for="board_notice" class="col-sm-1 col-form-label text-center">
+        		<small>공지사항</small>
+        		<input type="checkbox" id="board_notice" name="BOARD_NOTICE">
+    			</label>
+				</c:if>
 				 
 			</div>
 			

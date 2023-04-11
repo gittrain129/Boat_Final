@@ -57,8 +57,8 @@ $(function()
                   
                   if($("#loginid").text() == this.empno)
                   {
-                     img = "<img src='../resources/image/pencil2.png' width='15px' class='update'>"
-                        +" <img src='../resources/image/delete.png' width='15px' class='remove'>"
+                     img = "<img src='../resources/img/pencil2.png' width='15px' class='update'>"
+                        +" <img src='../resources/img/delete.png' width='15px' class='remove'>"
                         +" <input type='hidden' value='" + this.num + "'>";
                   }
                   

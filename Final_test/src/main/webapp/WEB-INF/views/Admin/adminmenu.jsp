@@ -15,9 +15,9 @@
                
                
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <a class="service-item d-block rounded text-center h-100 p-4" href="${pageContext.request.contextPath}/admin">
+                    <a class="service-item d-block rounded text-center h-100 p-4" href="${pageContext.request.contextPath}/admin/list">
                         <img class="img-fluid rounded mb-4" src="../resources/img/service-4.jpg" alt="">
-                        <h4 class="mb-0">매니저 변경</h4>
+                        <h4 class="mb-0">회원 정보/권한 수정</h4>
                     </a>
                 </div>
                
@@ -34,6 +34,13 @@
                     <a class="service-item d-block rounded text-center h-100 p-4" href="${pageContext.request.contextPath}/cal">
                         <img class="img-fluid rounded mb-4" src="../resources/img/service-6.jpg" alt="">
                         <h4 class="mb-0">캘린더</h4>
+                    </a>
+                </div>
+                
+                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <a class="service-item d-block rounded text-center h-100 p-4" href="${pageContext.request.contextPath}/confer/admit">
+                        <img class="img-fluid rounded mb-4" src="../resources/jkKim/image/large.jpg" alt="">
+                        <h4 class="mb-0">회의실 승인</h4>
                     </a>
                 </div>
             </div>

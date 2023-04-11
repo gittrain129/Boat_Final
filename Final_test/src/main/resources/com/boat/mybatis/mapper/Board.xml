@@ -72,8 +72,9 @@
 		<selectKey resultType="int" order="BEFORE" keyProperty="BOARD_NUM">
 			select nvl(max(BOARD_NUM), 0)+1 from board	
 		</selectKey>
-		insert into board(BOARD_NUM, BOARD_NAME, BOARD_PASS, BOARD_SUBJECT, BOARD_CONTENT, BOARD_RE_REF, BOARD_RE_LEV, BOARD_RE_SEQ, BOARD_READCOUNT, BOARD_DATE)
-		values(#{BOARD_NUM}, #{BOARD_NAME}, #{BOARD_PASS}, #{BOARD_SUBJECT}, #{BOARD_CONTENT}, #{BOARD_RE_REF}, #{BOARD_RE_LEV}, #{BOARD_RE_SEQ}, #{BOARD_READCOUNT}, sysdate)
+		
+		insert into board(BOARD_NUM, BOARD_NAME, BOARD_PASS, BOARD_SUBJECT, BOARD_CONTENT, BOARD_DEPT, BOARD_RE_REF, BOARD_RE_LEV, BOARD_RE_SEQ, BOARD_READCOUNT, BOARD_DATE,BOARD_EMPNO,BOARD_NOTICE,BOARD_JOB)
+		values(#{BOARD_NUM}, #{BOARD_NAME}, #{BOARD_PASS}, #{BOARD_SUBJECT}, #{BOARD_CONTENT},#{BOARD_DEPT}, #{BOARD_NUM}, #{BOARD_RE_LEV}, #{BOARD_RE_SEQ}, #{BOARD_READCOUNT}, sysdate,#{BOARD_EMPNO},#{BOARD_NOTICE},#{BOARD_JOB})
 	</insert>
 	
 	<delete id="boardDelete">
@@ -119,31 +120,35 @@
 	</select>
 
 <select id="getFavBoardList" resultType="Board">
-	select * from
-		(select rownum rnum, b.*
-		 from (
-		 	select board.*, nvl(cnt, 0) cnt
-		 	 from board 
-		 	 	left outer join
-		 	 		(select board_num, count(*) cnt from comments group by board_num)
-		 	 		 c on board.board_num = c.board_num 
-		 	 		 where board.board_num in (
-        				select board_num from board_fav where board_empno = #{BOARD_EMPNO}
-      					)
-		 	 		 <if test="dept != null and dept != ''">
-		 	 		 and board_dept = #{dept}
-		 	 		 </if>
-		 	 		 <if test="order != null and order != ''">
-		 	 		 order by BOARD_NOTICE desc, ${order} desc, BOARD_RE_REF desc, BOARD_RE_SEQ asc
-		 	 		 </if>
-		 			<if test="order == null or order == ''">
-						order by BOARD_NOTICE desc,  BOARD_RE_REF desc, BOARD_RE_SEQ asc
-					</if>
-			) b
-			where rownum &lt;= #{end}
-		)
-		where rnum &gt;= #{start} and rnum &lt;= #{end}
+	SELECT * FROM (
+		SELECT rownum rnum, b.*
+		FROM (
+			SELECT board.*, NVL(cnt, 0) cnt, LISTAGG(bf.board_empno, ',') WITHIN GROUP (ORDER BY bf.board_empno) AS abc
+			FROM board
+			LEFT OUTER JOIN (
+				SELECT board_num, COUNT(*) cnt FROM comments GROUP BY board_num
+				) c	 ON board.board_num = c.board_num
+				LEFT OUTER JOIN board_fav bf ON board.board_num = bf.board_num
+				<where>
+			<if test="dept != null and dept != ''">
+				AND board.board_dept = #{dept}
+			</if>
+			</where> 
+      			GROUP BY board.board_num, board.board_name, board.board_pass, board.board_subject, board.board_content, board.board_dept, board.board_re_ref, board.board_re_lev, board.board_re_seq, board.board_readcount, board.board_date, board.board_empno, board.board_notice, board.board_job, cnt 
+      		
+			<if test="order != null and order != ''">
+				ORDER BY BOARD_NOTICE DESC, ${order} DESC, BOARD_RE_REF DESC, BOARD_RE_SEQ ASC
+			</if>
+			<if test="order == null or order == ''">
+				ORDER BY BOARD_NOTICE DESC, BOARD_RE_REF DESC, BOARD_RE_SEQ ASC
+			</if>
+		) b
+		WHERE rownum &lt;= #{end}
+	) 
+	WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
 </select>
+
+
 
 
 	

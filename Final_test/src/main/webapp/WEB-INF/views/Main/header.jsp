@@ -360,17 +360,17 @@
                 <div class="text-white ms-3"></div>
             
             <div class="navbar-nav me-auto p-3 p-lg-0">
+            
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle me-0" data-bs-toggle="dropdown" ><span id="loginname">${NAME}</span> 님</a>
-                    <div class="dropdown-menu border-0 rounded-0 rounded-bottom m-0 shadow">
-                        <a href="${pageContext.request.contextPath}/member/myinfo" class="dropdown-item">내 정보 관리</a>
-                    </div>
-             <c:if test="${pinfo.username=='admin'}">
-            <!-- Dropdown -->
-              <div class="dropdown-menu border-0 rounded-0 rounded-bottom m-0 shadow">
-                        <a href="${pageContext.request.contextPath}/admin/list" class="dropdown-item">관리자페이지</a>
-                    </div>
-         </c:if>
+                   
+            <div class="dropdown-menu border-0 rounded-0 rounded-bottom m-0 shadow">
+            <a href="${pageContext.request.contextPath}/member/myinfo" class="dropdown-item">내 정보 관리</a>
+            <c:if test="${AUTH == 'ROLE_ADMIN' || AUTH == 'ROLE_MGR'}">
+            <a href="${pageContext.request.contextPath}/admin/menu" class="dropdown-item">관리자페이지</a>
+            </c:if>
+            </div>
+           
          
          
                 </div>
