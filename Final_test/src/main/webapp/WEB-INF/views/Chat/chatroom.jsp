@@ -361,7 +361,11 @@ function roomEnter(room){
 		let messageLoad = (ajaxForHTML("loadm", data, "GET"));
 		// 채팅방에 메세지 추가
     	document.getElementById("message").innerHTML += messageLoad;
-		
+		//스크롤
+		const chatContainer = document.querySelector(".chat-message");
+		setTimeout(() => {
+			  chatContainer.scrollTop = chatContainer.scrollHeight;
+			}, 100);
 		
 		// 4. 메세지 보내기 onClick 이벤트 변경
 		$("#sendBtn").attr("onClick", "send('message', true)");

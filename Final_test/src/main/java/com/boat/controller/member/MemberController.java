@@ -933,7 +933,11 @@ public class MemberController {
 		Member m2 = memberservice.member_info(uuid);
 		
 		mav.addObject("sendprofile", m.getPROFILE_FILE());
+		mav.addObject("sendid", m.getEMPNO());
+		
 		mav.addObject("receiverprofile", m2.getPROFILE_FILE());
+		mav.addObject("receiverid", m2.getEMPNO());
+		mav.addObject("sender", m2.getNAME());
 		mav.addObject("chatHistory", chatHistory);
 		
 		return mav;
