@@ -51,7 +51,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/member/setSnsInfo").permitAll()
 			.antMatchers("/member/userGoogleRegisterPro").permitAll()
 			.antMatchers("/member/GoogleLogin").permitAll()
-			.antMatchers("/**").access("hasRole('ROLE_ADMIN','ROLE_MGR','ROLE_MEMBER')");
+			.antMatchers("/**").access("hasAnyRole('ROLE_ADMIN','ROLE_MGR','ROLE_MEMBER')");
+//		.antMatchers("/**").access("hasRole('ROLE_ADMIN','ROLE_MGR','ROLE_MEMBER')");
 		
 		
 		
