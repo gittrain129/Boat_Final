@@ -3,7 +3,9 @@ package com.boat.Service.Attandance;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -249,12 +251,30 @@ public class AttandanceServiceImpl implements AttandanceService {
 
 
 	@Override
-	public void thisweekwork(String firstWeekDay, String lastWeekDay) {
+	public String thisweekwork(String firstWeekDay, String lastWeekDay,String EMPNO) throws ParseException {
 		System.out.println("==========================================");
-		System.out.println(firstWeekDay);
-		System.out.println(lastWeekDay);
-		//dao.thisweekwork(firstWeekDay,lastWeekDay);
+		Map<String, String> map = new HashMap<>();
+		map.put("firstWeekDay", firstWeekDay);
+		map.put("lastWeekDay", lastWeekDay);
+		map.put("EMPNO", EMPNO);
 		
+		Attandance att = new Attandance();
+		att.setTotal_work_time(	dao.thisweekwork(map));
+		String total_work_time=att.getTotal_work_time();
+		
+		System.out.println(total_work_time);
+		
+		int minutes = Integer.parseInt(total_work_time.split(":")[0]);  // 분 단위로 파싱
+		int hours = minutes / 60;  // 시간으로 변환
+		int remainingMinutes = minutes % 60;  // 분 단위로 남은 값 계산
+
+		String time = String.format("%02d:%02d", hours, remainingMinutes);  // 시간 형태로 변환
+
+		System.out.println(time+"123456");  // 1:54 출력
+		
+		
+				return time;
+						
 		
 	}
 

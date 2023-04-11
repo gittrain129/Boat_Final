@@ -86,7 +86,19 @@
         <div id="work-week" class="box">
         
             <div id="week-header">이번주 근로시간</div>
-            
+            <c:set var="str" value="${TodayMyatt.total_work_time}" />
+            <c:if test="${!empty str}">
+          <div class='thisweekwork'> 
+          ${fn:substring(str, 0, 2)} 시간
+           ${fn:substring(str, 3,5)} 분
+          </div>
+          </c:if>
+          <c:if test="${empty str}">
+          <div class='thisweekwork'> 
+
+				이번주 근무시간이 없습니다.
+          </div>
+          </c:if>
            <!-- 	 <div id="week">
               <span class ="week">첫째 주 :</span><span class="firstweek"></span>   </div>
               <div id="week">

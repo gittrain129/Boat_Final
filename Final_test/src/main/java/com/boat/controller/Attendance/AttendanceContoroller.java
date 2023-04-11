@@ -42,45 +42,20 @@ public class AttendanceContoroller {
 	//쿼리 변경 및 버튼 변경 후 
 	@RequestMapping(value="/list")
 	public ModelAndView attList(ModelAndView mv,
-								Principal principal) {
+								Principal principal) throws ParseException {
 		String EMPNO = principal.getName();
 		logger.info("attlist접속중......로그인한 empno = "+EMPNO);
 		List<Attandance> attlist = attandanceService.getAttList(EMPNO);
 		
 		//On_time _ EMPNO 받아서 넣기!
-		Attandance TodayMyatt = attandanceService.getTodayMyatt(EMPNO);
-		//if(TodayMyatt!=null||TodayMyatt.equals("")) {
-			mv.addObject("TodayMyatt",TodayMyatt);
-		//}
+		Attandance TodayMyatt = new Attandance();
+		TodayMyatt= attandanceService.getTodayMyatt(EMPNO);
+		if(TodayMyatt!=null) {
+			
+		}
 		
-
-		/*
-		 * //오늘 Calendar currentCalendar = Calendar.getInstance();
-		 * 
-		 * //이번달
-		 * int month = currentCalendar.get(Calendar.MONTH) + 1;
-		 * 
-		 * SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);//오늘
-		 * 
-		 * Date mon = currentCalendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-		 * currentCalendar.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY); //String today
-		 * =sdf.format(currentCalendar);
-		 * 
-		 * //System.out.println("오늘날짜 "+today);
-		 * 
-		 * // int thisWeek = getWeekOfYear(sdf.format(new Date()));
-		 * 
-		 * 
-		 * // System.out.println("이번주 확인"+thisWeek);
-		 * 
-		 */
-
 			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 	        Calendar currentCalendar = Calendar.getInstance();
-
-	        
-
-
 				
 
 	      //이번주 첫째 날짜  
@@ -96,16 +71,19 @@ public class AttendanceContoroller {
 
 	        System.out.println(firstWeekDay+"============================="+lastWeekDay);
 
-	        attandanceService.thisweekwork(firstWeekDay,lastWeekDay);
-			
-			
-			
+	        String total_work_time =attandanceService.thisweekwork(firstWeekDay,lastWeekDay,EMPNO);
+	        System.out.println("total_work_time   controller"+total_work_time);
+	        
+	        if(total_work_time ==null||total_work_time =="") {
+	        	TodayMyatt.setTotal_work_time("00:00");
+	        }
+	        else { 
+	        	TodayMyatt.setTotal_work_time(total_work_time);
+	        }
+	        
 			// select sum(work_time) from boat_attendance where reg_date>'2023-04-10' and reg_date <'2023-04-14';
 			
-			
-			
-			
-			
+	        mv.addObject("TodayMyatt",TodayMyatt);
 			
 		//전체리스트....? admin 사용...?
 		mv.addObject("attlist",attlist);
@@ -114,17 +92,7 @@ public class AttendanceContoroller {
 	
 	}
 	
-	private int getWeekOfYear(String date) {
-	    Calendar calendar = Calendar.getInstance();
-	    String[] dates = date.split("-");
-	    int year = Integer.parseInt(dates[0]);
-	    int month = Integer.parseInt(dates[1]);
-	    int day = Integer.parseInt(dates[2]);
-	    calendar.set(year, month - 1, day);
-	    return calendar.get(Calendar.WEEK_OF_YEAR);//16주차
-	    //return calendar.get(Calendar.WEEK_OF_MONTH);//3주차
-	}
-	
+
 	
 	@ResponseBody
 	@PostMapping(value="/on")
@@ -176,6 +144,7 @@ public class AttendanceContoroller {
 		Attandance att = new Attandance();
 		att.setEMPNO(EMPNO);
 		attandanceService.getExceldata(att,request,response);
+		
 		
 		
 	}

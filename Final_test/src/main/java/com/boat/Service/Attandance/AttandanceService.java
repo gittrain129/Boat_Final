@@ -28,7 +28,7 @@ public interface AttandanceService {
 
 	public void getExceldata(Attandance att, HttpServletRequest request, HttpServletResponse response) throws Exception;
 
-	public void thisweekwork(String firstWeekDay, String lastWeekDay);
+	public String thisweekwork(String firstWeekDay, String lastWeekDay, String EMPNO) throws ParseException;
 
 	
 

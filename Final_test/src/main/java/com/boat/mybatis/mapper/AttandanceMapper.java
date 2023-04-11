@@ -1,6 +1,7 @@
 package com.boat.mybatis.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -32,7 +33,7 @@ public interface AttandanceMapper {
 	//오늘인한시간
 	public void Todayworktime(String WORK_TIME, String EMPNO);
 
-	public void thisweekwork(String firstWeekDay, String lastWeekDay);
+	public String thisweekwork(Map<String, String> map);
 
 	
 

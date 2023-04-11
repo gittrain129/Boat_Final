@@ -44,5 +44,15 @@
 		and empno = #{EMPNO}
 		  </update>
 		  
+		  <select id="thisweekwork" resultType="String">
 		  
+				  <![CDATA[
+		SELECT TRUNC(SUM(TO_NUMBER(TO_CHAR(TO_DATE(work_time, 'HH24:MI'), 'SSSSS')))/60) 
+		       || ':' || TO_CHAR(MOD(SUM(TO_NUMBER(TO_CHAR(TO_DATE(work_time, 'HH24:MI'), 'SSSSS'))), 60), 'FM00') 
+		       AS total_work_time
+		FROM boat_attendance
+		WHERE reg_date >= #{firstWeekDay} AND reg_date <= #{lastWeekDay}
+		and empno = #{EMPNO}
+				   ]]>
+		  </select>
   </mapper>
