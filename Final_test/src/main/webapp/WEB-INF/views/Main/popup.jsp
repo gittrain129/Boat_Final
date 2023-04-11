@@ -78,30 +78,8 @@ margin-bottom : 20px;}
 }
 </style>
 
-<script>
-//head 태그 안에 스크립트 선언
-function setCookie( name, value, expiredays ) {
-    var todayDate = new Date();
-    todayDate.setTime(todayDate.getTime() + (expiredays * 1000 * 60 * 60)); // expiredays시간 후로 설정
-    document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";"
-}
-function closePop() {
-    if ( document.pop_form.chkbox.checked ){
-        setCookie( "maindiv", "done" , 6 ); // 6시간
-    }
-    document.getElementById('layer_popup').style.visibility = "hidden";
-}
 
-    cookiedata = document.cookie;   
-    if ( cookiedata.indexOf("maindiv=done") < 0 ){     
-        document.getElementById('layer_popup').style.visibility = "visible";
-    }
-    else {
-        document.getElementById('layer_popup').style.visibility = "hidden";
-    }
-</script>
-
-
+ 
 </head>
 <body>
 <!-- layer popup content -->
@@ -139,5 +117,42 @@ function closePop() {
 		</form>
 	</div>
 </div>
+
+<script>
+//쿠키 읽어오기
+cookiedata = document.cookie;   
+console.log("#="+cookiedata);
+console.log( cookiedata.indexOf("maindiv=done") < 0)
+if ( cookiedata.indexOf("maindiv=done") < 0 ){     
+    console.log("2")
+    document.getElementById('layer_popup').style.visibility = "visible";
+}
+else {
+    console.log("3")
+    document.getElementById('layer_popup').style.visibility = "hidden";
+}
+
+
+//head 태그 안에 스크립트 선언
+function setCookie( name, value, expiredays ) {
+    var todayDate = new Date();
+    todayDate.setTime(todayDate.getTime() + (expiredays * 1000 * 60 * 60)); // expiredays시간 후로 설정
+    document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";"
+}
+
+function closePop() {
+	
+	console.log("1")
+	
+    if ( document.pop_form.chkbox.checked ){
+        setCookie( "maindiv", "done" , 6 ); // 6시간
+    }
+    document.getElementById('layer_popup').style.visibility = "hidden";
+} 
+</script>
+
 </body>
+
+
+
 </html>

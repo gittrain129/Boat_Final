@@ -72,7 +72,7 @@ $(function(){
 					                '<div class="row">' +
 					                '<div class="col-sm-2" style="text-align:center;margin-top: 30px;font-size: 20px;">' +
 					                
-					                '<img class="mr-3 rounded img-thumbnail" src="' + profileFile + '" alt="프로필 사진" style="border-radius: 50% !important; width: 110px">' +
+					                '<img class="mr-3 rounded img-thumbnail" src="' +this.profile_FILE + '" alt="프로필 사진" style="border-radius: 50% !important; width: 110px">' +
 					                
 					                '<h6 class="mt-2" style="top: 5px;position: relative;font-size: 20px;color: #6c757d !important;">' + this.empno + '</h6>' +
 					                '<small class="text-muted">' + this.name + '</small>' +
@@ -100,6 +100,7 @@ $(function(){
 							
 						}); //each end
 						
+						//전체갯수 > 현재 가져온 갯수  => 가져올 데이터가 존재
 						if(3 < rdata.list.length){ //전체 댓글 갯수 -> 현재까지 보여준 댓글 갯수
 							$("#message").text("더보기")
 						} else {

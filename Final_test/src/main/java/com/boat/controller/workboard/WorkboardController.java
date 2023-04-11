@@ -42,6 +42,7 @@ public class  WorkboardController {
 	@PostMapping(value="/list")
 	public Map<String,Object> WorkboardList(int page) {
 			List<Workboard> list = WorkboardService.getWorkboardList(page);
+			
 			Map<String,Object> map = new HashMap<String, Object>();
 			map.put("list", list);
 			return map;
