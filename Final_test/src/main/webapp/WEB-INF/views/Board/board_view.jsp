@@ -198,6 +198,6 @@ form[action=down] > input[type=submit]{
 	<script src = "${pageContext.request.contextPath}/jkKim/js/view.js"></script>
 	
 	</sec:authorize>
-	
+	 <jsp:include page="../Main/footer.jsp" />
 </body>
 </html>
