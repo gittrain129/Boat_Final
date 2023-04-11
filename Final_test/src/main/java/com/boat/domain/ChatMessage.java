@@ -2,89 +2,44 @@ package com.boat.domain;
 
 public class ChatMessage {
 	
-	private String roomId;            // 방 번호
-    private String messageId;        // 메세지 번호
-    private String message;            // 메세지 내용
-    private String name;            // 보낸이 이름
-    private String email;            // 보낸이 이메일
-    private int unReadCount;        // 안 읽은 메세지 수
-    private int sessionCount;        // 현재 세션 수
+	private String SENDER;            // 보낸사람
+    private String RECEIVER;        // 받는 사람
+    private String CONTENT;            // 메세지 내용
+    private String CHAT_TIME;            // 표시 날짜
+    private String CHAT_DATE;            // SYSDATE
     
-    public ChatMessage() {
-        super();
-    }
- 
-    public ChatMessage(String roomId, String messageId, String message, String name, String email, int unReadCount,
-            int sessionCount) {
-        super();
-        this.roomId = roomId;
-        this.messageId = messageId;
-        this.message = message;
-        this.name = name;
-        this.email = email;
-        this.unReadCount = unReadCount;
-        this.sessionCount = sessionCount;
-    }
- 
-    public String getRoomId() {
-        return roomId;
-    }
- 
-    public void setRoomId(String roomId) {
-        this.roomId = roomId;
-    }
- 
-    public String getMessageId() {
-        return messageId;
-    }
- 
-    public void setMessageId(String messageId) {
-        this.messageId = messageId;
-    }
- 
-    public String getMessage() {
-        return message;
-    }
- 
-    public void setMessage(String message) {
-        this.message = message;
-    }
- 
-    public String getName() {
-        return name;
-    }
- 
-    public void setName(String name) {
-        this.name = name;
-    }
- 
-    public String getEmail() {
-        return email;
-    }
- 
-    public void setEmail(String email) {
-        this.email = email;
-    }
- 
-    public int getUnReadCount() {
-        return unReadCount;
-    }
- 
-    public void setUnReadCount(int unReadCount) {
-        this.unReadCount = unReadCount;
-    }
- 
-    public int getSessionCount() {
-        return sessionCount;
-    }
- 
-    public void setSessionCount(int sessionCount) {
-        this.sessionCount = sessionCount;
-    }
- 
-    @Override
-    public String toString() {
-        return "ChatMessage [roomId=" + roomId + ", messageId=" + messageId + ", message=" + message + ", name=" + name
-                + ", email=" + email + ", unReadCount=" + unReadCount + ", sessionCount=" + sessionCount + "]";
-    }
+	public String getSENDER() {
+		return SENDER;
+	}
+	public void setSENDER(String sENDER) {
+		SENDER = sENDER;
+	}
+	public String getRECEIVER() {
+		return RECEIVER;
+	}
+	public void setRECEIVER(String rECEIVER) {
+		RECEIVER = rECEIVER;
+	}
+	public String getCONTENT() {
+		return CONTENT;
+	}
+	public void setCONTENT(String cONTENT) {
+		CONTENT = cONTENT;
+	}
+	public String getCHAT_TIME() {
+		return CHAT_TIME;
+	}
+	public void setCHAT_TIME(String cHAT_TIME) {
+		CHAT_TIME = cHAT_TIME;
+	}
+	public String getCHAT_DATE() {
+		return CHAT_DATE;
+		
+	}
+	public void setCHAT_DATE(String cHAT_DATE) {
+		CHAT_DATE = cHAT_DATE;
+	}
+    
+    
+    
 }
