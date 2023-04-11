@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.boat.domain.Board;
+import com.boat.domain.ChatMessage;
 import com.boat.domain.Member;
 
 public interface MemberService {
@@ -82,9 +83,6 @@ public interface MemberService {
 	
 	//관리자페이지 업데이트
 	public int update_admin(Member member);
-
-	//메세지 전송 저장
-	public void messageinsert(String content, String uuid, String id, String formattedDate);
 
 
 }

@@ -354,6 +354,15 @@ function roomEnter(room){
 		// 3. 상대방 UUID로 session 찾기 (1. 입장과 동시에 채팅방 집어넣기 or 첫 메세지 보낼 때 연결하기)
 		uuid = room.dataset.uuid;
 		
+		
+		//메세지 불러오려고 uuid 전송
+		let data = {"uuid" : uuid};
+		//메세지 불러오기
+		let messageLoad = (ajaxForHTML("loadm", data, "GET"));
+		// 채팅방에 메세지 추가
+    	document.getElementById("message").innerHTML += messageLoad;
+		
+		
 		// 4. 메세지 보내기 onClick 이벤트 변경
 		$("#sendBtn").attr("onClick", "send('message', true)");
 	}

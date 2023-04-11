@@ -54,7 +54,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		session.setAttribute("loginUser", member);
 		
 		Logger.info("로그인 성공 : LoginSuccessHandler"); 
-		String url = request.getContextPath() + "/index";
+		String url = request.getContextPath() + "/member/chat";
 		response.sendRedirect(url);
 	}
 
