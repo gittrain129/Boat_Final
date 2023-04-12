@@ -41,6 +41,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/member/sign_up").permitAll()
 			.antMatchers("/member/join").permitAll()
 			.antMatchers("/member/idcheck").permitAll()
+			.antMatchers("/member/id_check").permitAll()
+			.antMatchers("/member/pwd_check").permitAll()
+			.antMatchers("/member/pwd_check_ok").permitAll()
+			.antMatchers("/member/pwdmodify").permitAll()
 			.antMatchers("/member/id_list").permitAll()
 			.antMatchers("/member/id_login").permitAll()
 			.antMatchers("/member/joinProcess").permitAll()
@@ -51,6 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/member/setSnsInfo").permitAll()
 			.antMatchers("/member/userGoogleRegisterPro").permitAll()
 			.antMatchers("/member/GoogleLogin").permitAll()
+			.antMatchers("/member/emailcerti").permitAll()
 			.antMatchers("/**").access("hasAnyRole('ROLE_ADMIN','ROLE_MGR','ROLE_MEMBER')");
 //		.antMatchers("/**").access("hasRole('ROLE_ADMIN','ROLE_MGR','ROLE_MEMBER')");
 		

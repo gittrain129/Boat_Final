@@ -44,7 +44,7 @@
 
 	</style>
 	
-
+	
 	
 	
 </head>
@@ -199,7 +199,28 @@
 			
 
 	</div>  <%-- container end --%>
+	<script>
+	// 존재하는지 확인할 요소의 선택자
+	const targetSelector = ".board${num}";
 
+	// MutationObserver 생성
+	const observer = new MutationObserver((mutationsList, observer) => {
+	  // 요소가 존재하는지 확인
+	  const chatContainer = document.querySelector(targetSelector);
+	  if (chatContainer) {
+	    // 요소가 존재하면 scrollTop 설정
+	    chatContainer.scrollTop = chatContainer.scrollHeight;
+	    // observer 중지
+	    observer.disconnect();
+	  }
+	});
+
+	// observer 시작
+	observer.observe(document.documentElement, {
+	  childList: true,
+	  subtree: true
+	});
+	</script>
 <jsp:include page="../Main/footer.jsp"/>
 	
 </body>

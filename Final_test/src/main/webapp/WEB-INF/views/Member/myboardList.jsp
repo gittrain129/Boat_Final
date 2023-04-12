@@ -70,21 +70,25 @@
 	                    		<c:when test="${b.BOARD_NOTICE eq '0' or b.BOARD_NOTICE eq '1'}">
 	                    			<c:out value="업무"/>
 	                    		</c:when>
+	                    		<c:when test="${b.BOARD_NOTICE eq null}">
+	                    			<c:out value="워크보드"/>
+	                    		</c:when>
 	                    		<c:otherwise>	
 	                    			<c:out value="자료실"/>
 						 	    </c:otherwise>
 	                    	</c:choose>
 	                    </td>
+	                    
 	                    <!-- 제목 -->
-	                    	<!-- 업무 제목 -->
-	                    	<c:if test="${b.BOARD_NOTICE eq '0' or b.BOARD_NOTICE eq '1'}">
+	                    <c:choose>
+	                    	<c:when test="${b.BOARD_NOTICE eq '0' or b.BOARD_NOTICE eq '1'}">
 								<td style="display: flex; align-items: center;">
 								 <c:if test="${b.BOARD_RE_LEV !=0 }"><%--답글인경우 --%>
             						<c:forEach var="a" begin="0" end="${b.BOARD_RE_LEV*2 }" step="1">
             						&nbsp;	
             						</c:forEach>
          						</c:if>
-         						<c:if test="${b.BOARD_RE_LEV ==0 }"><!--  원문 인경우 -->
+         						<c:if test="${b.BOARD_RE_LEV ==0 }">
          	 						&nbsp;
          						</c:if>
 								<a href="${pageContext.request.contextPath}/board/detail?num=${b.BOARD_NUM }" style="flex: 1; font-size:90%">
@@ -101,16 +105,34 @@
 								<span	class="badge badge-pill badge-warning float-right" style="background-color: #89a5ea;">${b.BOARD_DEPT }</span>
 								</c:if>
 								</td>
-							</c:if>
-							<!-- 자료실 제목 -->
-	                    	<c:if test="${not (b.BOARD_NOTICE eq '0' or b.BOARD_NOTICE eq '1')}">
+							</c:when>
+	                    	<c:when test="${b.BOARD_NOTICE eq null}">
 								<td style="display: flex; align-items: center;">
-								 <c:if test="${b.BOARD_RE_LEV !=0 }"><%--답글인경우 --%>
+								 <c:if test="${b.BOARD_RE_LEV !=0 }">
             						<c:forEach var="a" begin="0" end="${b.BOARD_RE_LEV*2 }" step="1">
             						&nbsp;	
             						</c:forEach>
          						</c:if>
-         						<c:if test="${b.BOARD_RE_LEV ==0 }"><!--  원문 인경우 -->
+         						<c:if test="${b.BOARD_RE_LEV ==0 }">
+         	 						&nbsp;
+         						</c:if>
+								<a href="${pageContext.request.contextPath}/workboard/detail?num=${b.BOARD_NUM}" style="flex: 1; font-size:90%">
+								<c:out value="${b.BOARD_SUBJECT}" escapeXml="true"/> 
+								<c:if test="${b.BOARD_DATE > nowday}">
+								<span	class="badge badge-pill badge-warning ml-auto" style="background-color: #89a5ea;">new</span>
+								</c:if>
+								</a>
+								<span	class="badge badge-pill badge-warning float-right" style="background-color: #89a5ea;">${b.BOARD_DEPT}</span>
+								</td>
+							</c:when>
+	                    	<c:otherwise>
+								<td style="display: flex; align-items: center;">
+								 <c:if test="${b.BOARD_RE_LEV !=0 }">
+            						<c:forEach var="a" begin="0" end="${b.BOARD_RE_LEV*2 }" step="1">
+            						&nbsp;	
+            						</c:forEach>
+         						</c:if>
+         						<c:if test="${b.BOARD_RE_LEV ==0 }">
          	 						&nbsp;
          						</c:if>
 								<a href="${pageContext.request.contextPath}/Filebo/detail?num=${b.BOARD_NUM }" style="flex: 1; font-size:90%">
@@ -122,7 +144,8 @@
 								</a>
 								<span	class="badge badge-pill badge-warning float-right" style="background-color: #89a5ea;">${b.BOARD_DEPT}</span>
 								</td>
-							</c:if>
+							</c:otherwise>
+						</c:choose>
 								
 						<!-- 글쓴이 -->
 						<td><div style="display: flex; justify-content: center; align-items: center;"><small>${b.BOARD_NAME }</small></div></td>
