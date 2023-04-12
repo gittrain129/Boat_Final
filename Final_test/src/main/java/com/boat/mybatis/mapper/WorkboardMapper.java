@@ -10,7 +10,7 @@ import com.boat.domain.Workboard;
 @Mapper
 public interface  WorkboardMapper {
 
-
+			public int getListCount();
 			
 			//댓글 목록 가져오기
 			public List<Workboard> getWorkboardList(Map<String, Integer> map);

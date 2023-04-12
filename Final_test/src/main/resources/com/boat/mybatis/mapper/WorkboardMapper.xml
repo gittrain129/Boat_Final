@@ -34,7 +34,7 @@
 	
 	<update id="workboardUpdate" parameterType="workboard">
 		update workboard
-		set	   workboard_card = #{workboard_card}
+		set	   category = #{category}, subject = #{subject}, content = #{content}
 		where  num = #{num}
 	</update>
 	

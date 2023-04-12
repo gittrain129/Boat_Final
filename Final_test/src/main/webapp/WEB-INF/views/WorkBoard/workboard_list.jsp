@@ -39,7 +39,20 @@
 		.navbar .navbar-nav .nav-link {
 		    color: #FFFFFF;
 		}
-
+		
+		.exclude>:not(caption)>:* {
+		 padding: 0.5rem 0.5rem;
+		 box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
+		}
+		
+		
+		#message {
+		    text-align: center;
+		    font-size: 25px;
+		    width: 800px;
+		    margin-left: 100px;
+		    background-color: #ededed;
+		}
 	</style>
 	
 	
@@ -88,15 +101,15 @@
 									<th style="width:120px;">카테고리</th>
 									<td>
 										<select name="category" id="category" class="pl">
-								            <option value="0" selected>선택해주세요</option>
-								            <option value="list">자유</option>
-								            <option value="list">홍보팀</option>
-								            <option value="list">개발팀</option>
-								            <option value="list">인사팀</option>
-								            <option value="list">기획팀</option>
-								            <option value="list">영업팀</option>
-								            <option value="list">동호회</option>								            
-								            <option value="list">취미</option>
+								            <option value="선택해주세요" selected>선택해주세요</option>
+								            <option value="자유">자유</option>
+								            <option value="홍보팀">홍보팀</option>
+								            <option value="개발팀">개발팀</option>
+								            <option value="인사팀">인사팀</option>
+								            <option value="기획팀">기획팀</option>
+								            <option value="영업팀">영업팀</option>
+								            <option value="동호회">동호회</option>								            
+								            <option value="취미">취미</option>
 								        </select>
 									</td>
 								</tr>
@@ -117,7 +130,7 @@
 								<tr>
 									<td colspan="2">
 										<button id="write"  class="btn btn-info float-right" style="background-color:#1ca7ff; border-color:#1ca7ff; color:white;">등록</button>
-				  						<button id="cancle" type=reset class="btn btn-danger">취소</button>
+				  						<button id="cancel" type=reset class="btn btn-danger">취소</button>
 									</td>
 								</tr>
 							</tbody>
@@ -134,69 +147,16 @@
 							</tbody>
 						</table>
 					</div>
+					<br>
 					
-				<!--	<hr class="border-danger mb-4 mt-4" />
+					<div id="message"></div>
 					
-					
-					<div id="workboard_card">
-						<table class="table table-striped">	
-							<tbody>	
-							<div class="card">
-							  <div class="card-header">
-							    제목
-							  </div>
-							  <div class="card-body">
-							    <div class="row">
-									<div class="col-sm-2">
-									  	<a href="#">
-									  		<img class="mr-3 rounded img-thumbnail" src="public/imgs/user.jpg" alt="Generic placeholder image">
-									  	</a>
-									  	<h6 class="mt-2"><a href="#">this.empno</a></h6>
-									  	<small class="text-muted">this.name</small>
-									 </div>
-									  <div class="col-sm-9 border-left border-secondary">
-									    <p>this.content</p>
-									  </div>
-								</div>
-							  </div>
-							  <div class="card-footer text-muted">
-							  	this.reg_date + img
-							  </div>
-							</div>
-							</tbody>
-						</table>
-					</div>
-							
-			
-			
-						<hr class="border-danger mb-4 mt-4" />
-			
-					
-						<div class="card">
-						  <div class="card-header">
-						    제목
-						  </div>
-						  <div class="card-body">
-						    <div class="row">
-								<div class="col-sm-2">
-								  	<a href="#">
-								  		<img class="mr-3 rounded img-thumbnail" src="public/imgs/user.jpg" alt="Generic placeholder image">
-								  	</a>
-								  	<h6 class="mt-2"><a href="#"></a></h6>
-								  	<small class="text-muted">122309</small>
-								 </div>
-								  <div class="col-sm-9 border-left border-secondary">
-								    <p>내용</p>
-								  </div>
-							</div>
-						  </div>
-						</div>
-				 -->
 			
 				</div> <%-- workboard_card end --%>			
 			
 
 	</div>  <%-- container end --%>
+	
 	<script>
 		 var targetId = '${num}';
 		  if (targetId !== '') {
