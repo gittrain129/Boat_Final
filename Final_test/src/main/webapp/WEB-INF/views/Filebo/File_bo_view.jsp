@@ -123,7 +123,7 @@
 <%--           <a href ="reply">답변</a> 
             
 <a href ="replyView?num=${boarddata.FILE_NUM}">답변</a>--%>
-		<c:if test="${boarddata.FILE_EMPNO ==empno||empno=='ADMIN'}">
+		<c:if test="${boarddata.FILE_EMPNO ==EMPNO||empno=='ADMIN'}">
 		<div class = "personal">
 			 <a href="modifyView?num=${boarddata.FILE_NUM}" class = "update">
 		         수정
