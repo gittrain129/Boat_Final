@@ -61,13 +61,14 @@ public class  WorkboardController {
 		return WorkboardService.workboardInsert(co);		
 	}
 	
+	@ResponseBody
 	@PostMapping(value="/update")
 	public int CommentUpdate(Workboard co) {
 		return WorkboardService.workboardUpdate(co);				
 	}
 	
 	
-	
+	@ResponseBody
 	@PostMapping(value="/delete")
 	public int CommentDelete(int num) {
 		return WorkboardService.workboardDelete(num);				
