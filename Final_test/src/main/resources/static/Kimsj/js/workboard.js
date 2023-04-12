@@ -14,8 +14,6 @@
 	
 	
 $(function(){
-		
-	
 
 	let token = $("meta[name='_csrf']").attr("content");
 	let header = $("meta[name='_csrf_header']").attr("content");
@@ -62,9 +60,8 @@ $(function(){
 							
 							
 							if($("#login_id").val() == this.empno) {
-
-								img = "<img src='../resources/Kimsj/image/pencil2.png' class='update' style='width: 20px; margin-right: 10px;'>"
-									+ "<img src='../resources/Kimsj/image/delete.png' class='remove' style='width: 20px;'>"
+								img = "<img src='../resources/img/pencil2.png' class='update' style='width: 20px; margin-right: 10px;'>"
+									+ "<img src='../resources/img/delete.png' class='remove' style='width: 20px;'>"
 									+ "<input class='board"+ this.num +"' type='hidden' value='" + this.num + "'>";
 
 							}
@@ -119,12 +116,11 @@ $(function(){
 						
 						$("#workboard_card table").hide()//1
 					}
-					
-					 
 				}
 		}); //ajax end
 	}//function end
 	
+
 	
 	
 	//글자수 50개 제한하는 이벤트
@@ -272,9 +268,10 @@ $(function(){
 		}) // ajax end
 	})
 
-	
-	
+
+
 })
+
 
 
 
