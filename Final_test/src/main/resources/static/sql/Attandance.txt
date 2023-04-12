@@ -6,5 +6,5 @@ create table BOAT_ATTENDANCE (
 	OUT_time varchar2(20),
 	dept varchar2(10),
 	reg_date DATE DEFAULT SYSDATE
-	NAME VARCHAR2(15),
+	NAME VARCHAR2(15)
 );
