@@ -98,7 +98,7 @@
             <div class="row g-5">
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="img-border">
-                        <img class="img-fluid" src="img/about.jpg" alt="">
+                        <img class="img-fluid" src="${pageContext.request.contextPath}/resources/img/about.jpg" alt="">
                     </div>
                 </div>
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
@@ -132,37 +132,37 @@
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <a class="service-item d-block rounded text-center h-100 p-4" href="${pageContext.request.contextPath}/map">
-                        <img class="img-fluid rounded mb-4" src="img/service-1.jpg" alt="">
+                        <img class="img-fluid rounded mb-4" src="${pageContext.request.contextPath}/resources/img/service-1.jpg" alt="">
                         <h4 class="mb-0">회사 소개</h4>
                     </a>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                     <a class="service-item d-block rounded text-center h-100 p-4" href="${pageContext.request.contextPath}/Attendance/list">
-                        <img class="img-fluid rounded mb-4" src="img/service-2.jpg" alt="">
+                        <img class="img-fluid rounded mb-4" src="${pageContext.request.contextPath}/resources/img/service-2.jpg" alt="">
                         <h4 class="mb-0">근태 관리</h4>
                     </a>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                     <a class="service-item d-block rounded text-center h-100 p-4" href="${pageContext.request.contextPath}/member/myboardList">
-                        <img class="img-fluid rounded mb-4" src="img/service-3.jpg" alt="">
+                        <img class="img-fluid rounded mb-4" src="${pageContext.request.contextPath}/resources/img/service-3.jpg" alt="">
                         <h4 class="mb-0">내 글 보기</h4>
                     </a>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <a class="service-item d-block rounded text-center h-100 p-4" href="${pageContext.request.contextPath}/Todo/list">
-                        <img class="img-fluid rounded mb-4" src="img/service-4.jpg" alt="">
+                        <img class="img-fluid rounded mb-4" src="${pageContext.request.contextPath}/resources/img/service-4.jpg" alt="">
                         <h4 class="mb-0">내 할일 보기</h4>
                     </a>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                     <a class="service-item d-block rounded text-center h-100 p-4" href="${pageContext.request.contextPath}/board/List">
-                        <img class="img-fluid rounded mb-4" src="img/service-5.jpg" alt="">
+                        <img class="img-fluid rounded mb-4" src="${pageContext.request.contextPath}/resources/img/service-5.jpg" alt="">
                         <h4 class="mb-0">업무 게시판</h4>
                     </a>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                     <a class="service-item d-block rounded text-center h-100 p-4" href="${pageContext.request.contextPath}/cal">
-                        <img class="img-fluid rounded mb-4" src="img/service-6.jpg" alt="">
+                        <img class="img-fluid rounded mb-4" src="${pageContext.request.contextPath}/resources/img/service-6.jpg" alt="">
                         <h4 class="mb-0">캘린더</h4>
                     </a>
                 </div>
