@@ -81,6 +81,9 @@
 			 <a href="modifyView?num=${boarddata.BOARD_NUM}" class = "update">
 		         수정
 			  </a>
+			  <a href="replyView?num=${boarddata.BOARD_NUM }" style="color:white; background: #00C73C">
+					답변
+				</a>
 			  <a id ='delete'>
 				<button id="deletebtn" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal">
 				삭제
@@ -146,7 +149,7 @@
 			<textarea rows=3 class="form-control" id="content" maxLength="50"></textarea>
 			<table class="table table-striped">
 				<thead>
-					<tr><td>아이디</td><td>내용</td><td>날짜</td></tr>
+					<tr><td>사번</td><td>내용</td><td>날짜</td></tr>
 				</thead>
 				<tbody>
 				</tbody>

@@ -65,7 +65,7 @@
             
             <!-- 사진 -->
             <div class="profile">
-            	<label for="upfile" class="bF7skra2CCu8uPGJJ3Jw pe-auto" style="background-image: url(../img/ano.png); background-size: cover; cursor:pointer;">
+            	<label for="upfile" class="bF7skra2CCu8uPGJJ3Jw pe-auto" style="background-image: url(${pageContext.request.contextPath}/resources/img/ano.png); background-size: cover; cursor:pointer;">
             		<img alt="profile" class="bF7skra2CCu8uPGJJ3Jw" style="display:none; cursor:pointer;">	
 		 	  	  	<svg width="36" height="36" fill="none" class="g68VV5Ghc0ymGpbFWhEx">
 				          	<circle cx="18" cy="18" r="18" fill="#000"></circle>

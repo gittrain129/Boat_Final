@@ -12,9 +12,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 	
-	<script src="${pageContext.request.contextPath}/resources/Kimsj/js/workboard.js"></script>	
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/Kimsj/workboard_lib/fa-5/css/all.css" />  	
-	<!-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/Kimsj/workboard_lib/bootstrap-4/css/bootstrap.min.css" />  -->
+	<script src="${pageContext.request.contextPath}/resources/Kimsj/js/workboard.js"></script>		
 	<link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 	
 	<style>
@@ -44,7 +42,7 @@
 
 	</style>
 	
-
+	
 	
 	
 </head>
@@ -119,7 +117,7 @@
 								<tr>
 									<td colspan="2">
 										<button id="write"  class="btn btn-info float-right" style="background-color:#1ca7ff; border-color:#1ca7ff; color:white;">등록</button>
-				  						<button type=reset class="btn btn-danger">취소</button>
+				  						<button id="cancle" type=reset class="btn btn-danger">취소</button>
 									</td>
 								</tr>
 							</tbody>
@@ -199,7 +197,28 @@
 			
 
 	</div>  <%-- container end --%>
+	<script>
+	// 존재하는지 확인할 요소의 선택자
+	const targetSelector = ".board${num}";
 
+	// MutationObserver 생성
+	const observer = new MutationObserver((mutationsList, observer) => {
+	  // 요소가 존재하는지 확인
+	  const chatContainer = document.querySelector(targetSelector);
+	  if (chatContainer) {
+	    // 요소가 존재하면 scrollTop 설정
+	    chatContainer.scrollTop = chatContainer.scrollHeight;
+	    // observer 중지
+	    observer.disconnect();
+	  }
+	});
+
+	// observer 시작
+	observer.observe(document.documentElement, {
+	  childList: true,
+	  subtree: true
+	});
+	</script>
 <jsp:include page="../Main/footer.jsp"/>
 	
 </body>

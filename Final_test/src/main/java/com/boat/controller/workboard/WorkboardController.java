@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.boat.Service.WorkBoard.WorkboardService;
 import com.boat.controller.main.HomeController;
@@ -61,15 +62,27 @@ public class  WorkboardController {
 		return WorkboardService.workboardInsert(co);		
 	}
 	
+	@ResponseBody
 	@PostMapping(value="/update")
 	public int CommentUpdate(Workboard co) {
 		return WorkboardService.workboardUpdate(co);				
 	}
 	
 	
-	
+	@ResponseBody
 	@PostMapping(value="/delete")
 	public int CommentDelete(int num) {
 		return WorkboardService.workboardDelete(num);				
 	}
+	
+	
+	
+	@GetMapping("/detail")
+	public ModelAndView Detail(int num, ModelAndView mv) {
+		mv.setViewName("/WorkBoard/workboard_list");
+		mv.addObject("num", String.valueOf(num));
+		
+		return mv;
+	}
+			   
 }
