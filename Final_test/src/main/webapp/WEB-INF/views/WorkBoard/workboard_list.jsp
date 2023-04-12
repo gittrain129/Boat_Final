@@ -12,9 +12,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 	
-	<script src="${pageContext.request.contextPath}/resources/Kimsj/js/workboard.js"></script>	
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/Kimsj/workboard_lib/fa-5/css/all.css" />  	
-	<!-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/Kimsj/workboard_lib/bootstrap-4/css/bootstrap.min.css" />  -->
+	<script src="${pageContext.request.contextPath}/resources/Kimsj/js/workboard.js"></script>		
 	<link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 	
 	<style>
@@ -119,7 +117,7 @@
 								<tr>
 									<td colspan="2">
 										<button id="write"  class="btn btn-info float-right" style="background-color:#1ca7ff; border-color:#1ca7ff; color:white;">등록</button>
-				  						<button type=reset class="btn btn-danger">취소</button>
+				  						<button id="cancle" type=reset class="btn btn-danger">취소</button>
 									</td>
 								</tr>
 							</tbody>

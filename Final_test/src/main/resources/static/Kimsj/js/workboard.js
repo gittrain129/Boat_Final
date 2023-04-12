@@ -11,6 +11,8 @@
 		ajax(data); 
 	}
 	
+	
+	
 $(function(){
 		
 	
@@ -60,9 +62,11 @@ $(function(){
 							
 							
 							if($("#login_id").val() == this.empno) {
+
 								img = "<img src='../resources/Kimsj/image/pencil2.png' class='update' style='width: 20px; margin-right: 10px;'>"
 									+ "<img src='../resources/Kimsj/image/delete.png' class='remove' style='width: 20px;'>"
 									+ "<input class='board"+ this.num +"' type='hidden' value='" + this.num + "'>";
+
 							}
 							
 							
@@ -180,7 +184,7 @@ $(function(){
 					"content" : content
 			};
 			$("#write").text("등록"); // 다시 등록으로 변경
-			$("#workboard_view .cancel").remove(); //취소 버튼 삭제
+			$("#workboard_view.cancel").remove(); //취소 버튼 삭제
 		
 		}
 		
@@ -194,7 +198,10 @@ $(function(){
 	        },
 			success : function(result){
 			console.log(result)
-				$("#workboard_view").val('');
+				$("#content").val('');
+				$("#category").val('0');
+				$("#subject").val('');
+				
 				if (result == 1) {
 					//page=1
 					getList(page); //등록, 수정완료 후 해당 페이지 보여줍니다.
@@ -209,7 +216,7 @@ $(function(){
 	// pencil2.png를 클릭하는 경우(수정)
 	$("#workboard_card").on('click', '.update', function() {
 		const before = $(this).parent().prev().text(); //선택한 내용을 가져옵니다.
-		$("#workboard_view").focus().val(before); //textarea에 수정 전 내용을 보여줍니다.
+		$("#workboard_card").focus().val(before); //textarea에 수정 전 내용을 보여줍니다.
 		num = $(this).next().next().val(); //수정할 댓글번호를 저장합니다.
 		$("#write").text("수정완료"); //등록버튼의 라벨을 '수정완료'로 변경합니다.
 		
