@@ -50,6 +50,7 @@
 	      	console.log("!webSocket")
 	      	webSocket.close;
 	    }
+		
 	})
 	let webSocket; 		// 웹소켓 전역변수
 	

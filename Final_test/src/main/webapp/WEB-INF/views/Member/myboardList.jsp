@@ -151,8 +151,12 @@
 						<td><div style="display: flex; justify-content: center; align-items: center;"><small>${b.BOARD_NAME }</small></div></td>
 						
 						<!-- 조회수 -->
+						<c:if test="${b.BOARD_NOTICE ne null}">
 						<td><div style="display: flex; justify-content: center; align-items: center;">${b.BOARD_READCOUNT }</div></td>
-					
+						</c:if>
+						<c:if test="${b.BOARD_NOTICE eq null}">
+						<td><div style="display: flex; justify-content: center; align-items: center;">-</div></td>
+						</c:if>
 						<!-- 올린날짜 -->
 						<c:set var="boardDate" value="${b.BOARD_DATE.toString()}"/>
 						<td>
