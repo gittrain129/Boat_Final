@@ -62,25 +62,6 @@
             <h3 class="sub_title fs-5 text fw-bold">회원 정보</h3>
             
             
-            <!-- 사진 -->
-            <div class="profile">
-			<c:set var="profile_src" value="${memberlist[0].PROFILE_FILE.replaceAll('\\\\\\\\', '/')}" />
-			  	<label for="upfile" class="bF7skra2CCu8uPGJJ3Jw pe-auto" style="background-image: url(/boat/resources/${profile_src}); background-size: cover; cursor:pointer;">
-            		<img alt="profile" class="bF7skra2CCu8uPGJJ3Jw" style="display:none; cursor:pointer;" src="${memberlist[0].PROFILE_FILE }">	
-		 	  	  	<svg width="36" height="36" fill="none" class="g68VV5Ghc0ymGpbFWhEx">
-				          	<circle cx="18" cy="18" r="18" fill="#000"></circle>
-				          	<path d="M11.375 22.658v2.969h2.969l8.756-8.756-2.97-2.969-8.755 8.756zm14.02-8.083a.788.788 0 000-1.116l-1.852-1.852a.788.788 0 00-1.116 0l-1.45 1.448 2.97 2.97 1.448-1.45z" fill="#fff"></path>
-			           </svg>
-		 	  	</label>
-	            <input type="file" name="uploadfile" id="upfile" accept="image/.jpg, .jpeg, .png, .gif" hidden="">
-            </div>
-            <div class="body col-sm-12 col-md-12 text-center mb-2">
-				<button type="button" id="profilebtn" class="btn btn-outline-primary w-25" onclick="onClickUpload();">프로필사진 등록</button>
-	        </div>
-            <div id="validationServerUsernameFeedback7" class="invalid-feedback fw-bold ps-0 text-center">
-				프로필 사진을 등록해 주세요
-			</div>
-            
             <!-- 입력 -->
             <!-- 부서명 -->
             <div class="row row-container align-items-center mt-3">
@@ -112,32 +93,7 @@
 			    </div>
             </div>
             
-            <!-- 비번 -->
-            <div class="row row-container align-items-center">
-                <div class="head col-sm-12 col-md-3 fw-bold">비밀번호
-                </div>
-                <div class="body col-sm-12 col-md-9">
-                    <input type="password" name="PASSWORD" class="_input" autocomplete="off" placeholder="6~16자 / 문자, 숫자, 특수 문자 모두 혼용 가능"
-                    	    id="_label-pwd" maxlength="16" value="${memberlist[0].PASSWORD_OG }">
-                	<i class= "fa fa-solid fa-eye-slash" ></i>
-                </div>
-                <div id="validationServerUsernameFeedback3" class="invalid-feedback fw-bold">
-			        영문, 숫자, 특수 문자 6~16자리로 입력해 주세요
-			    </div>
-            </div>
             
-            <!-- 비번확인 -->
-            <div class="row row-container align-items-center">
-                <div class="head col-sm-12 col-md-3 fw-bold">비밀번호 확인</div>
-                <div class="body col-sm-12 col-md-9">
-                    <input type="password" name="user_pwd2" autocomplete="off" placeholder="비밀번호를 다시 입력해 주세요" 
-                    	   id="_label-pwd-ck" class="_input" maxlength="16">
-                	<i class= "fa fa-solid fa-eye-slash" ></i>
-                </div>
-                <div id="validationServerUsernameFeedback4" class="invalid-feedback fw-bold">
-			        비밀번호와 동일하게 입력해 주세요
-			    </div>
-            </div>
             
             <!-- 이름 -->
             <div class="row row-container align-items-center">
@@ -148,6 +104,18 @@
                 </div>
                 <div id="validationServerUsernameFeedback5" class="invalid-feedback fw-bold">
 			        이름을 입력해 주세요
+			    </div>
+            </div>
+            
+              <!-- 직책 -->
+            <div class="row row-container align-items-center">
+                <div class="head col-sm-12 col-md-3 fw-bold">직책</div>
+                <div class="body col-sm-12 col-md-9">
+                    <input type="text" name="JOB" readonly class="input-id _input" id="job"
+                    		value="${memberlist[0].JOB }">
+                </div>
+                <div id="validationServerUsernameFeedback5" class="invalid-feedback fw-bold">
+			      
 			    </div>
             </div>
             
@@ -170,6 +138,7 @@
         			<div class="form-check form-switch">
     				<input class="form-check-input" type="checkbox" id="mgrSwitch" name="AUTH" value="ROLE_MGR" ${memberlist[0].AUTH == 'ROLE_MGR' ? 'checked' : ''}>
     				<label class="form-check-label" for="mgrSwitch">MGR</label>
+    				
 					</div>
         			
    			 </div>
@@ -207,14 +176,20 @@
   });
   
   const mgrSwitch = document.getElementById("mgrSwitch");
+  const jobSwitch = document.getElementById("job");
+  console.log(jobSwitch);
+  console.log(mgrSwitch);
+  
   mgrSwitch.addEventListener("change", () => {
     const submitBtn = document.querySelector(".submit");
     if (mgrSwitch.checked) {
       submitBtn.disabled = false;
       mgrSwitch.value = "ROLE_MGR";
+      jobSwitch.value = "부서장";
     } else {
       
       mgrSwitch.value = "ROLE_MEMBER";
+      jobSwitch.value = "사원";
     }
   });
   
