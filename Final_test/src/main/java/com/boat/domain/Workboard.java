@@ -52,7 +52,15 @@ public class Workboard {
 		return reg_date;
 	}
 	public void setReg_date(String reg_date) {
-		this.reg_date = reg_date.substring(0,16);
+		 // 년, 월, 일, 시, 분 추출
+	    String year = reg_date.substring(0, 4);
+	    String month = reg_date.substring(5, 7);
+	    String day = reg_date.substring(8, 10);
+	    String hour = reg_date.substring(11, 13);
+	    String minute = reg_date.substring(14, 16);
+
+	    // 추출한 값을 조합하여 원하는 형식으로 설정
+	    this.reg_date = year + "년 " + month + "월 " + day + "일 - " + hour + "시 " + minute + "분";
 	}
 	public String getSubject() {
 		return subject;

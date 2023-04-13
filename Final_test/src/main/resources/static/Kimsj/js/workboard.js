@@ -20,7 +20,7 @@ $(function(){
 	
 	$("#workboard_card table").hide(); //1
 	let page=1; //더 보기 에서 보여줄 페이지를 기억할 변수
-	const count = parseInt($("#runm").text());
+	const count = parseInt($("#count").text());
 	if (count != 0){ //댓글 갯수가 0이 아니면
 		getList(1); //첫 페이지의 댓글을 구해 옵니다. (한 페이지에 3개씩 가져 옵니다.)
 	} else { //댓그링 없는 경우
@@ -59,8 +59,8 @@ $(function(){
 							let img = '';
 							
 							if($("#login_id").val() == this.empno) {
-								img = "<img src='../resources/img/pencil2.png' class='update' style='width: 20px; margin-right: 10px;'>"
-									+ "<img src='../resources/img/delete.png' class='remove' style='width: 20px;'>"
+								img = "<img src='../resources/img/pencil2.png' id= 'update' class='update' style='width: 25px; margin-right: 10px; background-color:white; border-radius:15%; border:1px solid #585757;'>"
+									+ "<img src='../resources/img/delete.png' class='remove' style='width: 25px; background-color:white; border-radius:15%; border:1px solid #585757;'>"
 									+ "<input class='board"+ this.num +"' type='hidden' value='" + this.num + "'>";
 
 							}
@@ -68,30 +68,35 @@ $(function(){
 							
 						output +=	'<hr class="border-danger mb-4 mt-4" />' +
 									'<br>' +
-									'<div class="card" style="boarder-top:15px;">' +
-					                '<div class="card-header" style="background-color:#1ca7ff; color:white;">' + this.category + '</div>' +
-					                '<div class="card-body" style="height: 250px;">' +
+									'<br>' +
+									'<div class="card" id="card" style="boarder-top:15px; border:0px;">' +
+					                '<div class="card-header" style="font-size:20px; background-color:#1ca7ff; color:white;">' + this.category + '</div>' +
+					                '<div class="card-body" style="height: 250px; background-color:#f8fdff;">' +
 					                '<div class="row">' +
 					                '<div class="col-sm-2" style="text-align:center;margin-top: 30px;font-size: 20px;">' +
 					                
-					                '<img class="mr-3 rounded img-thumbnail" src="' +this.profile_FILE + '" alt="프로필 사진" style="border-radius: 50% !important; width: 110px">' +
+					                '<img class="mr-3 rounded img-thumbnail" src="' +this.profile_FILE + '" alt="프로필 사진" style="border-radius: 50% !important; width: 110px; border:0px;">' +
 					                
 					                '<h6 class="mt-2" style="top: 5px;position: relative;font-size: 20px;color: #6c757d !important;">' + this.empno + '</h6>' +
 					                '<small class="text-muted">' + this.name + '</small>' +
 					                '</div>' +
-					                '<div class="col-sm-9 border-left border-secondary" style="border: 1px solid #dfdfdf !important;width:  800px !important;height: 230px !important;border-radius: 6px;">' +
-					                '<p style="margin-top: 1rem; font-size:20px;">' + this.subject + '</p>' +
+					                '<div class="col-sm-9 border-left border-secondary" style="background-color: white; width:  800px !important;height: 230px !important;border-radius: 6px;">' +
+					                '<p class="subject" style="margin-top: 1rem; font-size:20px;">' + this.subject + '</p>' +
 					                '<hr>' +
-					                '<p style="font-size: 17px">' + this.content + '</p>' +
+					                '<p class="content" style="font-size: 17px">' + this.content + '</p>' +
 					                '</div>' +
 					                '</div>' +
 					                '</div>' +
-					                '<div class="card-footer text-muted">' + 
+					                '<div class="card-footer text-muted" style="background-color:#1ca7ff; color:white !important;">' + 
 					                '<div style="float: left;">' + this.reg_date + '</div>' +
-					            	'<div style="width: 80px; float: right;">' + img + '</div>' +
+					            //	'<div style="width: 80px; float: right;">' + img + '</div>' +
 					                '</div>' +
-					                '</div>' +
-					                '<br>'
+					            //    '</div>' +
+					                '<div class="table">' +
+					                '<div calss="exclude" style="float: right;">' + img + '</div>' +
+					                '</div>' + 
+					                '</div>' 
+					              //  '<br>'
 							
 						
 							
@@ -118,7 +123,8 @@ $(function(){
 							
 						
 						//전체갯수 > 현재 가져온 갯수  => 가져올 데이터가 존재
-						if(3 < rdata.list.length){ //전체 댓글 갯수 -> 현재까지 보여준 댓글 갯수
+						if(rdata.listcount > rdata.list.length){ //전체 댓글 갯수 -> 현재까지 보여준 댓글 갯수
+							console.log("더보기");
 							$("#message").text("더보기")
 						} else {
 							$("#message").text("")
@@ -137,17 +143,30 @@ $(function(){
 
 	
 	
-	//글자수 50개 제한하는 이벤트
+	//글자수 제한하는 이벤트
+	$("#subject").on('input', function() {
+		let subject = $(this).val();
+		let length = subject.length;
+		if (length > 40) {
+			length = 40;
+			subject = subject.substring(0, length);
+			$(this).val(subject);
+		}
+		
+	});
+	
 	$("#content").on('input', function() {
 		let content = $(this).val();
 		let length = content.length;
-		if (length > 50) {
-			length = 50;
+		if (length > 200) {
+			length = 200;
 			content = content.substring(0, length);
 			$(this).val(content);
 		}
-		$(".float-left").text(length + "/50")
-	})
+		
+	});
+	
+	
 	
 	
 	//더보기를 클릭하면 page 내용이 추가로 보여집니다.
@@ -160,26 +179,31 @@ $(function(){
 	//버튼의 라벨이 '등록'인 경우는 댓글을 추가하는 경우
 	//버튼의 라벨이 '수정완료'인 경우는 댓글을 수정하는 경우
 	$("#write").click(function() {
+		
+		
+			
+		const category = $("#category").val().trim();
 		const content = $("#content").val().trim();
 		const subject = $("#subject").val().trim();
-		if(!subject){
+		if(category === '선택해주세요'){
+			alert('카테고리를 선택하세요')
+			return false;
+		}else if(!subject){
 			alert('제목을 입력하세요')
 			return false;
 		}else if(!content){
 			alert('내용을 입력하세요')
 			return false;
 		}
-		
 		const buttonText = $("#write").text().trim(); // 버튼의 라벨로 add할지 update할지 결정
 		
-		$(".float-left").text('총 50자까지 가능합니다.');
 		
 		if (buttonText == "등록") {  // 댓글을 추가하는 경우
 		console.log('확인')
 		
 			url = "../workboard/add";
 			data = {
-				"category" : $("#category option:checked").text(),
+				"category" : $("#category").val(),
 				"content" : content,
 				"EMPNO" : $("#login_id").val(),
 				"NAME" : $("#login_name").val(),
@@ -191,6 +215,8 @@ $(function(){
 			url = "../workboard/update";
 			data = {
 					"num" : num,
+					"category" : $("#category").val(),
+					"subject" : $("#subject").val(),
 					"content" : content
 			};
 			$("#write").text("등록"); // 다시 등록으로 변경
@@ -209,10 +235,11 @@ $(function(){
 			success : function(result){
 			console.log(result)
 				$("#content").val('');
-				$("#category").val('0');
+				$("#category").val('선택해주세요');
 				$("#subject").val('');
 				
 				if (result == 1) {
+
 					//page=1
 					getList(page); //등록, 수정완료 후 해당 페이지 보여줍니다.
 				}//if
@@ -224,18 +251,33 @@ $(function(){
 	
 	
 	// pencil2.png를 클릭하는 경우(수정)
-	$("#workboard_card").on('click', '.update', function() {
-		const before = $(this).parent().prev().text(); //선택한 내용을 가져옵니다.
-		$("#workboard_card").focus().val(before); //textarea에 수정 전 내용을 보여줍니다.
+	$("#workboard_view").on('click', '.update', function() {
+		
+		// 클릭 이벤트 핸들러 내부에 아래 코드를 추가
+		  window.scrollTo({
+		    top: 550, // 이동할 위치의 Y 좌표, 0은 화면 상단을 의미함
+		    behavior: 'smooth' // 스크롤 이동에 애니메이션 효과 적용
+		  });
+  
+	    const card = $(this).closest('.card');
+		const before = $("#workboard_view").parent().prev().text(); //선택한 내용을 가져옵니다.
+
+		
+		$("#category").val(card.find(".card-header").text());
+		
+		$("#subject").val(card.find("p.subject").text());
+		
+		
+		$("#content").val(card.find("p.content").text());
+		
+		
 		num = $(this).next().next().val(); //수정할 댓글번호를 저장합니다.
 		$("#write").text("수정완료"); //등록버튼의 라벨을 '수정완료'로 변경합니다.
 		
-		//이미 취소 버튼이 만들어진 상태에서 또 수정을 클릭하면 취소가 계속 추가됩니다.
-		if(!$("#write").prev().is(".cancel"))
-		  $("#write").before('<button class="btn btn-danger float-right cancel">취소</button>');
+		
 		  
 		//모든 행의 배경색을 'white'로 지정합니다.
-		$("#workboard_card tr").css('background-color', 'white');
+		$("#workboard_card tbody").css('background-color', 'white');
 		
 		//선택한 행의 배경색을 'lightgray'로 지정합니다.
 		$(this).parent().parent().css('background-color', 'lightgray'); // 수정할 행의 배경색을 변경합니다.
@@ -245,13 +287,15 @@ $(function(){
 	
 	
 	//취소를 클릭하는 경우
-	$("#workboard_card").on('click', '.cancel', function() {
-		$("#workboard_card tr").removeAttr('style'); //<tr style="background-color: white;">
+	$("#workboard_view").on('click', '.cancel', function() {
+		$("#workboard_view tr").removeAttr('style'); //<tr style="background-color: white;">
 											  //<tr style="background-color: lightgray;">
 											  //style 속성을 제거 합니다.
 		$(this).remove(); //선택한 취소 버튼을 제거합니다.
 		$("#write").text("등록"); //$("#write")의 "수정완료" 라벨을 "등록"으로 변경합니다.
-		$("#workboard_view").val(''); //$("#workboard_view")의 값을 초기화 합니다.
+		$("#category").val(''); //$("#category")의 값을 초기화 합니다.
+		$("#subject").val('');
+		$("#content").val('');
 		$(".remove").prop("disabled",false); //삭제 할 수 있도록 합니다.
 	});
 	
@@ -282,6 +326,7 @@ $(function(){
 		}) // ajax end
 	})
 
+	
 
 
 })

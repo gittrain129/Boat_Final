@@ -25,7 +25,10 @@ public class WorkboardServiceImpl implements WorkboardService{
 
 	
 	
-	
+	@Override
+	public int getListCount() {
+		return dao.getListCount();
+	}
 	
 
 	@Override
@@ -34,6 +37,7 @@ public class WorkboardServiceImpl implements WorkboardService{
 		int endrow = page * 5;
 		
 		Map<String,Integer> map = new HashMap<String,Integer>();
+
 		map.put("start", startrow);
 		map.put("end", endrow);
 		return dao.getWorkboardList(map);
