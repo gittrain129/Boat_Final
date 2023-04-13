@@ -99,9 +99,9 @@ $.ajax({
                     if(subject.length>=20){
                         subject = subject.substr(0,20)+"...";
                     }
-                            let today = new Date(item.file_DATE);
+                            //let today = new Date();
                             
-                            moment(today).format();
+                          let today= moment().format().substr(0,10)
                             
                             console.log("nowday"+nowday)
                             console.log(item.file_DATE > nowday)
@@ -122,10 +122,13 @@ $.ajax({
                     
                     output +='<td><small>'+item.file_NAME+'</small></a></td>'
                     output +='<td>'+item.file_READCOUNT+'</td>'
-                    if(today ==new Date())
-                    filedateTime= item.file_DATE.substr(11,16)
+					let ckday = item.file_DATE.substr(0,10)
+					console.log(ckday);
+					console.log(today+"today");
+                    if(ckday ==today)
+                    filedateTime= item.file_DATE.substr(5,11)
                     else 
-                    filedateTime = item.file_DATE.substr(5,10)
+                    filedateTime = item.file_DATE.substr(5,5)
                     
                     output +='<td><div class="date">'+filedateTime+'</div></td>'
 

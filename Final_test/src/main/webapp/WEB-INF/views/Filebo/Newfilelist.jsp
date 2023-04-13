@@ -60,7 +60,7 @@
 			
 		</div>
 		</h3>
-		<div class="table-responsive">
+		<div class="">
 			<table class="table table-bordered table-hover">
 				<thead>
 					<tr class="bg-light">

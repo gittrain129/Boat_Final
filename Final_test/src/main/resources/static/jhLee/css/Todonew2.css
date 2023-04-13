@@ -617,3 +617,7 @@ a.forum-item-title:hover {
 				
 
 .nav-tabs{border : none;}
+
+.deleteTodo:hover{
+	cursor:pointer;
+}

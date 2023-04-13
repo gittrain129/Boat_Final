@@ -197,16 +197,11 @@ function replyform(num,lev,seq,ref){
 }//function(replyform) end
 
 $(function() {
-/*		if($('#empno').val()=""){
-	alert('로그인 후 이용 가능합니다.');}
-	
-	alert('로그인 후 이용 가능합니다.');
-	$('a').click(function(){
-		
 
-	
-	
-	})*/
+
+
+
+
 	console.log(empno+"empno있나요");
 	
 	getList(option);  //처음 로드 될때는 등록순 정렬
