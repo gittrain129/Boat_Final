@@ -114,6 +114,7 @@
       
       <th scope="col">신청대상</th>
       <th scope="col">신청자 사번</th>
+      <th scope="col">용도</th>
       <th scope="col" style="text-align:center;">예약시간</th>
       <th scope="col" style="text-align:center;">처리상태</th>
     </tr>
@@ -137,7 +138,7 @@
         
         <div class="form-group">
             <label for="rental">신청자 사번</label>
-            <input type="text" class="form-control" id="rental_id" name="rental" readonly>
+            <input type="text" class="form-control" id="rental_id" name="rental" readonly style="margin-bottom: 10px;">
           </div>
         
           <div class="form-group" style="display:none">
@@ -147,17 +148,17 @@
         
           <div class="form-group">
             <label for="startTime">대여시작 시간</label>
-            <input type="text" class="form-control" id="startTime" readonly>
+            <input type="text" class="form-control" id="startTime" readonly style="margin-bottom: 10px;">
             <input type="hidden" id="startTimeISO" name="startTimeISO">
           </div>
           <div class="form-group">
             <label for="endTime">대여종료 시간</label>
-            <input type="text" class="form-control" id="endTime" readonly>
+            <input type="text" class="form-control" id="endTime" readonly style="margin-bottom: 10px;">
              <input type="hidden" id="endTimeISO" name="endTimeISO">
           </div>
           <div class="form-group">
             <label for="content">용도</label>
-            <textarea class="form-control" id="content" rows="3"></textarea>
+		<textarea class="form-control" id="content" rows="3" style="resize: none; margin-bottom: 5px;"></textarea>
           </div>
           <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
@@ -190,12 +191,18 @@
 	    var endTime = "${r.end_t}";
 	    var status = "${r.status}";
 	    var memo = "${r.memo}";
+	    var content = "${r.title}";
+	    if (content.length > 10) {
+            content = content.substring(0, 10) + "...";
+        }
+	   
 	    
 
 	    if (loginid === id) {
 	        var output = $('<tr>');
 	        output.append($('<td>').text(rental));
 	        output.append($('<td>').text(id));
+	        output.append($('<td>').text(content));
 	        output.append($('<td>').text(startTime + ' - ' + endTime).css('text-align', 'center'));
 
 	        if (status === '거절') {

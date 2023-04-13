@@ -156,14 +156,11 @@
 			
 
 	</div>  <%-- container end --%>
-	
+
+	<input type="hidden" class="worknum" value="${param.num}">
+
 	<script>
-		 var targetId = '${num}';
-		  if (targetId !== '') {
-		    $('html, body').animate({
-		      scrollTop: $("#" + targetId).offset().top
-		    }, 'fast');
-		  }
+		 
 	</script>
 <jsp:include page="../Main/footer.jsp"/>
 	

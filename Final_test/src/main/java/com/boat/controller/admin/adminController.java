@@ -183,39 +183,6 @@ private PasswordEncoder passwordEncoder;
 			Model model, HttpServletRequest request) throws Exception {
 		
 		
-		member.setPASSWORD_OG(member.getPASSWORD());
-		
-		//비밀번호 암호화 추가
-		String encPassword = passwordEncoder.encode(member.getPASSWORD());
-		
-		member.setPASSWORD(encPassword);
-		
-		
-		MultipartFile uploadfile = member.getUploadfile();
-		
-		if(!uploadfile.isEmpty()) {
-			String fileName = uploadfile.getOriginalFilename();//원래 파일명
-			
-			String saveFolder = new File("src/main/resources/static/profile").getAbsolutePath();
-//			String saveFolder= profileSaveFolder.getProfilesavefolder();
-			List<String> fileDBName = fileDBName(fileName, saveFolder, member.getEMPNO());
-			
-			
-			String fileDBNames = fileDBName.get(0);
-			String refileName = fileDBName.get(1);
-			
-			//transferTo(file path) : 업로드된 파일을 매개변수의 경로에 저장합니다.
-			uploadfile.transferTo(new File(saveFolder + fileDBNames));
-			
-			//바뀐 파일명으로 저장
-			member.setPROFILE_IMG(refileName);
-			
-			
-			System.out.println("absolutePathss " +saveFolder);
-			//파일 경로 이름
-			member.setPROFILE_FILE("profile" + fileDBNames);
-		}
-		
 		
 		int result = memberservice.update_admin(member);
 		System.out.println("result="+result);
@@ -234,51 +201,7 @@ private PasswordEncoder passwordEncoder;
 		}
 	}	  					
 		
-	//파일명
-		private List<String> fileDBName(String fileName, String saveFolder, String empno) {
-			//새로운 폴더 이름 : 오늘 년+월+일
-			Calendar c = Calendar.getInstance();
-			int year = c.get(Calendar.YEAR);//오늘 년도 구합니다.
-			int month = c.get(Calendar.MONTH) + 1;//오늘 월 구합니다.
-			int date = c.get(Calendar.DATE);//오늘 일 구합니다.
-			
-			String homedir = saveFolder + "/" + year + "-" + month + "-" + date;
-			
-			File path1 = new File(homedir);
-			if(!(path1.exists())) {
-				path1.mkdir();//새로운 폴더를 생성
-			}
-			
-			
-			/*** 확장자 구하기 시작 ***/
-			int index = fileName.lastIndexOf(".");
-			/*
-			 * 문자열에서 특정 문자열의 위치 값(index)을 반환합니다.
-			 * IndexOf가 처음 발견되는 문자열에 대한 index를 반환하는 반면,
-			 * lastIndexOf는 마지막으로 발견되는 문자열의 index를 반환합니다.
-			 * (파일명에 점에 여러개 있을 경우 맨 마지막에 발견되는 문자열의 위치를 리턴합니다.)
-			 */
-			
-			
-			String fileExtenstion = fileName.substring(index + 1);
-			
-			/*** 확장자 구하기 끝 ***/
-			
-			//새로운 파일명
-			String refileName = empno + "." + fileExtenstion;
-			
-			
-			//오라클 디비에 저장될 파일명
-			//String fileDBName = "/" + year + "-" + month + "-" + date + "/" + refileName;
-			String fileDBName = File.separator + year + "-" + month + "-" + date + File.separator + refileName;
-			
-			
-			List<String> fileNames = new ArrayList<String>();
-			fileNames.add(fileDBName);
-			fileNames.add(refileName);
-			
-			return fileNames;
-		}	
+	
 			
 	
 	

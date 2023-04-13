@@ -197,34 +197,34 @@
         <form id="res_Form">
         
          <div class="form-group">
-            <label for="rental">신청자</label>
-            <input type="text" class="form-control" id="rental_id" name="rental" readonly>
+            <label for="rental">신청자 사번</label>
+            <input type="text" class="form-control" id="rental_id" name="rental" readonly style="margin-bottom: 10px;">
           </div>
         
           <div class="form-group" style="display:none">
             <label for="rental">대여대상</label>
-            <input type="hidden" id="rental" name="rental">
+            <input type="hidden" id="rental" name="rental" readonly style="margin-bottom: 10px;">
           </div>
         
           <div class="form-group">
             <label for="startTime">대여시작 시간</label>
-            <input type="text" class="form-control" id="startTime" readonly>
+            <input type="text" class="form-control" id="startTime" readonly style="margin-bottom: 10px;">
             <input type="hidden" id="startTimeISO" name="startTimeISO">
           </div>
           <div class="form-group">
             <label for="endTime">대여종료 시간</label>
-            <input type="text" class="form-control" id="endTime" readonly>
+            <input type="text" class="form-control" id="endTime" readonly style="margin-bottom: 10px;">
              <input type="hidden" id="endTimeISO" name="endTimeISO">
           </div>
           <div class="form-group">
             <label for="content">용도</label>
-            <textarea class="form-control" id="content" rows="3"></textarea>
+            <textarea class="form-control" id="content" rows="3" readonly style="resize:none; margin-bottom: 5px;"></textarea>
           </div>
            <div class="form-group d-none" >
             <label for="abc">고유값</label>
             <textarea class="form-control" id="abc" rows="3"></textarea>
           </div>
-          
+          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
       </div>
       <div class="modal-footer">

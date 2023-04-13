@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <title>일별근무시간</title>
 <jsp:include page="../Main/header.jsp" />
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!-- <script src="${path}/resources/js/attendance/board.js" defer ></script> -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/jhLee/css/Todonew.css">
@@ -28,6 +29,7 @@ body>div.container-fluid.bg-dark.text-body.footer.mt-5.pt-5.wow.fadeIn {
 	margin: 0 !important
 }
 </style>
+
 </head>
 
 
@@ -113,12 +115,14 @@ body>div.container-fluid.bg-dark.text-body.footer.mt-5.pt-5.wow.fadeIn {
 						<div class="cal_time" style="margin-top: 15px">
 							<label>일정 시작 날짜: </label><br>
 							<div class="form-group" style="margin-top: 15px">
-								<input type="DATE" id="addstartdate" name="START_DATE" class="form-control time" />
+								<input type="DATE" id="addstartdate" name="START_DATE"
+									class="form-control time" />
 							</div>
 
 							<label style="margin-top: 15px">일정 종료 날짜: </label><br>
 							<div class="form-group" style="margin-top: 15px">
-								<input type="DATE" id="addenddate"  name="END_DATE" class="form-control time" />
+								<input type="DATE" id="addenddate" name="END_DATE"
+									class="form-control time" />
 							</div>
 						</div>
 						<!-- cal_time-->
@@ -134,8 +138,7 @@ body>div.container-fluid.bg-dark.text-body.footer.mt-5.pt-5.wow.fadeIn {
 									toastr.options.closeButton = true;
 									toastr.options.newestOnTop = false;
 									toastr.options.progressBar = true;
-									toastr.info('종료날짜를
-											확인해주세요', '내 할일 ', {timeOut: 1500});
+									toastr.info('종료날짜를	확인해주세요', '내 할일 ', {timeOut: 1500});
 								return false}
 			
 							})
@@ -288,37 +291,39 @@ body>div.container-fluid.bg-dark.text-body.footer.mt-5.pt-5.wow.fadeIn {
 																<c:if test="${mt.state==1}">
 																	<th>
 																		<div></div>
-																		<div class="ddddone">완료</div> <!-- <div class='progress todoprogress'>
-                                                <div class="todoprogress-bar progress-bar bg-info" role="progressbar" style="width:${mydoneper}%" 
-                                                aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                              </div> -->
+																		<div class="ddddone">완료</div>
 
 																	</th>
-
 																	<th></th>
+
+																</c:if>
+
+
+																<c:set var="ptotage" value="${ptotage+1}" />
+
+																<c:if test="${mt.state!=1}">
+																	<th>
+																		<!-- <div class='todoprogress progress'></div> -->
+																	</th>
+																	<th>
+																		<div class="btn_wrap">
+																			<a class="btn btn-warning btn updateTodo"
+																				data-id="${mt.NUM}"> <i class="fas fa-plus"></i>
+																				수정
+																			</a> <a class="done btn btn-success btn"
+																				data-id="${mt.NUM}"> <i
+																				class="fas  fa-check-circle"></i> 완료
+																			</a>
+																		</div>
+																	</th>
+
+																</c:if>
+																<th>
+																<img alt="삭제" class="deleteTodo" data-id="${mt.NUM}"
+																	src="${pageContext.request.contextPath}/resources/jhLee/img/delete.png"
+																	style="width: 20px;">
+																	</th>
 															</tr>
-
-															</c:if>
-															<c:set var="ptotage" value="${ptotage+1}" />
-
-															<c:if test="${mt.state!=1}">
-																<th>
-																	<!-- <div class='todoprogress progress'></div> -->
-																</th>
-																<th>
-																	<div class="btn_wrap">
-																		<a class="btn btn-warning btn updateTodo"
-																			data-id="${mt.NUM}"> <i class="fas fa-plus"></i>
-																			수정
-																		</a> <a class="done btn btn-success btn"
-																			data-id="${mt.NUM}"> <i
-																			class="fas  fa-check-circle"></i> 완료
-																		</a>
-																	</div>
-																</th>
-																</tr>
-															</c:if>
-
 
 														</thead>
 

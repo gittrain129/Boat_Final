@@ -79,6 +79,11 @@ public class TodoServiceImpl implements TodoService {
 	public int updateTodo(Todo todo) {
 		return dao.updateTodo(todo);
 	}
+
+	@Override
+	public int tododelete(int num) {
+		return 	dao.DeleteTodo(num);
+	}
 	
 	
 

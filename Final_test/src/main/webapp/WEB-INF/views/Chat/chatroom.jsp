@@ -98,35 +98,6 @@ function ajaxForHTML(url, data, contentType, type){
 	return htmlData;
 }
 
-// 메세지 저장
-function ajaxForDB(data){
-	let token = $("meta[name='_csrf']").attr("content");
-	let header = $("meta[name='_csrf_header']").attr("content");
-	
-	$.ajax({
-	    url : "sendm",
-	    data: data,
-	    contentType: contentType,
-	    type:type,
-	 	// html(jsp)로 받기
-	    dataType: "html",
-	    async: false,
-	    beforeSend : function(xhr)
-		{   
-			xhr.setRequestHeader(header, token);			
-		},
-	    // 성공 시
-	    success:function(data){
-	    	htmlData = data;
-	    },
-	    error:function(jqxhr, textStatus, errorThrown){
-	       alert("ajax 처리 실패");
-	    }
-	});
-	
-	return htmlData;
-}
-
 $(function(){
 	connect()
 	$("#userList").html(ajaxForHTML("userLists", "GET"));
@@ -134,7 +105,6 @@ $(function(){
 
 <!-- webSocket 연결 -->
 function connect(){
-			
 	// webSocket 연결되지 않았을 때만 연결
 	if(webSocket == undefined){
 		console.log("undefined")
@@ -257,12 +227,11 @@ function onMessage(evt){
              "uuid" : receive[1]
         }
    	}else if(receive[0] === "onLineList"){
+   		let onlineUsers = [];
 		data.handle = receive[0];
 		for(let i = 1; i < receive.length; i++){
 			data[count++] = receive[i];
 		}
-	}else{
-		
 	}
 	
     console.log("data.handle="+data.handle)
@@ -270,8 +239,6 @@ function onMessage(evt){
     console.log("data.content="+data.content)
     console.log("data.uuid="+data.uuid)
     writeResponse(data);
-    
-    
 }
 
 <!-- webSocket 메세지 화면에 표시해주기 -->
@@ -370,7 +337,6 @@ function roomEnter(room){
 		// 4. 메세지 보내기 onClick 이벤트 변경
 		$("#sendBtn").attr("onClick", "send('message', true)");
 	}
-	
 }
 </script>
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>

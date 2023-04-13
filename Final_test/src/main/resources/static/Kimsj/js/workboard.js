@@ -49,7 +49,7 @@ $(function(){
 		        },
 				dataType :  "json",
 				success : function(rdata) {
-
+			
 					if(rdata.list.length > 0) {
 						$("#workboard_card table").show();  //문서가 로딩될 때 hide() 했던 부분을 보이게 합니다.(1)
 						$("#workboard_card tbody").empty();
@@ -57,7 +57,6 @@ $(function(){
 						$(rdata.list).each(function() {
 							let output = '';
 							let img = '';
-							
 							
 							if($("#login_id").val() == this.empno) {
 								img = "<img src='../resources/img/pencil2.png' id= 'update' class='update' style='width: 25px; margin-right: 10px; background-color:white; border-radius:15%; border:1px solid #585757;'>"
@@ -106,7 +105,22 @@ $(function(){
 							//append한 마지막 tr의 2번재 자식 td를 찾아 text()메서드로 content를 넣습니다.
 							$("#workboard_card tbody tr:last").find("td:nth-child(2)").text(this.workboard_card); //3
 							
+							
+							
+							
+							
 						}); //each end
+						
+						
+						var targetId = $(".worknum").val();
+		                    console.log(targetId)
+							 
+							  if (targetId !== '') {
+							    $('html, body').animate({
+							      scrollTop: $(".board" + targetId).closest(".card").offset().top
+							    }, 'fast');
+							  }
+							
 						
 						//전체갯수 > 현재 가져온 갯수  => 가져올 데이터가 존재
 						if(rdata.listcount > rdata.list.length){ //전체 댓글 갯수 -> 현재까지 보여준 댓글 갯수

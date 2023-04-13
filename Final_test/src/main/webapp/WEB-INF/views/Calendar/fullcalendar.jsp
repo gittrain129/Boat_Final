@@ -22,6 +22,8 @@
   <link href ="${pageContext.request.contextPath}/jhLee/css/fullcalendar.css"  rel ="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://unpkg.com/tippy.js@6"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
   <style>
 	.page-header {
 		margin: 0!important;
@@ -190,7 +192,7 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
 				$('#saveBtn').click(function(){
 					//calendar.unbind();
 				if($('#title').val()==""){
-					alert('일정을 입력해주세요');
+					swal('일정을 입력해주세요');
 					return false;
 					$('#title').focus();
 				}
@@ -207,19 +209,19 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
 						//allDay false
 						//시간체크 유효성 검사
 						if($('#START_TIME').val()==""){
-						alert('시작시간 을 입력해주세요');
+						swal('시작시간 을 입력해주세요');
 						return false;
 						$('#START_TIME').focus();
 						}
 					
 						if($('#END_TIME').val()==""){
-						alert('종료시간 을 입력해주세요');
+						swal('종료시간 을 입력해주세요');
 						return false;
 						$('#END_TIME').focus();
 						}
 
 						if($('#color').val()==""){
-						alert('부서명 을 입력해주세요');
+						swal('부서명 을 입력해주세요');
 						return false;
 						$('#color').focus();
 						}
@@ -241,11 +243,7 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
 					
 					if (new Date(endtimee)
 	                - new Date(starttimee) < 0) { // date 타입으로 변경 후 확인
-						toastr.options.escapeHtml = true;
-						toastr.options.closeButton = true;
-						toastr.options.newestOnTop = false;
-						toastr.options.progressBar = true;
-						toastr.info('종료시간을 확인해주세요', '캘린더', {timeOut: 1500});
+						swal('종료시간을 확인해주세요','종료시간이 시작시간보다 빠릅니다.');
 					return false}
 						
 						
@@ -293,11 +291,10 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
                     },
 					success: function(response) {
 						console.log(response);
-								toastr.options.escapeHtml = true;
-								toastr.options.closeButton = true;
-								toastr.options.newestOnTop = false;
-								toastr.options.progressBar = true;
-								toastr.info('일정이 추가되었습니다.', '캘린더', {timeOut: 1500});
+								
+						swal("일정이 추가되었습니다.", {
+						      icon: "success",
+						    });
 					},
 					error: function(xhr, status, error) {
 						console.log('error')
@@ -327,7 +324,16 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
 							,"EVENT_NAME":title}
 				console.log(title+'ddddddddddddddddddd')
 				console.log(empno+'ddddddddddddddddddd')
-				if (confirm("일정을 삭제하시겠습니까?")) {
+				
+				var Confirm=swal({
+					  title: "일정을 삭제하시겠습니까??",
+					  text: "",
+					  icon: "warning",
+					  buttons: true,
+					  dangerMode: true,
+					})
+					.then((willDelete) => {
+					  if (willDelete) {
 					$.ajax({
 						type: 'POST',
 						url: '/boat/cal/delete',
@@ -338,16 +344,19 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
 				},
 						success: function(response) {
 							if(response==0){
-						alert('등록한 글만 삭제 가능합니다.')
+						swal('등록한 글만 삭제 가능합니다.')
 						setTimeout(function(){
 								location.reload();},1500);	
 							}else{
-								console.log(response);
+								/* console.log(response);
 								toastr.options.escapeHtml = true;
 								toastr.options.closeButton = true;
 								toastr.options.newestOnTop = false;
 								toastr.options.progressBar = true;
-								toastr.info('일정이 삭제되었습니다.', '캘린더', {timeOut: 1500});
+								toastr.info('일정이 삭제되었습니다.', '캘린더', {timeOut: 1500}); */
+								swal("일정이 삭제되었습니다.", {
+								      icon: "success",
+								    });
 							}
 						},
 						error: function(xhr, status, error) {
@@ -358,9 +367,15 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
 						location.reload();},1500);
 
 				} //complete 끝
-					});//if
+					});//ajax끝
+					 
+					  } else {
+					    swal("취소되었습니다.");
+					    setTimeout(function(){
+							location.reload();},1500);
+					  }
+					});
 				}
-			}
 
 		
 			});//캘린더 객체 선언 끝
