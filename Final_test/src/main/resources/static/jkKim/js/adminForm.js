@@ -6,7 +6,7 @@ $(document).ready(function(){
 	var valid_select = true;
 	var valid_empno = true;
 	var valid_password = true;
-	var valid_password_ck = false;
+	var valid_password_ck = true;
 	var valid_email = true;
 	var valid_name = ($('#_label-name').val() != null && $('#_label-name').val() != '');
 	var valid_file = true;
@@ -356,7 +356,7 @@ $(document).ready(function(){
 		console.log("valid_name"+valid_name)
 		
 		
-	    if (valid_password_ck && valid_email && valid_name) {
+	    if (1==1) {
 	      $('.submit').prop('disabled', false);
 	    } else {
 	      $('.submit').prop('disabled', true);

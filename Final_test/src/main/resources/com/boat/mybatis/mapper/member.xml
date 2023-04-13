@@ -192,6 +192,7 @@
 	        <if test="PROFILE_FILE != null and PROFILE_FILE != ''"> PROFILE_FILE = #{PROFILE_FILE}, </if>
 	        <if test="PROFILE_IMG != null and PROFILE_IMG != ''"> PROFILE_IMG = #{PROFILE_IMG}, </if>
 	        <if test="AUTH != null and AUTH !=''"> AUTH = #{AUTH},</if>
+	        <if test="JOB != null and JOB !=''"> JOB = #{JOB},</if>
 	    </set>
 	    WHERE EMPNO = #{EMPNO}
 	</update>
