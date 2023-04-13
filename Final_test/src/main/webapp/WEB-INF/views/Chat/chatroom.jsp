@@ -179,8 +179,6 @@ function send(handle, secret){
 		data = {
 			"handle" : "onLineList"
 		}
-		
-
 	}
 	
 	let jsonData = JSON.stringify(data);
@@ -233,9 +231,7 @@ function onMessage(evt){
 		data.handle = receive[0];
 		for(let i = 1; i < receive.length; i++){
 			data[count++] = receive[i];
-			onlineUsers.push(receive[i]);
 		}
-		console.log("Number of online users: " + onlineUsers.length);
 	}
 	
     console.log("data.handle="+data.handle)
