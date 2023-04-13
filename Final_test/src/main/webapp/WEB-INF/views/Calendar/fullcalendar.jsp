@@ -22,6 +22,8 @@
   <link href ="${pageContext.request.contextPath}/jhLee/css/fullcalendar.css"  rel ="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://unpkg.com/tippy.js@6"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
   <style>
 	.page-header {
 		margin: 0!important;
@@ -327,7 +329,24 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
 							,"EVENT_NAME":title}
 				console.log(title+'ddddddddddddddddddd')
 				console.log(empno+'ddddddddddddddddddd')
-				if (confirm("일정을 삭제하시겠습니까?")) {
+				
+				var Confirm=swal({
+					  title: "일정을 삭제하시겠습니까??",
+					  text: "",
+					  icon: "warning",
+					  buttons: true,
+					  dangerMode: true,
+					})
+					.then((willDelete) => {
+					  if (willDelete) {
+					    swal("일정이 삭제되었습니다.", {
+					      icon: "success",
+					    });
+					  } else {
+					    swal("취소되었습니다.");
+					  }
+					});
+				if (Confirm) {
 					$.ajax({
 						type: 'POST',
 						url: '/boat/cal/delete',
