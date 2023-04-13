@@ -2,15 +2,7 @@
 
 
 $(document).ready(function(){
-/*if (new Date(endtimee)
-	                - new Date(starttimee) < 0) { // date 타입으로 변경 후 확인
-						toastr.options.escapeHtml = true;
-						toastr.options.closeButton = true;
-						toastr.options.newestOnTop = false;
-						toastr.options.progressBar = true;
-						toastr.info('종료시간을 확인해주세요', '캘린더', {timeOut: 1500});
-					return false}
-*/
+
 
 $(document).on("click", ".updateTodo", function () {
     let num = $(this).data('id');
@@ -52,11 +44,50 @@ $(document).on("click", ".done", function () {
             toastr.options.closeButton = true;
             toastr.options.newestOnTop = false;
             toastr.options.progressBar = true;
-            toastr.info('일정을 완료하였습니다.', '내 할일', {timeOut: 1500});
+            toastr.info('할일을 완료하였습니다.', '내 할일', {timeOut: 1500});
             setTimeout(function(){
 			 		location.reload();},1500);
         }
         })
+    })
+$(document).on("click", ".deleteTodo", function () {
+    var num = $(this).data('id');
+    let done = $(this)
+    
+    swal({
+					  title: "일정을 삭제하시겠습니까??",
+					  text: "",
+					  icon: "warning",
+					  buttons: true,
+					  dangerMode: true,
+					})
+					.then((willDelete) => {
+					  if (willDelete) {
+    $.ajax({
+        url :'../Todo/delete',
+        data:{num:num
+            },
+        success:function(rdata){
+            console.log(rdata);
+           /* toastr.options.escapeHtml = true;
+            toastr.options.closeButton = true;
+            toastr.options.newestOnTop = false;
+            toastr.options.progressBar = true;
+            toastr.info('할일을 삭제하였습니다..', '내 할일', {timeOut: 1500});
+            */
+			 		swal("일정이 삭제되었습니다.", {
+								      icon: "success",
+								    });
+								    setTimeout(function(){
+			 		location.reload();},1500);
+        }
+        })
+        	  } else {
+					    swal("취소되었습니다.");
+					    setTimeout(function(){
+							location.reload();},1500);
+					  }
+					});
     })
 
 

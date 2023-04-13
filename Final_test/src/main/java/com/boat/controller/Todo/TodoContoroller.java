@@ -43,6 +43,12 @@ public class TodoContoroller {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value="/delete")
+	public int delete(@RequestParam(value="num",required=false)int num) {
+		return todoService.tododelete(num);
+		
+	}
+	@ResponseBody
 	@RequestMapping(value="/done")
 	public int done(@RequestParam(value="num",required=false)int num) {
 		return todoService.todoDone(num);

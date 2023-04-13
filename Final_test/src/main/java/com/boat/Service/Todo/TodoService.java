@@ -22,7 +22,9 @@ public interface TodoService {
 
 	int todoDone(int num);
 
-	int updateTodo(Todo todo); 
+	int updateTodo(Todo todo);
+
+	int tododelete(int num); 
 	
 	
 	

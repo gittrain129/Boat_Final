@@ -4,6 +4,9 @@
   
   <mapper namespace="com.boat.mybatis.mapper.TodoMapper">
   
+  <delete id="DeleteTodo">
+  delete from todolist where num = #{num}
+  </delete>
 		<select id="getTodo" resultType = "Todo">
 		select * from TODOLIST where num = #{num}
 		</select>
