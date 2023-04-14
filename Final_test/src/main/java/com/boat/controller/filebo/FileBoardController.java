@@ -121,6 +121,9 @@ public class FileBoardController {
 
 		List<Filebo> boardlist = boardService.myFavList(EMPNO, page, limit);
 
+		for(Filebo a : boardlist)
+			a.setStar(EMPNO);
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("page", page);
 		map.put("maxpage", maxpage);

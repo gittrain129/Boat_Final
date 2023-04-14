@@ -87,10 +87,12 @@ $.ajax({
             let output ="<tbody>";
             $(data.boardlist).each(
                 function(index,item){
-                if(item.filebo.star.contains(empno))
-output+="<tr><td><i class='bi bi-star-fill' style='color:#ffd699' id='star" + item.file_NUM +"' onclick='toggle("+ item.file_NUM + ","+empno+")'></i></td><td>"
-else
-output+="<tr><td><i class='bi bi-star' id='star" + item.file_NUM +"' onclick='toggle("+ item.file_NUM + ","+empno+")'></i></td><td>"
+                let str = item.star
+                console.log (num+'str'+str)
+                if(str!=null&&str.includes(empno))
+				output+="<tr><td class='text-center'><i class='bi bi-star-fill' style='color:#ffd699' id='star" + num  +"' onclick='toggle("+ (num--)+ ","+empno+")'></i></td><td>"
+				else
+				output+="<tr><td class='text-center'><i class='bi bi-star' id='star" + num +"' onclick='toggle("+ (num--)+ ","+empno+")'></i></td><td>"
     					// output+="<tr><i class='bi bi-star-fill' style='color:#ffd699'id='star${FILIBO.FILE_NUM}' onclick='toggle(${FILIBO.FILE_NUM}, ${EMPNO})"></i><td title='즐겨찾기' class='text-center'></td><td>"
 			            
 			            
@@ -106,16 +108,14 @@ output+="<tr><td><i class='bi bi-star' id='star" + item.file_NUM +"' onclick='to
                             
                           let today= moment().format().substr(0,10)
                             
-                            console.log("nowday"+nowday)
-                            console.log(item.file_DATE > nowday)
                             let imgnew ="";
                             if(new Date(item.file_DATE) > nowday){
                                 imgnew="<img src='../../boat/jhLee/img/new.png' id='new' style='width:20px'>";
                             }
-                            let blank = "  ";
-                    output +=blank+blank+blank+"<a href='detail?num="+item.file_NUM+"'>"+blank+blank+blank
+                            let blank = "&nbsp;";
+                    output +=blank+blank+blank+blank+blank+"<a href='detail?num="+item.file_NUM+"'>"+blank
                     output += subject.replace(/</g,'&lt;').replace(/>/g,'&gt;')
-                            +'</a>['+item.cnt+']'+imgnew+'</div>'
+                            +'</a>'+blank+'['+item.cnt+']'+blank+imgnew+'</div>'
                     
                     output +='<span class="badge badge-pill badge-warning float-right"style="background-color: #89a5ea;">'+item.dept+'</span></td>'
                     
@@ -126,8 +126,8 @@ output+="<tr><td><i class='bi bi-star' id='star" + item.file_NUM +"' onclick='to
                     output +='<td><small>'+item.file_NAME+'</small></a></td>'
                     output +='<td>'+item.file_READCOUNT+'</td>'
 					let ckday = item.file_DATE.substr(0,10)
-					console.log(ckday);
-					console.log(today+"today");
+					//console.log(ckday);
+					//console.log(today+"today");
                     if(ckday ==today)
                     filedateTime= item.file_DATE.substr(5,11)
                     else 

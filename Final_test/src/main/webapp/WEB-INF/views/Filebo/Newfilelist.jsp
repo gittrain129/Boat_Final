@@ -81,11 +81,12 @@
 								<c:when test="${FILIBO.star.contains(EMPNO)}">
   								<td title="즐겨찾기" class="text-center">
     							<i class="bi bi-star-fill" style="color:#ffd699"id="star${FILIBO.FILE_NUM}" onclick="toggle(${FILIBO.FILE_NUM}, ${EMPNO})"></i>
-  								</td>
+  								</td><c:set var ="num" value ="${num-1}"/>
 								</c:when>
 								<c:otherwise>
 								<td title="즐겨찾기" class="text-center">
-    							<i class="bi bi-star" id="star${FILIBO.FILE_NUM}" onclick="toggle(${FILIBO.FILE_NUM}, ${EMPNO})"></i>
+    							<i class="bi bi-star" id="star${num}" onclick="toggle(${num}, ${EMPNO})"></i>
+								<c:set var ="num" value ="${num-1}"/>
   								</td>
   								</c:otherwise>
   								</c:choose>
