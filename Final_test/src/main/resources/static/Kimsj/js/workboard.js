@@ -24,7 +24,7 @@ $(function(){
 	if (count != 0){ //댓글 갯수가 0이 아니면
 		getList(1); //첫 페이지의 댓글을 구해 옵니다. (한 페이지에 3개씩 가져 옵니다.)
 	} else { //댓그링 없는 경우
-		$("#message").text("등록된 댓글이 없습니다.")
+		$("#message").text("등록된 워크보드 게시물이 없습니다.")
 	}
 	
 	let num=0;
@@ -47,6 +47,7 @@ $(function(){
 		        {   //데이터를 전송하기 전에 헤더에 csrf값을 설정합니다.
 		        	xhr.setRequestHeader(header, token);			
 		        },
+		        async:false,
 				dataType :  "json",
 				success : function(rdata) {
 			
@@ -132,7 +133,7 @@ $(function(){
 						
 						 
 					} else {
-						$("#message").text("등록된 댓글이 없습니다.")
+						$("#message").text("등록된 워크보드 게시물이 없습니다.")
 						
 						$("#workboard_card table").hide()//1
 					}
@@ -242,6 +243,21 @@ $(function(){
 
 					//page=1
 					getList(page); //등록, 수정완료 후 해당 페이지 보여줍니다.
+					
+					//스크롤 이동
+					
+					var targetId = num;
+	                    console.log(targetId)
+						 
+						  if (targetId !== '') {
+						  
+						  console.log($(".board" + targetId).closest(".card").offset().top);
+						  
+						    $('html, body').animate({
+						      scrollTop: $(".board" + targetId).closest(".card").offset().top - 100
+						    }, 'fast');
+						  }
+						
 				}//if
 			}//success
 			,error:function(error){console.log(error)}
