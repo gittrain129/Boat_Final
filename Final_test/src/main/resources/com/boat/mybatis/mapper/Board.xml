@@ -128,7 +128,11 @@
 			LEFT OUTER JOIN (
 				SELECT board_num, COUNT(*) cnt FROM comments GROUP BY board_num
 				) c	 ON board.board_num = c.board_num
+				
 				LEFT OUTER JOIN board_fav bf ON board.board_num = bf.board_num
+				where board.board_num in (
+        				select board_num from board_fav where board_empno = #{BOARD_EMPNO}
+      					)
 				<where>
 			<if test="dept != null and dept != ''">
 				AND board.board_dept = #{dept}
