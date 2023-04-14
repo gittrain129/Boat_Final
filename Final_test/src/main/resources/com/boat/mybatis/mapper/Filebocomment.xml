@@ -35,7 +35,7 @@ and FILE_COMMENT_RE_SEQ > #{}  ]]>
 				   from FILE_COMMENT join member 
 				   on FILE_COMMENT.FILE_C_ID = member.empno 
 				   where FILE_BO_NUM = #{FILE_BO_NUM} 
-				   order by FILE_C_NUM 
+				   order by FILE_COMMENT_RE_REF 
                    <if test='state=="1"'>
                    asc,
                    </if>
@@ -77,7 +77,7 @@ and FILE_COMMENT_RE_SEQ > #{FILE_COMMENT_RE_SEQ}
   insert into FILE_COMMENT (FILE_C_NUM,FILE_C_ID,FILE_CONTENT,FILE_COMMENT_DATE,FILE_BO_NUM,
 	FILE_COMMENT_RE_LEV,FILE_COMMENT_RE_SEQ,FILE_COMMENT_RE_REF,FILE_C_NAME,FILE_C_DEPT)
 					values(filecom.nextval,#{FILE_C_ID},#{FILE_CONTENT},sysdate,#{FILE_BO_NUM},
-					#{FILE_COMMENT_RE_LEV},#{FILE_COMMENT_RE_SEQ},filecom.nextval,#{FILE_C_NAME},#{FILE_C_DEPT})
+					#{FILE_COMMENT_RE_LEV},#{FILE_COMMENT_RE_SEQ},#{FILE_COMMENT_RE_REF},#{FILE_C_NAME},#{FILE_C_DEPT})
   </insert>
   
  </mapper>

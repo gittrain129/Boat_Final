@@ -55,7 +55,7 @@ $(document).on("click", ".deleteTodo", function () {
     let done = $(this)
     
     swal({
-					  title: "일정을 삭제하시겠습니까??",
+					  title: "할일을 삭제하시겠습니까??",
 					  text: "",
 					  icon: "warning",
 					  buttons: true,
