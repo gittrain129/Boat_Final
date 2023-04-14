@@ -237,7 +237,7 @@
 		  <div class="modal-dialog modal-lg">
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <h5 class="modal-title" id="exampleModalLabel">프로그래머스 개인정보 수집∙이용 동의</h5>
+		        <h5 class="modal-title" id="exampleModalLabel">BOAT 개인정보 수집∙이용 동의</h5>
 		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
 		      <div class="modal-body">
@@ -266,16 +266,16 @@
 		  <div class="modal-dialog modal-lg">
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <h5 class="modal-title" id="exampleModalLabel">프로그래머스 개인정보 수집∙이용 동의</h5>
+		        <h5 class="modal-title" id="exampleModalLabel">BOAT 개인정보 수집∙이용 동의</h5>
 		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
 		      <div class="modal-body">
-		        <p class=""> 주식회사 그렙은 프로그래머스 서비스를 이용하는 귀하의 개인정보를 아래와 같이 수집∙이용합니다.<br> 자세한 내용은 프로그래머스 개인정보 처리방침에서 확인하실 수 있습니다. </p>
+		        <p class=""> 주식회사 그렙은 BOAT 서비스를 이용하는 귀하의 개인정보를 아래와 같이 수집∙이용합니다.<br> 자세한 내용은 BOAT 개인정보 처리방침에서 확인하실 수 있습니다. </p>
 	        	<div class="fw-bold">1. 수집하는 개인정보 항목 및 이용 목적</div>
 	        	<table class="table table-border">
 	        	<tr><th>수집 방법</th><th>수집 항목</th><th>수집 및 이용목적</th></tr><tr><td>회원가입</td><td>[필수] 성명,이메일(아이디),비밀번호,중복가입확인정보(DI) [선택] 성별,휴대폰 번호, 한 줄 소개, 홈페이지, 활동 지역,페이스북 등 외부 서비스와의 연동을 위해 이용자가 설정한 계정 정보</td><td>이용자 식별 및 본인확인, 회원가입 의사의 확인</td></tr><tr><td>교육서비스 이용</td><td>[필수] 성명,이메일,전화번호 [선택] 취업상태,Github 등 블로그/웹사이트 주소, 경력사항</td><td>교육서비스 운영 목적</td></tr><tr><td>채용서비스 이용</td><td>[필수] 성명,이메일,전화번호 [선택] Github 저장소, 블로그/웹사이트 주소, 희망 연봉, 간단 소개,업무 경험(회사 이름, 직무, 업무 시작일, 사용 스택, 상세 업무 및 성과),학력사항(학력,전공,학위,입학/졸업 일,학점),개인 프로젝트(프로젝트명,제작 연도, 설명, 팀, 사용 스택, 상세 업무 및 성과, 오픈 여부, 저장소),수상/자격증(수상/취득 내용, 수상/취득 년월), 출판/논문/특허(출판/논문/특허명, 고유번호,출판사,저자,발행 연월),활동(활동명,시작일),외국어(시험명,점수)</td><td>이력서 등록을 통한 입사지원 등 취업활동 서비스 제공, 각종 맞춤형 취업서비스 제공</td></tr><tr><td>서비스 이용 과정 또는 처리 과정에서 생성되는 정보</td><td>서비스 이용기록,쿠키,방문 기록, 불량 이용 기록, 접속 로그, 접속IP정보</td><td>이상행위 탐지 및 서비스 개선을 위한 분석, 서비스 이용 기록과 접속 빈도 분석</td></tr></table>
 	        	<div>2. 개인정보 보유 및 이용기간</div><p> 회사는 이용자의 개인정보를 고지 및 동의 받은 사항에 따라 수집∙이용 목적이 달성되기 전 또는 이용자의 탈퇴 시까지 해당 정보를 보유합니다. 다만, 타 법령에 따라 법령에서 규정한 기간동안 개인정보를 보관할 필요가 있는 경우 외부와 차단된 별도 DB 또는 테이블에 분리 보관 됩니다. </p>
-	        	<div>3. 개인정보 수집 및 이용 동의를 거부할 권리</div><p> 귀하는 위 정보에 대한 수집∙이용 동의를 거부할 수 있는 권리가 있으나, 이에 동의하지 않을 경우 프로그래머스 서비스 이용에 제한될 수 있습니다. </p>
+	        	<div>3. 개인정보 수집 및 이용 동의를 거부할 권리</div><p> 귀하는 위 정보에 대한 수집∙이용 동의를 거부할 수 있는 권리가 있으나, 이에 동의하지 않을 경우 BOAT 서비스 이용에 제한될 수 있습니다. </p>
 		      </div>
 		    </div>
 		  </div>

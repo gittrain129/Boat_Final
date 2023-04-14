@@ -275,8 +275,8 @@ function writeResponse(data){
 		// [유저 목록 → 나] 로그인 표시
 		for(let i = 0; i < Object.keys(data).length - 1; i++){
 			let element = document.getElementById(data[i]);
-			  element.innerHTML = "온라인";
-			  element.classList.remove("text-danger");
+			element.innerHTML = "온라인";
+			element.classList.remove("text-danger");
 		}
 	}
 }
