@@ -87,8 +87,11 @@ $.ajax({
             let output ="<tbody>";
             $(data.boardlist).each(
                 function(index,item){
-                
-    					 output+="<tr><td title='즐겨찾기' class='text-center'></td><td>"
+                if(item.filebo.star.contains(empno))
+output+="<tr><td><i class='bi bi-star-fill' style='color:#ffd699' id='star" + item.file_NUM +"' onclick='toggle("+ item.file_NUM + ","+empno+")'></i></td><td>"
+else
+output+="<tr><td><i class='bi bi-star' id='star" + item.file_NUM +"' onclick='toggle("+ item.file_NUM + ","+empno+")'></i></td><td>"
+    					// output+="<tr><i class='bi bi-star-fill' style='color:#ffd699'id='star${FILIBO.FILE_NUM}' onclick='toggle(${FILIBO.FILE_NUM}, ${EMPNO})"></i><td title='즐겨찾기' class='text-center'></td><td>"
 			            
 			            
                     let img="";

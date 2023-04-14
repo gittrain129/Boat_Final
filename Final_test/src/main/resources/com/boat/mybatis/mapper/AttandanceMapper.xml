@@ -8,7 +8,7 @@
 	<select id="getAttList" resultType='Attandance'>
 		select * from BOAT_ATTENDANCE
 		where empno = #{empno}
-		 and REG_DATE <![CDATA[<> ]]> TO_CHAR(SYSDATE, 'YYYYMMDD')
+		<!--   and REG_DATE <![CDATA[<> ]]> TO_CHAR(SYSDATE, 'YYYYMMDD')-->
 		order by reg_date desc
 	</select>
 

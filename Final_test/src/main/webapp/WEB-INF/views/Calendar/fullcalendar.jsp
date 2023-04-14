@@ -41,6 +41,7 @@ let header = $("meta[name='_csrf_header']").attr("content");
 	var empno = $('#loginid').text();
 	var selectedEvent = null;
 	var calendarEl = document.getElementById('calendar');
+	var count =0;
 	let selDept = $("#calDept").val();
 	
 	const Empno =$('#loginid').text()
@@ -190,6 +191,7 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
 				$('#END_DATE').val(enddate.substr(0,10),-1)
 				
 				$('#saveBtn').click(function(){
+					
 					//calendar.unbind();
 				if($('#title').val()==""){
 					swal('일정을 입력해주세요');
@@ -302,16 +304,17 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
 						},
 				complete:function(){
 				$("#addevent").modal('hide')
-				
-				setTimeout(function(){
-        	   							location.reload();},1500);
+				  calendar.unselect();
+				//setTimeout(function(){
+        	   	//						location.reload();},1500);
 
 				} //complete 끝
 				})//ajax끝
    		          //  }// if 끝
-					
+				console.log(count++,calendar.toString());
    		      	  });//savebtnclick
-					   calendar.unselect();
+   		      	  console.log('end'+calendar);
+   		      	event.stopPropagation();
 				  //=================================================================
 				},
 				
@@ -452,9 +455,9 @@ $("#allday").click(function(){
   			<option value ="인사팀" class = "hire">인사팀</option>
   			<option value ="기획팀" class = "plan">기획팀</option>
   			<option value ="영업팀" class = "sales">영업팀</option>
-		<c:if test="${empno =='ADMIN'}">
+		<%-- <c:if test="${empno =='admin'}">
   			<option value ="관리자">(관리자)</option>
-		</c:if>
+		</c:if> --%>
 			</select>
 			<br>
 			<br>
@@ -547,9 +550,9 @@ $("#allday").click(function(){
   			<option value ="lightgreen" class = "hire">인사팀</option>
   			<option value ="purple" class = "plan">기획팀</option>
   			<option value ="" class = "sales">영업팀</option>
-				<c:if test="${EMPNO =='ADMIN'}">
+				<%-- <c:if test="${EMPNO =='ADMIN'}">
 		  			<option value ="red">(관리자)</option>
-				</c:if>
+				</c:if> --%>
 			</select>
 			 <input type="hidden" name ="EMPNO" value="${loginid}" id="calEmpno">
 		</form>
