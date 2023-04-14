@@ -35,11 +35,12 @@ let header = $("meta[name='_csrf_header']").attr("content");
 
 		
 		if($.trim($("#board_pass").val()) ==""){
-			   toastr.options.escapeHtml = true;
+		console.log('걸림 board_pass')
+	   toastr.options.escapeHtml = true;
        toastr.options.closeButton = true;
        toastr.options.newestOnTop = false;
        toastr.options.progressBar = true;
-       toastr.info('비밀번호를 입력해주세요.', {timeOut: 3000});
+       toastr.info('비밀번호를 입력해주세요.','업무 게시판', {timeOut: 3000});
 			$("#board_pass").focus();
 			return false;
 		}
@@ -48,7 +49,7 @@ let header = $("meta[name='_csrf_header']").attr("content");
        toastr.options.closeButton = true;
        toastr.options.newestOnTop = false;
        toastr.options.progressBar = true;
-       toastr.info('제목을 입력해주세요.', {timeOut: 3000});
+       toastr.info('제목을 입력해주세요.','업무 게시판', {timeOut: 3000});
 			$("#board_subject").focus();
 			return false;
 		}
@@ -57,7 +58,7 @@ let header = $("meta[name='_csrf_header']").attr("content");
        toastr.options.closeButton = true;
        toastr.options.newestOnTop = false;
        toastr.options.progressBar = true;
-       toastr.info('내용을 입력해주세요.', {timeOut: 3000});
+       toastr.info('내용을 입력해주세요.','업무 게시판', {timeOut: 3000});
 			$("#summernote").focus();
 			return false;
 		}

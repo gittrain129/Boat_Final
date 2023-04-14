@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <title>admin-list</title>
-
+<style>
+#navbarCollapse > div.d-flex.align-items-center.justify-content-end > div.ps-3 > div > form {
+  margin-bottom: 0;
+}
+</style>
 <jsp:include page="../Main/header.jsp"/>
 
 

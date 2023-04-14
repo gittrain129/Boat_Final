@@ -52,7 +52,7 @@
 			
 			
 			<div class="form-group row">
-				<label for="board_dept" class="col-sm-2 col-form-label">DEPT
+				<label for="board_dept" class="col-sm-2 col-form-label">부서
 				<input type="text" class="form-control" id="board_dept" name="BOARD_DEPT" value="${DEPT}" readonly/>
 				</label> 
 			

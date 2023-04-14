@@ -10,7 +10,11 @@
 
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 
-
+<style>
+#navbarCollapse > div.d-flex.align-items-center.justify-content-end > div.ps-3 > div > form {
+  margin-bottom: 0;
+}
+</style>
 
 <!-- 임시 css링크 -->
 
@@ -52,14 +56,14 @@
 			
 			
 			<div class="form-group row">
-				<label for="board_dept" class="col-sm-2 col-form-label">DEPT
+				<label for="board_dept" class="col-sm-2 col-form-label">부서
 				<input type="text" class="form-control" id="board_dept" name="BOARD_DEPT" value="${DEPT}" readonly/>
 				</label> 
 			
 			
 			
 				<label for="board_job" class="col-sm-2 col-form-label">직책 
-				<input type="text" class="form-control" id="board_job" name="BOARD_JOB" value="${JOB}" readonly>
+				<input type="text" class="form-control" id="board_job" name="BOARD_JOB" value='관리자' readonly>
 				</label>
 			
 			
