@@ -49,6 +49,18 @@ public class  WorkboardController {
 			map.put("listcount", listcount);
 			return map;
 	}
+	
+	@ResponseBody
+	@PostMapping(value="/select_list")
+	public Map<String,Object> select_WorkboardList(int page, String category) {
+			List<Workboard> list = WorkboardService.selectWorkboardList(page, category);
+			int listcount = WorkboardService.getListCount();
+			Map<String,Object> map = new HashMap<String, Object>();
+			
+			map.put("list", list);
+			map.put("listcount", listcount);
+			return map;
+	}
 
 	
 	@ResponseBody

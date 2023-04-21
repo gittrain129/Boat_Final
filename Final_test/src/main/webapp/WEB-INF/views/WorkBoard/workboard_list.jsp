@@ -70,15 +70,15 @@
             <h1 class="display-4 text-white animated slideInDown mb-3">워크보드</h1>
             <nav aria-label="breadcrumb animated slideInDown">
                 <ol class="breadcrumb justify-content-center mb-0">
-                	<li class="breadcrumb-item active"><a href="javascript:go(1,'전체보기')">전체보기</a></li>
-                	<li class="breadcrumb-item"><a class="text-white" href="javascript:go(1,'자유')">자유</a></li>
-                	<li class="breadcrumb-item"><a class="text-white" href="javascript:go(1,'홍보팀')">홍보팀</a></li>
-                    <li class="breadcrumb-item"><a class="text-white" href="javascript:go(1,'개발팀')">개발팀</a></li>
-                    <li class="breadcrumb-item"><a class="text-white" href="javascript:go(1,'인사팀')">인사팀</a></li>
-                    <li class="breadcrumb-item"><a class="text-white" href="javascript:go(1,'기획팀')">기획팀</a></li>
-                    <li class="breadcrumb-item"><a class="text-white" href="javascript:go(1,'영업팀')">영업팀</a></li>
-                	<li class="breadcrumb-item"><a class="text-white" href="javascript:go(1,'동호회')">동호회</a></li>
-                	<li class="breadcrumb-item"><a class="text-white" href="javascript:go(1,'취미')">취미</a></li>
+                	<li class="breadcrumb-item active"><a href="javascript:go('전체보기')">전체보기</a></li>
+                	<li class="breadcrumb-item"><a class="text-white" href="javascript:go('자유')">자유</a></li>
+                	<li class="breadcrumb-item"><a class="text-white" href="javascript:go('홍보팀')">홍보팀</a></li>
+                    <li class="breadcrumb-item"><a class="text-white" href="javascript:go('개발팀')">개발팀</a></li>
+                    <li class="breadcrumb-item"><a class="text-white" href="javascript:go('인사팀')">인사팀</a></li>
+                    <li class="breadcrumb-item"><a class="text-white" href="javascript:go('기획팀')">기획팀</a></li>
+                    <li class="breadcrumb-item"><a class="text-white" href="javascript:go('영업팀')">영업팀</a></li>
+                	<li class="breadcrumb-item"><a class="text-white" href="javascript:go('동호회')">동호회</a></li>
+                	<li class="breadcrumb-item"><a class="text-white" href="javascript:go('취미')">취미</a></li>
                 </ol>
             </nav>
         </div>

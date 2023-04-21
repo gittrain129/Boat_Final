@@ -1,22 +1,126 @@
-	function go(page,category) {
+let token = $("meta[name='_csrf']").attr("content");
+let header = $("meta[name='_csrf_header']").attr("content");
+
+function go(category) {
 		
 		$('.breadcrumb-item').removeClass('active'); 
 		$('.breadcrumb-item a').addClass('text-white'); 
-		$('a[href="javascript:go(1,\''+category+'\')"]').removeClass('text-white');
-		$('a[href="javascript:go(1,\''+category+'\')"]').parent('li').addClass('active'); 
+		$('a[href="javascript:go(\''+category+'\')"]').removeClass('text-white');
+		$('a[href="javascript:go(\''+category+'\')"]').parent('li').addClass('active'); 
 		
 		
-		const data = `category=${category}&page=${page}`;
+		const data = `category=${category}`;
 		
-		ajax(data); 
+		$.ajax({
+				type: "post",
+				url : "../workboard/select_list",
+				data: {
+						"page" : 1,
+						"category" : category
+				},
+				beforeSend : function(xhr)
+		        {   //데이터를 전송하기 전에 헤더에 csrf값을 설정합니다.
+		        	xhr.setRequestHeader(header, token);			
+		        },
+		        async:false,
+				dataType :  "json",
+				success : function(rdata) {
+			
+					if(rdata.list.length > 0) {
+						$("#workboard_card table").show();  //문서가 로딩될 때 hide() 했던 부분을 보이게 합니다.(1)
+						$("#workboard_card tbody").empty();
+						
+						$(rdata.list).each(function() {
+							let output = '';
+							let img = '';
+							
+							if($("#login_id").val() == this.empno) {
+								img = "<img src='../resources/img/pencil2.png' id= 'update' class='update' style='width: 25px; margin-right: 10px; background-color:white; border-radius:15%; border:1px solid #585757;'>"
+									+ "<img src='../resources/img/delete.png' class='remove' style='width: 25px; background-color:white; border-radius:15%; border:1px solid #585757;'>"
+									+ "<input class='board"+ this.num +"' type='hidden' value='" + this.num + "'>";
+
+							}
+							
+							
+						output +=	'<hr class="border-danger mb-4 mt-4" />' +
+									'<br>' +
+									'<br>' +
+									'<div class="card" id="card" style="boarder-top:15px; border:0px;">' +
+					                '<div class="card-header" style="font-size:20px; background-color:#1ca7ff; color:white;">' + this.category + '</div>' +
+					                '<div class="card-body" style="height: 250px; background-color:#f8fdff;">' +
+					                '<div class="row">' +
+					                '<div class="col-sm-2" style="text-align:center;margin-top: 30px;font-size: 20px;">' +
+					                
+					                '<img class="mr-3 rounded img-thumbnail" src="' +this.profile_FILE + '" alt="프로필 사진" style="border-radius: 50% !important; width: 110px; border:0px;">' +
+					                
+					                '<h6 class="mt-2" style="top: 5px;position: relative;font-size: 20px;color: #6c757d !important;">' + this.empno + '</h6>' +
+					                '<small class="text-muted">' + this.name + '</small>' +
+					                '</div>' +
+					                '<div class="col-sm-9 border-left border-secondary" style="background-color: white; width:  800px !important;height: 230px !important;border-radius: 6px;">' +
+					                '<p class="subject" style="margin-top: 1rem; font-size:20px;">' + this.subject + '</p>' +
+					                '<hr>' +
+					                '<p class="content" style="font-size: 17px">' + this.content + '</p>' +
+					                '</div>' +
+					                '</div>' +
+					                '</div>' +
+					                '<div class="card-footer text-muted" style="background-color:#1ca7ff; color:white !important;">' + 
+					                '<div style="float: left;">' + this.reg_date + '</div>' +
+					            //	'<div style="width: 80px; float: right;">' + img + '</div>' +
+					                '</div>' +
+					            //    '</div>' +
+					                '<div class="table">' +
+					                '<div calss="exclude" style="float: right;">' + img + '</div>' +
+					                '</div>' + 
+					                '</div>' 
+					              //  '<br>'
+							
+						
+							
+							$("#workboard_card tbody").append(output);
+											
+							//append한 마지막 tr의 2번재 자식 td를 찾아 text()메서드로 content를 넣습니다.
+							$("#workboard_card tbody tr:last").find("td:nth-child(2)").text(this.workboard_card); //3
+							
+							
+							
+							
+							
+						}); //each end
+						
+						
+						var targetId = $(".worknum").val();
+		                    console.log(targetId)
+							 
+							  if (targetId !== '') {
+							    $('html, body').animate({
+							      scrollTop: $(".board" + targetId).closest(".card").offset().top
+							    }, 'fast');
+							  }
+							
+						
+						//전체갯수 > 현재 가져온 갯수  => 가져올 데이터가 존재
+						if(rdata.listcount > rdata.list.length){ //전체 댓글 갯수 -> 현재까지 보여준 댓글 갯수
+							console.log("더보기");
+							$("#message").text("더보기")
+						} else {
+							$("#message").text("")
+						}
+						
+						 
+					} else {
+						$("#message").text("등록된 워크보드 게시물이 없습니다.")
+						
+						$("#workboard_card table").hide()//1
+					}
+				}
+		}); //ajax end
 	}
 	
 	
 	
 $(function(){
 
-	let token = $("meta[name='_csrf']").attr("content");
-	let header = $("meta[name='_csrf_header']").attr("content");
+	
 	
 	$("#workboard_card table").hide(); //1
 	let page=1; //더 보기 에서 보여줄 페이지를 기억할 변수
@@ -142,6 +246,8 @@ $(function(){
 	}//function end
 	
 
+	
+	
 	
 	
 	//글자수 제한하는 이벤트
