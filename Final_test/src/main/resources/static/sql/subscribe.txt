@@ -1,0 +1,5 @@
+drop table subscribe CASCADE CONSTRAINTS;
+
+create table subscribe(
+	email  varchar2(30)
+);

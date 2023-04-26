@@ -23,8 +23,27 @@
 			)
 		where rnum between #{start} and #{end}
 	</select>
-
 	
+	
+	
+	<select id="selectWorkboardList" resultType="workboard" parameterType="map">
+	  select *
+		from(select *
+			from(select rownum rnum, num, category, name, dept, empno, subject, content, profile_file, reg_date
+				from(
+					select *
+					from workboard
+					
+					order by reg_date desc
+					)
+				where rownum &lt; = #{end}
+				)
+			where rnum between #{start} and #{end}
+			)
+		where category = #{category}
+	</select>
+
+		
 	
 	<insert id="workboardInsert" parameterType="workboard">
 		insert into workboard

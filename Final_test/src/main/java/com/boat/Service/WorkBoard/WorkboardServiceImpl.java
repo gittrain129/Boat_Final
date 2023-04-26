@@ -42,6 +42,19 @@ public class WorkboardServiceImpl implements WorkboardService{
 		map.put("end", endrow);
 		return dao.getWorkboardList(map);
 	}
+	
+	
+	@Override
+	public List<Workboard> selectWorkboardList(int page, String category) {
+		int startrow = 1;
+		int endrow = page * 5;
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("start", startrow);
+		map.put("end", endrow);
+		map.put("category", category);
+		return dao.selectWorkboardList(map);
+	}
 
 	
 	

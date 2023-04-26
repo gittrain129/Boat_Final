@@ -11,6 +11,9 @@ public interface WorkboardService{
 		//댓글 목록 가져오기
 		public List<Workboard> getWorkboardList(int page);
 		
+		//선택 카테고리 목록 가져오기
+		public List<Workboard> selectWorkboardList(int page, String category);
+		
 		//댓글 등록하기
 		public int workboardInsert(Workboard c);
 		
